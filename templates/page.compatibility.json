@@ -8,44 +8,45 @@
         "copy": "Built to support future structured datasets for product, device, platform, and workflow compatibility."
       }
     },
-    "compare": {
-      "type": "product-compare-table",
+    "entries": {
+      "type": "compatibility-entry-list",
       "settings": {
-        "eyebrow": "Matrix",
+        "eyebrow": "Compatibility matrix",
         "heading": "Compatibility and fit guidance",
-        "copy": "This section can later shift from block-based review content to metaobject-backed compatibility matrices or recommendation sets.",
-        "columns_desktop": 3,
-        "source_note": "Use this module for early internal review, then migrate repeated compatibility logic into structured datasets."
+        "copy": "This section can now pull structured compatibility entries while still supporting fallback review blocks.",
+        "structured_source": "global",
+        "entry_limit": 6,
+        "source_note": "Use platform, device, workflow, collection, or product relationships in compatibility entries to make this page progressively smarter."
       },
       "blocks": {
         "compat_1": {
-          "type": "column",
+          "type": "entry",
           "settings": {
             "eyebrow": "Platform",
             "title": "Compatibility scenario",
             "copy": "Reserved for a supported device, platform, or workflow profile.",
             "link_label": "View related products",
-            "link": "/collections/all"
+            "link_url": "/collections/all"
           }
         },
         "compat_2": {
-          "type": "column",
+          "type": "entry",
           "settings": {
             "eyebrow": "Workflow",
             "title": "Compatibility scenario",
             "copy": "Reserved for a second supported use case or platform group.",
             "link_label": "View related products",
-            "link": "/collections/all"
+            "link_url": "/collections/all"
           }
         },
         "compat_3": {
-          "type": "column",
+          "type": "entry",
           "settings": {
             "eyebrow": "Device class",
             "title": "Compatibility scenario",
             "copy": "Reserved for a third supported device family or installation context.",
             "link_label": "View related products",
-            "link": "/collections/all"
+            "link_url": "/collections/all"
           }
         }
       },
@@ -107,5 +108,5 @@
       }
     }
   },
-  "order": ["hero", "compare", "support", "cta"]
+  "order": ["hero", "entries", "support", "cta"]
 }

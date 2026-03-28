@@ -14,6 +14,10 @@
         "eyebrow": "Resources",
         "heading": "Downloadable resources by product or task",
         "copy": "This section is ready to evolve into a metaobject-backed resource index with product associations, platforms, and version metadata.",
+        "structured_source": "global",
+        "resource_kind": "downloads",
+        "resource_limit": 6,
+        "show_search": true,
         "source_note": "Later phases can map these entries to resource metaobjects with versioning, platform metadata, and product relationships.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"

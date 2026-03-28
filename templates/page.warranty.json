@@ -1,8 +1,81 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Support" } },
-    "main": { "type": "main-page", "settings": {} },
-    "cta": { "type": "cta-banner", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Warranty",
+        "heading": "A structured warranty page for policy, claims, and escalation clarity",
+        "copy": "Use this page for warranty coverage, claim expectations, and how customers should move from support into service.",
+        "support_eyebrow": "Coverage guidance",
+        "support_note": "Warranty pages should clarify what is covered, what information is needed, and when support should be contacted first.",
+        "link_label": "Contact support",
+        "link_url": "/pages/contact"
+      }
+    },
+    "details": {
+      "type": "info-card-grid",
+      "settings": {
+        "eyebrow": "Warranty flow",
+        "heading": "Explain coverage, process, and next steps",
+        "copy": "Use these cards for coverage highlights, required claim information, and escalation order.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Coverage",
+            "title": "What the warranty is intended to cover",
+            "copy": "Use this card for concise policy summaries and exclusions."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Claims",
+            "title": "What customers should prepare before filing",
+            "copy": "Use this card for purchase proof, serial numbers, or required issue detail."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Support",
+            "title": "When support should be contacted first",
+            "copy": "Use this card when troubleshooting or compatibility review should happen before service escalation.",
+            "link_label": "Open support center",
+            "link_url": "/pages/support"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "intro_copy": "Use the page body for the actual warranty policy, regional notes, or formal coverage language.",
+        "side_eyebrow": "Claim support",
+        "side_heading": "Use a side card for the practical claim route",
+        "side_copy": "Direct customers into contact or troubleshooting depending on how you want the claim flow handled.",
+        "side_link_label": "Contact support",
+        "side_link_url": "/pages/contact"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need troubleshooting first",
+        "heading": "Some warranty questions should resolve through support before service",
+        "copy": "Use this CTA for pre-claim troubleshooting, compatibility review, or direct help.",
+        "link_label": "Open troubleshooting",
+        "link_url": "/pages/troubleshooting",
+        "secondary_label": "Open FAQ",
+        "secondary_url": "/pages/faq",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "main", "cta"]
+  "order": ["hero", "details", "main", "cta"]
 }

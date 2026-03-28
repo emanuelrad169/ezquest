@@ -1,21 +1,43 @@
-<section class="section-shell bg-slate-50">
+<section class="section-shell surface-muted">
   <div class="container-shell">
-    <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-      <div>
+    <div class="support-nav-layout">
+      <div class="support-aside">
         <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        <h2 class="section-heading">{{ section.settings.heading }}</h2>
+        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <span class="product-meta-pill">Support hub</span>
+          <span class="product-meta-pill">Guided paths</span>
+        </div>
+
         {% if section.settings.show_search %}
           <div class="mt-6">
             {% render 'support-search-form' %}
           </div>
         {% endif %}
+
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
           <div class="mt-6">
             {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
           </div>
         {% endif %}
+
+        <div class="support-crosslink-list">
+          <a href="/pages/downloads" class="support-crosslink">
+            <span>Downloads</span>
+            <span class="text-slate-400">Drivers</span>
+          </a>
+          <a href="/pages/manuals" class="support-crosslink">
+            <span>Manuals</span>
+            <span class="text-slate-400">Guides</span>
+          </a>
+          <a href="/pages/contact" class="support-crosslink">
+            <span>Contact support</span>
+            <span class="text-slate-400">Escalate</span>
+          </a>
+        </div>
       </div>
+
       <div class="grid gap-4 sm:grid-cols-2">
         {% for block in section.blocks %}
           {%- liquid
@@ -24,25 +46,29 @@
               assign block_eyebrow = forloop.index | prepend: '0'
             endif
           -%}
-          <div class="feature-card" {{ block.shopify_attributes }}>
+          <article class="support-tile" {{ block.shopify_attributes }}>
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
+              <span class="text-xs uppercase tracking-[0.18em] text-slate-300">Support path</span>
             </div>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight">{{ block.settings.title | default: 'Support destination' }}</h3>
-            <p class="mt-3 text-sm text-slate-600">{{ block.settings.copy }}</p>
+            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support destination' }}</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
             {% if block.settings.link_url != blank %}
-              <div class="mt-5">
+              <div class="mt-6">
                 {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
               </div>
             {% endif %}
-          </div>
+          </article>
         {% else %}
           {% for i in (1..4) %}
-            <div class="feature-card">
-              <p class="section-kicker">{{ i | prepend: '0' }}</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight">Support destination</h3>
-              <p class="mt-3 text-sm text-slate-600">Add support navigation blocks in the theme editor to populate this section.</p>
-            </div>
+            <article class="support-tile">
+              <div class="flex items-center justify-between gap-4">
+                <p class="section-kicker">{{ i | prepend: '0' }}</p>
+                <span class="text-xs uppercase tracking-[0.18em] text-slate-300">Support path</span>
+              </div>
+              <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">Support destination</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">Add support navigation blocks in the theme editor to populate this section.</p>
+            </article>
           {% endfor %}
         {% endfor %}
       </div>

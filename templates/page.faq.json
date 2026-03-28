@@ -1,8 +1,47 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Support" } },
-    "faq": { "type": "faq-accordion", "settings": {} },
-    "support": { "type": "support-card-grid", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Common product and support questions in one structured destination",
+        "copy": "Use the FAQ page for recurring questions that should stay accessible outside the product pages.",
+        "support_eyebrow": "FAQ guidance",
+        "support_note": "Use global FAQ entries for recurring questions and reserve product-linked FAQ content for PDP-specific nuance."
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "eyebrow": "Support FAQ",
+        "heading": "Frequently asked questions",
+        "copy": "Use this section for broader support and product questions before escalation.",
+        "structured_source": "global"
+      }
+    },
+    "support": {
+      "type": "support-card-grid",
+      "settings": {
+        "eyebrow": "Need another path",
+        "heading": "Move into support resources when the FAQ is not enough",
+        "copy": "Use these cards to connect FAQ outcomes to downloads, manuals, compatibility, or direct help.",
+        "columns_desktop": 3
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Still unresolved",
+        "heading": "Need a deeper support path?",
+        "copy": "Use the final CTA to route into downloads, manuals, or direct contact when the FAQ page is not enough.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "faq", "support"]
+  "order": ["hero", "faq", "support", "cta"]
 }

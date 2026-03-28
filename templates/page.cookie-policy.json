@@ -1,7 +1,22 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Legal" } },
-    "main": { "type": "main-page", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Legal",
+        "heading": "Cookie policy",
+        "copy": "Use this template for legally required policy content while keeping the page aligned with the rest of the storefront.",
+        "support_eyebrow": "Policy note",
+        "support_note": "Legal pages should remain clean and readable without looking disconnected from the storefront."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "intro_copy": "Use the page body for the full policy language and any region-specific notes."
+      }
+    }
   },
   "order": ["hero", "main"]
 }

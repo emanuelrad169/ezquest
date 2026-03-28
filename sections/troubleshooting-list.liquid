@@ -1,15 +1,46 @@
-<section class="section-shell bg-slate-50">
+<section class="section-shell surface-muted">
   <div class="container-shell">
-    <div class="max-w-3xl">
-      <h2 class="section-heading">{{ section.settings.heading }}</h2>
-      <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+    <div class="section-intro">
+      <div class="max-w-3xl">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
+        <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+      </div>
+      {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+        <div class="section-intro-action">
+          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+        </div>
+      {% endif %}
     </div>
+
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {% for block in section.blocks %}
-        <div class="card-shell" {{ block.shopify_attributes }}>
-          <h3 class="text-lg font-semibold">{{ block.settings.title }}</h3>
-          <p class="mt-3 text-sm text-slate-600">{{ block.settings.copy }}</p>
-        </div>
+        <article class="feature-card bg-gradient-to-br from-white to-slate-50" {{ block.shopify_attributes }}>
+          <div class="flex items-center justify-between gap-4">
+            <p class="section-kicker">{{ block.settings.eyebrow | default: 'Issue' }}</p>
+            <span class="text-xs uppercase tracking-[0.18em] text-slate-300">{{ forloop.index | prepend: '0' }}</span>
+          </div>
+          <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title }}</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
+          {% if block.settings.link_label != blank and block.settings.link_url != blank %}
+            <div class="mt-6">
+              {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
+            </div>
+          {% endif %}
+        </article>
+      {% else %}
+        {% for i in (1..4) %}
+          <article class="feature-card bg-gradient-to-br from-white to-slate-50">
+            <div class="flex items-center justify-between gap-4">
+              <p class="section-kicker">Issue</p>
+              <span class="text-xs uppercase tracking-[0.18em] text-slate-300">{{ i | prepend: '0' }}</span>
+            </div>
+            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">Issue title</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Add troubleshooting blocks in the theme editor to populate this section.</p>
+          </article>
+        {% endfor %}
       {% endfor %}
     </div>
   </div>
@@ -19,16 +50,22 @@
 {
   "name": "Troubleshooting list",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Troubleshooting" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Troubleshooting framework" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for issue categories, symptoms, and next steps." }
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for issue categories, symptoms, and next steps." },
+    { "type": "text", "id": "link_label", "label": "Section link label" },
+    { "type": "url", "id": "link_url", "label": "Section link URL" }
   ],
   "blocks": [
     {
       "type": "issue",
       "name": "Issue item",
       "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Issue" },
         { "type": "text", "id": "title", "label": "Title", "default": "Issue title" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Issue guidance" }
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Issue guidance" },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link" }
       ]
     }
   ],

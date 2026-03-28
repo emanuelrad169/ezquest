@@ -7,29 +7,29 @@
         "show_sku": true,
         "show_quantity_selector": true,
         "show_dynamic_checkout": true,
-        "support_heading": "Implementation-ready buy box",
-        "support_copy": "This product module is structured for future compatibility notes, installation guidance, and support escalation without overloading the purchase flow."
+        "support_heading": "Support continuity near the buy box",
+        "support_copy": "This product module is structured for compatibility notes, installation guidance, compare-entry points, and support escalation without overloading the purchase flow."
       },
       "blocks": {
         "highlight_1": {
           "type": "highlight",
           "settings": {
             "title": "Core capability",
-            "copy": "Reserved for a primary technical or workflow benefit."
+            "copy": "Use this for a primary technical or workflow benefit that helps the shopper understand the product quickly."
           }
         },
         "highlight_2": {
           "type": "highlight",
           "settings": {
             "title": "Deployment fit",
-            "copy": "Reserved for setup context, device compatibility, or workspace fit."
+            "copy": "Use this for setup context, device compatibility, or workspace fit that reduces uncertainty before purchase."
           }
         },
         "highlight_3": {
           "type": "highlight",
           "settings": {
             "title": "Support readiness",
-            "copy": "Reserved for downloads, manuals, or after-purchase continuity."
+            "copy": "Use this for downloads, manuals, and after-purchase continuity so support feels integrated rather than bolted on."
           }
         }
       },
@@ -40,7 +40,7 @@
       "settings": {
         "eyebrow": "Product story",
         "heading": "A modular layer for feature explanation and technical positioning",
-        "copy": "Structured to support richer product storytelling, proof points, and use-case sequencing in later phases."
+        "copy": "Use this layer to move the customer from product interest into product confidence before they commit."
       },
       "blocks": {
         "story_1": {
@@ -48,7 +48,7 @@
           "settings": {
             "eyebrow": "Module 01",
             "title": "Primary feature explanation",
-            "copy": "Reserved for a lead product feature and why it matters in real use."
+            "copy": "Use this panel for the lead product feature and why it matters in a real setup."
           }
         },
         "story_2": {
@@ -56,7 +56,7 @@
           "settings": {
             "eyebrow": "Module 02",
             "title": "Workflow or setup value",
-            "copy": "Reserved for product deployment, platform support, or connection context."
+            "copy": "Use this panel for deployment, platform support, or connection context that helps the shopper self-qualify."
           }
         },
         "story_3": {
@@ -64,7 +64,7 @@
           "settings": {
             "eyebrow": "Module 03",
             "title": "Support continuity",
-            "copy": "Reserved for firmware, manuals, or compatibility reassurance."
+            "copy": "Use this panel for firmware, manuals, compatibility reassurance, or long-term ownership confidence."
           }
         }
       },
@@ -75,7 +75,7 @@
       "settings": {
         "heading": "Specifications",
         "copy": "This section is designed to evolve into a metafield-backed technical specification table.",
-        "source_note": "Section blocks can be replaced with product metafield-backed rows in a later implementation pass."
+        "source_note": "Use structured rows for final technical data while keeping the fallback table reviewable during content seeding."
       },
       "blocks": {
         "spec_1": {
@@ -114,9 +114,9 @@
       "settings": {
         "eyebrow": "Compare",
         "heading": "A comparison module ready for structured datasets",
-        "copy": "This area can later map to metaobject-backed comparison groups, buying guides, or compatibility matrices.",
+        "copy": "Use this area to differentiate adjacent products more clearly while keeping compare tied to support and compatibility context.",
         "columns_desktop": 3,
-        "source_note": "Use blocks for early internal review, then migrate repeated comparison data into structured content."
+        "source_note": "Use blocks for early review, then migrate repeated comparison data into structured groups without changing the customer-facing pattern."
       },
       "blocks": {
         "compare_1": {
@@ -124,7 +124,7 @@
           "settings": {
             "eyebrow": "Option 01",
             "title": "Comparison candidate",
-            "copy": "Reserved for alternate product or adjacent solution positioning.",
+            "copy": "Use this card for an alternate product or adjacent solution with a clear reason to choose it.",
             "link_label": "View product"
           }
         },
@@ -133,7 +133,7 @@
           "settings": {
             "eyebrow": "Option 02",
             "title": "Comparison candidate",
-            "copy": "Reserved for differentiated workflow, port mix, or power profile.",
+            "copy": "Use this card for a differentiated workflow, port mix, or power profile.",
             "link_label": "View product"
           }
         },
@@ -142,7 +142,7 @@
           "settings": {
             "eyebrow": "Option 03",
             "title": "Comparison candidate",
-            "copy": "Reserved for higher-tier, lower-tier, or specialized alternative guidance.",
+            "copy": "Use this card for higher-tier, lower-tier, or specialized alternative guidance.",
             "link_label": "View product"
           }
         }
@@ -152,7 +152,8 @@
     "faq": {
       "type": "faq-accordion",
       "settings": {
-        "heading": "Support questions"
+        "heading": "Support questions",
+        "copy": "Keep product-level questions here when they directly support purchase confidence or setup clarity."
       },
       "blocks": {
         "faq_1": {
@@ -177,11 +178,11 @@
       "settings": {
         "eyebrow": "Need more detail",
         "heading": "Support and compatibility can stay connected to the PDP",
-        "copy": "This module gives product pages a controlled route into manuals, downloads, and compatibility guidance.",
+        "copy": "Use this module to route from product education into manuals, downloads, compatibility, or direct help without losing the shopping context.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
-        "secondary_label": "View downloads",
-        "secondary_url": "/pages/downloads",
+        "secondary_label": "Compare options",
+        "secondary_url": "/pages/compare",
         "style": "light",
         "button_style": "secondary"
       }

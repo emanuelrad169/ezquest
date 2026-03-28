@@ -1,11 +1,34 @@
 <section class="section-shell">
   <div class="container-shell">
-    <h1 class="section-heading">{{ blog.title }}</h1>
-    <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="hero-surface">
+      <div class="grid gap-8 lg:grid-cols-[1fr_0.62fr] lg:items-end">
+        <div class="max-w-3xl">
+          <p class="section-kicker">Resources</p>
+          <h1 class="section-heading mt-5">{{ blog.title }}</h1>
+          <p class="section-copy mt-5">Use this landing page for setup guidance, compatibility education, and deeper product-support content that extends beyond PDP copy.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <span class="product-meta-pill">{{ blog.articles_count }} articles</span>
+            <span class="product-meta-pill">Knowledge center</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <p class="section-kicker">Editorial direction</p>
+          <p class="mt-4 text-sm leading-7 text-slate-600">Keep the blog focused on practical product education, troubleshooting context, and support continuity rather than generic promotional posts.</p>
+          <div class="support-crosslink-list">
+            <a href="/pages/support" class="support-crosslink">
+              <span>Open support center</span>
+              <span class="text-slate-400">Help</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 editorial-grid">
       {% for article in blog.articles %}
         {% render 'card-article', article: article, excerpt: article.excerpt_or_content | strip_html | truncatewords: 22 %}
       {% else %}
-        <div class="card-shell md:col-span-2 xl:col-span-3">Blog listing scaffold.</div>
+        <div class="card-shell md:col-span-2 xl:col-span-3">Add articles in Shopify admin to populate this resource landing page.</div>
       {% endfor %}
     </div>
   </div>

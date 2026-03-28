@@ -1,8 +1,38 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Compare" } },
-    "compare": { "type": "product-compare-table", "settings": {} },
-    "cta": { "type": "cta-banner", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Compare",
+        "heading": "A compare destination ready for structured product groups",
+        "copy": "Use this page for broader compare sets that sit outside the PDP but still use the same group-driven system.",
+        "support_eyebrow": "Compare note",
+        "support_note": "The compare page should help customers narrow decisions, not repeat product cards without context."
+      }
+    },
+    "compare": {
+      "type": "product-compare-table",
+      "settings": {
+        "eyebrow": "Compare products",
+        "heading": "Compare adjacent products and support context",
+        "copy": "This page can later be driven entirely from comparison groups while keeping the current fallback structure.",
+        "columns_desktop": 3
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need help choosing",
+        "heading": "Compare pages should still route into support and buying guidance",
+        "copy": "Use the final CTA to move from compare into product support or direct contact when needed.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
   "order": ["hero", "compare", "cta"]
 }

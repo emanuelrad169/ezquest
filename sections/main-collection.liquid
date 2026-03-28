@@ -14,13 +14,34 @@
             <div class="section-copy">{{ intro_copy }}</div>
           {% endif %}
 
+          <div class="hero-chip-row">
+            <span class="hero-chip">{{ collection.products_count }} products</span>
+            <span class="hero-chip">Premium electronics</span>
+            <span class="hero-chip">Support-ready shopping</span>
+          </div>
+
+          <div class="merch-stat-grid">
+            <div class="merch-stat-card">
+              <p class="section-kicker">Discovery</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Use this collection to group related products with clearer workflow and support context.</p>
+            </div>
+            <div class="merch-stat-card">
+              <p class="section-kicker">Compare</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Route shoppers into compare or compatibility before they stall on a detail question.</p>
+            </div>
+            <div class="merch-stat-card">
+              <p class="section-kicker">Support</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Keep downloads, manuals, and direct support visible without interrupting purchase intent.</p>
+            </div>
+          </div>
+
           <div class="collection-toolbar">
-            <p class="text-sm text-slate-500">{{ collection.products_count }} products</p>
+            <p class="text-sm font-medium uppercase tracking-[0.18em] text-slate-500">{{ collection.products_count }} products</p>
 
             {% if section.settings.show_sort %}
               <form method="get" class="flex items-center gap-3">
-                <label class="text-sm text-slate-600" for="CollectionSort">Sort</label>
-                <select id="CollectionSort" name="sort_by" class="min-h-11 rounded-full border border-slate-300 px-4 py-2 text-sm" onchange="this.form.submit()">
+                <label class="text-sm font-medium text-slate-600" for="CollectionSort">Sort</label>
+                <select id="CollectionSort" name="sort_by" class="min-h-11 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900" onchange="this.form.submit()">
                   {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
                   {% for option in collection.sort_options %}
                     <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
@@ -33,25 +54,35 @@
 
         <div class="space-y-4">
           {% if section.settings.show_collection_image and collection.image != blank %}
-            {{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-3xl border border-slate-200 object-cover' }}
+            {{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-[1.8rem] border border-slate-200/80 object-cover shadow-[0_16px_50px_rgba(15,23,42,0.06)]' }}
           {% endif %}
 
           {% if section.settings.show_support_panel %}
-            <aside class="section-frame">
+            <aside class="support-aside">
               <p class="section-kicker">Need guidance</p>
-              <h2 class="mt-3 text-lg font-semibold tracking-tight text-slate-900">{{ section.settings.support_label }}</h2>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Use this area for collection-level buying help, compatibility guidance, or a support entry point.</p>
+              <h2 class="mt-4 text-2xl font-semibold tracking-[-0.03em] text-slate-950">{{ section.settings.support_label }}</h2>
+              <p class="mt-4 text-sm leading-7 text-slate-600">Use this area for collection-level buying help, compatibility guidance, or a support entry point.</p>
               {% if section.settings.support_url != blank %}
-                <div class="mt-5">
+                <div class="mt-6">
                   {% render 'button', label: 'Explore support', url: section.settings.support_url, style: 'secondary' %}
                 </div>
               {% endif %}
+              <div class="support-crosslink-list">
+                <a href="/pages/compare" class="support-crosslink">
+                  <span>Compare related options</span>
+                  <span class="text-slate-400">Compare</span>
+                </a>
+                <a href="/pages/compatibility" class="support-crosslink">
+                  <span>Check compatibility</span>
+                  <span class="text-slate-400">Fit</span>
+                </a>
+              </div>
             </aside>
           {% endif %}
         </div>
       </header>
 
-      <div class="product-grid">
+      <div class="mt-10 product-grid">
         {% for product in collection.products %}
           {% render 'card-product', product: product %}
         {% else %}
@@ -60,11 +91,11 @@
       </div>
 
       {% if paginate.pages > 1 %}
-        <nav class="mt-10 flex items-center justify-center gap-3" aria-label="Pagination">
+        <nav class="mt-12 flex items-center justify-center gap-3" aria-label="Pagination">
           {% if paginate.previous %}
             <a href="{{ paginate.previous.url }}" class="button-secondary">Previous</a>
           {% endif %}
-          <span class="text-sm text-slate-500">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          <span class="text-sm font-medium uppercase tracking-[0.18em] text-slate-500">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
           {% if paginate.next %}
             <a href="{{ paginate.next.url }}" class="button-secondary">Next</a>
           {% endif %}

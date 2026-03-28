@@ -1,8 +1,45 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "About" } },
-    "story": { "type": "product-story-grid", "settings": {} },
-    "main": { "type": "main-page", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "A cleaner storytelling page for brand, product mindset, and support philosophy",
+        "copy": "Use this template when the story deserves more narrative structure than a simple company page.",
+        "support_eyebrow": "Story note",
+        "support_note": "Keep the narrative practical and grounded in the product experience rather than generic lifestyle positioning."
+      }
+    },
+    "story": {
+      "type": "product-story-grid",
+      "settings": {
+        "eyebrow": "Story modules",
+        "heading": "Explain the company through a few strong narrative beats",
+        "copy": "Use this section for timeline, product philosophy, or channel evolution.",
+        "columns_desktop": "3"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "intro_copy": "Use the page body for the richer long-form narrative and supporting editorial content."
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Explore next",
+        "heading": "Move from story into products, support, or channel discovery",
+        "copy": "Use the final CTA to keep the page connected to the broader storefront journey.",
+        "link_label": "Browse collections",
+        "link_url": "/collections/all",
+        "secondary_label": "Where to buy",
+        "secondary_url": "/pages/where-to-buy",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "story", "main"]
+  "order": ["hero", "story", "main", "cta"]
 }

@@ -1,4 +1,4 @@
-<section class="section-shell bg-slate-50">
+<section class="section-shell surface-muted">
   <div class="container-shell">
     {%- liquid
       assign structured_group = blank
@@ -41,6 +41,7 @@
         endif
       endif
     -%}
+
     <div class="section-intro">
       <div class="max-w-3xl">
         {% if section_eyebrow != blank %}
@@ -48,10 +49,16 @@
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <span class="product-meta-pill">Decision support</span>
+          <span class="product-meta-pill">Structured-ready</span>
+        </div>
       </div>
       {% if source_note != blank %}
         <div class="section-intro-action lg:max-w-md">
-          <p class="text-sm leading-6 text-slate-500">{{ source_note }}</p>
+          <div class="shell-note">
+            {{ source_note }}
+          </div>
         </div>
       {% elsif section.settings.link_label != blank and section.settings.link_url != blank %}
         <div class="section-intro-action">
@@ -59,6 +66,7 @@
         </div>
       {% endif %}
     </div>
+
     {%- liquid
       assign grid_class = 'xl:grid-cols-3'
       if section.settings.columns_desktop == 2
@@ -67,15 +75,21 @@
         assign grid_class = 'xl:grid-cols-4'
       endif
     -%}
+
     <div class="mt-10 grid gap-6 md:grid-cols-2 {{ grid_class }}">
       {% if has_structured_compare %}
         {% for compare_product in structured_compare_items %}
-          <article class="feature-card text-sm text-slate-600">
+          {%- liquid
+            assign compare_support_summary = compare_product.metafields.ezquest.support_summary
+            assign compare_compatibility_summary = compare_product.metafields.ezquest.compatibility_summary
+          -%}
+          <article class="compare-card text-sm text-slate-600">
             {% if compare_product.featured_image != blank %}
-              {{ compare_product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-2xl object-cover' }}
+              {{ compare_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-[1.4rem] bg-slate-50 object-cover' }}
             {% else %}
-              <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100"></div>
+              <div class="hero-media-frame aspect-[4/3]"></div>
             {% endif %}
+
             <div class="mt-5 flex items-center justify-between gap-4">
               {% if compare_product.vendor != blank %}
                 <p class="section-kicker">{{ compare_product.vendor }}</p>
@@ -84,14 +98,23 @@
                 <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ compare_product.type }}</span>
               {% endif %}
             </div>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{{ compare_product.title }}</h3>
-            {% if compare_product.description != blank %}
-              <p class="mt-3 leading-6">{{ compare_product.description | strip_html | truncatewords: 24 }}</p>
+
+            <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ compare_product.title }}</h3>
+
+            {% if compare_support_summary != blank %}
+              <div class="richtext-content mt-3">{{ compare_support_summary | metafield_tag }}</div>
+            {% elsif compare_compatibility_summary != blank %}
+              <div class="richtext-content mt-3">{{ compare_compatibility_summary | metafield_tag }}</div>
+            {% elsif compare_product.description != blank %}
+              <p class="mt-3 leading-7">{{ compare_product.description | strip_html | truncatewords: 24 }}</p>
             {% endif %}
-            <div class="mt-4">
+
+            <div class="mt-5 border-t border-slate-200 pt-5">
               {% render 'price', product: compare_product %}
             </div>
-            <div class="mt-6">
+
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5">
+              <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Compare product fit, support, and pricing</p>
               {% render 'button', label: structured_link_label, url: compare_product.url, style: 'secondary' %}
             </div>
           </article>
@@ -101,11 +124,11 @@
           {% render 'compare-cell', block: block %}
         {% else %}
           {% for i in (1..3) %}
-            <article class="feature-card text-sm text-slate-600">
-              <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100"></div>
+            <article class="compare-card text-sm text-slate-600">
+              <div class="hero-media-frame aspect-[4/3]"></div>
               <p class="section-kicker mt-5">Compare item</p>
-              <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{{ section.settings.empty_state_heading }}</h3>
-              <p class="mt-3 leading-6">{{ section.settings.empty_state_copy }}</p>
+              <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ section.settings.empty_state_heading }}</h3>
+              <p class="mt-3 leading-7">{{ section.settings.empty_state_copy }}</p>
             </article>
           {% endfor %}
         {% endfor %}

@@ -3,14 +3,15 @@
   assign secondary_menu = section.settings.secondary_menu
   assign support_url = section.settings.support_url | default: settings.support_contact_url
 -%}
-<header class="site-header border-b border-slate-200 bg-white" role="banner">
+<header class="site-header" role="banner">
   {% if secondary_menu != blank %}
-    <div class="border-b border-slate-100 bg-slate-50">
-      <div class="container-shell flex min-h-10 items-center justify-end">
+    <div class="border-b border-slate-200/70 bg-slate-50/90">
+      <div class="container-shell flex min-h-10 items-center justify-between gap-4">
+        <p class="hidden text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-slate-400 lg:block">Premium connectivity and support</p>
         <nav aria-label="Utility" class="hidden lg:block">
-          <ul class="flex items-center gap-5 text-xs text-slate-600">
+          <ul class="flex items-center gap-5 text-xs font-medium text-slate-500">
             {% for link in secondary_menu.links %}
-              <li><a href="{{ link.url }}" class="hover:text-slate-900">{{ link.title }}</a></li>
+              <li><a href="{{ link.url }}" class="transition hover:text-slate-900">{{ link.title }}</a></li>
             {% endfor %}
           </ul>
         </nav>
@@ -18,58 +19,61 @@
     </div>
   {% endif %}
 
-  <div class="container-shell flex min-h-20 items-center justify-between gap-6">
-    <a href="{{ routes.root_url }}" class="inline-flex items-center gap-3 text-xl font-semibold tracking-tight">
-      {% if settings.brand_logo != blank %}
-        {{ settings.brand_logo | image_url: width: 240 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
-      {% else %}
-        <span>{{ shop.name }}</span>
-      {% endif %}
-    </a>
-
-    <nav aria-label="Primary" class="hidden lg:block">
-      <ul class="flex items-center gap-6">
-        {% if primary_menu != blank %}
-          {% for link in primary_menu.links %}
-            <li>
-              <a href="{{ link.url }}" class="text-sm font-medium text-slate-700 transition hover:text-slate-950{% if link.current %} text-slate-950{% endif %}">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endfor %}
+  <div class="container-shell">
+    <div class="site-header-shell">
+      <a href="{{ routes.root_url }}" class="inline-flex items-center gap-4 text-slate-950">
+        {% if settings.brand_logo != blank %}
+          {{ settings.brand_logo | image_url: width: 260 | image_tag: alt: shop.name, class: 'h-8 w-auto lg:h-9' }}
+        {% else %}
+          <span class="text-xl font-semibold tracking-[-0.04em]">{{ shop.name }}</span>
         {% endif %}
-      </ul>
-    </nav>
+        <span class="hidden rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500 xl:inline-flex">Electronics</span>
+      </a>
 
-    <div class="flex items-center gap-4">
-      {% if support_url != blank %}
-        <a href="{{ support_url }}" class="hidden text-sm text-slate-600 lg:inline-flex">
-          {{ section.settings.support_label }}
+      <nav aria-label="Primary" class="hidden lg:block">
+        <ul class="flex items-center gap-7">
+          {% if primary_menu != blank %}
+            {% for link in primary_menu.links %}
+              <li>
+                <a href="{{ link.url }}" class="text-sm font-semibold text-slate-600 transition hover:text-slate-950{% if link.current %} text-slate-950{% endif %}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-3 lg:gap-4">
+        {% if support_url != blank %}
+          <a href="{{ support_url }}" class="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-950 lg:inline-flex">
+            {{ section.settings.support_label }}
+          </a>
+        {% endif %}
+        {% if settings.header_show_search %}
+          <a href="{{ routes.search_url }}" class="site-meta-link hidden lg:inline-flex">{{ 'header.search' | t }}</a>
+        {% endif %}
+        <a href="{{ routes.cart_url }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-slate-300 hover:text-slate-950">
+          {{ 'header.cart' | t }}
         </a>
-      {% endif %}
-      {% if settings.header_show_search %}
-        <a href="{{ routes.search_url }}" class="text-sm text-slate-700">{{ 'header.search' | t }}</a>
-      {% endif %}
-      <a href="{{ routes.cart_url }}" class="text-sm text-slate-700">{{ 'header.cart' | t }}</a>
-      <button
-        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 px-3 text-sm lg:hidden"
-        type="button"
-        aria-controls="mobile-nav-drawer"
-        aria-expanded="false"
-        data-drawer-open="mobile-nav-drawer"
-      >
-        {{ 'header.open_menu' | t }}
-      </button>
-    </div>
-  </div>
-
-  {% if section.settings.show_mega_panel and section.blocks.size > 0 %}
-    <div class="border-t border-slate-100">
-      <div class="container-shell hidden lg:block">
-        {% render 'mega-menu-panel', section: section, menu: primary_menu %}
+        <button
+          class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-900 lg:hidden"
+          type="button"
+          aria-controls="mobile-nav-drawer"
+          aria-expanded="false"
+          data-drawer-open="mobile-nav-drawer"
+        >
+          {{ 'header.open_menu' | t }}
+        </button>
       </div>
     </div>
-  {% endif %}
 
-  {% render 'mobile-nav-drawer', menu: primary_menu %}
+    {% if section.settings.show_mega_panel and section.blocks.size > 0 %}
+      <div class="hidden border-t border-slate-200/70 lg:block">
+        {% render 'mega-menu-panel', section: section, menu: primary_menu %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% render 'mobile-nav-drawer', menu: primary_menu, support_url: support_url %}
 </header>

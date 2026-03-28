@@ -14,6 +14,10 @@
         "eyebrow": "Documentation",
         "heading": "Manuals and setup guidance by product family",
         "copy": "This section can later be powered by metaobjects that connect manuals to products, collections, and lifecycle stages.",
+        "structured_source": "global",
+        "resource_kind": "manuals",
+        "resource_limit": 6,
+        "show_search": true,
         "source_note": "Manual entries can later map to structured documents tied to products, families, or support lifecycle stages.",
         "link_label": "Open support center",
         "link_url": "/pages/support"

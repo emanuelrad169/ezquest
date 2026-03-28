@@ -19,7 +19,7 @@
       "settings": {
         "eyebrow": "Collection detail",
         "heading": "Collection highlights",
-        "copy": "A secondary storytelling area for category-specific guidance, accessory cross-sell paths, or trust signals.",
+        "copy": "Use this secondary layer for category-specific guidance, technical considerations, and support-aware cross-sell context.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -27,21 +27,21 @@
           "type": "feature",
           "settings": {
             "title": "Use-case overview",
-            "copy": "Reserved for collection-specific product guidance, fit, or workflow positioning."
+            "copy": "Use this block for collection-specific product guidance, setup fit, or workflow positioning."
           }
         },
         "feature_2": {
           "type": "feature",
           "settings": {
             "title": "Technical guidance",
-            "copy": "Reserved for power, port, compatibility, or platform-specific considerations."
+            "copy": "Use this block for port mix, power, compatibility, or platform-specific considerations."
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "title": "Support continuity",
-            "copy": "Reserved for links to manuals, downloads, troubleshooting, or compatibility guidance."
+            "copy": "Use this block to route into manuals, downloads, troubleshooting, or compatibility guidance."
           }
         }
       },
@@ -75,9 +75,11 @@
       "settings": {
         "eyebrow": "Support continuity",
         "heading": "Need product help before purchasing?",
-        "copy": "This space can route shoppers to compatibility guidance, support resources, or contact pathways without breaking the collection flow.",
+        "copy": "Use this space to route shoppers into compatibility, compare, or direct support without breaking the collection flow.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
+        "secondary_label": "Compare options",
+        "secondary_url": "/pages/compare",
         "style": "light",
         "button_style": "secondary"
       }

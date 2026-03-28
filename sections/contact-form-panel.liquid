@@ -1,0 +1,87 @@
+<section class="section-shell">
+  <div class="container-shell max-w-6xl">
+    <div class="content-page-shell">
+      <div class="content-page-sidebar">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
+        {% if section.settings.copy != blank %}
+          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        {% endif %}
+
+        {% if section.settings.side_heading != blank or section.settings.side_copy != blank %}
+          <div class="product-support-panel mt-6">
+            {% if section.settings.side_eyebrow != blank %}
+              <p class="section-kicker">{{ section.settings.side_eyebrow }}</p>
+            {% endif %}
+            {% if section.settings.side_heading != blank %}
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-950">{{ section.settings.side_heading }}</h3>
+            {% endif %}
+            {% if section.settings.side_copy != blank %}
+              <p class="mt-3 text-sm leading-7 text-slate-600">{{ section.settings.side_copy }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="content-page-body">
+        {% form 'contact', class: 'space-y-5' %}
+          {% if form.posted_successfully? %}
+            <div class="rounded-[1.4rem] border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-700">
+              {{ section.settings.success_message }}
+            </div>
+          {% endif %}
+
+          {{ form.errors | default_errors }}
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormName-{{ section.id }}">Name</label>
+              <input id="ContactFormName-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormEmail-{{ section.id }}">Email</label>
+              <input id="ContactFormEmail-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocorrect="off" autocapitalize="off">
+            </div>
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormPhone-{{ section.id }}">Phone</label>
+            <input id="ContactFormPhone-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="tel" name="contact[phone]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormMessage-{{ section.id }}">Message</label>
+            <textarea id="ContactFormMessage-{{ section.id }}" class="min-h-40 w-full rounded-[1.6rem] border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" rows="7" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <div class="action-cluster">
+            <button type="submit" class="button-primary">Send message</button>
+            {% if settings.support_contact_url != blank %}
+              {% render 'button', label: 'Support center', url: settings.support_contact_url, style: 'secondary' %}
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form panel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact form" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Send a message" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this form for direct support, business questions, or order-related contact." },
+    { "type": "text", "id": "side_eyebrow", "label": "Side card eyebrow", "default": "Before submitting" },
+    { "type": "text", "id": "side_heading", "label": "Side card heading", "default": "Use direct contact when self-service is not enough" },
+    { "type": "textarea", "id": "side_copy", "label": "Side card copy", "default": "Encourage customers to include product name, order details, and the issue summary so support can respond efficiently." },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks for reaching out. Your message has been sent." }
+  ],
+  "presets": [
+    { "name": "Contact form panel" }
+  ]
+}
+{% endschema %}

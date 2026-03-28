@@ -1,8 +1,97 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Contact" } },
-    "support": { "type": "support-card-grid", "settings": {} },
-    "main": { "type": "main-page", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Contact",
+        "heading": "A clean escalation path for product, order, and support questions",
+        "copy": "Use this page as the controlled handoff point for direct support, warranty escalation, or business inquiries.",
+        "support_eyebrow": "Best use",
+        "support_note": "Keep the contact page practical: when to contact, which route to use, and what users should prepare before reaching out.",
+        "link_label": "View support center",
+        "link_url": "/pages/support"
+      }
+    },
+    "details": {
+      "type": "info-card-grid",
+      "settings": {
+        "eyebrow": "Contact pathways",
+        "heading": "Direct the right question to the right support route",
+        "copy": "Use these cards for direct support, sales, warranty, or channel escalation paths.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Support",
+            "title": "Product and setup help",
+            "copy": "Use this card for direct product support or post-purchase issue handling.",
+            "link_label": "Open support center",
+            "link_url": "/pages/support"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Warranty",
+            "title": "Claims and warranty guidance",
+            "copy": "Use this card for warranty policy, claim routes, or eligibility guidance.",
+            "link_label": "View warranty",
+            "link_url": "/pages/warranty"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Orders",
+            "title": "Shipping and return questions",
+            "copy": "Use this card for order support, return windows, and shipping expectations.",
+            "link_label": "Open shipping and returns",
+            "link_url": "/pages/shipping-returns"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    },
+    "form": {
+      "type": "contact-form-panel",
+      "settings": {
+        "eyebrow": "Contact form",
+        "heading": "Send a message with the details support will need",
+        "copy": "Use this form for direct support, warranty follow-up, business requests, or order-related escalation when self-service resources are not enough.",
+        "side_eyebrow": "Before submitting",
+        "side_heading": "Help support respond faster",
+        "side_copy": "Include the product name, order reference, setup context, and the issue summary so the next step is clear from the first reply.",
+        "success_message": "Thanks for reaching out. Your message has been sent."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "intro_copy": "Use the page body for contact forms, office details, business contact information, or any support expectations.",
+        "side_eyebrow": "Before contacting",
+        "side_heading": "Route customers through self-service when it saves time",
+        "side_copy": "Use the side card to direct customers to downloads, manuals, compatibility, or FAQ before a direct handoff.",
+        "side_link_label": "View downloads",
+        "side_link_url": "/pages/downloads"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need self-service first",
+        "heading": "Support pages should still reduce unnecessary escalations",
+        "copy": "Use the final CTA to redirect into support resources when that path is faster than direct contact.",
+        "link_label": "Open manuals",
+        "link_url": "/pages/manuals",
+        "secondary_label": "Open FAQ",
+        "secondary_url": "/pages/faq",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "support", "main"]
+  "order": ["hero", "details", "form", "main", "cta"]
 }

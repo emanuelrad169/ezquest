@@ -1,47 +1,75 @@
 <section class="section-shell">
-  <div class="container-shell max-w-5xl">
+  <div class="container-shell max-w-6xl">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Technical details'
       assign section_copy = section.settings.copy | default: 'Reserved for technical overview text and implementation notes.'
       assign structured_spec_rows = blank
       assign has_structured_rows = false
+      assign note_label = 'Data model note'
+      assign note_from_metafield = false
+
       if product != blank and product.metafields.ezquest.spec_rows != blank
         assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
         if structured_spec_rows.count > 0
           assign has_structured_rows = true
         endif
       endif
+
+      if section.settings.source_note == blank and product != blank and product.metafields.ezquest.compatibility_summary != blank
+        assign note_label = 'Compatibility note'
+        assign note_from_metafield = true
+      elsif section.settings.source_note == blank and product != blank and product.metafields.ezquest.support_summary != blank
+        assign note_label = 'Support note'
+        assign note_from_metafield = true
+      endif
     -%}
-    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-      <div>
+
+    <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+      <div class="support-aside">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
-        <div class="max-w-3xl">
-          <h2 class="section-heading mt-4">{{ section_heading }}</h2>
-          <p class="section-copy mt-4">{{ section_copy }}</p>
+        <h2 class="section-heading mt-4">{{ section_heading }}</h2>
+        <p class="section-copy mt-4">{{ section_copy }}</p>
+
+        {% if section.settings.source_note != blank or note_from_metafield %}
+          <div class="product-support-panel mt-6">
+            <p class="section-kicker">{{ note_label }}</p>
+            {% if note_from_metafield and product.metafields.ezquest.compatibility_summary != blank %}
+              <div class="richtext-content mt-3">{{ product.metafields.ezquest.compatibility_summary | metafield_tag }}</div>
+            {% elsif note_from_metafield and product.metafields.ezquest.support_summary != blank %}
+              <div class="richtext-content mt-3">{{ product.metafields.ezquest.support_summary | metafield_tag }}</div>
+            {% else %}
+              <p class="mt-3 text-sm leading-6 text-slate-600">{{ section.settings.source_note }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="section-frame overflow-hidden p-0">
+        <div class="border-b border-slate-200 bg-slate-50/90 px-6 py-5 lg:px-8">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <p class="section-kicker">Technical profile</p>
+            {% if has_structured_rows %}
+              <span class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Structured data</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="px-6 py-2 lg:px-8">
+          {% if has_structured_rows %}
+            {% for spec_row in structured_spec_rows %}
+              {% render 'spec-row', label: spec_row.label.value, value: spec_row.spec_value.value, first: forloop.first %}
+            {% endfor %}
+          {% else %}
+            {% for block in section.blocks %}
+              {% render 'spec-row', label: block.settings.label, value: block.settings.value, first: forloop.first %}
+            {% else %}
+              {% render 'spec-row', label: section.settings.empty_state_label, value: section.settings.empty_state_value, first: true %}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
-      {% if section.settings.source_note != blank %}
-        <aside class="section-frame">
-          <p class="section-kicker">Data model note</p>
-          <p class="mt-3 text-sm leading-6 text-slate-600">{{ section.settings.source_note }}</p>
-        </aside>
-      {% endif %}
-    </div>
-
-    <div class="mt-8 rounded-3xl border border-slate-200 bg-white px-6 py-2">
-      {% if has_structured_rows %}
-        {% for spec_row in structured_spec_rows %}
-          {% render 'spec-row', label: spec_row.label.value, value: spec_row.spec_value.value, first: forloop.first %}
-        {% endfor %}
-      {% else %}
-        {% for block in section.blocks %}
-          {% render 'spec-row', label: block.settings.label, value: block.settings.value, first: forloop.first %}
-        {% else %}
-          {% render 'spec-row', label: section.settings.empty_state_label, value: section.settings.empty_state_value, first: true %}
-        {% endfor %}
-      {% endif %}
     </div>
   </div>
 </section>

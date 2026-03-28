@@ -4,16 +4,16 @@
       "type": "hero-home",
       "settings": {
         "eyebrow": "Connectivity platform",
-        "heading": "Premium storefront framework for product discovery and support clarity",
-        "copy": "Structured to balance merchandising, product education, and support pathways without locking in final campaign copy.",
+        "heading": "Premium connectivity built for cleaner setups, faster decisions, and stronger support continuity",
+        "copy": "Use the homepage to balance category discovery, product confidence, and support entry points so shoppers can move from interest to action without friction.",
         "layout": "split",
         "primary_label": "Browse collections",
         "primary_url": "/collections/all",
-        "secondary_label": "Explore support",
-        "secondary_url": "/pages/support",
+        "secondary_label": "Compare options",
+        "secondary_url": "/pages/compare",
         "show_support_link": true,
-        "panel_heading": "Implementation direction",
-        "panel_copy": "This hero supports future visual polish, campaign modules, and stronger product-family storytelling without changing the underlying information architecture.",
+        "panel_heading": "Merchandising direction",
+        "panel_copy": "This hero now supports category discovery, compare-entry points, and support handoff without changing the underlying Shopify-native architecture.",
         "panel_link_label": "View support center",
         "panel_link_url": "/pages/support"
       },
@@ -22,21 +22,21 @@
           "type": "stat",
           "settings": {
             "value": "01",
-            "label": "Commerce-ready entry point"
+            "label": "Clear category discovery"
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
             "value": "02",
-            "label": "Support-aware navigation path"
+            "label": "Compare-aware decision path"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
             "value": "03",
-            "label": "Structured content expansion path"
+            "label": "Support continuity built in"
           }
         }
       },
@@ -46,8 +46,8 @@
       "type": "collection-feature-grid",
       "settings": {
         "eyebrow": "Shop by category",
-        "heading": "Collection architecture for key product families",
-        "copy": "Supports category-led merchandising today and richer collection storytelling in later phases.",
+        "heading": "Start with the product family that matches the workflow",
+        "copy": "Use this module to lead shoppers into the right collection faster, with clearer differentiation between core categories.",
         "columns_desktop": 4,
         "link_label": "View all products",
         "link_url": "/collections/all"
@@ -57,7 +57,7 @@
           "type": "feature",
           "settings": {
             "title": "Hubs and adapters",
-            "copy": "Reserved for the primary collection entry point and category positioning.",
+            "copy": "Compact connectivity solutions for everyday device expansion, travel setups, and quick productivity upgrades.",
             "link_label": "Open collection",
             "link": "/collections/hubs-adapters"
           }
@@ -66,7 +66,7 @@
           "type": "feature",
           "settings": {
             "title": "Docking stations",
-            "copy": "Reserved for workspace and multi-device docking solutions.",
+            "copy": "Desk-ready solutions for multi-display, multi-device, and higher-capacity workspace setups.",
             "link_label": "Open collection",
             "link": "/collections/docking-stations"
           }
@@ -75,7 +75,7 @@
           "type": "feature",
           "settings": {
             "title": "Chargers and power",
-            "copy": "Reserved for charging, power delivery, and portable power modules.",
+            "copy": "Charging and power accessories designed for cleaner travel kits, desktop power, and reliable daily use.",
             "link_label": "Open collection",
             "link": "/collections/chargers-power"
           }
@@ -84,7 +84,7 @@
           "type": "feature",
           "settings": {
             "title": "Cables and accessories",
-            "copy": "Reserved for supporting accessories and add-on browsing paths.",
+            "copy": "Supporting accessories and add-ons that complete the setup without sending customers into a dead-end utility page.",
             "link_label": "Open collection",
             "link": "/collections/accessories"
           }
@@ -95,9 +95,9 @@
     "story": {
       "type": "product-story-grid",
       "settings": {
-        "eyebrow": "Why this structure works",
-        "heading": "Homepage modules that can grow into a premium storytelling system",
-        "copy": "These cards are placeholders for future campaign, trust, and product-story layers while keeping the layout reviewable now.",
+        "eyebrow": "Why EZQuest",
+        "heading": "Build confidence before the shopper ever hits the product page",
+        "copy": "Use these story modules to explain why the catalog is easier to shop, compare, and support than a generic accessories grid.",
         "columns_desktop": "3"
       },
       "blocks": {
@@ -105,9 +105,9 @@
           "type": "story",
           "settings": {
             "eyebrow": "Narrative",
-            "title": "Feature storytelling band",
-            "copy": "Reserved for modular story panels that combine product utility and technical clarity.",
-            "link_label": "See product flow",
+            "title": "Feature-led merchandising",
+            "copy": "Lead with product utility, technical clarity, and setup confidence instead of generic campaign filler.",
+            "link_label": "Browse products",
             "link": "/collections/all"
           }
         },
@@ -116,7 +116,7 @@
           "settings": {
             "eyebrow": "Decision support",
             "title": "Comparison and buying guidance",
-            "copy": "Reserved for compare-entry points and product-family differentiation.",
+            "copy": "Make product differences legible early so shoppers can narrow the right option without guesswork.",
             "link_label": "Open compare page",
             "link": "/pages/compare"
           }
@@ -126,7 +126,7 @@
           "settings": {
             "eyebrow": "Post-purchase",
             "title": "Support and compatibility pathways",
-            "copy": "Reserved for downloads, manuals, compatibility, and troubleshooting discovery.",
+            "copy": "Keep downloads, manuals, compatibility, and troubleshooting visible as part of the main customer journey.",
             "link_label": "Explore support",
             "link": "/pages/support"
           }
@@ -139,7 +139,7 @@
       "settings": {
         "eyebrow": "Support",
         "heading": "Support routes are visible from the first page",
-        "copy": "This module establishes the support center as part of the primary customer journey, not a disconnected utility area.",
+        "copy": "The support layer should feel like part of the storefront, helping with product confidence before and after purchase.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -147,7 +147,7 @@
           "type": "card",
           "settings": {
             "title": "Downloads",
-            "copy": "Entry point for drivers, firmware, and product resources.",
+            "copy": "Drivers, firmware, and utilities tied to product readiness and post-purchase confidence.",
             "link_label": "Open downloads",
             "link_url": "/pages/downloads"
           }
@@ -156,7 +156,7 @@
           "type": "card",
           "settings": {
             "title": "Manuals",
-            "copy": "Entry point for setup guides and product documentation.",
+            "copy": "Guides and setup documentation that shorten the path from unboxing to a working setup.",
             "link_label": "Open manuals",
             "link_url": "/pages/manuals"
           }
@@ -165,7 +165,7 @@
           "type": "card",
           "settings": {
             "title": "Compatibility",
-            "copy": "Entry point for device, platform, and workflow compatibility guidance.",
+            "copy": "Compatibility guidance for device, platform, and workflow fit before a purchase becomes a support issue.",
             "link_label": "Open compatibility",
             "link_url": "/pages/compatibility"
           }
@@ -178,7 +178,7 @@
       "settings": {
         "eyebrow": "Resources",
         "heading": "Editorial and education framework",
-        "copy": "Supports future journal content, product education, and evergreen guidance without requiring that content to exist yet.",
+        "copy": "Use editorial content to support buying confidence, setup guidance, and product education instead of treating the blog like an afterthought.",
         "limit": 3
       }
     },
@@ -186,12 +186,12 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Next step",
-        "heading": "A framework ready for deeper product and support implementation",
-        "copy": "The next layer can focus on richer merchandising, structured support data, and visual polish without changing the core architecture.",
+        "heading": "Move from discovery into products, compare, or support with less friction",
+        "copy": "Close the homepage with a strong shopping action and a practical secondary support path so the journey stays clear.",
         "link_label": "Browse products",
         "link_url": "/collections/all",
-        "secondary_label": "Open support center",
-        "secondary_url": "/pages/support",
+        "secondary_label": "Compare options",
+        "secondary_url": "/pages/compare",
         "style": "dark"
       }
     }

@@ -1,8 +1,48 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Support" } },
-    "issues": { "type": "troubleshooting-list", "settings": {} },
-    "support": { "type": "support-card-grid", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Troubleshooting",
+        "heading": "A practical support page for common issue diagnosis and next steps",
+        "copy": "Use this page for common issue groupings, recovery paths, and escalation thresholds.",
+        "support_eyebrow": "Troubleshooting note",
+        "support_note": "Each block should represent a real issue category and steer users into the right next action rather than dumping generic advice."
+      }
+    },
+    "issues": {
+      "type": "troubleshooting-list",
+      "settings": {
+        "eyebrow": "Common issues",
+        "heading": "Troubleshooting pathways by symptom or product behavior",
+        "copy": "Use this section for recurring issues, likely causes, and the next best support step.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      }
+    },
+    "support": {
+      "type": "support-card-grid",
+      "settings": {
+        "eyebrow": "Need another route",
+        "heading": "Move into compatibility, downloads, or direct help",
+        "copy": "Use these cards to keep troubleshooting connected to the rest of the support ecosystem.",
+        "columns_desktop": 3
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Escalation",
+        "heading": "Still need help beyond guided troubleshooting?",
+        "copy": "Use the final CTA to escalate into contact or warranty once self-service is exhausted.",
+        "link_label": "Contact support",
+        "link_url": "/pages/contact",
+        "secondary_label": "View warranty",
+        "secondary_url": "/pages/warranty",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "issues", "support"]
+  "order": ["hero", "issues", "support", "cta"]
 }

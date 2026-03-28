@@ -1,7 +1,81 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "Company" } },
-    "main": { "type": "main-page", "settings": {} }
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Where to buy",
+        "heading": "A route for retail, channel, and purchase-location guidance",
+        "copy": "Use this page for retailer coverage, channel notes, and how customers should choose where to buy.",
+        "support_eyebrow": "Retail note",
+        "support_note": "Keep this page clean and practical. It should explain channel options, not overwhelm with generic brand language.",
+        "link_label": "Browse products",
+        "link_url": "/collections/all"
+      }
+    },
+    "details": {
+      "type": "info-card-grid",
+      "settings": {
+        "eyebrow": "Purchase channels",
+        "heading": "Clarify direct, partner, and retail pathways",
+        "copy": "Use these cards for direct store, retail partner, and regional purchase guidance.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Direct",
+            "title": "Buy directly from the storefront",
+            "copy": "Use this card for direct-channel advantages or support continuity notes."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Retail",
+            "title": "Retail partner and in-market options",
+            "copy": "Use this card for reseller, distributor, or partner channel context."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Support",
+            "title": "Need help choosing the right product first?",
+            "copy": "Use this card to move customers back into collections or support before purchase.",
+            "link_label": "Open support center",
+            "link_url": "/pages/support"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "intro_copy": "Use the page body for reseller lists, territory notes, or fuller channel language.",
+        "side_eyebrow": "Need product guidance",
+        "side_heading": "Keep channel pages connected to the product layer",
+        "side_copy": "Use the side card for collection discovery or support routing when customers are not yet sure what they need.",
+        "side_link_label": "Browse collections",
+        "side_link_url": "/collections/all"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Still deciding",
+        "heading": "Move from where-to-buy into product and support discovery",
+        "copy": "Use the CTA to route customers into collections, support, or contact depending on the next best step.",
+        "link_label": "Browse collections",
+        "link_url": "/collections/all",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
   },
-  "order": ["hero", "main"]
+  "order": ["hero", "details", "main", "cta"]
 }

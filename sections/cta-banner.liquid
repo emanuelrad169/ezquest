@@ -3,29 +3,41 @@
     {%- liquid
       assign section_heading = section.settings.heading | default: 'CTA framework'
       assign section_copy = section.settings.copy | default: 'Reserved for end-of-page conversion or support escalation.'
-      assign banner_class = 'bg-slate-900 text-white'
+      assign banner_class = 'cta-surface-dark'
       assign copy_class = 'text-slate-200'
+      assign kicker_class = 'text-slate-300'
+      assign heading_class = 'text-white'
+
       if section.settings.style == 'light'
-        assign banner_class = 'border border-slate-200 bg-slate-50 text-slate-900'
+        assign banner_class = 'cta-surface-light'
         assign copy_class = 'text-slate-600'
+        assign kicker_class = ''
+        assign heading_class = 'text-slate-950'
       endif
     -%}
-    <div class="rounded-[2rem] px-8 py-10 lg:px-12 lg:py-14 {{ banner_class }}">
-      <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+
+    <div class="rounded-[2.25rem] px-8 py-10 lg:px-12 lg:py-14 {{ banner_class }}">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.7fr] lg:items-end">
         <div class="max-w-3xl">
           {% if section.settings.eyebrow != blank %}
-            <p class="section-kicker{% if section.settings.style == 'dark' %} text-slate-300{% endif %}">{{ section.settings.eyebrow }}</p>
+            <p class="section-kicker {{ kicker_class }}">{{ section.settings.eyebrow }}</p>
           {% endif %}
-          <h2 class="section-heading mt-4{% if section.settings.style == 'dark' %} text-white{% endif %}">{{ section_heading }}</h2>
-          <p class="mt-4 max-w-2xl text-sm leading-6 lg:text-base {{ copy_class }}">{{ section_copy }}</p>
+          <h2 class="section-heading mt-4 {{ heading_class }}">{{ section_heading }}</h2>
+          <p class="mt-4 max-w-2xl text-base leading-7 {{ copy_class }}">{{ section_copy }}</p>
         </div>
-        <div class="action-cluster lg:justify-end">
-          {% if section.settings.link_label != blank %}
-            {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: section.settings.button_style %}
-          {% endif %}
-          {% if section.settings.secondary_label != blank and section.settings.secondary_url != blank %}
-            {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url, style: 'secondary' %}
-          {% endif %}
+
+        <div class="flex flex-col gap-4 lg:items-end">
+          <div class="action-cluster lg:justify-end">
+            {% if section.settings.link_label != blank %}
+              {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: section.settings.button_style %}
+            {% endif %}
+            {% if section.settings.secondary_label != blank and section.settings.secondary_url != blank %}
+              {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url, style: 'secondary' %}
+            {% endif %}
+          </div>
+          <p class="text-sm leading-6 {% if section.settings.style == 'dark' %}text-slate-300{% else %}text-slate-500{% endif %}">
+            Keep this module focused on one clear action and one practical secondary path.
+          </p>
         </div>
       </div>
     </div>
