@@ -50,3 +50,4 @@ shopify theme dev --store your-store.myshopify.com
 ## Next Milestone
 
 Phase 2 should begin with implementation of the global shell, homepage, collection page, product page, and the first support-center templates.
+# EZQuest
