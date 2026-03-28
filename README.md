@@ -21,19 +21,35 @@ Custom Shopify Online Store 2.0 theme scaffold for EZQuest.
 
 ```bash
 npm install
+cp .env.example .env.local
+# set SHOPIFY_FLAG_STORE in .env.local
 shopify auth login
-shopify theme dev --store your-store.myshopify.com
+npm run dev
 ```
 
 ## Scripts
 
-- `npm run dev`: Tailwind watch + local Shopify development
+- `npm run dev`: Tailwind watch + local Shopify development using `SHOPIFY_FLAG_STORE`
 - `npm run build`: compile production CSS
 - `npm run check`: run Theme Check
 - `npm run push:staging`: build and push to an unpublished theme
 - `npm run push`: build and push the current theme
 - `npm run pull`: pull theme files from Shopify
 - `npm run package`: build and package the theme
+
+## Store Configuration
+
+Create a local `.env.local` file and set:
+
+```bash
+SHOPIFY_FLAG_STORE=your-store.myshopify.com
+```
+
+You can also override it inline for a single run:
+
+```bash
+SHOPIFY_FLAG_STORE=your-store.myshopify.com npm run dev
+```
 
 ## Architecture Notes
 

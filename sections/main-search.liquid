@@ -1,0 +1,25 @@
+<section class="section-shell">
+  <div class="container-shell">
+    <h1 class="section-heading">Search</h1>
+    <div class="mt-8">
+      {% render 'support-search-form' %}
+    </div>
+    <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {% for item in search.results %}
+        <div class="card-shell">
+          <a href="{{ item.url }}" class="text-lg font-semibold text-slate-900">{{ item.title }}</a>
+          <p class="mt-3 text-sm text-slate-600">{{ item.content | strip_html | truncatewords: 24 }}</p>
+        </div>
+      {% else %}
+        <div class="card-shell md:col-span-2 xl:col-span-3">Search results scaffold.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main search",
+  "settings": []
+}
+{% endschema %}

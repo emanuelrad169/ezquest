@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Documentation",
+        "heading": "Manuals framework",
+        "copy": "Designed for setup guides, quick-start documents, and future product-linked support documentation."
+      }
+    },
+    "resources": {
+      "type": "support-resource-list",
+      "settings": {
+        "eyebrow": "Documentation",
+        "heading": "Manuals and setup guidance by product family",
+        "copy": "This section can later be powered by metaobjects that connect manuals to products, collections, and lifecycle stages.",
+        "source_note": "Manual entries can later map to structured documents tied to products, families, or support lifecycle stages.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      },
+      "blocks": {
+        "resource_1": {
+          "type": "resource",
+          "settings": {
+            "meta": "Quick start",
+            "title": "Quick-start guide entry",
+            "copy": "Reserved for setup documentation and essential first-use steps.",
+            "link_label": "Open guide",
+            "link_url": "#"
+          }
+        },
+        "resource_2": {
+          "type": "resource",
+          "settings": {
+            "meta": "User guide",
+            "title": "Full manual entry",
+            "copy": "Reserved for complete product documentation and deeper usage guidance.",
+            "link_label": "Open guide",
+            "link_url": "#"
+          }
+        },
+        "resource_3": {
+          "type": "resource",
+          "settings": {
+            "meta": "Setup note",
+            "title": "Installation or workflow note",
+            "copy": "Reserved for product-specific setup notes or advanced usage instructions.",
+            "link_label": "Open guide",
+            "link_url": "#"
+          }
+        }
+      },
+      "block_order": ["resource_1", "resource_2", "resource_3"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need product-specific help",
+        "heading": "Manuals can connect directly into compatibility and troubleshooting",
+        "copy": "This space supports escalation into compatibility guidance, FAQ content, or direct support contact.",
+        "link_label": "Open troubleshooting",
+        "link_url": "/pages/troubleshooting",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "resources", "cta"]
+}

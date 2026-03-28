@@ -1,0 +1,10 @@
+{%- liquid
+  assign row_classes = 'grid grid-cols-1 gap-3 py-4 md:grid-cols-[0.9fr_1.1fr]'
+  unless first
+    assign row_classes = row_classes | append: ' border-t border-slate-200'
+  endunless
+-%}
+<div class="{{ row_classes }}">
+  <div class="text-sm font-medium text-slate-900">{{ label }}</div>
+  <div class="text-sm leading-6 text-slate-600">{{ value }}</div>
+</div>

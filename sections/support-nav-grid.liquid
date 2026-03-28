@@ -1,0 +1,84 @@
+<section class="section-shell bg-slate-50">
+  <div class="container-shell">
+    <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        <h2 class="section-heading">{{ section.settings.heading }}</h2>
+        <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        {% if section.settings.show_search %}
+          <div class="mt-6">
+            {% render 'support-search-form' %}
+          </div>
+        {% endif %}
+        {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+          <div class="mt-6">
+            {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {% for block in section.blocks %}
+          {%- liquid
+            assign block_eyebrow = block.settings.eyebrow
+            if block_eyebrow == blank
+              assign block_eyebrow = forloop.index | prepend: '0'
+            endif
+          -%}
+          <div class="feature-card" {{ block.shopify_attributes }}>
+            <div class="flex items-center justify-between gap-4">
+              <p class="section-kicker">{{ block_eyebrow }}</p>
+            </div>
+            <h3 class="mt-4 text-xl font-semibold tracking-tight">{{ block.settings.title | default: 'Support destination' }}</h3>
+            <p class="mt-3 text-sm text-slate-600">{{ block.settings.copy }}</p>
+            {% if block.settings.link_url != blank %}
+              <div class="mt-5">
+                {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
+              </div>
+            {% endif %}
+          </div>
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="feature-card">
+              <p class="section-kicker">{{ i | prepend: '0' }}</p>
+              <h3 class="mt-4 text-xl font-semibold tracking-tight">Support destination</h3>
+              <p class="mt-3 text-sm text-slate-600">Add support navigation blocks in the theme editor to populate this section.</p>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Support nav grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support hub" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Support center architecture" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for support entry points by task or product family." },
+    { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": true },
+    { "type": "text", "id": "link_label", "label": "Section link label" },
+    { "type": "url", "id": "link_url", "label": "Section link URL" }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Nav item",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Downloads" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Destination summary" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Open page" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Support nav grid",
+      "blocks": [{ "type": "nav_item" }, { "type": "nav_item" }, { "type": "nav_item" }, { "type": "nav_item" }]
+    }
+  ]
+}
+{% endschema %}

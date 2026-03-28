@@ -1,0 +1,122 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Support center",
+        "heading": "A structured support hub for product help and post-purchase continuity",
+        "copy": "Built to organize support by task, resource type, and future structured data instead of forcing everything into static pages."
+      }
+    },
+    "nav": {
+      "type": "support-nav-grid",
+      "settings": {
+        "eyebrow": "Support hub",
+        "heading": "Start with the task you need to complete",
+        "copy": "This section becomes the primary routing layer for downloads, manuals, compatibility, troubleshooting, and warranty pathways.",
+        "show_search": true,
+        "link_label": "Contact support",
+        "link_url": "/pages/contact"
+      },
+      "blocks": {
+        "nav_1": {
+          "type": "nav_item",
+          "settings": {
+            "eyebrow": "01",
+            "title": "Downloads",
+            "copy": "Drivers, firmware, and resource files.",
+            "link_label": "Open downloads",
+            "link_url": "/pages/downloads"
+          }
+        },
+        "nav_2": {
+          "type": "nav_item",
+          "settings": {
+            "eyebrow": "02",
+            "title": "Manuals",
+            "copy": "Setup guides and product documentation.",
+            "link_label": "Open manuals",
+            "link_url": "/pages/manuals"
+          }
+        },
+        "nav_3": {
+          "type": "nav_item",
+          "settings": {
+            "eyebrow": "03",
+            "title": "Compatibility",
+            "copy": "Device and workflow fit guidance.",
+            "link_label": "Open compatibility",
+            "link_url": "/pages/compatibility"
+          }
+        },
+        "nav_4": {
+          "type": "nav_item",
+          "settings": {
+            "eyebrow": "04",
+            "title": "Warranty and contact",
+            "copy": "Escalation paths, warranty help, and direct support routes.",
+            "link_label": "Open contact page",
+            "link_url": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"]
+    },
+    "cards": {
+      "type": "support-card-grid",
+      "settings": {
+        "eyebrow": "Support pathways",
+        "heading": "Secondary support modules for recurring customer needs",
+        "copy": "Use these cards for cross-links, escalation routes, or future structured support indexes.",
+        "columns_desktop": 3,
+        "link_label": "View all support pages",
+        "link_url": "/pages/support"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Troubleshooting",
+            "copy": "Route customers to common issue resolution flows and diagnostic guidance.",
+            "link_label": "Open troubleshooting",
+            "link_url": "/pages/troubleshooting"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "FAQ",
+            "copy": "Route customers to high-frequency answers before escalation.",
+            "link_label": "Open FAQ",
+            "link_url": "/pages/faq"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Warranty",
+            "copy": "Route customers to policy, claim guidance, and service information.",
+            "link_label": "Open warranty page",
+            "link_url": "/pages/warranty"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Escalation",
+        "heading": "Need help beyond self-service resources?",
+        "copy": "Use this callout for direct support contact, warranty claims, or a future integrated help workflow.",
+        "link_label": "Contact support",
+        "link_url": "/pages/contact",
+        "secondary_label": "View warranty page",
+        "secondary_url": "/pages/warranty",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "nav", "cards", "cta"]
+}

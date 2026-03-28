@@ -1,0 +1,45 @@
+{% render 'site-footer', section: section %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "shopify-section-footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Support menu"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company menu"
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support heading",
+      "default": "Support"
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Company heading",
+      "default": "Company"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay connected"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Reserved for support, legal, and operational footer details."
+    }
+  ]
+}
+{% endschema %}

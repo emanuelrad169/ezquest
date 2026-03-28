@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "Support" } },
+    "issues": { "type": "troubleshooting-list", "settings": {} },
+    "support": { "type": "support-card-grid", "settings": {} }
+  },
+  "order": ["hero", "issues", "support"]
+}

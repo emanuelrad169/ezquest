@@ -1,0 +1,36 @@
+<nav class="mb-6" aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-slate-500">
+    <li><a href="{{ routes.root_url }}" class="hover:text-slate-900">Home</a></li>
+
+    {% if template contains 'product' and collection %}
+      <li aria-hidden="true">/</li>
+      <li><a href="{{ collection.url }}" class="hover:text-slate-900">{{ collection.title }}</a></li>
+    {% elsif template contains 'article' and blog %}
+      <li aria-hidden="true">/</li>
+      <li><a href="{{ blog.url }}" class="hover:text-slate-900">{{ blog.title }}</a></li>
+    {% elsif template contains 'collection' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ collection.title }}</li>
+    {% elsif template contains 'blog' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ blog.title }}</li>
+    {% endif %}
+
+    {% if template contains 'product' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ product.title }}</li>
+    {% elsif template contains 'article' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ article.title }}</li>
+    {% elsif template contains 'page' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ page.title }}</li>
+    {% elsif template contains 'search' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">Search</li>
+    {% elsif template contains 'cart' %}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">Cart</li>
+    {% endif %}
+  </ol>
+</nav>

@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "Contact" } },
+    "support": { "type": "support-card-grid", "settings": {} },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "support", "main"]
+}

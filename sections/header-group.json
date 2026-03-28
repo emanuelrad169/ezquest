@@ -1,0 +1,17 @@
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "message": "Reserved for shipping, promo, or service announcements."
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    }
+  },
+  "order": ["announcement_bar", "header"]
+}

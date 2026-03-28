@@ -1,0 +1,19 @@
+{%- liquid
+  assign wrapper_class = class | default: ''
+  assign ratio_class = aspect_ratio | default: 'aspect-[4/3]'
+  assign object_fit = object_fit | default: 'object-cover'
+-%}
+<div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 {{ wrapper_class }}">
+  {% if media != blank %}
+    {% case media.media_type %}
+      {% when 'image' %}
+        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: ratio_class | append: ' w-full ' | append: object_fit }}
+      {% else %}
+        {{ media | media_tag: class: ratio_class | append: ' w-full ' | append: object_fit, image_size: '1600x' }}
+    {% endcase %}
+  {% elsif image != blank %}
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', class: ratio_class | append: ' w-full ' | append: object_fit }}
+  {% else %}
+    <div class="{{ ratio_class }} w-full bg-slate-100"></div>
+  {% endif %}
+</div>

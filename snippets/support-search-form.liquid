@@ -1,0 +1,8 @@
+<form action="{{ routes.search_url }}" method="get" class="card-shell">
+  <label class="mb-3 block text-sm font-medium text-slate-900" for="SupportSearch">{{ 'support.search_label' | t }}</label>
+  <div class="flex flex-col gap-3 md:flex-row">
+    <input id="SupportSearch" class="min-h-12 w-full rounded-full border border-slate-300 px-4 py-3" type="search" name="q" placeholder="{{ 'support.search_label' | t }}">
+    <input type="hidden" name="type" value="article,page,product">
+    <button class="button-primary" type="submit">{{ 'header.search' | t }}</button>
+  </div>
+</form>

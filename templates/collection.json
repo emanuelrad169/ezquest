@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "eyebrow": "Collection",
+        "intro_heading": "",
+        "intro_copy": "",
+        "support_label": "Need help choosing?",
+        "support_url": "/pages/support",
+        "products_per_page": 16,
+        "show_collection_image": true,
+        "show_sort": true,
+        "show_support_panel": true
+      }
+    },
+    "feature_grid": {
+      "type": "collection-feature-grid",
+      "settings": {
+        "eyebrow": "Collection detail",
+        "heading": "Collection highlights",
+        "copy": "A secondary storytelling area for category-specific guidance, accessory cross-sell paths, or trust signals.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Use-case overview",
+            "copy": "Reserved for collection-specific product guidance, fit, or workflow positioning."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Technical guidance",
+            "copy": "Reserved for power, port, compatibility, or platform-specific considerations."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Support continuity",
+            "copy": "Reserved for links to manuals, downloads, troubleshooting, or compatibility guidance."
+          }
+        }
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Collection support"
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What information should live here later?",
+            "answer": "Use this section for collection-level buying guidance, compatibility questions, or general setup questions that apply across multiple products."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Should this replace product-level FAQs?",
+            "answer": "No. Keep this section focused on category-wide guidance while product-specific details remain on the PDP or in structured support content."
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Support continuity",
+        "heading": "Need product help before purchasing?",
+        "copy": "This space can route shoppers to compatibility guidance, support resources, or contact pathways without breaking the collection flow.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["main", "feature_grid", "faq", "cta"]
+}

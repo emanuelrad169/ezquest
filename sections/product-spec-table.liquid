@@ -1,0 +1,63 @@
+<section class="section-shell">
+  <div class="container-shell max-w-5xl">
+    {%- liquid
+      assign section_heading = section.settings.heading | default: 'Technical details'
+      assign section_copy = section.settings.copy | default: 'Reserved for technical overview text and implementation notes.'
+    -%}
+    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <div class="max-w-3xl">
+          <h2 class="section-heading mt-4">{{ section_heading }}</h2>
+          <p class="section-copy mt-4">{{ section_copy }}</p>
+        </div>
+      </div>
+      {% if section.settings.source_note != blank %}
+        <aside class="section-frame">
+          <p class="section-kicker">Data model note</p>
+          <p class="mt-3 text-sm leading-6 text-slate-600">{{ section.settings.source_note }}</p>
+        </aside>
+      {% endif %}
+    </div>
+
+    <div class="mt-8 rounded-3xl border border-slate-200 bg-white px-6 py-2">
+      {% for block in section.blocks %}
+        {% render 'spec-row', label: block.settings.label, value: block.settings.value, first: forloop.first %}
+      {% else %}
+        {% render 'spec-row', label: section.settings.empty_state_label, value: section.settings.empty_state_value, first: true %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product spec table",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Specifications" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Technical details" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for technical overview text and implementation notes." },
+    { "type": "textarea", "id": "source_note", "label": "Source note", "default": "This section can later read from product metafields or metaobject-backed sources." },
+    { "type": "text", "id": "empty_state_label", "label": "Empty-state label", "default": "Specification label" },
+    { "type": "text", "id": "empty_state_value", "label": "Empty-state value", "default": "Specification value" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Specification row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Specification label" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Specification value" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product spec table",
+      "blocks": [{ "type": "row" }, { "type": "row" }, { "type": "row" }]
+    }
+  ]
+}
+{% endschema %}

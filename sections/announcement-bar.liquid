@@ -1,0 +1,24 @@
+<section class="border-b border-slate-200 bg-slate-50 py-3">
+  <div class="container-shell text-center text-sm text-slate-600">
+    {{ section.settings.message }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "Reserved for shipping, promo, or service announcements."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-home",
+      "settings": {
+        "eyebrow": "Connectivity platform",
+        "heading": "Premium storefront framework for product discovery and support clarity",
+        "copy": "Structured to balance merchandising, product education, and support pathways without locking in final campaign copy.",
+        "layout": "split",
+        "primary_label": "Browse collections",
+        "primary_url": "/collections/all",
+        "secondary_label": "Explore support",
+        "secondary_url": "/pages/support",
+        "show_support_link": true,
+        "panel_heading": "Implementation direction",
+        "panel_copy": "This hero supports future visual polish, campaign modules, and stronger product-family storytelling without changing the underlying information architecture.",
+        "panel_link_label": "View support center",
+        "panel_link_url": "/pages/support"
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "01",
+            "label": "Commerce-ready entry point"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "02",
+            "label": "Support-aware navigation path"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "03",
+            "label": "Structured content expansion path"
+          }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3"]
+    },
+    "categories": {
+      "type": "collection-feature-grid",
+      "settings": {
+        "eyebrow": "Shop by category",
+        "heading": "Collection architecture for key product families",
+        "copy": "Supports category-led merchandising today and richer collection storytelling in later phases.",
+        "columns_desktop": 4,
+        "link_label": "View all products",
+        "link_url": "/collections/all"
+      },
+      "blocks": {
+        "category_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Hubs and adapters",
+            "copy": "Reserved for the primary collection entry point and category positioning.",
+            "link_label": "Open collection",
+            "link": "/collections/hubs-adapters"
+          }
+        },
+        "category_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Docking stations",
+            "copy": "Reserved for workspace and multi-device docking solutions.",
+            "link_label": "Open collection",
+            "link": "/collections/docking-stations"
+          }
+        },
+        "category_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Chargers and power",
+            "copy": "Reserved for charging, power delivery, and portable power modules.",
+            "link_label": "Open collection",
+            "link": "/collections/chargers-power"
+          }
+        },
+        "category_4": {
+          "type": "feature",
+          "settings": {
+            "title": "Cables and accessories",
+            "copy": "Reserved for supporting accessories and add-on browsing paths.",
+            "link_label": "Open collection",
+            "link": "/collections/accessories"
+          }
+        }
+      },
+      "block_order": ["category_1", "category_2", "category_3", "category_4"]
+    },
+    "story": {
+      "type": "product-story-grid",
+      "settings": {
+        "eyebrow": "Why this structure works",
+        "heading": "Homepage modules that can grow into a premium storytelling system",
+        "copy": "These cards are placeholders for future campaign, trust, and product-story layers while keeping the layout reviewable now.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Narrative",
+            "title": "Feature storytelling band",
+            "copy": "Reserved for modular story panels that combine product utility and technical clarity.",
+            "link_label": "See product flow",
+            "link": "/collections/all"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Decision support",
+            "title": "Comparison and buying guidance",
+            "copy": "Reserved for compare-entry points and product-family differentiation.",
+            "link_label": "Open compare page",
+            "link": "/pages/compare"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Post-purchase",
+            "title": "Support and compatibility pathways",
+            "copy": "Reserved for downloads, manuals, compatibility, and troubleshooting discovery.",
+            "link_label": "Explore support",
+            "link": "/pages/support"
+          }
+        }
+      },
+      "block_order": ["story_1", "story_2", "story_3"]
+    },
+    "support": {
+      "type": "support-card-grid",
+      "settings": {
+        "eyebrow": "Support",
+        "heading": "Support routes are visible from the first page",
+        "copy": "This module establishes the support center as part of the primary customer journey, not a disconnected utility area.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "support_1": {
+          "type": "card",
+          "settings": {
+            "title": "Downloads",
+            "copy": "Entry point for drivers, firmware, and product resources.",
+            "link_label": "Open downloads",
+            "link_url": "/pages/downloads"
+          }
+        },
+        "support_2": {
+          "type": "card",
+          "settings": {
+            "title": "Manuals",
+            "copy": "Entry point for setup guides and product documentation.",
+            "link_label": "Open manuals",
+            "link_url": "/pages/manuals"
+          }
+        },
+        "support_3": {
+          "type": "card",
+          "settings": {
+            "title": "Compatibility",
+            "copy": "Entry point for device, platform, and workflow compatibility guidance.",
+            "link_label": "Open compatibility",
+            "link_url": "/pages/compatibility"
+          }
+        }
+      },
+      "block_order": ["support_1", "support_2", "support_3"]
+    },
+    "articles": {
+      "type": "article-feed",
+      "settings": {
+        "eyebrow": "Resources",
+        "heading": "Editorial and education framework",
+        "copy": "Supports future journal content, product education, and evergreen guidance without requiring that content to exist yet.",
+        "limit": 3
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Next step",
+        "heading": "A framework ready for deeper product and support implementation",
+        "copy": "The next layer can focus on richer merchandising, structured support data, and visual polish without changing the core architecture.",
+        "link_label": "Browse products",
+        "link_url": "/collections/all",
+        "secondary_label": "Open support center",
+        "secondary_url": "/pages/support",
+        "style": "dark"
+      }
+    }
+  },
+  "order": ["hero", "categories", "story", "support", "articles", "cta"]
+}

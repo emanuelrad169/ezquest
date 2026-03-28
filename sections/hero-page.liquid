@@ -1,0 +1,28 @@
+<section class="section-shell border-b border-slate-200 bg-slate-50">
+  <div class="container-shell">
+    {% render 'breadcrumbs' %}
+    <div class="max-w-3xl">
+      {% if section.settings.eyebrow != blank %}
+        {% render 'badge', text: section.settings.eyebrow %}
+      {% endif %}
+      <h1 class="section-heading mt-5">{{ section.settings.heading | default: page.title }}</h1>
+      {% if section.settings.copy != blank %}
+        <p class="section-copy mt-5">{{ section.settings.copy }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading override" },
+    { "type": "textarea", "id": "copy", "label": "Copy" }
+  ],
+  "presets": [
+    { "name": "Page hero" }
+  ]
+}
+{% endschema %}

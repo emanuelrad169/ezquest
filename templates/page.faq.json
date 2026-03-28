@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "Support" } },
+    "faq": { "type": "faq-accordion", "settings": {} },
+    "support": { "type": "support-card-grid", "settings": {} }
+  },
+  "order": ["hero", "faq", "support"]
+}

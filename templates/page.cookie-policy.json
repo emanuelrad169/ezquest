@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "Legal" } },
+    "main": { "type": "main-page", "settings": {} }
+  },
+  "order": ["hero", "main"]
+}

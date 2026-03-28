@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": { "type": "main-article", "settings": {} },
+    "articles": { "type": "article-feed", "settings": {} },
+    "cta": { "type": "cta-banner", "settings": {} }
+  },
+  "order": ["main", "articles", "cta"]
+}

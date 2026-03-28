@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "404", "heading": "Page not found", "copy": "Use search or return to the homepage." } },
+    "support": { "type": "support-card-grid", "settings": {} }
+  },
+  "order": ["hero", "support"]
+}

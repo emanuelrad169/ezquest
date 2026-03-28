@@ -1,0 +1,191 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": true,
+        "show_sku": true,
+        "show_quantity_selector": true,
+        "show_dynamic_checkout": true,
+        "support_heading": "Implementation-ready buy box",
+        "support_copy": "This product module is structured for future compatibility notes, installation guidance, and support escalation without overloading the purchase flow."
+      },
+      "blocks": {
+        "highlight_1": {
+          "type": "highlight",
+          "settings": {
+            "title": "Core capability",
+            "copy": "Reserved for a primary technical or workflow benefit."
+          }
+        },
+        "highlight_2": {
+          "type": "highlight",
+          "settings": {
+            "title": "Deployment fit",
+            "copy": "Reserved for setup context, device compatibility, or workspace fit."
+          }
+        },
+        "highlight_3": {
+          "type": "highlight",
+          "settings": {
+            "title": "Support readiness",
+            "copy": "Reserved for downloads, manuals, or after-purchase continuity."
+          }
+        }
+      },
+      "block_order": ["highlight_1", "highlight_2", "highlight_3"]
+    },
+    "story": {
+      "type": "product-story-carousel",
+      "settings": {
+        "eyebrow": "Product story",
+        "heading": "A modular layer for feature explanation and technical positioning",
+        "copy": "Structured to support richer product storytelling, proof points, and use-case sequencing in later phases."
+      },
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Module 01",
+            "title": "Primary feature explanation",
+            "copy": "Reserved for a lead product feature and why it matters in real use."
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Module 02",
+            "title": "Workflow or setup value",
+            "copy": "Reserved for product deployment, platform support, or connection context."
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "eyebrow": "Module 03",
+            "title": "Support continuity",
+            "copy": "Reserved for firmware, manuals, or compatibility reassurance."
+          }
+        }
+      },
+      "block_order": ["story_1", "story_2", "story_3"]
+    },
+    "specs": {
+      "type": "product-spec-table",
+      "settings": {
+        "heading": "Specifications",
+        "copy": "This section is designed to evolve into a metafield-backed technical specification table.",
+        "source_note": "Section blocks can be replaced with product metafield-backed rows in a later implementation pass."
+      },
+      "blocks": {
+        "spec_1": {
+          "type": "row",
+          "settings": {
+            "label": "Connection type",
+            "value": "Reserved for structured technical data"
+          }
+        },
+        "spec_2": {
+          "type": "row",
+          "settings": {
+            "label": "Power or charging support",
+            "value": "Reserved for structured technical data"
+          }
+        },
+        "spec_3": {
+          "type": "row",
+          "settings": {
+            "label": "Compatibility scope",
+            "value": "Reserved for structured technical data"
+          }
+        },
+        "spec_4": {
+          "type": "row",
+          "settings": {
+            "label": "Included items",
+            "value": "Reserved for structured technical data"
+          }
+        }
+      },
+      "block_order": ["spec_1", "spec_2", "spec_3", "spec_4"]
+    },
+    "compare": {
+      "type": "product-compare-table",
+      "settings": {
+        "eyebrow": "Compare",
+        "heading": "A comparison module ready for structured datasets",
+        "copy": "This area can later map to metaobject-backed comparison groups, buying guides, or compatibility matrices.",
+        "columns_desktop": 3,
+        "source_note": "Use blocks for early internal review, then migrate repeated comparison data into structured content."
+      },
+      "blocks": {
+        "compare_1": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Option 01",
+            "title": "Comparison candidate",
+            "copy": "Reserved for alternate product or adjacent solution positioning.",
+            "link_label": "View product"
+          }
+        },
+        "compare_2": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Option 02",
+            "title": "Comparison candidate",
+            "copy": "Reserved for differentiated workflow, port mix, or power profile.",
+            "link_label": "View product"
+          }
+        },
+        "compare_3": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Option 03",
+            "title": "Comparison candidate",
+            "copy": "Reserved for higher-tier, lower-tier, or specialized alternative guidance.",
+            "link_label": "View product"
+          }
+        }
+      },
+      "block_order": ["compare_1", "compare_2", "compare_3"]
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Support questions"
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Where should product-level support questions live?",
+            "answer": "Use this section for questions tightly related to setup, usage, or compatibility. Broader support content should move into the support center as structured resources."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How will specifications scale later?",
+            "answer": "The current table is block-based for review speed, but the section is intended to migrate to product metafields or metaobject-backed technical datasets."
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need more detail",
+        "heading": "Support and compatibility can stay connected to the PDP",
+        "copy": "This module gives product pages a controlled route into manuals, downloads, and compatibility guidance.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support",
+        "secondary_label": "View downloads",
+        "secondary_url": "/pages/downloads",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["main", "story", "specs", "compare", "faq", "cta"]
+}

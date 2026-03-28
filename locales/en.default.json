@@ -1,0 +1,31 @@
+{
+  "general": {
+    "continue_reading": "Continue reading",
+    "learn_more": "Learn more",
+    "shop_now": "Shop now",
+    "contact_support": "Contact support",
+    "view_all": "View all"
+  },
+  "header": {
+    "open_menu": "Open menu",
+    "search": "Search",
+    "cart": "Cart"
+  },
+  "footer": {
+    "newsletter_placeholder": "Enter your email",
+    "newsletter_button": "Subscribe"
+  },
+  "support": {
+    "search_label": "Search support resources",
+    "downloads_title": "Downloads",
+    "manuals_title": "Manuals",
+    "compatibility_title": "Compatibility",
+    "faq_title": "FAQ",
+    "troubleshooting_title": "Troubleshooting"
+  },
+  "product": {
+    "specifications": "Specifications",
+    "compare": "Compare",
+    "related": "Related products"
+  }
+}

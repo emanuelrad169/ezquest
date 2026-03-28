@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "Compare" } },
+    "compare": { "type": "product-compare-table", "settings": {} },
+    "cta": { "type": "cta-banner", "settings": {} }
+  },
+  "order": ["hero", "compare", "cta"]
+}

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "hero": { "type": "hero-page", "settings": { "eyebrow": "About" } },
+    "story": { "type": "product-story-grid", "settings": {} },
+    "main": { "type": "main-page", "settings": {} },
+    "cta": { "type": "cta-banner", "settings": {} }
+  },
+  "order": ["hero", "story", "main", "cta"]
+}

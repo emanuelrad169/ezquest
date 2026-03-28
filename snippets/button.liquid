@@ -1,0 +1,10 @@
+{%- liquid
+  assign button_label = label | default: 'Learn more'
+  assign button_url = url | default: '#'
+  assign button_style = style | default: 'primary'
+  assign button_class = 'button-primary'
+  if button_style == 'secondary'
+    assign button_class = 'button-secondary'
+  endif
+-%}
+<a href="{{ button_url }}" class="{{ button_class }}">{{ button_label }}</a>

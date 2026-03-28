@@ -1,0 +1,9 @@
+<div class="card-shell" data-accordion-item>
+  <button class="flex w-full items-center justify-between text-left font-medium" type="button" aria-expanded="false" data-accordion-trigger>
+    <span>{{ title }}</span>
+    {% render 'icon', name: 'plus' %}
+  </button>
+  <div class="mt-4 text-sm text-slate-600" hidden data-accordion-content>
+    {{ content }}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<article class="section-shell">
+  <div class="container-shell max-w-4xl">
+    {% render 'breadcrumbs' %}
+    <h1 class="section-heading">{{ article.title }}</h1>
+    <div class="mt-3 text-sm text-slate-500">{{ article.published_at | date: '%B %d, %Y' }}</div>
+    <div class="richtext-content mt-8 max-w-none">
+      {{ article.content }}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Main article",
+  "settings": []
+}
+{% endschema %}

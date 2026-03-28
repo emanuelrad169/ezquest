@@ -1,0 +1,10 @@
+node_modules/
+src/
+docs/
+package.json
+package-lock.json
+postcss.config.cjs
+tailwind.config.cjs
+README.md
+.gitignore
+.theme-check.yml

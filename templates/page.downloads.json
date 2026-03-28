@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Support resources",
+        "heading": "Downloads framework",
+        "copy": "Designed for drivers, firmware, utilities, and future structured resource indexing."
+      }
+    },
+    "resources": {
+      "type": "support-resource-list",
+      "settings": {
+        "eyebrow": "Resources",
+        "heading": "Downloadable resources by product or task",
+        "copy": "This section is ready to evolve into a metaobject-backed resource index with product associations, platforms, and version metadata.",
+        "source_note": "Later phases can map these entries to resource metaobjects with versioning, platform metadata, and product relationships.",
+        "link_label": "Contact support",
+        "link_url": "/pages/contact"
+      },
+      "blocks": {
+        "resource_1": {
+          "type": "resource",
+          "settings": {
+            "meta": "Firmware",
+            "title": "Firmware resource entry",
+            "copy": "Reserved for version notes, platform details, and linked product scope.",
+            "link_label": "Open resource",
+            "link_url": "#"
+          }
+        },
+        "resource_2": {
+          "type": "resource",
+          "settings": {
+            "meta": "Driver",
+            "title": "Driver resource entry",
+            "copy": "Reserved for OS compatibility, release notes, and install guidance.",
+            "link_label": "Open resource",
+            "link_url": "#"
+          }
+        },
+        "resource_3": {
+          "type": "resource",
+          "settings": {
+            "meta": "Utility",
+            "title": "Tool or utility entry",
+            "copy": "Reserved for software tools, helper apps, and update resources.",
+            "link_label": "Open resource",
+            "link_url": "#"
+          }
+        }
+      },
+      "block_order": ["resource_1", "resource_2", "resource_3"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need another resource",
+        "heading": "Not sure which download applies to your setup?",
+        "copy": "This callout can route customers into compatibility guidance or direct support without interrupting the resource flow.",
+        "link_label": "Open compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "resources", "cta"]
+}

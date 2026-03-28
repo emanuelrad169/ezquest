@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "hero_home": {
+      "name": "Home hero"
+    },
+    "hero_page": {
+      "name": "Page hero"
+    }
+  }
+}

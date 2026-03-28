@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#111827">
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>{% if page_title %}{{ page_title }}{% endif %}{% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} - Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
+    {{ content_for_header }}
+    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </head>
+  <body class="page-shell template-{{ template | split: '.' | first | handle }}{% if request.design_mode %} design-mode{% endif %}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+    {% sections 'header-group' %}
+    <main id="MainContent" class="site-main" role="main">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+  </body>
+</html>

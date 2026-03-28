@@ -1,0 +1,18 @@
+<section class="section-shell">
+  <div class="container-shell max-w-4xl">
+    {% unless template contains 'page.about' or template contains 'page.support' or template contains 'page.contact' or template contains 'page.downloads' or template contains 'page.manuals' or template contains 'page.compatibility' or template contains 'page.faq' or template contains 'page.troubleshooting' %}
+      {% render 'breadcrumbs' %}
+      <h1 class="section-heading">{{ page.title }}</h1>
+    {% endunless %}
+    <div class="richtext-content mt-8 max-w-none">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main page",
+  "settings": []
+}
+{% endschema %}
