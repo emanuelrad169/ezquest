@@ -3,6 +3,14 @@
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Technical details'
       assign section_copy = section.settings.copy | default: 'Reserved for technical overview text and implementation notes.'
+      assign structured_spec_rows = blank
+      assign has_structured_rows = false
+      if product != blank and product.metafields.ezquest.spec_rows != blank
+        assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
+        if structured_spec_rows.count > 0
+          assign has_structured_rows = true
+        endif
+      endif
     -%}
     <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
       <div>
@@ -23,11 +31,17 @@
     </div>
 
     <div class="mt-8 rounded-3xl border border-slate-200 bg-white px-6 py-2">
-      {% for block in section.blocks %}
-        {% render 'spec-row', label: block.settings.label, value: block.settings.value, first: forloop.first %}
+      {% if has_structured_rows %}
+        {% for spec_row in structured_spec_rows %}
+          {% render 'spec-row', label: spec_row.label.value, value: spec_row.spec_value.value, first: forloop.first %}
+        {% endfor %}
       {% else %}
-        {% render 'spec-row', label: section.settings.empty_state_label, value: section.settings.empty_state_value, first: true %}
-      {% endfor %}
+        {% for block in section.blocks %}
+          {% render 'spec-row', label: block.settings.label, value: block.settings.value, first: forloop.first %}
+        {% else %}
+          {% render 'spec-row', label: section.settings.empty_state_label, value: section.settings.empty_state_value, first: true %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>

@@ -1,20 +1,57 @@
 <section class="section-shell bg-slate-50">
   <div class="container-shell">
     {%- liquid
+      assign structured_group = blank
+      assign structured_compare_items = blank
+      assign has_structured_compare = false
+
+      if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
+        assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
+      elsif section.settings.structured_source != 'blocks' and product != blank and product.metafields.ezquest.compare_group != blank
+        assign structured_group = product.metafields.ezquest.compare_group.value
+      elsif section.settings.structured_source == 'auto' and section.settings.comparison_group_handle != blank
+        assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
+      endif
+
       assign section_heading = section.settings.heading | default: 'Comparison'
       assign section_copy = section.settings.copy | default: 'Reserved for compatibility or product comparison structures.'
+      assign section_eyebrow = section.settings.eyebrow
+      assign source_note = section.settings.source_note
+      assign structured_link_label = section.settings.structured_link_label | default: 'View product'
+
+      if structured_group != blank
+        if structured_group.products != blank and structured_group.products.value.count > 0
+          assign structured_compare_items = structured_group.products.value
+          assign has_structured_compare = true
+        endif
+        if structured_group.eyebrow != blank and structured_group.eyebrow.value != blank
+          assign section_eyebrow = structured_group.eyebrow.value
+        endif
+        if structured_group.heading != blank and structured_group.heading.value != blank
+          assign section_heading = structured_group.heading.value
+        endif
+        if structured_group.description != blank and structured_group.description.value != blank
+          assign section_copy = structured_group.description.value
+        endif
+        if structured_group.support_note != blank and structured_group.support_note.value != blank
+          assign source_note = structured_group.support_note.value
+        endif
+        if structured_group.cta_label != blank and structured_group.cta_label.value != blank
+          assign structured_link_label = structured_group.cta_label.value
+        endif
+      endif
     -%}
     <div class="section-intro">
       <div class="max-w-3xl">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% if section_eyebrow != blank %}
+          <p class="section-kicker">{{ section_eyebrow }}</p>
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
       </div>
-      {% if section.settings.source_note != blank %}
+      {% if source_note != blank %}
         <div class="section-intro-action lg:max-w-md">
-          <p class="text-sm leading-6 text-slate-500">{{ section.settings.source_note }}</p>
+          <p class="text-sm leading-6 text-slate-500">{{ source_note }}</p>
         </div>
       {% elsif section.settings.link_label != blank and section.settings.link_url != blank %}
         <div class="section-intro-action">
@@ -31,18 +68,48 @@
       endif
     -%}
     <div class="mt-10 grid gap-6 md:grid-cols-2 {{ grid_class }}">
-      {% for block in section.blocks %}
-        {% render 'compare-cell', block: block %}
-      {% else %}
-        {% for i in (1..3) %}
+      {% if has_structured_compare %}
+        {% for compare_product in structured_compare_items %}
           <article class="feature-card text-sm text-slate-600">
-            <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100"></div>
-            <p class="section-kicker mt-5">Compare item</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{{ section.settings.empty_state_heading }}</h3>
-            <p class="mt-3 leading-6">{{ section.settings.empty_state_copy }}</p>
+            {% if compare_product.featured_image != blank %}
+              {{ compare_product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-2xl object-cover' }}
+            {% else %}
+              <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100"></div>
+            {% endif %}
+            <div class="mt-5 flex items-center justify-between gap-4">
+              {% if compare_product.vendor != blank %}
+                <p class="section-kicker">{{ compare_product.vendor }}</p>
+              {% endif %}
+              {% if compare_product.type != blank %}
+                <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ compare_product.type }}</span>
+              {% endif %}
+            </div>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{{ compare_product.title }}</h3>
+            {% if compare_product.description != blank %}
+              <p class="mt-3 leading-6">{{ compare_product.description | strip_html | truncatewords: 24 }}</p>
+            {% endif %}
+            <div class="mt-4">
+              {% render 'price', product: compare_product %}
+            </div>
+            <div class="mt-6">
+              {% render 'button', label: structured_link_label, url: compare_product.url, style: 'secondary' %}
+            </div>
           </article>
         {% endfor %}
-      {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          {% render 'compare-cell', block: block %}
+        {% else %}
+          {% for i in (1..3) %}
+            <article class="feature-card text-sm text-slate-600">
+              <div class="aspect-[4/3] w-full rounded-2xl bg-slate-100"></div>
+              <p class="section-kicker mt-5">Compare item</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">{{ section.settings.empty_state_heading }}</h3>
+              <p class="mt-3 leading-6">{{ section.settings.empty_state_copy }}</p>
+            </article>
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
@@ -63,9 +130,22 @@
       "step": 1,
       "default": 3
     },
+    {
+      "type": "select",
+      "id": "structured_source",
+      "label": "Structured source",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "group_handle", "label": "Comparison group handle" },
+        { "value": "blocks", "label": "Blocks only" }
+      ]
+    },
+    { "type": "text", "id": "comparison_group_handle", "label": "Comparison group handle" },
     { "type": "textarea", "id": "source_note", "label": "Source note" },
     { "type": "text", "id": "link_label", "label": "Section link label" },
     { "type": "url", "id": "link_url", "label": "Section link URL" },
+    { "type": "text", "id": "structured_link_label", "label": "Structured card link label", "default": "View product" },
     { "type": "text", "id": "empty_state_heading", "label": "Empty-state heading", "default": "Comparison item" },
     { "type": "textarea", "id": "empty_state_copy", "label": "Empty-state copy", "default": "Add compare blocks in the theme editor to preview this module with structured content." }
   ],
