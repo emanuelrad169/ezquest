@@ -1,10 +1,10 @@
 {%- liquid
   assign media_first = false
-  assign hero_heading = section.settings.heading | default: 'Homepage hero framework'
-  assign hero_copy = section.settings.copy | default: 'Reserved for homepage value proposition, support orientation, and merchandising hierarchy.'
-  assign panel_eyebrow = section.settings.panel_eyebrow | default: 'Framework note'
-  assign panel_heading = section.settings.panel_heading | default: 'Implementation direction'
-  assign panel_copy = section.settings.panel_copy | default: 'Reserved for structural guidance, merchandising priorities, or support handoff messaging.'
+  assign hero_heading = section.settings.heading | default: 'Premium connectivity that makes every setup feel simpler'
+  assign hero_copy = section.settings.copy | default: 'Guide customers from product discovery to confident purchase with clearer category choices, cleaner comparison, and support that feels built in from the start.'
+  assign panel_eyebrow = section.settings.panel_eyebrow | default: 'Why it converts'
+  assign panel_heading = section.settings.panel_heading | default: 'A storefront built for faster, more confident decisions'
+  assign panel_copy = section.settings.panel_copy | default: 'The homepage should help customers understand what to buy, why it fits, and where support lives before hesitation slows the journey down.'
   if section.settings.layout == 'media_first'
     assign media_first = true
   endif
@@ -21,9 +21,9 @@
           <p class="section-copy mt-5">{{ hero_copy }}</p>
 
           <div class="hero-chip-row">
-            <span class="hero-chip">Premium electronics</span>
-            <span class="hero-chip">Support-aware storefront</span>
-            <span class="hero-chip">Structured-ready foundation</span>
+            <span class="hero-chip">Premium connectivity</span>
+            <span class="hero-chip">Clear product fit</span>
+            <span class="hero-chip">Support built in</span>
           </div>
 
           <div class="action-cluster mt-8">
@@ -40,14 +40,20 @@
             {% endif %}
           </div>
 
+          <div class="trust-inline-list">
+            <span class="trust-inline-item">Compare before you buy</span>
+            <span class="trust-inline-item">Manuals and downloads available</span>
+            <span class="trust-inline-item">Direct support when needed</span>
+          </div>
+
           <div class="hero-quick-links">
             <a href="/pages/compare" class="hero-quick-link">
               <div class="section-kicker">Compare</div>
-              <div class="mt-2 text-base font-semibold tracking-[-0.02em] text-slate-950">Compare product families</div>
+              <div class="mt-2 text-base font-semibold tracking-[-0.02em] text-slate-950">Compare the right hub or dock faster</div>
             </a>
             <a href="/pages/downloads" class="hero-quick-link">
               <div class="section-kicker">Resources</div>
-              <div class="mt-2 text-base font-semibold tracking-[-0.02em] text-slate-950">Open downloads and manuals</div>
+              <div class="mt-2 text-base font-semibold tracking-[-0.02em] text-slate-950">See manuals, downloads, and setup help</div>
             </a>
           </div>
 
@@ -63,7 +69,7 @@
               {% for i in (1..3) %}
                 <div class="hero-metric">
                   <p class="text-2xl font-semibold tracking-[-0.04em] text-slate-950">0{{ i }}</p>
-                  <p class="mt-2 text-sm leading-6 text-slate-600">Add hero metric blocks in the theme editor to reinforce priorities here.</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Use hero metrics for buying confidence, support visibility, or stronger category messaging.</p>
                 </div>
               {% endfor %}
             {% endif %}
@@ -86,7 +92,7 @@
                   <span class="text-slate-400">Browse</span>
                 </a>
                 <a href="/pages/support" class="support-crosslink">
-                  <span>Open support center</span>
+                  <span>Explore support before or after purchase</span>
                   <span class="text-slate-400">Help</span>
                 </a>
               </div>

@@ -2,8 +2,8 @@
   <div class="container-shell">
     {% render 'breadcrumbs' %}
     {%- liquid
-      assign support_heading = section.settings.support_heading | default: 'Implementation-ready buy box'
-      assign support_copy = section.settings.support_copy | default: 'Reserved for compatibility guidance, installation notes, or direct support handoff messaging.'
+      assign support_heading = section.settings.support_heading | default: 'Support-backed buying confidence'
+      assign support_copy = section.settings.support_copy | default: 'Use this space for compatibility guidance, installation notes, or the clearest next support step before purchase hesitation turns into drop-off.'
       assign support_summary = product.metafields.ezquest.support_summary
       assign compatibility_summary = product.metafields.ezquest.compatibility_summary
       assign structured_highlights = blank
@@ -54,7 +54,7 @@
               <span class="product-meta-pill">SKU {{ product.selected_or_first_available_variant.sku }}</span>
             {% endif %}
             {% if product.available %}
-              <span class="product-meta-pill border-emerald-200 bg-emerald-50 text-emerald-700">Available</span>
+              <span class="product-meta-pill border-emerald-200 bg-emerald-50 text-emerald-700">Ready to order</span>
             {% else %}
               <span class="product-meta-pill border-slate-300 bg-slate-100 text-slate-600">Sold out</span>
             {% endif %}
@@ -68,16 +68,16 @@
 
           <div class="product-confidence-list">
             <div class="product-confidence-item">
-              <p class="section-kicker">Confidence</p>
-              <p class="mt-2">Premium product detail flow with support continuity built in.</p>
+              <p class="section-kicker">Clarity</p>
+              <p class="mt-2">Understand the fit, key features, and next step without digging through clutter.</p>
             </div>
             <div class="product-confidence-item">
               <p class="section-kicker">Compare</p>
-              <p class="mt-2">Keep adjacent options visible so customers can narrow choices faster.</p>
+              <p class="mt-2">Compare adjacent options quickly if the customer is choosing between tiers or setups.</p>
             </div>
             <div class="product-confidence-item">
               <p class="section-kicker">Support</p>
-              <p class="mt-2">Manuals, downloads, and compatibility can stay close to the buy box.</p>
+              <p class="mt-2">Manuals, downloads, and compatibility live close to the buy box instead of after the purchase.</p>
             </div>
           </div>
 
@@ -150,15 +150,23 @@
                     {% if product.available %}Add to cart{% else %}Sold out{% endif %}
                   </button>
                   {% if settings.support_contact_url != blank %}
-                    {% render 'button', label: 'Contact support', url: settings.support_contact_url, style: 'secondary' %}
+                    {% render 'button', label: 'Need help choosing?', url: settings.support_contact_url, style: 'secondary' %}
                   {% endif %}
                 </div>
               </div>
 
+              <div class="cta-note-row">
+                <span class="cta-note-pill">Compatibility help available</span>
+                <span class="cta-note-pill">Manuals and downloads nearby</span>
+                <span class="cta-note-pill">Direct support if needed</span>
+              </div>
+
+              <p class="micro-note">Built for customers who want clearer product fit, easier setup continuity, and less guesswork before checkout.</p>
+
               <div class="product-link-row">
-                <a href="/pages/compare" class="site-meta-link">Compare options</a>
+                <a href="/pages/compare" class="site-meta-link">Compare nearby options</a>
                 <a href="/pages/downloads" class="site-meta-link">View downloads</a>
-                <a href="/pages/manuals" class="site-meta-link">Open manuals</a>
+                <a href="/pages/manuals" class="site-meta-link">See manuals</a>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -181,11 +189,11 @@
                 {% endif %}
                 <div class="support-crosslink-list">
                   <a href="/pages/compatibility" class="support-crosslink">
-                    <span>Check compatibility</span>
+                    <span>Check compatibility before ordering</span>
                     <span class="text-slate-400">Fit</span>
                   </a>
                   <a href="/pages/contact" class="support-crosslink">
-                    <span>Contact support</span>
+                    <span>Talk to support if you still need a recommendation</span>
                     <span class="text-slate-400">Help</span>
                   </a>
                 </div>

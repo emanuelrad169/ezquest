@@ -8,6 +8,7 @@
         <div class="mt-6 flex flex-wrap items-center gap-3">
           <span class="product-meta-pill">Support hub</span>
           <span class="product-meta-pill">Guided paths</span>
+          <span class="product-meta-pill">Buy with confidence</span>
         </div>
 
         {% if section.settings.show_search %}
@@ -36,6 +37,10 @@
             <span class="text-slate-400">Escalate</span>
           </a>
         </div>
+
+        <div class="shell-note mt-6">
+          Support should reduce hesitation before purchase and solve issues after purchase. Start with the most specific task page, then escalate only when needed.
+        </div>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-2">
@@ -53,11 +58,12 @@
             </div>
             <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support destination' }}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
-            {% if block.settings.link_url != blank %}
-              <div class="mt-6">
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
+              <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Start here when this is the clearest next step</p>
+              {% if block.settings.link_url != blank %}
                 {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
-              </div>
-            {% endif %}
+              {% endif %}
+            </div>
           </article>
         {% else %}
           {% for i in (1..4) %}
@@ -67,7 +73,7 @@
                 <span class="text-xs uppercase tracking-[0.18em] text-slate-300">Support path</span>
               </div>
               <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">Support destination</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">Add support navigation blocks in the theme editor to populate this section.</p>
+              <p class="mt-3 text-sm leading-7 text-slate-600">Add support navigation blocks in the theme editor to populate this section with downloads, manuals, compatibility, troubleshooting, or escalation routes.</p>
             </article>
           {% endfor %}
         {% endfor %}
@@ -82,7 +88,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support hub" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Support center architecture" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for support entry points by task or product family." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this section as the main routing layer for downloads, manuals, compatibility, troubleshooting, and escalation paths." },
     { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": true },
     { "type": "text", "id": "link_label", "label": "Section link label" },
     { "type": "url", "id": "link_url", "label": "Section link URL" }
@@ -94,8 +100,8 @@
       "settings": [
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
         { "type": "text", "id": "title", "label": "Title", "default": "Downloads" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Destination summary" },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "Open page" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Explain when this support destination is the right next step." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Open support page" },
         { "type": "url", "id": "link_url", "label": "Link" }
       ]
     }
