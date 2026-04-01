@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support center",
-        "heading": "A structured support hub for product help and post-purchase continuity",
-        "copy": "Built to organize support by task, resource type, and future structured data instead of forcing everything into static pages."
+        "heading": "Find the right help without the runaround",
+        "copy": "Start with the task in front of you, then move into downloads, manuals, compatibility, or direct help from one clear hub."
       }
     },
     "nav": {
@@ -13,7 +13,7 @@
       "settings": {
         "eyebrow": "Support hub",
         "heading": "Start with the task you need to complete",
-        "copy": "This section becomes the primary routing layer for downloads, manuals, compatibility, troubleshooting, and warranty pathways.",
+        "copy": "Choose the path that best matches what you need right now, from setup files and manuals to compatibility checks or direct support.",
         "show_search": true,
         "link_label": "Contact support",
         "link_url": "/pages/contact"
@@ -24,7 +24,7 @@
           "settings": {
             "eyebrow": "01",
             "title": "Downloads",
-            "copy": "Drivers, firmware, and resource files.",
+            "copy": "Drivers, firmware, and utilities for the product you already have.",
             "link_label": "Open downloads",
             "link_url": "/pages/downloads"
           }
@@ -34,7 +34,7 @@
           "settings": {
             "eyebrow": "02",
             "title": "Manuals",
-            "copy": "Setup guides and product documentation.",
+            "copy": "Quick-start guides, user manuals, and setup notes by product family.",
             "link_label": "Open manuals",
             "link_url": "/pages/manuals"
           }
@@ -44,7 +44,7 @@
           "settings": {
             "eyebrow": "03",
             "title": "Compatibility",
-            "copy": "Device and workflow fit guidance.",
+            "copy": "Check fit before you buy or confirm the right workflow after purchase.",
             "link_label": "Open compatibility",
             "link_url": "/pages/compatibility"
           }
@@ -54,7 +54,7 @@
           "settings": {
             "eyebrow": "04",
             "title": "Warranty and contact",
-            "copy": "Escalation paths, warranty help, and direct support routes.",
+            "copy": "Move into warranty or direct help when self-service is no longer enough.",
             "link_label": "Open contact page",
             "link_url": "/pages/contact"
           }
@@ -63,11 +63,11 @@
       "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"]
     },
     "cards": {
-      "type": "support-card-grid",
+      "type": "support-link-grid",
       "settings": {
-        "eyebrow": "Support pathways",
-        "heading": "Secondary support modules for recurring customer needs",
-        "copy": "Use these cards for cross-links, escalation routes, or future structured support indexes.",
+        "eyebrow": "Common next steps",
+        "heading": "Keep the next useful path close",
+        "copy": "Move into troubleshooting, FAQ, or warranty help without losing the support context or starting over.",
         "columns_desktop": 3,
         "link_label": "View all support pages",
         "link_url": "/pages/support"
@@ -77,7 +77,8 @@
           "type": "card",
           "settings": {
             "title": "Troubleshooting",
-            "copy": "Route customers to common issue resolution flows and diagnostic guidance.",
+            "copy": "Use symptom-led help when a product is connected but not behaving as expected.",
+            "meta": "Guided resolution",
             "link_label": "Open troubleshooting",
             "link_url": "/pages/troubleshooting"
           }
@@ -86,7 +87,8 @@
           "type": "card",
           "settings": {
             "title": "FAQ",
-            "copy": "Route customers to high-frequency answers before escalation.",
+            "copy": "Answer the broad questions first before moving into a deeper support path.",
+            "meta": "Quick answers",
             "link_label": "Open FAQ",
             "link_url": "/pages/faq"
           }
@@ -95,7 +97,8 @@
           "type": "card",
           "settings": {
             "title": "Warranty",
-            "copy": "Route customers to policy, claim guidance, and service information.",
+            "copy": "Review coverage, claim expectations, and when support should be contacted first.",
+            "meta": "Coverage",
             "link_label": "Open warranty page",
             "link_url": "/pages/warranty"
           }
@@ -108,7 +111,7 @@
       "settings": {
         "eyebrow": "Escalation",
         "heading": "Need help beyond self-service resources?",
-        "copy": "Use this callout for direct support contact, warranty claims, or a future integrated help workflow.",
+        "copy": "If self-service is not enough, move directly into contact or warranty guidance from here with the right context already in place.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "View warranty page",

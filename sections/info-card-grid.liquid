@@ -28,10 +28,10 @@
 
     <div class="mt-10 grid gap-6 md:grid-cols-2 {{ columns_class }}">
       {% for block in section.blocks %}
-        <article class="feature-card bg-gradient-to-br from-white to-slate-50" {{ block.shopify_attributes }}>
+        <article class="info-card" {{ block.shopify_attributes }}>
           <div class="flex items-center justify-between gap-4">
             <p class="section-kicker">{{ block.settings.eyebrow | default: 'Detail' }}</p>
-            <span class="text-xs uppercase tracking-[0.18em] text-slate-300">{{ forloop.index | prepend: '0' }}</span>
+            <span class="text-xs uppercase tracking-wide text-slate-300">{{ forloop.index | prepend: '0' }}</span>
           </div>
           <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Information card' }}</h3>
           {% if block.settings.copy != blank %}
@@ -45,13 +45,29 @@
         </article>
       {% else %}
         {% for i in (1..3) %}
-          <article class="feature-card bg-gradient-to-br from-white to-slate-50">
+          <article class="info-card">
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">Detail</p>
-              <span class="text-xs uppercase tracking-[0.18em] text-slate-300">{{ i | prepend: '0' }}</span>
+              <span class="text-xs uppercase tracking-wide text-slate-300">{{ i | prepend: '0' }}</span>
             </div>
-            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">Information card</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Add cards in the theme editor to populate this section.</p>
+            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
+              {% if forloop.index == 1 %}
+                Clear policy details
+              {% elsif forloop.index == 2 %}
+                Order and ownership guidance
+              {% else %}
+                Need the next step?
+              {% endif %}
+            </h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">
+              {% if forloop.index == 1 %}
+                Use these cards for the policy, process, or support details customers need most often.
+              {% elsif forloop.index == 2 %}
+                Keep shipping, warranty, reseller, or policy guidance easy to scan.
+              {% else %}
+                Route customers into support, collections, or buying guidance without losing page context.
+              {% endif %}
+            </p>
           </article>
         {% endfor %}
       {% endfor %}
@@ -65,7 +81,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Information" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Supporting details" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this section for company details, process summaries, contact pathways, or policy highlights." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this space for process summaries, policy highlights, or trust-building details that customers may need next." },
     {
       "type": "range",
       "id": "columns_desktop",
@@ -84,8 +100,8 @@
       "name": "Info card",
       "settings": [
         { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Detail" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Information card" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Summary text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Clear policy details" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Summarize the practical detail a customer needs here." },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "Learn more" },
         { "type": "url", "id": "link_url", "label": "Link" }
       ]

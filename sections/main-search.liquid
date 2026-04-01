@@ -1,43 +1,62 @@
 <section class="section-shell">
   <div class="container-shell">
-    <div class="hero-surface">
-      <div class="grid gap-8 lg:grid-cols-[1fr_0.62fr] lg:items-end">
+    <div class="editorial-shell">
+      <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
         <div class="max-w-3xl">
           <p class="section-kicker">Search</p>
-          <h1 class="section-heading mt-5">Find products, resources, and support content</h1>
+          <h1 class="section-heading mt-5">Find products, resources, and support faster</h1>
           {% if search.performed %}
-            <p class="section-copy mt-5">Showing results for “{{ search.terms }}” across product, support, and content surfaces.</p>
+            <p class="section-copy mt-5">Showing results for “{{ search.terms }}” across products, manuals, downloads, support pages, and resources.</p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
               <span class="product-meta-pill">{{ search.results_count }} results</span>
               <span class="product-meta-pill">Unified discovery</span>
             </div>
           {% else %}
-            <p class="section-copy mt-5">Search should help users move across shopping, support, and documentation without feeling like a disconnected utility page.</p>
+            <p class="section-copy mt-5">Search by product name, port type, compatibility keyword, or support topic from one clear starting point.</p>
           {% endif %}
         </div>
-        <div class="hero-panel">
+        <div class="hero-side-panel">
           {% render 'support-search-form' %}
         </div>
       </div>
     </div>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="search-grid-shell">
       {% for item in search.results %}
-        <div class="search-result-card">
-          <p class="section-kicker">{{ item.object_type | default: 'Result' }}</p>
-          <a href="{{ item.url }}" class="mt-4 block text-2xl font-semibold tracking-tight text-slate-950">{{ item.title }}</a>
-          <p class="mt-3 text-sm leading-7 text-slate-600">{{ item.content | strip_html | truncatewords: 24 }}</p>
-        </div>
+        {% if item.object_type == 'product' %}
+          {% render 'card-product', product: item, card_style: 'featured-strip', card_index: forloop.index0 %}
+        {% else %}
+          <div class="search-result-card search-result-card--{{ item.object_type | default: 'result' }}">
+            <p class="section-kicker">
+              {% if item.object_type == 'article' %}
+                Article
+              {% elsif item.object_type == 'page' %}
+                Page
+              {% else %}
+                {{ item.object_type | default: 'Result' }}
+              {% endif %}
+            </p>
+            <a href="{{ item.url }}" class="mt-4 block text-2xl font-semibold tracking-tight text-slate-950">{{ item.title }}</a>
+            <p class="mt-3 text-sm leading-7 text-slate-600">{{ item.content | strip_html | truncatewords: 24 }}</p>
+            <div class="mt-6 border-t border-slate-200/80 pt-5">
+              <a href="{{ item.url }}" class="button-tertiary">Open result</a>
+            </div>
+          </div>
+        {% endif %}
       {% else %}
-        <div class="search-result-card md:col-span-2 xl:col-span-3">
+        <div class="search-empty-shell">
           {% if search.performed %}
             <p class="section-kicker">No results yet</p>
             <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">No matches for “{{ search.terms }}”</h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Try a product name, port type, compatibility keyword, or support topic. Once store content is fully seeded, search will connect products, manuals, downloads, and support pages more deeply.</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Try a product name, connection type, compatibility keyword, or support topic. If nothing matches yet, move into support or browse the product families directly.</p>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a href="/pages/support" class="button-secondary">Open support center</a>
+              <a href="{{ routes.all_products_collection_url }}" class="site-meta-link">Browse all products</a>
+            </div>
           {% else %}
             <p class="section-kicker">Search the storefront</p>
             <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">Start with a product name, resource type, or support topic</h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Use search as the fastest bridge between shopping, documentation, and support.</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Use search as the fastest bridge between shopping, setup guidance, downloads, and support.</p>
           {% endif %}
         </div>
       {% endfor %}

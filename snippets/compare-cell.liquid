@@ -2,26 +2,18 @@
   assign compare_product = block.settings.product
   assign compare_title = block.settings.title
   assign compare_copy = block.settings.copy
-  assign compare_link = block.settings.link
   assign compare_vendor = blank
   assign compare_type = blank
 
   if compare_product != blank
     assign compare_title = compare_product.title
-    assign compare_link = compare_product.url
     assign compare_vendor = compare_product.vendor
     assign compare_type = compare_product.type
   endif
 -%}
 
-<article class="compare-card text-sm text-slate-600" {{ block.shopify_attributes }}>
-  {% if compare_product.featured_image != blank %}
-    {{ compare_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'aspect-[4/3] w-full rounded-[1.4rem] bg-slate-50 object-cover' }}
-  {% else %}
-    <div class="hero-media-frame aspect-[4/3]"></div>
-  {% endif %}
-
-  <div class="mt-5 flex items-center justify-between gap-4">
+<article class="compare-card" {{ block.shopify_attributes }}>
+  <div class="compare-card-label-row">
     {% if block.settings.eyebrow != blank %}
       <p class="section-kicker">{{ block.settings.eyebrow }}</p>
     {% elsif compare_vendor != blank %}
@@ -29,36 +21,35 @@
     {% endif %}
 
     {% if compare_type != blank %}
-      <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ compare_type }}</span>
+      <span class="compare-card-type">{{ compare_type }}</span>
     {% endif %}
   </div>
-
-  <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ compare_title }}</h3>
-
-  {% if compare_vendor != blank and block.settings.eyebrow != compare_vendor %}
-    <p class="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">{{ compare_vendor }}</p>
-  {% endif %}
-
-  {% if compare_product != blank and compare_product.metafields.ezquest.support_summary != blank %}
-    <div class="richtext-content mt-3">{{ compare_product.metafields.ezquest.support_summary | metafield_tag }}</div>
-  {% elsif compare_product != blank and compare_product.metafields.ezquest.compatibility_summary != blank %}
-    <div class="richtext-content mt-3">{{ compare_product.metafields.ezquest.compatibility_summary | metafield_tag }}</div>
-  {% elsif compare_copy != blank %}
-    <p class="mt-3 leading-7">{{ compare_copy }}</p>
-  {% elsif compare_product != blank and compare_product.description != blank %}
-    <p class="mt-3 leading-7">{{ compare_product.description | strip_html | truncatewords: 24 }}</p>
-  {% endif %}
 
   {% if compare_product != blank %}
-    <div class="mt-5 border-t border-slate-200 pt-5">
-      {% render 'price', product: compare_product %}
-    </div>
+    {% render 'card-product', product: compare_product, card_style: 'featured-strip' %}
+  {% else %}
+    <article class="product-card-tile product-card-tile--featured-strip">
+      <div class="product-card-featured-media">
+        {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+      </div>
+      <div class="product-card-featured-body">
+        <h3 class="card-title product-card-featured-title">{{ compare_title }}</h3>
+        {% if compare_copy != blank %}
+          <p class="product-card-featured-value">{{ compare_copy | truncatewords: 12 }}</p>
+        {% endif %}
+      </div>
+    </article>
   {% endif %}
 
-  <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5">
-    <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Compare product fit, support, and pricing</p>
-    {% if compare_link != blank %}
-      {% render 'button', label: block.settings.link_label, url: compare_link, style: 'secondary' %}
+  <p class="compare-context-note">
+    {% if compare_product != blank and compare_product.metafields.ezquest.support_summary != blank %}
+      {{ compare_product.metafields.ezquest.support_summary | metafield_tag | strip_html | truncatewords: 14 }}
+    {% elsif compare_product != blank and compare_product.metafields.ezquest.compatibility_summary != blank %}
+      {{ compare_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | truncatewords: 14 }}
+    {% elsif compare_copy != blank %}
+      {{ compare_copy | truncatewords: 14 }}
+    {% else %}
+      See how this option differs by fit, support, and price.
     {% endif %}
-  </div>
+  </p>
 </article>

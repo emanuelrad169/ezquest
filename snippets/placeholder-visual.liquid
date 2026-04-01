@@ -1,0 +1,71 @@
+{%- liquid
+  assign placeholder_text = text | default: 'EZQuest'
+  assign placeholder_width = width | default: 1600
+  assign placeholder_height = height | default: 1200
+  assign placeholder_alt = alt | default: placeholder_text
+  assign placeholder_class = class | default: ''
+  assign placeholder_kind = kind | default: ''
+  assign placeholder_hint = placeholder_text | downcase
+  assign placeholder_src = 'https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=1600&q=80'
+
+  if placeholder_kind == blank
+    if placeholder_class contains 'home-hero'
+      assign placeholder_kind = 'hero'
+    elsif placeholder_class contains 'editorial' or placeholder_class contains 'explore'
+      assign placeholder_kind = 'editorial'
+    elsif placeholder_class contains 'support'
+      assign placeholder_kind = 'support'
+    elsif placeholder_class contains 'home-story' or placeholder_class contains 'mega-menu-compare'
+      assign placeholder_kind = 'story'
+    elsif placeholder_class contains 'collection'
+      assign placeholder_kind = 'collection'
+    else
+      assign placeholder_kind = 'product'
+    endif
+  endif
+
+  if placeholder_kind == 'hero'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=1800&q=80'
+  elsif placeholder_kind == 'collection_hubs'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80'
+  elsif placeholder_kind == 'collection_docks'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1400&q=80'
+  elsif placeholder_kind == 'collection_power'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80'
+  elsif placeholder_kind == 'collection_accessories'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1400&q=80'
+  elsif placeholder_kind == 'collection'
+    if placeholder_hint contains 'travel'
+      assign placeholder_src = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80'
+    elsif placeholder_hint contains 'dock' or placeholder_hint contains 'desk' or placeholder_hint contains 'display'
+      assign placeholder_src = 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1400&q=80'
+    elsif placeholder_hint contains 'power' or placeholder_hint contains 'charg'
+      assign placeholder_src = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80'
+    elsif placeholder_hint contains 'accessor'
+      assign placeholder_src = 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1400&q=80'
+    else
+      assign placeholder_src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80'
+    endif
+  elsif placeholder_kind == 'product'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80'
+  elsif placeholder_kind == 'support'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80'
+  elsif placeholder_kind == 'editorial'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80'
+  elsif placeholder_kind == 'story'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1600&q=80'
+  elsif placeholder_kind == 'compare'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1800&q=80'
+  elsif placeholder_kind == 'explore'
+    assign placeholder_src = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80'
+  endif
+-%}
+<img
+  src="{{ placeholder_src }}"
+  alt="{{ placeholder_alt | escape }}"
+  class="home-placeholder-image {{ placeholder_class }}"
+  width="{{ placeholder_width }}"
+  height="{{ placeholder_height }}"
+  loading="lazy"
+  decoding="async"
+>

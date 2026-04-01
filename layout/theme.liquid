@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#f8f9f5">
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
@@ -11,6 +11,7 @@
     <title>{% if page_title %}{{ page_title }}{% endif %}{% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} - Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer="defer"></script>
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="page-shell template-{{ template | split: '.' | first | handle }}{% if request.design_mode %} design-mode{% endif %}">

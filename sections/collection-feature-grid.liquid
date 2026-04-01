@@ -1,74 +1,106 @@
-<section class="section-shell">
+<section class="section-shell home-browse-section">
   <div class="container-shell">
     {%- liquid
-      assign section_heading = section.settings.heading | default: 'Collection framework'
-      assign section_copy = section.settings.copy | default: 'Reserved for category narrative, merchandising, and buying guidance.'
+      assign section_heading = section.settings.heading | default: 'Browse by setup style'
+      assign section_copy = section.settings.copy | default: 'Choose the product family that best matches the ports, power, and workspace flow you need.'
     -%}
-    <div class="section-intro">
-      <div class="max-w-3xl">
+    <div class="home-collections-shell">
+      <div class="home-collections-intro">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <span class="product-meta-pill">Category discovery</span>
-          <span class="product-meta-pill">Merchandising layer</span>
-        </div>
+        {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+          <div class="mt-8">
+            {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+          </div>
+        {% endif %}
       </div>
-      {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-        <div class="section-intro-action">
-          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
-        </div>
-      {% endif %}
-    </div>
 
-    {%- liquid
-      assign columns_class = 'lg:grid-cols-4'
-      if section.settings.columns_desktop == 2
-        assign columns_class = 'lg:grid-cols-2'
-      elsif section.settings.columns_desktop == 3
-        assign columns_class = 'lg:grid-cols-3'
-      endif
-    -%}
-
-    <div class="mt-10 grid gap-6 md:grid-cols-2 {{ columns_class }}">
       {% for block in section.blocks %}
         {%- liquid
           assign card_title = block.settings.title
           assign card_copy = block.settings.copy
           assign card_url = block.settings.link
+          assign fallback_product_image = blank
           if block.settings.collection != blank
             assign card_title = block.settings.collection.title
             if block.settings.collection.description != blank and card_copy == blank
               assign card_copy = block.settings.collection.description | strip_html | truncatewords: 20
             endif
             assign card_url = block.settings.collection.url
+            if block.settings.collection.featured_image == blank and block.settings.collection.products_count > 0 and block.settings.collection.products.first.featured_image != blank
+              assign fallback_product_image = block.settings.collection.products.first.featured_image
+            endif
           endif
           assign card_eyebrow = block.settings.eyebrow
+          assign placeholder_kind = 'collection'
           if card_eyebrow == blank and section.settings.show_sequence
             assign card_eyebrow = forloop.index | prepend: '0'
           endif
+
+          assign feature_class = 'home-collection-card'
+          if forloop.index == 1
+            assign feature_class = feature_class | append: ' home-collection-card--feature'
+          elsif forloop.index == 2
+            assign feature_class = feature_class | append: ' home-collection-card--tall'
+          elsif forloop.index == 3
+            assign feature_class = feature_class | append: ' home-collection-card--compact-left'
+          else
+            assign feature_class = feature_class | append: ' home-collection-card--compact-right'
+          endif
+
+          if fallback_product_image == blank
+            if card_url contains '/collections/hubs-adapters' and all_products['usb-c-multimedia-hub'] != blank
+              assign fallback_product_image = all_products['usb-c-multimedia-hub'].featured_image
+              assign placeholder_kind = 'collection_hubs'
+            elsif card_url contains '/collections/docking-stations' and all_products['usb-c-pro-dock'] != blank
+              assign fallback_product_image = all_products['usb-c-pro-dock'].featured_image
+              assign placeholder_kind = 'collection_docks'
+            elsif card_url contains '/collections/chargers-power' and all_products['usb-c-travel-hub'] != blank
+              assign fallback_product_image = all_products['usb-c-travel-hub'].featured_image
+              assign placeholder_kind = 'collection_power'
+            elsif card_url contains '/collections/accessories' and all_products['usb-c-travel-hub'] != blank
+              assign fallback_product_image = all_products['usb-c-travel-hub'].featured_image
+              assign placeholder_kind = 'collection_accessories'
+            endif
+          endif
         -%}
-        <article class="feature-card flex h-full flex-col bg-gradient-to-br from-white to-slate-50" {{ block.shopify_attributes }}>
+        <article class="{{ feature_class }}" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mb-6 aspect-[4/3] w-full rounded-[1.5rem] border border-slate-200/80 object-cover' }}
+            <div class="home-collection-media">
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collection-image aspect-card w-full object-cover' }}
+            </div>
           {% elsif block.settings.collection != blank and block.settings.collection.featured_image != blank %}
-            {{ block.settings.collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mb-6 aspect-[4/3] w-full rounded-[1.5rem] border border-slate-200/80 object-cover' }}
+            <div class="home-collection-media">
+              {{ block.settings.collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collection-image aspect-card w-full object-cover' }}
+            </div>
+          {% elsif fallback_product_image != blank %}
+            <div class="home-collection-media">
+              {{ fallback_product_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collection-image aspect-card w-full object-cover' }}
+            </div>
           {% else %}
-            <div class="mb-6 aspect-[4/3] rounded-[1.5rem] border border-slate-200/80 bg-slate-100"></div>
+            <div class="home-collection-media">
+              {% render 'placeholder-visual',
+                kind: placeholder_kind,
+                text: card_title | default: 'EZQuest Collection',
+                width: 1200,
+                height: 900,
+                class: 'home-collection-image aspect-card w-full object-cover'
+              %}
+            </div>
           {% endif %}
-          {% if card_eyebrow != blank %}
-            <p class="section-kicker">{{ card_eyebrow }}</p>
-          {% endif %}
-          <div class="content-flow grow">
-            <h3 class="text-xl font-semibold tracking-[-0.03em] text-slate-950">{{ card_title | default: 'Collection feature' }}</h3>
+          <div class="home-collection-content">
+            {% if card_eyebrow != blank %}
+              <p class="section-kicker">{{ card_eyebrow }}</p>
+            {% endif %}
+            <h3 class="card-title mt-4">{{ card_title | default: 'Browse the right setup' }}</h3>
             {% if card_copy != blank %}
-              <p class="text-sm leading-7 text-slate-600">{{ card_copy }}</p>
+              <p class="mt-3 text-sm leading-7 text-slate-600">{{ card_copy }}</p>
             {% endif %}
           </div>
-          <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-            <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Explore products, compare fit, and find support</p>
+          <div class="home-collection-footer">
             {% if card_url != blank %}
               {% render 'button', label: block.settings.link_label, url: card_url, style: 'secondary' %}
             {% endif %}
@@ -76,16 +108,51 @@
         </article>
       {% else %}
         {% for i in (1..section.settings.columns_desktop) %}
-          <article class="feature-card flex h-full flex-col bg-gradient-to-br from-white to-slate-50">
-            <div class="mb-6 aspect-[4/3] rounded-[1.5rem] border border-slate-200/80 bg-slate-100"></div>
+          {%- liquid
+            assign fallback_collection_image = blank
+            assign fallback_collection_title = 'Desk-first connectivity'
+            assign fallback_collection_copy = 'Find hubs and docks built for cleaner workstation setups, clearer display workflows, and easier support.'
+            assign placeholder_kind = 'collection'
+
+            if forloop.index == 1 and all_products['usb-c-multimedia-hub'] != blank
+              assign fallback_collection_image = all_products['usb-c-multimedia-hub'].featured_image
+              assign fallback_collection_title = 'Hubs for everyday device expansion'
+              assign fallback_collection_copy = 'Start with compact connectivity that covers charging, display, and essential data ports.'
+              assign placeholder_kind = 'collection_hubs'
+            elsif forloop.index == 2 and all_products['usb-c-pro-dock'] != blank
+              assign fallback_collection_image = all_products['usb-c-pro-dock'].featured_image
+              assign fallback_collection_title = 'Desk setups with more power and ports'
+              assign fallback_collection_copy = 'Explore docking options designed for heavier workstation needs and steadier daily use.'
+              assign placeholder_kind = 'collection_docks'
+            elsif all_products['usb-c-travel-hub'] != blank
+              assign fallback_collection_image = all_products['usb-c-travel-hub'].featured_image
+              assign fallback_collection_title = 'Travel-ready connectivity'
+              assign fallback_collection_copy = 'Browse lighter expansion options for mobile setups, meeting rooms, and flexible workdays.'
+              assign placeholder_kind = 'collection_power'
+            endif
+          -%}
+          <article class="home-collection-card home-collection-card--compact">
+            <div class="home-collection-media">
+              {% if fallback_collection_image != blank %}
+                {{ fallback_collection_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collection-image aspect-card w-full object-cover' }}
+              {% else %}
+              {% render 'placeholder-visual',
+                  kind: placeholder_kind,
+                  text: 'EZQuest Collection',
+                  width: 1200,
+                  height: 900,
+                  class: 'home-collection-image aspect-card w-full object-cover'
+                %}
+              {% endif %}
+            </div>
             {% if section.settings.show_sequence %}
               <p class="section-kicker">{{ i | prepend: '0' }}</p>
             {% endif %}
-            <div class="content-flow grow">
-              <h3 class="text-xl font-semibold tracking-[-0.03em] text-slate-950">Collection feature</h3>
-              <p class="text-sm leading-7 text-slate-600">Add collection cards in the theme editor to populate this module.</p>
+            <div class="home-collection-content">
+              <h3 class="card-title mt-4">{{ fallback_collection_title }}</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">{{ fallback_collection_copy }}</p>
             </div>
-            <div class="mt-6 border-t border-slate-200/80 pt-5 text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Explore products, compare fit, and find support</div>
+            <div class="home-collection-footer"></div>
           </article>
         {% endfor %}
       {% endfor %}
@@ -98,8 +165,8 @@
   "name": "Collection feature grid",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Collections" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Collection framework" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for category narrative, merchandising, and buying guidance." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Browse by setup style" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Choose the product family that best matches the ports, power, and workspace flow you need." },
     {
       "type": "range",
       "id": "columns_desktop",
@@ -121,8 +188,8 @@
         { "type": "collection", "id": "collection", "label": "Collection" },
         { "type": "image_picker", "id": "image", "label": "Image override" },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Feature title" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Feature summary" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Browse the right setup" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Guide customers into the collection that best matches their devices, ports, and workflow." },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "View collection" },
         { "type": "url", "id": "link", "label": "Link override" }
       ]

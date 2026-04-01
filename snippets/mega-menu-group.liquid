@@ -1,0 +1,55 @@
+{%- liquid
+  assign variant = variant | default: 'default'
+  assign group_handle = group_handle | default: blank
+  assign preview_key = preview_key | default: blank
+  assign item_class = class | default: blank
+-%}
+{%- if variant == 'pill' -%}
+  <a href="{{ href }}" class="mega-menu-pill {{ item_class }}">
+    <span>{{ title }}</span>
+  </a>
+{%- elsif variant == 'utility' -%}
+  <a href="{{ href }}" class="mega-menu-utility-link {{ item_class }}">
+    <span class="mega-menu-utility-copy">
+      <strong>{{ title }}</strong>
+      {% if copy != blank %}
+        <small>{{ copy }}</small>
+      {% endif %}
+    </span>
+    <span class="mega-menu-link-arrow" aria-hidden="true">{% render 'icon', name: 'chevron-right' %}</span>
+  </a>
+{%- elsif variant == 'decision' -%}
+  <a
+    href="{{ href }}"
+    class="mega-menu-decision-item {{ item_class }}"
+    {% if preview_key != blank %}data-mega-preview-target="{{ preview_key }}" data-mega-group="{{ group_handle }}"{% endif %}
+  >
+    {% if eyebrow != blank %}
+      <span class="mega-menu-item-eyebrow">{{ eyebrow }}</span>
+    {% endif %}
+    <span class="mega-menu-item-title-row">
+      <strong>{{ title }}</strong>
+      <span class="mega-menu-inline-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
+    </span>
+    {% if copy != blank %}
+      <span class="mega-menu-item-copy">{{ copy }}</span>
+    {% endif %}
+  </a>
+{%- else -%}
+  <a
+    href="{{ href }}"
+    class="mega-menu-category-card {{ item_class }}"
+    {% if preview_key != blank %}data-mega-preview-target="{{ preview_key }}" data-mega-group="{{ group_handle }}"{% endif %}
+  >
+    {% if eyebrow != blank %}
+      <span class="mega-menu-item-eyebrow">{{ eyebrow }}</span>
+    {% endif %}
+    <span class="mega-menu-item-title-row">
+      <strong>{{ title }}</strong>
+      <span class="mega-menu-inline-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
+    </span>
+    {% if copy != blank %}
+      <span class="mega-menu-item-copy">{{ copy }}</span>
+    {% endif %}
+  </a>
+{%- endif -%}

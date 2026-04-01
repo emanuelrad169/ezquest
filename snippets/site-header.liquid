@@ -1,79 +1,85 @@
 {%- liquid
-  assign primary_menu = section.settings.menu | default: settings.header_primary_menu
-  assign secondary_menu = section.settings.secondary_menu
-  assign support_url = section.settings.support_url | default: settings.support_contact_url
+  assign account_url = routes.account_url | default: '/account'
 -%}
 <header class="site-header" role="banner">
-  {% if secondary_menu != blank %}
-    <div class="border-b border-slate-200/70 bg-slate-50/90">
-      <div class="container-shell flex min-h-10 items-center justify-between gap-4">
-        <p class="hidden text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-slate-400 lg:block">Premium connectivity and support</p>
-        <nav aria-label="Utility" class="hidden lg:block">
-          <ul class="flex items-center gap-5 text-xs font-medium text-slate-500">
-            {% for link in secondary_menu.links %}
-              <li><a href="{{ link.url }}" class="transition hover:text-slate-900">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </nav>
-      </div>
-    </div>
-  {% endif %}
-
-  <div class="container-shell">
+  <div class="site-header-inner">
     <div class="site-header-shell">
-      <a href="{{ routes.root_url }}" class="inline-flex items-center gap-4 text-slate-950">
-        {% if settings.brand_logo != blank %}
-          {{ settings.brand_logo | image_url: width: 260 | image_tag: alt: shop.name, class: 'h-8 w-auto lg:h-9' }}
-        {% else %}
-          <span class="text-xl font-semibold tracking-[-0.04em]">{{ shop.name }}</span>
-        {% endif %}
-        <span class="hidden rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500 xl:inline-flex">Electronics</span>
-      </a>
-
-      <nav aria-label="Primary" class="hidden lg:block">
-        <ul class="flex items-center gap-7">
-          {% if primary_menu != blank %}
-            {% for link in primary_menu.links %}
-              <li>
-                <a href="{{ link.url }}" class="text-sm font-semibold text-slate-600 transition hover:text-slate-950{% if link.current %} text-slate-950{% endif %}">
-                  {{ link.title }}
-                </a>
-              </li>
-            {% endfor %}
-          {% endif %}
-        </ul>
-      </nav>
-
-      <div class="flex items-center gap-3 lg:gap-4">
-        {% if support_url != blank %}
-          <a href="{{ support_url }}" class="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-950 lg:inline-flex">
-            {{ section.settings.support_label }}
-          </a>
-        {% endif %}
-        {% if settings.header_show_search %}
-          <a href="{{ routes.search_url }}" class="site-meta-link hidden lg:inline-flex">{{ 'header.search' | t }}</a>
-        {% endif %}
-        <a href="{{ routes.cart_url }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-slate-300 hover:text-slate-950">
-          {{ 'header.cart' | t }}
+      <div class="site-header-main-row">
+        <a href="{{ routes.root_url }}" class="site-brandmark">
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="h-12 w-auto lg:h-14" width="240" height="56">
         </a>
-        <button
-          class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-900 lg:hidden"
-          type="button"
-          aria-controls="mobile-nav-drawer"
-          aria-expanded="false"
-          data-drawer-open="mobile-nav-drawer"
-        >
-          {{ 'header.open_menu' | t }}
-        </button>
+
+        <a href="{{ routes.search_url }}" class="site-header-search-surface hidden lg:flex" aria-label="{{ 'header.search' | t }}">
+          <span class="site-header-search-label">Search</span>
+          <span class="site-header-search-icon">
+            {% render 'icon', name: 'search' %}
+          </span>
+        </a>
+
+        <a href="/pages/support" class="site-header-support-surface hidden lg:flex" aria-label="Customer support">
+          <span class="site-header-support-icon">
+            {% render 'icon', name: 'support' %}
+          </span>
+          <span class="site-header-support-copy">
+            <span class="site-header-support-label">Customer support</span>
+            <strong class="site-header-support-value">1-800-123-45-67</strong>
+          </span>
+          <span class="site-header-support-caret">
+            {% render 'icon', name: 'chevron-down' %}
+          </span>
+        </a>
+
+        <div class="site-header-actions">
+          <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
+            {% render 'icon', name: 'search' %}
+          </a>
+          <a href="{{ account_url }}" class="site-header-icon-button" aria-label="Account">
+            {% render 'icon', name: 'user' %}
+          </a>
+          <a href="/pages/compare" class="site-header-icon-button" aria-label="Compare">
+            {% render 'icon', name: 'layers' %}
+          </a>
+          <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button" aria-label="{{ 'header.cart' | t }}">
+            {% render 'icon', name: 'cart' %}
+            {% if cart.item_count > 0 %}
+              <span class="site-header-cart-count">{{ cart.item_count }}</span>
+            {% endif %}
+          </a>
+          <a href="{{ routes.cart_url }}" class="site-header-cart-summary hidden lg:block">
+            <span class="site-header-cart-summary-label">Subtotal</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </a>
+          <button
+            class="site-header-icon-button lg:hidden"
+            type="button"
+            aria-controls="mobile-nav-drawer"
+            aria-expanded="false"
+            data-drawer-open="mobile-nav-drawer"
+          >
+            <span class="sr-only">{{ 'header.open_menu' | t }}</span>
+            {% render 'icon', name: 'menu' %}
+          </button>
+        </div>
+      </div>
+
+      <div class="site-header-nav-row hidden lg:flex">
+        <nav aria-label="Primary" class="site-header-nav">
+          {% render 'mega-menu', section: section %}
+        </nav>
+
+        <div class="site-header-meta-links">
+          <a href="{{ routes.all_products_collection_url }}" class="site-header-meta-link">
+            {% render 'icon', name: 'tag' %}
+            <span>All sales</span>
+          </a>
+          <a href="/pages/shipping-returns" class="site-header-meta-link">
+            {% render 'icon', name: 'truck' %}
+            <span>Shipping &amp; Delivery</span>
+          </a>
+        </div>
       </div>
     </div>
-
-    {% if section.settings.show_mega_panel and section.blocks.size > 0 %}
-      <div class="hidden border-t border-slate-200/70 lg:block">
-        {% render 'mega-menu-panel', section: section, menu: primary_menu %}
-      </div>
-    {% endif %}
   </div>
 
-  {% render 'mobile-nav-drawer', menu: primary_menu, support_url: support_url %}
+  {% render 'mobile-nav-drawer' %}
 </header>

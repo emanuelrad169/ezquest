@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Shipping and returns",
-        "heading": "A clearer operational page for shipping expectations and return handling",
-        "copy": "Use this page to explain fulfillment timing, return windows, and how order support connects to contact routes.",
+        "heading": "Shipping and returns",
+        "copy": "Clarify fulfillment timing, return windows, and the right next step for order-related help.",
         "support_eyebrow": "Order support",
-        "support_note": "Keep this page practical and operational. Customers should understand timing, policy, and what to do next.",
+        "support_note": "See order timing, return windows, and the clearest next step for shipping or returns questions.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
       }
@@ -17,7 +17,7 @@
       "settings": {
         "eyebrow": "Order details",
         "heading": "Set expectations before customers need to escalate",
-        "copy": "Use these cards for shipping windows, return timing, and policy boundaries.",
+        "copy": "These highlights cover shipping windows, return timing, and the policy boundaries customers need to understand quickly.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -26,7 +26,7 @@
           "settings": {
             "eyebrow": "Shipping",
             "title": "Order processing and delivery expectations",
-            "copy": "Use this card for fulfillment timing and shipping cadence."
+            "copy": "Set clear expectations for processing times, shipping cadence, and delivery timing."
           }
         },
         "card_2": {
@@ -34,7 +34,7 @@
           "settings": {
             "eyebrow": "Returns",
             "title": "Return windows and eligibility",
-            "copy": "Use this card for return periods, condition expectations, or exclusions."
+            "copy": "Explain return windows, condition expectations, and any exceptions customers should know."
           }
         },
         "card_3": {
@@ -42,7 +42,7 @@
           "settings": {
             "eyebrow": "Help",
             "title": "Where order questions should go next",
-            "copy": "Use this card for direct order-support escalation or FAQ routing.",
+            "copy": "Direct customers into order support or FAQ guidance when they need help beyond the policy text.",
             "link_label": "Open contact page",
             "link_url": "/pages/contact"
           }
@@ -54,10 +54,10 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for full shipping and returns policy content or merchant-specific operational details.",
+        "intro_copy": "The full policy and any merchant-specific operational details continue below.",
         "side_eyebrow": "Need product help instead",
-        "side_heading": "Keep order support separate from technical support when needed",
-        "side_copy": "Use the side card to steer technical product questions back into the support center.",
+        "side_heading": "Separate order help from technical support when needed",
+        "side_copy": "Route technical product questions back into the support center while keeping order help clear and operational.",
         "side_link_label": "Open support center",
         "side_link_url": "/pages/support"
       }
@@ -67,7 +67,7 @@
       "settings": {
         "eyebrow": "Need direct help",
         "heading": "Still need support with a shipment or return?",
-        "copy": "Use the final banner for order-support escalation once policy content has done its job.",
+        "copy": "Move into direct order help when the policy answers are no longer enough.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "Open FAQ",

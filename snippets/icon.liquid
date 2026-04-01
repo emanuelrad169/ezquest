@@ -1,6 +1,71 @@
 {%- liquid
   assign icon_name = name | default: 'chevron-right'
 -%}
-<span class="inline-flex h-5 w-5 items-center justify-center rounded-full border border-slate-300 text-xs">
-  {{ icon_name | slice: 0, 1 | upcase }}
-</span>
+{%- case icon_name -%}
+  {%- when 'plus' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 3.25v11.5M3.25 9h11.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'minus' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M3.25 9h11.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'chevron-right' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M7 4.5L11.5 9 7 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'chevron-down' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'chevron-left' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M11 4.5L6.5 9l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'arrow-right' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 9h11M10.5 5l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'close' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'check' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M3.8 9.25 7.2 12.6 14.2 5.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'search' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="4.75" stroke="currentColor" stroke-width="1.7"/><path d="M11.6 11.6 15 15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'user' or 'account' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="5.75" r="2.75" stroke="currentColor" stroke-width="1.7"/><path d="M4 14c.7-2.35 2.74-3.75 5-3.75S13.3 11.65 14 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'support' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M4.25 7.75a4.75 4.75 0 1 1 9.5 0v3a1.5 1.5 0 0 1-1.5 1.5h-1.25V8.75h2.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12.5c0 1.25.95 2.25 2.25 2.25h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M4.25 8.75H7v3.5H5.75a1.5 1.5 0 0 1-1.5-1.5v-2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+  {%- when 'menu' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'headphones' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M4.25 9a4.75 4.75 0 1 1 9.5 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="3" y="8.8" width="2.8" height="4.8" rx="1.3" stroke="currentColor" stroke-width="1.6"/><rect x="12.2" y="8.8" width="2.8" height="4.8" rx="1.3" stroke="currentColor" stroke-width="1.6"/></svg>
+  {%- when 'earbuds' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M6 4.1a2.1 2.1 0 1 1 0 4.2v3.2a1.1 1.1 0 1 1-2.2 0V8.1A2.3 2.3 0 0 1 6 4.1ZM12 4.1a2.1 2.1 0 1 0 0 4.2v3.2a1.1 1.1 0 1 0 2.2 0V8.1A2.3 2.3 0 0 0 12 4.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'speaker' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="4.2" y="2.9" width="9.6" height="12.2" rx="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="7.2" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="12.2" r="0.9" fill="currentColor"/></svg>
+  {%- when 'accessory' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="6.2" y="2.8" width="5.6" height="12.4" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 5.1v1.8M7.2 6h3.6M7.2 11.8h3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  {%- when 'cart' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 3.25h1.5l1.7 7.05a1 1 0 0 0 .97.75h6.08a1 1 0 0 0 .96-.72L15.25 5H5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.25" cy="14.25" r="0.9" fill="currentColor"/><circle cx="12.25" cy="14.25" r="0.9" fill="currentColor"/></svg>
+  {%- when 'download' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 3.5v7.5M5.75 8.75 9 12l3.25-3.25M3.5 14.5h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'monitor' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="4" width="12" height="8" rx="1.6" stroke="currentColor" stroke-width="1.7"/><path d="M7 14h4M9 12v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- when 'bolt' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9.8 2.8 5.9 9.1h2.7L8 15.2l4.1-6.3H9.4l.4-6.1Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+  {%- when 'layers' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="m9 3.5 5.5 2.8L9 9.1 3.5 6.3 9 3.5ZM3.5 9.3 9 12.1l5.5-2.8M3.5 12.1 9 14.9l5.5-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'spark' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 3.1 10.1 7 14 8.1l-3.9 1.1L9 13.1l-1.1-3.9L4 8.1 7.9 7 9 3.1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13.8 2.8v1.7M14.65 3.65h-1.7M3.35 12.65v1.7M4.2 13.5H2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  {%- when 'book-open' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 4.2c-1-.7-2.35-1.05-4.05-1.05H3.5v9.7h1.45c1.7 0 3.05.35 4.05 1.05 1-.7 2.35-1.05 4.05-1.05h1.45v-9.7h-1.45c-1.7 0-3.05.35-4.05 1.05Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 4.2v9.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  {%- when 'shield' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 2.9 13.9 4.6v3.6c0 3-2 5.65-4.9 6.9-2.9-1.25-4.9-3.9-4.9-6.9V4.6L9 2.9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  {%- when 'map' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="m3 4.5 4-1.75 4 1.75L15 2.75v10.75l-4 1.75-4-1.75-4 1.75V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 2.75v10.75M11 4.5v10.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  {%- when 'tag' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9.25 3H5.5A1.5 1.5 0 0 0 4 4.5v3.75L9.25 13.5l5.25-5.25L9.25 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.75" cy="6.75" r="1" fill="currentColor"/></svg>
+  {%- when 'truck' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 5h8v5.25h-8V5ZM10.5 6.5h2.5l2.5 2.75v1h-5V6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6" cy="13" r="1.35" stroke="currentColor" stroke-width="1.6"/><circle cx="13" cy="13" r="1.35" stroke="currentColor" stroke-width="1.6"/></svg>
+  {%- when 'facebook' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M10.4 15V9.55h1.8l.3-2.2h-2.1V5.95c0-.64.18-1.1 1.1-1.1h1.16v-2a14.22 14.22 0 0 0-1.7-.1c-1.68 0-2.83 1.03-2.83 2.93v1.67H6.3v2.2h1.82V15h2.28Z" fill="currentColor"/></svg>
+  {%- when 'pinterest' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M9 3a6 6 0 0 0-2.2 11.58c-.03-.45-.06-1.15.02-1.65l1.06-4.5s-.27-.54-.27-1.34c0-1.26.73-2.2 1.64-2.2.77 0 1.14.58 1.14 1.27 0 .78-.5 1.94-.75 3.01-.22.9.46 1.63 1.34 1.63 1.61 0 2.69-2.07 2.69-4.51A3.62 3.62 0 0 0 9 3Z" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'instagram' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="9" r="2.9" stroke="currentColor" stroke-width="1.7"/><circle cx="12.65" cy="5.35" r="0.85" fill="currentColor"/></svg>
+  {%- when 'youtube' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="2.5" y="4.25" width="13" height="9.5" rx="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 7.1 11.15 9 7.5 10.9V7.1Z" fill="currentColor"/></svg>
+  {%- when 'x-social' -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M4 3.5 14 14.5M14 3.5 4 14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  {%- else -%}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><path d="M7 4.5 11.5 9 7 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endcase -%}

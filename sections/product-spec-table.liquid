@@ -1,12 +1,10 @@
 <section class="section-shell">
   <div class="container-shell max-w-6xl">
     {%- liquid
-      assign section_heading = section.settings.heading | default: 'Technical details'
-      assign section_copy = section.settings.copy | default: 'Reserved for technical overview text and implementation notes.'
+      assign section_heading = section.settings.heading | default: 'Technical sheet'
+      assign section_copy = section.settings.copy | default: 'Review the key ports, charging, display, and host details that matter most before you commit.'
       assign structured_spec_rows = blank
       assign has_structured_rows = false
-      assign note_label = 'Data model note'
-      assign note_from_metafield = false
 
       if product != blank and product.metafields.ezquest.spec_rows != blank
         assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
@@ -14,49 +12,24 @@
           assign has_structured_rows = true
         endif
       endif
-
-      if section.settings.source_note == blank and product != blank and product.metafields.ezquest.compatibility_summary != blank
-        assign note_label = 'Compatibility note'
-        assign note_from_metafield = true
-      elsif section.settings.source_note == blank and product != blank and product.metafields.ezquest.support_summary != blank
-        assign note_label = 'Support note'
-        assign note_from_metafield = true
-      endif
     -%}
 
-    <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-      <div class="support-aside">
+    <div class="grid gap-8 lg:grid-cols-article-aside lg:items-start">
+      <div class="product-technical-intro">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
-
-        {% if section.settings.source_note != blank or note_from_metafield %}
-          <div class="product-support-panel mt-6">
-            <p class="section-kicker">{{ note_label }}</p>
-            {% if note_from_metafield and product.metafields.ezquest.compatibility_summary != blank %}
-              <div class="richtext-content mt-3">{{ product.metafields.ezquest.compatibility_summary | metafield_tag }}</div>
-            {% elsif note_from_metafield and product.metafields.ezquest.support_summary != blank %}
-              <div class="richtext-content mt-3">{{ product.metafields.ezquest.support_summary | metafield_tag }}</div>
-            {% else %}
-              <p class="mt-3 text-sm leading-6 text-slate-600">{{ section.settings.source_note }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
+        <p class="product-technical-note">{{ section.settings.source_note | default: 'Scan the ports, charging, display, and host details here first, then move deeper only if you need a fit check.' }}</p>
       </div>
 
-      <div class="section-frame overflow-hidden p-0">
-        <div class="border-b border-slate-200 bg-slate-50/90 px-6 py-5 lg:px-8">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <p class="section-kicker">Technical profile</p>
-            {% if has_structured_rows %}
-              <span class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Structured data</span>
-            {% endif %}
-          </div>
+      <div class="spec-table-shell">
+        <div class="spec-table-head">
+          <p class="section-kicker">Technical profile</p>
         </div>
 
-        <div class="px-6 py-2 lg:px-8">
+        <div class="spec-table-body">
           {% if has_structured_rows %}
             {% for spec_row in structured_spec_rows %}
               {% render 'spec-row', label: spec_row.label.value, value: spec_row.spec_value.value, first: forloop.first %}
@@ -78,20 +51,20 @@
 {
   "name": "Product spec table",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Specifications" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Technical details" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for technical overview text and implementation notes." },
-    { "type": "textarea", "id": "source_note", "label": "Source note", "default": "This section can later read from product metafields or metaobject-backed sources." },
-    { "type": "text", "id": "empty_state_label", "label": "Empty-state label", "default": "Specification label" },
-    { "type": "text", "id": "empty_state_value", "label": "Empty-state value", "default": "Specification value" }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Technical sheet" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Technical sheet" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Review the key ports, charging, display, and host details that matter most before you commit." },
+    { "type": "textarea", "id": "source_note", "label": "Source note", "default": "Confirm the essentials here, then move into compatibility or manuals only if you need a closer fit check." },
+    { "type": "text", "id": "empty_state_label", "label": "Empty-state label", "default": "Connection type" },
+    { "type": "text", "id": "empty_state_value", "label": "Empty-state value", "default": "USB-C host connection" }
   ],
   "blocks": [
     {
       "type": "row",
       "name": "Specification row",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Specification label" },
-        { "type": "text", "id": "value", "label": "Value", "default": "Specification value" }
+        { "type": "text", "id": "label", "label": "Label", "default": "Connection type" },
+        { "type": "text", "id": "value", "label": "Value", "default": "USB-C host connection" }
       ]
     }
   ],

@@ -53,6 +53,11 @@
         "label": "Company menu"
       },
       {
+        "type": "link_list",
+        "id": "footer_menu_legal",
+        "label": "Legal menu"
+      },
+      {
         "type": "text",
         "id": "footer_newsletter_heading",
         "label": "Newsletter heading",

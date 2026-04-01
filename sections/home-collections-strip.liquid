@@ -1,0 +1,148 @@
+<section class="section-shell home-collections-strip-section">
+  <div class="container-shell">
+    {%- liquid
+      assign section_heading = section.settings.heading | default: 'Collections'
+      assign section_copy = section.settings.copy
+    -%}
+
+    <div class="home-collections-strip-header">
+      <h2 class="section-heading home-strip-heading">{{ section_heading }}</h2>
+      <span class="home-strip-rule" aria-hidden="true"></span>
+    </div>
+
+    {% if section_copy != blank %}
+      <p class="section-copy home-strip-copy">{{ section_copy }}</p>
+    {% endif %}
+
+    <div class="home-collections-strip-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign collection_object = block.settings.collection
+          assign card_title = block.settings.title
+          assign card_url = block.settings.link
+          assign product_count = block.settings.product_count
+          assign card_image = block.settings.image
+          assign card_summary = blank
+          assign placeholder_kind = 'collection'
+
+          if collection_object != blank
+            assign card_title = collection_object.title
+            assign card_url = collection_object.url
+            assign product_count = collection_object.products_count
+
+            if card_image == blank and collection_object.featured_image != blank
+              assign card_image = collection_object.featured_image
+            endif
+            if card_image == blank and collection_object.products_count > 0 and collection_object.products.first.featured_image != blank
+              assign card_image = collection_object.products.first.featured_image
+            endif
+          endif
+
+          if card_image == blank
+            if card_url contains '/collections/hubs-adapters' and all_products['usb-c-multimedia-hub'] != blank
+              assign card_image = all_products['usb-c-multimedia-hub'].featured_image
+              assign placeholder_kind = 'collection_hubs'
+            elsif card_url contains '/collections/docking-stations' and all_products['usb-c-pro-dock'] != blank
+              assign card_image = all_products['usb-c-pro-dock'].featured_image
+              assign placeholder_kind = 'collection_docks'
+            elsif card_url contains '/collections/chargers-power' and all_products['usb-c-travel-hub'] != blank
+              assign card_image = all_products['usb-c-travel-hub'].featured_image
+              assign placeholder_kind = 'collection_power'
+            elsif card_url contains '/collections/accessories' and all_products['usb-c-travel-hub'] != blank
+              assign card_image = all_products['usb-c-travel-hub'].featured_image
+              assign placeholder_kind = 'collection_accessories'
+            endif
+          endif
+
+          if card_title == blank
+            assign card_title = 'EZQuest Collection'
+          endif
+
+          if collection_object != blank
+            case collection_object.handle
+              when 'hubs-adapters'
+                assign card_summary = 'Everyday expansion for laptops and tablets'
+              when 'docking-stations'
+                assign card_summary = 'Desk-ready ports, power, and display support'
+              when 'chargers-power'
+                assign card_summary = 'Reliable charging across work, home, and travel'
+              when 'accessories'
+                assign card_summary = 'Cables and add-ons that finish the setup'
+            endcase
+          elsif card_url contains '/collections/hubs-adapters'
+            assign card_summary = 'Everyday expansion for laptops and tablets'
+          elsif card_url contains '/collections/docking-stations'
+            assign card_summary = 'Desk-ready ports, power, and display support'
+          elsif card_url contains '/collections/chargers-power'
+            assign card_summary = 'Reliable charging across work, home, and travel'
+          elsif card_url contains '/collections/accessories'
+            assign card_summary = 'Cables and add-ons that finish the setup'
+          endif
+        -%}
+
+        <a href="{{ card_url | default: '/collections/all' }}" class="home-collections-strip-card" {{ block.shopify_attributes }}>
+          <div class="home-collections-strip-media">
+            {% if card_image != blank %}
+              {{ card_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collections-strip-image' }}
+            {% else %}
+              {% render 'placeholder-visual',
+                kind: placeholder_kind,
+                text: card_title,
+                width: 1200,
+                height: 900,
+                class: 'home-collections-strip-image'
+              %}
+            {% endif %}
+          </div>
+          <div class="home-collections-strip-overlay"></div>
+          <div class="home-collections-strip-content">
+            <h3 class="home-collections-strip-title">{{ card_title }}</h3>
+            {% if card_summary != blank %}
+              <p class="home-collections-strip-summary">{{ card_summary }}</p>
+            {% endif %}
+            {% if product_count != blank %}
+              <p class="home-collections-strip-count">
+                {{ product_count }} product{% if product_count != 1 %}s{% endif %}
+              </p>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home collections strip",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Collections" },
+    { "type": "textarea", "id": "copy", "label": "Copy" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "limit": 4,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        { "type": "text", "id": "title", "label": "Title override" },
+        { "type": "url", "id": "link", "label": "Link override" },
+        { "type": "number", "id": "product_count", "label": "Product count override" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home collections strip",
+      "blocks": [
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

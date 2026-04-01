@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Where to buy",
-        "heading": "A route for retail, channel, and purchase-location guidance",
-        "copy": "Use this page for retailer coverage, channel notes, and how customers should choose where to buy.",
+        "heading": "Where to buy EZQuest",
+        "copy": "Help customers choose the right channel, region, or partner before they complete the purchase.",
         "support_eyebrow": "Retail note",
-        "support_note": "Keep this page clean and practical. It should explain channel options, not overwhelm with generic brand language.",
+        "support_note": "Choose the right purchase channel here, then move back into products or support when more help is needed.",
         "link_label": "Browse products",
         "link_url": "/collections/all"
       }
@@ -17,7 +17,7 @@
       "settings": {
         "eyebrow": "Purchase channels",
         "heading": "Clarify direct, partner, and retail pathways",
-        "copy": "Use these cards for direct store, retail partner, and regional purchase guidance.",
+        "copy": "Choose between direct, partner, and retail paths without guessing where to buy.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -26,7 +26,7 @@
           "settings": {
             "eyebrow": "Direct",
             "title": "Buy directly from the storefront",
-            "copy": "Use this card for direct-channel advantages or support continuity notes."
+            "copy": "Explain the benefits of buying directly, including product access and clearer support after purchase."
           }
         },
         "card_2": {
@@ -34,7 +34,7 @@
           "settings": {
             "eyebrow": "Retail",
             "title": "Retail partner and in-market options",
-            "copy": "Use this card for reseller, distributor, or partner channel context."
+            "copy": "Point customers toward the most useful regional, reseller, or retail path without sending them into guesswork."
           }
         },
         "card_3": {
@@ -42,7 +42,7 @@
           "settings": {
             "eyebrow": "Support",
             "title": "Need help choosing the right product first?",
-            "copy": "Use this card to move customers back into collections or support before purchase.",
+            "copy": "Send customers back into collections or support if they still need product guidance before buying.",
             "link_label": "Open support center",
             "link_url": "/pages/support"
           }
@@ -54,10 +54,10 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for reseller lists, territory notes, or fuller channel language.",
+        "intro_copy": "Reseller lists, territory notes, and fuller channel guidance continue below.",
         "side_eyebrow": "Need product guidance",
-        "side_heading": "Keep channel pages connected to the product layer",
-        "side_copy": "Use the side card for collection discovery or support routing when customers are not yet sure what they need.",
+        "side_heading": "Keep channel pages connected to products",
+        "side_copy": "If a customer is not sure what they need yet, route them back into collections or support from here.",
         "side_link_label": "Browse collections",
         "side_link_url": "/collections/all"
       }
@@ -67,7 +67,7 @@
       "settings": {
         "eyebrow": "Still deciding",
         "heading": "Move from where-to-buy into product and support discovery",
-        "copy": "Use the CTA to route customers into collections, support, or contact depending on the next best step.",
+        "copy": "Move from purchase channels into products, support, or direct help without friction.",
         "link_label": "Browse collections",
         "link_url": "/collections/all",
         "secondary_label": "Contact support",

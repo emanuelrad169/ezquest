@@ -1,0 +1,22 @@
+<div class="mega-menu-preview mega-menu-preview--{{ variant | default: 'shop' }}" data-mega-preview-host="{{ group_handle }}" data-mega-default-preview="{{ default_preview }}">
+  <div class="mega-menu-preview-copy">
+    {% if eyebrow != blank %}
+      <p class="mega-menu-preview-kicker" data-mega-preview-eyebrow>{{ eyebrow }}</p>
+    {% endif %}
+    <h3 class="mega-menu-preview-title" data-mega-preview-title>{{ title }}</h3>
+    {% if copy != blank %}
+      <p class="mega-menu-preview-text" data-mega-preview-copy>{{ copy }}</p>
+    {% endif %}
+    {% if href != blank %}
+      <a href="{{ href }}" class="mega-menu-preview-cta" data-mega-preview-link>
+        <span data-mega-preview-cta>{{ cta | default: 'Explore' }}</span>
+        <span aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
+      </a>
+    {% endif %}
+  </div>
+  {% if image != blank %}
+    <div class="mega-menu-preview-media">
+      {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-preview-image', data-mega-preview-image: '' }}
+    </div>
+  {% endif %}
+</div>

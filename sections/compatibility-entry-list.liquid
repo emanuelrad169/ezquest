@@ -1,4 +1,4 @@
-<section class="section-shell bg-slate-50">
+<section class="section-shell surface-muted">
   <div class="container-shell">
     {%- liquid
       assign current_product = blank
@@ -39,8 +39,8 @@
       endcase
     -%}
 
-    <div class="resource-list-shell">
-      <div class="resource-list-intro">
+    <div class="resource-list-shell compatibility-shell">
+      <div class="resource-list-intro compatibility-intro">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
@@ -48,33 +48,10 @@
         {% if section.settings.copy != blank %}
           <p class="section-copy mt-4">{{ section.settings.copy }}</p>
         {% endif %}
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <span class="product-meta-pill">Compatibility</span>
-          {% if section.settings.structured_source != 'blocks' %}
-            <span class="product-meta-pill">Structured-ready</span>
-          {% endif %}
-        </div>
-        {% if section.settings.source_note != blank %}
-          <p class="mt-4 text-sm leading-6 text-slate-500">{{ section.settings.source_note }}</p>
-        {% endif %}
-
-        <div class="support-crosslink-list">
-          <a href="/pages/manuals" class="support-crosslink">
-            <span>Open manuals</span>
-            <span class="text-slate-400">Guides</span>
-          </a>
-          <a href="/pages/downloads" class="support-crosslink">
-            <span>Open downloads</span>
-            <span class="text-slate-400">Resources</span>
-          </a>
-          <a href="/pages/contact" class="support-crosslink">
-            <span>Need help confirming fit</span>
-            <span class="text-slate-400">Support</span>
-          </a>
-        </div>
-
-        <div class="shell-note mt-6">
-          Use compatibility entries to confirm fit first, then route into manuals, downloads, or direct support only when the next step is clear.
+        <div class="compatibility-next-steps">
+          <a href="/pages/manuals" class="site-meta-link">Manuals</a>
+          <a href="/pages/downloads" class="site-meta-link">Downloads</a>
+          <a href="/pages/contact" class="site-meta-link">Contact support</a>
         </div>
       </div>
 
@@ -181,15 +158,15 @@
                   <p class="section-kicker">Compatibility entry</p>
                 {% endif %}
                 {% if entry_context != blank %}
-                  <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ entry_context }}</span>
+                  <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
                 {% endif %}
               </div>
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
               {% if entry_summary != blank %}
                 <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
               {% endif %}
-              <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Move into the product, manual, or download that supports this fit scenario</p>
+              <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Fit check for a more confident purchase</p>
                 <div class="flex flex-wrap gap-3">
                   {% if primary_url != blank %}
                     {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
@@ -206,10 +183,22 @@
 
         {% if rendered_entries == 0 %}
           {% for i in (1..3) %}
+            {%- liquid
+              assign fallback_title = 'MacBook Pro multi-display fit'
+              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
+
+              if forloop.index == 2
+                assign fallback_title = 'Windows workstation setup check'
+                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
+              elsif forloop.index == 3
+                assign fallback_title = 'Conference-room connection path'
+                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
+              endif
+            -%}
             <article class="compatibility-card">
               <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">Compatibility scenario</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify or use section blocks to populate this module with clearer fit guidance by product, platform, or workflow.</p>
+              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
             </article>
           {% endfor %}
         {% endif %}
@@ -341,15 +330,15 @@
                   <p class="section-kicker">Compatibility entry</p>
                 {% endif %}
                 {% if entry_context != blank %}
-                  <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ entry_context }}</span>
+                  <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
                 {% endif %}
               </div>
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
               {% if entry_summary != blank %}
                 <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
               {% endif %}
-              <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Move into the product, manual, or download that supports this fit scenario</p>
+              <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Fit check for more confident buying and a faster move into setup help</p>
                 <div class="flex flex-wrap gap-3">
                   {% if primary_url != blank %}
                     {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
@@ -366,10 +355,22 @@
 
         {% if rendered_entries == 0 %}
           {% for i in (1..3) %}
+            {%- liquid
+              assign fallback_title = 'MacBook Pro multi-display fit'
+              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
+
+              if forloop.index == 2
+                assign fallback_title = 'Windows workstation setup check'
+                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
+              elsif forloop.index == 3
+                assign fallback_title = 'Conference-room connection path'
+                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
+              endif
+            -%}
             <article class="compatibility-card">
               <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">Compatibility scenario</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify or use section blocks to populate this module with clearer fit guidance by product, platform, or workflow.</p>
+              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
             </article>
           {% endfor %}
         {% endif %}
@@ -385,8 +386,8 @@
             {% if block.settings.copy != blank %}
               <p class="mt-3 text-sm leading-6 text-slate-600">{{ block.settings.copy }}</p>
             {% endif %}
-            <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-              <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Turn a compatibility answer into the next useful action</p>
+            <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+              <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Turn a compatibility answer into the next useful action</p>
               {% if block.settings.link_url != blank %}
                 {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
               {% endif %}
@@ -394,10 +395,22 @@
           </article>
         {% else %}
           {% for i in (1..3) %}
+            {%- liquid
+              assign fallback_title = 'MacBook Pro multi-display fit'
+              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
+
+              if forloop.index == 2
+                assign fallback_title = 'Windows workstation setup check'
+                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
+              elsif forloop.index == 3
+                assign fallback_title = 'Conference-room connection path'
+                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
+              endif
+            -%}
             <article class="compatibility-card">
               <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">Compatibility scenario</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify or use section blocks to populate this module with clearer fit guidance by product, platform, or workflow.</p>
+              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
             </article>
           {% endfor %}
         {% endfor %}
@@ -413,7 +426,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compatibility" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Compatibility and fit guidance" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this section for compatibility entries that confirm fit, reduce uncertainty, and route customers into the right product or support resource." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Confirm fit, reduce uncertainty, and route customers into the right product or support resource." },
     {
       "type": "select",
       "id": "structured_source",
@@ -441,7 +454,7 @@
       "step": 1,
       "default": 6
     },
-    { "type": "textarea", "id": "source_note", "label": "Support note", "default": "Best results come from ordering entries consistently in Shopify and using filters only where they improve clarity." },
+    { "type": "textarea", "id": "source_note", "label": "Support note", "default": "Use compatibility guidance to confirm fit first, then move customers into manuals, downloads, or direct help only when that next step is clear." },
     { "type": "text", "id": "product_link_label", "label": "Product link label", "default": "View related product" },
     { "type": "text", "id": "download_link_label", "label": "Download link label", "default": "Open related download" },
     { "type": "text", "id": "manual_link_label", "label": "Manual link label", "default": "Open related manual" }

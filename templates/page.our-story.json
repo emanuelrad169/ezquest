@@ -4,18 +4,18 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Our story",
-        "heading": "A cleaner storytelling page for brand, product mindset, and support philosophy",
-        "copy": "Use this template when the story deserves more narrative structure than a simple company page.",
+        "heading": "The story behind a cleaner setup experience",
+        "copy": "Follow the EZQuest story through product thinking, practical design, and customer confidence.",
         "support_eyebrow": "Story note",
-        "support_note": "Keep the narrative practical and grounded in the product experience rather than generic lifestyle positioning."
+        "support_note": "This story should feel grounded in product experience, ownership, and the way support stays connected after purchase."
       }
     },
     "story": {
       "type": "product-story-grid",
       "settings": {
-        "eyebrow": "Story modules",
-        "heading": "Explain the company through a few strong narrative beats",
-        "copy": "Use this section for timeline, product philosophy, or channel evolution.",
+        "eyebrow": "Brand story",
+        "heading": "Tell the EZQuest story through product thinking, practical design, and support confidence",
+        "copy": "Shape the story through a few strong moments: what EZQuest builds, why it matters, and how ownership stays supported after purchase.",
         "columns_desktop": "3"
       }
     },
@@ -23,7 +23,7 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for the richer long-form narrative and supporting editorial content."
+        "intro_copy": "The longer narrative, brand milestones, and the ideas that shaped EZQuest hubs, docks, chargers, and accessories continue here."
       }
     },
     "cta": {
@@ -31,7 +31,7 @@
       "settings": {
         "eyebrow": "Explore next",
         "heading": "Move from story into products, support, or channel discovery",
-        "copy": "Use the final CTA to keep the page connected to the broader storefront journey.",
+        "copy": "Move from story into products, support, or where-to-buy guidance without losing the thread.",
         "link_label": "Browse collections",
         "link_url": "/collections/all",
         "secondary_label": "Where to buy",

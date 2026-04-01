@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Contact",
-        "heading": "A clean escalation path for product, order, and support questions",
-        "copy": "Use this page as the controlled handoff point for direct support, warranty escalation, or business inquiries.",
+        "heading": "Contact EZQuest support",
+        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is not enough.",
         "support_eyebrow": "Best use",
-        "support_note": "Keep the contact page practical: when to contact, which route to use, and what users should prepare before reaching out.",
+        "support_note": "Choose the right route first, then send the details support will need so the next step is clear from the first reply.",
         "link_label": "View support center",
         "link_url": "/pages/support"
       }
@@ -17,7 +17,7 @@
       "settings": {
         "eyebrow": "Contact pathways",
         "heading": "Direct the right question to the right support route",
-        "copy": "Use these cards for direct support, sales, warranty, or channel escalation paths.",
+        "copy": "Choose the right path for product help, warranty questions, or order-related issues without guessing where to start.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -26,7 +26,7 @@
           "settings": {
             "eyebrow": "Support",
             "title": "Product and setup help",
-            "copy": "Use this card for direct product support or post-purchase issue handling.",
+            "copy": "Get help with product questions, setup issues, and post-purchase support needs.",
             "link_label": "Open support center",
             "link_url": "/pages/support"
           }
@@ -36,7 +36,7 @@
           "settings": {
             "eyebrow": "Warranty",
             "title": "Claims and warranty guidance",
-            "copy": "Use this card for warranty policy, claim routes, or eligibility guidance.",
+            "copy": "Review warranty guidance, claim expectations, and the information needed before service support begins.",
             "link_label": "View warranty",
             "link_url": "/pages/warranty"
           }
@@ -46,7 +46,7 @@
           "settings": {
             "eyebrow": "Orders",
             "title": "Shipping and return questions",
-            "copy": "Use this card for order support, return windows, and shipping expectations.",
+            "copy": "Find the right path for shipping questions, returns, and order-related help.",
             "link_label": "Open shipping and returns",
             "link_url": "/pages/shipping-returns"
           }
@@ -59,7 +59,7 @@
       "settings": {
         "eyebrow": "Contact form",
         "heading": "Send a message with the details support will need",
-        "copy": "Use this form for direct support, warranty follow-up, business requests, or order-related escalation when self-service resources are not enough.",
+        "copy": "Send the details support needs so the right next step is clear from the first reply.",
         "side_eyebrow": "Before submitting",
         "side_heading": "Help support respond faster",
         "side_copy": "Include the product name, order reference, setup context, and the issue summary so the next step is clear from the first reply.",
@@ -70,10 +70,10 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for contact forms, office details, business contact information, or any support expectations.",
+        "intro_copy": "Office details, business contact information, and response expectations live here when you need them.",
         "side_eyebrow": "Before contacting",
-        "side_heading": "Route customers through self-service when it saves time",
-        "side_copy": "Use the side card to direct customers to downloads, manuals, compatibility, or FAQ before a direct handoff.",
+        "side_heading": "Start with self-service when it is faster",
+        "side_copy": "Downloads, manuals, compatibility, and FAQ may solve the issue before a direct handoff is needed.",
         "side_link_label": "View downloads",
         "side_link_url": "/pages/downloads"
       }
@@ -82,8 +82,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need self-service first",
-        "heading": "Support pages should still reduce unnecessary escalations",
-        "copy": "Use the final CTA to redirect into support resources when that path is faster than direct contact.",
+        "heading": "Need self-service before you reach out?",
+        "copy": "Move into support resources when that path is faster than waiting on a direct reply.",
         "link_label": "Open manuals",
         "link_url": "/pages/manuals",
         "secondary_label": "Open FAQ",

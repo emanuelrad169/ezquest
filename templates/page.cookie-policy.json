@@ -5,16 +5,16 @@
       "settings": {
         "eyebrow": "Legal",
         "heading": "Cookie policy",
-        "copy": "Use this template for legally required policy content while keeping the page aligned with the rest of the storefront.",
+        "copy": "Review how cookies and similar technologies are used across the EZQuest storefront.",
         "support_eyebrow": "Policy note",
-        "support_note": "Legal pages should remain clean and readable without looking disconnected from the storefront."
+        "support_note": "This page should stay clean, readable, and easy to scan without losing the storefront’s trust signals."
       }
     },
     "main": {
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for the full policy language and any region-specific notes."
+        "intro_copy": "The full policy language and any region-specific notes continue below."
       }
     }
   },

@@ -1,0 +1,68 @@
+{%- liquid
+  assign variant = variant | default: 'product'
+-%}
+{%- if variant == 'story' -%}
+  <article class="mega-menu-story-card">
+    {% if eyebrow != blank %}
+      <p class="mega-menu-story-kicker">{{ eyebrow }}</p>
+    {% endif %}
+    <h3 class="mega-menu-story-title">{{ title }}</h3>
+    {% if copy != blank %}
+      <p class="mega-menu-story-text">{{ copy }}</p>
+    {% endif %}
+    <div class="mega-menu-story-actions">
+      {% if href != blank %}
+        <a href="{{ href }}" class="mega-menu-story-primary">{{ cta | default: 'Explore' }}</a>
+      {% endif %}
+      {% if secondary_href != blank %}
+        <a href="{{ secondary_href }}" class="mega-menu-story-secondary">{{ secondary_cta | default: 'Learn more' }}</a>
+      {% endif %}
+    </div>
+  </article>
+{%- elsif variant == 'support' -%}
+  <aside class="mega-menu-support-note">
+    {% if eyebrow != blank %}
+      <p class="mega-menu-story-kicker">{{ eyebrow }}</p>
+    {% endif %}
+    <h3 class="mega-menu-support-title">{{ title }}</h3>
+    {% if copy != blank %}
+      <p class="mega-menu-support-text">{{ copy }}</p>
+    {% endif %}
+    {% if bullets != blank %}
+      <ul class="mega-menu-support-bullets">
+        {% for bullet in bullets %}
+          <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if href != blank %}
+      <a href="{{ href }}" class="mega-menu-support-cta">{{ cta | default: 'Open support' }}</a>
+    {% endif %}
+  </aside>
+{%- else -%}
+  <a href="{{ href }}" class="mega-menu-featured-card">
+    <div class="mega-menu-featured-copy">
+      {% if eyebrow != blank %}
+        <p class="mega-menu-story-kicker">{{ eyebrow }}</p>
+      {% endif %}
+      <h3 class="mega-menu-featured-title">{{ title }}</h3>
+      {% if copy != blank %}
+        <p class="mega-menu-featured-text">{{ copy }}</p>
+      {% endif %}
+      <div class="mega-menu-featured-meta">
+        {% if badge != blank %}
+          <span class="mega-menu-featured-badge">{{ badge }}</span>
+        {% endif %}
+        {% if price != blank %}
+          <span class="mega-menu-featured-price">{{ price }}</span>
+        {% endif %}
+      </div>
+      <span class="mega-menu-featured-cta">{{ cta | default: 'View product' }}</span>
+    </div>
+    {% if image != blank %}
+      <div class="mega-menu-featured-media">
+        {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-featured-image' }}
+      </div>
+    {% endif %}
+  </a>
+{%- endif -%}

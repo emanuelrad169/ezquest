@@ -4,32 +4,32 @@
       "type": "main-product",
       "settings": {
         "show_vendor": true,
-        "show_sku": true,
+        "show_sku": false,
         "show_quantity_selector": true,
-        "show_dynamic_checkout": true,
-        "support_heading": "Support continuity near the buy box",
-        "support_copy": "This product module is structured for compatibility notes, installation guidance, compare-entry points, and support escalation without overloading the purchase flow."
+        "show_dynamic_checkout": false,
+        "support_heading": "Support confidence stays close to the product",
+        "support_copy": "Check compatibility, open manuals, or download setup files without leaving the buying path or starting the decision over."
       },
       "blocks": {
         "highlight_1": {
           "type": "highlight",
           "settings": {
-            "title": "Core capability",
-            "copy": "Use this for a primary technical or workflow benefit that helps the shopper understand the product quickly."
+            "title": "Works with Mac + Windows",
+            "copy": ""
           }
         },
         "highlight_2": {
           "type": "highlight",
           "settings": {
-            "title": "Deployment fit",
-            "copy": "Use this for setup context, device compatibility, or workspace fit that reduces uncertainty before purchase."
+            "title": "Plug & play setup",
+            "copy": ""
           }
         },
         "highlight_3": {
           "type": "highlight",
           "settings": {
-            "title": "Support readiness",
-            "copy": "Use this for downloads, manuals, and after-purchase continuity so support feels integrated rather than bolted on."
+            "title": "Manuals and downloads available",
+            "copy": ""
           }
         }
       },
@@ -39,32 +39,32 @@
       "type": "product-story-carousel",
       "settings": {
         "eyebrow": "Product story",
-        "heading": "A modular layer for feature explanation and technical positioning",
-        "copy": "Use this layer to move the customer from product interest into product confidence before they commit."
+        "heading": "Why this EZQuest setup earns a closer look",
+        "copy": "A short look at the ports, power path, and workflow details that make this EZQuest product easier to choose."
       },
       "blocks": {
         "story_1": {
           "type": "story",
           "settings": {
-            "eyebrow": "Module 01",
-            "title": "Primary feature explanation",
-            "copy": "Use this panel for the lead product feature and why it matters in a real setup."
+            "eyebrow": "Design",
+            "title": "Made for cleaner modern-device setups",
+            "copy": "Show how this product reduces desk clutter, travel friction, or charging complexity in one clear idea."
           }
         },
         "story_2": {
           "type": "story",
           "settings": {
-            "eyebrow": "Module 02",
-            "title": "Workflow or setup value",
-            "copy": "Use this panel for deployment, platform support, or connection context that helps the shopper self-qualify."
+            "eyebrow": "Workflow",
+            "title": "A better fit for the way you connect",
+            "copy": "Explain the port mix, display support, or power-delivery path in one short, scannable idea."
           }
         },
         "story_3": {
           "type": "story",
           "settings": {
-            "eyebrow": "Module 03",
-            "title": "Support continuity",
-            "copy": "Use this panel for firmware, manuals, compatibility reassurance, or long-term ownership confidence."
+            "eyebrow": "Support",
+            "title": "Ownership confidence from day one",
+            "copy": "Keep compatibility guidance, manuals, and downloads close so support feels built into the product."
           }
         }
       },
@@ -73,37 +73,37 @@
     "specs": {
       "type": "product-spec-table",
       "settings": {
-        "heading": "Specifications",
-        "copy": "This section is designed to evolve into a metafield-backed technical specification table.",
-        "source_note": "Use structured rows for final technical data while keeping the fallback table reviewable during content seeding."
+        "heading": "Technical sheet",
+        "copy": "Review the ports, charging support, display capability, and platform fit that matter before you commit.",
+        "source_note": "Start with the technical fit here, then move into compatibility or manuals only if your setup needs a closer check."
       },
       "blocks": {
         "spec_1": {
           "type": "row",
           "settings": {
             "label": "Connection type",
-            "value": "Reserved for structured technical data"
+            "value": "USB-C host connection"
           }
         },
         "spec_2": {
           "type": "row",
           "settings": {
             "label": "Power or charging support",
-            "value": "Reserved for structured technical data"
+            "value": "Up to 100W pass-through charging"
           }
         },
         "spec_3": {
           "type": "row",
           "settings": {
             "label": "Compatibility scope",
-            "value": "Reserved for structured technical data"
+            "value": "Mac + Windows compatible"
           }
         },
         "spec_4": {
           "type": "row",
           "settings": {
             "label": "Included items",
-            "value": "Reserved for structured technical data"
+            "value": "Hub, cable, and quick-start guide"
           }
         }
       },
@@ -113,61 +113,78 @@
       "type": "product-compare-table",
       "settings": {
         "eyebrow": "Compare",
-        "heading": "A comparison module ready for structured datasets",
-        "copy": "Use this area to differentiate adjacent products more clearly while keeping compare tied to support and compatibility context.",
+        "heading": "Compare nearby options",
+        "copy": "See nearby EZQuest models side by side so the right port mix, power path, display support, and workflow fit are easier to spot.",
         "columns_desktop": 3,
-        "source_note": "Use blocks for early review, then migrate repeated comparison data into structured groups without changing the customer-facing pattern."
+        "source_note": "Compare nearby models by setup style, desk footprint, and support path before you move deeper into product detail."
       },
       "blocks": {
         "compare_1": {
           "type": "column",
           "settings": {
-            "eyebrow": "Option 01",
-            "title": "Comparison candidate",
-            "copy": "Use this card for an alternate product or adjacent solution with a clear reason to choose it.",
-            "link_label": "View product"
+            "eyebrow": "Everyday desk",
+            "title": "USB-C Multimedia Hub",
+            "copy": "A balanced everyday hub for charging, display, Ethernet, and accessory expansion at the desk or on the go.",
+            "link_label": "View product",
+            "link": "/products/usb-c-multimedia-hub"
           }
         },
         "compare_2": {
           "type": "column",
           "settings": {
-            "eyebrow": "Option 02",
-            "title": "Comparison candidate",
-            "copy": "Use this card for a differentiated workflow, port mix, or power profile.",
-            "link_label": "View product"
+            "eyebrow": "Travel",
+            "title": "USB-C Travel Hub",
+            "copy": "Best when portability matters most and the setup needs light, dependable expansion away from the desk.",
+            "link_label": "View product",
+            "link": "/products/usb-c-travel-hub"
           }
         },
         "compare_3": {
           "type": "column",
           "settings": {
-            "eyebrow": "Option 03",
-            "title": "Comparison candidate",
-            "copy": "Use this card for higher-tier, lower-tier, or specialized alternative guidance.",
-            "link_label": "View product"
+            "eyebrow": "Power desk",
+            "title": "USB-C Pro Dock",
+            "copy": "A stronger fit for heavier desk setups that need more ports, displays, Ethernet, and workspace stability.",
+            "link_label": "View product",
+            "link": "/products/usb-c-pro-dock"
           }
         }
       },
       "block_order": ["compare_1", "compare_2", "compare_3"]
     },
+    "compatibility": {
+      "type": "compatibility-entry-list",
+      "settings": {
+        "eyebrow": "Compatibility",
+        "heading": "Buy with confidence",
+        "copy": "Check the device, platform, and workflow fit before you order.",
+        "source_note": "",
+        "structured_source": "auto",
+        "entry_limit": 4,
+        "product_link_label": "View product",
+        "download_link_label": "Downloads",
+        "manual_link_label": "Manuals"
+      }
+    },
     "faq": {
       "type": "faq-accordion",
       "settings": {
-        "heading": "Support questions",
-        "copy": "Keep product-level questions here when they directly support purchase confidence or setup clarity."
+        "heading": "FAQ",
+        "copy": "Answer the questions most likely to slow the purchase decision."
       },
       "blocks": {
         "faq_1": {
           "type": "faq",
           "settings": {
-            "question": "Where should product-level support questions live?",
-            "answer": "Use this section for questions tightly related to setup, usage, or compatibility. Broader support content should move into the support center as structured resources."
+            "question": "How do I confirm compatibility before I buy?",
+            "answer": "Start with the compatibility guidance on the product page, then move into manuals, downloads, or direct support only if your setup needs a deeper check."
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "How will specifications scale later?",
-            "answer": "The current table is block-based for review speed, but the section is intended to migrate to product metafields or metaobject-backed technical datasets."
+            "question": "Where do I find setup guides and downloads?",
+            "answer": "Manuals and downloads stay close to the product journey so you can move from buying into setup without losing context."
           }
         }
       },
@@ -176,17 +193,17 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need more detail",
-        "heading": "Support and compatibility can stay connected to the PDP",
-        "copy": "Use this module to route from product education into manuals, downloads, compatibility, or direct help without losing the shopping context.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support",
-        "secondary_label": "Compare options",
-        "secondary_url": "/pages/compare",
+        "eyebrow": "Next step",
+        "heading": "Need one more check before you buy?",
+        "copy": "Move into compare or support without losing the product context or starting your decision over.",
+        "link_label": "Compare options",
+        "link_url": "/pages/compare",
+        "secondary_label": "Open support",
+        "secondary_url": "/pages/support",
         "style": "light",
         "button_style": "secondary"
       }
     }
   },
-  "order": ["main", "story", "specs", "compare", "faq", "cta"]
+  "order": ["main", "story", "specs", "compare", "compatibility", "faq", "cta"]
 }

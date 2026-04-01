@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support resources",
-        "heading": "Downloads framework",
-        "copy": "Designed for drivers, firmware, utilities, and future structured resource indexing."
+        "heading": "Drivers, firmware, and utilities",
+        "copy": "Find the files you need by product, platform, or the task you are trying to complete."
       }
     },
     "resources": {
@@ -13,12 +13,12 @@
       "settings": {
         "eyebrow": "Resources",
         "heading": "Downloadable resources by product or task",
-        "copy": "This section is ready to evolve into a metaobject-backed resource index with product associations, platforms, and version metadata.",
+        "copy": "Browse updates, drivers, and utilities by product family, platform, or support task without digging through an unstructured file list.",
         "structured_source": "global",
         "resource_kind": "downloads",
         "resource_limit": 6,
         "show_search": true,
-        "source_note": "Later phases can map these entries to resource metaobjects with versioning, platform metadata, and product relationships.",
+        "source_note": "Choose the file that matches your product and platform, then move into compatibility or contact support only if you still need help.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
       },
@@ -27,8 +27,8 @@
           "type": "resource",
           "settings": {
             "meta": "Firmware",
-            "title": "Firmware resource entry",
-            "copy": "Reserved for version notes, platform details, and linked product scope.",
+            "title": "Firmware updates",
+            "copy": "Open firmware files with supported products, platform notes, and version guidance clearly listed.",
             "link_label": "Open resource",
             "link_url": "#"
           }
@@ -37,8 +37,8 @@
           "type": "resource",
           "settings": {
             "meta": "Driver",
-            "title": "Driver resource entry",
-            "copy": "Reserved for OS compatibility, release notes, and install guidance.",
+            "title": "Platform drivers",
+            "copy": "Download platform-specific drivers with release notes, install guidance, and supported product details in one place.",
             "link_label": "Open resource",
             "link_url": "#"
           }
@@ -47,8 +47,8 @@
           "type": "resource",
           "settings": {
             "meta": "Utility",
-            "title": "Tool or utility entry",
-            "copy": "Reserved for software tools, helper apps, and update resources.",
+            "title": "Updater and helper tools",
+            "copy": "Access companion tools, updater apps, and support utilities tied to EZQuest products and setup workflows.",
             "link_label": "Open resource",
             "link_url": "#"
           }
@@ -61,7 +61,7 @@
       "settings": {
         "eyebrow": "Need another resource",
         "heading": "Not sure which download applies to your setup?",
-        "copy": "This callout can route customers into compatibility guidance or direct support without interrupting the resource flow.",
+        "copy": "If the right file is still unclear, move into compatibility guidance or contact support before you install anything.",
         "link_label": "Open compatibility",
         "link_url": "/pages/compatibility",
         "secondary_label": "Contact support",

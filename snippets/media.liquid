@@ -1,19 +1,19 @@
 {%- liquid
   assign wrapper_class = class | default: ''
-  assign ratio_class = aspect_ratio | default: 'aspect-[4/3]'
-  assign object_fit = object_fit | default: 'object-cover'
+  assign ratio_class = aspect_ratio | default: 'aspect-card'
+  assign object_fit = object_fit | default: 'object-contain'
 -%}
-<div class="overflow-hidden rounded-[1.9rem] border border-slate-200/80 bg-gradient-to-br from-white to-slate-100/90 shadow-[0_16px_50px_rgba(15,23,42,0.06)] {{ wrapper_class }}">
+<div class="overflow-hidden {{ wrapper_class }}">
   {% if media != blank %}
     {% case media.media_type %}
       {% when 'image' %}
-        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: ratio_class | append: ' w-full ' | append: object_fit }}
+        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', class: ratio_class | append: ' w-full ' | append: object_fit }}
       {% else %}
         {{ media | media_tag: class: ratio_class | append: ' w-full ' | append: object_fit, image_size: '1600x' }}
     {% endcase %}
   {% elsif image != blank %}
-    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', class: ratio_class | append: ' w-full ' | append: object_fit }}
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', class: ratio_class | append: ' w-full ' | append: object_fit }}
   {% else %}
-    <div class="{{ ratio_class }} w-full bg-slate-100"></div>
+    {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: ratio_class | append: ' w-full ' | append: object_fit %}
   {% endif %}
 </div>

@@ -8,19 +8,19 @@
       "type": "article-feed",
       "settings": {
         "eyebrow": "Continue exploring",
-        "heading": "Related support and education content",
-        "copy": "Use this section to keep readers in a practical learning flow with more setup guidance, compatibility education, or support articles.",
+        "heading": "Keep reading in a practical direction",
+        "copy": "Continue with setup guidance, compatibility advice, and support-focused articles that help the next step feel clearer.",
         "limit": 3,
         "link_label": "View all articles",
-        "link_url": "/blogs/news"
+        "link_url": "/blogs/resources"
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need the next step",
-        "heading": "Articles should hand off into support or product context cleanly",
-        "copy": "Close educational content with a practical path into support, compatibility help, or product discovery.",
+        "heading": "Need the next step after this article?",
+        "copy": "Move from reading into support, compatibility help, or product discovery without losing the thread.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Browse products",

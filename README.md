@@ -104,6 +104,8 @@ Optional `.env.local` overrides can still exist for ad hoc CLI flags, but the de
 ## Documentation
 
 - Phase 1.5 handoff: [docs/phase-1-5-handoff.md](./docs/phase-1-5-handoff.md)
+- Phase 1 final foundation: [docs/phase-1-final-foundation.md](./docs/phase-1-final-foundation.md)
+- Shopify Admin automation: [docs/shopify-admin-automation.md](./docs/shopify-admin-automation.md)
 - Structured data architecture: [docs/structured-data-architecture.md](./docs/structured-data-architecture.md)
 
 ## Next Milestone

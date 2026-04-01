@@ -5,9 +5,9 @@
       "settings": {
         "eyebrow": "About",
         "heading": "A premium connectivity brand built around practical product confidence",
-        "copy": "Use this page for brand context, product philosophy, and the support-first thinking behind the storefront.",
+        "copy": "EZQuest builds premium connectivity products designed to make modern-device setups feel cleaner, simpler, and easier to support.",
         "support_eyebrow": "Brand context",
-        "support_note": "Keep this page focused on what the company makes, who it serves, and how product, support, and reliability connect.",
+        "support_note": "Explore how product design, support clarity, and everyday reliability come together across the EZQuest line.",
         "link_label": "Explore support",
         "link_url": "/pages/support"
       }
@@ -16,8 +16,8 @@
       "type": "product-story-grid",
       "settings": {
         "eyebrow": "Company story",
-        "heading": "Structured brand storytelling for internal review",
-        "copy": "This section can explain product philosophy, brand history, or why the support model matters.",
+        "heading": "The brand behind the setup",
+        "copy": "See the brand through product mindset, ownership confidence, and the support that stays close after purchase.",
         "columns_desktop": "3"
       }
     },
@@ -25,8 +25,8 @@
       "type": "info-card-grid",
       "settings": {
         "eyebrow": "What matters",
-        "heading": "Company details that support trust and merchandising",
-        "copy": "Use these cards for operating principles, support commitments, or channel information.",
+        "heading": "What customers should understand about the brand",
+        "copy": "Focus on product design, support commitment, and the channel clarity that builds trust.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -35,7 +35,7 @@
           "settings": {
             "eyebrow": "Products",
             "title": "Connectivity built for real workflows",
-            "copy": "Use this card for product positioning, device categories, or practical quality signals."
+            "copy": "Built for modern-device workflows that need dependable ports, power, and daily ease of use."
           }
         },
         "card_2": {
@@ -43,7 +43,7 @@
           "settings": {
             "eyebrow": "Support",
             "title": "Support stays connected to the product layer",
-            "copy": "Use this card for manuals, downloads, compatibility, and post-purchase continuity."
+            "copy": "Support stays visible through manuals, downloads, compatibility guidance, and direct help."
           }
         },
         "card_3": {
@@ -51,7 +51,7 @@
           "settings": {
             "eyebrow": "Channels",
             "title": "Ready for retail, support, and direct merchandising",
-            "copy": "Use this card for distribution, channel fit, or where-to-buy context."
+            "copy": "Available through direct and partner channels that keep product access and support clear."
           }
         }
       },
@@ -61,10 +61,10 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the CMS body for the fuller company narrative, credibility points, and any additional story content.",
+        "intro_copy": "The fuller company story, product philosophy, and proof points that build trust continue here.",
         "side_eyebrow": "Need another destination",
-        "side_heading": "About pages should still route into product and support flows",
-        "side_copy": "Use the side card for contact, where-to-buy, or support handoff when the story page needs a practical next step.",
+        "side_heading": "Keep the story connected to the storefront",
+        "side_copy": "From here, customers should be able to move into products, support, or where-to-buy guidance without a dead end.",
         "side_link_label": "Contact support",
         "side_link_url": "/pages/contact"
       }
@@ -74,7 +74,7 @@
       "settings": {
         "eyebrow": "Next step",
         "heading": "Ready to connect the brand story to products and support?",
-        "copy": "Use this banner to move customers into collections, support, or partner routes without leaving the company section feeling dead-ended.",
+        "copy": "Move from the company story into products, support, or buying guidance with a clear next step.",
         "link_label": "Browse collections",
         "link_url": "/collections/all",
         "secondary_label": "Open support center",

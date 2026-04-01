@@ -1,0 +1,129 @@
+<section class="section-shell">
+  <div class="container-shell">
+    <div class="section-intro">
+      <div class="max-w-3xl">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
+        {% if section.settings.copy != blank %}
+          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        {% endif %}
+      </div>
+      {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+        <div class="section-intro-action">
+          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+        </div>
+      {% endif %}
+    </div>
+
+    {%- liquid
+      assign columns_class = 'xl:grid-cols-3'
+      if section.settings.columns_desktop == 2
+        assign columns_class = 'xl:grid-cols-2'
+      elsif section.settings.columns_desktop == 4
+        assign columns_class = 'xl:grid-cols-4'
+      endif
+    -%}
+
+    <div class="support-link-grid {{ columns_class }}">
+      {% for block in section.blocks %}
+        <article class="support-link-card motion-lift" {{ block.shopify_attributes }}>
+          <div class="support-link-card-top">
+            <div>
+              {% if block.settings.eyebrow != blank %}
+                <p class="section-kicker">{{ block.settings.eyebrow }}</p>
+              {% endif %}
+              <h3 class="support-link-card-title">{{ block.settings.title | default: 'Support path' }}</h3>
+            </div>
+            <span class="support-link-card-index">{{ forloop.index | prepend: '0' }}</span>
+          </div>
+
+          {% if block.settings.copy != blank %}
+            <p class="support-link-card-copy">{{ block.settings.copy }}</p>
+          {% endif %}
+
+          <div class="support-link-card-footer">
+            {% if block.settings.link_url != blank %}
+              <a href="{{ block.settings.link_url }}" class="button-secondary">{{ block.settings.link_label | default: 'Open page' }}</a>
+            {% endif %}
+            {% if block.settings.meta != blank %}
+              <span class="support-link-card-meta">{{ block.settings.meta }}</span>
+            {% endif %}
+          </div>
+        </article>
+      {% else %}
+        {% for i in (1..3) %}
+          <article class="support-link-card">
+            <div class="support-link-card-top">
+              <div>
+                <p class="section-kicker">Support path</p>
+                <h3 class="support-link-card-title">
+                  {% if forloop.index == 1 %}
+                    Downloads
+                  {% elsif forloop.index == 2 %}
+                    Manuals
+                  {% else %}
+                    Contact support
+                  {% endif %}
+                </h3>
+              </div>
+              <span class="support-link-card-index">{{ i | prepend: '0' }}</span>
+            </div>
+            <p class="support-link-card-copy">
+              {% if forloop.index == 1 %}
+                Open files, firmware, and utilities when the next step depends on software or updates.
+              {% elsif forloop.index == 2 %}
+                Move into setup guides and documentation when you need product-specific instructions.
+              {% else %}
+                Reach support directly when self-service no longer answers the question clearly.
+              {% endif %}
+            </p>
+          </article>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Support link grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Next step" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Keep the next useful support path close" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Move into the next useful destination without losing the context of the question you are trying to solve." },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    { "type": "text", "id": "link_label", "label": "Section link label" },
+    { "type": "url", "id": "link_url", "label": "Section link URL" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Support link",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support path" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Manuals" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Explain when this support destination is the right next step." },
+        { "type": "text", "id": "meta", "label": "Meta note" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Open page" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Support link grid",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

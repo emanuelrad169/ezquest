@@ -8,7 +8,7 @@
       <aside class="content-page-sidebar">
         {% if section.settings.show_title %}
           <p class="section-kicker">{{ section.settings.sidebar_eyebrow | default: 'Page' }}</p>
-          <h2 class="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-950">{{ page.title }}</h2>
+          <h2 class="mt-4 text-3xl font-semibold tracking-heading text-slate-950">{{ page.title }}</h2>
         {% endif %}
 
         {% if section.settings.intro_copy != blank %}

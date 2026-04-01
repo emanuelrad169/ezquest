@@ -1,0 +1,131 @@
+{%- liquid
+  assign source_collection = section.settings.collection
+  assign products_limit = section.settings.products_limit | default: 8
+  assign featured_products = blank
+
+  if source_collection != blank
+    assign featured_products = source_collection.products
+  elsif collections['all'] != blank
+    assign featured_products = collections['all'].products
+  endif
+-%}
+
+<section class="section-shell featured-products-section">
+  <div class="container-shell">
+    <div class="featured-products-header">
+      <div class="featured-products-header-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <div class="featured-products-heading-row">
+          <h2 class="section-heading featured-products-heading">{{ section.settings.heading | default: 'Featured products' }}</h2>
+          <span class="home-strip-rule" aria-hidden="true"></span>
+        </div>
+        {% if section.settings.copy != blank %}
+          <p class="featured-products-copy">{{ section.settings.copy }}</p>
+        {% endif %}
+      </div>
+
+      <div class="featured-products-header-actions">
+        {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+          <a href="{{ section.settings.link_url }}" class="featured-products-link">{{ section.settings.link_label }}</a>
+        {% endif %}
+        <div class="featured-products-controls" aria-label="Featured product carousel controls">
+          <button class="featured-products-arrow" type="button" data-carousel-prev aria-label="Previous products">
+            {% render 'icon', name: 'chevron-left' %}
+          </button>
+          <button class="featured-products-arrow" type="button" data-carousel-next aria-label="Next products">
+            {% render 'icon', name: 'chevron-right' %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="featured-products-carousel" data-scroll-carousel aria-label="{{ section.settings.heading | default: 'Featured products' }}">
+      <div class="featured-products-track" data-carousel-track>
+        {% if featured_products != blank and featured_products.size > 0 %}
+          {% for product in featured_products limit: products_limit %}
+            <div class="featured-products-slide{% if forloop.first %} is-featured{% endif %}">
+              {% render 'card-product', product: product, card_style: 'featured-strip', card_index: forloop.index0 %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..5) %}
+            <div class="featured-products-slide">
+              <article class="product-card-tile product-card-tile--featured-strip motion-fade-up" data-card-index="{{ forloop.index0 }}">
+                <div class="product-card-featured-media">
+                  {% render 'placeholder-visual',
+                    kind: 'product',
+                    text: 'EZQuest Product',
+                    width: 900,
+                    height: 700,
+                    class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
+                  %}
+                  <span class="product-card-featured-badge">Save 20%</span>
+                </div>
+
+                <div class="product-card-featured-body">
+                  <div class="product-card-featured-meta">
+                    <span class="product-card-featured-brand">EZQuest</span>
+                    <span class="product-card-featured-category">USB-C hub</span>
+                  </div>
+
+                  <h3 class="card-title product-card-featured-title">EZQuest connectivity essential</h3>
+                  <p class="product-card-featured-value">Compact expansion for charging, display, and data.</p>
+
+                  <div class="product-card-featured-rating" aria-label="Buying confidence">
+                    <span class="product-card-featured-rating-copy">Works with modern Mac and Windows setups</span>
+                  </div>
+
+                  <div class="product-card-featured-price">
+                    <div class="price-block space-y-1">
+                      <div class="flex flex-wrap items-end gap-3">
+                        <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950">$249.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="featured-products-support-row">
+      <p class="featured-products-support-copy">Need a faster path to the right port mix or power setup?</p>
+      <div class="featured-products-support-links">
+        <a href="/pages/compare" class="support-inline-link">Compare setups</a>
+        <a href="/pages/support" class="support-inline-link">Get help choosing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured carousel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured products" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured products" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Curated EZQuest products for travel setups, desk docks, charging workflows, and everyday device expansion." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop all products" },
+    { "type": "url", "id": "link_url", "label": "Link URL" },
+    { "type": "collection", "id": "collection", "label": "Collection source" },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured carousel"
+    }
+  ]
+}
+{% endschema %}

@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Warranty",
-        "heading": "A structured warranty page for policy, claims, and escalation clarity",
-        "copy": "Use this page for warranty coverage, claim expectations, and how customers should move from support into service.",
+        "heading": "Warranty coverage and claim guidance",
+        "copy": "Review coverage, claim expectations, and the steps customers should take before service begins.",
         "support_eyebrow": "Coverage guidance",
-        "support_note": "Warranty pages should clarify what is covered, what information is needed, and when support should be contacted first.",
+        "support_note": "See what is covered, what information to prepare, and when support should be contacted before a claim moves forward.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
       }
@@ -16,8 +16,8 @@
       "type": "info-card-grid",
       "settings": {
         "eyebrow": "Warranty flow",
-        "heading": "Explain coverage, process, and next steps",
-        "copy": "Use these cards for coverage highlights, required claim information, and escalation order.",
+        "heading": "Coverage, process, and next steps",
+        "copy": "These highlights help you understand coverage, prepare claim details, and know the clearest next step.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -26,7 +26,7 @@
           "settings": {
             "eyebrow": "Coverage",
             "title": "What the warranty is intended to cover",
-            "copy": "Use this card for concise policy summaries and exclusions."
+            "copy": "Highlight what coverage is intended to include, along with key exclusions customers should know."
           }
         },
         "card_2": {
@@ -34,7 +34,7 @@
           "settings": {
             "eyebrow": "Claims",
             "title": "What customers should prepare before filing",
-            "copy": "Use this card for purchase proof, serial numbers, or required issue detail."
+            "copy": "Explain what customers should prepare, including proof of purchase and issue details."
           }
         },
         "card_3": {
@@ -42,7 +42,7 @@
           "settings": {
             "eyebrow": "Support",
             "title": "When support should be contacted first",
-            "copy": "Use this card when troubleshooting or compatibility review should happen before service escalation.",
+            "copy": "Clarify when troubleshooting or compatibility review should happen before a claim moves forward.",
             "link_label": "Open support center",
             "link_url": "/pages/support"
           }
@@ -54,10 +54,10 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "Use the page body for the actual warranty policy, regional notes, or formal coverage language.",
+        "intro_copy": "The full warranty policy, regional notes, and formal coverage language continue below.",
         "side_eyebrow": "Claim support",
-        "side_heading": "Use a side card for the practical claim route",
-        "side_copy": "Direct customers into contact or troubleshooting depending on how you want the claim flow handled.",
+        "side_heading": "Keep the claim path practical",
+        "side_copy": "Direct customers into contact or troubleshooting depending on the clearest next step in the claim flow.",
         "side_link_label": "Contact support",
         "side_link_url": "/pages/contact"
       }
@@ -67,7 +67,7 @@
       "settings": {
         "eyebrow": "Need troubleshooting first",
         "heading": "Some warranty questions should resolve through support before service",
-        "copy": "Use this CTA for pre-claim troubleshooting, compatibility review, or direct help.",
+        "copy": "Some warranty questions are resolved faster through troubleshooting, compatibility review, or direct support.",
         "link_label": "Open troubleshooting",
         "link_url": "/pages/troubleshooting",
         "secondary_label": "Open FAQ",

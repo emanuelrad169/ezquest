@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Common product and support questions in one structured destination",
-        "copy": "Use the FAQ page for recurring questions that should stay accessible outside the product pages.",
+        "heading": "Common questions, answered clearly",
+        "copy": "Start here for the questions customers ask most often before moving into troubleshooting or direct support.",
         "support_eyebrow": "FAQ guidance",
-        "support_note": "Use global FAQ entries for recurring questions and reserve product-linked FAQ content for PDP-specific nuance."
+        "support_note": "Come here for the broad answers customers need before they commit, set up, or escalate."
       }
     },
     "faq": {
@@ -15,25 +15,58 @@
       "settings": {
         "eyebrow": "Support FAQ",
         "heading": "Frequently asked questions",
-        "copy": "Use this section for broader support and product questions before escalation.",
+        "copy": "Find the broad answers here first, then move into a deeper support path only when the question becomes product-specific.",
         "structured_source": "global"
       }
     },
     "support": {
-      "type": "support-card-grid",
+      "type": "support-link-grid",
       "settings": {
         "eyebrow": "Need another path",
         "heading": "Move into support resources when the FAQ is not enough",
-        "copy": "Use these cards to connect FAQ outcomes to downloads, manuals, compatibility, or direct help.",
+        "copy": "Keep the next step close when an answer leads into setup, compatibility, downloads, or direct support.",
         "columns_desktop": 3
-      }
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Manuals",
+            "copy": "Open setup guides and user documentation when the next step needs more detailed instructions.",
+            "meta": "Documentation",
+            "link_label": "Open manuals",
+            "link_url": "/pages/manuals"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Troubleshooting",
+            "copy": "Move into symptom-based help when the answer depends on a specific issue or behavior.",
+            "meta": "Guided resolution",
+            "link_label": "Open troubleshooting",
+            "link_url": "/pages/troubleshooting"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Contact support",
+            "copy": "Reach support directly when the answer depends on a more specific product or setup question.",
+            "meta": "Direct help",
+            "link_label": "Contact support",
+            "link_url": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Still unresolved",
         "heading": "Need a deeper support path?",
-        "copy": "Use the final CTA to route into downloads, manuals, or direct contact when the FAQ page is not enough.",
+        "copy": "Move into downloads, manuals, troubleshooting, or direct contact when the FAQ page is not enough.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Contact support",

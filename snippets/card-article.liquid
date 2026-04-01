@@ -1,22 +1,27 @@
-<article class="feature-card h-full bg-gradient-to-br from-white to-slate-50">
-  <div class="flex items-center justify-between gap-4">
+<article class="editorial-card motion-lift">
+  <div class="editorial-card-meta-row">
     <p class="section-kicker">
       {% if article != blank and article.blog != blank %}
         {{ article.blog.title }}
       {% else %}
-        Resource article
+        Buying guide
       {% endif %}
     </p>
     {% if article != blank %}
-      <span class="text-xs uppercase tracking-[0.18em] text-slate-400">{{ article.published_at | date: '%b %d, %Y' }}</span>
+      <span class="editorial-card-date">{{ article.published_at | date: '%b %d, %Y' }}</span>
     {% endif %}
   </div>
-  <h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-slate-950">
+  <h3 class="card-title editorial-card-title mt-3">
     {% if article != blank %}
-      <a href="{{ article.url }}">{{ article.title }}</a>
+      <a href="{{ article.url }}" class="transition hover:text-slate-700">{{ article.title }}</a>
     {% else %}
-      Article title
+      Better setup guidance starts here
     {% endif %}
   </h3>
-  <p class="mt-4 text-sm leading-7 text-slate-600">{{ excerpt | default: 'Reserved for article summary structure.' }}</p>
+  <p class="editorial-card-excerpt mt-4 text-sm leading-7 text-slate-600">{{ excerpt | default: 'Practical setup guidance, compatibility notes, and product help.' }}</p>
+  {% if article != blank %}
+    <div class="mt-6 border-t border-slate-200/80 pt-5">
+      <a href="{{ article.url }}" class="button-tertiary">Read article</a>
+    </div>
+  {% endif %}
 </article>

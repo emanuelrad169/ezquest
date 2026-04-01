@@ -8,11 +8,11 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need product-specific guidance",
-        "heading": "Editorial content should connect back to support and product discovery",
-        "copy": "Use this closing callout to route readers into related products, support resources, or direct help after they finish an article.",
+        "heading": "Keep reading connected to products and support",
+        "copy": "Move from educational content into related products, support resources, or direct help with a clear next step.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
-        "secondary_label": "Browse products",
+        "secondary_label": "Browse collections",
         "secondary_url": "/collections/all",
         "style": "light",
         "button_style": "secondary"

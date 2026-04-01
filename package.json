@@ -18,7 +18,19 @@
     "pull": "shopify theme pull",
     "package": "npm run build && shopify theme package",
     "open": "shopify theme open",
-    "info": "shopify theme info"
+    "info": "shopify theme info",
+    "shopify:seed:preflight": "node scripts/shopify-admin/cli.js preflight",
+    "shopify:seed:pages": "node scripts/shopify-admin/cli.js pages",
+    "shopify:seed:blogs": "node scripts/shopify-admin/cli.js blogs",
+    "shopify:seed:products": "node scripts/shopify-admin/cli.js products",
+    "shopify:seed:metaobjects": "node scripts/shopify-admin/cli.js metaobjects",
+    "shopify:seed:metafields": "node scripts/shopify-admin/cli.js metafields",
+    "shopify:seed:collections": "node scripts/shopify-admin/cli.js collections",
+    "shopify:seed:menus": "node scripts/shopify-admin/cli.js menus",
+    "shopify:seed:content": "node scripts/shopify-admin/cli.js content",
+    "shopify:seed:validate": "node scripts/shopify-admin/cli.js validate",
+    "shopify:seed:all": "node scripts/shopify-admin/cli.js all",
+    "shopify:seed:dry": "node scripts/shopify-admin/cli.js all --dry-run"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

@@ -39,49 +39,21 @@
   endcase
 -%}
 
-<section class="section-shell">
-  <div class="container-shell max-w-6xl">
-    <div class="faq-shell">
-      <div class="faq-intro">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <h2 class="section-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ faq_heading }}</h2>
-        {% if section.settings.copy != blank %}
-          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        {% endif %}
-
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          {% if use_product_faqs %}
-            <span class="product-meta-pill">Product FAQ</span>
-          {% elsif use_global_faqs %}
-            <span class="product-meta-pill">Global FAQ</span>
-          {% else %}
-            <span class="product-meta-pill">Editor fallback</span>
+<section class="section-shell home-faq-section">
+  <div class="container-shell max-w-7xl">
+    <div class="home-faq-shell">
+      <div class="home-faq-main">
+        <div class="home-faq-intro">
+          {% if section.settings.eyebrow != blank %}
+            <p class="section-kicker">{{ section.settings.eyebrow }}</p>
           {% endif %}
-
-          {% if faq_group_filter != blank %}
-            <span class="product-meta-pill">{{ section.settings.faq_group }}</span>
+          <h2 class="home-faq-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ faq_heading }}</h2>
+          {% if section.settings.copy != blank %}
+            <p class="section-copy mt-4">{{ section.settings.copy }}</p>
           {% endif %}
         </div>
 
-        <div class="support-crosslink-list">
-          <a href="/pages/troubleshooting" class="support-crosslink">
-            <span>Open troubleshooting</span>
-            <span class="text-slate-400">Diagnose</span>
-          </a>
-          <a href="/pages/manuals" class="support-crosslink">
-            <span>Open manuals</span>
-            <span class="text-slate-400">Guides</span>
-          </a>
-          <a href="/pages/contact" class="support-crosslink">
-            <span>Contact support</span>
-            <span class="text-slate-400">Escalate</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="faq-list">
+        <div class="faq-list home-faq-list">
         {% if use_product_faqs %}
           {% for faq_item in structured_product_faqs limit: section.settings.faq_limit %}
             {% capture answer %}
@@ -128,10 +100,19 @@
           {% endfor %}
           {% if rendered_faqs == 0 %}
             {% for i in (1..3) %}
+              {%- liquid
+                assign fallback_question = 'How do I confirm compatibility before I buy?'
+
+                if forloop.index == 2
+                  assign fallback_question = 'Where do I find setup guides and manuals?'
+                elsif forloop.index == 3
+                  assign fallback_question = 'When should I contact support directly?'
+                endif
+              -%}
               {% capture answer %}
-                <p>Add FAQ blocks in the theme editor or seed global FAQ metaobjects to populate this section with client-review-ready answers.</p>
+                <p>Start here for compatibility checks, setup basics, and ownership guidance, then move into troubleshooting or direct support only when your setup needs a deeper answer.</p>
               {% endcapture %}
-              {% render 'accordion-item', title: 'FAQ item', content: answer %}
+              {% render 'accordion-item', title: fallback_question, content: answer %}
             {% endfor %}
           {% endif %}
         {% else %}
@@ -142,14 +123,30 @@
             {% render 'accordion-item', title: block.settings.question, content: answer %}
           {% else %}
             {% for i in (1..3) %}
+              {%- liquid
+                assign fallback_question = 'How do I confirm compatibility before I buy?'
+
+                if forloop.index == 2
+                  assign fallback_question = 'Where do I find setup guides and manuals?'
+                elsif forloop.index == 3
+                  assign fallback_question = 'When should I contact support directly?'
+                endif
+              -%}
               {% capture answer %}
-                <p>Add FAQ blocks in the theme editor or seed product-linked FAQs to populate this section with client-review-ready answers.</p>
+                <p>Keep the answer focused on product fit, setup guidance, or ownership clarity so the customer can move forward with confidence and know the next step.</p>
               {% endcapture %}
-              {% render 'accordion-item', title: 'FAQ item', content: answer %}
+              {% render 'accordion-item', title: fallback_question, content: answer %}
             {% endfor %}
           {% endfor %}
         {% endif %}
+        </div>
       </div>
+
+      <aside class="home-faq-help-card">
+        <h3>Need setup help?</h3>
+        <p>Move into support when the question depends on your exact product, connection path, or order details.</p>
+        <a href="/pages/contact" class="home-faq-help-button" aria-label="Contact EZQuest support">Contact support</a>
+      </aside>
     </div>
   </div>
 </section>
@@ -160,7 +157,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this section for recurring questions, clearer self-service answers, and the right next support step." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Answer recurring questions clearly, then route into troubleshooting, manuals, or direct support when needed." },
     {
       "type": "select",
       "id": "structured_source",
@@ -191,8 +188,8 @@
       "type": "faq",
       "name": "FAQ item",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
-        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Answer" }
+        { "type": "text", "id": "question", "label": "Question", "default": "How do I confirm compatibility before I buy?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Start with compatibility guidance on the product page, then move into manuals, downloads, or direct support only if your setup needs a deeper check." }
       ]
     }
   ],

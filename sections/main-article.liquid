@@ -2,25 +2,29 @@
   <div class="container-shell max-w-6xl">
     {% render 'breadcrumbs' %}
 
-    <div class="hero-surface mt-6">
-      <div class="grid gap-8 lg:grid-cols-[1fr_0.62fr] lg:items-end">
+    <div class="editorial-shell mt-6">
+      <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
         <div class="max-w-3xl">
           <p class="section-kicker">Article</p>
           <h1 class="section-heading mt-5">{{ article.title }}</h1>
-          <div class="mt-5 flex flex-wrap items-center gap-3">
-            <p class="text-sm font-medium uppercase tracking-[0.18em] text-slate-500">{{ article.published_at | date: '%B %d, %Y' }}</p>
+          <div class="article-meta-row">
+            <p class="text-sm font-medium uppercase tracking-wide text-slate-500">{{ article.published_at | date: '%B %d, %Y' }}</p>
             {% if article.blog != blank %}
               <span class="product-meta-pill">{{ article.blog.title }}</span>
             {% endif %}
           </div>
         </div>
-        <div class="hero-panel">
-          <p class="section-kicker">Editorial note</p>
-          <p class="mt-4 text-sm leading-7 text-slate-600">Use article content for education, setup guidance, and product-support continuity rather than generic blog filler.</p>
+        <div class="hero-side-panel">
+          <p class="section-kicker">Next useful step</p>
+          <p class="mt-4 text-sm leading-7 text-slate-600">Use this guide to answer the product-fit question first, then move into support, manuals, or downloads only if the setup needs a deeper next step.</p>
           <div class="support-crosslink-list">
-            <a href="/blogs/news" class="support-crosslink">
+            <a href="{{ article.blog.url | default: '/blogs/resources' }}" class="support-crosslink">
               <span>Back to resources</span>
               <span class="text-slate-400">Browse</span>
+            </a>
+            <a href="/pages/compatibility" class="support-crosslink">
+              <span>Check compatibility</span>
+              <span class="text-slate-400">Fit</span>
             </a>
             <a href="/pages/support" class="support-crosslink">
               <span>Need direct help</span>
@@ -31,10 +35,21 @@
       </div>
     </div>
 
-    <div class="content-page-body mt-8 max-w-4xl">
+    <div class="editorial-reading-shell mt-8 max-w-4xl">
+      {% if article.image != blank %}
+        <div class="article-feature-shell">
+          {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-feature-image' }}
+        </div>
+      {% endif %}
       <div class="richtext-content max-w-none">
         {{ article.content }}
       </div>
+    </div>
+
+    <div class="article-continuation-shell">
+      <a href="/pages/support" class="support-inline-link">Open support center</a>
+      <a href="/pages/manuals" class="support-inline-link">Manuals</a>
+      <a href="/pages/downloads" class="support-inline-link">Downloads</a>
     </div>
   </div>
 </article>

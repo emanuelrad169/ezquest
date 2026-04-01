@@ -1,57 +1,131 @@
 {%- liquid
   assign support_menu = section.settings.support_menu | default: settings.footer_menu_support
   assign company_menu = section.settings.company_menu | default: settings.footer_menu_company
-  assign newsletter_heading = section.settings.newsletter_heading | default: settings.footer_newsletter_heading
+  assign legal_menu = section.settings.legal_menu | default: settings.footer_menu_legal
 -%}
 <footer class="site-footer" role="contentinfo">
   <div class="container-shell">
     <div class="site-footer-shell">
-      <div class="max-w-md">
-        <p class="section-kicker text-slate-400">Connectivity platform</p>
-        <h2 class="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">{{ shop.name }}</h2>
-        <p class="mt-4 text-sm leading-7 text-slate-400">{{ settings.brand_tagline }}</p>
-        {% if settings.support_contact_url != blank %}
-          <div class="mt-6">
-            <a href="{{ settings.support_contact_url }}" class="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-700 bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:border-slate-600 hover:bg-slate-800">
-              Contact support
-            </a>
-          </div>
-        {% endif %}
-      </div>
+      <div class="site-footer-brand-column">
+        <a href="{{ routes.root_url }}" class="site-footer-brandmark">
+          {% if settings.brand_logo != blank %}
+            {{ settings.brand_logo | image_url: width: 220 | image_tag: alt: shop.name, class: 'h-10 w-auto' }}
+          {% else %}
+            <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="h-10 w-auto" width="152" height="36">
+          {% endif %}
+        </a>
 
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">{{ section.settings.support_heading }}</h3>
-        {% if support_menu != blank %}
-          <ul class="mt-5 space-y-3 text-sm text-slate-300">
-            {% for link in support_menu.links %}
-              <li><a href="{{ link.url }}" class="transition hover:text-white">{{ link.title }}</a></li>
-            {% endfor %}
+        <div class="site-footer-contact-block">
+          <h3 class="site-footer-column-heading">Contact Info</h3>
+          <ul class="site-footer-contact-list">
+            <li>
+              <span class="site-footer-contact-icon">{% render 'icon', name: 'map' %}</span>
+              <span>Find support, manuals, downloads, compatibility help, and where-to-buy details in one place.</span>
+            </li>
+            <li>
+              <span class="site-footer-contact-icon">{% render 'icon', name: 'support' %}</span>
+              <span><a href="/pages/contact">Need direct help? Contact EZQuest support.</a></span>
+            </li>
           </ul>
-        {% endif %}
+        </div>
       </div>
 
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">{{ section.settings.company_heading }}</h3>
-        {% if company_menu != blank %}
-          <ul class="mt-5 space-y-3 text-sm text-slate-300">
+      <div class="site-footer-column">
+        <h3 class="site-footer-column-heading">{{ section.settings.company_heading }}</h3>
+        {% if company_menu != blank and company_menu.links.size > 0 %}
+          <ul class="site-footer-link-list">
             {% for link in company_menu.links %}
-              <li><a href="{{ link.url }}" class="transition hover:text-white">{{ link.title }}</a></li>
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="site-footer-link-list">
+            <li><a href="/pages/about">About EZQuest</a></li>
+            <li><a href="/pages/our-story">Our Story</a></li>
+            <li><a href="/pages/where-to-buy">Where to Buy</a></li>
+            <li><a href="/blogs/resources">Resources</a></li>
           </ul>
         {% endif %}
       </div>
 
-      <div class="rounded-[1.8rem] border border-slate-800 bg-slate-900/80 p-6">
-        <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">{{ newsletter_heading }}</h3>
-        <p class="mt-4 text-sm leading-7 text-slate-300">Use this space for newsletter capture, channel updates, or launch-readiness messaging once lifecycle tooling is connected.</p>
+      <div class="site-footer-column">
+        <h3 class="site-footer-column-heading">Shop by product family</h3>
+        {% if support_menu != blank and support_menu.links.size > 0 %}
+          <ul class="site-footer-link-list">
+            {% for link in support_menu.links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="site-footer-link-list">
+            <li><a href="{{ routes.collections_url }}/hubs-adapters">Hubs & Adapters</a></li>
+            <li><a href="{{ routes.collections_url }}/docking-stations">Docking Stations</a></li>
+            <li><a href="{{ routes.collections_url }}/chargers-power">Chargers & Power</a></li>
+            <li><a href="{{ routes.collections_url }}/accessories">Accessories</a></li>
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="site-footer-column">
+        <h3 class="site-footer-column-heading">{{ section.settings.legal_heading }}</h3>
+        {% if legal_menu != blank and legal_menu.links.size > 0 %}
+          <ul class="site-footer-link-list">
+            {% for link in legal_menu.links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="site-footer-link-list">
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+            <li><a href="/policies/refund-policy">Refund Policy</a></li>
+            <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/pages/cookie-policy">Cookie Policy</a></li>
+          </ul>
+        {% endif %}
       </div>
     </div>
   </div>
 
-  <div class="border-t border-slate-800">
-    <div class="container-shell flex flex-col gap-3 py-5 text-sm text-slate-500 lg:flex-row lg:items-center lg:justify-between">
-      <div>{{ section.settings.bottom_text }}</div>
-      <div class="text-slate-600">Built for product discovery, support continuity, and cleaner electronics merchandising.</div>
+  <div class="site-footer-meta-bar">
+    <div class="container-shell site-footer-meta-shell">
+      <div class="site-footer-meta-links">
+        {% if legal_menu != blank and legal_menu.links.size > 0 %}
+          {% for link in legal_menu.links limit: 4 %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/terms-of-service">Terms of Use</a>
+          <a href="/policies/refund-policy">Sales and Refunds</a>
+          <a href="/pages/cookie-policy">Legal</a>
+        {% endif %}
+      </div>
+
+        <div class="site-footer-socials">
+        <a href="/pages/support" aria-label="Support">Support</a>
+        <a href="/pages/compare" aria-label="Compare">Compare</a>
+        <a href="/blogs/resources" aria-label="Resources">Resources</a>
+        <a href="/pages/where-to-buy" aria-label="Where to buy">Where to buy</a>
+        <a href="/pages/about" aria-label="About EZQuest">About</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer-bottom">
+    <div class="container-shell site-footer-bottom-shell">
+      <div class="site-footer-payments" aria-label="Accepted payment methods">
+        <span>Visa</span>
+        <span>Mastercard</span>
+        <span>Amex</span>
+        <span>PayPal</span>
+        <span>Discover</span>
+      </div>
+
+      <div class="site-footer-copyright">
+        <span>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name }}</span>
+        <span>{{ section.settings.bottom_text }}</span>
+      </div>
     </div>
   </div>
 </footer>

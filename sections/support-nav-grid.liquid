@@ -5,41 +5,24 @@
         <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <span class="product-meta-pill">Support hub</span>
-          <span class="product-meta-pill">Guided paths</span>
-          <span class="product-meta-pill">Buy with confidence</span>
-        </div>
 
         {% if section.settings.show_search %}
-          <div class="mt-6">
+          <div class="mt-8">
             {% render 'support-search-form' %}
           </div>
         {% endif %}
 
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-          <div class="mt-6">
+          <div class="mt-8">
             {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
           </div>
         {% endif %}
 
-        <div class="support-crosslink-list">
-          <a href="/pages/downloads" class="support-crosslink">
-            <span>Downloads</span>
-            <span class="text-slate-400">Drivers</span>
-          </a>
-          <a href="/pages/manuals" class="support-crosslink">
-            <span>Manuals</span>
-            <span class="text-slate-400">Guides</span>
-          </a>
-          <a href="/pages/contact" class="support-crosslink">
-            <span>Contact support</span>
-            <span class="text-slate-400">Escalate</span>
-          </a>
-        </div>
-
-        <div class="shell-note mt-6">
-          Support should reduce hesitation before purchase and solve issues after purchase. Start with the most specific task page, then escalate only when needed.
+        <div class="support-next-step-list">
+          <a href="/pages/downloads" class="support-inline-link">Downloads</a>
+          <a href="/pages/manuals" class="support-inline-link">Manuals</a>
+          <a href="/pages/compatibility" class="support-inline-link">Compatibility</a>
+          <a href="/pages/contact" class="support-inline-link">Contact support</a>
         </div>
       </div>
 
@@ -51,15 +34,15 @@
               assign block_eyebrow = forloop.index | prepend: '0'
             endif
           -%}
-          <article class="support-tile" {{ block.shopify_attributes }}>
+          <article class="support-tile motion-lift" {{ block.shopify_attributes }}>
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
-              <span class="text-xs uppercase tracking-[0.18em] text-slate-300">Support path</span>
+              <span class="text-xs uppercase tracking-wide text-slate-300">Start here</span>
             </div>
-            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support destination' }}</h3>
+            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support path' }}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
             <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-              <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Start here when this is the clearest next step</p>
+              <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Best when this is the clearest next task</p>
               {% if block.settings.link_url != blank %}
                 {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
               {% endif %}
@@ -70,10 +53,30 @@
             <article class="support-tile">
               <div class="flex items-center justify-between gap-4">
                 <p class="section-kicker">{{ i | prepend: '0' }}</p>
-                <span class="text-xs uppercase tracking-[0.18em] text-slate-300">Support path</span>
+                <span class="text-xs uppercase tracking-wide text-slate-300">Support path</span>
               </div>
-              <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">Support destination</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">Add support navigation blocks in the theme editor to populate this section with downloads, manuals, compatibility, troubleshooting, or escalation routes.</p>
+              <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
+                {% if forloop.index == 1 %}
+                  Downloads and drivers
+                {% elsif forloop.index == 2 %}
+                  Manuals and setup guides
+                {% elsif forloop.index == 3 %}
+                  Compatibility checks
+                {% else %}
+                  Direct support
+                {% endif %}
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                {% if forloop.index == 1 %}
+                  Start here when the next step is a file, installer, or firmware resource tied to your product.
+                {% elsif forloop.index == 2 %}
+                  Move into manuals when you need setup steps, product instructions, or a quick-start path.
+                {% elsif forloop.index == 3 %}
+                  Confirm the right device, display, or workflow fit before you buy or begin installation.
+                {% else %}
+                  Use direct support when the answer depends on your exact setup, order, or troubleshooting context.
+                {% endif %}
+              </p>
             </article>
           {% endfor %}
         {% endfor %}
@@ -87,8 +90,8 @@
   "name": "Support nav grid",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support hub" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Support center architecture" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this section as the main routing layer for downloads, manuals, compatibility, troubleshooting, and escalation paths." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Start with the help you need" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Find downloads, manuals, compatibility guidance, troubleshooting, and direct support from one clear starting point." },
     { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": true },
     { "type": "text", "id": "link_label", "label": "Section link label" },
     { "type": "url", "id": "link_url", "label": "Section link URL" }

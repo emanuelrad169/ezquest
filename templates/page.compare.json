@@ -4,27 +4,60 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Compare",
-        "heading": "A compare destination ready for structured product groups",
-        "copy": "Use this page for broader compare sets that sit outside the PDP but still use the same group-driven system.",
+        "heading": "Compare the right EZQuest setup side by side",
+        "copy": "Narrow the right product by port mix, desk-versus-travel fit, charging needs, and the kind of workflow it serves best.",
         "support_eyebrow": "Compare note",
-        "support_note": "The compare page should help customers narrow decisions, not repeat product cards without context."
+        "support_note": "Compare the options here first, then move into compatibility or support only when you need a deeper fit check."
       }
     },
     "compare": {
       "type": "product-compare-table",
       "settings": {
         "eyebrow": "Compare products",
-        "heading": "Compare adjacent products and support context",
-        "copy": "This page can later be driven entirely from comparison groups while keeping the current fallback structure.",
+        "heading": "Compare everyday hub, travel hub, and desk dock choices clearly",
+        "copy": "Use compare to choose between lighter travel expansion, balanced everyday connectivity, and a stronger desk-ready dock.",
         "columns_desktop": 3
-      }
+      },
+      "blocks": {
+        "compare_1": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Desk setup",
+            "title": "USB-C Multimedia Hub",
+            "copy": "A balanced everyday hub for charging, HDMI, Ethernet, and accessory expansion at the desk or on the go.",
+            "link_label": "View product",
+            "link": "/products/usb-c-multimedia-hub"
+          }
+        },
+        "compare_2": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Travel",
+            "title": "USB-C Travel Hub",
+            "copy": "Best when portability matters most and the setup needs light, dependable expansion for meetings, hotel desks, or classroom use.",
+            "link_label": "View product",
+            "link": "/products/usb-c-travel-hub"
+          }
+        },
+        "compare_3": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Power user",
+            "title": "USB-C Pro Dock",
+            "copy": "A stronger fit for heavier desk setups that need more ports, displays, Ethernet, and permanent workspace stability.",
+            "link_label": "View product",
+            "link": "/products/usb-c-pro-dock"
+          }
+        }
+      },
+      "block_order": ["compare_1", "compare_2", "compare_3"]
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need help choosing",
-        "heading": "Compare pages should still route into support and buying guidance",
-        "copy": "Use the final CTA to move from compare into product support or direct contact when needed.",
+        "heading": "Need help choosing between these options?",
+        "copy": "Move from comparison into support, compatibility, or direct help without losing the buying context.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Contact support",

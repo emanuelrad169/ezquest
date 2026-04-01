@@ -1,62 +1,91 @@
-<section class="section-shell">
+<section class="section-shell section-dark home-story-section">
   <div class="container-shell">
     {%- liquid
-      assign section_heading = section.settings.heading | default: 'Story grid framework'
-      assign section_copy = section.settings.copy | default: 'Reserved for timeline, value proposition, or brand narrative content.'
-      assign grid_class = 'lg:grid-cols-2'
-      assign wrapper_class = ''
-      if section.settings.columns_desktop == '3'
-        assign grid_class = 'lg:grid-cols-3'
-        assign wrapper_class = ' story-grid--editorial'
-      endif
+      assign section_heading = section.settings.heading | default: 'Why EZQuest feels easier to own'
+      assign section_copy = section.settings.copy | default: 'Show how product design, setup clarity, and support work together across the line.'
     -%}
-    <div class="section-intro">
-      <div class="max-w-3xl">
+    <div class="home-story-shell">
+      <div class="home-story-intro">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <span class="product-meta-pill">Storytelling layer</span>
-          <span class="product-meta-pill">Conversion support</span>
-        </div>
+        {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+          <div class="mt-8">
+            {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+          </div>
+        {% endif %}
       </div>
-      {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-        <div class="section-intro-action">
-          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
-        </div>
-      {% endif %}
-    </div>
 
-    <div class="mt-10 grid gap-6 {{ grid_class }}{{ wrapper_class }}">
       {% for block in section.blocks %}
         {%- liquid
           assign story_eyebrow = block.settings.eyebrow
+          assign story_image = block.settings.image
           if story_eyebrow == blank and section.settings.show_sequence
-            assign story_eyebrow = 'Module'
+            if forloop.index == 1
+              assign story_eyebrow = 'Design'
+            elsif forloop.index == 2
+              assign story_eyebrow = 'Workflow'
+            else
+              assign story_eyebrow = 'Support'
+            endif
+          endif
+
+          assign story_class = 'home-story-card'
+          if forloop.index == 1
+            assign story_class = story_class | append: ' home-story-card--feature'
+          elsif forloop.index == 2
+            assign story_class = story_class | append: ' home-story-card--detail'
+          else
+            assign story_class = story_class | append: ' home-story-card--support'
+          endif
+
+          if story_image == blank
+            if forloop.index == 1 and all_products['usb-c-multimedia-hub'] != blank
+              assign story_image = all_products['usb-c-multimedia-hub'].featured_image
+            elsif forloop.index == 2 and all_products['usb-c-pro-dock'] != blank
+              assign story_image = all_products['usb-c-pro-dock'].featured_image
+            elsif all_products['usb-c-travel-hub'] != blank
+              assign story_image = all_products['usb-c-travel-hub'].featured_image
+            endif
           endif
         -%}
-        <article class="feature-card flex h-full flex-col bg-gradient-to-br from-white to-slate-50" {{ block.shopify_attributes }}>
-          {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'mb-6 aspect-[4/3] w-full rounded-[1.5rem] border border-slate-200/80 object-cover' }}
+        <article class="{{ story_class }}" {{ block.shopify_attributes }}>
+          {% if story_image != blank %}
+            <div class="home-story-media">
+              {{ story_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-story-image aspect-card w-full object-cover' }}
+            </div>
           {% else %}
-            <div class="mb-6 aspect-[4/3] rounded-[1.5rem] border border-slate-200/80 bg-slate-100"></div>
+            <div class="home-story-media">
+              {% render 'placeholder-visual',
+                kind: 'story',
+                text: block.settings.title | default: 'EZQuest Story',
+                width: 1200,
+                height: 900,
+                bg: '1D2736',
+                fg: 'F8FAFC',
+                class: 'home-story-image aspect-card w-full object-cover'
+              %}
+            </div>
           {% endif %}
-          <div class="flex items-center justify-between gap-4">
-            {% if story_eyebrow != blank %}
-              <p class="section-kicker">{{ story_eyebrow }}</p>
-            {% endif %}
-            {% if section.settings.show_sequence %}
-              <span class="text-sm font-medium text-slate-400">{{ forloop.index | prepend: '0' }}</span>
+          <div class="home-story-content">
+            <div class="flex items-center justify-between gap-4">
+              {% if story_eyebrow != blank %}
+                <p class="section-kicker">{{ story_eyebrow }}</p>
+              {% endif %}
+              {% if section.settings.show_sequence %}
+                <span class="text-sm font-medium text-slate-400">{{ forloop.index | prepend: '0' }}</span>
+              {% endif %}
+            </div>
+            <h3 class="card-title mt-4">{{ block.settings.title | default: 'Built for cleaner device setups' }}</h3>
+            {% if block.settings.copy != blank %}
+              <p class="mt-4 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
+            {% else %}
+              <p class="mt-4 text-sm leading-7 text-slate-600">See how the port mix, charging path, and support model work together in a setup customers can understand quickly.</p>
             {% endif %}
           </div>
-          <h3 class="mt-4 text-2xl font-semibold tracking-[-0.03em] text-slate-950">{{ block.settings.title | default: 'Story item' }}</h3>
-          {% if block.settings.copy != blank %}
-            <p class="mt-4 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
-          {% endif %}
-          <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-            <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Move from explanation into action</p>
+          <div class="home-story-footer">
             {% if block.settings.link != blank %}
               {% render 'button', label: block.settings.link_label, url: block.settings.link, style: 'secondary' %}
             {% endif %}
@@ -65,17 +94,67 @@
       {% else %}
         {% assign fallback_columns = section.settings.columns_desktop | plus: 0 %}
         {% for i in (1..fallback_columns) %}
-          <article class="feature-card flex h-full flex-col bg-gradient-to-br from-white to-slate-50">
-            <div class="mb-6 aspect-[4/3] rounded-[1.5rem] border border-slate-200/80 bg-slate-100"></div>
-            <div class="flex items-center justify-between gap-4">
-              <p class="section-kicker">Module</p>
-              {% if section.settings.show_sequence %}
-                <span class="text-sm font-medium text-slate-400">{{ i | prepend: '0' }}</span>
+          {%- liquid
+            assign fallback_story_image = blank
+            if forloop.index == 1 and all_products['usb-c-multimedia-hub'] != blank
+              assign fallback_story_image = all_products['usb-c-multimedia-hub'].featured_image
+            elsif forloop.index == 2 and all_products['usb-c-pro-dock'] != blank
+              assign fallback_story_image = all_products['usb-c-pro-dock'].featured_image
+            elsif all_products['usb-c-travel-hub'] != blank
+              assign fallback_story_image = all_products['usb-c-travel-hub'].featured_image
+            endif
+          -%}
+          <article class="home-story-card home-story-card--support">
+            <div class="home-story-media">
+              {% if fallback_story_image != blank %}
+                {{ fallback_story_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-story-image aspect-card w-full object-cover' }}
+              {% else %}
+                {% render 'placeholder-visual',
+                  kind: 'story',
+                  text: 'EZQuest Story',
+                  width: 1200,
+                  height: 900,
+                  bg: '1D2736',
+                  fg: 'F8FAFC',
+                  class: 'home-story-image aspect-card w-full object-cover'
+                %}
               {% endif %}
             </div>
-            <h3 class="mt-4 text-2xl font-semibold tracking-[-0.03em] text-slate-950">Story item</h3>
-            <p class="mt-4 text-sm leading-7 text-slate-600">Add story blocks in the theme editor to preview this section with real content.</p>
-            <div class="mt-6 border-t border-slate-200/80 pt-5 text-xs font-medium uppercase tracking-[0.18em] text-slate-400">Move from explanation into action</div>
+            <div class="home-story-content">
+              <div class="flex items-center justify-between gap-4">
+                <p class="section-kicker">
+                  {% if forloop.index == 1 %}
+                    Design
+                  {% elsif forloop.index == 2 %}
+                    Workflow
+                  {% else %}
+                    Support
+                  {% endif %}
+                </p>
+                {% if section.settings.show_sequence %}
+                  <span class="text-sm font-medium text-slate-400">{{ i | prepend: '0' }}</span>
+                {% endif %}
+              </div>
+              <h3 class="card-title mt-4">
+                {% if forloop.index == 1 %}
+                  Premium connectivity without setup clutter
+                {% elsif forloop.index == 2 %}
+                  A better fit for the devices you use every day
+                {% else %}
+                  Support that stays close after purchase
+                {% endif %}
+              </h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">
+                {% if forloop.index == 1 %}
+                  Frame the lead product benefit around cleaner desks, better port access, and fewer setup compromises.
+                {% elsif forloop.index == 2 %}
+                  Show how charging, display, and connection paths make the right model easier to choose.
+                {% else %}
+                  Keep manuals, downloads, and compatibility within reach so ownership feels considered from the start.
+                {% endif %}
+              </p>
+            </div>
+            <div class="home-story-footer"></div>
           </article>
         {% endfor %}
       {% endfor %}
@@ -88,8 +167,8 @@
   "name": "Product story grid",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Story" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Story grid framework" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Reserved for timeline, value proposition, or brand narrative content." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why EZQuest feels easier to own" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Show how product design, setup clarity, and support work together across the line." },
     {
       "type": "select",
       "id": "columns_desktop",
@@ -110,9 +189,9 @@
       "name": "Story item",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Module" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Story item" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Narrative summary" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Design" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Built for cleaner device setups" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Explain how the product design, workflow fit, or support path makes ownership easier." },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "Learn more" },
         { "type": "url", "id": "link", "label": "Link" }
       ]

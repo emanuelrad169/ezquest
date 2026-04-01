@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Compatibility",
-        "heading": "Compatibility framework",
-        "copy": "Built to support future structured datasets for product, device, platform, and workflow compatibility."
+        "heading": "Check device and workflow fit",
+        "copy": "Confirm product fit by platform, device type, display path, and the setup you are trying to build."
       }
     },
     "entries": {
@@ -13,18 +13,18 @@
       "settings": {
         "eyebrow": "Compatibility matrix",
         "heading": "Compatibility and fit guidance",
-        "copy": "This section can now pull structured compatibility entries while still supporting fallback review blocks.",
+        "copy": "Use compatibility guidance to buy with more confidence and reduce the guesswork before setup begins.",
         "structured_source": "global",
         "entry_limit": 6,
-        "source_note": "Use platform, device, workflow, collection, or product relationships in compatibility entries to make this page progressively smarter."
+        "source_note": "Check the device, platform, or workflow that matches your setup first, then move into manuals, downloads, or support only if the next step is still unclear."
       },
       "blocks": {
         "compat_1": {
           "type": "entry",
           "settings": {
             "eyebrow": "Platform",
-            "title": "Compatibility scenario",
-            "copy": "Reserved for a supported device, platform, or workflow profile.",
+            "title": "MacBook Pro setup",
+            "copy": "Check fit for modern MacBook workflows, display support, charging passthrough, and the ports commonly used in daily setups.",
             "link_label": "View related products",
             "link_url": "/collections/all"
           }
@@ -33,8 +33,8 @@
           "type": "entry",
           "settings": {
             "eyebrow": "Workflow",
-            "title": "Compatibility scenario",
-            "copy": "Reserved for a second supported use case or platform group.",
+            "title": "Windows laptop setup",
+            "copy": "Review fit for USB-C Windows laptops, charging behavior, Ethernet needs, and display or room-based use cases.",
             "link_label": "View related products",
             "link_url": "/collections/all"
           }
@@ -43,8 +43,8 @@
           "type": "entry",
           "settings": {
             "eyebrow": "Device class",
-            "title": "Compatibility scenario",
-            "copy": "Reserved for a third supported device family or installation context.",
+            "title": "Conference room and shared desk",
+            "copy": "See how products map to shared workspaces, desk resets, presentation rooms, and quick reconnect workflows.",
             "link_label": "View related products",
             "link_url": "/collections/all"
           }
@@ -53,11 +53,11 @@
       "block_order": ["compat_1", "compat_2", "compat_3"]
     },
     "support": {
-      "type": "support-card-grid",
+      "type": "support-link-grid",
       "settings": {
         "eyebrow": "Related support",
-        "heading": "Follow-on support paths",
-        "copy": "Use these links to connect compatibility outcomes to downloads, manuals, or direct support.",
+        "heading": "Keep the next step close",
+        "copy": "Move from compatibility into downloads, manuals, or direct support without starting over.",
         "columns_desktop": 3,
         "link_label": "Open support center",
         "link_url": "/pages/support"
@@ -68,6 +68,7 @@
           "settings": {
             "title": "Downloads",
             "copy": "Continue to firmware, drivers, or utilities tied to supported products.",
+            "meta": "Files and tools",
             "link_label": "Open downloads",
             "link_url": "/pages/downloads"
           }
@@ -77,6 +78,7 @@
           "settings": {
             "title": "Manuals",
             "copy": "Continue to setup guides or documentation tied to supported products.",
+            "meta": "Setup guides",
             "link_label": "Open manuals",
             "link_url": "/pages/manuals"
           }
@@ -86,6 +88,7 @@
           "settings": {
             "title": "Contact support",
             "copy": "Escalate when compatibility depends on a more specific deployment question.",
+            "meta": "Direct help",
             "link_label": "Open contact page",
             "link_url": "/pages/contact"
           }
@@ -97,8 +100,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need help confirming fit",
-        "heading": "Compatibility can route into a more structured recommendation flow later",
-        "copy": "This module preserves a clear escalation path now while leaving room for future calculators or guided selectors.",
+        "heading": "Need another step after compatibility?",
+        "copy": "If you still need help confirming fit, move into support or browse the product line with a clearer idea of what to choose.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "Browse products",

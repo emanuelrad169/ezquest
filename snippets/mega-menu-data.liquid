@@ -1,0 +1,263 @@
+{%- liquid
+  assign hub_product = all_products['usb-c-multimedia-hub']
+  assign dock_product = all_products['usb-c-pro-dock']
+  assign travel_product = all_products['usb-c-travel-hub']
+
+  assign hubs_url = routes.collections_url | append: '/hubs-adapters'
+  assign docks_url = routes.collections_url | append: '/docking-stations'
+  assign power_url = routes.collections_url | append: '/chargers-power'
+  assign accessories_url = routes.collections_url | append: '/accessories'
+  assign compare_url = '/pages/compare'
+  assign compatibility_url = '/pages/compatibility'
+  assign support_url = '/pages/support'
+  assign downloads_url = '/pages/downloads'
+  assign manuals_url = '/pages/manuals'
+  assign faq_url = '/pages/faq'
+  assign troubleshooting_url = '/pages/support#troubleshooting'
+  assign contact_url = '/pages/contact'
+  assign about_url = '/pages/about'
+  assign story_url = '/pages/our-story'
+  assign where_to_buy_url = '/pages/where-to-buy'
+  assign resources_url = '/blogs/resources'
+
+  assign hub_image = ''
+  assign dock_image = ''
+  assign travel_image = ''
+
+  if hub_product != blank and hub_product.featured_image != blank
+    assign hub_image = hub_product.featured_image | image_url: width: 900
+  endif
+
+  if dock_product != blank and dock_product.featured_image != blank
+    assign dock_image = dock_product.featured_image | image_url: width: 900
+  endif
+
+  if travel_product != blank and travel_product.featured_image != blank
+    assign travel_image = travel_product.featured_image | image_url: width: 900
+  endif
+-%}
+{
+  "shop": {
+    "label": {{ 'Shop' | json }},
+    "href": {{ routes.all_products_collection_url | json }},
+    "behaviorType": {{ 'preview-grid' | json }},
+    "groups": [
+      {
+        "id": {{ 'hubs' | json }},
+        "label": {{ 'Hubs' | json }},
+        "href": {{ hubs_url | json }},
+        "eyebrow": {{ 'Compact expansion' | json }},
+        "copy": {{ 'Display, charge, data.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Everyday expansion' | json }},
+          "title": {{ 'Hubs that keep the setup moving' | json }},
+          "copy": {{ 'Compact expansion without the clutter.' | json }},
+          "href": {{ hubs_url | json }},
+          "cta": {{ 'Browse hubs' | json }},
+          "image": {{ hub_image | json }}
+        }
+      },
+      {
+        "id": {{ 'docking' | json }},
+        "label": {{ 'Docking Stations' | json }},
+        "href": {{ docks_url | json }},
+        "eyebrow": {{ 'Desktop power' | json }},
+        "copy": {{ 'Desk-ready expansion.' | json }},
+        "preview": {
+          "eyebrow": {{ 'For serious desks' | json }},
+          "title": {{ 'Docking built for cleaner workstations' | json }},
+          "copy": {{ 'More ports, more power, cleaner desks.' | json }},
+          "href": {{ docks_url | json }},
+          "cta": {{ 'Explore docks' | json }},
+          "image": {{ dock_image | json }}
+        }
+      },
+      {
+        "id": {{ 'power' | json }},
+        "label": {{ 'Power' | json }},
+        "href": {{ power_url | json }},
+        "eyebrow": {{ 'Fast charging' | json }},
+        "copy": {{ 'Fast, reliable charging.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Charge with confidence' | json }},
+          "title": {{ 'Power that fits modern devices' | json }},
+          "copy": {{ 'Reliable charging across the setup.' | json }},
+          "href": {{ power_url | json }},
+          "cta": {{ 'See power products' | json }},
+          "image": {{ dock_image | json }}
+        }
+      },
+      {
+        "id": {{ 'accessories' | json }},
+        "label": {{ 'Accessories' | json }},
+        "href": {{ accessories_url | json }},
+        "eyebrow": {{ 'Finish the setup' | json }},
+        "copy": {{ 'Finish the setup.' | json }},
+        "preview": {
+          "eyebrow": {{ 'The final layer' | json }},
+          "title": {{ 'Accessories that remove friction' | json }},
+          "copy": {{ 'Cables and add-ons that keep things simple.' | json }},
+          "href": {{ accessories_url | json }},
+          "cta": {{ 'View accessories' | json }},
+          "image": {{ travel_image | json }}
+        }
+      }
+    ],
+    "previewContent": { "defaultId": {{ 'hubs' | json }} },
+    "featuredContent": {
+      "eyebrow": {{ 'Featured' | json }},
+      "title": {{ dock_product.title | default: 'USB-C Pro Dock' | json }},
+      "copy": {{ 'A stronger anchor for larger desk setups.' | json }},
+      "href": {{ dock_product.url | default: docks_url | json }},
+      "cta": {{ 'View featured dock' | json }},
+      "image": {{ dock_image | json }},
+      "badge": {{ 'Desk setup' | json }},
+      "price": {{ dock_product.price | money | json }}
+    },
+    "quickLinks": [
+      { "label": {{ 'Travel setup' | json }}, "href": {{ travel_product.url | default: hubs_url | json }} },
+      { "label": {{ 'Dual-display desk' | json }}, "href": {{ compare_url | json }} },
+      { "label": {{ 'iPad workflow' | json }}, "href": {{ hubs_url | json }} },
+      { "label": {{ 'MacBook power users' | json }}, "href": {{ docks_url | json }} }
+    ]
+  },
+  "compare": {
+    "label": {{ 'Compare' | json }},
+    "href": {{ compare_url | json }},
+    "behaviorType": {{ 'decision-list' | json }},
+    "groups": [
+      {
+        "id": {{ 'desk-setup' | json }},
+        "label": {{ 'Desk setup' | json }},
+        "href": {{ compare_url | json }},
+        "eyebrow": {{ 'Workstation' | json }},
+        "copy": {{ 'More ports. More power.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Choose this if' | json }},
+          "title": {{ 'You want a clean single-cable desk' | json }},
+          "copy": {{ 'Start with docking for a steadier desk setup.' | json }},
+          "href": {{ docks_url | json }},
+          "cta": {{ 'Compare desk-ready products' | json }},
+          "image": {{ dock_image | json }}
+        }
+      },
+      {
+        "id": {{ 'travel-setup' | json }},
+        "label": {{ 'Travel setup' | json }},
+        "href": {{ compare_url | json }},
+        "eyebrow": {{ 'Portable' | json }},
+        "copy": {{ 'Compact and easy to pack.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Choose this if' | json }},
+          "title": {{ 'You need flexibility without the desk footprint' | json }},
+          "copy": {{ 'Start with hubs that stay easy to carry.' | json }},
+          "href": {{ hub_product.url | default: hubs_url | json }},
+          "cta": {{ 'See travel-friendly options' | json }},
+          "image": {{ travel_image | json }}
+        }
+      },
+      {
+        "id": {{ 'multi-display' | json }},
+        "label": {{ 'Multi-display' | json }},
+        "href": {{ compatibility_url | json }},
+        "eyebrow": {{ 'Displays' | json }},
+        "copy": {{ 'Confirm monitor support.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Choose this if' | json }},
+          "title": {{ 'Display support is the deciding factor' | json }},
+          "copy": {{ 'Use compatibility first when display support decides the purchase.' | json }},
+          "href": {{ compatibility_url | json }},
+          "cta": {{ 'Check compatibility' | json }},
+          "image": {{ dock_image | json }}
+        }
+      },
+      {
+        "id": {{ 'power-users' | json }},
+        "label": {{ 'Power users' | json }},
+        "href": {{ compare_url | json }},
+        "eyebrow": {{ 'High demand' | json }},
+        "copy": {{ 'Ports, wattage, throughput.' | json }},
+        "preview": {
+          "eyebrow": {{ 'Choose this if' | json }},
+          "title": {{ 'Ports, power, and performance all matter' | json }},
+          "copy": {{ 'Compare products built for heavier workflows.' | json }},
+          "href": {{ compare_url | json }},
+          "cta": {{ 'Start comparing' | json }},
+          "image": {{ hub_image | json }}
+        }
+      }
+    ],
+    "previewContent": { "defaultId": {{ 'desk-setup' | json }} },
+    "featuredContent": {
+      "eyebrow": {{ 'Decision support' | json }},
+      "title": {{ 'Choose the right setup' | json }},
+      "copy": {{ 'Guide customers by how they work, not by forcing them to decode specs first.' | json }},
+      "href": {{ compare_url | json }},
+      "cta": {{ 'Open compare' | json }}
+    }
+  },
+  "support": {
+    "label": {{ 'Support' | json }},
+    "href": {{ support_url | json }},
+    "behaviorType": {{ 'utility-groups' | json }},
+    "groups": [
+      {
+        "id": {{ 'before-you-buy' | json }},
+        "label": {{ 'Before you buy' | json }},
+        "items": [
+          { "label": {{ 'Downloads' | json }}, "href": {{ downloads_url | json }}, "copy": {{ 'Drivers and firmware' | json }} },
+          { "label": {{ 'Manuals' | json }}, "href": {{ manuals_url | json }}, "copy": {{ 'Setup guidance' | json }} },
+          { "label": {{ 'Compatibility' | json }}, "href": {{ compatibility_url | json }}, "copy": {{ 'Check fit' | json }} }
+        ]
+      },
+      {
+        "id": {{ 'ownership-help' | json }},
+        "label": {{ 'Ownership help' | json }},
+        "items": [
+          { "label": {{ 'FAQ' | json }}, "href": {{ faq_url | json }}, "copy": {{ 'Fast answers' | json }} },
+          { "label": {{ 'Troubleshooting' | json }}, "href": {{ troubleshooting_url | json }}, "copy": {{ 'Common issues' | json }} },
+          { "label": {{ 'Contact' | json }}, "href": {{ contact_url | json }}, "copy": {{ 'Reach support' | json }} }
+        ]
+      }
+    ],
+    "previewContent": {},
+    "featuredContent": {
+      "eyebrow": {{ 'Support promise' | json }},
+      "title": {{ 'Help stays close' | json }},
+      "copy": {{ 'Everything needed for setup and fit in one place.' | json }},
+      "href": {{ support_url | json }},
+      "cta": {{ 'Open support center' | json }},
+      "bullets": [
+        {{ 'Compatibility help before you buy' | json }},
+        {{ 'Manuals and downloads in one place' | json }},
+        {{ 'Direct contact when self-service is not enough' | json }}
+      ]
+    }
+  },
+  "about": {
+    "label": {{ 'About' | json }},
+    "href": {{ about_url | json }},
+    "behaviorType": {{ 'editorial-story' | json }},
+    "groups": [
+      {
+        "id": {{ 'about-links' | json }},
+        "label": {{ 'Brand links' | json }},
+        "items": [
+          { "label": {{ 'About EZQuest' | json }}, "href": {{ about_url | json }}, "copy": {{ 'Brand overview' | json }} },
+          { "label": {{ 'Our Story' | json }}, "href": {{ story_url | json }}, "copy": {{ 'How the brand was built' | json }} },
+          { "label": {{ 'Where to Buy' | json }}, "href": {{ where_to_buy_url | json }}, "copy": {{ 'Retail and availability' | json }} }
+        ]
+      }
+    ],
+    "previewContent": {},
+    "featuredContent": {
+      "eyebrow": {{ 'EZQuest' | json }},
+      "title": {{ 'Connectivity products built to feel clear, capable, and dependable' | json }},
+      "copy": {{ 'Brand trust, resources, and where to buy in one quiet layer.' | json }},
+      "href": {{ resources_url | json }},
+      "cta": {{ 'Read resources' | json }},
+      "secondaryHref": {{ story_url | json }},
+      "secondaryCta": {{ 'See our story' | json }}
+    }
+  }
+}

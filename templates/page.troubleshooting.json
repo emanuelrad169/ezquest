@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Troubleshooting",
-        "heading": "A practical support page for common issue diagnosis and next steps",
-        "copy": "Use this page for common issue groupings, recovery paths, and escalation thresholds.",
+        "heading": "Troubleshoot common issues faster",
+        "copy": "Start with the symptom you are seeing, then move into the clearest next recovery step.",
         "support_eyebrow": "Troubleshooting note",
-        "support_note": "Each block should represent a real issue category and steer users into the right next action rather than dumping generic advice."
+        "support_note": "Start with the visible symptom, then take the clearest next action instead of bouncing between support pages."
       }
     },
     "issues": {
@@ -15,26 +15,59 @@
       "settings": {
         "eyebrow": "Common issues",
         "heading": "Troubleshooting pathways by symptom or product behavior",
-        "copy": "Use this section for recurring issues, likely causes, and the next best support step.",
+        "copy": "Review recurring issues, likely causes, and the next best support step without losing the rest of the support flow.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }
     },
     "support": {
-      "type": "support-card-grid",
+      "type": "support-link-grid",
       "settings": {
         "eyebrow": "Need another route",
         "heading": "Move into compatibility, downloads, or direct help",
-        "copy": "Use these cards to keep troubleshooting connected to the rest of the support ecosystem.",
+        "copy": "If troubleshooting does not solve it, move naturally into compatibility, downloads, manuals, or direct support.",
         "columns_desktop": 3
-      }
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Downloads",
+            "copy": "Open drivers, firmware, and utilities when the next step is software, updates, or tools.",
+            "meta": "Files",
+            "link_label": "Open downloads",
+            "link_url": "/pages/downloads"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Compatibility",
+            "copy": "Check fit again when the issue may be caused by device, platform, or workflow mismatch.",
+            "meta": "Fit check",
+            "link_label": "Open compatibility",
+            "link_url": "/pages/compatibility"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Contact support",
+            "copy": "Move directly into support when guided troubleshooting is not enough to resolve the issue.",
+            "meta": "Escalation",
+            "link_label": "Contact support",
+            "link_url": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Escalation",
         "heading": "Still need help beyond guided troubleshooting?",
-        "copy": "Use the final CTA to escalate into contact or warranty once self-service is exhausted.",
+        "copy": "Escalate into contact or warranty once self-service is exhausted and the issue still needs direct review.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "View warranty",

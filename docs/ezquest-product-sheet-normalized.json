@@ -1,0 +1,335 @@
+{
+  "source_file": "/Users/emanuelrad/Desktop/EZQuest Product List 2026.04.01.xlsx",
+  "generated_from": "Sheet1",
+  "grouping_rules": {
+    "eol_rule": "Any SKU highlighted in red is EOL.",
+    "core_product_rule": "If SKUs are the same core product and only differ by color or length, treat them as one parent product with child variants.",
+    "pack_size_rule": "If SKUs differ by pack size or quantity, keep them as separate products unless explicitly told otherwise."
+  },
+  "notes": [
+    "This normalized file focuses on the explicit grouping instructions provided for Phase 3 catalog setup.",
+    "For the SKUs included here, none of the referenced rows appeared red-highlighted in the workbook styles, so is_eol is false for all included child SKUs.",
+    "UPC values were normalized to digits only.",
+    "Box quantity values were preserved as workbook text to avoid losing packaging context."
+  ],
+  "parents": [
+    {
+      "parent_handle": "pro-series-usb-c-5in1-hub",
+      "normalized_family_name": "Pro Series USB-C 5in1 Hub",
+      "grouping_basis": "color variants",
+      "variant_option_1": "Color",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "H30005",
+          "upc": "694307300057",
+          "color": "Space Black",
+          "length": null,
+          "price": "14.99",
+          "map": "35.99",
+          "msrp": "35.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "H30015",
+          "upc": "694307300156",
+          "color": "Silver",
+          "length": null,
+          "price": "14.99",
+          "map": "35.99",
+          "msrp": "35.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "ultraslim-wall-charger-dual-usb-c-70w",
+      "normalized_family_name": "UltraSlim Wall Charger Dual USB-C 70W",
+      "grouping_basis": "color variants",
+      "variant_option_1": "Color",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "P14070",
+          "upc": "69430714070",
+          "color": "White",
+          "length": null,
+          "price": "24.99",
+          "map": "49.99",
+          "msrp": "49.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "P15070",
+          "upc": "69430715070",
+          "color": "Black",
+          "length": null,
+          "price": "24.99",
+          "map": "49.99",
+          "msrp": "49.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "worldtravel-65w-gan-5-port-pd-wall-charger",
+      "normalized_family_name": "WorldTravel 65W GaN 5 Ports PD Wall Charger",
+      "grouping_basis": "color variants",
+      "variant_option_1": "Color",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "P40065",
+          "upc": "69430740065",
+          "color": "White",
+          "length": null,
+          "price": "29.99",
+          "map": "59.99",
+          "msrp": "59.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "P40066",
+          "upc": "69430740066",
+          "color": "Black",
+          "length": null,
+          "price": "29.99",
+          "map": "59.99",
+          "msrp": "59.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "worldtravel-35w-gan-5-port-pd-wall-charger",
+      "normalized_family_name": "WorldTravel 35W GaN 5 Ports PD Wall Charger",
+      "grouping_basis": "color variants",
+      "variant_option_1": "Color",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "P40035",
+          "upc": "69430740035",
+          "color": "White",
+          "length": null,
+          "price": "22.99",
+          "map": "45.99",
+          "msrp": "49.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "P40036",
+          "upc": "69430740036",
+          "color": "Black",
+          "length": null,
+          "price": "22.99",
+          "map": "45.99",
+          "msrp": "49.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n60 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "duraguard-usb-c-to-usb-c-charge-and-sync-cable",
+      "normalized_family_name": "DuraGuard USB-C to USB-C Charge and Sync Cable",
+      "grouping_basis": "length and color variants",
+      "variant_option_1": "Color",
+      "variant_option_2": "Length",
+      "children": [
+        {
+          "sku": "X48910",
+          "upc": "694307489103",
+          "color": "Space Gray",
+          "length": "1.2 Meter",
+          "price": "7.99",
+          "map": "15.99",
+          "msrp": "15.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "X48920",
+          "upc": "694307489202",
+          "color": "Space Gray",
+          "length": "2.2 Meter",
+          "price": "9.99",
+          "map": "19.99",
+          "msrp": "19.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "X48930",
+          "upc": "694307489202",
+          "color": "Silver",
+          "length": "2 Meter",
+          "price": "9.99",
+          "map": "19.99",
+          "msrp": "19.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "duraguard-usb-c-to-usb-a-charge-and-sync-cable",
+      "normalized_family_name": "DuraGuard USB-C to USB-A Charge and Sync Cable",
+      "grouping_basis": "length variants",
+      "variant_option_1": "Length",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "X48912",
+          "upc": "694307489127",
+          "color": "Space Gray",
+          "length": "1.2 Meter",
+          "price": "6.49",
+          "map": "15.99",
+          "msrp": "15.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "X48922",
+          "upc": "694307489226",
+          "color": "Space Gray",
+          "length": "2.2 Meter",
+          "price": "7.99",
+          "map": "19.99",
+          "msrp": "19.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "duraguard-stereo-audio-cable",
+      "normalized_family_name": "DuraGuard Stereo Audio Cable",
+      "grouping_basis": "length variants",
+      "variant_option_1": "Length",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "X49910",
+          "upc": "694307499102",
+          "color": "Space Gray",
+          "length": "2 Meter",
+          "price": "6.49",
+          "map": "12.99",
+          "msrp": "12.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "C49920",
+          "upc": "694307499201",
+          "color": "Space Gray",
+          "length": "3 Meter",
+          "price": "7.99",
+          "map": "14.99",
+          "msrp": "14.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "duraguard-stereo-audio-cable-90-degree",
+      "normalized_family_name": "DuraGuard Stereo Audio Cable 90 Degree",
+      "grouping_basis": "length variants",
+      "variant_option_1": "Length",
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "C59920",
+          "upc": "",
+          "color": "Space Gray",
+          "length": "2 Meter",
+          "price": "",
+          "map": "",
+          "msrp": "",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        },
+        {
+          "sku": "C59930",
+          "upc": "",
+          "color": "Space Gray",
+          "length": "3 Meter",
+          "price": "",
+          "map": "",
+          "msrp": "",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "superspeed-gen-1-usb-c-to-usb-a-mini-adapter",
+      "normalized_family_name": "SuperSpeed Gen 1 USB-C to USB-A Mini Adapter",
+      "grouping_basis": "separate product because pack size differs",
+      "variant_option_1": null,
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "X40077",
+          "upc": "694307400771",
+          "color": "Space Gray",
+          "length": null,
+          "price": "4.99",
+          "map": "9.99",
+          "msrp": "9.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    },
+    {
+      "parent_handle": "superspeed-gen-1-usb-c-to-usb-a-mini-adapter-2-pack",
+      "normalized_family_name": "SuperSpeed Gen 1 USB-C to USB-A Mini Adapter 2 Pack",
+      "grouping_basis": "separate product because pack size differs",
+      "variant_option_1": null,
+      "variant_option_2": null,
+      "children": [
+        {
+          "sku": "X40079",
+          "upc": "694307400795",
+          "color": "Space Gray",
+          "length": null,
+          "price": "7.99",
+          "map": "14.99",
+          "msrp": "14.99",
+          "status": "Shipping",
+          "box_quantity": "10 PACK/\nMASTER\n BOX\n100 PCS",
+          "is_eol": false
+        }
+      ]
+    }
+  ]
+}
