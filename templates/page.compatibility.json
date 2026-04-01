@@ -5,52 +5,23 @@
       "settings": {
         "eyebrow": "Compatibility",
         "heading": "Check device and workflow fit",
-        "copy": "Confirm product fit by platform, device type, display path, and the setup you are trying to build."
+        "copy": "Confirm product fit by platform, device type, display path, and the setup you are building.",
+        "support_eyebrow": "Ownership path",
+        "support_note": "Compatibility is where purchase confidence and setup confidence meet. Use it to confirm the right fit before you buy, then move into manuals, downloads, or support only if you need the next layer of detail.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
       }
     },
     "entries": {
       "type": "compatibility-entry-list",
       "settings": {
         "eyebrow": "Compatibility matrix",
-        "heading": "Compatibility and fit guidance",
+        "heading": "Compatibility guidance for real devices and real workflows",
         "copy": "Use compatibility guidance to buy with more confidence and reduce the guesswork before setup begins.",
         "structured_source": "global",
         "entry_limit": 6,
-        "source_note": "Check the device, platform, or workflow that matches your setup first, then move into manuals, downloads, or support only if the next step is still unclear."
-      },
-      "blocks": {
-        "compat_1": {
-          "type": "entry",
-          "settings": {
-            "eyebrow": "Platform",
-            "title": "MacBook Pro setup",
-            "copy": "Check fit for modern MacBook workflows, display support, charging passthrough, and the ports commonly used in daily setups.",
-            "link_label": "View related products",
-            "link_url": "/collections/all"
-          }
-        },
-        "compat_2": {
-          "type": "entry",
-          "settings": {
-            "eyebrow": "Workflow",
-            "title": "Windows laptop setup",
-            "copy": "Review fit for USB-C Windows laptops, charging behavior, Ethernet needs, and display or room-based use cases.",
-            "link_label": "View related products",
-            "link_url": "/collections/all"
-          }
-        },
-        "compat_3": {
-          "type": "entry",
-          "settings": {
-            "eyebrow": "Device class",
-            "title": "Conference room and shared desk",
-            "copy": "See how products map to shared workspaces, desk resets, presentation rooms, and quick reconnect workflows.",
-            "link_label": "View related products",
-            "link_url": "/collections/all"
-          }
-        }
-      },
-      "block_order": ["compat_1", "compat_2", "compat_3"]
+        "source_note": "Check the device, platform, or workflow that matches your setup first. Move into manuals, downloads, or support only if the next step is still unclear."
+      }
     },
     "support": {
       "type": "support-link-grid",

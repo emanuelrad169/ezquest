@@ -39,8 +39,8 @@
         <span>Support</span>
       </a>
     </li>
-    <li class="mega-menu-nav-item">
-      <a href="{{ resources_url }}" class="mega-menu-trigger mega-menu-trigger--plain">
+    <li class="mega-menu-nav-item" data-mega-item="resources">
+      <a href="{{ resources_url }}" class="mega-menu-trigger" data-mega-trigger="resources" aria-expanded="false" aria-controls="mega-menu-panel-resources">
         <span>Resources</span>
       </a>
     </li>
@@ -56,6 +56,7 @@
     {% render 'mega-menu-panel', group_handle: 'shop' %}
     {% render 'mega-menu-panel', group_handle: 'collections' %}
     {% render 'mega-menu-panel', group_handle: 'explore' %}
+    {% render 'mega-menu-panel', group_handle: 'resources' %}
     {% render 'mega-menu-panel', group_handle: 'compare' %}
   </div>
 </div>

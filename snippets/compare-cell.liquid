@@ -26,7 +26,7 @@
   </div>
 
   {% if compare_product != blank %}
-    {% render 'card-product', product: compare_product, card_style: 'featured-strip' %}
+    {% render 'card-product', product: compare_product, card_style: 'featured-strip', image_variant: 'compare' %}
   {% else %}
     <article class="product-card-tile product-card-tile--featured-strip">
       <div class="product-card-featured-media">

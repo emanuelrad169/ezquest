@@ -1,40 +1,12 @@
 <section class="site-announcement-bar" aria-label="Store announcement">
   <div class="site-announcement-inner">
     <div class="site-announcement-shell">
-      <div class="site-announcement-side" aria-hidden="true"></div>
       <p class="site-announcement-message">
         <span class="site-announcement-icon">
           {% render 'icon', name: 'book-open' %}
         </span>
         <span>{{ section.settings.message }}</span>
       </p>
-      <div class="site-announcement-meta hidden lg:flex" aria-label="Regional settings and social links">
-        <a href="#" class="site-announcement-meta-item">
-          <span>United States (USD $)</span>
-          {% render 'icon', name: 'chevron-down' %}
-        </a>
-        <a href="#" class="site-announcement-meta-item">
-          <span>English</span>
-          {% render 'icon', name: 'chevron-down' %}
-        </a>
-        <div class="site-announcement-socials">
-          <a href="#" class="site-announcement-social" aria-label="X">
-            {% render 'icon', name: 'x-social' %}
-          </a>
-          <a href="#" class="site-announcement-social" aria-label="Facebook">
-            {% render 'icon', name: 'facebook' %}
-          </a>
-          <a href="#" class="site-announcement-social" aria-label="Pinterest">
-            {% render 'icon', name: 'pinterest' %}
-          </a>
-          <a href="#" class="site-announcement-social" aria-label="Instagram">
-            {% render 'icon', name: 'instagram' %}
-          </a>
-          <a href="#" class="site-announcement-social" aria-label="YouTube">
-            {% render 'icon', name: 'youtube' %}
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>

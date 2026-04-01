@@ -2,6 +2,15 @@ const seedProducts = require("../../seeds/products");
 const { findPublicationByName, publishResourceToPublication } = require("../publications");
 const { bump } = require("../summary");
 
+const TEMPORARY_PRODUCT_MEDIA_MARKERS = [
+  "photo-1518770660439-4636190af475",
+  "photo-1527443154391-507e9dc6c5cc",
+  "photo-1519389950473-47ba0277781c",
+  "photo-1498050108023-c5249f4df085",
+  "photo-1517336714739-489689fd1ca8",
+  "photo-1484704849700-f032a568e944"
+];
+
 async function findProductDetailByHandle(client, handle) {
   const query = `
     query ProductByHandle($query: String!) {
@@ -60,6 +69,30 @@ async function findProductDetailByHandle(client, handle) {
 
 function getSeedImageUrls(seed) {
   return Array.isArray(seed.imageUrls) ? seed.imageUrls.filter(Boolean) : [];
+}
+
+function isTemporaryRemoteMediaUrl(url) {
+  if (!url) {
+    return false;
+  }
+
+  try {
+    const { hostname, pathname } = new URL(url);
+    if (hostname === "images.unsplash.com" || hostname.endsWith(".unsplash.com")) {
+      return true;
+    }
+
+    return TEMPORARY_PRODUCT_MEDIA_MARKERS.some((marker) => pathname.includes(marker));
+  } catch {
+    return false;
+  }
+}
+
+function getTemporaryRemoteMediaIds(existing) {
+  return (existing.media?.nodes || [])
+    .filter((node) => isTemporaryRemoteMediaUrl(node?.image?.url))
+    .map((node) => node.id)
+    .filter(Boolean);
 }
 
 function hasGroupedVariants(seed) {
@@ -258,6 +291,32 @@ async function addProductMedia(client, productId, seed) {
   );
 
   client.assertUserErrors(data.productCreateMedia.mediaUserErrors, `Add product media ${seed.handle}`);
+}
+
+async function deleteProductMedia(client, productId, mediaIds, handle) {
+  if (!Array.isArray(mediaIds) || mediaIds.length === 0) {
+    return;
+  }
+
+  const mutation = `
+    mutation DeleteProductMedia($productId: ID!, $mediaIds: [ID!]!) {
+      productDeleteMedia(productId: $productId, mediaIds: $mediaIds) {
+        deletedMediaIds
+        mediaUserErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const data = await client.graphql(
+    mutation,
+    { productId, mediaIds },
+    { label: `Delete product media ${handle}` }
+  );
+
+  client.assertUserErrors(data.productDeleteMedia.mediaUserErrors, `Delete product media ${handle}`);
 }
 
 async function updateSingleVariant(client, productId, variantId, seed) {
@@ -474,6 +533,10 @@ async function seedProductsCommand(context, summary) {
         if (currentVariant?.id) {
           await updateSingleVariant(client, existing.id, currentVariant.id, seed);
         }
+      }
+      const temporaryRemoteMediaIds = getTemporaryRemoteMediaIds(existing);
+      if (temporaryRemoteMediaIds.length > 0 && getSeedImageUrls(seed).length === 0) {
+        await deleteProductMedia(client, existing.id, temporaryRemoteMediaIds, seed.handle);
       }
       if ((existing.media?.nodes || []).length === 0 && getSeedImageUrls(seed).length > 0) {
         await addProductMedia(client, existing.id, seed);

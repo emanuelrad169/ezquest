@@ -23,6 +23,7 @@
           assign product_count = block.settings.product_count
           assign card_image = block.settings.image
           assign card_summary = blank
+          assign card_eyebrow = blank
           assign placeholder_kind = 'collection'
 
           if collection_object != blank
@@ -61,26 +62,34 @@
           if collection_object != blank
             case collection_object.handle
               when 'hubs-adapters'
-                assign card_summary = 'Everyday expansion for laptops and tablets'
+                assign card_eyebrow = 'Hybrid + travel'
+                assign card_summary = 'Compact port expansion for everyday carry, hybrid desks, and display-ready meetings'
               when 'docking-stations'
-                assign card_summary = 'Desk-ready ports, power, and display support'
+                assign card_eyebrow = 'Desk command'
+                assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
               when 'chargers-power'
-                assign card_summary = 'Reliable charging across work, home, and travel'
+                assign card_eyebrow = 'Power layer'
+                assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines that need less friction'
               when 'accessories'
-                assign card_summary = 'Cables and add-ons that finish the setup'
+                assign card_eyebrow = 'Finish the setup'
+                assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner, calmer, and more dependable'
             endcase
           elsif card_url contains '/collections/hubs-adapters'
-            assign card_summary = 'Everyday expansion for laptops and tablets'
+            assign card_eyebrow = 'Hybrid + travel'
+            assign card_summary = 'Compact port expansion for everyday carry, hybrid desks, and display-ready meetings'
           elsif card_url contains '/collections/docking-stations'
-            assign card_summary = 'Desk-ready ports, power, and display support'
+            assign card_eyebrow = 'Desk command'
+            assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
           elsif card_url contains '/collections/chargers-power'
-            assign card_summary = 'Reliable charging across work, home, and travel'
+            assign card_eyebrow = 'Power layer'
+            assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines that need less friction'
           elsif card_url contains '/collections/accessories'
-            assign card_summary = 'Cables and add-ons that finish the setup'
+            assign card_eyebrow = 'Finish the setup'
+            assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner, calmer, and more dependable'
           endif
         -%}
 
-        <a href="{{ card_url | default: '/collections/all' }}" class="home-collections-strip-card" {{ block.shopify_attributes }}>
+        <a href="{{ card_url | default: '/collections/all' }}" class="home-collections-strip-card{% if forloop.first %} is-featured{% endif %}{% if forloop.last %} is-wide{% endif %}" {{ block.shopify_attributes }}>
           <div class="home-collections-strip-media">
             {% if card_image != blank %}
               {{ card_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collections-strip-image' }}
@@ -96,15 +105,21 @@
           </div>
           <div class="home-collections-strip-overlay"></div>
           <div class="home-collections-strip-content">
+            {% if card_eyebrow != blank %}
+              <p class="home-collections-strip-eyebrow">{{ card_eyebrow }}</p>
+            {% endif %}
             <h3 class="home-collections-strip-title">{{ card_title }}</h3>
             {% if card_summary != blank %}
               <p class="home-collections-strip-summary">{{ card_summary }}</p>
             {% endif %}
-            {% if product_count != blank %}
-              <p class="home-collections-strip-count">
-                {{ product_count }} product{% if product_count != 1 %}s{% endif %}
-              </p>
-            {% endif %}
+            <div class="home-collections-strip-footer">
+              {% if product_count != blank %}
+                <p class="home-collections-strip-count">
+                  {{ product_count }} product{% if product_count != 1 %}s{% endif %}
+                </p>
+              {% endif %}
+              <span class="home-collections-strip-link-label">Explore family</span>
+            </div>
           </div>
         </a>
       {% endfor %}

@@ -1,0 +1,29 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-travel" x1="154" y1="92" x2="1410" y2="1100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F9FC"/>
+      <stop offset="1" stop-color="#DCE3ED"/>
+    </linearGradient>
+    <radialGradient id="glow-travel" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 206) rotate(132.722) scale(444 304)">
+      <stop stop-color="#FFF6CC"/>
+      <stop offset="1" stop-color="#FFF6CC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="device-travel" x1="664" y1="510" x2="1048" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#909AAD"/>
+      <stop offset="1" stop-color="#606B81"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" rx="56" fill="url(#bg-travel)"/>
+  <rect x="88" y="88" width="1424" height="1024" rx="52" fill="#F9FBFE" stroke="#E5EBF3"/>
+  <ellipse cx="1160" cy="206" rx="444" ry="304" fill="url(#glow-travel)"/>
+  <path d="M98 990C290 914 494 874 738 876C992 880 1200 934 1498 1052V1112H98V990Z" fill="#D8E0EA"/>
+  <rect x="642" y="520" width="478" height="276" rx="88" fill="url(#device-travel)"/>
+  <rect x="700" y="574" width="362" height="168" rx="48" fill="#6E7990"/>
+  <rect x="752" y="648" width="92" height="18" rx="9" fill="#2E394B"/>
+  <rect x="866" y="648" width="110" height="18" rx="9" fill="#334052"/>
+  <rect x="994" y="648" width="72" height="18" rx="9" fill="#394558"/>
+  <rect x="1016" y="602" width="28" height="96" rx="14" fill="#D8E0EA"/>
+  <path d="M1088 854C1154 816 1224 796 1298 796C1338 796 1378 802 1418 816C1372 890 1322 946 1268 984C1218 1020 1164 1048 1106 1066C1062 1044 1026 1020 994 992C1024 946 1056 900 1088 854Z" fill="#CBD4E0"/>
+  <circle cx="494" cy="856" r="20" fill="#F3CC47" fill-opacity="0.9"/>
+  <path d="M1044 962C1130 952 1210 960 1302 1000C1242 1038 1178 1058 1110 1058C1048 1058 992 1042 944 1012C978 994 1012 978 1044 962Z" fill="#F3CC47" fill-opacity="0.38"/>
+</svg>

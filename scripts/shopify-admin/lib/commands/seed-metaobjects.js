@@ -33,6 +33,33 @@ async function getMetaobjectDefinitions(client) {
   return data.metaobjectDefinitions.nodes;
 }
 
+function buildFieldDefinitionPayload(field, definitionIds) {
+  const payload = {
+    name: field.name,
+    key: field.key,
+    type: field.type,
+    required: Boolean(field.required)
+  };
+
+  if (field.metaobjectDefinitionType) {
+    const targetDefinitionId = definitionIds.get(field.metaobjectDefinitionType);
+    if (!targetDefinitionId) {
+      throw new Error(
+        `Metaobject definition ${field.metaobjectDefinitionType} must exist before field ${field.key} can be created`
+      );
+    }
+
+    payload.validations = [
+      {
+        name: "metaobject_definition_id",
+        value: targetDefinitionId
+      }
+    ];
+  }
+
+  return payload;
+}
+
 async function createMetaobjectDefinition(client, definition) {
   const mutation = `
     mutation CreateMetaobjectDefinition($definition: MetaobjectDefinitionCreateInput!) {
@@ -54,12 +81,20 @@ async function createMetaobjectDefinition(client, definition) {
     name: definition.name,
     type: definition.type,
     displayNameKey: definition.displayNameKey,
-    fieldDefinitions: definition.fieldDefinitions.map((field) => ({
-      name: field.name,
-      key: field.key,
-      type: field.type,
-      required: Boolean(field.required)
-    }))
+    fieldDefinitions: definition.fieldDefinitions.map((field) => {
+      const fieldPayload = {
+        name: field.name,
+        key: field.key,
+        type: field.type,
+        required: Boolean(field.required)
+      };
+
+      if (field.validations) {
+        fieldPayload.validations = field.validations;
+      }
+
+      return fieldPayload;
+    })
   };
 
   const data = await client.graphql(
@@ -96,7 +131,15 @@ async function seedMetaobjectDefinitions(context, summary) {
         continue;
       }
 
-      await createMetaobjectDefinition(client, definition);
+      const payload = {
+        ...definition,
+        fieldDefinitions: definition.fieldDefinitions.map((field) =>
+          buildFieldDefinitionPayload(field, new Map([...byType.entries()].map(([type, item]) => [type, item.id])))
+        )
+      };
+
+      const created = await createMetaobjectDefinition(client, payload);
+      byType.set(definition.type, created);
       console.log(`[shopify-admin] Created metaobject definition ${definition.type}`);
       bump(summary, "created");
     }

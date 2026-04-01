@@ -1,0 +1,84 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" rx="44" fill="#EEF3F9"/>
+  <rect width="1600" height="1200" rx="44" fill="url(#bg)"/>
+  <ellipse cx="1192" cy="972" rx="500" ry="156" fill="url(#deskGlow)"/>
+  <g filter="url(#shadowMonitor)">
+    <rect x="760" y="254" width="520" height="312" rx="34" fill="url(#monitor)"/>
+    <rect x="822" y="314" width="396" height="192" rx="22" fill="#F8FAFC" fill-opacity="0.2"/>
+  </g>
+  <g filter="url(#shadowLaptop)">
+    <path d="M356 790H948L1026 914H278L356 790Z" fill="url(#laptopBase)"/>
+    <rect x="428" y="512" width="450" height="260" rx="28" fill="url(#laptopScreen)"/>
+    <rect x="482" y="562" width="342" height="160" rx="18" fill="#F8FAFC" fill-opacity="0.14"/>
+  </g>
+  <g filter="url(#shadowHub)">
+    <rect x="850" y="766" width="334" height="176" rx="42" fill="url(#hub)"/>
+    <rect x="886" y="806" width="250" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.28"/>
+    <rect x="886" y="858" width="80" height="24" rx="12" fill="#162133" fill-opacity="0.44"/>
+    <rect x="982" y="858" width="100" height="24" rx="12" fill="#162133" fill-opacity="0.44"/>
+    <rect x="1098" y="858" width="38" height="24" rx="12" fill="#162133" fill-opacity="0.44"/>
+  </g>
+  <path d="M960 846C904 788 842 738 774 694" stroke="url(#cable)" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="870" cy="778" r="10" fill="#FACC15"/>
+  <defs>
+    <linearGradient id="bg" x1="176" y1="96" x2="1426" y2="1128" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F6FB"/>
+      <stop offset="1" stop-color="#D3DCE7"/>
+    </linearGradient>
+    <radialGradient id="deskGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1192 972) rotate(90) scale(156 500)">
+      <stop stop-color="#FACC15" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="monitor" x1="784" y1="266" x2="1260" y2="566" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CBD5E1"/>
+      <stop offset="0.56" stop-color="#7D889B"/>
+      <stop offset="1" stop-color="#435063"/>
+    </linearGradient>
+    <linearGradient id="laptopBase" x1="346" y1="790" x2="1012" y2="936" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BDC7D4"/>
+      <stop offset="0.6" stop-color="#7F8A9D"/>
+      <stop offset="1" stop-color="#536072"/>
+    </linearGradient>
+    <linearGradient id="laptopScreen" x1="452" y1="524" x2="862" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#AAB5C8"/>
+      <stop offset="0.52" stop-color="#5D697D"/>
+      <stop offset="1" stop-color="#243041"/>
+    </linearGradient>
+    <linearGradient id="hub" x1="862" y1="776" x2="1184" y2="942" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCE4EE"/>
+      <stop offset="0.54" stop-color="#98A4B6"/>
+      <stop offset="1" stop-color="#566274"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="960" y1="846" x2="774" y2="694" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.28"/>
+    </linearGradient>
+    <filter id="shadowMonitor" x="728" y="232" width="596" height="386" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="16"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.14 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowLaptop" x="242" y="488" width="820" height="482" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-12" dy="18"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.14 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowHub" x="816" y="744" width="404" height="242" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-8" dy="16"/>
+      <feGaussianBlur stdDeviation="13"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>

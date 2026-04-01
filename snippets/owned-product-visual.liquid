@@ -1,0 +1,65 @@
+{%- liquid
+  assign resolved_handle = product_handle | default: product.handle
+  assign resolved_title = product_title | default: product.title | default: 'EZQuest product'
+  assign resolved_variant = variant | default: 'hero'
+  assign resolved_width = width | default: 1600
+  assign resolved_height = height | default: 1200
+  assign resolved_class = class | default: ''
+  assign resolved_kind = kind | default: 'product'
+  assign visual_asset = blank
+
+  case resolved_handle
+    when 'usb-c-multimedia-hub'
+      case resolved_variant
+        when 'hero'
+          assign visual_asset = 'pdp-multimedia-hero.svg'
+        when 'compare'
+          assign visual_asset = 'compare-multimedia.svg'
+        when 'ports'
+          assign visual_asset = 'pdp-multimedia-ports.svg'
+        when 'setup'
+          assign visual_asset = 'pdp-multimedia-setup.svg'
+      endcase
+    when 'usb-c-travel-hub'
+      case resolved_variant
+        when 'hero'
+          assign visual_asset = 'pdp-travel-hero.svg'
+        when 'compare'
+          assign visual_asset = 'compare-travel.svg'
+        when 'ports'
+          assign visual_asset = 'pdp-travel-ports.svg'
+        when 'setup'
+          assign visual_asset = 'pdp-travel-setup.svg'
+      endcase
+    when 'usb-c-pro-dock'
+      case resolved_variant
+        when 'hero'
+          assign visual_asset = 'pdp-dock-hero.svg'
+        when 'compare'
+          assign visual_asset = 'compare-dock.svg'
+        when 'ports'
+          assign visual_asset = 'pdp-dock-ports.svg'
+        when 'setup'
+          assign visual_asset = 'pdp-dock-setup.svg'
+      endcase
+  endcase
+-%}
+{% if visual_asset != blank %}
+  <img
+    src="{{ visual_asset | asset_url }}"
+    alt="{{ alt | default: resolved_title | escape }}"
+    class="{{ resolved_class }}"
+    width="{{ resolved_width }}"
+    height="{{ resolved_height }}"
+    loading="lazy"
+    decoding="async"
+  >
+{% else %}
+  {% render 'placeholder-visual',
+    kind: resolved_kind,
+    text: resolved_title,
+    width: resolved_width,
+    height: resolved_height,
+    class: resolved_class
+  %}
+{% endif %}

@@ -1,0 +1,37 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-power" x1="180" y1="120" x2="1340" y2="1100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F5EE"/>
+      <stop offset="1" stop-color="#D8DDE7"/>
+    </linearGradient>
+    <radialGradient id="glow-power" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1178 224) rotate(131.688) scale(470 340)">
+      <stop stop-color="#FFF2C2"/>
+      <stop offset="1" stop-color="#FFF2C2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="charger-main" x1="726" y1="430" x2="1038" y2="876" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8F98AA"/>
+      <stop offset="1" stop-color="#5D667A"/>
+    </linearGradient>
+    <linearGradient id="charger-mini" x1="980" y1="690" x2="1210" y2="1012" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AA3B5"/>
+      <stop offset="1" stop-color="#6B7489"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" rx="56" fill="url(#bg-power)"/>
+  <rect x="88" y="90" width="1424" height="1020" rx="52" fill="#F7F8FB" stroke="#E4E9F0"/>
+  <ellipse cx="1178" cy="224" rx="470" ry="340" fill="url(#glow-power)"/>
+  <path d="M98 960C304 874 526 838 782 842C1052 846 1246 906 1502 1048V1110H98V960Z" fill="#D8DEE7"/>
+  <rect x="730" y="416" width="310" height="440" rx="84" fill="url(#charger-main)"/>
+  <rect x="784" y="476" width="202" height="320" rx="52" fill="#6E788D"/>
+  <rect x="824" y="548" width="122" height="24" rx="12" fill="#BEC7D6"/>
+  <rect x="824" y="604" width="144" height="18" rx="9" fill="#AAB4C7"/>
+  <rect x="998" y="510" width="34" height="88" rx="17" fill="#D4DCE6"/>
+  <rect x="998" y="618" width="34" height="88" rx="17" fill="#CBD4E0"/>
+  <rect x="946" y="376" width="24" height="76" rx="12" fill="#D4DCE6"/>
+  <rect x="812" y="376" width="24" height="76" rx="12" fill="#D4DCE6"/>
+  <rect x="986" y="684" width="244" height="284" rx="58" fill="url(#charger-mini)"/>
+  <rect x="1028" y="732" width="160" height="188" rx="42" fill="#788299"/>
+  <rect x="1062" y="820" width="92" height="18" rx="9" fill="#CFD7E2"/>
+  <path d="M494 938C598 904 690 892 812 906C764 958 708 994 638 1012C574 1028 504 1022 422 998C448 974 472 956 494 938Z" fill="#F3CC47" fill-opacity="0.4"/>
+  <circle cx="392" cy="910" r="22" fill="#F3CC47" fill-opacity="0.9"/>
+</svg>

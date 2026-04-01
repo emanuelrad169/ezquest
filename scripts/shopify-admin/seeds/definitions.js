@@ -43,7 +43,6 @@ const metaobjectDefinitions = [
       { name: "Platforms", key: "platforms", type: "list.single_line_text_field", required: false },
       { name: "Products", key: "products", type: "list.product_reference", required: false },
       { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
-      { name: "Compatibility entries", key: "compatibility_entries", type: "list.metaobject_reference", required: false },
       { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
     ]
   },
@@ -60,8 +59,8 @@ const metaobjectDefinitions = [
       { name: "Summary", key: "summary", type: "multi_line_text_field", required: false },
       { name: "Products", key: "products", type: "list.product_reference", required: false },
       { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
-      { name: "Manuals", key: "manuals", type: "list.metaobject_reference", required: false },
-      { name: "Downloads", key: "downloads", type: "list.metaobject_reference", required: false },
+      { name: "Manuals", key: "manuals", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_manual" },
+      { name: "Downloads", key: "downloads", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_download" },
       { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
     ]
   },

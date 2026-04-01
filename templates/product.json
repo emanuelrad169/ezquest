@@ -9,105 +9,24 @@
         "show_dynamic_checkout": false,
         "support_heading": "Support confidence stays close to the product",
         "support_copy": "Check compatibility, open manuals, or download setup files without leaving the buying path or starting the decision over."
-      },
-      "blocks": {
-        "highlight_1": {
-          "type": "highlight",
-          "settings": {
-            "title": "Works with Mac + Windows",
-            "copy": ""
-          }
-        },
-        "highlight_2": {
-          "type": "highlight",
-          "settings": {
-            "title": "Plug & play setup",
-            "copy": ""
-          }
-        },
-        "highlight_3": {
-          "type": "highlight",
-          "settings": {
-            "title": "Manuals and downloads available",
-            "copy": ""
-          }
-        }
-      },
-      "block_order": ["highlight_1", "highlight_2", "highlight_3"]
+      }
     },
     "story": {
       "type": "product-story-carousel",
       "settings": {
         "eyebrow": "Product story",
-        "heading": "Why this EZQuest setup earns a closer look",
-        "copy": "A short look at the ports, power path, and workflow details that make this EZQuest product easier to choose."
-      },
-      "blocks": {
-        "story_1": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "Design",
-            "title": "Made for cleaner modern-device setups",
-            "copy": "Show how this product reduces desk clutter, travel friction, or charging complexity in one clear idea."
-          }
-        },
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "Workflow",
-            "title": "A better fit for the way you connect",
-            "copy": "Explain the port mix, display support, or power-delivery path in one short, scannable idea."
-          }
-        },
-        "story_3": {
-          "type": "story",
-          "settings": {
-            "eyebrow": "Support",
-            "title": "Ownership confidence from day one",
-            "copy": "Keep compatibility guidance, manuals, and downloads close so support feels built into the product."
-          }
-        }
-      },
-      "block_order": ["story_1", "story_2", "story_3"]
+        "heading": "Why this setup exists and where it fits best",
+        "copy": "Use the structured highlights below to understand the setup role, workflow fit, and ownership value that separate this EZQuest product from nearby options.",
+        "structured_source": "product"
+      }
     },
     "specs": {
       "type": "product-spec-table",
       "settings": {
-        "heading": "Technical sheet",
-        "copy": "Review the ports, charging support, display capability, and platform fit that matter before you commit.",
-        "source_note": "Start with the technical fit here, then move into compatibility or manuals only if your setup needs a closer check."
-      },
-      "blocks": {
-        "spec_1": {
-          "type": "row",
-          "settings": {
-            "label": "Connection type",
-            "value": "USB-C host connection"
-          }
-        },
-        "spec_2": {
-          "type": "row",
-          "settings": {
-            "label": "Power or charging support",
-            "value": "Up to 100W pass-through charging"
-          }
-        },
-        "spec_3": {
-          "type": "row",
-          "settings": {
-            "label": "Compatibility scope",
-            "value": "Mac + Windows compatible"
-          }
-        },
-        "spec_4": {
-          "type": "row",
-          "settings": {
-            "label": "Included items",
-            "value": "Hub, cable, and quick-start guide"
-          }
-        }
-      },
-      "block_order": ["spec_1", "spec_2", "spec_3", "spec_4"]
+        "heading": "Technical fit, without the noise",
+        "copy": "Review the ports, charging support, display capability, and host fit that matter before you commit.",
+        "source_note": "Start with the technical fit here, then move into compatibility or manuals only when the setup needs a closer check."
+      }
     },
     "compare": {
       "type": "product-compare-table",
@@ -116,41 +35,9 @@
         "heading": "Compare nearby options",
         "copy": "See nearby EZQuest models side by side so the right port mix, power path, display support, and workflow fit are easier to spot.",
         "columns_desktop": 3,
+        "structured_source": "auto",
         "source_note": "Compare nearby models by setup style, desk footprint, and support path before you move deeper into product detail."
-      },
-      "blocks": {
-        "compare_1": {
-          "type": "column",
-          "settings": {
-            "eyebrow": "Everyday desk",
-            "title": "USB-C Multimedia Hub",
-            "copy": "A balanced everyday hub for charging, display, Ethernet, and accessory expansion at the desk or on the go.",
-            "link_label": "View product",
-            "link": "/products/usb-c-multimedia-hub"
-          }
-        },
-        "compare_2": {
-          "type": "column",
-          "settings": {
-            "eyebrow": "Travel",
-            "title": "USB-C Travel Hub",
-            "copy": "Best when portability matters most and the setup needs light, dependable expansion away from the desk.",
-            "link_label": "View product",
-            "link": "/products/usb-c-travel-hub"
-          }
-        },
-        "compare_3": {
-          "type": "column",
-          "settings": {
-            "eyebrow": "Power desk",
-            "title": "USB-C Pro Dock",
-            "copy": "A stronger fit for heavier desk setups that need more ports, displays, Ethernet, and workspace stability.",
-            "link_label": "View product",
-            "link": "/products/usb-c-pro-dock"
-          }
-        }
-      },
-      "block_order": ["compare_1", "compare_2", "compare_3"]
+      }
     },
     "compatibility": {
       "type": "compatibility-entry-list",
@@ -170,25 +57,9 @@
       "type": "faq-accordion",
       "settings": {
         "heading": "FAQ",
-        "copy": "Answer the questions most likely to slow the purchase decision."
-      },
-      "blocks": {
-        "faq_1": {
-          "type": "faq",
-          "settings": {
-            "question": "How do I confirm compatibility before I buy?",
-            "answer": "Start with the compatibility guidance on the product page, then move into manuals, downloads, or direct support only if your setup needs a deeper check."
-          }
-        },
-        "faq_2": {
-          "type": "faq",
-          "settings": {
-            "question": "Where do I find setup guides and downloads?",
-            "answer": "Manuals and downloads stay close to the product journey so you can move from buying into setup without losing context."
-          }
-        }
-      },
-      "block_order": ["faq_1", "faq_2"]
+        "copy": "Answer the questions most likely to slow the purchase decision.",
+        "structured_source": "product"
+      }
     },
     "cta": {
       "type": "cta-banner",

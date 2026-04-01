@@ -1,0 +1,32 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-accessories" x1="160" y1="80" x2="1360" y2="1090" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F8FB"/>
+      <stop offset="1" stop-color="#D8DFE9"/>
+    </linearGradient>
+    <radialGradient id="glow-accessories" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1168 210) rotate(131.557) scale(470 330)">
+      <stop stop-color="#FFF7D6"/>
+      <stop offset="1" stop-color="#FFF7D6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cable-body" x1="662" y1="446" x2="1102" y2="868" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8C96A8"/>
+      <stop offset="1" stop-color="#596477"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" rx="56" fill="url(#bg-accessories)"/>
+  <rect x="92" y="88" width="1416" height="1024" rx="52" fill="#F8FAFD" stroke="#E4EAF2"/>
+  <ellipse cx="1168" cy="210" rx="470" ry="330" fill="url(#glow-accessories)"/>
+  <path d="M92 982C296 896 522 848 778 850C1040 854 1240 910 1508 1048V1112H92V982Z" fill="#D9E0EA"/>
+  <rect x="674" y="448" width="452" height="250" rx="82" fill="url(#cable-body)"/>
+  <rect x="730" y="506" width="340" height="134" rx="42" fill="#687387"/>
+  <rect x="770" y="546" width="104" height="18" rx="9" fill="#AEB8C9"/>
+  <rect x="890" y="546" width="120" height="18" rx="9" fill="#A3ADBF"/>
+  <rect x="814" y="812" width="432" height="122" rx="61" fill="#7A8499"/>
+  <rect x="874" y="848" width="74" height="16" rx="8" fill="#313B4C"/>
+  <rect x="972" y="848" width="92" height="16" rx="8" fill="#354052"/>
+  <rect x="1086" y="848" width="58" height="16" rx="8" fill="#384356"/>
+  <rect x="1162" y="848" width="58" height="16" rx="8" fill="#414C60"/>
+  <path d="M1214 790C1300 734 1362 666 1400 586C1422 540 1434 488 1436 430C1440 340 1418 264 1382 200" stroke="#BDC6D5" stroke-width="22" stroke-linecap="round"/>
+  <path d="M1210 994C1300 1038 1388 1044 1468 1012C1410 1074 1336 1104 1248 1102C1170 1100 1094 1072 1038 1028C1096 1020 1154 1008 1210 994Z" fill="#F3CC47" fill-opacity="0.38"/>
+  <circle cx="424" cy="916" r="22" fill="#F3CC47" fill-opacity="0.92"/>
+</svg>

@@ -10,26 +10,26 @@
 
     <nav aria-label="Mobile" class="mega-mobile-nav">
       <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="true" data-mega-mobile-trigger="shop" aria-controls="mega-mobile-panel-shop">
+        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="shop" aria-controls="mega-mobile-panel-shop">
           <span>Shop</span>
           <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
         </button>
-        <div class="mega-mobile-panel is-open" id="mega-mobile-panel-shop" data-mega-mobile-panel="shop">
+        <div class="mega-mobile-panel" id="mega-mobile-panel-shop" data-mega-mobile-panel="shop" hidden>
           <div class="mega-mobile-stack-links">
-            <a href="{{ routes.collections_url }}/hubs-adapters">Hubs & adapters</a>
-            <a href="{{ routes.collections_url }}/docking-stations">Docking stations</a>
-            <a href="{{ routes.collections_url }}/chargers-power">Power</a>
-            <a href="{{ routes.collections_url }}/accessories">Accessories</a>
+            <a href="{{ routes.all_products_collection_url }}">All products</a>
+            <a href="{{ routes.all_products_collection_url }}?filter.v.availability=1&amp;sort_by=best-selling">Best sellers</a>
+            <a href="/pages/compare">Compare products</a>
+            <a href="/pages/where-to-buy">Where to buy</a>
           </div>
         </div>
       </div>
 
       <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="collections" aria-controls="mega-mobile-panel-collections">
+        <button class="mega-mobile-trigger" type="button" aria-expanded="true" data-mega-mobile-trigger="collections" aria-controls="mega-mobile-panel-collections">
           <span>Product families</span>
           <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
         </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-collections" data-mega-mobile-panel="collections" hidden>
+        <div class="mega-mobile-panel is-open" id="mega-mobile-panel-collections" data-mega-mobile-panel="collections">
           <div class="mega-mobile-stack-links">
             <a href="{{ routes.collections_url }}/hubs-adapters">Hubs & adapters</a>
             <a href="{{ routes.collections_url }}/docking-stations">Docking stations</a>
@@ -72,9 +72,21 @@
       </div>
 
       <div class="mega-mobile-section">
-        <a href="/blogs/resources" class="mega-mobile-trigger mega-mobile-trigger--link">
+        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="resources" aria-controls="mega-mobile-panel-resources">
           <span>Resources</span>
-        </a>
+          <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
+        </button>
+        <div class="mega-mobile-panel" id="mega-mobile-panel-resources" data-mega-mobile-panel="resources" hidden>
+          <div class="mega-mobile-stack-links">
+            <a href="/blogs/resources">Blog &amp; resources</a>
+            <a href="/pages/manuals">Manuals</a>
+            <a href="/pages/downloads">Downloads</a>
+            <a href="/pages/compatibility">Compatibility</a>
+            <a href="/pages/faq">FAQ</a>
+            <a href="/pages/warranty">Warranty</a>
+            <a href="/pages/shipping-returns">Shipping &amp; returns</a>
+          </div>
+        </div>
       </div>
 
       <div class="mega-mobile-section">

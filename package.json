@@ -8,9 +8,10 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:css dev:theme",
     "dev:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --watch",
-    "dev:theme": "shopify theme dev --environment default",
+    "dev:theme": "node scripts/dev/prepare-preview.cjs && shopify theme dev --environment default",
     "build": "npm run build:css",
     "build:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --minify",
+    "qa:routes": "sh scripts/dev/route-qa.sh",
     "check": "shopify theme check",
     "lint": "shopify theme check",
     "push:staging": "npm run build && shopify theme push --unpublished",

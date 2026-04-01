@@ -2,38 +2,120 @@
   <section class="section-shell">
     <div class="container-shell">
       {% render 'breadcrumbs' %}
+      {%- liquid
+        assign intro_copy = section.settings.intro_copy | default: collection.description
+        assign category_label = 'Product family'
+        assign category_statement = 'Choose the EZQuest family that matches your setup, then narrow the right ports, power path, and footprint.'
+        assign category_support_note = 'Use compare and support only when you need a closer fit check.'
+        assign category_stat_one = 'Built for cleaner workflows'
+        assign category_stat_two = 'Engineered to reduce setup friction'
+        assign category_stat_three = 'Support stays close after the buy'
+        assign collection_visual = blank
+        assign lead_product = collection.products.first
 
-      <header class="collection-hero{% unless section.settings.show_collection_image and collection.image != blank %} collection-hero--simple{% endunless %}">
+        if intro_copy == blank
+          case collection.handle
+            when 'hubs-adapters'
+              assign intro_copy = 'USB-C hubs and adapters for everyday expansion, presentations, travel setups, and lighter single-cable upgrades.'
+            when 'docking-stations'
+              assign intro_copy = 'Desk-ready docks that bring displays, charging, Ethernet, and peripherals into one calmer workstation footprint.'
+            when 'chargers-power'
+              assign intro_copy = 'Charging essentials built for cleaner travel kits, lighter desk charging, and reliable everyday power.'
+            when 'accessories'
+              assign intro_copy = 'Charge-and-sync cables and finishing accessories that make the setup feel complete, dependable, and easier to live with.'
+            else
+              assign intro_copy = 'Browse the EZQuest product family that best matches your ports, power, charging, and workflow needs.'
+          endcase
+        endif
+
+        case collection.handle
+          when 'hubs-adapters'
+            assign category_label = 'Hybrid + travel'
+            assign category_statement = 'Hubs and adapters for everyday expansion, portable desks, presentations, and single-display workflows.'
+            assign category_support_note = 'Best for portable desks, presentations, single-display workflows, and everyday expansion.'
+            assign category_stat_one = 'Everyday port expansion'
+            assign category_stat_two = 'Travel-to-desk flexibility'
+            assign category_stat_three = 'Single-cable simplicity'
+          when 'docking-stations'
+            assign category_label = 'Desk command'
+            assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and a calmer workstation footprint.'
+            assign category_support_note = 'Best for users stepping up from smaller hubs into a more stable multi-device desk setup.'
+            assign category_stat_one = 'Permanent desk control'
+            assign category_stat_two = 'Display + Ethernet ready'
+            assign category_stat_three = 'Stronger workstation fit'
+          when 'chargers-power'
+            assign category_label = 'Power layer'
+            assign category_statement = 'Charging products that keep travel kits, home desks, and multi-device routines lighter, faster, and less cluttered.'
+            assign category_support_note = 'Best when the charging path matters before the port count does.'
+            assign category_stat_one = 'Travel and desk charging'
+            assign category_stat_two = 'Less charger clutter'
+            assign category_stat_three = 'Multi-device routines'
+          when 'accessories'
+            assign category_label = 'Finish the setup'
+            assign category_statement = 'Cables and finishing pieces that make the EZQuest setup feel complete, dependable, and easier to live with every day.'
+            assign category_support_note = 'Best for tightening cable paths, replacing weak links, and finishing the workflow cleanly.'
+            assign category_stat_one = 'Cleaner cable paths'
+            assign category_stat_two = 'Reliable daily accessories'
+            assign category_stat_three = 'Finishing-layer utility'
+        endcase
+
+        if section.settings.show_collection_image and collection.image != blank
+          assign collection_visual = collection.image
+        elsif lead_product != blank and lead_product.featured_image != blank
+          assign collection_visual = lead_product.featured_image
+        endif
+      -%}
+
+      <header class="collection-hero{% if collection_visual == blank %} collection-hero--simple{% endif %}">
         <div class="collection-hero-copy">
-          {%- liquid
-            assign intro_copy = section.settings.intro_copy | default: collection.description
-            if intro_copy == blank
-              case collection.handle
-                when 'hubs-adapters'
-                  assign intro_copy = 'USB-C hubs and adapters for everyday port expansion, presentations, travel setups, and single-cable productivity upgrades.'
-                when 'docking-stations'
-                  assign intro_copy = 'Desk-ready docks that simplify displays, charging, Ethernet, and everyday workstation connectivity.'
-                when 'chargers-power'
-                  assign intro_copy = 'Wall chargers and power essentials designed for cleaner travel kits, desktop charging, and reliable everyday use.'
-                when 'accessories'
-                  assign intro_copy = 'Charge-and-sync cables and practical accessories that finish the setup with dependable everyday connectivity.'
-                else
-                  assign intro_copy = 'Browse the EZQuest product family that best matches your ports, power, charging, and workflow needs.'
-              endcase
-            endif
-          -%}
           {% if section.settings.eyebrow != blank %}
             <p class="section-kicker">{{ section.settings.eyebrow }}</p>
           {% endif %}
+          <p class="collection-hero-label">{{ category_label }}</p>
           <h1 class="section-heading">{{ section.settings.intro_heading | default: collection.title }}</h1>
+          <p class="collection-hero-statement">{{ category_statement }}</p>
           {% if intro_copy != blank %}
-            <p class="section-copy">{{ intro_copy | strip_html | truncatewords: 20 }}</p>
+            <p class="section-copy">{{ intro_copy | strip_html | truncatewords: 26 }}</p>
           {% endif %}
+
+          <div class="merch-stat-grid">
+            <div class="merch-stat-card">{{ category_stat_one }}</div>
+            <div class="merch-stat-card">{{ category_stat_two }}</div>
+            <div class="merch-stat-card">{{ category_stat_three }}</div>
+          </div>
+
+          <div class="collection-hero-footer">
+            <p class="collection-hero-note">{{ category_support_note }}</p>
+            <div class="collection-inline-support" aria-label="Collection helpers">
+              <a href="/pages/compare" class="collection-inline-link">Compare nearby options</a>
+              <a href="{{ section.settings.support_url | default: '/pages/support' }}" class="collection-inline-link">Need help choosing the right setup?</a>
+            </div>
+          </div>
         </div>
 
         <div class="collection-hero-side">
-          {% if section.settings.show_collection_image and collection.image != blank %}
-            {{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'collection-hero-image' }}
+          {% if collection_visual != blank %}
+            {{ collection_visual | image_url: width: 900 | image_tag: loading: 'lazy', class: 'collection-hero-image' }}
+          {% else %}
+            {% render 'owned-collection-visual',
+              collection_handle: collection.handle,
+              collection_title: collection.title,
+              width: 1200,
+              height: 900,
+              class: 'collection-hero-image'
+            %}
+          {% endif %}
+          {% if lead_product != blank %}
+            <div class="collection-hero-lead-product">
+              <p class="collection-hero-lead-kicker">Start here</p>
+              <h2 class="collection-hero-lead-title">{{ lead_product.title }}</h2>
+              {% if lead_product.metafields.ezquest.feature_highlights != blank and lead_product.metafields.ezquest.feature_highlights.value.count > 0 %}
+                <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.feature_highlights.value.first }}</p>
+              {% elsif lead_product.metafields.ezquest.compatibility_summary != blank %}
+                <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | truncatewords: 14 }}</p>
+              {% endif %}
+              <a href="{{ lead_product.url }}" class="collection-inline-link">View lead product</a>
+            </div>
           {% endif %}
         </div>
       </header>
@@ -54,16 +136,15 @@
             </form>
           {% endif %}
 
-          <div class="collection-inline-support" aria-label="Collection helpers">
-            <a href="/pages/compare" class="collection-inline-link">Compare nearby options</a>
-            <a href="{{ section.settings.support_url | default: '/pages/support' }}" class="collection-inline-link">Need help choosing the right setup?</a>
-          </div>
+          <p class="collection-toolbar-note">Use compare to narrow setup fit, then move into support only if you still need a closer check.</p>
         </div>
       </div>
 
       <div class="section-stack-lg product-grid">
         {% for product in collection.products %}
-          {% render 'card-product', product: product, card_style: 'featured-strip', card_index: forloop.index0 %}
+          <div class="collection-product-slot{% if forloop.first %} is-lead{% elsif forloop.index == 2 %} is-secondary{% endif %}">
+            {% render 'card-product', product: product, card_style: 'featured-strip', card_index: forloop.index0 %}
+          </div>
         {% else %}
           <div class="panel-primary md:col-span-2 xl:col-span-4">
             <p class="section-kicker">Collection</p>

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "heading": "Choose the product family that fits your workflow.",
+        "copy": "Browse EZQuest collections by setup type, then move into the right family with a clearer idea of the ports, power path, and footprint you need."
+      }
+    }
+  },
+  "order": ["main"]
+}

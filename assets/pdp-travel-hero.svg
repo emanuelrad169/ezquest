@@ -1,0 +1,76 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" rx="44" fill="#F5F8FC"/>
+  <rect width="1600" height="1200" rx="44" fill="url(#bg)"/>
+  <ellipse cx="1160" cy="208" rx="284" ry="196" fill="url(#glow)"/>
+  <ellipse cx="1100" cy="954" rx="486" ry="156" fill="url(#baseGlow)"/>
+  <path d="M786 772C1002 714 1248 736 1490 848V1200H730L786 772Z" fill="url(#plane)"/>
+  <g filter="url(#shadowHub)">
+    <rect x="760" y="516" width="470" height="278" rx="66" fill="url(#body)"/>
+    <rect x="804" y="560" width="382" height="190" rx="44" fill="url(#face)"/>
+    <rect x="856" y="618" width="224" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.3"/>
+    <rect x="856" y="668" width="126" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+    <rect x="998" y="668" width="90" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+    <rect x="1104" y="668" width="38" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+  </g>
+  <g filter="url(#shadowPassport)">
+    <rect x="1088" y="346" width="246" height="164" rx="26" fill="url(#passport)"/>
+    <rect x="1136" y="390" width="150" height="10" rx="5" fill="#FACC15" fill-opacity="0.84"/>
+    <rect x="1136" y="422" width="110" height="10" rx="5" fill="#F8FAFC" fill-opacity="0.22"/>
+  </g>
+  <path d="M1166 794C1236 820 1316 820 1388 792" stroke="url(#cable)" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="792" cy="540" r="9" fill="#FACC15"/>
+  <defs>
+    <linearGradient id="bg" x1="198" y1="100" x2="1402" y2="1124" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F8FC"/>
+      <stop offset="1" stop-color="#D9E3EF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 208) rotate(145.03) scale(356.02 249.073)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="baseGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1100 954) rotate(90) scale(156 486)">
+      <stop stop-color="#FACC15" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plane" x1="804" y1="764" x2="1502" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#95A1B2" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="body" x1="774" y1="524" x2="1212" y2="798" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D4DCE7"/>
+      <stop offset="0.54" stop-color="#8894A7"/>
+      <stop offset="1" stop-color="#4A5669"/>
+    </linearGradient>
+    <linearGradient id="face" x1="804" y1="560" x2="1186" y2="750" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#D6DEE9"/>
+      <stop offset="1" stop-color="#B8C2D1"/>
+    </linearGradient>
+    <linearGradient id="passport" x1="1102" y1="358" x2="1320" y2="510" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CAD4E3"/>
+      <stop offset="1" stop-color="#A9B6C8"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="1166" y1="800" x2="1388" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.24"/>
+    </linearGradient>
+    <filter id="shadowHub" x="714" y="480" width="568" height="374" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-14" dy="22"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowPassport" x="1064" y="326" width="306" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>

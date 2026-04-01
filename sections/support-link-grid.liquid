@@ -26,9 +26,9 @@
       endif
     -%}
 
-    <div class="support-link-grid {{ columns_class }}">
+    <div class="support-link-grid support-link-grid--ownership {{ columns_class }}">
       {% for block in section.blocks %}
-        <article class="support-link-card motion-lift" {{ block.shopify_attributes }}>
+        <article class="support-link-card{% if forloop.first %} support-link-card--featured{% endif %} motion-lift" {{ block.shopify_attributes }}>
           <div class="support-link-card-top">
             <div>
               {% if block.settings.eyebrow != blank %}
@@ -54,7 +54,7 @@
         </article>
       {% else %}
         {% for i in (1..3) %}
-          <article class="support-link-card">
+          <article class="support-link-card{% if forloop.first %} support-link-card--featured{% endif %}">
             <div class="support-link-card-top">
               <div>
                 <p class="section-kicker">Support path</p>

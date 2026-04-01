@@ -5,63 +5,34 @@
       "settings": {
         "eyebrow": "Documentation",
         "heading": "Manuals and setup guides",
-        "copy": "Find quick-start instructions, user guides, and setup notes by product family."
+        "copy": "Find quick-start instructions, user guides, and setup notes by product family.",
+        "support_eyebrow": "Ownership path",
+        "support_note": "Manuals are where setup becomes clearer. Start with the guide that matches your product and stage, then move into troubleshooting or support only when you still need a deeper answer.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
       }
     },
     "resources": {
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Documentation",
-        "heading": "Manuals and setup guidance by product family",
+        "heading": "Manuals and setup guidance, organized for the way people actually install",
         "copy": "Browse setup guides by product family, setup stage, or the kind of answer you need right now.",
         "structured_source": "global",
         "resource_kind": "manuals",
         "resource_limit": 6,
         "show_search": true,
-        "source_note": "Start with the guide that matches your product and setup stage, then move into troubleshooting or contact support only if needed.",
+        "source_note": "Start with the guide that matches your product and setup stage. Move into troubleshooting or direct help only if the next step is still unclear.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
-      },
-      "blocks": {
-        "resource_1": {
-          "type": "resource",
-          "settings": {
-            "meta": "Quick start",
-            "title": "Quick-start guides",
-            "copy": "Start with the essentials: connection steps, first-use setup, and the key product notes most customers need first.",
-            "link_label": "Open guide",
-            "link_url": "#"
-          }
-        },
-        "resource_2": {
-          "type": "resource",
-          "settings": {
-            "meta": "User guide",
-            "title": "Full user guides",
-            "copy": "Review complete documentation, features, and deeper usage guidance for the product or workflow.",
-            "link_label": "Open guide",
-            "link_url": "#"
-          }
-        },
-        "resource_3": {
-          "type": "resource",
-          "settings": {
-            "meta": "Setup note",
-            "title": "Setup notes",
-            "copy": "Open product-specific setup notes and advanced guidance for displays, power delivery, or more complex workflows.",
-            "link_label": "Open guide",
-            "link_url": "#"
-          }
-        }
-      },
-      "block_order": ["resource_1", "resource_2", "resource_3"]
+      }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need product-specific help",
         "heading": "Need another step after the manual?",
-        "copy": "If a guide does not fully resolve the setup, move into troubleshooting, compatibility, or direct support.",
+        "copy": "If a guide does not fully resolve the setup, move into troubleshooting, compatibility, or direct support without losing momentum.",
         "link_label": "Open troubleshooting",
         "link_url": "/pages/troubleshooting",
         "secondary_label": "Contact support",

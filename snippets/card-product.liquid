@@ -1,5 +1,6 @@
 {%- liquid
   assign card_style = card_style | default: 'default'
+  assign image_variant = image_variant | default: 'hero'
   assign featured_card = false
   if card_style == 'featured-strip'
     assign featured_card = true
@@ -9,6 +10,7 @@
   assign trust_cue = 'Support resources available'
   assign product_badge = blank
   assign fit_cue = blank
+  assign support_text = blank
 
   if product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
     assign value_line = product.metafields.ezquest.feature_highlights.value.first
@@ -34,23 +36,18 @@
   endif
 
   if product != blank
-    assign support_text = blank
     if product.metafields.ezquest.compatibility_summary != blank
-      assign support_text = product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | downcase
+      assign support_text = product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | strip
     elsif product.metafields.ezquest.support_summary != blank
-      assign support_text = product.metafields.ezquest.support_summary | metafield_tag | strip_html | downcase
+      assign support_text = product.metafields.ezquest.support_summary | metafield_tag | strip_html | strip
     elsif product.description != blank
-      assign support_text = product.description | strip_html | downcase
+      assign support_text = product.description | strip_html | strip
     endif
 
-    if support_text contains 'mac' and support_text contains 'windows'
-      assign trust_cue = 'Works with Mac + Windows'
-    elsif support_text contains 'macbook' or support_text contains 'ipad' or support_text contains 'thunderbolt'
-      assign trust_cue = 'Built for modern Apple workflows'
-    elsif support_text contains 'plug'
-      assign trust_cue = 'Plug & play setup'
-    elsif support_text contains 'manual' or support_text contains 'download'
-      assign trust_cue = 'Manuals and downloads available'
+    if support_text != blank
+      assign trust_cue = support_text | truncatewords: 6
+    elsif product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 1
+      assign trust_cue = product.metafields.ezquest.feature_highlights.value[1]
     endif
 
     assign product_tags_downcase = product.tags | join: ',' | downcase
@@ -74,9 +71,11 @@
       {% if product != blank and product.featured_image != blank %}
         {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'product-card-image product-card-featured-image aspect-card w-full object-contain' }}
       {% else %}
-        {% render 'placeholder-visual',
+        {% render 'owned-product-visual',
+          product_handle: product.handle,
+          product_title: product.title | default: 'EZQuest Product',
+          variant: image_variant,
           kind: 'product',
-          text: product.title | default: 'EZQuest Product',
           width: 1200,
           height: 900,
           class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
@@ -109,7 +108,7 @@
 
       <div class="product-card-featured-footer">
         <div class="product-card-featured-price">
-          {% render 'price', product: product %}
+          {% render 'price', product: product, show_promo_note: false %}
         </div>
         <span class="product-card-featured-cta">View product</span>
       </div>
@@ -128,9 +127,11 @@
     </div>
   {% else %}
     <div class="product-thumb-card product-card-media">
-      {% render 'placeholder-visual',
+      {% render 'owned-product-visual',
+        product_handle: product.handle,
+        product_title: product.title | default: value_line,
+        variant: image_variant,
         kind: 'product',
-        text: value_line,
         width: 900,
         height: 675,
         class: 'product-card-image aspect-card w-full object-cover'
@@ -138,8 +139,8 @@
     </div>
   {% endif %}
 
-  <div class="product-card-body">
-  <div class="mt-5 flex items-center justify-between gap-3">
+  <div class="product-card-body mt-4 flex flex-1 flex-col">
+  <div class="flex items-center justify-between gap-3">
     {% if product != blank and product.vendor != blank %}
       <p class="section-kicker">{{ product.vendor }}</p>
     {% else %}
@@ -160,9 +161,9 @@
 
   <p class="product-card-value-line mt-3">{{ value_line }}</p>
 
-  <div class="product-card-trust mt-4">{{ trust_cue }}</div>
+  <div class="product-card-trust mt-3">{{ trust_cue }}</div>
 
-  <div class="product-card-footer">
+  <div class="product-card-footer mt-5">
     {% render 'price', product: product %}
     <div class="flex items-center gap-3">
       {% if product != blank %}

@@ -1,13 +1,9 @@
 {%- liquid
   assign group_handle = group_handle | default: 'shop'
+  assign best_sellers_url = routes.all_products_collection_url | append: '?filter.v.availability=1&sort_by=best-selling'
   assign hub_product = all_products['usb-c-multimedia-hub']
   assign dock_product = all_products['usb-c-pro-dock']
   assign travel_product = all_products['usb-c-travel-hub']
-
-  assign hubs_collection = collections['hubs-adapters']
-  assign docks_collection = collections['docking-stations']
-  assign power_collection = collections['chargers-power']
-  assign accessories_collection = collections['accessories']
 
   assign hub_image = blank
   assign dock_image = blank
@@ -36,28 +32,28 @@
     {% when 'shop' %}
       <div class="mega-menu-panel-surface mega-menu-panel-surface--shop">
         <aside class="mega-menu-shop-rail">
-          <p class="mega-menu-side-label">Product families</p>
+          <p class="mega-menu-side-label">Shop</p>
           <div class="mega-menu-shop-link-list">
-            <a href="{{ hubs_collection.url | default: '/collections/hubs-adapters' }}" class="mega-menu-shop-link is-active">
+            <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-link is-active">
               <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'layers' %}</span>
-              <span>Hubs &amp; adapters</span>
+              <span>All products</span>
             </a>
-            <a href="{{ docks_collection.url | default: '/collections/docking-stations' }}" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'monitor' %}</span>
-              <span>Docking stations</span>
+            <a href="{{ best_sellers_url }}" class="mega-menu-shop-link">
+              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'spark' %}</span>
+              <span>Best sellers</span>
             </a>
-            <a href="{{ power_collection.url | default: '/collections/chargers-power' }}" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'bolt' %}</span>
-              <span>Chargers &amp; power</span>
+            <a href="/pages/compare" class="mega-menu-shop-link">
+              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'check' %}</span>
+              <span>Compare products</span>
             </a>
-            <a href="{{ accessories_collection.url | default: '/collections/accessories' }}" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'accessory' %}</span>
-              <span>Cables &amp; accessories</span>
+            <a href="/pages/where-to-buy" class="mega-menu-shop-link">
+              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'tag' %}</span>
+              <span>Where to buy</span>
             </a>
           </div>
 
           <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-view-all">
-            <span>Shop all connectivity</span>
+            <span>Shop all products</span>
             <span class="mega-menu-shop-view-icon">{% render 'icon', name: 'arrow-right' %}</span>
           </a>
         </aside>
@@ -139,6 +135,36 @@
         </a>
       </div>
 
+    {% when 'resources' %}
+      <div class="mega-menu-panel-surface mega-menu-panel-surface--explore mega-menu-panel-surface--resources">
+        <div class="mega-menu-explore-shell">
+          <div class="mega-menu-explore-links">
+            <p class="mega-menu-side-label">Resources</p>
+            <a href="/blogs/resources">Blog &amp; resources</a>
+            <a href="/pages/manuals">Manuals</a>
+            <a href="/pages/downloads">Downloads</a>
+            <a href="/pages/compatibility">Compatibility</a>
+            <a href="/pages/faq">FAQ</a>
+            <a href="/pages/warranty">Warranty</a>
+            <a href="/pages/shipping-returns">Shipping &amp; returns</a>
+          </div>
+
+          <a href="/blogs/resources" class="mega-menu-explore-hero mega-menu-support-hero">
+            {% if hub_image != blank %}
+              {{ hub_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'mega-menu-explore-image' }}
+            {% else %}
+              {% render 'placeholder-visual', kind: 'editorial', text: 'EZQuest Resources', width: 1600, height: 960, class: 'mega-menu-explore-image' %}
+            {% endif %}
+            <div class="mega-menu-compare-overlay"></div>
+            <div class="mega-menu-compare-copy">
+              <p class="mega-menu-side-label mega-menu-side-label--light">Resources</p>
+              <h3>Go straight to setup guides, downloads, and support answers.</h3>
+              <p>Use resources when you already know the question and want the clearest direct path.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
     {% when 'collections' %}
       <div class="mega-menu-panel-surface mega-menu-panel-surface--collections">
         <div class="mega-menu-collections-grid">
@@ -153,7 +179,13 @@
                   {% if collection_image != blank %}
                     {{ collection_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-collection-card-image' }}
                   {% else %}
-                    {% render 'placeholder-visual', kind: 'collection', text: collection_object.title, width: 900, height: 1200, class: 'mega-menu-collection-card-image' %}
+                    {% render 'owned-collection-visual',
+                      collection_handle: collection_object.handle,
+                      collection_title: collection_object.title,
+                      width: 900,
+                      height: 1200,
+                      class: 'mega-menu-collection-card-image'
+                    %}
                   {% endif %}
                 </div>
                 <div class="mega-menu-collection-card-copy">
@@ -182,7 +214,13 @@
               {% if lifestyle_image != blank %}
                 {{ lifestyle_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-collection-card-image' }}
               {% else %}
-                {% render 'placeholder-visual', kind: 'collection', text: all_collection_title, width: 900, height: 1200, class: 'mega-menu-collection-card-image' %}
+                {% render 'owned-collection-visual',
+                  collection_handle: 'hubs-adapters',
+                  collection_title: all_collection_title,
+                  width: 900,
+                  height: 1200,
+                  class: 'mega-menu-collection-card-image'
+                %}
               {% endif %}
             </div>
             <div class="mega-menu-collection-card-overlay"></div>
@@ -266,11 +304,6 @@
 
     {% when 'compare' %}
       <div class="mega-menu-panel-surface mega-menu-panel-surface--compare">
-        <div class="mega-menu-social-rail" aria-label="Social links">
-          <a href="#" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>
-          <a href="#" aria-label="X">{% render 'icon', name: 'x-social' %}</a>
-        </div>
-
         <a href="/pages/compare" class="mega-menu-compare-hero">
           {% if travel_image != blank %}
             {{ travel_image | image_url: width: 1800 | image_tag: loading: 'lazy', class: 'mega-menu-compare-image' }}

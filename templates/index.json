@@ -4,8 +4,8 @@
       "type": "hero-home",
       "settings": {
         "eyebrow": "Premium connectivity",
-        "heading": "USB-C hubs, docks, chargers, and cables built for cleaner Mac, PC, and mobile workflows.",
-        "copy": "Shop EZQuest by the way you work: travel light with a compact hub, build a stronger desk with a dock, or keep everyday charging and cable paths under control.",
+        "heading": "Premium connectivity for cleaner, calmer setups.",
+        "copy": "From compact travel hubs to desk-ready docks, EZQuest gives Mac, PC, and mobile workflows the ports, power, and support they need.",
         "primary_label": "Shop product families",
         "primary_url": "/collections/all",
         "secondary_label": "",
@@ -16,8 +16,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Premium connectivity",
-            "heading": "USB-C hubs, docks, chargers, and cables built for cleaner Mac, PC, and mobile workflows.",
-            "copy": "Shop EZQuest by the way you work: travel light with a compact hub, build a stronger desk with a dock, or keep everyday charging and cable paths under control.",
+            "heading": "Premium connectivity for cleaner, calmer setups.",
+            "copy": "From compact travel hubs to desk-ready docks, EZQuest gives Mac, PC, and mobile workflows the ports, power, and support they need.",
             "primary_label": "Shop product families",
             "primary_url": "/collections/all",
             "secondary_label": "",
@@ -28,8 +28,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Choose by workflow",
-            "heading": "Start with the product family that fits your setup: travel, desk, charging, or everyday accessories.",
-            "copy": "Use product families and comparison tools to narrow the right port mix, power path, display support, and desk footprint before you buy.",
+            "heading": "Choose the family that fits your workflow first.",
+            "copy": "Start with travel, desk, charging, or finishing pieces, then narrow the right mix of ports, power, and footprint.",
             "primary_label": "Browse product families",
             "primary_url": "/collections/all",
             "secondary_label": "",
@@ -40,8 +40,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Support stays close",
-            "heading": "Manuals, downloads, and compatibility stay connected to ownership from day one.",
-            "copy": "Check setup guides, firmware, and compatibility fast before or after checkout.",
+            "heading": "Ownership stays easy because support stays part of the product.",
+            "copy": "Move from compatibility into manuals, downloads, and setup help without losing the thread of what you bought or why.",
             "primary_label": "Open support",
             "primary_url": "/pages/support",
             "secondary_label": "",
@@ -54,8 +54,8 @@
     "categories": {
       "type": "home-collections-strip",
       "settings": {
-        "heading": "Shop by product family",
-        "copy": ""
+        "heading": "Start with the setup you can picture",
+        "copy": "Start with the family that matches your setup, then narrow by footprint, power path, and device mix."
       },
       "blocks": {
         "category_1": {
@@ -88,9 +88,9 @@
     "story": {
       "type": "featured-product-carousel",
       "settings": {
-        "eyebrow": "Featured products",
-        "heading": "Featured products",
-        "copy": "Start with three core EZQuest choices: a travel-ready hub, an everyday multimedia hub, or a desk-ready dock for heavier workstation setups.",
+        "eyebrow": "Best places to start",
+        "heading": "Three strong starting points for travel, everyday desks, and workstation setups",
+        "copy": "Use these core EZQuest picks to orient the lineup fast, then compare the port mix, power path, and support fit that match your workflow.",
         "link_label": "Shop all products",
         "link_url": "/collections/all",
         "collection": "all",
@@ -101,8 +101,8 @@
       "type": "support-card-grid",
       "settings": {
         "eyebrow": "Ownership confidence",
-        "heading": "From compatibility before purchase to manuals after delivery, support stays part of the EZQuest experience.",
-        "copy": "Check fit for Mac, PC, tablets, displays, and charging workflows, then move into downloads, manuals, troubleshooting, or direct help without losing context.",
+        "heading": "Support should feel built in, not bolted on.",
+        "copy": "Move from compatibility before purchase into manuals, downloads, and setup help without losing the thread of what you bought or why.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       },
@@ -114,40 +114,11 @@
       "settings": {
         "heading": "FAQ",
         "copy": "",
-        "structured_source": "blocks",
+        "structured_source": "global",
         "faq_limit": 4
       },
-      "blocks": {
-        "faq_1": {
-          "type": "faq",
-          "settings": {
-            "question": "How do I confirm compatibility before I buy?",
-            "answer": "Start with the compatibility guidance on the product page or compare page, then move into manuals, downloads, or direct support only if your setup needs a closer check."
-          }
-        },
-        "faq_2": {
-          "type": "faq",
-          "settings": {
-            "question": "Where do I find setup guides and manuals?",
-            "answer": "Manuals and downloads stay close to the storefront so you can move from buying into setup without losing context or guessing where the next file lives."
-          }
-        },
-        "faq_3": {
-          "type": "faq",
-          "settings": {
-            "question": "When should I contact support directly?",
-            "answer": "Use support when compatibility, setup, or an order issue still is not clear after checking the product page, manuals, or troubleshooting guidance."
-          }
-        },
-        "faq_4": {
-          "type": "faq",
-          "settings": {
-            "question": "Where can I compare similar products?",
-            "answer": "Use the compare page or the compare section on each product page to spot the right port, power, and workflow fit faster."
-          }
-        }
-      },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"]
+      "blocks": {},
+      "block_order": []
     }
   },
   "order": ["hero", "categories", "story", "support", "faq_home"]

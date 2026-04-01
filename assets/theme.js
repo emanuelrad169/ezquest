@@ -4,6 +4,43 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+function animateSequence(elements, options) {
+  const distance = options.distance || 12;
+  const duration = options.duration || 320;
+  const delayStep = options.delayStep || 40;
+  const baseDelay = options.baseDelay || 0;
+
+  elements.forEach(function (element, index) {
+    if (!element) return;
+    element.animate([
+      { opacity: 0, transform: 'translateY(' + distance + 'px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], {
+      duration: duration,
+      delay: baseDelay + (index * delayStep),
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      fill: 'both'
+    });
+  });
+}
+
+function animateMediaReveal(element, options) {
+  if (!element) return;
+  const scaleFrom = options.scaleFrom || 1.01;
+  const duration = options.duration || 420;
+  const delay = options.delay || 0;
+
+  element.animate([
+    { opacity: 0, transform: 'scale(' + scaleFrom + ')' },
+    { opacity: 1, transform: 'scale(1)' }
+  ], {
+    duration: duration,
+    delay: delay,
+    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    fill: 'both'
+  });
+}
+
 // ─── Header: scroll state ─────────────────────────────────────────────────────
 (function () {
   const header = document.querySelector('.site-header');
@@ -86,36 +123,6 @@ function prefersReducedMotion() {
     const frame = mainImg.closest('.product-gallery-main');
     if (frame) frame.classList.add('is-switching');
 
-    if (window.gsap && !prefersReducedMotion()) {
-      gsap.to(mainImg, {
-        opacity: 0.18,
-        scale: 0.985,
-        duration: 0.16,
-        ease: 'power2.out',
-        onComplete: function () {
-          mainImg.src = nextSrc;
-          if (nextSrcset) {
-            mainImg.srcset = nextSrcset;
-          } else {
-            mainImg.removeAttribute('srcset');
-          }
-          gsap.fromTo(mainImg, {
-            opacity: 0.24,
-            scale: 1.018
-          }, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.3,
-            ease: 'power2.out',
-            onComplete: function () {
-              if (frame) frame.classList.remove('is-switching');
-            }
-          });
-        }
-      });
-      return;
-    }
-
     mainImg.style.transition = 'opacity 160ms ease, transform 220ms ease';
     mainImg.style.opacity = '0.18';
     mainImg.style.transform = 'scale(0.985)';
@@ -169,7 +176,7 @@ function prefersReducedMotion() {
 // ─── GSAP: hero entrance ──────────────────────────────────────────────────────
 (function () {
   function animateHeroSlide(slide, isInitial) {
-    if (!slide || typeof gsap === 'undefined' || prefersReducedMotion()) return;
+    if (!slide || prefersReducedMotion()) return;
 
     const kicker = slide.querySelector('[data-hero-kicker]');
     const heading = slide.querySelector('[data-hero-heading]');
@@ -179,22 +186,32 @@ function prefersReducedMotion() {
     const controls = slide.closest('[data-hero-slider]')?.querySelector('.home-hero-slider-controls');
     const items = [kicker, heading, copy, actions].filter(Boolean);
 
-    gsap.killTweensOf([items, media, controls].flat());
-    gsap.set(items, { opacity: 0, y: isInitial ? 10 : 14 });
-    if (media) gsap.set(media, { opacity: 0, scale: isInitial ? 0.985 : 1.015 });
-    if (controls && isInitial) gsap.set(controls, { opacity: 0, y: 8 });
+    animateMediaReveal(media, {
+      scaleFrom: isInitial ? 0.985 : 1.015,
+      duration: isInitial ? 700 : 460
+    });
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    if (media) tl.to(media, { opacity: 1, scale: 1, duration: isInitial ? 0.7 : 0.46 }, 0);
-    if (kicker) tl.to(kicker, { opacity: 1, y: 0, duration: 0.28 }, isInitial ? 0.08 : 0.05);
-    if (heading) tl.to(heading, { opacity: 1, y: 0, duration: isInitial ? 0.52 : 0.36 }, isInitial ? 0.14 : 0.1);
-    if (copy) tl.to(copy, { opacity: 1, y: 0, duration: 0.34 }, isInitial ? 0.24 : 0.18);
-    if (actions) tl.to(actions, { opacity: 1, y: 0, duration: 0.28 }, isInitial ? 0.32 : 0.25);
-    if (controls && isInitial) tl.to(controls, { opacity: 1, y: 0, duration: 0.32 }, 0.32);
+    animateSequence(items, {
+      distance: isInitial ? 10 : 14,
+      duration: isInitial ? 420 : 320,
+      baseDelay: isInitial ? 80 : 50,
+      delayStep: 55
+    });
+
+    if (controls && isInitial) {
+      controls.animate([
+        { opacity: 0, transform: 'translateY(8px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], {
+        duration: 320,
+        delay: 320,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        fill: 'both'
+      });
+    }
   }
 
   function initHeroEntrance() {
-    if (typeof gsap === 'undefined') return;
     const hero = document.querySelector('[data-hero]');
     if (!hero) return;
     if (prefersReducedMotion()) return;
@@ -236,7 +253,7 @@ function prefersReducedMotion() {
     }
 
     function animateActiveSlide(slide, initial) {
-      if (!slide || reducedMotion || typeof gsap === 'undefined') return;
+      if (!slide || reducedMotion) return;
       const kicker = slide.querySelector('[data-hero-kicker]');
       const heading = slide.querySelector('[data-hero-heading]');
       const copy = slide.querySelector('[data-hero-copy]');
@@ -244,16 +261,17 @@ function prefersReducedMotion() {
       const media = slide.querySelector('[data-hero-media]');
       const items = [kicker, heading, copy, actions].filter(Boolean);
 
-      gsap.killTweensOf(items);
-      gsap.killTweensOf(media);
-      gsap.set(items, { opacity: 0, y: initial ? 10 : 12 });
-      if (media) gsap.set(media, { opacity: 0, scale: initial ? 0.985 : 1.01 });
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      if (media) tl.to(media, { opacity: 1, scale: 1, duration: initial ? 0.62 : 0.42 }, 0);
-      if (kicker) tl.to(kicker, { opacity: 1, y: 0, duration: 0.24 }, initial ? 0.08 : 0.05);
-      if (heading) tl.to(heading, { opacity: 1, y: 0, duration: initial ? 0.46 : 0.34 }, initial ? 0.14 : 0.1);
-      if (copy) tl.to(copy, { opacity: 1, y: 0, duration: 0.28 }, initial ? 0.22 : 0.18);
-      if (actions) tl.to(actions, { opacity: 1, y: 0, duration: 0.24 }, initial ? 0.28 : 0.22);
+      animateMediaReveal(media, {
+        scaleFrom: initial ? 0.985 : 1.01,
+        duration: initial ? 620 : 420
+      });
+
+      animateSequence(items, {
+        distance: initial ? 10 : 12,
+        duration: initial ? 380 : 300,
+        baseDelay: initial ? 80 : 50,
+        delayStep: 45
+      });
     }
 
     function showSlide(nextIndex, initial) {
@@ -673,33 +691,14 @@ document.addEventListener('keydown', function(event) {
     if (link && item.preview.href) link.setAttribute('href', item.preview.href);
     if (cta) cta.textContent = item.preview.cta || 'Explore';
     if (image && item.preview.image) {
-      if (window.gsap && !prefersReducedMotion()) {
-        gsap.to(image, {
-          opacity: 0.14,
-          scale: 0.985,
-          duration: 0.12,
-          ease: 'power2.out',
-          onComplete: function () {
-            image.setAttribute('src', item.preview.image);
-            gsap.to(image, {
-              opacity: 1,
-              scale: 1,
-              duration: 0.24,
-              ease: 'power2.out'
-            });
-          }
-        });
-      } else {
-        image.style.opacity = '0';
-        window.setTimeout(function () {
-          image.setAttribute('src', item.preview.image);
-          image.style.opacity = '1';
-          image.style.transform = 'scale(1.015)';
-          window.setTimeout(function () {
-            image.style.transform = '';
-          }, 180);
-        }, 90);
-      }
+      image.style.transition = 'opacity 140ms ease, transform 200ms ease';
+      image.style.opacity = '0.14';
+      image.style.transform = 'scale(0.985)';
+      window.setTimeout(function () {
+        image.setAttribute('src', item.preview.image);
+        image.style.opacity = '1';
+        image.style.transform = 'scale(1)';
+      }, 90);
     }
 
     this.root.querySelectorAll('[data-mega-group="' + group + '"][data-mega-preview-target]').forEach(function (entry) {

@@ -1,30 +1,102 @@
-<section class="section-shell">
+<section class="section-shell main-product-section">
   <div class="container-shell">
     {% render 'breadcrumbs' %}
     {%- liquid
       assign structured_highlights = blank
       assign has_structured_highlights = false
       assign lead_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+      assign support_summary_text = blank
+      assign compatibility_summary_text = blank
+      assign first_structured_highlight = blank
+      assign product_description_excerpt = blank
+      assign product_positioning_text = blank
+      assign setup_label = 'Everyday setup'
+      assign setup_statement = 'Premium connectivity that makes the setup feel cleaner, calmer, and easier to trust.'
+      assign setup_environment = 'Built for modern-device routines that need clearer expansion without adding clutter.'
+      assign spec_count = 0
+      assign manual_count = 0
+      assign download_count = 0
+      assign use_owned_product_gallery = false
 
       if product.metafields.ezquest.feature_highlights != blank
         assign structured_highlights = product.metafields.ezquest.feature_highlights.value
         if structured_highlights.count > 0
           assign has_structured_highlights = true
+          assign first_structured_highlight = structured_highlights.first
         endif
       endif
+
+      if section.settings.show_support_summary and product.metafields.ezquest.support_summary != blank
+        assign support_summary_text = product.metafields.ezquest.support_summary | metafield_tag | strip_html | strip
+      endif
+
+      if product.metafields.ezquest.compatibility_summary != blank
+        assign compatibility_summary_text = product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | strip
+      endif
+
+      if product.description != blank
+        assign product_description_excerpt = product.description | strip_html | strip
+      endif
+
+      if compatibility_summary_text != blank
+        assign product_positioning_text = compatibility_summary_text
+      elsif support_summary_text != blank
+        assign product_positioning_text = support_summary_text
+      elsif product_description_excerpt != blank
+        assign product_positioning_text = product_description_excerpt | truncatewords: 24
+      endif
+
+      if product.metafields.ezquest.spec_rows != blank
+        assign spec_count = product.metafields.ezquest.spec_rows.value.count
+      endif
+
+      if product.metafields.ezquest.manuals != blank
+        assign manual_count = product.metafields.ezquest.manuals.value.count
+      endif
+
+      if product.metafields.ezquest.downloads != blank
+        assign download_count = product.metafields.ezquest.downloads.value.count
+      endif
+
+      case product.handle
+        when 'usb-c-travel-hub'
+          assign use_owned_product_gallery = true
+          assign setup_label = 'Travel-first setup'
+          assign setup_statement = 'Compact expansion for meetings, hotel desks, classrooms, and lighter mobile workflows.'
+          assign setup_environment = 'Choose it when portability matters more than maximum port count or a permanent desk footprint.'
+        when 'usb-c-pro-dock'
+          assign use_owned_product_gallery = true
+          assign setup_label = 'Desk-first setup'
+          assign setup_statement = 'Broader connectivity for permanent desks that need displays, Ethernet, peripherals, and calmer cable control.'
+          assign setup_environment = 'Built for users stepping up from lighter hubs into a more stable workstation setup.'
+        when 'usb-c-multimedia-hub'
+          assign use_owned_product_gallery = true
+          assign setup_label = 'Balanced everyday setup'
+          assign setup_statement = 'One everyday hub for charging, HDMI, Ethernet, storage access, and hybrid desk routines.'
+          assign setup_environment = 'Choose it when one compact adapter should cover the daily desk.'
+      endcase
     -%}
 
     <div class="product-layout mt-6">
       <div class="product-gallery">
-        <div class="product-gallery-stage">
+        <div class="product-gallery-stage product-gallery-stage-shell">
+          <div class="product-gallery-stage-note">
+            <span class="product-gallery-stage-label">{{ setup_label }}</span>
+            <p class="product-gallery-stage-copy">{{ setup_environment }}</p>
+          </div>
+
           <div class="product-gallery-main">
-          {% if lead_media != blank %}
-            {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
-          {% elsif product.featured_image != blank %}
-            {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
-          {% else %}
-            {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
-          {% endif %}
+            {% if lead_media != blank %}
+              {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
+            {% elsif product.featured_image != blank %}
+              {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
+            {% elsif use_owned_product_gallery %}
+              <div class="hero-media-frame p-2 lg:p-3">
+                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover' %}
+              </div>
+            {% else %}
+              {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+            {% endif %}
           </div>
 
           {% if product.media.size > 1 %}
@@ -36,6 +108,18 @@
                   </div>
                 {% endunless %}
               {% endfor %}
+            </div>
+          {% elsif use_owned_product_gallery %}
+            <div class="product-gallery-grid mt-5">
+              <div class="product-thumb-card">
+                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 800, height: 600, class: 'aspect-card w-full object-cover' %}
+              </div>
+              <div class="product-thumb-card">
+                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'ports', width: 800, height: 600, class: 'aspect-card w-full object-cover' %}
+              </div>
+              <div class="product-thumb-card">
+                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'setup', width: 800, height: 600, class: 'aspect-card w-full object-cover' %}
+              </div>
             </div>
           {% endif %}
         </div>
@@ -58,16 +142,54 @@
               {% endif %}
             </div>
 
-            <h1 class="section-heading mt-4">{{ product.title }}</h1>
+            <div class="product-buybox-lead">
+              <p class="product-buybox-setup-label">{{ setup_label }}</p>
+              <h1 class="section-heading mt-3">{{ product.title }}</h1>
+              <p class="product-buybox-setup-statement">{{ setup_statement }}</p>
+            </div>
 
-            <div class="product-buybox-price">
-              <div>
-                {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
+            <div class="product-buybox-price-row">
+              <div class="product-buybox-price">
+                <div>
+                  {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
+                </div>
               </div>
+              {% if product_positioning_text != blank %}
+                <p class="product-buybox-positioning">{{ product_positioning_text }}</p>
+              {% endif %}
+            </div>
+
+            <div class="product-buybox-signal-grid">
+              <div class="product-buybox-signal">
+                <p class="product-buybox-signal-label">Setup fit</p>
+                <p class="product-buybox-signal-value">{{ setup_label }}</p>
+              </div>
+              {% if spec_count > 0 %}
+                <div class="product-buybox-signal">
+                  <p class="product-buybox-signal-label">Technical fit</p>
+                  <p class="product-buybox-signal-value">{{ spec_count }} key spec{% if spec_count != 1 %}s{% endif %}</p>
+                </div>
+              {% endif %}
+              {% if manual_count > 0 or download_count > 0 %}
+                <div class="product-buybox-signal">
+                  <p class="product-buybox-signal-label">Ownership path</p>
+                  <p class="product-buybox-signal-value">
+                    {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
+                    {% if manual_count > 0 and download_count > 0 %} + {% endif %}
+                    {% if download_count > 0 %}{{ download_count }} download{% if download_count != 1 %}s{% endif %}{% endif %}
+                  </p>
+                </div>
+              {% endif %}
             </div>
 
             <div class="product-buybox-confidence">
-              Check compatibility, manuals, and downloads before you order if your Mac, PC, tablet, display, or charging setup needs a closer fit check.
+              <div>
+                {% if support_summary_text != blank %}
+                  {{ support_summary_text }}
+                {% else %}
+                  Check compatibility, manuals, and downloads before you order if your Mac, PC, tablet, display, or charging setup needs a closer fit check.
+                {% endif %}
+              </div>
             </div>
           </div>
 
@@ -103,7 +225,7 @@
               </div>
 
               <div class="product-form-meta">
-                <a href="/pages/compare" class="hero-secondary-action">Compare nearby EZQuest options</a>
+              <a href="/pages/compare" class="hero-secondary-action">See which EZQuest setup fits better</a>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -116,16 +238,34 @@
 
           <div class="product-assurance-grid">
             <div class="product-confidence-item">
-              <p class="section-kicker">Compatibility</p>
-              <p class="mt-2">Works with Mac + Windows</p>
+              <p class="section-kicker">Setup fit</p>
+              <p class="mt-2">
+                {% if compatibility_summary_text != blank %}
+                  {{ compatibility_summary_text | truncatewords: 14 }}
+                {% else %}
+                  Works with Mac + Windows
+                {% endif %}
+              </p>
             </div>
             <div class="product-confidence-item">
-              <p class="section-kicker">Setup</p>
-              <p class="mt-2">Plug & play setup</p>
+              <p class="section-kicker">Why choose it</p>
+              <p class="mt-2">
+                {% if first_structured_highlight != blank %}
+                  {{ first_structured_highlight }}
+                {% else %}
+                  Plug &amp; play setup
+                {% endif %}
+              </p>
             </div>
             <div class="product-confidence-item">
-              <p class="section-kicker">Support</p>
-              <p class="mt-2">Manuals, downloads, and setup help available</p>
+              <p class="section-kicker">Ownership</p>
+              <p class="mt-2">
+                {% if support_summary_text != blank %}
+                  {{ support_summary_text | truncatewords: 14 }}
+                {% else %}
+                  Manuals, downloads, and setup help available
+                {% endif %}
+              </p>
             </div>
           </div>
 
@@ -145,7 +285,8 @@
                   {% for highlight in structured_highlights limit: section.settings.highlight_limit %}
                     {% if rendered_highlights < 3 %}
                       <div class="product-highlight-card">
-                        <div class="text-sm font-semibold leading-6 text-slate-950">{{ highlight }}</div>
+                        <p class="product-highlight-index">0{{ forloop.index }}</p>
+                        <div class="product-highlight-copy">{{ highlight }}</div>
                       </div>
                       {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
                     {% endif %}
@@ -154,7 +295,8 @@
                   {% for block in section.blocks %}
                     {% if rendered_highlights < 3 %}
                       <div class="product-highlight-card" {{ block.shopify_attributes }}>
-                        <div class="text-sm font-semibold leading-6 text-slate-950">{{ block.settings.title }}</div>
+                        <p class="product-highlight-index">0{{ rendered_highlights | plus: 1 }}</p>
+                        <div class="product-highlight-copy">{{ block.settings.title }}</div>
                       </div>
                       {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
                     {% endif %}

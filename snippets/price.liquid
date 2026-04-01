@@ -1,21 +1,11 @@
 {%- liquid
   assign current_variant = variant | default: product.selected_or_first_available_variant
   assign current_price = current_variant.price | default: product.price
-  assign compare_price = current_variant.compare_at_price
 -%}
 <div class="price-block space-y-1">
   <div class="flex flex-wrap items-end gap-3">
-    {% if product != blank and product.price_varies %}
-      <span class="text-caption font-semibold uppercase tracking-wider text-slate-500">From</span>
-    {% endif %}
     <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950">
       {{ current_price | money }}
     </span>
-    {% if compare_price > current_price %}
-      <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-label text-slate-500 line-through">{{ compare_price | money }}</span>
-    {% endif %}
   </div>
-  {% if compare_price > current_price %}
-    <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Promotional pricing available while this offer is active.</p>
-  {% endif %}
 </div>

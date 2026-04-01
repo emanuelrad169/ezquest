@@ -1,5 +1,20 @@
 {%- liquid
   assign account_url = routes.account_url | default: '/account'
+  assign support_url = section.settings.support_url | default: '/pages/support'
+  assign support_label = section.settings.support_label | default: 'Support'
+  assign support_phone_label = section.settings.support_phone_label | default: support_label
+  assign support_phone = section.settings.support_phone | strip
+
+  assign support_href = support_url
+  assign support_aria_label = 'Support center'
+  assign support_has_phone = false
+
+  if support_phone != blank
+    assign support_href = support_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' | replace: '.', ''
+    assign support_href = 'tel:' | append: support_href
+    assign support_aria_label = support_phone_label | append: ' ' | append: support_phone
+    assign support_has_phone = true
+  endif
 -%}
 <header class="site-header" role="banner">
   <div class="site-header-inner">
@@ -16,17 +31,31 @@
           </span>
         </a>
 
-        <a href="/pages/support" class="site-header-support-surface hidden lg:flex" aria-label="Customer support">
+        <a href="{{ support_href }}" class="site-header-support-surface hidden lg:flex" aria-label="{{ support_aria_label }}">
           <span class="site-header-support-icon">
             {% render 'icon', name: 'support' %}
           </span>
           <span class="site-header-support-copy">
-            <span class="site-header-support-label">Customer support</span>
-            <strong class="site-header-support-value">1-800-123-45-67</strong>
+            <span class="site-header-support-label">
+              {% if support_has_phone %}
+                {{ support_phone_label }}
+              {% else %}
+                {{ support_label }}
+              {% endif %}
+            </span>
+            <strong class="site-header-support-value">
+              {% if support_has_phone %}
+                {{ support_phone }}
+              {% else %}
+                Contact support
+              {% endif %}
+            </strong>
           </span>
-          <span class="site-header-support-caret">
-            {% render 'icon', name: 'chevron-down' %}
-          </span>
+          {% unless support_has_phone %}
+            <span class="site-header-support-caret">
+              {% render 'icon', name: 'chevron-down' %}
+            </span>
+          {% endunless %}
         </a>
 
         <div class="site-header-actions">

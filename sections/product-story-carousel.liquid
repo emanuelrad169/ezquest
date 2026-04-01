@@ -1,4 +1,4 @@
-<section class="section-shell surface-muted">
+<section class="section-shell surface-muted product-story-section">
   <div class="container-shell">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Product details that matter in real setups'
@@ -6,6 +6,12 @@
       assign structured_highlights = blank
       assign has_structured_highlights = false
       assign use_structured_highlights = false
+      assign support_summary_text = blank
+      assign compatibility_summary_text = blank
+      assign setup_label = 'Everyday setup'
+      assign story_note_one = 'A closer look at why this matters in the setup.'
+      assign story_note_two = 'How the product keeps the workflow simpler once it is on the desk or in the bag.'
+      assign story_note_three = 'What this means for ownership confidence after the purchase.'
 
       if product != blank and product.metafields.ezquest.feature_highlights != blank
         assign structured_highlights = product.metafields.ezquest.feature_highlights.value
@@ -13,6 +19,32 @@
           assign has_structured_highlights = true
         endif
       endif
+
+      if product != blank and product.metafields.ezquest.support_summary != blank
+        assign support_summary_text = product.metafields.ezquest.support_summary | metafield_tag | strip_html | strip
+      endif
+
+      if product != blank and product.metafields.ezquest.compatibility_summary != blank
+        assign compatibility_summary_text = product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | strip
+      endif
+
+      case product.handle
+        when 'usb-c-travel-hub'
+          assign setup_label = 'Travel-first setup'
+          assign story_note_one = 'Built for presentations, hotel desks, classrooms, and everyday carry where lighter expansion matters.'
+          assign story_note_two = 'Keeps HDMI, charging, and core ports close without turning the mobile setup into a cable project.'
+          assign story_note_three = 'Support stays nearby when you need compatibility, downloads, or quick setup guidance on the move.'
+        when 'usb-c-pro-dock'
+          assign setup_label = 'Desk-first setup'
+          assign story_note_one = 'Designed for permanent desks that need more peripherals, stronger display support, and calmer cable control.'
+          assign story_note_two = 'Makes the step up from smaller hubs feel clear when the setup has become more workstation-like.'
+          assign story_note_three = 'Keeps longer-term ownership easier with manuals, downloads, and support attached to the product.'
+        when 'usb-c-multimedia-hub'
+          assign setup_label = 'Balanced everyday setup'
+          assign story_note_one = 'Built for everyday desks that want HDMI, charging, Ethernet, and accessory access in one adapter.'
+          assign story_note_two = 'Gives hybrid work setups a cleaner center of gravity without demanding a full dock footprint.'
+          assign story_note_three = 'Keeps support and compatibility close when the desk needs one dependable everyday hub.'
+      endcase
 
       if section.settings.structured_source == 'product' and has_structured_highlights
         assign use_structured_highlights = true
@@ -39,31 +71,56 @@
     <div class="scroll-snap-row mt-10">
       {% if use_structured_highlights %}
         {% for highlight in structured_highlights limit: section.settings.structured_limit %}
+          {%- liquid
+            assign story_support_copy = story_note_one
+            assign story_visual_variant = 'hero'
+            if forloop.index == 2
+              assign story_visual_variant = 'ports'
+              if compatibility_summary_text != blank
+                assign story_support_copy = compatibility_summary_text
+              else
+                assign story_support_copy = story_note_two
+              endif
+            elsif forloop.index == 3
+              assign story_visual_variant = 'setup'
+              if support_summary_text != blank
+                assign story_support_copy = support_summary_text
+              else
+                assign story_support_copy = story_note_three
+              endif
+            endif
+          -%}
           <article class="compare-card scroll-snap-item">
-            {% render 'placeholder-visual', kind: 'story', text: highlight, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+            {% render 'owned-product-visual', product_handle: product.handle, product_title: highlight, variant: story_visual_variant, kind: 'story', width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
             <div class="mt-5 flex items-center justify-between gap-4">
-              <p class="section-kicker">{{ section.settings.structured_eyebrow }}</p>
+              <p class="section-kicker">{{ setup_label }}</p>
               {% if section.settings.show_sequence %}
                 <span class="text-sm font-medium text-slate-400">{{ forloop.index | prepend: '0' }}</span>
               {% endif %}
             </div>
             <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ highlight }}</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600">This panel highlights a core feature customers can quickly connect to a real desk, travel, or charging workflow.</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">{{ story_support_copy }}</p>
           </article>
         {% endfor %}
       {% elsif section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {%- liquid
             assign story_eyebrow = block.settings.eyebrow
+            assign story_visual_variant = 'hero'
             if story_eyebrow == blank and section.settings.show_sequence
               assign story_eyebrow = 'Feature'
+            endif
+            if forloop.index == 2
+              assign story_visual_variant = 'ports'
+            elsif forloop.index == 3
+              assign story_visual_variant = 'setup'
             endif
           -%}
           <article class="compare-card scroll-snap-item" {{ block.shopify_attributes }}>
             {% if block.settings.image != blank %}
               {% render 'media', image: block.settings.image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2', object_fit: 'object-contain' %}
             {% else %}
-              {% render 'placeholder-visual', kind: 'story', text: block.settings.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+              {% render 'owned-product-visual', product_handle: product.handle, product_title: block.settings.title, variant: story_visual_variant, kind: 'story', width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
             {% endif %}
             <div class="mt-5 flex items-center justify-between gap-4">
               {% if story_eyebrow != blank %}
@@ -89,17 +146,20 @@
           {%- liquid
             assign fallback_title = 'Designed for cleaner desk setups'
             assign fallback_copy = 'Use this space to highlight the one product benefit that matters most after the purchase decision.'
+            assign story_visual_variant = 'hero'
 
             if forloop.index == 2
               assign fallback_title = 'Ports, power, and display in one step'
               assign fallback_copy = 'Show how the product reduces cable sprawl while keeping charging, display, and device expansion clear.'
+              assign story_visual_variant = 'ports'
             elsif forloop.index == 3
               assign fallback_title = 'Support stays close after purchase'
               assign fallback_copy = 'Reinforce that manuals, downloads, and compatibility help remain close once the product arrives.'
+              assign story_visual_variant = 'setup'
             endif
           -%}
           <article class="compare-card scroll-snap-item">
-            {% render 'placeholder-visual', kind: 'story', text: fallback_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+            {% render 'owned-product-visual', product_handle: product.handle, product_title: fallback_title, variant: story_visual_variant, kind: 'story', width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
             <div class="mt-5 flex items-center justify-between gap-4">
               <p class="section-kicker">Feature</p>
               {% if section.settings.show_sequence %}

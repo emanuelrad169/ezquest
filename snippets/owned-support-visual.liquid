@@ -1,0 +1,45 @@
+{%- liquid
+  assign resolved_context = context | default: page.handle | default: 'support'
+  assign resolved_width = width | default: 1440
+  assign resolved_height = height | default: 1080
+  assign resolved_class = class | default: ''
+  assign visual_asset = blank
+  assign visual_label = alt | default: 'EZQuest support visual'
+
+  case resolved_context
+    when 'support'
+      assign visual_asset = 'support-hub.svg'
+      assign visual_label = alt | default: 'EZQuest ownership support hub'
+    when 'downloads'
+      assign visual_asset = 'support-downloads.svg'
+      assign visual_label = alt | default: 'EZQuest downloads and firmware support'
+    when 'manuals'
+      assign visual_asset = 'support-manuals.svg'
+      assign visual_label = alt | default: 'EZQuest manuals and setup guidance'
+    when 'compatibility'
+      assign visual_asset = 'support-compatibility.svg'
+      assign visual_label = alt | default: 'EZQuest compatibility guidance'
+    when 'faq'
+      assign visual_asset = 'support-faq.svg'
+      assign visual_label = alt | default: 'EZQuest FAQ and support guidance'
+  endcase
+-%}
+{% if visual_asset != blank %}
+  <img
+    src="{{ visual_asset | asset_url }}"
+    alt="{{ visual_label | escape }}"
+    class="{{ resolved_class }}"
+    width="{{ resolved_width }}"
+    height="{{ resolved_height }}"
+    loading="lazy"
+    decoding="async"
+  >
+{% else %}
+  {% render 'placeholder-visual',
+    kind: 'support',
+    text: visual_label,
+    width: resolved_width,
+    height: resolved_height,
+    class: resolved_class
+  %}
+{% endif %}

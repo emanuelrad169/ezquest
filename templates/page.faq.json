@@ -7,7 +7,7 @@
         "heading": "Common questions, answered clearly",
         "copy": "Start here for the questions customers ask most often before moving into troubleshooting or direct support.",
         "support_eyebrow": "FAQ guidance",
-        "support_note": "Come here for the broad answers customers need before they commit, set up, or escalate."
+        "support_note": "Come here for the broad answers customers need before they commit, set up, or escalate. When a question becomes product-specific, the next support path stays close."
       }
     },
     "faq": {
@@ -23,7 +23,7 @@
       "type": "support-link-grid",
       "settings": {
         "eyebrow": "Need another path",
-        "heading": "Move into support resources when the FAQ is not enough",
+        "heading": "Move into the next ownership path when the FAQ is not enough",
         "copy": "Keep the next step close when an answer leads into setup, compatibility, downloads, or direct support.",
         "columns_desktop": 3
       },

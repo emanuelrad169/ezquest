@@ -5,56 +5,27 @@
       "settings": {
         "eyebrow": "Support resources",
         "heading": "Drivers, firmware, and utilities",
-        "copy": "Find the files you need by product, platform, or the task you are trying to complete."
+        "copy": "Find the files you need by product, platform, or task.",
+        "support_eyebrow": "Ownership path",
+        "support_note": "Use downloads when the next step is software, firmware, or a utility tied to the product you already own. Move deeper into support only if you still need guidance.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
       }
     },
     "resources": {
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Resources",
-        "heading": "Downloadable resources by product or task",
+        "heading": "Downloadable resources, organized by real next step",
         "copy": "Browse updates, drivers, and utilities by product family, platform, or support task without digging through an unstructured file list.",
         "structured_source": "global",
         "resource_kind": "downloads",
         "resource_limit": 6,
         "show_search": true,
-        "source_note": "Choose the file that matches your product and platform, then move into compatibility or contact support only if you still need help.",
+        "source_note": "Choose the file that matches your product and platform first. Move into compatibility or direct help only if the next step is still unclear.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
-      },
-      "blocks": {
-        "resource_1": {
-          "type": "resource",
-          "settings": {
-            "meta": "Firmware",
-            "title": "Firmware updates",
-            "copy": "Open firmware files with supported products, platform notes, and version guidance clearly listed.",
-            "link_label": "Open resource",
-            "link_url": "#"
-          }
-        },
-        "resource_2": {
-          "type": "resource",
-          "settings": {
-            "meta": "Driver",
-            "title": "Platform drivers",
-            "copy": "Download platform-specific drivers with release notes, install guidance, and supported product details in one place.",
-            "link_label": "Open resource",
-            "link_url": "#"
-          }
-        },
-        "resource_3": {
-          "type": "resource",
-          "settings": {
-            "meta": "Utility",
-            "title": "Updater and helper tools",
-            "copy": "Access companion tools, updater apps, and support utilities tied to EZQuest products and setup workflows.",
-            "link_label": "Open resource",
-            "link_url": "#"
-          }
-        }
-      },
-      "block_order": ["resource_1", "resource_2", "resource_3"]
+      }
     },
     "cta": {
       "type": "cta-banner",

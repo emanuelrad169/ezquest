@@ -1,0 +1,38 @@
+{%- liquid
+  assign resolved_handle = collection_handle | default: collection.handle
+  assign resolved_title = collection_title | default: collection.title | default: 'EZQuest collection'
+  assign resolved_width = width | default: 1600
+  assign resolved_height = height | default: 1200
+  assign resolved_class = class | default: ''
+  assign visual_asset = blank
+
+  case resolved_handle
+    when 'hubs-adapters'
+      assign visual_asset = 'collection-hubs-adapters.svg'
+    when 'docking-stations'
+      assign visual_asset = 'collection-docking-stations.svg'
+    when 'chargers-power'
+      assign visual_asset = 'collection-chargers-power.svg'
+    when 'accessories'
+      assign visual_asset = 'collection-accessories.svg'
+  endcase
+-%}
+{% if visual_asset != blank %}
+  <img
+    src="{{ visual_asset | asset_url }}"
+    alt="{{ alt | default: resolved_title | escape }}"
+    class="{{ resolved_class }}"
+    width="{{ resolved_width }}"
+    height="{{ resolved_height }}"
+    loading="lazy"
+    decoding="async"
+  >
+{% else %}
+  {% render 'placeholder-visual',
+    kind: 'collection',
+    text: resolved_title,
+    width: resolved_width,
+    height: resolved_height,
+    class: resolved_class
+  %}
+{% endif %}

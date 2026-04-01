@@ -5,6 +5,7 @@
         <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        <p class="support-aside-meta">{{ section.blocks.size }} ownership paths, one clear next step</p>
 
         {% if section.settings.show_search %}
           <div class="mt-8">
@@ -26,7 +27,7 @@
         </div>
       </div>
 
-      <div class="grid gap-4 sm:grid-cols-2">
+      <div class="support-nav-cards">
         {% for block in section.blocks %}
           {%- liquid
             assign block_eyebrow = block.settings.eyebrow
@@ -34,15 +35,15 @@
               assign block_eyebrow = forloop.index | prepend: '0'
             endif
           -%}
-          <article class="support-tile motion-lift" {{ block.shopify_attributes }}>
+          <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %} motion-lift" {{ block.shopify_attributes }}>
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
-              <span class="text-xs uppercase tracking-wide text-slate-300">Start here</span>
+              <span class="support-tile-badge">{% if forloop.first %}Begin here{% else %}Next path{% endif %}</span>
             </div>
             <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support path' }}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
             <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-              <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Best when this is the clearest next task</p>
+              <p class="support-tile-note">{% if forloop.first %}Best when you know the exact task in front of you{% else %}Best when this is the clearest next step{% endif %}</p>
               {% if block.settings.link_url != blank %}
                 {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
               {% endif %}
@@ -50,10 +51,10 @@
           </article>
         {% else %}
           {% for i in (1..4) %}
-            <article class="support-tile">
+            <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %}">
               <div class="flex items-center justify-between gap-4">
                 <p class="section-kicker">{{ i | prepend: '0' }}</p>
-                <span class="text-xs uppercase tracking-wide text-slate-300">Support path</span>
+                <span class="support-tile-badge">{% if forloop.first %}Begin here{% else %}Support path{% endif %}</span>
               </div>
               <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
                 {% if forloop.index == 1 %}

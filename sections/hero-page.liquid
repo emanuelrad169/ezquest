@@ -1,25 +1,81 @@
 <section class="section-shell pt-8 lg:pt-10">
   <div class="container-shell">
+    {%- liquid
+      assign structured_group = blank
+      assign support_page_context = false
+      assign hero_eyebrow = section.settings.eyebrow
+      assign hero_heading = section.settings.heading | default: page.title | default: blog.title | default: article.title
+      assign hero_copy = section.settings.copy
+      assign hero_support_eyebrow = section.settings.support_eyebrow
+      assign hero_support_note = section.settings.support_note
+
+      if request.page_type == 'page' and page != blank
+        case page.handle
+          when 'support', 'downloads', 'manuals', 'compatibility', 'faq'
+            assign support_page_context = true
+        endcase
+      endif
+
+      if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
+        assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
+      endif
+
+      if structured_group != blank
+        if structured_group.eyebrow != blank and structured_group.eyebrow.value != blank
+          assign hero_eyebrow = structured_group.eyebrow.value
+        endif
+        if structured_group.heading != blank and structured_group.heading.value != blank
+          assign hero_heading = structured_group.heading.value
+        endif
+        if structured_group.description != blank and structured_group.description.value != blank
+          assign hero_copy = structured_group.description.value
+        endif
+        if structured_group.support_note != blank and structured_group.support_note.value != blank
+          assign hero_support_note = structured_group.support_note.value
+        endif
+      endif
+    -%}
     {% render 'breadcrumbs' %}
-    <div class="hero-surface mt-6">
+    <div class="hero-surface{% if support_page_context %} hero-surface--support{% endif %} mt-6">
       <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
         <div class="max-w-3xl">
-          {% if section.settings.eyebrow != blank %}
-            <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+          {% if hero_eyebrow != blank %}
+            <p class="section-kicker">{{ hero_eyebrow }}</p>
           {% endif %}
-          <h1 class="section-heading mt-5">{{ section.settings.heading | default: page.title | default: blog.title | default: article.title }}</h1>
-          {% if section.settings.copy != blank %}
-            <p class="section-copy mt-5">{{ section.settings.copy }}</p>
+          <h1 class="section-heading mt-5">{{ hero_heading }}</h1>
+          {% if hero_copy != blank %}
+            <p class="section-copy mt-5">{{ hero_copy }}</p>
+          {% endif %}
+          {% if support_page_context %}
+            <div class="support-hero-paths">
+              <a href="/pages/support" class="support-hero-path{% if page.handle == 'support' %} is-active{% endif %}">Support hub</a>
+              <a href="/pages/downloads" class="support-hero-path{% if page.handle == 'downloads' %} is-active{% endif %}">Downloads</a>
+              <a href="/pages/manuals" class="support-hero-path{% if page.handle == 'manuals' %} is-active{% endif %}">Manuals</a>
+              <a href="/pages/compatibility" class="support-hero-path{% if page.handle == 'compatibility' %} is-active{% endif %}">Compatibility</a>
+              <a href="/pages/faq" class="support-hero-path{% if page.handle == 'faq' %} is-active{% endif %}">FAQ</a>
+            </div>
           {% endif %}
         </div>
 
-        {% if section.settings.support_note != blank or section.settings.link_label != blank %}
-          <div class="hero-panel">
-            {% if section.settings.support_eyebrow != blank %}
-              <p class="section-kicker">{{ section.settings.support_eyebrow }}</p>
+        {% if hero_support_note != blank or section.settings.link_label != blank %}
+          <div class="hero-panel{% if support_page_context %} hero-panel--support{% endif %}">
+            {% if support_page_context %}
+              <div class="support-hero-visual-frame">
+                {% render 'owned-support-visual', context: page.handle, alt: hero_heading, class: 'support-hero-visual' %}
+              </div>
             {% endif %}
-            {% if section.settings.support_note != blank %}
-              <p class="mt-4 text-sm leading-7 text-slate-600">{{ section.settings.support_note }}</p>
+            {% if hero_support_eyebrow != blank %}
+              <p class="section-kicker">{{ hero_support_eyebrow }}</p>
+            {% endif %}
+            {% if hero_support_note != blank %}
+              <p class="mt-4 text-sm leading-7 text-slate-600">{{ hero_support_note }}</p>
+            {% endif %}
+            {% if support_page_context %}
+              <ul class="support-hero-signals">
+                <li>Structured resources stay tied to the right product and setup path.</li>
+                <li>Compatibility, manuals, downloads, and FAQ stay connected as one ownership system.</li>
+                <li>Escalation stays nearby when self-service is no longer enough.</li>
+              </ul>
             {% endif %}
             {% if section.settings.link_label != blank and section.settings.link_url != blank %}
               <div class="mt-6">
@@ -37,6 +93,17 @@
 {
   "name": "Page hero",
   "settings": [
+    {
+      "type": "select",
+      "id": "structured_source",
+      "label": "Structured source",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "group_handle", "label": "Comparison group handle" }
+      ]
+    },
+    { "type": "text", "id": "comparison_group_handle", "label": "Comparison group handle" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading override" },
     { "type": "textarea", "id": "copy", "label": "Copy" },

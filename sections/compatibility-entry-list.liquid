@@ -6,9 +6,14 @@
       assign has_product_entries = false
       assign use_product_entries = false
       assign use_global_entries = false
+      assign support_page_context = false
       assign platform_filter = section.settings.platform_filter | downcase | strip
       assign device_filter = section.settings.device_filter | downcase | strip
       assign workflow_filter = section.settings.workflow_filter | downcase | strip
+
+      if request.page_type == 'page' and page != blank and page.handle == 'compatibility'
+        assign support_page_context = true
+      endif
 
       if product != blank
         assign current_product = product
@@ -39,14 +44,17 @@
       endcase
     -%}
 
-    <div class="resource-list-shell compatibility-shell">
-      <div class="resource-list-intro compatibility-intro">
+    <div class="resource-list-shell resource-list-shell--support compatibility-shell{% if support_page_context %} compatibility-shell--support{% endif %}">
+      <div class="resource-list-intro resource-list-intro--support compatibility-intro">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         {% if section.settings.copy != blank %}
           <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        {% endif %}
+        {% if section.settings.source_note != blank %}
+          <div class="support-utility-note mt-6">{{ section.settings.source_note }}</div>
         {% endif %}
         <div class="compatibility-next-steps">
           <a href="/pages/manuals" class="site-meta-link">Manuals</a>
@@ -150,7 +158,7 @@
           -%}
 
           {% if matches_platform and matches_device and matches_workflow and rendered_entries < section.settings.entry_limit %}
-            <article class="compatibility-card">
+            <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 {% if entry_status != blank %}
                   <p class="section-kicker">{{ entry_status }}</p>
@@ -182,25 +190,11 @@
         {% endfor %}
 
         {% if rendered_entries == 0 %}
-          {% for i in (1..3) %}
-            {%- liquid
-              assign fallback_title = 'MacBook Pro multi-display fit'
-              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
-
-              if forloop.index == 2
-                assign fallback_title = 'Windows workstation setup check'
-                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
-              elsif forloop.index == 3
-                assign fallback_title = 'Conference-room connection path'
-                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
-              endif
-            -%}
-            <article class="compatibility-card">
-              <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
-            </article>
-          {% endfor %}
+          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+            <p class="section-kicker">Compatibility</p>
+            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current product, collection, or filter set.</p>
+          </article>
         {% endif %}
       {% elsif use_global_entries %}
         {%- assign rendered_entries = 0 -%}
@@ -322,7 +316,7 @@
           -%}
 
           {% if matches_platform and matches_device and matches_workflow and matches_collection and matches_product and rendered_entries < section.settings.entry_limit %}
-            <article class="compatibility-card">
+            <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 {% if entry_status != blank %}
                   <p class="section-kicker">{{ entry_status }}</p>
@@ -354,29 +348,15 @@
         {% endfor %}
 
         {% if rendered_entries == 0 %}
-          {% for i in (1..3) %}
-            {%- liquid
-              assign fallback_title = 'MacBook Pro multi-display fit'
-              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
-
-              if forloop.index == 2
-                assign fallback_title = 'Windows workstation setup check'
-                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
-              elsif forloop.index == 3
-                assign fallback_title = 'Conference-room connection path'
-                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
-              endif
-            -%}
-            <article class="compatibility-card">
-              <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
-            </article>
-          {% endfor %}
+          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+            <p class="section-kicker">Compatibility</p>
+            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current collection, product, or filter set.</p>
+          </article>
         {% endif %}
       {% else %}
         {% for block in section.blocks %}
-          <article class="compatibility-card" {{ block.shopify_attributes }}>
+          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}" {{ block.shopify_attributes }}>
             {% if block.settings.eyebrow != blank %}
               <p class="section-kicker">{{ block.settings.eyebrow }}</p>
             {% else %}
@@ -394,25 +374,11 @@
             </div>
           </article>
         {% else %}
-          {% for i in (1..3) %}
-            {%- liquid
-              assign fallback_title = 'MacBook Pro multi-display fit'
-              assign fallback_copy = 'Confirm display support, power delivery, and port behavior before you choose the right hub or dock.'
-
-              if forloop.index == 2
-                assign fallback_title = 'Windows workstation setup check'
-                assign fallback_copy = 'Use compatibility guidance to confirm room-display, charging, and accessory fit before installation.'
-              elsif forloop.index == 3
-                assign fallback_title = 'Conference-room connection path'
-                assign fallback_copy = 'Review the workflow, device type, and cable path so the final setup is ready to deploy with less guesswork.'
-              endif
-            -%}
-            <article class="compatibility-card">
-              <p class="section-kicker">Compatibility entry</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ fallback_title }}</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">{{ fallback_copy }}</p>
-            </article>
-          {% endfor %}
+          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+            <p class="section-kicker">Compatibility</p>
+            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No compatibility guidance available yet</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify to replace this empty state.</p>
+          </article>
         {% endfor %}
       {% endif %}
       </div>
