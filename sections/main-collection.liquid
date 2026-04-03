@@ -5,8 +5,9 @@
       {%- liquid
         assign intro_copy = section.settings.intro_copy | default: collection.description
         assign category_label = 'Product family'
-        assign category_statement = 'Choose the EZQuest family that matches your setup, then narrow the right ports, power path, and footprint.'
-        assign category_support_note = 'Use compare and support only when you need a closer fit check.'
+        assign category_statement = 'Choose the EZQuest family that matches the setup, then narrow the right ports, power path, and footprint.'
+        assign category_support_note = 'Use compare or support only when the fit still needs a closer check.'
+        assign category_decision_note = 'Choose this family when the setup needs a clearer lane before you compare individual products.'
         assign category_stat_one = 'Built for cleaner workflows'
         assign category_stat_two = 'Engineered to reduce setup friction'
         assign category_stat_three = 'Support stays close after the buy'
@@ -24,7 +25,7 @@
             when 'accessories'
               assign intro_copy = 'Charge-and-sync cables and finishing accessories that make the setup feel complete, dependable, and easier to live with.'
             else
-              assign intro_copy = 'Browse the EZQuest product family that best matches your ports, power, charging, and workflow needs.'
+              assign intro_copy = 'Browse the EZQuest family that best matches your ports, power, charging, and workflow needs.'
           endcase
         endif
 
@@ -33,6 +34,7 @@
             assign category_label = 'Hybrid + travel'
             assign category_statement = 'Hubs and adapters for everyday expansion, portable desks, presentations, and single-display workflows.'
             assign category_support_note = 'Best for portable desks, presentations, single-display workflows, and everyday expansion.'
+            assign category_decision_note = 'Choose hubs and adapters when you need flexibility first, not a permanent workstation footprint.'
             assign category_stat_one = 'Everyday port expansion'
             assign category_stat_two = 'Travel-to-desk flexibility'
             assign category_stat_three = 'Single-cable simplicity'
@@ -40,6 +42,7 @@
             assign category_label = 'Desk command'
             assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and a calmer workstation footprint.'
             assign category_support_note = 'Best for users stepping up from smaller hubs into a more stable multi-device desk setup.'
+            assign category_decision_note = 'Choose docking stations when the desk stays put and you need displays, Ethernet, charging, and accessory control.'
             assign category_stat_one = 'Permanent desk control'
             assign category_stat_two = 'Display + Ethernet ready'
             assign category_stat_three = 'Stronger workstation fit'
@@ -47,6 +50,7 @@
             assign category_label = 'Power layer'
             assign category_statement = 'Charging products that keep travel kits, home desks, and multi-device routines lighter, faster, and less cluttered.'
             assign category_support_note = 'Best when the charging path matters before the port count does.'
+            assign category_decision_note = 'Choose chargers and power when the workflow already works, but the charging layer still needs to be cleaner and more reliable.'
             assign category_stat_one = 'Travel and desk charging'
             assign category_stat_two = 'Less charger clutter'
             assign category_stat_three = 'Multi-device routines'
@@ -54,6 +58,7 @@
             assign category_label = 'Finish the setup'
             assign category_statement = 'Cables and finishing pieces that make the EZQuest setup feel complete, dependable, and easier to live with every day.'
             assign category_support_note = 'Best for tightening cable paths, replacing weak links, and finishing the workflow cleanly.'
+            assign category_decision_note = 'Choose accessories when the last layer of the setup still needs cleaner routing or a more dependable final piece.'
             assign category_stat_one = 'Cleaner cable paths'
             assign category_stat_two = 'Reliable daily accessories'
             assign category_stat_three = 'Finishing-layer utility'
@@ -77,6 +82,7 @@
           {% if intro_copy != blank %}
             <p class="section-copy">{{ intro_copy | strip_html | truncatewords: 26 }}</p>
           {% endif %}
+          <p class="collection-hero-decision-note">{{ category_decision_note }}</p>
 
           <div class="merch-stat-grid">
             <div class="merch-stat-card">{{ category_stat_one }}</div>
@@ -95,26 +101,28 @@
 
         <div class="collection-hero-side">
           {% if collection_visual != blank %}
-            {{ collection_visual | image_url: width: 900 | image_tag: loading: 'lazy', class: 'collection-hero-image' }}
+            {{ collection_visual | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-hero-image' }}
           {% else %}
             {% render 'owned-collection-visual',
               collection_handle: collection.handle,
               collection_title: collection.title,
               width: 1200,
               height: 900,
-              class: 'collection-hero-image'
+              class: 'collection-hero-image',
+              loading: 'eager',
+              fetchpriority: 'high'
             %}
           {% endif %}
           {% if lead_product != blank %}
             <div class="collection-hero-lead-product">
-              <p class="collection-hero-lead-kicker">Start here</p>
+              <p class="collection-hero-lead-kicker">First pick</p>
               <h2 class="collection-hero-lead-title">{{ lead_product.title }}</h2>
               {% if lead_product.metafields.ezquest.feature_highlights != blank and lead_product.metafields.ezquest.feature_highlights.value.count > 0 %}
                 <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.feature_highlights.value.first }}</p>
               {% elsif lead_product.metafields.ezquest.compatibility_summary != blank %}
                 <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | truncatewords: 14 }}</p>
               {% endif %}
-              <a href="{{ lead_product.url }}" class="collection-inline-link">View lead product</a>
+              <a href="{{ lead_product.url }}" class="collection-inline-link">See first pick</a>
             </div>
           {% endif %}
         </div>
@@ -136,7 +144,16 @@
             </form>
           {% endif %}
 
-          <p class="collection-toolbar-note">Use compare to narrow setup fit, then move into support only if you still need a closer check.</p>
+          <p class="collection-toolbar-note">Use compare to narrow fit, then move into support only if the setup still needs a closer check.</p>
+        </div>
+      </div>
+
+      <div class="collection-shopping-note" aria-label="Collection guidance">
+        <p class="collection-shopping-note-kicker">Category confidence</p>
+        <p class="collection-shopping-note-copy">{{ category_support_note }}</p>
+        <div class="collection-inline-support">
+          <a href="/pages/compare" class="collection-inline-link">Compare nearby options</a>
+          <a href="{{ section.settings.support_url | default: '/pages/support' }}" class="collection-inline-link">Get setup help</a>
         </div>
       </div>
 
@@ -149,7 +166,7 @@
           <div class="panel-primary md:col-span-2 xl:col-span-4">
             <p class="section-kicker">Collection</p>
             <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This product family is being merchandised now.</h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Browse the full catalog, compare nearby products, or move into support if you need help choosing the right EZQuest setup.</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Browse the full catalog, compare nearby products, or move into support if you still need help choosing the right setup.</p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
               <a href="{{ routes.all_products_collection_url }}" class="button-secondary">Browse all products</a>
               <a href="/pages/compare" class="site-meta-link">Compare options</a>

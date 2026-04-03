@@ -27,7 +27,7 @@
           </div>
           <p class="troubleshooting-card-copy">{{ block.settings.copy }}</p>
           <div class="troubleshooting-card-footer">
-            <p class="troubleshooting-card-meta">Confirm the symptom first, then move into the best next action.</p>
+            <p class="troubleshooting-card-meta">Start with the visible symptom, then take the shortest path to resolution.</p>
             {% if block.settings.link_label != blank and block.settings.link_url != blank %}
               {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
             {% endif %}
@@ -65,7 +65,7 @@
               {% endif %}
             </p>
             <div class="troubleshooting-card-footer">
-              <p class="troubleshooting-card-meta">Follow the clearest next action instead of guessing between support pages.</p>
+              <p class="troubleshooting-card-meta">Follow the clearest next action instead of bouncing between support pages.</p>
             </div>
           </article>
         {% endfor %}

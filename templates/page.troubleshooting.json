@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Troubleshooting",
-        "heading": "Troubleshoot common issues faster",
-        "copy": "Start with the symptom you are seeing, then move into the clearest next recovery step.",
+        "heading": "Troubleshoot the clearest symptom first",
+        "copy": "Start with the symptom you are seeing, then move into the clearest next recovery step without guessing between pages.",
         "support_eyebrow": "Troubleshooting note",
         "support_note": "Start with the visible symptom, then take the clearest next action instead of bouncing between support pages."
       }
@@ -14,8 +14,8 @@
       "type": "troubleshooting-list",
       "settings": {
         "eyebrow": "Common issues",
-        "heading": "Troubleshooting pathways by symptom or product behavior",
-        "copy": "Review recurring issues, likely causes, and the next best support step without losing the rest of the support flow.",
+        "heading": "Troubleshooting by symptom and product behavior",
+        "copy": "Review recurring issues, likely causes, and the next best support step without losing the rest of the ownership flow.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }

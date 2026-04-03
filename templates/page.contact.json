@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Contact",
-        "heading": "Contact EZQuest support",
-        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is not enough.",
+        "heading": "Contact support when self-service is not enough",
+        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is no longer the fastest path.",
         "support_eyebrow": "Best use",
         "support_note": "Choose the right route first, then send the details support will need so the next step is clear from the first reply.",
         "link_label": "View support center",
@@ -16,8 +16,8 @@
       "type": "info-card-grid",
       "settings": {
         "eyebrow": "Contact pathways",
-        "heading": "Direct the right question to the right support route",
-        "copy": "Choose the right path for product help, warranty questions, or order-related issues without guessing where to start.",
+        "heading": "Direct the right question to the right route",
+        "copy": "Choose the right path for product help, warranty questions, or order issues without guessing where to start.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -58,7 +58,7 @@
       "type": "contact-form-panel",
       "settings": {
         "eyebrow": "Contact form",
-        "heading": "Send a message with the details support will need",
+        "heading": "Send the details support will need",
         "copy": "Send the details support needs so the right next step is clear from the first reply.",
         "side_eyebrow": "Before submitting",
         "side_heading": "Help support respond faster",

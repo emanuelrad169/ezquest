@@ -1,10 +1,15 @@
 {%- liquid
   assign feature_image = section.settings.image
+  assign use_owned_support_visual = false
 
   if feature_image == blank and all_products['usb-c-pro-dock'] != blank
     assign feature_image = all_products['usb-c-pro-dock'].featured_image
   elsif feature_image == blank and all_products['usb-c-multimedia-hub'] != blank
     assign feature_image = all_products['usb-c-multimedia-hub'].featured_image
+  endif
+
+  if feature_image == blank
+    assign use_owned_support_visual = true
   endif
 -%}
 
@@ -22,6 +27,10 @@
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
           <a href="{{ section.settings.link_url }}" class="home-feature-band-button">{{ section.settings.link_label }}</a>
         {% endif %}
+        <div class="home-feature-band-note">
+          <p class="home-feature-band-note-kicker">Support stays in the buying path</p>
+          <p class="home-feature-band-note-copy">Check fit before you order, then move into manuals, downloads, and help without leaving the EZQuest flow.</p>
+        </div>
         <div class="home-feature-band-links">
           <a href="/pages/compatibility" class="support-inline-link">Check compatibility</a>
           <a href="/pages/manuals" class="support-inline-link">Manuals</a>
@@ -32,6 +41,8 @@
       <div class="home-feature-band-media">
         {% if feature_image != blank %}
           {{ feature_image | image_url: width: 1800 | image_tag: loading: 'lazy', class: 'home-feature-band-image' }}
+        {% elsif use_owned_support_visual %}
+          {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', width: 1800, height: 1400, class: 'home-feature-band-image' %}
         {% else %}
           {% render 'placeholder-visual', kind: 'support', text: 'EZQuest lifestyle', width: 1800, height: 1400, class: 'home-feature-band-image' %}
         {% endif %}

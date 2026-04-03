@@ -1,0 +1,110 @@
+<section class="section-shell home-confidence-section">
+  <div class="container-shell">
+    <div class="home-confidence-header">
+      <div class="home-confidence-header-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="section-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ section.settings.heading }}</h2>
+        {% if section.settings.copy != blank %}
+          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+        {% endif %}
+      </div>
+      <div class="home-confidence-header-note">
+        <p>Keep service, shipping, warranty, and support visible so the storefront closes with confidence instead of one more generic content block.</p>
+      </div>
+    </div>
+
+    <div class="home-confidence-grid">
+      <article class="home-confidence-card home-confidence-card--shipping">
+        <div class="home-confidence-card-copy">
+          <h3>Fast shipping</h3>
+          <p>Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
+        </div>
+        <div class="home-confidence-card-visual">
+          {% render 'icon', name: 'truck' %}
+        </div>
+      </article>
+
+      <article class="home-confidence-card home-confidence-card--featured">
+        <div class="home-confidence-card-copy">
+          <p class="home-confidence-card-eyebrow">Ownership confidence</p>
+          <h3>Support stays part of the product long after checkout.</h3>
+          <p>Move from manuals and downloads into compatibility guidance and direct help without losing the context of what you bought.</p>
+          <div class="home-confidence-card-links">
+            <a href="/pages/support" class="home-confidence-link">Open support center</a>
+            <a href="/pages/compatibility" class="home-confidence-link home-confidence-link--subtle">Check compatibility</a>
+          </div>
+        </div>
+        <div class="home-confidence-feature-visual">
+          {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', class: 'home-confidence-feature-image' %}
+        </div>
+      </article>
+
+      <article class="home-confidence-card home-confidence-card--returns">
+        <div class="home-confidence-card-copy">
+          <h3>Returns and warranty</h3>
+          <p>Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
+        </div>
+        <div class="home-confidence-card-visual">
+          {% render 'icon', name: 'shield' %}
+        </div>
+      </article>
+
+      <article class="home-confidence-card">
+        <div class="home-confidence-card-copy">
+          <h3>Secure payment</h3>
+          <p>Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
+        </div>
+        <div class="home-confidence-card-visual">
+          {% render 'icon', name: 'shield' %}
+        </div>
+      </article>
+
+      <article class="home-confidence-card">
+        <div class="home-confidence-card-copy">
+          <h3>Manuals and downloads</h3>
+          <p>Setup guides, firmware, and downloads stay close by when a workflow needs one more step to feel complete.</p>
+        </div>
+        <div class="home-confidence-card-visual">
+          {% render 'icon', name: 'download' %}
+        </div>
+      </article>
+
+      <article class="home-confidence-card home-confidence-card--support">
+        <div class="home-confidence-card-copy">
+          <h3>Direct support</h3>
+          <p>From product questions to setup help, support paths stay connected to the storefront instead of sending customers elsewhere.</p>
+        </div>
+        <div class="home-confidence-card-visual">
+          {% render 'icon', name: 'support' %}
+        </div>
+      </article>
+    </div>
+
+    <div class="home-confidence-links-row">
+      <span class="home-confidence-links-label">Quick access</span>
+      <a href="/pages/shipping-returns" class="home-confidence-pill-link">Shipping &amp; returns</a>
+      <a href="/pages/warranty" class="home-confidence-pill-link">Warranty</a>
+      <a href="/pages/manuals" class="home-confidence-pill-link">Manuals</a>
+      <a href="/pages/downloads" class="home-confidence-pill-link">Downloads</a>
+      <a href="/pages/contact" class="home-confidence-pill-link">Contact support</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home confidence grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop with confidence" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence should be visible before and after the purchase." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and support close to the buying path so the EZQuest experience feels complete from first click to long-term ownership." }
+  ],
+  "presets": [
+    {
+      "name": "Home confidence grid"
+    }
+  ]
+}
+{% endschema %}

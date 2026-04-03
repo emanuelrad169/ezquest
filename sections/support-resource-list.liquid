@@ -6,10 +6,10 @@
       assign has_structured_entries = false
       assign use_global_entries = false
       assign platform_filter = section.settings.platform_filter | downcase | strip
-      assign resource_kind_label = 'Manuals'
+      assign resource_count_note = 'Manuals that stay tied to the right product, setup stage, and next step.'
 
       if section.settings.resource_kind == 'downloads'
-        assign resource_kind_label = 'Downloads'
+        assign resource_count_note = 'Downloads that stay tied to the right product, platform, and next step.'
       endif
 
       if product != blank
@@ -42,7 +42,7 @@
         {% endif %}
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        <p class="support-resource-count">{{ resource_kind_label }} that stay tied to the right product, platform, and next step.</p>
+        <p class="support-resource-count">{{ resource_count_note }}</p>
         {% if section.settings.source_note != blank %}
           <div class="support-utility-note mt-6">{{ section.settings.source_note }}</div>
         {% endif %}
@@ -59,8 +59,13 @@
 
         <div class="support-next-step-list">
           <a href="/pages/compatibility" class="support-inline-link">Check compatibility</a>
-          <a href="/pages/manuals" class="support-inline-link">Manuals</a>
-          <a href="/pages/downloads" class="support-inline-link">Downloads</a>
+          {% if section.settings.resource_kind == 'downloads' %}
+            <a href="/pages/manuals" class="support-inline-link">Manuals</a>
+            <a href="/pages/support" class="support-inline-link">Support hub</a>
+          {% else %}
+            <a href="/pages/downloads" class="support-inline-link">Downloads</a>
+            <a href="/pages/troubleshooting" class="support-inline-link">Troubleshooting</a>
+          {% endif %}
           <a href="/pages/contact" class="support-inline-link">Contact support</a>
         </div>
       </div>

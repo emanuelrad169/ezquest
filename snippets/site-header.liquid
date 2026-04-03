@@ -31,67 +31,69 @@
           </span>
         </a>
 
-        <a href="{{ support_href }}" class="site-header-support-surface hidden lg:flex" aria-label="{{ support_aria_label }}">
-          <span class="site-header-support-icon">
-            {% render 'icon', name: 'support' %}
-          </span>
-          <span class="site-header-support-copy">
-            <span class="site-header-support-label">
-              {% if support_has_phone %}
-                {{ support_phone_label }}
-              {% else %}
-                {{ support_label }}
-              {% endif %}
+        <div class="site-header-utility-cluster">
+          <a href="{{ support_href }}" class="site-header-support-surface hidden lg:flex" aria-label="{{ support_aria_label }}">
+            <span class="site-header-support-icon">
+              {% render 'icon', name: 'support' %}
             </span>
-            <strong class="site-header-support-value">
-              {% if support_has_phone %}
-                {{ support_phone }}
-              {% else %}
-                Contact support
-              {% endif %}
-            </strong>
-          </span>
-          {% unless support_has_phone %}
-            <span class="site-header-support-caret">
-              {% render 'icon', name: 'chevron-down' %}
+            <span class="site-header-support-copy">
+              <span class="site-header-support-label">
+                {% if support_has_phone %}
+                  {{ support_phone_label }}
+                {% else %}
+                  {{ support_label }}
+                {% endif %}
+              </span>
+              <strong class="site-header-support-value">
+                {% if support_has_phone %}
+                  {{ support_phone }}
+                {% else %}
+                  Contact support
+                {% endif %}
+              </strong>
             </span>
-          {% endunless %}
-        </a>
+            {% unless support_has_phone %}
+              <span class="site-header-support-caret">
+                {% render 'icon', name: 'chevron-down' %}
+              </span>
+            {% endunless %}
+          </a>
 
-        <div class="site-header-actions">
-          <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
-            {% render 'icon', name: 'search' %}
-          </a>
-          <a href="{{ account_url }}" class="site-header-icon-button" aria-label="Account">
-            {% render 'icon', name: 'user' %}
-          </a>
-          <a href="/pages/compare" class="site-header-icon-button" aria-label="Compare">
-            {% render 'icon', name: 'layers' %}
-          </a>
-          <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button" aria-label="{{ 'header.cart' | t }}">
-            {% render 'icon', name: 'cart' %}
-            {% if cart.item_count > 0 %}
-              <span class="site-header-cart-count">{{ cart.item_count }}</span>
-            {% endif %}
-          </a>
-          <a href="{{ routes.cart_url }}" class="site-header-cart-summary hidden lg:block">
-            <span class="site-header-cart-summary-label">Subtotal</span>
-            <strong>{{ cart.total_price | money }}</strong>
-          </a>
-          <button
-            class="site-header-icon-button lg:hidden"
-            type="button"
-            aria-controls="mobile-nav-drawer"
-            aria-expanded="false"
-            data-drawer-open="mobile-nav-drawer"
-          >
-            <span class="sr-only">{{ 'header.open_menu' | t }}</span>
-            {% render 'icon', name: 'menu' %}
-          </button>
+          <div class="site-header-actions">
+            <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
+              {% render 'icon', name: 'search' %}
+            </a>
+            <a href="{{ account_url }}" class="site-header-icon-button" aria-label="Account">
+              {% render 'icon', name: 'user' %}
+            </a>
+            <a href="/pages/compare" class="site-header-icon-button" aria-label="Compare">
+              {% render 'icon', name: 'layers' %}
+            </a>
+            <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button" aria-label="{{ 'header.cart' | t }}">
+              {% render 'icon', name: 'cart' %}
+              {% if cart.item_count > 0 %}
+                <span class="site-header-cart-count">{{ cart.item_count }}</span>
+              {% endif %}
+            </a>
+            <a href="{{ routes.cart_url }}" class="site-header-cart-summary hidden lg:block">
+              <span class="site-header-cart-summary-label">Subtotal</span>
+              <strong>{{ cart.total_price | money }}</strong>
+            </a>
+            <button
+              class="site-header-icon-button lg:hidden"
+              type="button"
+              aria-controls="mobile-nav-drawer"
+              aria-expanded="false"
+              data-drawer-open="mobile-nav-drawer"
+            >
+              <span class="sr-only">{{ 'header.open_menu' | t }}</span>
+              {% render 'icon', name: 'menu' %}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="site-header-nav-row hidden lg:flex">
+      <div class="site-header-nav-row hidden lg:grid">
         <nav aria-label="Primary" class="site-header-nav">
           {% render 'mega-menu', section: section %}
         </nav>
@@ -110,5 +112,10 @@
     </div>
   </div>
 
-  {% render 'mobile-nav-drawer' %}
+  {% render 'mobile-nav-drawer',
+    support_href: support_href,
+    support_has_phone: support_has_phone,
+    support_phone: support_phone,
+    support_phone_label: support_phone_label
+  %}
 </header>

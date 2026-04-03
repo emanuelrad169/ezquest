@@ -9,6 +9,7 @@
       assign support_summary_text = blank
       assign compatibility_summary_text = blank
       assign setup_label = 'Everyday setup'
+      assign story_intro_note = 'See how this product earns its place before you move deeper into specs or support.'
       assign story_note_one = 'A closer look at why this matters in the setup.'
       assign story_note_two = 'How the product keeps the workflow simpler once it is on the desk or in the bag.'
       assign story_note_three = 'What this means for ownership confidence after the purchase.'
@@ -31,16 +32,25 @@
       case product.handle
         when 'usb-c-travel-hub'
           assign setup_label = 'Travel-first setup'
+          assign section_heading = 'Why this hub works better on the move'
+          assign section_copy = 'See how the travel-first role, lighter footprint, and ownership path separate it from broader desk options.'
+          assign story_intro_note = 'Start here when the question is whether portability should win over extra desk-ready connectivity.'
           assign story_note_one = 'Built for presentations, hotel desks, classrooms, and everyday carry where lighter expansion matters.'
           assign story_note_two = 'Keeps HDMI, charging, and core ports close without turning the mobile setup into a cable project.'
           assign story_note_three = 'Support stays nearby when you need compatibility, downloads, or quick setup guidance on the move.'
         when 'usb-c-pro-dock'
           assign setup_label = 'Desk-first setup'
+          assign section_heading = 'Why this dock belongs at the desk'
+          assign section_copy = 'See how the workstation role, broader connectivity, and ownership support justify stepping up from lighter hubs.'
+          assign story_intro_note = 'Start here when the desk has become the center of the workflow and the setup needs more authority.'
           assign story_note_one = 'Designed for permanent desks that need more peripherals, stronger display support, and calmer cable control.'
           assign story_note_two = 'Makes the step up from smaller hubs feel clear when the setup has become more workstation-like.'
           assign story_note_three = 'Keeps longer-term ownership easier with manuals, downloads, and support attached to the product.'
         when 'usb-c-multimedia-hub'
           assign setup_label = 'Balanced everyday setup'
+          assign section_heading = 'Why this hub earns its place on the everyday desk'
+          assign section_copy = 'See how the balanced role, broader daily coverage, and support path make it the strongest all-around EZQuest choice.'
+          assign story_intro_note = 'Start here when you want one compact hub to cover the desk before stepping up to a full dock.'
           assign story_note_one = 'Built for everyday desks that want HDMI, charging, Ethernet, and accessory access in one adapter.'
           assign story_note_two = 'Gives hybrid work setups a cleaner center of gravity without demanding a full dock footprint.'
           assign story_note_three = 'Keeps support and compatibility close when the desk needs one dependable everyday hub.'
@@ -60,6 +70,7 @@
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
+        <p class="product-story-intro-note">{{ story_intro_note }}</p>
       </div>
       {% if section.settings.link_label != blank and section.settings.link_url != blank %}
         <div class="section-intro-action">

@@ -3,6 +3,7 @@
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Technical sheet'
       assign section_copy = section.settings.copy | default: 'Review the key ports, charging, display, and host details that matter most before you commit.'
+      assign section_note = section.settings.source_note | default: 'Scan the ports, charging, display, and host details here first, then move deeper only if you need a fit check.'
       assign structured_spec_rows = blank
       assign has_structured_rows = false
 
@@ -12,6 +13,21 @@
           assign has_structured_rows = true
         endif
       endif
+
+      case product.handle
+        when 'usb-c-travel-hub'
+          assign section_heading = 'Technical fit for the travel-first setup'
+          assign section_copy = 'Confirm the core ports, charging path, and display support that matter when the setup needs to stay lighter and more mobile.'
+          assign section_note = 'Check the essentials here, then move into compatibility only if the room, display, or host setup still needs a closer read.'
+        when 'usb-c-pro-dock'
+          assign section_heading = 'Technical fit for the desk-first setup'
+          assign section_copy = 'Review the broader connectivity, display support, charging path, and host fit that matter before committing to a more permanent desk solution.'
+          assign section_note = 'Start with the desk-critical essentials here, then move into compatibility or manuals only if the workstation setup still needs a closer check.'
+        when 'usb-c-multimedia-hub'
+          assign section_heading = 'Technical fit for the balanced everyday setup'
+          assign section_copy = 'Review the ports, charging support, display path, and host fit that make this the strongest all-around everyday choice.'
+          assign section_note = 'Confirm the everyday essentials here first, then move into compatibility or manuals only when the setup still needs a closer fit check.'
+      endcase
     -%}
 
     <div class="grid gap-8 lg:grid-cols-article-aside lg:items-start">
@@ -21,7 +37,7 @@
         {% endif %}
         <h2 class="section-heading mt-4">{{ section_heading }}</h2>
         <p class="section-copy mt-4">{{ section_copy }}</p>
-        <p class="product-technical-note">{{ section.settings.source_note | default: 'Scan the ports, charging, display, and host details here first, then move deeper only if you need a fit check.' }}</p>
+        <p class="product-technical-note">{{ section_note }}</p>
       </div>
 
       <div class="spec-table-shell">

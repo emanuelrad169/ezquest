@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support center",
-        "heading": "Ownership support, without the runaround",
-        "copy": "Start with the task in front of you, then move into downloads, manuals, compatibility, or direct help from one calm, product-aware hub.",
+        "heading": "Support that stays close to the product",
+        "copy": "Start with the task in front of you, then move into files, guides, fit checks, or direct help from one calm, product-aware hub.",
         "support_eyebrow": "Ownership path",
-        "support_note": "Everything here is designed to keep setup, troubleshooting, and post-purchase confidence tied to the right EZQuest product and the right next step.",
+        "support_note": "Setup help, troubleshooting, compatibility, and escalation stay tied to the right product and the right next step.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
       }
@@ -16,8 +16,8 @@
       "type": "support-nav-grid",
       "settings": {
         "eyebrow": "Support hub",
-        "heading": "Start with the clearest next task",
-        "copy": "Choose the path that best matches what you need right now, from setup files and manuals to compatibility checks or direct support, without losing product context.",
+        "heading": "Start with the fastest path to resolution",
+        "copy": "Choose the path that best matches what you need now, from setup files and manuals to fit checks or direct support.",
         "show_search": true,
         "link_label": "Contact support",
         "link_url": "/pages/contact"
@@ -70,8 +70,8 @@
       "type": "support-link-grid",
       "settings": {
         "eyebrow": "Common next steps",
-        "heading": "Keep the next useful ownership path close",
-        "copy": "Move into troubleshooting, FAQ, or warranty guidance without losing the context of the product, setup stage, or question you are trying to resolve.",
+        "heading": "Keep the next useful path close",
+        "copy": "Move into troubleshooting, FAQ, or warranty guidance without losing the product, setup stage, or question already in front of you.",
         "columns_desktop": 3,
         "link_label": "View all support pages",
         "link_url": "/pages/support"
@@ -114,8 +114,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Escalation",
-        "heading": "Need help beyond self-service?",
-        "copy": "If the next step depends on your exact product, order, or deployment, move directly into contact or warranty guidance with the right context already in place.",
+        "heading": "Need a direct handoff?",
+        "copy": "If the next step depends on your exact product, order, or deployment, move into contact or warranty guidance with the right context already in place.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "View warranty page",

@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Documentation",
-        "heading": "Manuals and setup guides",
-        "copy": "Find quick-start instructions, user guides, and setup notes by product family.",
+        "heading": "Manuals and setup guides that stay product-aware",
+        "copy": "Find quick-start instructions, user guides, and setup notes by product family and install stage.",
         "support_eyebrow": "Ownership path",
         "support_note": "Manuals are where setup becomes clearer. Start with the guide that matches your product and stage, then move into troubleshooting or support only when you still need a deeper answer.",
         "link_label": "Open support center",
@@ -16,8 +16,8 @@
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Documentation",
-        "heading": "Manuals and setup guidance, organized for the way people actually install",
-        "copy": "Browse setup guides by product family, setup stage, or the kind of answer you need right now.",
+        "heading": "Manuals and setup guidance, organized for the way people install",
+        "copy": "Browse setup guides by product family, setup stage, or the answer you need right now.",
         "structured_source": "global",
         "resource_kind": "manuals",
         "resource_limit": 6,
@@ -31,8 +31,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need product-specific help",
-        "heading": "Need another step after the manual?",
-        "copy": "If a guide does not fully resolve the setup, move into troubleshooting, compatibility, or direct support without losing momentum.",
+        "heading": "Need another step after the guide?",
+        "copy": "If a guide does not fully resolve the setup, move into troubleshooting, compatibility, or support without losing momentum.",
         "link_label": "Open troubleshooting",
         "link_url": "/pages/troubleshooting",
         "secondary_label": "Contact support",

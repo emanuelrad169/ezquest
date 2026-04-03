@@ -6,8 +6,17 @@
     -%}
 
     <div class="home-collections-strip-header">
-      <h2 class="section-heading home-strip-heading">{{ section_heading }}</h2>
-      <span class="home-strip-rule" aria-hidden="true"></span>
+      <div class="home-collections-strip-header-copy">
+        <p class="section-kicker">Product families</p>
+        <div class="home-collections-strip-heading-row">
+          <h2 class="section-heading home-strip-heading">{{ section_heading }}</h2>
+          <span class="home-strip-rule" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="home-collections-strip-header-aside">
+        <p class="home-collections-strip-header-note">Move from travel-ready hubs to desk-first docks without losing the thread.</p>
+        <a href="{{ routes.collections_url }}" class="site-meta-link">View all families</a>
+      </div>
     </div>
 
     {% if section_copy != blank %}
@@ -24,7 +33,7 @@
           assign card_image = block.settings.image
           assign card_summary = blank
           assign card_eyebrow = blank
-          assign placeholder_kind = 'collection'
+          assign card_guidance = blank
 
           if collection_object != blank
             assign card_title = collection_object.title
@@ -42,16 +51,12 @@
           if card_image == blank
             if card_url contains '/collections/hubs-adapters' and all_products['usb-c-multimedia-hub'] != blank
               assign card_image = all_products['usb-c-multimedia-hub'].featured_image
-              assign placeholder_kind = 'collection_hubs'
             elsif card_url contains '/collections/docking-stations' and all_products['usb-c-pro-dock'] != blank
               assign card_image = all_products['usb-c-pro-dock'].featured_image
-              assign placeholder_kind = 'collection_docks'
             elsif card_url contains '/collections/chargers-power' and all_products['usb-c-travel-hub'] != blank
               assign card_image = all_products['usb-c-travel-hub'].featured_image
-              assign placeholder_kind = 'collection_power'
             elsif card_url contains '/collections/accessories' and all_products['usb-c-travel-hub'] != blank
               assign card_image = all_products['usb-c-travel-hub'].featured_image
-              assign placeholder_kind = 'collection_accessories'
             endif
           endif
 
@@ -63,40 +68,48 @@
             case collection_object.handle
               when 'hubs-adapters'
                 assign card_eyebrow = 'Hybrid + travel'
-                assign card_summary = 'Compact port expansion for everyday carry, hybrid desks, and display-ready meetings'
+                assign card_summary = 'Compact expansion for everyday carry, hybrid desks, and display-ready meetings'
+                assign card_guidance = 'Best for daily carry and hybrid desks'
               when 'docking-stations'
                 assign card_eyebrow = 'Desk command'
                 assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
+                assign card_guidance = 'Best for permanent desks and displays'
               when 'chargers-power'
                 assign card_eyebrow = 'Power layer'
-                assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines that need less friction'
+                assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines'
+                assign card_guidance = 'Best for charging routines and travel kits'
               when 'accessories'
                 assign card_eyebrow = 'Finish the setup'
-                assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner, calmer, and more dependable'
+                assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner and more dependable'
+                assign card_guidance = 'Best for finishing the setup cleanly'
             endcase
           elsif card_url contains '/collections/hubs-adapters'
             assign card_eyebrow = 'Hybrid + travel'
-            assign card_summary = 'Compact port expansion for everyday carry, hybrid desks, and display-ready meetings'
+            assign card_summary = 'Compact expansion for everyday carry, hybrid desks, and display-ready meetings'
+            assign card_guidance = 'Best for daily carry and hybrid desks'
           elsif card_url contains '/collections/docking-stations'
             assign card_eyebrow = 'Desk command'
             assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
+            assign card_guidance = 'Best for permanent desks and displays'
           elsif card_url contains '/collections/chargers-power'
             assign card_eyebrow = 'Power layer'
-            assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines that need less friction'
+            assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines'
+            assign card_guidance = 'Best for charging routines and travel kits'
           elsif card_url contains '/collections/accessories'
             assign card_eyebrow = 'Finish the setup'
-            assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner, calmer, and more dependable'
+            assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner and more dependable'
+            assign card_guidance = 'Best for finishing the setup cleanly'
           endif
         -%}
 
-        <a href="{{ card_url | default: '/collections/all' }}" class="home-collections-strip-card{% if forloop.first %} is-featured{% endif %}{% if forloop.last %} is-wide{% endif %}" {{ block.shopify_attributes }}>
+        <a href="{{ card_url | default: '/collections/all' }}" class="home-collections-strip-card{% if forloop.first %} is-featured is-primary{% elsif forloop.index == 2 %} is-supporting{% elsif forloop.index == 3 %} is-secondary{% endif %}{% if forloop.last %} is-wide{% endif %}" {{ block.shopify_attributes }}>
           <div class="home-collections-strip-media">
             {% if card_image != blank %}
               {{ card_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collections-strip-image' }}
             {% else %}
-              {% render 'placeholder-visual',
-                kind: placeholder_kind,
-                text: card_title,
+              {% render 'owned-collection-visual',
+                collection_handle: collection_object.handle,
+                collection_title: card_title,
                 width: 1200,
                 height: 900,
                 class: 'home-collections-strip-image'
@@ -113,11 +126,16 @@
               <p class="home-collections-strip-summary">{{ card_summary }}</p>
             {% endif %}
             <div class="home-collections-strip-footer">
-              {% if product_count != blank %}
-                <p class="home-collections-strip-count">
-                  {{ product_count }} product{% if product_count != 1 %}s{% endif %}
-                </p>
-              {% endif %}
+              <div class="home-collections-strip-footer-copy">
+                {% if product_count != blank %}
+                  <p class="home-collections-strip-count">
+                    {{ product_count }} product{% if product_count != 1 %}s{% endif %}
+                  </p>
+                {% endif %}
+                {% if card_guidance != blank %}
+                  <p class="home-collections-strip-guidance">{{ card_guidance }}</p>
+                {% endif %}
+              </div>
               <span class="home-collections-strip-link-label">Explore family</span>
             </div>
           </div>

@@ -3,8 +3,9 @@
     "main": {
       "type": "main-list-collections",
       "settings": {
-        "heading": "Choose the product family that fits your workflow.",
-        "copy": "Browse EZQuest collections by setup type, then move into the right family with a clearer idea of the ports, power path, and footprint you need."
+        "heading": "Start with the family built for your setup.",
+        "copy": "Choose hubs, docks, power, or finishing pieces by the way the workflow actually needs to work.",
+        "note": "Use collections to narrow the right family first, then compare or move into support only when you need a closer fit check."
       }
     }
   },

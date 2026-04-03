@@ -4,8 +4,8 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Compatibility",
-        "heading": "Check device and workflow fit",
-        "copy": "Confirm product fit by platform, device type, display path, and the setup you are building.",
+        "heading": "Confirm device and workflow fit",
+        "copy": "Confirm product fit by platform, device type, display path, and the setup you are building before setup begins.",
         "support_eyebrow": "Ownership path",
         "support_note": "Compatibility is where purchase confidence and setup confidence meet. Use it to confirm the right fit before you buy, then move into manuals, downloads, or support only if you need the next layer of detail.",
         "link_label": "Open support center",
@@ -16,8 +16,8 @@
       "type": "compatibility-entry-list",
       "settings": {
         "eyebrow": "Compatibility matrix",
-        "heading": "Compatibility guidance for real devices and real workflows",
-        "copy": "Use compatibility guidance to buy with more confidence and reduce the guesswork before setup begins.",
+        "heading": "Compatibility guidance for real devices and workflows",
+        "copy": "Use compatibility guidance to buy with more confidence and reduce guesswork before setup begins.",
         "structured_source": "global",
         "entry_limit": 6,
         "source_note": "Check the device, platform, or workflow that matches your setup first. Move into manuals, downloads, or support only if the next step is still unclear."
@@ -28,7 +28,7 @@
       "settings": {
         "eyebrow": "Related support",
         "heading": "Keep the next step close",
-        "copy": "Move from compatibility into downloads, manuals, or direct support without starting over.",
+        "copy": "Move from compatibility into setup files, guides, or direct support without starting over.",
         "columns_desktop": 3,
         "link_label": "Open support center",
         "link_url": "/pages/support"
@@ -71,12 +71,12 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need help confirming fit",
-        "heading": "Need another step after compatibility?",
-        "copy": "If you still need help confirming fit, move into support or browse the product line with a clearer idea of what to choose.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact",
-        "secondary_label": "Browse products",
-        "secondary_url": "/collections/all",
+        "heading": "Need the next step after fit is confirmed?",
+        "copy": "If compatibility is clear but setup still is not, move into manuals first, then escalate only when the install path still needs help.",
+        "link_label": "Open manuals",
+        "link_url": "/pages/manuals",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
         "style": "light",
         "button_style": "secondary"
       }

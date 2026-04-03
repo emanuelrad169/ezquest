@@ -1,29 +1,81 @@
 <svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" rx="56" fill="#F5F8FC"/>
+  <rect x="88" y="88" width="1424" height="1024" rx="52" fill="url(#shell)" stroke="#E5EBF3"/>
+  <ellipse cx="1160" cy="208" rx="432" ry="296" fill="url(#glow)"/>
+  <ellipse cx="1100" cy="990" rx="498" ry="160" fill="url(#baseGlow)"/>
+  <rect x="132" y="182" width="204" height="8" rx="4" fill="url(#accent)"/>
+  <path d="M94 988C286 922 502 884 742 886C986 888 1210 940 1504 1048V1112H94V988Z" fill="url(#plane)"/>
+  <g filter="url(#shadowHub)">
+    <rect x="714" y="520" width="458" height="270" rx="72" fill="url(#body)"/>
+    <rect x="760" y="566" width="366" height="178" rx="48" fill="url(#face)"/>
+    <rect x="814" y="620" width="204" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.3"/>
+    <rect x="814" y="668" width="116" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+    <rect x="948" y="668" width="84" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+    <rect x="1046" y="668" width="38" height="20" rx="10" fill="#111A2A" fill-opacity="0.44"/>
+  </g>
+  <g filter="url(#shadowPassport)">
+    <rect x="1054" y="340" width="250" height="168" rx="28" fill="url(#passport)"/>
+    <rect x="1102" y="384" width="152" height="10" rx="5" fill="#FACC15" fill-opacity="0.84"/>
+    <rect x="1102" y="416" width="110" height="10" rx="5" fill="#F8FAFC" fill-opacity="0.22"/>
+  </g>
+  <path d="M1106 804C1180 826 1264 826 1344 796" stroke="url(#cable)" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="746" cy="546" r="9" fill="#FACC15"/>
   <defs>
-    <linearGradient id="bg-travel" x1="154" y1="92" x2="1410" y2="1100" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F7F9FC"/>
-      <stop offset="1" stop-color="#DCE3ED"/>
+    <linearGradient id="shell" x1="198" y1="100" x2="1402" y2="1124" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#DFE7F1"/>
     </linearGradient>
-    <radialGradient id="glow-travel" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 206) rotate(132.722) scale(444 304)">
-      <stop stop-color="#FFF6CC"/>
-      <stop offset="1" stop-color="#FFF6CC" stop-opacity="0"/>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 208) rotate(144.8) scale(470.41 328.144)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="device-travel" x1="664" y1="510" x2="1048" y2="844" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#909AAD"/>
-      <stop offset="1" stop-color="#606B81"/>
+    <radialGradient id="baseGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1100 990) rotate(90) scale(160 498)">
+      <stop stop-color="#FACC15" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="132" y1="186" x2="336" y2="186" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="plane" x1="94" y1="988" x2="1504" y2="1112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D8E0EB" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#97A5B8" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="body" x1="730" y1="528" x2="1154" y2="792" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D4DCE7"/>
+      <stop offset="0.54" stop-color="#8894A7"/>
+      <stop offset="1" stop-color="#4A5669"/>
+    </linearGradient>
+    <linearGradient id="face" x1="760" y1="566" x2="1126" y2="744" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#D7DFE9"/>
+      <stop offset="1" stop-color="#B7C2D1"/>
+    </linearGradient>
+    <linearGradient id="passport" x1="1068" y1="352" x2="1290" y2="508" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CAD4E3"/>
+      <stop offset="1" stop-color="#A9B6C8"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="1106" y1="800" x2="1344" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.24"/>
+    </linearGradient>
+    <filter id="shadowHub" x="668" y="484" width="556" height="366" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-14" dy="22"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowPassport" x="1030" y="324" width="304" height="216" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
   </defs>
-  <rect width="1600" height="1200" rx="56" fill="url(#bg-travel)"/>
-  <rect x="88" y="88" width="1424" height="1024" rx="52" fill="#F9FBFE" stroke="#E5EBF3"/>
-  <ellipse cx="1160" cy="206" rx="444" ry="304" fill="url(#glow-travel)"/>
-  <path d="M98 990C290 914 494 874 738 876C992 880 1200 934 1498 1052V1112H98V990Z" fill="#D8E0EA"/>
-  <rect x="642" y="520" width="478" height="276" rx="88" fill="url(#device-travel)"/>
-  <rect x="700" y="574" width="362" height="168" rx="48" fill="#6E7990"/>
-  <rect x="752" y="648" width="92" height="18" rx="9" fill="#2E394B"/>
-  <rect x="866" y="648" width="110" height="18" rx="9" fill="#334052"/>
-  <rect x="994" y="648" width="72" height="18" rx="9" fill="#394558"/>
-  <rect x="1016" y="602" width="28" height="96" rx="14" fill="#D8E0EA"/>
-  <path d="M1088 854C1154 816 1224 796 1298 796C1338 796 1378 802 1418 816C1372 890 1322 946 1268 984C1218 1020 1164 1048 1106 1066C1062 1044 1026 1020 994 992C1024 946 1056 900 1088 854Z" fill="#CBD4E0"/>
-  <circle cx="494" cy="856" r="20" fill="#F3CC47" fill-opacity="0.9"/>
-  <path d="M1044 962C1130 952 1210 960 1302 1000C1242 1038 1178 1058 1110 1058C1048 1058 992 1042 944 1012C978 994 1012 978 1044 962Z" fill="#F3CC47" fill-opacity="0.38"/>
 </svg>

@@ -4,6 +4,8 @@
   assign compare_copy = block.settings.copy
   assign compare_vendor = blank
   assign compare_type = blank
+  assign compare_handoff_label = 'See product'
+  assign compare_support_label = 'Confirm fit'
 
   if compare_product != blank
     assign compare_title = compare_product.title
@@ -49,7 +51,13 @@
     {% elsif compare_copy != blank %}
       {{ compare_copy | truncatewords: 14 }}
     {% else %}
-      See how this option differs by fit, support, and price.
+      See how this option differs by fit, support, and everyday use.
     {% endif %}
   </p>
+  {% if compare_product != blank %}
+    <div class="compare-card-links">
+      <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
+      <a href="/pages/compatibility" class="site-meta-link">{{ compare_support_label }}</a>
+    </div>
+  {% endif %}
 </article>

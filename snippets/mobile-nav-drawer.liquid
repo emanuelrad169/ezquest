@@ -8,6 +8,29 @@
       </button>
     </div>
 
+    <div class="mega-mobile-service">
+      <a href="{{ support_href | default: '/pages/support' }}" class="mega-mobile-service-link">
+        <span class="mega-mobile-service-kicker">
+          {% if support_has_phone %}
+            {{ support_phone_label | default: 'Support' }}
+          {% else %}
+            Support center
+          {% endif %}
+        </span>
+        <strong class="mega-mobile-service-value">
+          {% if support_has_phone %}
+            {{ support_phone }}
+          {% else %}
+            Contact support
+          {% endif %}
+        </strong>
+      </a>
+      <div class="mega-mobile-service-meta">
+        <a href="/pages/shipping-returns">Shipping &amp; Delivery</a>
+        <a href="/pages/compatibility">Compatibility</a>
+      </div>
+    </div>
+
     <nav aria-label="Mobile" class="mega-mobile-nav">
       <div class="mega-mobile-section">
         <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="shop" aria-controls="mega-mobile-panel-shop">
@@ -25,11 +48,11 @@
       </div>
 
       <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="true" data-mega-mobile-trigger="collections" aria-controls="mega-mobile-panel-collections">
+        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="collections" aria-controls="mega-mobile-panel-collections">
           <span>Product families</span>
           <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
         </button>
-        <div class="mega-mobile-panel is-open" id="mega-mobile-panel-collections" data-mega-mobile-panel="collections">
+        <div class="mega-mobile-panel" id="mega-mobile-panel-collections" data-mega-mobile-panel="collections" hidden>
           <div class="mega-mobile-stack-links">
             <a href="{{ routes.collections_url }}/hubs-adapters">Hubs & adapters</a>
             <a href="{{ routes.collections_url }}/docking-stations">Docking stations</a>
@@ -101,8 +124,8 @@
         <span>{{ 'header.search' | t }}</span>
         <span class="text-slate-400">Browse</span>
       </a>
-      <a href="/pages/contact" class="support-crosslink">
-        <span>Contact</span>
+      <a href="/pages/support" class="support-crosslink">
+        <span>Support</span>
         <span class="text-slate-400">Help</span>
       </a>
       <a href="{{ routes.cart_url }}" class="support-crosslink">

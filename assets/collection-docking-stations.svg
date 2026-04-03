@@ -1,33 +1,107 @@
 <svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" rx="56" fill="#F3F6FB"/>
+  <rect x="78" y="82" width="1444" height="1036" rx="48" fill="url(#shell)" stroke="#E5EBF3"/>
+  <ellipse cx="1208" cy="184" rx="446" ry="300" fill="url(#glow)"/>
+  <ellipse cx="1092" cy="1020" rx="560" ry="176" fill="url(#baseGlow)"/>
+  <rect x="132" y="180" width="248" height="8" rx="4" fill="url(#accent)"/>
+  <path d="M126 948C360 860 600 836 842 850C1088 866 1308 944 1496 1046V1118H126V948Z" fill="url(#plane)"/>
+  <g filter="url(#shadowMonitor)">
+    <rect x="970" y="196" width="354" height="220" rx="30" fill="url(#monitor)"/>
+    <rect x="1028" y="244" width="238" height="124" rx="20" fill="#F8FAFC" fill-opacity="0.18"/>
+  </g>
+  <g filter="url(#shadowDock)">
+    <rect x="784" y="334" width="446" height="662" rx="86" fill="url(#dockBody)"/>
+    <rect x="842" y="390" width="330" height="552" rx="60" fill="url(#dockFace)"/>
+    <rect x="884" y="444" width="214" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.32"/>
+    <rect x="884" y="500" width="158" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.18"/>
+    <rect x="864" y="612" width="284" height="156" rx="46" fill="url(#screenGlow)"/>
+    <rect x="916" y="654" width="180" height="72" rx="28" fill="#F8FAFC" fill-opacity="0.18"/>
+    <rect x="824" y="758" width="30" height="104" rx="15" fill="#AAB5C6"/>
+    <rect x="824" y="880" width="30" height="50" rx="15" fill="#AAB5C6"/>
+    <rect x="1148" y="660" width="36" height="74" rx="18" fill="#9BA7BA"/>
+    <rect x="1148" y="752" width="36" height="94" rx="18" fill="#9BA7BA"/>
+    <rect x="1148" y="862" width="36" height="66" rx="18" fill="#9BA7BA"/>
+  </g>
+  <g filter="url(#shadowBase)">
+    <rect x="510" y="760" width="420" height="134" rx="42" fill="url(#base)"/>
+    <rect x="552" y="802" width="190" height="18" rx="9" fill="#132032" fill-opacity="0.4"/>
+    <rect x="762" y="802" width="124" height="18" rx="9" fill="#132032" fill-opacity="0.32"/>
+  </g>
+  <path d="M1140 960C1222 932 1316 934 1404 968" stroke="url(#cable)" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="810" cy="362" r="10" fill="#FACC15"/>
   <defs>
-    <linearGradient id="bg-docks" x1="160" y1="90" x2="1380" y2="1110" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EEF2F7"/>
-      <stop offset="1" stop-color="#CBD4E0"/>
+    <linearGradient id="shell" x1="210" y1="88" x2="1390" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#DBE3EE"/>
     </linearGradient>
-    <radialGradient id="glow-docks" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1188 218) rotate(130.947) scale(520 360)">
-      <stop stop-color="#FFF6D1"/>
-      <stop offset="1" stop-color="#FFF6D1" stop-opacity="0"/>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1208 184) rotate(144.806) scale(500.45 338.361)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="dock-body" x1="770" y1="322" x2="1148" y2="902" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#8893A6"/>
-      <stop offset="1" stop-color="#556073"/>
+    <radialGradient id="baseGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1092 1020) rotate(90) scale(176 560)">
+      <stop stop-color="#FACC15" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="132" y1="184" x2="380" y2="184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="plane" x1="126" y1="948" x2="1496" y2="1118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D6DFEA" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#96A5B7" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="monitor" x1="986" y1="206" x2="1310" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E4ECF5" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#BCC8D8" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="dockBody" x1="820" y1="348" x2="1204" y2="996" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D4DCE7"/>
+      <stop offset="0.54" stop-color="#7B8799"/>
+      <stop offset="1" stop-color="#334153"/>
+    </linearGradient>
+    <linearGradient id="dockFace" x1="842" y1="390" x2="1172" y2="942" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#AFBBCB"/>
+      <stop offset="0.48" stop-color="#5C687B"/>
+      <stop offset="1" stop-color="#212D3C"/>
+    </linearGradient>
+    <radialGradient id="screenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1006 690) rotate(90) scale(78 142)">
+      <stop stop-color="#F8FAFC" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.16"/>
+    </radialGradient>
+    <linearGradient id="base" x1="528" y1="770" x2="918" y2="894" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CBD5E1"/>
+      <stop offset="1" stop-color="#7A889B"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="1140" y1="964" x2="1404" y2="964" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACC15" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.24"/>
+    </linearGradient>
+    <filter id="shadowMonitor" x="944" y="172" width="428" height="292" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="13"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowDock" x="734" y="296" width="548" height="756" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-18" dy="28"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.2 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowBase" x="484" y="738" width="474" height="188" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="13"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
   </defs>
-  <rect width="1600" height="1200" rx="56" fill="url(#bg-docks)"/>
-  <rect x="88" y="88" width="1424" height="1024" rx="52" fill="#F4F7FB" stroke="#E1E8F1"/>
-  <ellipse cx="1188" cy="218" rx="520" ry="360" fill="url(#glow-docks)"/>
-  <path d="M92 974C278 896 476 846 732 840C1002 836 1214 888 1508 1034V1112H92V974Z" fill="#D5DDE8"/>
-  <rect x="786" y="312" width="388" height="610" rx="120" fill="url(#dock-body)"/>
-  <rect x="854" y="400" width="252" height="386" rx="64" fill="#657086"/>
-  <rect x="918" y="502" width="128" height="22" rx="11" fill="#AAB5C8"/>
-  <rect x="906" y="556" width="154" height="18" rx="9" fill="#9CA8BC"/>
-  <rect x="896" y="606" width="174" height="18" rx="9" fill="#909CB1"/>
-  <rect x="1108" y="558" width="30" height="112" rx="15" fill="#C5CEDB"/>
-  <rect x="1108" y="702" width="30" height="112" rx="15" fill="#BFC8D7"/>
-  <rect x="1098" y="856" width="40" height="24" rx="12" fill="#C7D0DC"/>
-  <rect x="518" y="766" width="356" height="190" rx="54" fill="#6A758D"/>
-  <rect x="564" y="808" width="264" height="104" rx="30" fill="#75809A"/>
-  <path d="M514 976C642 940 822 934 948 964C1068 994 1178 1050 1260 1110H514V976Z" fill="#C9D2DF"/>
-  <circle cx="432" cy="896" r="22" fill="#F3CC47" fill-opacity="0.92"/>
-  <path d="M1142 1006C1248 980 1338 988 1456 1046C1374 1080 1296 1094 1220 1090C1156 1090 1096 1072 1040 1048C1074 1038 1108 1028 1142 1006Z" fill="#F3CC47" fill-opacity="0.42"/>
 </svg>

@@ -33,6 +33,7 @@
       <div class="mega-menu-panel-surface mega-menu-panel-surface--shop">
         <aside class="mega-menu-shop-rail">
           <p class="mega-menu-side-label">Shop</p>
+          <p class="mega-menu-column-intro">Start with the fastest route into the EZQuest lineup, then narrow by setup fit.</p>
           <div class="mega-menu-shop-link-list">
             <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-link is-active">
               <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'layers' %}</span>
@@ -140,6 +141,7 @@
         <div class="mega-menu-explore-shell">
           <div class="mega-menu-explore-links">
             <p class="mega-menu-side-label">Resources</p>
+            <p class="mega-menu-column-intro">Reference pages for manuals, downloads, compatibility, warranty, and post-purchase details.</p>
             <a href="/blogs/resources">Blog &amp; resources</a>
             <a href="/pages/manuals">Manuals</a>
             <a href="/pages/downloads">Downloads</a>
@@ -202,6 +204,9 @@
                         Finish the setup with dependable cables and everyday accessories.
                       {% endif %}
                     </p>
+                    <span class="mega-menu-collection-card-meta">
+                      {{ collection_object.products_count }} product{% if collection_object.products_count != 1 %}s{% endif %}
+                    </span>
                   </div>
                   <span class="mega-menu-collection-card-arrow">{% render 'icon', name: 'arrow-right' %}</span>
                 </div>
@@ -228,6 +233,7 @@
               <div>
                 <h3>{{ all_collection_title }}</h3>
                 <p>Browse hubs, docks, chargers, and cables in one place.</p>
+                <span class="mega-menu-collection-card-meta mega-menu-collection-card-meta--light">Browse the full EZQuest catalog</span>
               </div>
               <span class="mega-menu-collection-card-arrow">{% render 'icon', name: 'arrow-right' %}</span>
             </div>
@@ -240,6 +246,7 @@
         <div class="mega-menu-support-shell">
           <div class="mega-menu-support-links">
             <p class="mega-menu-side-label">Support center</p>
+            <p class="mega-menu-column-intro">Stay in the buying flow when you need manuals, compatibility guidance, or a direct support path.</p>
             <div class="mega-menu-support-grid">
               <a href="/pages/downloads" class="mega-menu-support-link">
                 <span class="mega-menu-support-link-icon">{% render 'icon', name: 'download' %}</span>

@@ -10,9 +10,13 @@
       assign first_structured_highlight = blank
       assign product_description_excerpt = blank
       assign product_positioning_text = blank
+      assign role_decision_note = 'Choose this when one product should keep the setup cleaner without complicating the desk.'
+      assign compare_cta_label = 'Compare with nearby EZQuest fits'
+      assign ownership_heading = section.settings.support_heading | default: 'Support stays close to the product'
+      assign ownership_copy = section.settings.support_copy | default: 'Compatibility guidance, manuals, downloads, and direct support stay nearby without crowding the decision.'
       assign setup_label = 'Everyday setup'
-      assign setup_statement = 'Premium connectivity that makes the setup feel cleaner, calmer, and easier to trust.'
-      assign setup_environment = 'Built for modern-device routines that need clearer expansion without adding clutter.'
+      assign setup_statement = 'Connectivity that keeps the setup cleaner, calmer, and easier to trust.'
+      assign setup_environment = 'Built for modern-device routines that need clearer expansion without extra clutter.'
       assign spec_count = 0
       assign manual_count = 0
       assign download_count = 0
@@ -64,17 +68,30 @@
           assign setup_label = 'Travel-first setup'
           assign setup_statement = 'Compact expansion for meetings, hotel desks, classrooms, and lighter mobile workflows.'
           assign setup_environment = 'Choose it when portability matters more than maximum port count or a permanent desk footprint.'
+          assign role_decision_note = 'Choose this when the setup needs to stay light, mobile, and ready for rooms that change.'
+          assign compare_cta_label = 'Compare with balanced and desk-ready options'
+          assign ownership_heading = 'Support should stay light, even on the move'
         when 'usb-c-pro-dock'
           assign use_owned_product_gallery = true
           assign setup_label = 'Desk-first setup'
           assign setup_statement = 'Broader connectivity for permanent desks that need displays, Ethernet, peripherals, and calmer cable control.'
           assign setup_environment = 'Built for users stepping up from lighter hubs into a more stable workstation setup.'
+          assign role_decision_note = 'Choose this when the desk stays put and the workflow needs a more complete connection hub.'
+          assign compare_cta_label = 'Compare with balanced and portable options'
+          assign ownership_heading = 'Workstation confidence should not stop at checkout'
         when 'usb-c-multimedia-hub'
           assign use_owned_product_gallery = true
           assign setup_label = 'Balanced everyday setup'
           assign setup_statement = 'One everyday hub for charging, HDMI, Ethernet, storage access, and hybrid desk routines.'
           assign setup_environment = 'Choose it when one compact adapter should cover the daily desk.'
+          assign role_decision_note = 'Choose this when one everyday hub should cover the desk without moving up to a full dock.'
+          assign compare_cta_label = 'Compare with travel and desk-ready options'
+          assign ownership_heading = 'Confidence stays close to the everyday setup'
       endcase
+
+      if support_summary_text != blank
+        assign ownership_copy = support_summary_text
+      endif
     -%}
 
     <div class="product-layout mt-6">
@@ -92,7 +109,7 @@
               {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
             {% elsif use_owned_product_gallery %}
               <div class="hero-media-frame p-2 lg:p-3">
-                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover' %}
+                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
               </div>
             {% else %}
               {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
@@ -146,6 +163,7 @@
               <p class="product-buybox-setup-label">{{ setup_label }}</p>
               <h1 class="section-heading mt-3">{{ product.title }}</h1>
               <p class="product-buybox-setup-statement">{{ setup_statement }}</p>
+              <p class="product-buybox-role-note">{{ role_decision_note }}</p>
             </div>
 
             <div class="product-buybox-price-row">
@@ -183,11 +201,19 @@
             </div>
 
             <div class="product-buybox-confidence">
-              <div>
-                {% if support_summary_text != blank %}
-                  {{ support_summary_text }}
+              <p class="product-buybox-confidence-kicker">{{ section.settings.support_eyebrow | default: 'Ownership confidence' }}</p>
+              <p class="product-buybox-confidence-heading">{{ ownership_heading }}</p>
+              <div class="product-buybox-confidence-copy">
+                {{ ownership_copy }}
+              </div>
+              <div class="product-buybox-confidence-links">
+                <a href="/pages/compatibility" class="collection-inline-link">Check compatibility</a>
+                {% if manual_count > 0 %}
+                  <a href="/pages/manuals" class="collection-inline-link">Open manuals</a>
+                {% elsif download_count > 0 %}
+                  <a href="/pages/downloads" class="collection-inline-link">View downloads</a>
                 {% else %}
-                  Check compatibility, manuals, and downloads before you order if your Mac, PC, tablet, display, or charging setup needs a closer fit check.
+                  <a href="/pages/support" class="collection-inline-link">Open support</a>
                 {% endif %}
               </div>
             </div>
@@ -225,7 +251,7 @@
               </div>
 
               <div class="product-form-meta">
-              <a href="/pages/compare" class="hero-secondary-action">See which EZQuest setup fits better</a>
+              <a href="/pages/compare" class="hero-secondary-action">{{ compare_cta_label }}</a>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -263,7 +289,7 @@
                 {% if support_summary_text != blank %}
                   {{ support_summary_text | truncatewords: 14 }}
                 {% else %}
-                  Manuals, downloads, and setup help available
+                  Manuals, downloads, and setup help stay close
                 {% endif %}
               </p>
             </div>

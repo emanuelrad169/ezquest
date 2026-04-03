@@ -4,8 +4,8 @@
       "type": "hero-home",
       "settings": {
         "eyebrow": "Premium connectivity",
-        "heading": "Premium connectivity for cleaner, calmer setups.",
-        "copy": "From compact travel hubs to desk-ready docks, EZQuest gives Mac, PC, and mobile workflows the ports, power, and support they need.",
+        "heading": "Connectivity built for the setups people actually use.",
+        "copy": "From travel hubs to desk-ready docks, EZQuest keeps ports, power, and support close to the work.",
         "primary_label": "Shop product families",
         "primary_url": "/collections/all",
         "secondary_label": "",
@@ -16,8 +16,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Premium connectivity",
-            "heading": "Premium connectivity for cleaner, calmer setups.",
-            "copy": "From compact travel hubs to desk-ready docks, EZQuest gives Mac, PC, and mobile workflows the ports, power, and support they need.",
+            "heading": "Connectivity built for the setups people actually use.",
+            "copy": "From travel hubs to desk-ready docks, EZQuest keeps ports, power, and support close to the work.",
             "primary_label": "Shop product families",
             "primary_url": "/collections/all",
             "secondary_label": "",
@@ -28,8 +28,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Choose by workflow",
-            "heading": "Choose the family that fits your workflow first.",
-            "copy": "Start with travel, desk, charging, or finishing pieces, then narrow the right mix of ports, power, and footprint.",
+            "heading": "Choose the family that fits the setup.",
+            "copy": "Start with travel, desk, power, or finishing pieces. Then narrow the right port mix and footprint.",
             "primary_label": "Browse product families",
             "primary_url": "/collections/all",
             "secondary_label": "",
@@ -40,8 +40,8 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Support stays close",
-            "heading": "Ownership stays easy because support stays part of the product.",
-            "copy": "Move from compatibility into manuals, downloads, and setup help without losing the thread of what you bought or why.",
+            "heading": "Support should stay part of the product.",
+            "copy": "Move from fit checks into manuals, downloads, and setup help without losing the thread.",
             "primary_label": "Open support",
             "primary_url": "/pages/support",
             "secondary_label": "",
@@ -54,8 +54,8 @@
     "categories": {
       "type": "home-collections-strip",
       "settings": {
-        "heading": "Start with the setup you can picture",
-        "copy": "Start with the family that matches your setup, then narrow by footprint, power path, and device mix."
+        "heading": "Start with the setup you can already picture",
+        "copy": "Choose the family first, then narrow the right footprint, power path, and device fit."
       },
       "blocks": {
         "category_1": {
@@ -89,8 +89,8 @@
       "type": "featured-product-carousel",
       "settings": {
         "eyebrow": "Best places to start",
-        "heading": "Three strong starting points for travel, everyday desks, and workstation setups",
-        "copy": "Use these core EZQuest picks to orient the lineup fast, then compare the port mix, power path, and support fit that match your workflow.",
+        "heading": "Start with the clearest first fit",
+        "copy": "Use these EZQuest picks to narrow the lineup fast, then compare the setup that fits best.",
         "link_label": "Shop all products",
         "link_url": "/collections/all",
         "collection": "all",
@@ -101,8 +101,8 @@
       "type": "support-card-grid",
       "settings": {
         "eyebrow": "Ownership confidence",
-        "heading": "Support should feel built in, not bolted on.",
-        "copy": "Move from compatibility before purchase into manuals, downloads, and setup help without losing the thread of what you bought or why.",
+        "heading": "Support should feel built in from the start.",
+        "copy": "Move from fit checks into manuals, downloads, and setup help without leaving the EZQuest path.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       },
@@ -110,12 +110,11 @@
       "block_order": []
     },
     "faq_home": {
-      "type": "faq-accordion",
+      "type": "home-confidence-grid",
       "settings": {
-        "heading": "FAQ",
-        "copy": "",
-        "structured_source": "global",
-        "faq_limit": 4
+        "eyebrow": "Shop with confidence",
+        "heading": "Confidence should stay close before and after checkout.",
+        "copy": "Keep shipping, warranty, manuals, downloads, and direct help close so the experience ends with confidence."
       },
       "blocks": {},
       "block_order": []

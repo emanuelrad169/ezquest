@@ -26,6 +26,8 @@
       assign section_heading = section.settings.heading | default: 'Compare the right fit'
       assign section_copy = section.settings.copy | default: 'See how this product stacks up against nearby options by setup, support, and buying fit.'
       assign section_eyebrow = section.settings.eyebrow
+      assign product_compare_note = 'Compare nearby options when you need one clearer decision between balanced, portable, and desk-ready setups.'
+      assign compare_page_note = 'Start with the setup role first, then use compatibility or support only to confirm the final fit.'
 
       if structured_group != blank
         if structured_group.products != blank and structured_group.products.value.count > 0
@@ -42,10 +44,29 @@
           assign section_copy = structured_group.description.value
         endif
       endif
+
+      if product != blank and compare_page_context == false
+        case product.handle
+          when 'usb-c-travel-hub'
+            assign section_heading = 'Compare the travel-first fit with broader EZQuest options'
+            assign section_copy = 'See whether the lighter mobile setup is the right call, or if a more balanced or desk-ready option fits better.'
+            assign product_compare_note = 'Use compare now if portability is the goal, but you still need to sanity-check displays, power, or desk permanence.'
+          when 'usb-c-pro-dock'
+            assign section_heading = 'Compare the desk-first fit with lighter EZQuest options'
+            assign section_copy = 'See whether the workflow really needs a fuller dock, or if a more balanced everyday or portable option fits better.'
+            assign product_compare_note = 'Use compare now if the desk is the center of the workflow, but you want to confirm that a full dock is worth the step up.'
+          when 'usb-c-multimedia-hub'
+            assign section_heading = 'Compare this balanced everyday fit with travel and desk-ready options'
+            assign section_copy = 'See whether this all-around hub covers the daily desk, or if the workflow needs something lighter or more permanent.'
+            assign product_compare_note = 'Use compare now if one compact hub feels close, but you still want to check whether the workflow leans more travel-first or desk-first.'
+        endcase
+      elsif compare_page_context
+        assign compare_page_note = 'Start with the role that matches the setup, then move into compatibility or support only when the final fit still needs a closer check.'
+      endif
     -%}
 
     <div class="section-intro product-compare-intro">
-      <div class="max-w-3xl">
+      <div class="max-w-3xl product-compare-intro-copy">
         {% if section_eyebrow != blank %}
           <p class="section-kicker">{{ section_eyebrow }}</p>
         {% endif %}
@@ -53,13 +74,19 @@
         <p class="section-copy mt-4">{{ section_copy }}</p>
         {% if compare_page_context and section.settings.source_note != blank %}
           <div class="support-utility-note mt-6">{{ section.settings.source_note }}</div>
+          <p class="product-compare-note">{{ compare_page_note }}</p>
+        {% elsif compare_page_context == false %}
+          <p class="product-compare-note">{{ product_compare_note }}</p>
         {% endif %}
       </div>
       <div class="section-intro-action">
         {% if compare_page_context %}
-          <a href="/pages/compatibility" class="site-meta-link">Need a fit check?</a>
+          <div class="compare-intro-actions">
+            <a href="/pages/compatibility" class="site-meta-link">Need a fit check?</a>
+            <a href="/pages/support" class="site-meta-link">Open support</a>
+          </div>
         {% else %}
-          <a href="/pages/compare" class="site-meta-link">Open full compare</a>
+          <a href="/pages/compare" class="site-meta-link">Compare nearby fits</a>
         {% endif %}
       </div>
     </div>
@@ -86,6 +113,9 @@
             assign compare_positioning = 'A premium EZQuest option for Apple, PC, and mobile workflows.'
             assign compare_best_for = 'Best when you need a balanced connectivity decision.'
             assign compare_variant_class = 'compare-card--balanced'
+            assign compare_handoff_label = 'Go deeper into this product'
+            assign compare_support_label = 'Check compatibility'
+            assign compare_support_url = '/pages/compatibility'
 
             if current_product_id != blank and compare_product.id == current_product_id
               assign is_primary_product = true
@@ -97,16 +127,22 @@
               assign compare_positioning = 'Built for lighter mobile setups, hotel desks, classroom work, and everyday carry.'
               assign compare_best_for = 'Best when portability matters more than maximum port count.'
               assign compare_variant_class = 'compare-card--portable'
+              assign compare_handoff_label = 'See the travel-first product page'
+              assign compare_support_label = 'Check mobile fit'
             elsif compare_product.handle contains 'multimedia'
               assign compare_recommendation_label = 'Most balanced'
               assign compare_positioning = 'The strongest all-around choice for hybrid desks that still need HDMI, charging, Ethernet, and accessory access.'
               assign compare_best_for = 'Best for everyday work where one compact hub should cover the whole desk.'
               assign compare_variant_class = 'compare-card--balanced'
+              assign compare_handoff_label = 'See the balanced everyday product page'
+              assign compare_support_label = 'Check everyday fit'
             elsif compare_product.handle contains 'pro-dock' or compare_product.type contains 'Dock'
               assign compare_recommendation_label = 'Most desk-ready'
               assign compare_positioning = 'Made for more permanent setups with broader connectivity, more peripherals, and a clearer workstation role.'
               assign compare_best_for = 'Best when the desk is the center of the workflow and the setup should stay connected.'
               assign compare_variant_class = 'compare-card--desk'
+              assign compare_handoff_label = 'See the desk-first product page'
+              assign compare_support_label = 'Check workstation fit'
             endif
 
             if compare_page_context and compare_product.handle contains 'multimedia'
@@ -134,7 +170,15 @@
             {% endif %}
             <p class="compare-context-note">
               {% if is_primary_product %}
-                Best if this setup already matches the ports, charging, and display path you need.
+                {% if compare_product.handle contains 'travel' %}
+                  Best if the setup needs to stay portable and ready for rooms that change.
+                {% elsif compare_product.handle contains 'multimedia' %}
+                  Best if one everyday hub should cover the daily desk without moving up to a full dock.
+                {% elsif compare_product.handle contains 'pro-dock' or compare_product.type contains 'Dock' %}
+                  Best if the desk stays put and the workflow needs a more complete connection hub.
+                {% else %}
+                  Best if this setup already matches the ports, charging, and display path you need.
+                {% endif %}
               {% elsif compare_support_summary != blank %}
                 {{ compare_support_summary | metafield_tag | strip_html | truncatewords: 14 }}
               {% elsif compare_compatibility_summary != blank %}
@@ -143,6 +187,10 @@
                 Compare this option by power, ports, and buying fit.
               {% endif %}
             </p>
+            <div class="compare-card-links">
+              <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
+              <a href="{{ compare_support_url }}" class="site-meta-link">{{ compare_support_label }}</a>
+            </div>
           </article>
         {% endfor %}
       {% else %}

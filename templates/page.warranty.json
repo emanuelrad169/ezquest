@@ -4,7 +4,7 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Warranty",
-        "heading": "Warranty coverage and claim guidance",
+        "heading": "Warranty guidance that keeps the next step clear",
         "copy": "Review coverage, claim expectations, and the steps customers should take before service begins.",
         "support_eyebrow": "Coverage guidance",
         "support_note": "See what is covered, what information to prepare, and when support should be contacted before a claim moves forward.",
@@ -57,7 +57,7 @@
         "intro_copy": "The full warranty policy, regional notes, and formal coverage language continue below.",
         "side_eyebrow": "Claim support",
         "side_heading": "Keep the claim path practical",
-        "side_copy": "Direct customers into contact or troubleshooting depending on the clearest next step in the claim flow.",
+        "side_copy": "Move into contact or troubleshooting depending on the clearest next step in the claim flow.",
         "side_link_label": "Contact support",
         "side_link_url": "/pages/contact"
       }
@@ -66,7 +66,7 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need troubleshooting first",
-        "heading": "Some warranty questions should resolve through support before service",
+        "heading": "Some warranty questions resolve through support first",
         "copy": "Some warranty questions are resolved faster through troubleshooting, compatibility review, or direct support.",
         "link_label": "Open troubleshooting",
         "link_url": "/pages/troubleshooting",

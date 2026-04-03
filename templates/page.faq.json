@@ -5,9 +5,9 @@
       "settings": {
         "eyebrow": "FAQ",
         "heading": "Common questions, answered clearly",
-        "copy": "Start here for the questions customers ask most often before moving into troubleshooting or direct support.",
+        "copy": "Start here for the questions customers ask most before moving into troubleshooting or support.",
         "support_eyebrow": "FAQ guidance",
-        "support_note": "Come here for the broad answers customers need before they commit, set up, or escalate. When a question becomes product-specific, the next support path stays close."
+        "support_note": "Come here for the broad answers first. When a question becomes product-specific, the next support path stays close."
       }
     },
     "faq": {
@@ -23,8 +23,8 @@
       "type": "support-link-grid",
       "settings": {
         "eyebrow": "Need another path",
-        "heading": "Move into the next ownership path when the FAQ is not enough",
-        "copy": "Keep the next step close when an answer leads into setup, compatibility, downloads, or direct support.",
+        "heading": "Move into the next support path when the FAQ is not enough",
+        "copy": "Keep the next step close when an answer leads into setup, compatibility, downloads, troubleshooting, or direct support.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -66,7 +66,7 @@
       "settings": {
         "eyebrow": "Still unresolved",
         "heading": "Need a deeper support path?",
-        "copy": "Move into downloads, manuals, troubleshooting, or direct contact when the FAQ page is not enough.",
+        "copy": "Move into downloads, manuals, troubleshooting, or direct contact when the FAQ is not enough.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Contact support",

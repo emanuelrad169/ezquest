@@ -4,6 +4,8 @@
   assign resolved_width = width | default: 1600
   assign resolved_height = height | default: 1200
   assign resolved_class = class | default: ''
+  assign resolved_loading = loading | default: 'lazy'
+  assign resolved_fetchpriority = fetchpriority | default: 'auto'
   assign visual_asset = blank
 
   case resolved_handle
@@ -24,7 +26,8 @@
     class="{{ resolved_class }}"
     width="{{ resolved_width }}"
     height="{{ resolved_height }}"
-    loading="lazy"
+    loading="{{ resolved_loading }}"
+    fetchpriority="{{ resolved_fetchpriority }}"
     decoding="async"
   >
 {% else %}
