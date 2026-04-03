@@ -3643,7 +3643,6 @@
 
   .home-hero-copy-heading {
     @apply mt-7 max-w-5xl font-bold text-white;
-    max-width: 8.85ch;
     font-size: 3.6rem;
     line-height: 0.92;
   }
