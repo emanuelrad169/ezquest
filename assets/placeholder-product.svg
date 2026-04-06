@@ -1,15 +1,52 @@
-<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="1200" rx="48" fill="#F8FAFC"/>
-  <rect width="1600" height="1200" rx="48" fill="url(#bg)"/>
-  <circle cx="304" cy="312" r="168" fill="#FACC15" fill-opacity="0.14"/>
-  <rect x="284" y="228" width="1032" height="744" rx="40" fill="#FFFFFF" fill-opacity="0.74"/>
-  <rect x="500" y="332" width="600" height="464" rx="40" fill="#CBD5E1"/>
-  <rect x="556" y="388" width="488" height="352" rx="28" fill="#E2E8F0"/>
-  <rect x="640" y="844" width="320" height="24" rx="12" fill="#0F172A" fill-opacity="0.24"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E2E8F0"/>
-      <stop offset="1" stop-color="#FFFFFF"/>
+    <style>
+      .st0 {
+        fill: url(#linear-gradient2);
+      }
+
+      .st1 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st2 {
+        fill: #f1c516;
+      }
+
+      .st3 {
+        fill: url(#linear-gradient);
+      }
+
+      .st4 {
+        fill: #f8fafc;
+      }
+
+      .st5 {
+        fill: #aab5c6;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="800" y1="1211.7" x2="800" y2="-11.7" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#969eaa"/>
+      <stop offset=".6" stop-color="#364152"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient1" x1="500" y1="564" x2="1100" y2="564" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b8c2d0"/>
+      <stop offset=".5" stop-color="#677387"/>
+      <stop offset="1" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient2" x1="640" y1="858.4" x2="960" y2="858.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d2dae6"/>
+      <stop offset=".5" stop-color="#7d889a"/>
+      <stop offset="1" stop-color="#384355"/>
     </linearGradient>
   </defs>
+  <rect class="st4" width="1600" height="1200" rx="48" ry="48"/>
+  <rect class="st3" width="1600" height="1200"/>
+  <rect class="st1" x="500" y="332" width="600" height="464" rx="40" ry="40"/>
+  <rect class="st5" x="556" y="388" width="488" height="352" rx="28" ry="28"/>
+  <path class="st0" d="M652,844h296c6.6,0,12,6.4,12,14.4h0c0,7.9-5.4,14.4-12,14.4h-296c-6.6,0-12-6.4-12-14.4h0c0-7.9,5.4-14.4,12-14.4Z"/>
+  <circle class="st2" cx="506.3" cy="337.3" r="41.2"/>
 </svg>

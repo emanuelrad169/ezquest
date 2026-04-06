@@ -1,17 +1,60 @@
-<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="1200" rx="48" fill="#F8FAFC"/>
-  <rect width="1600" height="1200" rx="48" fill="url(#bg)"/>
-  <circle cx="1292" cy="220" r="220" fill="#FACC15" fill-opacity="0.16"/>
-  <rect x="140" y="168" width="220" height="16" rx="8" fill="#FACC15"/>
-  <rect x="140" y="236" width="440" height="88" rx="24" fill="#0F172A" fill-opacity="0.84"/>
-  <rect x="140" y="364" width="360" height="42" rx="21" fill="#334155" fill-opacity="0.28"/>
-  <rect x="140" y="492" width="560" height="472" rx="36" fill="#FFFFFF" fill-opacity="0.78"/>
-  <rect x="772" y="492" width="688" height="216" rx="36" fill="#FFFFFF" fill-opacity="0.78"/>
-  <rect x="772" y="748" width="688" height="216" rx="36" fill="#FFFFFF" fill-opacity="0.62"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#CBD5E1"/>
-      <stop offset="1" stop-color="#F8FAFC"/>
+    <style>
+      .st0 {
+        fill: #334155;
+        fill-opacity: .3;
+      }
+
+      .st1 {
+        fill: url(#linear-gradient2);
+      }
+
+      .st2 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st3 {
+        fill: url(#linear-gradient3);
+      }
+
+      .st4, .st5 {
+        fill: #facc15;
+      }
+
+      .st6 {
+        fill: #f8fafc;
+        fill-opacity: .2;
+      }
+
+      .st7 {
+        fill: url(#linear-gradient);
+      }
+
+      .st5 {
+        fill-opacity: .2;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0" y1="597.4" x2="1600" y2="597.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".4" stop-color="#364152"/>
+      <stop offset="1" stop-color="#969eaa"/>
     </linearGradient>
+    <linearGradient id="linear-gradient1" x1="140" y1="728" x2="700" y2="728" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dce5f0" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#b8c4d3" stop-opacity=".4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient2" x1="772" y1="600" x2="1460" y2="600" xlink:href="#linear-gradient1"/>
+    <linearGradient id="linear-gradient3" x1="772" y1="856" x2="1460" y2="856" xlink:href="#linear-gradient1"/>
   </defs>
+  <rect class="st7" y="-2.6" width="1600" height="1200"/>
+  <circle class="st5" cx="1292" cy="220" r="220"/>
+  <path class="st4" d="M148,168h204c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-204c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
+  <rect class="st6" x="140" y="236" width="440" height="88" rx="24" ry="24"/>
+  <path class="st0" d="M161,364h318c11.6,0,21,9.4,21,21h0c0,11.6-9.4,21-21,21H161c-11.6,0-21-9.4-21-21h0c0-11.6,9.4-21,21-21Z"/>
+  <rect class="st2" x="140" y="492" width="560" height="472" rx="36" ry="36"/>
+  <rect class="st1" x="772" y="492" width="688" height="216" rx="36" ry="36"/>
+  <rect class="st3" x="772" y="748" width="688" height="216" rx="36" ry="36"/>
 </svg>

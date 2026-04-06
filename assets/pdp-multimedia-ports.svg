@@ -1,49 +1,58 @@
-<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="1200" rx="44" fill="#F8FAFC"/>
-  <rect width="1600" height="1200" rx="44" fill="url(#bg)"/>
-  <ellipse cx="1230" cy="172" rx="290" ry="196" fill="url(#glow)"/>
-  <g filter="url(#shadow)">
-    <rect x="368" y="430" width="864" height="310" rx="78" fill="url(#body)"/>
-    <rect x="430" y="486" width="740" height="198" rx="54" fill="url(#face)"/>
-    <rect x="514" y="562" width="126" height="44" rx="22" fill="#172031" fill-opacity="0.54"/>
-    <rect x="664" y="562" width="160" height="44" rx="22" fill="#172031" fill-opacity="0.54"/>
-    <rect x="850" y="562" width="94" height="44" rx="22" fill="#172031" fill-opacity="0.54"/>
-    <rect x="968" y="562" width="94" height="44" rx="22" fill="#172031" fill-opacity="0.54"/>
-    <rect x="1088" y="554" width="18" height="60" rx="9" fill="#D6DEE8"/>
-  </g>
-  <rect x="254" y="874" width="540" height="2" rx="1" fill="url(#line)"/>
-  <circle cx="386" cy="446" r="10" fill="#FACC15"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
   <defs>
-    <linearGradient id="bg" x1="208" y1="96" x2="1400" y2="1114" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F4F7FB"/>
-      <stop offset="1" stop-color="#D8E0EB"/>
+    <style>
+      .st0 {
+        fill: url(#linear-gradient2);
+      }
+
+      .st1 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st2 {
+        fill: #facc15;
+      }
+
+      .st3 {
+        fill: url(#linear-gradient);
+      }
+
+      .st4 {
+        fill: #172031;
+        fill-opacity: .5;
+      }
+
+      .st5 {
+        fill: #d6dee8;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-.5" y1="599.5" x2="1599.5" y2="599.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".4" stop-color="#364152"/>
+      <stop offset="1" stop-color="#969eaa"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1230 172) rotate(145.784) scale(366.656 248.972)">
-      <stop stop-color="#FFFFFF" stop-opacity="0.88"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="body" x1="392" y1="436" x2="1190" y2="744" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D6DEE8"/>
-      <stop offset="0.54" stop-color="#919CAE"/>
-      <stop offset="1" stop-color="#4D596C"/>
+    <linearGradient id="linear-gradient1" x1="394.8" y1="771.4" x2="1192.8" y2="463.4" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d6dee8"/>
+      <stop offset=".5" stop-color="#919cae"/>
+      <stop offset="1" stop-color="#4d596c"/>
     </linearGradient>
-    <linearGradient id="face" x1="430" y1="486" x2="1170" y2="684" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="0.5" stop-color="#D3DBE6"/>
-      <stop offset="1" stop-color="#BAC5D4"/>
+    <linearGradient id="linear-gradient2" x1="430" y1="714" x2="1170" y2="516" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".5" stop-color="#d3dbe6"/>
+      <stop offset="1" stop-color="#bac5d4"/>
     </linearGradient>
-    <linearGradient id="line" x1="254" y1="875" x2="794" y2="875" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#94A3B8" stop-opacity="0.38"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="shadow" x="314" y="392" width="966" height="416" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-14" dy="24"/>
-      <feGaussianBlur stdDeviation="20"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.16 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-    </filter>
   </defs>
+  <rect class="st3" x="-.5" y="-.5" width="1600" height="1200"/>
+  <g>
+    <rect class="st1" x="368" y="430" width="864" height="310" rx="78" ry="78"/>
+    <rect class="st0" x="430" y="486" width="740" height="198" rx="54" ry="54"/>
+    <path class="st4" d="M536,562h82c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-82c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
+    <path class="st4" d="M686,562h116c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-116c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
+    <path class="st4" d="M872,562h50c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-50c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
+    <path class="st4" d="M990,562h50c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-50c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
+    <path class="st5" d="M1097,554h0c5,0,9,4,9,9v42c0,5-4,9-9,9h0c-5,0-9-4-9-9v-42c0-5,4-9,9-9Z"/>
+  </g>
+  <circle class="st2" cx="386" cy="446" r="30.9"/>
 </svg>

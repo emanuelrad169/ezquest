@@ -1,113 +1,160 @@
-<svg width="1440" height="1080" viewBox="0 0 1440 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1440" height="1080" rx="56" fill="#F4F7FB"/>
-  <rect width="1440" height="1080" rx="56" fill="url(#bg)"/>
-  <ellipse cx="1192" cy="172" rx="356" ry="210" fill="url(#topGlow)"/>
-  <ellipse cx="316" cy="932" rx="340" ry="210" fill="url(#softGlow)"/>
-  <path d="M156 796C368 728 688 718 980 764C1110 784 1226 820 1310 862V990H156V796Z" fill="url(#deskPlane)"/>
-  <path d="M168 806H1272" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
-  <g filter="url(#shadowLarge)">
-    <rect x="706" y="212" width="474" height="394" rx="42" fill="url(#screenShell)"/>
-    <rect x="748" y="252" width="390" height="254" rx="28" fill="url(#screenGlow)"/>
-    <rect x="806" y="642" width="274" height="30" rx="15" fill="#8A95A9"/>
-    <rect x="762" y="670" width="362" height="20" rx="10" fill="#CBD5E1"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1440 1080">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st1 {
+        fill: url(#linear-gradient3);
+      }
+
+      .st2 {
+        fill: url(#linear-gradient6);
+      }
+
+      .st3 {
+        fill: url(#linear-gradient5);
+      }
+
+      .st4 {
+        fill: url(#linear-gradient4);
+      }
+
+      .st5 {
+        fill: #facc15;
+      }
+
+      .st6 {
+        fill-opacity: .3;
+      }
+
+      .st6, .st7 {
+        fill: #f8fafc;
+      }
+
+      .st7 {
+        fill-opacity: .5;
+      }
+
+      .st8 {
+        fill-opacity: .3;
+      }
+
+      .st8, .st9, .st10 {
+        fill: #64748b;
+      }
+
+      .st9 {
+        fill-opacity: .2;
+      }
+
+      .st10 {
+        fill-opacity: .2;
+      }
+
+      .st11 {
+        fill: url(#linear-gradient);
+      }
+
+      .st12 {
+        fill: #fff7d1;
+      }
+
+      .st13 {
+        fill: #cbd5e1;
+      }
+
+      .st14 {
+        fill: #8a95a9;
+      }
+
+      .st15 {
+        fill: #fde68a;
+      }
+
+      .st16 {
+        fill: none;
+        stroke: url(#linear-gradient2);
+        stroke-linecap: round;
+        stroke-width: 4px;
+      }
+
+      .st17 {
+        opacity: .9;
+      }
+
+      .st18 {
+        opacity: .9;
+      }
+
+      .st19 {
+        fill: #111827;
+        fill-opacity: .4;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0" y1="540" x2="1440" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".4" stop-color="#364152"/>
+      <stop offset="1" stop-color="#969eaa"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient1" x1="-3.1" y1="222.6" x2="1436.9" y2="-4.5" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dbe4ef" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#94a3b8" stop-opacity=".2"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient2" x1="168" y1="274" x2="1272" y2="274" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#facc15" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#facc15" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#cbd5e1" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient3" x1="741.1" y1="851" x2="1165.1" y2="473" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#cbd5e1"/>
+      <stop offset=".6" stop-color="#64748b"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient4" x1="748" y1="828" x2="1138" y2="574" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset=".5" stop-color="#cbd5e1"/>
+      <stop offset="1" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient5" x1="593.6" y1="524.2" x2="1083.6" y2="334.2" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d6dee8"/>
+      <stop offset=".6" stop-color="#7a8698"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient6" x1="213.7" y1="762.9" x2="479.7" y2="432.9" xlink:href="#linear-gradient3"/>
+  </defs>
+  <rect class="st11" width="1440" height="1080"/>
+  <path class="st0" d="M0,837.9c264.5-84.9,663.8-97.3,1028.2-39.9,162.2,25,307,69.9,411.8,122.3v159.7H0v-242.1Z"/>
+  <path class="st16" d="M168,806h1104"/>
+  <g>
+    <rect class="st1" x="706" y="212" width="474" height="394" rx="42" ry="42"/>
+    <rect class="st4" x="748" y="252" width="390" height="254" rx="28" ry="28"/>
+    <path class="st14" d="M821,642h244c8.3,0,15,6.7,15,15h0c0,8.3-6.7,15-15,15h-244c-8.3,0-15-6.7-15-15h0c0-8.3,6.7-15,15-15Z"/>
+    <path class="st13" d="M772,670h342c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-342c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
   </g>
-  <g filter="url(#shadowMedium)">
-    <rect x="574" y="548" width="520" height="202" rx="36" fill="url(#dockBody)"/>
-    <rect x="616" y="590" width="312" height="16" rx="8" fill="#F8FAFC" fill-opacity="0.48"/>
-    <rect x="616" y="634" width="218" height="12" rx="6" fill="#F8FAFC" fill-opacity="0.26"/>
-    <g opacity="0.86">
-      <rect x="632" y="694" width="70" height="22" rx="11" fill="#111827" fill-opacity="0.38"/>
-      <rect x="718" y="694" width="92" height="22" rx="11" fill="#111827" fill-opacity="0.38"/>
-      <rect x="826" y="694" width="54" height="22" rx="11" fill="#111827" fill-opacity="0.38"/>
-      <rect x="896" y="694" width="54" height="22" rx="11" fill="#111827" fill-opacity="0.38"/>
+  <g>
+    <rect class="st3" x="574" y="548" width="520" height="202" rx="36" ry="36"/>
+    <path class="st7" d="M624,590h296c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-296c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
+    <path class="st6" d="M622,634h206c3.3,0,6,2.7,6,6h0c0,3.3-2.7,6-6,6h-206c-3.3,0-6-2.7-6-6h0c0-3.3,2.7-6,6-6Z"/>
+    <g class="st18">
+      <path class="st19" d="M643,694h48c6.1,0,11,4.9,11,11h0c0,6.1-4.9,11-11,11h-48c-6.1,0-11-4.9-11-11h0c0-6.1,4.9-11,11-11Z"/>
+      <path class="st19" d="M729,694h70c6.1,0,11,4.9,11,11h0c0,6.1-4.9,11-11,11h-70c-6.1,0-11-4.9-11-11h0c0-6.1,4.9-11,11-11Z"/>
+      <path class="st19" d="M837,694h32c6.1,0,11,4.9,11,11h0c0,6.1-4.9,11-11,11h-32c-6.1,0-11-4.9-11-11h0c0-6.1,4.9-11,11-11Z"/>
+      <path class="st19" d="M907,694h32c6.1,0,11,4.9,11,11h0c0,6.1-4.9,11-11,11h-32c-6.1,0-11-4.9-11-11h0c0-6.1,4.9-11,11-11Z"/>
     </g>
   </g>
-  <g filter="url(#shadowCard)">
-    <rect x="196" y="306" width="298" height="348" rx="34" fill="url(#cardShell)"/>
-    <rect x="234" y="350" width="222" height="16" rx="8" fill="#64748B" fill-opacity="0.3"/>
-    <rect x="234" y="398" width="162" height="14" rx="7" fill="#64748B" fill-opacity="0.18"/>
-    <rect x="234" y="470" width="144" height="122" rx="20" fill="#F8FAFC"/>
-    <path d="M270 490H342L384 532V572C384 580.837 376.837 588 368 588H270C261.163 588 254 580.837 254 572V506C254 497.163 261.163 490 270 490Z" fill="url(#folder)"/>
-    <path d="M342 490V522C342 527.523 346.477 532 352 532H384" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
-    <rect x="234" y="622" width="168" height="14" rx="7" fill="#64748B" fill-opacity="0.16"/>
+  <g>
+    <rect class="st2" x="196" y="306" width="298" height="348" rx="34" ry="34"/>
+    <path class="st8" d="M242,350h206c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-206c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
+    <path class="st10" d="M241,398h148c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-148c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
+    <path class="st9" d="M241,622h154c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-154c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
   </g>
-  <g opacity="0.92">
-    <circle cx="1132" cy="206" r="12" fill="#FACC15"/>
-    <circle cx="576" cy="828" r="8" fill="#FDE68A"/>
-    <circle cx="182" cy="770" r="10" fill="#FFF7D1"/>
+  <g class="st17">
+    <circle class="st5" cx="1132" cy="206" r="12"/>
+    <circle class="st15" cx="576" cy="828" r="8"/>
+    <circle class="st12" cx="182" cy="770" r="10"/>
   </g>
-  <defs>
-    <linearGradient id="bg" x1="186" y1="104" x2="1254" y2="990" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="0.58" stop-color="#EEF2F8"/>
-      <stop offset="1" stop-color="#E2E8F0"/>
-    </linearGradient>
-    <radialGradient id="topGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1192 172) rotate(132.948) scale(434.561 282.487)">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="softGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(316 932) rotate(90) scale(210 340)">
-      <stop stop-color="#FACC15" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="deskPlane" x1="156" y1="796" x2="1310" y2="978" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#DBE4EF" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.18"/>
-    </linearGradient>
-    <linearGradient id="line" x1="168" y1="808" x2="1272" y2="808" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0"/>
-      <stop offset="0.48" stop-color="#FACC15" stop-opacity="0.38"/>
-      <stop offset="1" stop-color="#CBD5E1" stop-opacity="0.28"/>
-    </linearGradient>
-    <linearGradient id="screenShell" x1="742" y1="228" x2="1166" y2="606" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#CBD5E1"/>
-      <stop offset="0.6" stop-color="#64748B"/>
-      <stop offset="1" stop-color="#334155"/>
-    </linearGradient>
-    <linearGradient id="screenGlow" x1="748" y1="252" x2="1138" y2="506" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8FAFC"/>
-      <stop offset="0.52" stop-color="#CBD5E1"/>
-      <stop offset="1" stop-color="#94A3B8"/>
-    </linearGradient>
-    <linearGradient id="dockBody" x1="592" y1="560" x2="1082" y2="750" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D6DEE8"/>
-      <stop offset="0.56" stop-color="#7A8698"/>
-      <stop offset="1" stop-color="#334155"/>
-    </linearGradient>
-    <linearGradient id="cardShell" x1="210" y1="320" x2="476" y2="650" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#EEF2F8"/>
-    </linearGradient>
-    <linearGradient id="folder" x1="254" y1="490" x2="384" y2="588" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E2E8F0"/>
-      <stop offset="1" stop-color="#CBD5E1"/>
-    </linearGradient>
-    <filter id="shadowLarge" x="646" y="168" width="596" height="594" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-10" dy="24"/>
-      <feGaussianBlur stdDeviation="24"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0980392 0 0 0 0 0.188235 0 0 0 0.18 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-    </filter>
-    <filter id="shadowMedium" x="534" y="520" width="610" height="290" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-8" dy="20"/>
-      <feGaussianBlur stdDeviation="16"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0980392 0 0 0 0 0.188235 0 0 0 0.16 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-    </filter>
-    <filter id="shadowCard" x="166" y="276" width="378" height="438" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="18"/>
-      <feGaussianBlur stdDeviation="15"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0980392 0 0 0 0 0.188235 0 0 0 0.1 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-    </filter>
-  </defs>
 </svg>

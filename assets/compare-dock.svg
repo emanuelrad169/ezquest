@@ -1,89 +1,102 @@
-<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="1200" rx="56" fill="#F3F7FB"/>
-  <rect x="88" y="88" width="1424" height="1024" rx="52" fill="url(#shell)" stroke="#E5EBF3"/>
-  <ellipse cx="1206" cy="176" rx="450" ry="304" fill="url(#glow)"/>
-  <ellipse cx="1136" cy="1008" rx="530" ry="170" fill="url(#baseGlow)"/>
-  <rect x="132" y="182" width="214" height="8" rx="4" fill="url(#accent)"/>
-  <path d="M96 988C292 912 514 880 762 884C1010 888 1228 944 1504 1048V1112H96V988Z" fill="url(#plane)"/>
-  <g filter="url(#shadowMonitor)">
-    <rect x="1010" y="220" width="300" height="194" rx="30" fill="url(#monitor)"/>
-    <rect x="1062" y="262" width="196" height="110" rx="18" fill="#F8FAFC" fill-opacity="0.18"/>
-  </g>
-  <g filter="url(#shadowDock)">
-    <rect x="784" y="346" width="430" height="636" rx="82" fill="url(#dockBody)"/>
-    <rect x="836" y="396" width="326" height="534" rx="58" fill="url(#dockFace)"/>
-    <rect x="878" y="448" width="214" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.3"/>
-    <rect x="878" y="502" width="158" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.18"/>
-    <rect x="858" y="614" width="282" height="154" rx="46" fill="url(#screenGlow)"/>
-    <rect x="910" y="656" width="178" height="68" rx="26" fill="#F8FAFC" fill-opacity="0.18"/>
-    <rect x="820" y="754" width="30" height="102" rx="15" fill="#A8B4C6"/>
-    <rect x="820" y="876" width="30" height="48" rx="15" fill="#A8B4C6"/>
-    <rect x="1138" y="656" width="34" height="74" rx="17" fill="#9AA6BA"/>
-    <rect x="1138" y="748" width="34" height="92" rx="17" fill="#9AA6BA"/>
-    <rect x="1138" y="856" width="34" height="68" rx="17" fill="#9AA6BA"/>
-  </g>
-  <path d="M1122 956C1204 930 1298 932 1388 966" stroke="url(#cable)" stroke-width="14" stroke-linecap="round"/>
-  <circle cx="806" cy="372" r="10" fill="#FACC15"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
   <defs>
-    <linearGradient id="shell" x1="198" y1="100" x2="1402" y2="1124" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8FAFD"/>
-      <stop offset="1" stop-color="#DEE6F1"/>
+    <style>
+      .st0 {
+        fill: url(#linear-gradient2);
+      }
+
+      .st1 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st2 {
+        fill: url(#linear-gradient3);
+      }
+
+      .st3 {
+        fill: url(#linear-gradient4);
+      }
+
+      .st4 {
+        fill: #facc15;
+      }
+
+      .st5 {
+        fill-opacity: .2;
+      }
+
+      .st5, .st6 {
+        fill: #f8fafc;
+      }
+
+      .st6 {
+        fill-opacity: .3;
+      }
+
+      .st7 {
+        fill: url(#radial-gradient);
+      }
+
+      .st8 {
+        fill: url(#linear-gradient);
+      }
+
+      .st9 {
+        fill: #a8b4c6;
+      }
+
+      .st10 {
+        fill: #9aa6ba;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0" y1="600" x2="1600" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".4" stop-color="#364152"/>
+      <stop offset="1" stop-color="#969eaa"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1206 176) rotate(145.126) scale(502.811 338.379)">
-      <stop stop-color="#FFFFFF" stop-opacity="0.92"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="baseGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1136 1008) rotate(90) scale(170 530)">
-      <stop stop-color="#FACC15" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="accent" x1="132" y1="186" x2="346" y2="186" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    <linearGradient id="linear-gradient1" x1="2.1" y1="158.2" x2="1602.1" y2="17.3" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d6dfea" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#95a4b6" stop-opacity=".2"/>
     </linearGradient>
-    <linearGradient id="plane" x1="96" y1="988" x2="1504" y2="1112" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D6DFEA" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#95A4B6" stop-opacity="0.18"/>
+    <linearGradient id="linear-gradient2" x1="1107" y1="1046.7" x2="1435" y2="826.4" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e5edf6" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#bdcad9" stop-opacity=".4"/>
     </linearGradient>
-    <linearGradient id="monitor" x1="1024" y1="230" x2="1298" y2="414" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E5EDF6" stop-opacity="0.86"/>
-      <stop offset="1" stop-color="#BDCAD9" stop-opacity="0.42"/>
-    </linearGradient>
-    <linearGradient id="dockBody" x1="812" y1="360" x2="1188" y2="982" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D3DBE7"/>
-      <stop offset="0.54" stop-color="#7C879A"/>
+    <linearGradient id="linear-gradient3" x1="855.1" y1="894.6" x2="1306.4" y2="147.9" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d3dbe7"/>
+      <stop offset=".5" stop-color="#7c879a"/>
       <stop offset="1" stop-color="#344153"/>
     </linearGradient>
-    <linearGradient id="dockFace" x1="836" y1="396" x2="1162" y2="930" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#AFBBCB"/>
-      <stop offset="0.48" stop-color="#5C687B"/>
-      <stop offset="1" stop-color="#212D3C"/>
+    <linearGradient id="linear-gradient4" x1="881.4" y1="849" x2="1272" y2="209.2" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#afbbcb"/>
+      <stop offset=".5" stop-color="#5c687b"/>
+      <stop offset="1" stop-color="#212d3c"/>
     </linearGradient>
-    <radialGradient id="screenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(998 691) rotate(90) scale(77 141)">
-      <stop stop-color="#F8FAFC" stop-opacity="0.36"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.16"/>
+    <radialGradient id="radial-gradient" cx="490.8" cy="939" fx="490.8" fy="939" r="1.2" gradientTransform="translate(-131330 -37089) rotate(90) scale(77 -141)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#94a3b8" stop-opacity=".2"/>
     </radialGradient>
-    <linearGradient id="cable" x1="1122" y1="962" x2="1388" y2="962" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0.74"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.24"/>
-    </linearGradient>
-    <filter id="shadowMonitor" x="984" y="190" width="352" height="256" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="16"/>
-      <feGaussianBlur stdDeviation="13"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.12 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-    </filter>
-    <filter id="shadowDock" x="734" y="310" width="532" height="726" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-18" dy="28"/>
-      <feGaussianBlur stdDeviation="22"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.160784 0 0 0 0.2 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-    </filter>
   </defs>
+  <rect class="st8" width="1600" height="1200"/>
+  <path class="st1" d="M0,1066c222.7-86.4,475-122.7,756.8-118.2s529.5,68.2,843.2,186.4v72.7H0v-140.9Z"/>
+  <g>
+    <rect class="st0" x="1089.7" y="146.2" width="355.3" height="229.8" rx="30" ry="30"/>
+    <rect class="st5" x="1151.3" y="195.9" width="232.1" height="130.3" rx="18" ry="18"/>
+  </g>
+  <g>
+    <rect class="st2" x="822.1" y="295.4" width="509.3" height="753.3" rx="82" ry="82"/>
+    <rect class="st3" x="883.7" y="354.6" width="386.1" height="632.5" rx="58" ry="58"/>
+    <path class="st6" d="M944.1,416.2h232.1c5.9,0,10.7,4.8,10.7,10.7h0c0,5.9-4.8,10.7-10.7,10.7h-232.1c-5.9,0-10.7-4.8-10.7-10.7h0c0-5.9,4.8-10.7,10.7-10.7Z"/>
+    <path class="st5" d="M941.7,480.2h170.6c4.6,0,8.3,3.7,8.3,8.3h0c0,4.6-3.7,8.3-8.3,8.3h-170.6c-4.6,0-8.3-3.7-8.3-8.3h0c0-4.6,3.7-8.3,8.3-8.3Z"/>
+    <rect class="st7" x="909.7" y="612.8" width="334" height="182.4" rx="46" ry="46"/>
+    <rect class="st5" x="971.3" y="662.6" width="210.8" height="80.5" rx="26" ry="26"/>
+    <path class="st9" d="M882.5,778.7h0c9.8,0,17.8,8,17.8,17.8v85.3c0,9.8-8,17.8-17.8,17.8h0c-9.8,0-17.8-8-17.8-17.8v-85.3c0-9.8,8-17.8,17.8-17.8Z"/>
+    <path class="st9" d="M882.5,923.2h0c9.8,0,17.8,8,17.8,17.8v21.3c0,9.8-8,17.8-17.8,17.8h0c-9.8,0-17.8-8-17.8-17.8v-21.3c0-9.8,8-17.8,17.8-17.8Z"/>
+    <path class="st10" d="M1261.5,662.6h0c11.1,0,20.1,9,20.1,20.1v47.4c0,11.1-9,20.1-20.1,20.1h0c-11.1,0-20.1-9-20.1-20.1v-47.4c0-11.1,9-20.1,20.1-20.1Z"/>
+    <path class="st10" d="M1261.5,771.6h0c11.1,0,20.1,9,20.1,20.1v68.7c0,11.1-9,20.1-20.1,20.1h0c-11.1,0-20.1-9-20.1-20.1v-68.7c0-11.1,9-20.1,20.1-20.1Z"/>
+    <path class="st10" d="M1261.5,899.5h0c11.1,0,20.1,9,20.1,20.1v40.3c0,11.1-9,20.1-20.1,20.1h0c-11.1,0-20.1-9-20.1-20.1v-40.3c0-11.1,9-20.1,20.1-20.1Z"/>
+  </g>
+  <circle class="st4" cx="841" cy="314.2" r="53.2"/>
 </svg>

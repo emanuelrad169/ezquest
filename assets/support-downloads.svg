@@ -1,80 +1,135 @@
-<svg width="1440" height="1080" viewBox="0 0 1440 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1440" height="1080" rx="56" fill="#F5F8FC"/>
-  <rect width="1440" height="1080" rx="56" fill="url(#bg)"/>
-  <ellipse cx="1150" cy="146" rx="320" ry="188" fill="url(#glow)"/>
-  <ellipse cx="278" cy="914" rx="312" ry="176" fill="url(#amber)"/>
-  <path d="M170 810C428 734 778 728 1118 778C1190 788 1256 802 1312 826V1000H170V810Z" fill="url(#desk)"/>
-  <g filter="url(#shadow)">
-    <rect x="252" y="298" width="426" height="500" rx="40" fill="url(#panel)"/>
-    <rect x="304" y="360" width="322" height="20" rx="10" fill="#CBD5E1"/>
-    <rect x="304" y="414" width="252" height="16" rx="8" fill="#CBD5E1" fill-opacity="0.72"/>
-    <rect x="304" y="500" width="112" height="112" rx="24" fill="#FFFFFF"/>
-    <path d="M360 520V588" stroke="#94A3B8" stroke-width="18" stroke-linecap="round"/>
-    <path d="M328 556L360 590L392 556" stroke="#334155" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="304" y="648" width="270" height="16" rx="8" fill="#CBD5E1" fill-opacity="0.66"/>
-    <rect x="304" y="690" width="194" height="14" rx="7" fill="#CBD5E1" fill-opacity="0.44"/>
-  </g>
-  <g filter="url(#shadowSoft)">
-    <rect x="788" y="330" width="430" height="356" rx="38" fill="url(#module)"/>
-    <rect x="836" y="380" width="320" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.48"/>
-    <rect x="836" y="430" width="236" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.28"/>
-    <g opacity="0.88">
-      <rect x="848" y="550" width="82" height="24" rx="12" fill="#0F172A" fill-opacity="0.34"/>
-      <rect x="946" y="550" width="114" height="24" rx="12" fill="#0F172A" fill-opacity="0.34"/>
-      <rect x="1076" y="550" width="62" height="24" rx="12" fill="#0F172A" fill-opacity="0.34"/>
-    </g>
-    <path d="M986 662C1062 644 1164 648 1246 680" stroke="url(#cable)" stroke-width="14" stroke-linecap="round"/>
-  </g>
-  <circle cx="1220" cy="244" r="12" fill="#FACC15"/>
-  <circle cx="734" cy="764" r="8" fill="#FFF1B8"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1440 1080">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
   <defs>
-    <linearGradient id="bg" x1="160" y1="120" x2="1278" y2="998" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="0.58" stop-color="#EEF2F8"/>
-      <stop offset="1" stop-color="#E2E8F0"/>
+    <style>
+      .st0 {
+        fill: #0f172a;
+        fill-opacity: .3;
+      }
+
+      .st1 {
+        fill: url(#linear-gradient2);
+      }
+
+      .st2 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st3 {
+        fill: url(#linear-gradient3);
+      }
+
+      .st4 {
+        stroke: #334155;
+        stroke-linejoin: round;
+      }
+
+      .st4, .st5 {
+        stroke-width: 18px;
+      }
+
+      .st4, .st5, .st6 {
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      .st7 {
+        fill: #facc15;
+      }
+
+      .st8 {
+        fill-opacity: .3;
+      }
+
+      .st8, .st9 {
+        fill: #f8fafc;
+      }
+
+      .st9 {
+        fill-opacity: .5;
+      }
+
+      .st5 {
+        stroke: #94a3b8;
+      }
+
+      .st10 {
+        fill: url(#linear-gradient);
+      }
+
+      .st11 {
+        fill-opacity: .7;
+      }
+
+      .st11, .st12, .st13, .st14 {
+        fill: #cbd5e1;
+      }
+
+      .st12 {
+        fill-opacity: .7;
+      }
+
+      .st15 {
+        fill: #fff1b8;
+      }
+
+      .st13 {
+        fill-opacity: .4;
+      }
+
+      .st6 {
+        stroke: url(#linear-gradient4);
+        stroke-width: 14px;
+      }
+
+      .st16 {
+        opacity: .9;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-1" y1="539.5" x2="1440" y2="539.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".4" stop-color="#364152"/>
+      <stop offset="1" stop-color="#969eaa"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1150 146) rotate(135.359) scale(386.174 252.262)">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(278 914) rotate(90) scale(176 312)">
-      <stop stop-color="#FACC15" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="desk" x1="170" y1="810" x2="1312" y2="990" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#DBE4EF" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.18"/>
+    <linearGradient id="linear-gradient1" x1="-.8" y1="234.5" x2="1439.2" y2="7.5" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dbe4ef" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#94a3b8" stop-opacity=".2"/>
     </linearGradient>
-    <linearGradient id="panel" x1="272" y1="320" x2="646" y2="786" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#EEF2F8"/>
-    </linearGradient>
-    <linearGradient id="module" x1="806" y1="346" x2="1194" y2="686" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D6DEE8"/>
-      <stop offset="0.52" stop-color="#7A8698"/>
+    <linearGradient id="linear-gradient2" x1="278.1" y1="764.9" x2="652.1" y2="298.9" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d6dee8"/>
+      <stop offset=".5" stop-color="#7a8698"/>
       <stop offset="1" stop-color="#334155"/>
     </linearGradient>
-    <linearGradient id="cable" x1="986" y1="664" x2="1246" y2="680" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0.64"/>
-      <stop offset="1" stop-color="#CBD5E1" stop-opacity="0.24"/>
+    <linearGradient id="linear-gradient3" x1="811.3" y1="740" x2="1199.3" y2="400" xlink:href="#linear-gradient2"/>
+    <linearGradient id="linear-gradient4" x1="986.6" y1="425.8" x2="1246.6" y2="409.8" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#facc15" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#cbd5e1" stop-opacity=".2"/>
     </linearGradient>
-    <filter id="shadow" x="216" y="268" width="498" height="582" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="18"/>
-      <feGaussianBlur stdDeviation="18"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0980392 0 0 0 0 0.188235 0 0 0 0.12 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-    </filter>
-    <filter id="shadowSoft" x="748" y="300" width="518" height="446" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-8" dy="20"/>
-      <feGaussianBlur stdDeviation="16"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0980392 0 0 0 0 0.188235 0 0 0 0.14 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-    </filter>
   </defs>
+  <rect class="st10" x="-1" y="-.9" width="1441" height="1080.7"/>
+  <path class="st2" d="M0,840.4c325.3-95.8,766.7-103.4,1195.4-40.4,90.8,12.6,174,30.3,244.6,60.5v219.4H0v-239.6Z"/>
+  <g>
+    <rect class="st1" x="252" y="298" width="426" height="500" rx="40" ry="40"/>
+    <path class="st14" d="M314,360h302c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-302c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
+    <path class="st12" d="M312,414h236c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-236c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
+    <rect class="st8" x="304" y="500" width="112" height="112" rx="24" ry="24"/>
+    <path class="st5" d="M360,520v68"/>
+    <path class="st4" d="M328,556l32,34,32-34"/>
+    <path class="st11" d="M312,648h254c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-254c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
+    <path class="st13" d="M311,690h180c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-180c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
+  </g>
+  <g>
+    <rect class="st3" x="788" y="330" width="430" height="356" rx="38" ry="38"/>
+    <path class="st9" d="M845,380h302c5,0,9,4,9,9h0c0,5-4,9-9,9h-302c-5,0-9-4-9-9h0c0-5,4-9,9-9Z"/>
+    <path class="st8" d="M843,430h222c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-222c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
+    <g class="st16">
+      <path class="st0" d="M860,550h58c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-58c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
+      <path class="st0" d="M958,550h90c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-90c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
+      <path class="st0" d="M1088,550h38c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-38c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
+    </g>
+    <path class="st6" d="M986,662c76-18,178-14,260,18"/>
+  </g>
+  <circle class="st7" cx="1220" cy="244" r="12"/>
+  <circle class="st15" cx="734" cy="764" r="8"/>
 </svg>

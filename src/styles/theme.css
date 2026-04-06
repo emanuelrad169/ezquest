@@ -2504,8 +2504,8 @@
 
   .product-card-featured-media {
     @apply relative flex items-end justify-center overflow-hidden bg-slate-50;
-    min-height: 16.15rem;
-    padding: 0.55rem 0.9rem 0.3rem;
+    min-height: 12.4rem;
+    padding: 0.8rem 0.9rem 0.3rem;
     background-image: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.96)), radial-gradient(circle at 16% 18%, rgba(250, 204, 21, 0.12), transparent 24%);
   }
 
@@ -2537,10 +2537,11 @@
   }
 
   .product-card-featured-badge {
-    @apply absolute left-5 top-5 rounded-full border border-red-200 px-3 py-1 font-semibold uppercase text-red-500;
+    @apply absolute left-4 top-4 rounded-full border border-red-200 px-3 py-1 font-semibold uppercase text-red-500;
     font-size: 0.72rem;
     letter-spacing: 0.14em;
     background-color: rgba(255, 255, 255, 0.96);
+    z-index: 3;
   }
 
   .product-card-featured-body {
@@ -2741,11 +2742,13 @@
   }
 
   .featured-products-section .product-card-featured-media {
-    min-height: 16.9rem;
+    min-height: 12.8rem;
+    padding-top: 0.75rem;
   }
 
   .featured-products-section .featured-products-slide.is-featured .product-card-featured-media {
-    min-height: 18.9rem;
+    min-height: 17.2rem;
+    padding-top: 0.8rem;
   }
 
   .featured-products-section .product-card-featured-title {
@@ -3679,6 +3682,11 @@
     max-width: 24ch;
   }
 
+  .mega-menu-collection-card-meta {
+    @apply mt-3 inline-flex text-xs font-medium uppercase text-slate-400;
+    letter-spacing: 0.14em;
+  }
+
   .mega-menu-collection-card-copy--light h3,
   .mega-menu-collection-card-copy--light p {
     @apply text-white;
@@ -3686,6 +3694,10 @@
 
   .mega-menu-collection-card-copy--light p {
     color: rgba(255, 255, 255, 0.78);
+  }
+
+  .mega-menu-collection-card-meta--light {
+    color: rgba(255, 255, 255, 0.76);
   }
 
   .mega-menu-collection-card-arrow {
