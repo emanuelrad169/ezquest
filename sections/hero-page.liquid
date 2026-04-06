@@ -11,7 +11,7 @@
 
       if request.page_type == 'page' and page != blank
         case page.handle
-          when 'support', 'downloads', 'manuals', 'compatibility', 'faq', 'troubleshooting', 'contact', 'warranty'
+          when 'support', 'downloads', 'firmware', 'manuals', 'user-guides', 'compatibility', 'faq', 'troubleshooting', 'help-me-choose', 'contact', 'ticket-submission', 'warranty', 'shipping-returns'
             assign support_page_context = true
         endcase
       endif
@@ -48,14 +48,22 @@
           {% endif %}
           {% if support_page_context %}
             <div class="support-hero-paths">
-              <a href="/pages/support" class="support-hero-path{% if page.handle == 'support' %} is-active{% endif %}">Support hub</a>
-              <a href="/pages/downloads" class="support-hero-path{% if page.handle == 'downloads' %} is-active{% endif %}">Downloads</a>
-              <a href="/pages/manuals" class="support-hero-path{% if page.handle == 'manuals' %} is-active{% endif %}">Manuals</a>
-              <a href="/pages/compatibility" class="support-hero-path{% if page.handle == 'compatibility' %} is-active{% endif %}">Compatibility</a>
-              <a href="/pages/troubleshooting" class="support-hero-path{% if page.handle == 'troubleshooting' %} is-active{% endif %}">Troubleshooting</a>
-              <a href="/pages/faq" class="support-hero-path{% if page.handle == 'faq' %} is-active{% endif %}">FAQ</a>
-              <a href="/pages/contact" class="support-hero-path{% if page.handle == 'contact' %} is-active{% endif %}">Contact</a>
-              <a href="/pages/warranty" class="support-hero-path{% if page.handle == 'warranty' %} is-active{% endif %}">Warranty</a>
+              <div class="support-hero-path-group support-hero-path-group--primary">
+                <a href="/pages/support" class="support-hero-path{% if page.handle == 'support' %} is-active{% endif %}">Support hub</a>
+                <a href="/pages/downloads" class="support-hero-path{% if page.handle == 'downloads' %} is-active{% endif %}">Downloads</a>
+                <a href="/pages/manuals" class="support-hero-path{% if page.handle == 'manuals' %} is-active{% endif %}">Manuals</a>
+                <a href="/pages/compatibility" class="support-hero-path{% if page.handle == 'compatibility' %} is-active{% endif %}">Compatibility</a>
+                <a href="/pages/faq" class="support-hero-path{% if page.handle == 'faq' %} is-active{% endif %}">FAQ</a>
+                <a href="/pages/troubleshooting" class="support-hero-path{% if page.handle == 'troubleshooting' %} is-active{% endif %}">Troubleshooting</a>
+                <a href="/pages/contact" class="support-hero-path{% if page.handle == 'contact' %} is-active{% endif %}">Contact</a>
+              </div>
+              <div class="support-hero-path-group support-hero-path-group--secondary">
+                <a href="/pages/firmware" class="support-hero-path support-hero-path--secondary{% if page.handle == 'firmware' %} is-active{% endif %}">Firmware</a>
+                <a href="/pages/user-guides" class="support-hero-path support-hero-path--secondary{% if page.handle == 'user-guides' %} is-active{% endif %}">User guides</a>
+                <a href="/pages/help-me-choose" class="support-hero-path support-hero-path--secondary{% if page.handle == 'help-me-choose' %} is-active{% endif %}">Help me choose</a>
+                <a href="/pages/ticket-submission" class="support-hero-path support-hero-path--secondary{% if page.handle == 'ticket-submission' %} is-active{% endif %}">Ticket submission</a>
+                <a href="/pages/warranty" class="support-hero-path support-hero-path--secondary{% if page.handle == 'warranty' %} is-active{% endif %}">Warranty</a>
+              </div>
             </div>
           {% endif %}
         </div>
@@ -75,9 +83,9 @@
             {% endif %}
             {% if support_page_context %}
               <ul class="support-hero-signals">
-                <li>Structured resources stay tied to the right product and setup path.</li>
+                <li>Resources stay tied to the product and setup already in front of you.</li>
                 <li>Compatibility, manuals, downloads, and FAQ stay connected as one system.</li>
-                <li>Escalation stays close when self-service is no longer enough.</li>
+                <li>Direct help is nearby when self-service is no longer enough.</li>
               </ul>
             {% endif %}
             {% if section.settings.link_label != blank and section.settings.link_url != blank %}

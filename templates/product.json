@@ -7,25 +7,25 @@
         "show_sku": false,
         "show_quantity_selector": true,
         "show_dynamic_checkout": false,
-        "support_heading": "Support confidence stays close to the product",
-        "support_copy": "Check compatibility, open manuals, or download setup files without leaving the buying path or starting the decision over."
+        "support_heading": "Support for this product",
+        "support_copy": "Check compatibility, open the manual, or get the right download for this exact model."
       }
     },
     "story": {
       "type": "product-story-carousel",
       "settings": {
         "eyebrow": "Product story",
-        "heading": "Why this setup exists and where it fits best",
-        "copy": "Use the structured highlights below to understand the setup role, workflow fit, and ownership value that separate this EZQuest product from nearby options.",
+        "heading": "Why this product earns its place",
+        "copy": "Use the highlights below to see the setup role, everyday value, and ownership advantages that separate this product from nearby options.",
         "structured_source": "product"
       }
     },
     "specs": {
       "type": "product-spec-table",
       "settings": {
-        "heading": "Technical fit, without the noise",
-        "copy": "Review the ports, charging support, display capability, and host fit that matter before you commit.",
-        "source_note": "Start with the technical fit here, then move into compatibility or manuals only when the setup needs a closer check."
+        "heading": "Technical detail, without the noise",
+        "copy": "Review the ports, charging support, display capability, and host compatibility that matter before you commit.",
+        "source_note": "Start with the key specs here, then open compatibility or manuals only when one detail still needs confirmation."
       }
     },
     "compare": {
@@ -33,10 +33,10 @@
       "settings": {
         "eyebrow": "Compare",
         "heading": "Compare nearby options",
-        "copy": "See nearby EZQuest models side by side so the right port mix, power path, display support, and workflow fit are easier to spot.",
+        "copy": "See nearby EZQuest models side by side so the right role, port mix, power, and display support are easier to spot.",
         "columns_desktop": 3,
         "structured_source": "auto",
-        "source_note": "Compare nearby models by setup style, desk footprint, and support path before you move deeper into product detail."
+        "source_note": "Compare nearby models by setup role, desk footprint, and everyday use before you go deeper into one product page."
       }
     },
     "compatibility": {
@@ -44,7 +44,7 @@
       "settings": {
         "eyebrow": "Compatibility",
         "heading": "Buy with confidence",
-        "copy": "Check the device, platform, and workflow fit before you order.",
+        "copy": "Check device, platform, and workflow compatibility before you order.",
         "source_note": "",
         "structured_source": "auto",
         "entry_limit": 4,
@@ -57,19 +57,19 @@
       "type": "faq-accordion",
       "settings": {
         "heading": "FAQ",
-        "copy": "Answer the questions most likely to slow the purchase decision.",
+        "copy": "Answer the questions most likely to slow the decision.",
         "structured_source": "product"
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Next step",
-        "heading": "Need one more check before you buy?",
-        "copy": "Move into compare or support without losing the product context or starting your decision over.",
+        "eyebrow": "Still deciding",
+        "heading": "Need a final confirmation before you buy?",
+        "copy": "Use compare or support only when the choice is still close.",
         "link_label": "Compare options",
         "link_url": "/pages/compare",
-        "secondary_label": "Open support",
+        "secondary_label": "Open support center",
         "secondary_url": "/pages/support",
         "style": "light",
         "button_style": "secondary"

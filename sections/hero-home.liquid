@@ -7,11 +7,6 @@
   assign owned_hero_desktop_asset = 'hero-home-desktop.svg'
   assign owned_hero_mobile_asset = 'hero-home-mobile.svg'
 
-  if fallback_image == blank and all_products['usb-c-pro-dock'] != blank
-    assign fallback_image = all_products['usb-c-pro-dock'].featured_image
-  elsif fallback_image == blank and all_products['usb-c-multimedia-hub'] != blank
-    assign fallback_image = all_products['usb-c-multimedia-hub'].featured_image
-  endif
 -%}
 
 <section class="home-hero" data-hero>
@@ -113,7 +108,7 @@
 
                   <div class="home-hero-support-note">
                     <p class="home-hero-support-note-kicker">Ownership confidence</p>
-                    <p class="home-hero-support-note-copy">Compatibility, manuals, downloads, and support stay close from first click to setup.</p>
+                    <p class="home-hero-support-note-copy">Manuals, compatibility, and support stay within reach from first click to setup.</p>
                   </div>
 
                   <div class="home-hero-trust-rail" data-hero-trust>
@@ -127,7 +122,7 @@
                     </a>
                     <a href="/pages/support" class="home-hero-trust-link">
                       {% render 'icon', name: 'support' %}
-                      <span>Support stays close</span>
+                      <span>Support nearby</span>
                     </a>
                   </div>
                 </div>
@@ -206,7 +201,7 @@
                 </div>
                 <div class="home-hero-support-note">
                   <p class="home-hero-support-note-kicker">Ownership confidence</p>
-                  <p class="home-hero-support-note-copy">Compatibility, manuals, downloads, and support stay close from first click to setup.</p>
+                  <p class="home-hero-support-note-copy">Manuals, compatibility, and support stay within reach from first click to setup.</p>
                 </div>
                 <div class="home-hero-trust-rail" data-hero-trust>
                   <span class="home-hero-trust-chip">
@@ -219,7 +214,7 @@
                   </a>
                   <a href="/pages/support" class="home-hero-trust-link">
                     {% render 'icon', name: 'support' %}
-                    <span>Support stays close</span>
+                    <span>Support nearby</span>
                   </a>
                 </div>
               </div>

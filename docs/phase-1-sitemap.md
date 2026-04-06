@@ -20,7 +20,7 @@ The Phase 1 storefront architecture supports 28 core destinations when native Sh
    - `/collections/docking-stations`
 5. Chargers & Power
    - `/collections/chargers-power`
-6. Cables & Accessories
+6. Accessories
    - `/collections/accessories`
 7. Product detail page
    - `/products/:handle`
@@ -105,7 +105,7 @@ These are supported by the theme and should be counted as part of the implemente
 - Hubs & Adapters
 - Docking Stations
 - Chargers & Power
-- Cables & Accessories
+- Accessories
 - All Products
 
 ### Support ecosystem

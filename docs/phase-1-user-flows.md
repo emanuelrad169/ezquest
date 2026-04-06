@@ -36,7 +36,7 @@ This document formalizes the Phase 1 user-flow mapping using the implemented the
 ### Product-family-first flow
 
 1. Homepage
-2. Hubs & Adapters, Docking Stations, Chargers & Power, or Cables & Accessories
+2. Hubs & Adapters, Docking Stations, Chargers & Power, or Accessories
 3. Collection page
 4. Product detail page
 5. Cart

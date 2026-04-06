@@ -5,7 +5,7 @@
       "settings": {
         "eyebrow": "Troubleshooting",
         "heading": "Troubleshoot the clearest symptom first",
-        "copy": "Start with the symptom you are seeing, then move into the clearest next recovery step without guessing between pages.",
+        "copy": "Start with the symptom you are seeing, then take the clearest recovery action without guessing between pages.",
         "support_eyebrow": "Troubleshooting note",
         "support_note": "Start with the visible symptom, then take the clearest next action instead of bouncing between support pages."
       }
@@ -15,7 +15,7 @@
       "settings": {
         "eyebrow": "Common issues",
         "heading": "Troubleshooting by symptom and product behavior",
-        "copy": "Review recurring issues, likely causes, and the next best support step without losing the rest of the ownership flow.",
+        "copy": "Review recurring issues, likely causes, and the clearest support action without losing the rest of the ownership flow.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }
@@ -33,7 +33,7 @@
           "type": "card",
           "settings": {
             "title": "Downloads",
-            "copy": "Open drivers, firmware, and utilities when the next step is software, updates, or tools.",
+            "copy": "Open drivers and utilities when the issue points to software or tools.",
             "meta": "Files",
             "link_label": "Open downloads",
             "link_url": "/pages/downloads"
@@ -43,8 +43,8 @@
           "type": "card",
           "settings": {
             "title": "Compatibility",
-            "copy": "Check fit again when the issue may be caused by device, platform, or workflow mismatch.",
-            "meta": "Fit check",
+            "copy": "Check compatibility again when the issue may be caused by device, platform, or workflow mismatch.",
+            "meta": "Compatibility",
             "link_label": "Open compatibility",
             "link_url": "/pages/compatibility"
           }
@@ -53,8 +53,8 @@
           "type": "card",
           "settings": {
             "title": "Contact support",
-            "copy": "Move directly into support when guided troubleshooting is not enough to resolve the issue.",
-            "meta": "Escalation",
+            "copy": "Contact support when guided troubleshooting still leaves one question open.",
+            "meta": "Direct help",
             "link_label": "Contact support",
             "link_url": "/pages/contact"
           }
@@ -65,9 +65,9 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Escalation",
+        "eyebrow": "Direct help",
         "heading": "Still need help beyond guided troubleshooting?",
-        "copy": "Escalate into contact or warranty once self-service is exhausted and the issue still needs direct review.",
+        "copy": "Open contact or warranty guidance once self-service is exhausted and the issue still needs direct review.",
         "link_label": "Contact support",
         "link_url": "/pages/contact",
         "secondary_label": "View warranty",

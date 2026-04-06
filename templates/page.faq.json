@@ -7,7 +7,7 @@
         "heading": "Common questions, answered clearly",
         "copy": "Start here for the questions customers ask most before moving into troubleshooting or support.",
         "support_eyebrow": "FAQ guidance",
-        "support_note": "Come here for the broad answers first. When a question becomes product-specific, the next support path stays close."
+        "support_note": "Come here for the broad answers first. When a question becomes product-specific, the next support step is easy to find."
       }
     },
     "faq": {
@@ -15,16 +15,16 @@
       "settings": {
         "eyebrow": "Support FAQ",
         "heading": "Frequently asked questions",
-        "copy": "Find the broad answers here first, then move into a deeper support path only when the question becomes product-specific.",
+        "copy": "Find the broad answers here first, then move into a deeper support page only when the question becomes product-specific.",
         "structured_source": "global"
       }
     },
     "support": {
       "type": "support-link-grid",
       "settings": {
-        "eyebrow": "Need another path",
-        "heading": "Move into the next support path when the FAQ is not enough",
-        "copy": "Keep the next step close when an answer leads into setup, compatibility, downloads, troubleshooting, or direct support.",
+        "eyebrow": "Need more help",
+        "heading": "Open the next support page when the FAQ is not enough",
+        "copy": "Keep setup, compatibility, downloads, troubleshooting, and direct support easy to reach from here.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -65,8 +65,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Still unresolved",
-        "heading": "Need a deeper support path?",
-        "copy": "Move into downloads, manuals, troubleshooting, or direct contact when the FAQ is not enough.",
+        "heading": "Need more than the FAQ?",
+        "copy": "Open downloads, manuals, troubleshooting, or direct contact when the FAQ is not enough.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Contact support",

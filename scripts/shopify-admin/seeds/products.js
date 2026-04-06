@@ -82,6 +82,22 @@ function buildDescription(productType, familyName) {
   }
 }
 
+function inferCollectionHandles(productType) {
+  switch (productType) {
+    case "Hub":
+    case "Adapter":
+      return ["hubs-adapters"];
+    case "Dock":
+      return ["docking-stations"];
+    case "Charger":
+      return ["chargers-power"];
+    case "Cable":
+    case "Accessory":
+    default:
+      return ["accessories"];
+  }
+}
+
 function buildNormalizedSeedProduct(parent) {
   const optionNames = [parent.variant_option_1, parent.variant_option_2].filter(Boolean);
   const productType = inferProductType(parent.parent_handle, parent.normalized_family_name);
@@ -97,6 +113,7 @@ function buildNormalizedSeedProduct(parent) {
     sku: firstChild.sku,
     descriptionHtml: buildDescription(productType, parent.normalized_family_name),
     imageUrls: buildTemporaryImageUrls(productType),
+    collectionHandles: inferCollectionHandles(productType),
     optionNames,
     variants: parent.children.map((child) => {
       const compareAtPrice = child.msrp || child.map || null;
@@ -127,7 +144,8 @@ const coreProducts = [
     sku: "EZQ-HUB-001",
     descriptionHtml:
       "<p>The EZQuest USB-C Multimedia Hub is the balanced everyday hub for Mac, PC, and tablet users who want 4K HDMI, pass-through charging, wired networking, and removable-media access through one compact USB-C connection.</p>",
-    imageUrls: buildTemporaryImageUrls("Hub")
+    imageUrls: buildTemporaryImageUrls("Hub"),
+    collectionHandles: ["hubs-adapters"]
   },
   {
     title: "USB-C Travel Hub",
@@ -139,7 +157,8 @@ const coreProducts = [
     sku: "EZQ-HUB-002",
     descriptionHtml:
       "<p>The EZQuest USB-C Travel Hub keeps mobile setups light with HDMI, USB access, and pass-through charging for hotel desks, meeting rooms, classrooms, and everyday work away from the main workstation.</p>",
-    imageUrls: buildTemporaryImageUrls("Hub")
+    imageUrls: buildTemporaryImageUrls("Hub"),
+    collectionHandles: ["hubs-adapters"]
   },
   {
     title: "USB-C Pro Dock",
@@ -151,7 +170,8 @@ const coreProducts = [
     sku: "EZQ-DOCK-001",
     descriptionHtml:
       "<p>The EZQuest USB-C Pro Dock is built for permanent desk setups that need more ports, cleaner cable management, stable display support, wired networking, and a clearer upgrade path from compact travel or multimedia hubs.</p>",
-    imageUrls: buildTemporaryImageUrls("Dock")
+    imageUrls: buildTemporaryImageUrls("Dock"),
+    collectionHandles: ["docking-stations"]
   }
 ];
 

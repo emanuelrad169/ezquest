@@ -11,9 +11,10 @@
       assign product_description_excerpt = blank
       assign product_positioning_text = blank
       assign role_decision_note = 'Choose this when one product should keep the setup cleaner without complicating the desk.'
-      assign compare_cta_label = 'Compare with nearby EZQuest fits'
-      assign ownership_heading = section.settings.support_heading | default: 'Support stays close to the product'
-      assign ownership_copy = section.settings.support_copy | default: 'Compatibility guidance, manuals, downloads, and direct support stay nearby without crowding the decision.'
+      assign role_boundary_note = 'Step up only if the workflow needs more permanent desk connectivity.'
+      assign compare_cta_label = 'Still deciding? Compare nearby options'
+      assign ownership_heading = section.settings.support_heading | default: 'Support for this product'
+      assign ownership_copy = section.settings.support_copy | default: 'Check compatibility, open the manual, or get the right download for this product without crowding the decision.'
       assign setup_label = 'Everyday setup'
       assign setup_statement = 'Connectivity that keeps the setup cleaner, calmer, and easier to trust.'
       assign setup_environment = 'Built for modern-device routines that need clearer expansion without extra clutter.'
@@ -21,6 +22,10 @@
       assign manual_count = 0
       assign download_count = 0
       assign use_owned_product_gallery = false
+      assign compatibility_support_url = '/pages/compatibility'
+      assign manuals_support_url = '/pages/manuals'
+      assign downloads_support_url = '/pages/downloads'
+      assign support_center_url = '/pages/support'
 
       if product.metafields.ezquest.feature_highlights != blank
         assign structured_highlights = product.metafields.ezquest.feature_highlights.value
@@ -62,31 +67,41 @@
         assign download_count = product.metafields.ezquest.downloads.value.count
       endif
 
+      if product.handle != blank
+        assign compatibility_support_url = compatibility_support_url | append: '?product=' | append: product.handle
+        assign manuals_support_url = manuals_support_url | append: '?product=' | append: product.handle
+        assign downloads_support_url = downloads_support_url | append: '?product=' | append: product.handle
+        assign support_center_url = support_center_url | append: '?product=' | append: product.handle
+      endif
+
       case product.handle
         when 'usb-c-travel-hub'
           assign use_owned_product_gallery = true
           assign setup_label = 'Travel-first setup'
           assign setup_statement = 'Compact expansion for meetings, hotel desks, classrooms, and lighter mobile workflows.'
           assign setup_environment = 'Choose it when portability matters more than maximum port count or a permanent desk footprint.'
-          assign role_decision_note = 'Choose this when the setup needs to stay light, mobile, and ready for rooms that change.'
-          assign compare_cta_label = 'Compare with balanced and desk-ready options'
-          assign ownership_heading = 'Support should stay light, even on the move'
+          assign role_decision_note = 'Choose this when the setup moves often and the hub should stay easy to carry.'
+          assign role_boundary_note = 'Step up only if the desk needs more ports, more power, or a steadier display chain.'
+          assign compare_cta_label = 'Still deciding? Compare against balanced and desk-ready options'
+          assign ownership_heading = 'Support that travels well'
         when 'usb-c-pro-dock'
           assign use_owned_product_gallery = true
           assign setup_label = 'Desk-first setup'
           assign setup_statement = 'Broader connectivity for permanent desks that need displays, Ethernet, peripherals, and calmer cable control.'
           assign setup_environment = 'Built for users stepping up from lighter hubs into a more stable workstation setup.'
           assign role_decision_note = 'Choose this when the desk stays put and the workflow needs a more complete connection hub.'
-          assign compare_cta_label = 'Compare with balanced and portable options'
-          assign ownership_heading = 'Workstation confidence should not stop at checkout'
+          assign role_boundary_note = 'Go lighter only if portability matters more than a permanent workstation setup.'
+          assign compare_cta_label = 'Still deciding? Compare against balanced and portable options'
+          assign ownership_heading = 'Support for the workstation'
         when 'usb-c-multimedia-hub'
           assign use_owned_product_gallery = true
           assign setup_label = 'Balanced everyday setup'
           assign setup_statement = 'One everyday hub for charging, HDMI, Ethernet, storage access, and hybrid desk routines.'
           assign setup_environment = 'Choose it when one compact adapter should cover the daily desk.'
-          assign role_decision_note = 'Choose this when one everyday hub should cover the desk without moving up to a full dock.'
-          assign compare_cta_label = 'Compare with travel and desk-ready options'
-          assign ownership_heading = 'Confidence stays close to the everyday setup'
+          assign role_decision_note = 'Choose this when one compact hub should cover the everyday desk.'
+          assign role_boundary_note = 'Go lighter only if portability wins. Step up only if the desk needs a fuller dock.'
+          assign compare_cta_label = 'Still deciding? Compare against travel and desk-ready options'
+          assign ownership_heading = 'Support for the everyday desk'
       endcase
 
       if support_summary_text != blank
@@ -164,6 +179,7 @@
               <h1 class="section-heading mt-3">{{ product.title }}</h1>
               <p class="product-buybox-setup-statement">{{ setup_statement }}</p>
               <p class="product-buybox-role-note">{{ role_decision_note }}</p>
+              <p class="product-buybox-positioning">{{ role_boundary_note }}</p>
             </div>
 
             <div class="product-buybox-price-row">
@@ -190,7 +206,7 @@
               {% endif %}
               {% if manual_count > 0 or download_count > 0 %}
                 <div class="product-buybox-signal">
-                  <p class="product-buybox-signal-label">Ownership path</p>
+                  <p class="product-buybox-signal-label">Support nearby</p>
                   <p class="product-buybox-signal-value">
                     {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
                     {% if manual_count > 0 and download_count > 0 %} + {% endif %}
@@ -207,13 +223,13 @@
                 {{ ownership_copy }}
               </div>
               <div class="product-buybox-confidence-links">
-                <a href="/pages/compatibility" class="collection-inline-link">Check compatibility</a>
+                <a href="{{ compatibility_support_url }}" class="collection-inline-link">Check compatibility for this product</a>
                 {% if manual_count > 0 %}
-                  <a href="/pages/manuals" class="collection-inline-link">Open manuals</a>
+                  <a href="{{ manuals_support_url }}" class="collection-inline-link">Open manuals for this product</a>
                 {% elsif download_count > 0 %}
-                  <a href="/pages/downloads" class="collection-inline-link">View downloads</a>
+                  <a href="{{ downloads_support_url }}" class="collection-inline-link">View downloads for this product</a>
                 {% else %}
-                  <a href="/pages/support" class="collection-inline-link">Open support</a>
+                  <a href="{{ support_center_url }}" class="collection-inline-link">Open support for this model</a>
                 {% endif %}
               </div>
             </div>
@@ -251,7 +267,8 @@
               </div>
 
               <div class="product-form-meta">
-              <a href="/pages/compare" class="hero-secondary-action">{{ compare_cta_label }}</a>
+              <p class="support-utility-note">Add to cart when this role matches the setup. Open compare or support only if one buying detail still needs a closer look.</p>
+              <a href="/pages/compare?product={{ product.handle }}" class="hero-secondary-action">{{ compare_cta_label }}</a>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -289,17 +306,17 @@
                 {% if support_summary_text != blank %}
                   {{ support_summary_text | truncatewords: 14 }}
                 {% else %}
-                  Manuals, downloads, and setup help stay close
+                  Manuals, downloads, and setup help for this product
                 {% endif %}
               </p>
             </div>
           </div>
 
           <div class="product-link-row">
-            <a href="/pages/compare" class="site-meta-link">Compare this product</a>
-            <a href="/pages/downloads" class="site-meta-link">Downloads</a>
-            <a href="/pages/manuals" class="site-meta-link">Manuals</a>
-            <a href="/pages/compatibility" class="site-meta-link">Compatibility</a>
+            <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare this product</a>
+            <a href="{{ downloads_support_url }}" class="site-meta-link">Downloads</a>
+            <a href="{{ manuals_support_url }}" class="site-meta-link">Manuals</a>
+            <a href="{{ compatibility_support_url }}" class="site-meta-link">Compatibility</a>
           </div>
 
           {% if has_structured_highlights or section.blocks.size > 0 %}
@@ -408,13 +425,13 @@
       "type": "text",
       "id": "support_heading",
       "label": "Support panel heading",
-      "default": "Setup help stays close to the product"
+      "default": "Support guidance built around this product"
     },
     {
       "type": "textarea",
       "id": "support_copy",
       "label": "Support panel copy",
-      "default": "Compatibility guidance, manuals, downloads, and direct support stay nearby without overwhelming the buying flow."
+      "default": "Compatibility guidance, manuals, downloads, and direct support stay nearby without crowding the buying decision."
     }
   ],
   "blocks": [

@@ -45,7 +45,7 @@
 
           <div class="support-link-card-footer">
             {% if block.settings.link_url != blank %}
-              <a href="{{ block.settings.link_url }}" class="button-secondary">{{ block.settings.link_label | default: 'Open page' }}</a>
+              <a href="{{ block.settings.link_url }}" class="button-secondary"{% if block.settings.link_url contains '/pages/' %} data-support-context-link{% endif %}>{{ block.settings.link_label | default: 'Open page' }}</a>
             {% endif %}
             {% if block.settings.meta != blank %}
               <span class="support-link-card-meta">{{ block.settings.meta }}</span>

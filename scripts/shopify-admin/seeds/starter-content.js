@@ -40,6 +40,28 @@ module.exports = {
           sort_order: 20
         }
       ],
+      userGuides: [
+        {
+          title: "USB-C Multimedia Hub Setup Checklist",
+          guide_type: "Setup Checklist",
+          summary: "Step-by-step setup checklist for display, charging, Ethernet, and accessory readiness on the everyday desk.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows", "iPadOS"],
+          workflows: ["everyday-desk"],
+          sort_order: 10
+        },
+        {
+          title: "USB-C Multimedia Hub Presentation Workflow Guide",
+          guide_type: "Workflow Guide",
+          summary: "Meeting-room and classroom workflow setup guidance for stable HDMI output and accessory reliability.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows"],
+          workflows: ["presentation", "conference-room"],
+          sort_order: 20
+        }
+      ],
       downloads: [
         {
           title: "USB-C Multimedia Hub Windows Driver",
@@ -49,15 +71,17 @@ module.exports = {
           button_label: "Download file",
           platforms: ["Windows"],
           sort_order: 10
-        },
+        }
+      ],
+      firmware: [
         {
-          title: "USB-C Multimedia Hub Firmware Updater",
-          download_type: "Firmware",
-          summary: "Firmware updater that improves display handshake stability, card-reader reliability, and peripheral reconnect behavior.",
+          title: "USB-C Multimedia Hub Firmware Update Utility",
+          firmware_type: "Firmware Update",
+          summary: "Improves display handshake stability, card-reader reliability, and peripheral reconnect behavior.",
           version: "v1.4.2",
-          button_label: "Download file",
+          button_label: "Download firmware",
           platforms: ["macOS", "Windows"],
-          sort_order: 20
+          sort_order: 10
         }
       ],
       compatibilityEntries: [
@@ -140,6 +164,28 @@ module.exports = {
           sort_order: 20
         }
       ],
+      userGuides: [
+        {
+          title: "USB-C Travel Hub Mobile Setup Guide",
+          guide_type: "Setup Guide",
+          summary: "Mobile setup guidance for presentation, hotel-desk, and meeting workflows with minimal cable clutter.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows", "iPadOS"],
+          workflows: ["travel-work", "mobile-presentation"],
+          sort_order: 10
+        },
+        {
+          title: "USB-C Travel Hub Packing + Carry Guide",
+          guide_type: "Carry Guide",
+          summary: "Best practices for travel packing, accessory pairing, and fast setup on the go.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows"],
+          workflows: ["travel"],
+          sort_order: 20
+        }
+      ],
       downloads: [
         {
           title: "USB-C Travel Hub Windows Driver",
@@ -149,15 +195,17 @@ module.exports = {
           button_label: "Download file",
           platforms: ["Windows"],
           sort_order: 10
-        },
+        }
+      ],
+      firmware: [
         {
-          title: "USB-C Travel Hub Firmware Updater",
-          download_type: "Firmware",
+          title: "USB-C Travel Hub Firmware Update Utility",
+          firmware_type: "Firmware Update",
           summary: "Firmware updater for travel hub display negotiation and peripheral stability improvements.",
           version: "v1.1.0",
-          button_label: "Download file",
+          button_label: "Download firmware",
           platforms: ["macOS", "Windows"],
-          sort_order: 20
+          sort_order: 10
         }
       ],
       compatibilityEntries: [
@@ -240,6 +288,28 @@ module.exports = {
           sort_order: 20
         }
       ],
+      userGuides: [
+        {
+          title: "USB-C Pro Dock Desk Setup Guide",
+          guide_type: "Setup Guide",
+          summary: "Desk-first setup guidance for multi-peripheral workstations, cable management, and long-session stability.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows"],
+          workflows: ["desk-workstation"],
+          sort_order: 10
+        },
+        {
+          title: "USB-C Pro Dock Workflow Tuning Guide",
+          guide_type: "Workflow Guide",
+          summary: "Recommendations for display mix, charging, and peripheral routing in permanent desk setups.",
+          version: "v1.0",
+          button_label: "Open guide",
+          platforms: ["macOS", "Windows"],
+          workflows: ["desk-workstation", "conference-room-and-desk"],
+          sort_order: 20
+        }
+      ],
       downloads: [
         {
           title: "USB-C Pro Dock Windows Driver",
@@ -249,15 +319,17 @@ module.exports = {
           button_label: "Download file",
           platforms: ["Windows"],
           sort_order: 10
-        },
+        }
+      ],
+      firmware: [
         {
-          title: "USB-C Pro Dock Firmware Updater",
-          download_type: "Firmware",
+          title: "USB-C Pro Dock Firmware Update Utility",
+          firmware_type: "Firmware Update",
           summary: "Firmware updater for dock stability, display negotiation, Ethernet reliability, and desktop peripheral support.",
           version: "v2.1.3",
-          button_label: "Download file",
+          button_label: "Download firmware",
           platforms: ["macOS", "Windows"],
-          sort_order: 20
+          sort_order: 10
         }
       ],
       compatibilityEntries: [
@@ -312,6 +384,98 @@ module.exports = {
       cta_label: "View product",
       support_note: "Use compare to narrow by port mix, display needs, and desk-versus-travel fit before escalating to support.",
       productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"]
+    }
+  ],
+  troubleshootingItems: [
+    {
+      title: "Display not detected",
+      issue_type: "Display",
+      summary: "Confirm cable path, display input, and host support first, then validate the correct port and adapter chain.",
+      primary_label: "Check compatibility",
+      primary_url: "/pages/compatibility",
+      secondary_label: "View manuals",
+      secondary_url: "/pages/manuals",
+      platforms: ["macOS", "Windows"],
+      workflows: ["single-display", "dual-display"],
+      productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"],
+      sort_order: 10
+    },
+    {
+      title: "Device not charging as expected",
+      issue_type: "Power",
+      summary: "Confirm charger wattage, power-delivery support, and the full USB-C path before escalating the issue.",
+      primary_label: "View downloads",
+      primary_url: "/pages/downloads",
+      secondary_label: "Contact support",
+      secondary_url: "/pages/contact",
+      platforms: ["macOS", "Windows"],
+      workflows: ["everyday-desk", "travel-work"],
+      productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"],
+      sort_order: 20
+    },
+    {
+      title: "Accessory or drive not appearing",
+      issue_type: "Accessories",
+      summary: "Review port type, adapter chain, and platform support, then verify drivers or firmware if required.",
+      primary_label: "Open downloads",
+      primary_url: "/pages/downloads",
+      secondary_label: "View manuals",
+      secondary_url: "/pages/manuals",
+      platforms: ["macOS", "Windows"],
+      workflows: ["everyday-desk", "desk-workstation"],
+      productHandles: ["usb-c-multimedia-hub", "usb-c-pro-dock"],
+      sort_order: 30
+    },
+    {
+      title: "Setup still not working",
+      issue_type: "Escalation",
+      summary: "Move from symptom checks into manuals, downloads, or direct support when the faster path is no longer enough.",
+      primary_label: "Open support",
+      primary_url: "/pages/support",
+      secondary_label: "Contact support",
+      secondary_url: "/pages/contact",
+      platforms: ["macOS", "Windows"],
+      workflows: ["support-escalation"],
+      productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"],
+      sort_order: 40
+    }
+  ],
+  decisionGuideEntries: [
+    {
+      title: "Balanced everyday setup",
+      role_label: "Everyday desk",
+      summary: "Best for everyday desks that need HDMI, charging, Ethernet, and accessory access without a full dock footprint.",
+      primary_label: "View multimedia hubs",
+      primary_url: "/collections/hubs-adapters",
+      secondary_label: "Compare options",
+      secondary_url: "/pages/compare",
+      workflows: ["everyday-desk"],
+      productHandles: ["usb-c-multimedia-hub"],
+      sort_order: 10
+    },
+    {
+      title: "Portable travel setup",
+      role_label: "Travel / meetings",
+      summary: "Best for travel and mobile setups that prioritize compact carry with presentation-ready HDMI and charging.",
+      primary_label: "View travel hubs",
+      primary_url: "/collections/hubs-adapters",
+      secondary_label: "Check compatibility",
+      secondary_url: "/pages/compatibility",
+      workflows: ["travel-work", "mobile-presentation"],
+      productHandles: ["usb-c-travel-hub"],
+      sort_order: 20
+    },
+    {
+      title: "Desk-ready workstation",
+      role_label: "Workstation",
+      summary: "Best for permanent desk setups that need expanded connectivity, more peripherals, and longer-session stability.",
+      primary_label: "View docking stations",
+      primary_url: "/collections/docking-stations",
+      secondary_label: "Compare options",
+      secondary_url: "/pages/compare",
+      workflows: ["desk-workstation"],
+      productHandles: ["usb-c-pro-dock"],
+      sort_order: 30
     }
   ]
 };

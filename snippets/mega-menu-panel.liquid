@@ -33,7 +33,7 @@
       <div class="mega-menu-panel-surface mega-menu-panel-surface--shop">
         <aside class="mega-menu-shop-rail">
           <p class="mega-menu-side-label">Shop</p>
-          <p class="mega-menu-column-intro">Start with the fastest route into the EZQuest lineup, then narrow by setup fit.</p>
+          <p class="mega-menu-column-intro">Start with the clearest route into the EZQuest lineup.</p>
           <div class="mega-menu-shop-link-list">
             <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-link is-active">
               <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'layers' %}</span>
@@ -41,7 +41,7 @@
             </a>
             <a href="{{ best_sellers_url }}" class="mega-menu-shop-link">
               <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'spark' %}</span>
-              <span>Best sellers</span>
+              <span>Featured picks</span>
             </a>
             <a href="/pages/compare" class="mega-menu-shop-link">
               <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'check' %}</span>
@@ -61,9 +61,9 @@
 
         <div class="mega-menu-shop-stage">
           <div class="mega-menu-shop-stage-head">
-            <p class="mega-menu-side-label">Best sellers</p>
-            <a href="{{ routes.all_products_collection_url }}" class="mega-menu-stage-link">
-              <span>Shop all product families</span>
+            <p class="mega-menu-side-label">Featured products</p>
+            <a href="{{ routes.collections_url }}" class="mega-menu-stage-link">
+              <span>Shop product families</span>
               {% render 'icon', name: 'arrow-right' %}
             </a>
           </div>
@@ -72,7 +72,15 @@
             {% if hub_product != blank %}
               <a href="{{ hub_product.url }}" class="mega-menu-product-card">
                 <div class="mega-menu-product-card-media">
-                  {{ hub_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'mega-menu-product-card-image' }}
+                  {% render 'owned-product-visual',
+                    product_handle: hub_product.handle,
+                    product_title: hub_product.title,
+                    variant: 'compare',
+                    kind: 'product',
+                    width: 900,
+                    height: 675,
+                    class: 'mega-menu-product-card-image'
+                  %}
                 </div>
                 <div class="mega-menu-product-card-copy">
                   <p class="mega-menu-product-brand">{{ hub_product.vendor | default: shop.name }}</p>
@@ -80,7 +88,7 @@
                     <h3>{{ hub_product.title }}</h3>
                     <span>{{ hub_product.price | money }}</span>
                   </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Compact ports, charging, and display support for MacBook, iPad, and everyday mobile workflows.</p>
+                  <p class="mt-3 text-sm leading-6 text-slate-600">Everyday ports, charging, and HDMI for hybrid desks.</p>
                 </div>
               </a>
             {% endif %}
@@ -88,7 +96,15 @@
             {% if dock_product != blank %}
               <a href="{{ dock_product.url }}" class="mega-menu-product-card">
                 <div class="mega-menu-product-card-media">
-                  {{ dock_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'mega-menu-product-card-image' }}
+                  {% render 'owned-product-visual',
+                    product_handle: dock_product.handle,
+                    product_title: dock_product.title,
+                    variant: 'compare',
+                    kind: 'product',
+                    width: 900,
+                    height: 675,
+                    class: 'mega-menu-product-card-image'
+                  %}
                 </div>
                 <div class="mega-menu-product-card-copy">
                   <p class="mega-menu-product-brand">{{ dock_product.vendor | default: shop.name }}</p>
@@ -96,7 +112,7 @@
                     <h3>{{ dock_product.title }}</h3>
                     <span>{{ dock_product.price | money }}</span>
                   </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Desk-ready expansion for multi-display setups, power delivery, and a cleaner single-cable workstation.</p>
+                  <p class="mt-3 text-sm leading-6 text-slate-600">Desk-ready expansion for displays, power, and a cleaner workstation.</p>
                 </div>
               </a>
             {% endif %}
@@ -104,7 +120,15 @@
             {% if travel_product != blank %}
               <a href="{{ travel_product.url }}" class="mega-menu-product-card">
                 <div class="mega-menu-product-card-media">
-                  {{ travel_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'mega-menu-product-card-image' }}
+                  {% render 'owned-product-visual',
+                    product_handle: travel_product.handle,
+                    product_title: travel_product.title,
+                    variant: 'compare',
+                    kind: 'product',
+                    width: 900,
+                    height: 675,
+                    class: 'mega-menu-product-card-image'
+                  %}
                 </div>
                 <div class="mega-menu-product-card-copy">
                   <p class="mega-menu-product-brand">{{ travel_product.vendor | default: shop.name }}</p>
@@ -112,7 +136,7 @@
                     <h3>{{ travel_product.title }}</h3>
                     <span>{{ travel_product.price | money }}</span>
                   </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Travel-friendly expansion when you need a lighter carry without giving up core ports or charging support.</p>
+                  <p class="mt-3 text-sm leading-6 text-slate-600">Lighter expansion for mobile setups, meetings, and travel days.</p>
                 </div>
               </a>
             {% endif %}
@@ -121,11 +145,15 @@
 
         <a href="/pages/compare" class="mega-menu-promo-card">
           <div class="mega-menu-promo-media">
-            {% if dock_image != blank %}
-              {{ dock_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-promo-image' }}
-            {% else %}
-              {% render 'placeholder-visual', kind: 'product', text: 'EZQuest', width: 900, height: 1200, class: 'mega-menu-promo-image' %}
-            {% endif %}
+            {% render 'owned-product-visual',
+              product_handle: 'usb-c-pro-dock',
+              product_title: 'EZQuest',
+              variant: 'hero',
+              kind: 'product',
+              width: 900,
+              height: 1200,
+              class: 'mega-menu-promo-image'
+            %}
           </div>
           <div class="mega-menu-promo-overlay"></div>
           <div class="mega-menu-promo-copy">
@@ -141,14 +169,13 @@
         <div class="mega-menu-explore-shell">
           <div class="mega-menu-explore-links">
             <p class="mega-menu-side-label">Resources</p>
-            <p class="mega-menu-column-intro">Reference pages for manuals, downloads, compatibility, warranty, and post-purchase details.</p>
+            <p class="mega-menu-column-intro">Buying guidance, policies, and reference pages that sit beside the support center.</p>
             <a href="/blogs/resources">Blog &amp; resources</a>
-            <a href="/pages/manuals">Manuals</a>
-            <a href="/pages/downloads">Downloads</a>
-            <a href="/pages/compatibility">Compatibility</a>
-            <a href="/pages/faq">FAQ</a>
+            <a href="/pages/help-me-choose">Help me choose</a>
+            <a href="/pages/where-to-buy">Where to buy</a>
             <a href="/pages/warranty">Warranty</a>
             <a href="/pages/shipping-returns">Shipping &amp; returns</a>
+            <a href="/pages/cookie-policy">Cookie policy</a>
           </div>
 
           <a href="/blogs/resources" class="mega-menu-explore-hero mega-menu-support-hero">
@@ -160,8 +187,8 @@
             <div class="mega-menu-compare-overlay"></div>
             <div class="mega-menu-compare-copy">
               <p class="mega-menu-side-label mega-menu-side-label--light">Resources</p>
-              <h3>Go straight to setup guides, downloads, and support answers.</h3>
-              <p>Use resources when you already know the question and want the clearest direct path.</p>
+              <h3>Go straight to buying guidance, policies, and reference content.</h3>
+              <p>Use resources when you want a clearer answer before or after the purchase.</p>
             </div>
           </a>
         </div>
@@ -232,7 +259,7 @@
             <div class="mega-menu-collection-card-copy mega-menu-collection-card-copy--light">
               <div>
                 <h3>{{ all_collection_title }}</h3>
-                <p>Browse hubs, docks, chargers, and cables in one place.</p>
+                <p>Browse hubs, docks, chargers, and accessories in one place.</p>
                 <span class="mega-menu-collection-card-meta mega-menu-collection-card-meta--light">Browse the full EZQuest catalog</span>
               </div>
               <span class="mega-menu-collection-card-arrow">{% render 'icon', name: 'arrow-right' %}</span>
@@ -252,7 +279,7 @@
                 <span class="mega-menu-support-link-icon">{% render 'icon', name: 'download' %}</span>
                 <span>
                   <strong>Downloads</strong>
-                  <small>Drivers, firmware, and installation files.</small>
+                  <small>Drivers and installation files.</small>
                 </span>
               </a>
               <a href="/pages/manuals" class="mega-menu-support-link">
@@ -273,21 +300,21 @@
                 <span class="mega-menu-support-link-icon">{% render 'icon', name: 'spark' %}</span>
                 <span>
                   <strong>FAQ</strong>
-                  <small>Fast answers before you escalate.</small>
+                  <small>Fast answers to the common questions.</small>
                 </span>
               </a>
               <a href="/pages/troubleshooting" class="mega-menu-support-link">
                 <span class="mega-menu-support-link-icon">{% render 'icon', name: 'layers' %}</span>
                 <span>
                   <strong>Troubleshooting</strong>
-                  <small>Move from symptoms into the clearest next step.</small>
+                  <small>Symptom-led help when a product is not behaving as expected.</small>
                 </span>
               </a>
               <a href="/pages/contact" class="mega-menu-support-link">
                 <span class="mega-menu-support-link-icon">{% render 'icon', name: 'support' %}</span>
                 <span>
                   <strong>Contact support</strong>
-                  <small>Reach the team when self-service is not enough.</small>
+                  <small>Reach the team when the answer depends on your setup.</small>
                 </span>
               </a>
             </div>
@@ -297,13 +324,13 @@
             {% if lifestyle_image != blank %}
               {{ lifestyle_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'mega-menu-explore-image' }}
             {% else %}
-              {% render 'placeholder-visual', kind: 'support', text: 'EZQuest Support', width: 1600, height: 960, class: 'mega-menu-explore-image' %}
+              {% render 'owned-support-visual', context: 'support', alt: 'EZQuest Support', width: 1600, height: 960, class: 'mega-menu-explore-image' %}
             {% endif %}
             <div class="mega-menu-compare-overlay"></div>
             <div class="mega-menu-compare-copy">
-              <p class="mega-menu-side-label mega-menu-side-label--light">Support stays close</p>
-              <h3>Buy with more confidence, then move into setup with less friction.</h3>
-              <p>Manuals, downloads, compatibility, and direct help stay connected to the buying path.</p>
+              <p class="mega-menu-side-label mega-menu-side-label--light">Support center</p>
+              <h3>Buy with confidence, then move into setup without losing momentum.</h3>
+              <p>Manuals, downloads, compatibility, and direct help stay connected to the product.</p>
             </div>
           </a>
         </div>
@@ -315,13 +342,21 @@
           {% if travel_image != blank %}
             {{ travel_image | image_url: width: 1800 | image_tag: loading: 'lazy', class: 'mega-menu-compare-image' }}
           {% else %}
-            {% render 'placeholder-visual', kind: 'compare', text: 'Compare EZQuest', width: 1800, height: 900, class: 'mega-menu-compare-image' %}
+            {% render 'owned-product-visual',
+              product_handle: 'usb-c-multimedia-hub',
+              product_title: 'Compare EZQuest',
+              variant: 'compare',
+              kind: 'compare',
+              width: 1800,
+              height: 900,
+              class: 'mega-menu-compare-image'
+            %}
           {% endif %}
           <div class="mega-menu-compare-overlay"></div>
           <div class="mega-menu-compare-copy">
             <p class="mega-menu-side-label mega-menu-side-label--light">Compare</p>
             <h3>Choose the right hub, dock, or charger before checkout.</h3>
-            <p>Compare ports, power delivery, display support, and workflow fit side by side.</p>
+            <p>See the most portable, most balanced, and most desk-ready roles side by side.</p>
           </div>
         </a>
       </div>

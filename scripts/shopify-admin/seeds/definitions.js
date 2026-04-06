@@ -25,6 +25,7 @@ const metaobjectDefinitions = [
       { name: "Platforms", key: "platforms", type: "list.single_line_text_field", required: false },
       { name: "Products", key: "products", type: "list.product_reference", required: false },
       { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
+      { name: "Related compatibility entries", key: "compatibility_entries", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_compatibility_entry" },
       { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
     ]
   },
@@ -47,6 +48,47 @@ const metaobjectDefinitions = [
     ]
   },
   {
+    name: "EZQuest Firmware",
+    type: "ezquest_firmware",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Firmware type", key: "firmware_type", type: "single_line_text_field", required: true },
+      { name: "Summary", key: "summary", type: "multi_line_text_field", required: false },
+      { name: "File", key: "file", type: "file_reference", required: false },
+      { name: "External URL", key: "external_url", type: "url", required: false },
+      { name: "Button label", key: "button_label", type: "single_line_text_field", required: false },
+      { name: "Version", key: "version", type: "single_line_text_field", required: false },
+      { name: "Platforms", key: "platforms", type: "list.single_line_text_field", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false },
+      { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
+      { name: "Related manuals", key: "manuals", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_manual" },
+      { name: "Related downloads", key: "downloads", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_download" },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
+    ]
+  },
+  {
+    name: "EZQuest User Guide",
+    type: "ezquest_user_guide",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Guide type", key: "guide_type", type: "single_line_text_field", required: true },
+      { name: "Summary", key: "summary", type: "multi_line_text_field", required: false },
+      { name: "File", key: "file", type: "file_reference", required: false },
+      { name: "External URL", key: "external_url", type: "url", required: false },
+      { name: "Button label", key: "button_label", type: "single_line_text_field", required: false },
+      { name: "Version", key: "version", type: "single_line_text_field", required: false },
+      { name: "Platforms", key: "platforms", type: "list.single_line_text_field", required: false },
+      { name: "Workflows", key: "workflows", type: "list.single_line_text_field", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false },
+      { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
+      { name: "Related manuals", key: "manuals", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_manual" },
+      { name: "Related downloads", key: "downloads", type: "list.metaobject_reference", required: false, metaobjectDefinitionType: "ezquest_download" },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
+    ]
+  },
+  {
     name: "EZQuest Compatibility Entry",
     type: "ezquest_compatibility_entry",
     displayNameKey: "title",
@@ -65,6 +107,27 @@ const metaobjectDefinitions = [
     ]
   },
   {
+    name: "EZQuest Troubleshooting Item",
+    type: "ezquest_troubleshooting_item",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Issue type", key: "issue_type", type: "single_line_text_field", required: false },
+      { name: "Summary", key: "summary", type: "multi_line_text_field", required: false },
+      { name: "Likely causes", key: "likely_causes", type: "multi_line_text_field", required: false },
+      { name: "Resolution", key: "resolution", type: "multi_line_text_field", required: false },
+      { name: "Primary label", key: "primary_label", type: "single_line_text_field", required: false },
+      { name: "Primary URL", key: "primary_url", type: "url", required: false },
+      { name: "Secondary label", key: "secondary_label", type: "single_line_text_field", required: false },
+      { name: "Secondary URL", key: "secondary_url", type: "url", required: false },
+      { name: "Platforms", key: "platforms", type: "list.single_line_text_field", required: false },
+      { name: "Workflows", key: "workflows", type: "list.single_line_text_field", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false },
+      { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
+    ]
+  },
+  {
     name: "EZQuest Comparison Group",
     type: "ezquest_comparison_group",
     displayNameKey: "heading",
@@ -76,6 +139,24 @@ const metaobjectDefinitions = [
       { name: "Products", key: "products", type: "list.product_reference", required: false },
       { name: "CTA label", key: "cta_label", type: "single_line_text_field", required: false },
       { name: "Support note", key: "support_note", type: "multi_line_text_field", required: false }
+    ]
+  },
+  {
+    name: "EZQuest Decision Guide Entry",
+    type: "ezquest_decision_guide_entry",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Role label", key: "role_label", type: "single_line_text_field", required: false },
+      { name: "Summary", key: "summary", type: "multi_line_text_field", required: false },
+      { name: "Primary label", key: "primary_label", type: "single_line_text_field", required: false },
+      { name: "Primary URL", key: "primary_url", type: "url", required: false },
+      { name: "Secondary label", key: "secondary_label", type: "single_line_text_field", required: false },
+      { name: "Secondary URL", key: "secondary_url", type: "url", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false },
+      { name: "Collections", key: "collections", type: "list.collection_reference", required: false },
+      { name: "Workflows", key: "workflows", type: "list.single_line_text_field", required: false },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false }
     ]
   },
   {
@@ -102,6 +183,8 @@ const productMetafieldDefinitions = [
   { name: "Compatibility summary", namespace: "ezquest", key: "compatibility_summary", type: "rich_text_field", ownerType: "PRODUCT" },
   { name: "Linked manuals", namespace: "ezquest", key: "manuals", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_manual" },
   { name: "Linked downloads", namespace: "ezquest", key: "downloads", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_download" },
+  { name: "Linked firmware", namespace: "ezquest", key: "firmware", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_firmware" },
+  { name: "Linked user guides", namespace: "ezquest", key: "user_guides", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_user_guide" },
   { name: "Linked compatibility entries", namespace: "ezquest", key: "compatibility_entries", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_compatibility_entry" },
   { name: "Comparison group", namespace: "ezquest", key: "compare_group", type: "metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_comparison_group" },
   { name: "Linked FAQ items", namespace: "ezquest", key: "faq_items", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_faq_item" }

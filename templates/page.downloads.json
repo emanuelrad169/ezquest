@@ -4,10 +4,10 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support resources",
-        "heading": "Drivers, firmware, and utilities that stay tied to your setup",
+        "heading": "Drivers and utilities that stay tied to your setup",
         "copy": "Find the right file by product, platform, or the next task in front of you.",
-        "support_eyebrow": "Ownership path",
-        "support_note": "Use downloads when the next step is software, firmware, or a utility tied to the product you already own. Escalate only if the install path still needs help.",
+        "support_eyebrow": "Ownership confidence",
+        "support_note": "Use downloads when software or a utility is the clearest answer for the product you already own. Contact support only if install help is still needed.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }
@@ -16,13 +16,13 @@
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Resources",
-        "heading": "Downloadable resources, organized by the next step",
+        "heading": "Downloadable resources, organized for the job in front of you",
         "copy": "Browse updates, drivers, and utilities by product family, platform, or support task without digging through a raw file list.",
         "structured_source": "global",
         "resource_kind": "downloads",
         "resource_limit": 6,
         "show_search": true,
-        "source_note": "Choose the file that matches your product and platform first. Move into compatibility or direct help only when the next step is still unclear.",
+        "source_note": "Choose the file that matches your product and platform first. Move into compatibility or direct help only when one detail is still unclear.",
         "link_label": "Contact support",
         "link_url": "/pages/contact"
       }

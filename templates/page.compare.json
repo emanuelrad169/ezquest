@@ -6,33 +6,33 @@
         "structured_source": "group_handle",
         "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
         "support_eyebrow": "Decision note",
-        "support_note": "Start with the role that feels closest: Travel Hub for portability, Multimedia Hub for everyday balance, and Pro Dock for the permanent desk.",
-        "link_label": "Open support",
-        "link_url": "/pages/support"
+        "support_note": "Start with the role: Travel Hub for portability, Multimedia Hub for balanced everyday use, and Pro Dock for the permanent desk.",
+        "link_label": "Check compatibility",
+        "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup"
       }
     },
     "compare": {
       "type": "product-compare-table",
       "settings": {
         "eyebrow": "Guided choice",
-        "heading": "Choose the EZQuest setup that fits the way you work",
-        "copy": "Start with the role that matches the setup: most portable, most balanced, or most desk-ready. Go deeper only when one option is still close.",
+        "heading": "Choose the EZQuest product built for your setup",
+        "copy": "Start with the role: most portable, most balanced, or most desk-ready. From there, open the product page that matches it.",
         "columns_desktop": 3,
         "structured_source": "group_handle",
         "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
-        "source_note": "Choose the role first. Use compatibility and support to confirm the final fit."
+        "source_note": "Choose the role first. Open the matching product page next. Use compatibility or support only when you want a final confirmation."
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need help choosing",
-        "heading": "Need one last check before you choose?",
-        "copy": "Move into support or compatibility without losing the decision context.",
-        "link_label": "Open support",
-        "link_url": "/pages/support",
-        "secondary_label": "Check compatibility",
-        "secondary_url": "/pages/compatibility",
+        "heading": "Need a final confirmation?",
+        "copy": "Check compatibility first. If the setup is unusual, support can help from there.",
+        "link_label": "Check compatibility",
+        "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup",
+        "secondary_label": "Open support center",
+        "secondary_url": "/pages/support?source=compare&group=usb-c-workspace-connectivity-lineup",
         "style": "light",
         "button_style": "secondary"
       }

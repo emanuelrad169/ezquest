@@ -9,7 +9,13 @@ module.exports = [
     title: "Downloads",
     handle: "downloads",
     templateSuffix: "downloads",
-    body: "<p>Find firmware, drivers, utilities, and product-linked downloads here. Use compatibility guidance first if you are not sure which file applies to your setup.</p>"
+    body: "<p>Find drivers, utilities, and product-linked downloads here. Use compatibility guidance first if you are not sure which file applies to your setup, and move to Firmware only when an update is specifically required.</p>"
+  },
+  {
+    title: "Firmware",
+    handle: "firmware",
+    templateSuffix: "firmware",
+    body: "<p>Firmware updates improve stability, connectivity, and long-term performance. Match firmware to the correct product and platform before updating.</p>"
   },
   {
     title: "Manuals",
@@ -18,10 +24,16 @@ module.exports = [
     body: "<p>Find quick-start guides, product manuals, and setup references here. Manuals should help customers move from unboxing to a working setup with less friction.</p>"
   },
   {
+    title: "User Guides",
+    handle: "user-guides",
+    templateSuffix: "user-guides",
+    body: "<p>User guides provide deeper setup workflows, best practices, and ownership tips beyond the quick-start manuals. Use these when you want more context on the right setup for your workflow.</p>"
+  },
+  {
     title: "Compatibility",
     handle: "compatibility",
     templateSuffix: "compatibility",
-    body: "<p>Use this page to confirm product fit by device, platform, and workflow. Compatibility guidance should help customers choose the right product and the right support resource before they need direct escalation.</p>"
+    body: "<p>Use this page to confirm product fit by device, platform, and workflow. Compatibility guidance should help customers choose the right product and the right support resource before they need direct support.</p>"
   },
   {
     title: "FAQ",
@@ -33,13 +45,25 @@ module.exports = [
     title: "Troubleshooting",
     handle: "troubleshooting",
     templateSuffix: "troubleshooting",
-    body: "<p>Use troubleshooting to narrow common symptoms, likely causes, and the right next action. Start here after FAQ review and before direct escalation whenever possible.</p>"
+    body: "<p>Use troubleshooting to narrow common symptoms, likely causes, and the right next action. Start here after FAQ review and before direct support whenever possible.</p>"
+  },
+  {
+    title: "Ticket Submission",
+    handle: "ticket-submission",
+    templateSuffix: "ticket-submission",
+    body: "<p>Use this page when you have already reviewed the support resources and still need direct assistance. The EZQuest team will guide you through the next step.</p>"
   },
   {
     title: "Contact Support",
     handle: "contact",
     templateSuffix: "contact",
     body: "<p>Use this page for direct support, warranty follow-up, order questions, or business inquiries once self-service resources are no longer enough.</p>"
+  },
+  {
+    title: "Help Me Choose",
+    handle: "help-me-choose",
+    templateSuffix: "help-me-choose",
+    body: "<p>Use this guide to match your workflow to the right EZQuest product family before you buy. Start with how and where you work, then narrow the right product type.</p>"
   },
   {
     title: "About EZQuest",

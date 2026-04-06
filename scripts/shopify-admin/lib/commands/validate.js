@@ -96,6 +96,8 @@ async function getProductStructuredState(client, handle) {
           specRows: metafield(namespace: "ezquest", key: "spec_rows") { id }
           manuals: metafield(namespace: "ezquest", key: "manuals") { id }
           downloads: metafield(namespace: "ezquest", key: "downloads") { id }
+          firmware: metafield(namespace: "ezquest", key: "firmware") { id }
+          userGuides: metafield(namespace: "ezquest", key: "user_guides") { id }
           compatibilityEntries: metafield(namespace: "ezquest", key: "compatibility_entries") { id }
           compareGroup: metafield(namespace: "ezquest", key: "compare_group") { id }
           faqItems: metafield(namespace: "ezquest", key: "faq_items") { id }
@@ -118,6 +120,8 @@ async function getProductStructuredState(client, handle) {
     spec_rows: Boolean(p.specRows),
     manuals: Boolean(p.manuals),
     downloads: Boolean(p.downloads),
+    firmware: Boolean(p.firmware),
+    user_guides: Boolean(p.userGuides),
     compatibility_entries: Boolean(p.compatibilityEntries),
     compare_group: Boolean(p.compareGroup),
     faq_items: Boolean(p.faqItems)
@@ -194,6 +198,8 @@ async function runValidation(context, summary) {
         "spec_rows",
         "manuals",
         "downloads",
+        "firmware",
+        "user_guides",
         "compatibility_entries",
         "compare_group",
         "faq_items"

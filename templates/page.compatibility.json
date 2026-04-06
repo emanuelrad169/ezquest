@@ -6,8 +6,8 @@
         "eyebrow": "Compatibility",
         "heading": "Confirm device and workflow fit",
         "copy": "Confirm product fit by platform, device type, display path, and the setup you are building before setup begins.",
-        "support_eyebrow": "Ownership path",
-        "support_note": "Compatibility is where purchase confidence and setup confidence meet. Use it to confirm the right fit before you buy, then move into manuals, downloads, or support only if you need the next layer of detail.",
+        "support_eyebrow": "Ownership confidence",
+        "support_note": "Compatibility is where buying confidence and setup confidence meet. Confirm the right fit first, then open manuals, downloads, or support only if you still need more detail.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }
@@ -19,16 +19,17 @@
         "heading": "Compatibility guidance for real devices and workflows",
         "copy": "Use compatibility guidance to buy with more confidence and reduce guesswork before setup begins.",
         "structured_source": "global",
+        "limit_to_source_product": true,
         "entry_limit": 6,
-        "source_note": "Check the device, platform, or workflow that matches your setup first. Move into manuals, downloads, or support only if the next step is still unclear."
+        "source_note": "Check the device, platform, or workflow that matches your setup first. Open manuals, downloads, or support only if one detail still needs a closer look."
       }
     },
     "support": {
       "type": "support-link-grid",
       "settings": {
         "eyebrow": "Related support",
-        "heading": "Keep the next step close",
-        "copy": "Move from compatibility into setup files, guides, or direct support without starting over.",
+        "heading": "Keep the right follow-up nearby",
+        "copy": "Open setup files, guides, or direct support without losing sight of the product you are checking.",
         "columns_desktop": 3,
         "link_label": "Open support center",
         "link_url": "/pages/support"
@@ -38,7 +39,7 @@
           "type": "card",
           "settings": {
             "title": "Downloads",
-            "copy": "Continue to firmware, drivers, or utilities tied to supported products.",
+            "copy": "Continue to drivers or utilities tied to supported products.",
             "meta": "Files and tools",
             "link_label": "Open downloads",
             "link_url": "/pages/downloads"
@@ -58,7 +59,7 @@
           "type": "card",
           "settings": {
             "title": "Contact support",
-            "copy": "Escalate when compatibility depends on a more specific deployment question.",
+            "copy": "Contact support when compatibility depends on a more specific deployment question.",
             "meta": "Direct help",
             "link_label": "Open contact page",
             "link_url": "/pages/contact"
@@ -71,8 +72,8 @@
       "type": "cta-banner",
       "settings": {
         "eyebrow": "Need help confirming fit",
-        "heading": "Need the next step after fit is confirmed?",
-        "copy": "If compatibility is clear but setup still is not, move into manuals first, then escalate only when the install path still needs help.",
+        "heading": "Need help after fit is confirmed?",
+        "copy": "If compatibility is clear but setup still is not, open manuals first, then contact support only if the install still needs help.",
         "link_label": "Open manuals",
         "link_url": "/pages/manuals",
         "secondary_label": "Contact support",

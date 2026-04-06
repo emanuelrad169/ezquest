@@ -137,7 +137,7 @@ ezquest-theme/
 | Hubs & Adapters | `/collections/hubs-adapters` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
 | Docking Stations | `/collections/docking-stations` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
 | Chargers & Power | `/collections/chargers-power` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
-| Cables | `/collections/cables` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
+| Accessories | `/collections/accessories` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
 | Accessories | `/collections/accessories` | Collection | `collection.json` | Collection | Category narrative may later use collection metafields |
 | Product Detail | `/products/<handle>` | Product | `product.json` | Product | Specs, comparison, compatibility, downloads should move to metafields/metaobjects |
 | Compare Products | `/pages/compare` | Page | `page.compare.json` | Custom page | Should later be powered by comparison metaobjects |
@@ -152,8 +152,8 @@ ezquest-theme/
 | Warranty & Claims | `/pages/warranty` | Page | `page.warranty.json` | Custom page | Keep as page content unless claim flows become structured |
 | Shipping & Returns | `/pages/shipping-returns` | Page | `page.shipping-returns.json` | Custom page | Chosen as custom page, not a Shopify policy page |
 | Contact Support | `/pages/contact` | Page | `page.contact.json` | Custom page | Contact form/embed details can be added in Phase 2 |
-| Blog Listing | `/blogs/ezquest-journal` | Blog | `blog.json` | Blog | Editorial structure stays native Shopify blog |
-| Blog Article | `/blogs/ezquest-journal/<article>` | Article | `article.json` | Article | Related content can be section/block driven initially |
+| Blog Listing | `/blogs/resources` | Blog | `blog.json` | Blog | Editorial structure stays native Shopify blog |
+| Blog Article | `/blogs/resources/<article>` | Article | `article.json` | Article | Related content can be section/block driven initially |
 | About EZQuest | `/pages/about` | Page | `page.about.json` | Custom page | Narrative page, likely stays page content + sections |
 | Our Story | `/pages/our-story` | Page | `page.our-story.json` | Custom page | Uses the same content architecture as About with its own template handle |
 | Where To Buy | `/pages/where-to-buy` | Page | `page.where-to-buy.json` | Custom page | Keep simple unless dealer/location data becomes structured |

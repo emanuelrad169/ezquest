@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "User guides",
+        "heading": "Guides for setup, workflows, and best practices",
+        "copy": "Long-form setup and workflow guidance that bridges product selection with real-world use.",
+        "support_eyebrow": "Ownership path",
+        "support_note": "Use guides when you need the full setup path or a workflow-specific walkthrough.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      }
+    },
+    "resources": {
+      "type": "support-resource-list",
+      "settings": {
+        "eyebrow": "Guides",
+        "heading": "User guides tied to real setups",
+        "copy": "Browse setup guides by workflow, product family, or the decision you are working through.",
+        "structured_source": "global",
+        "resource_kind": "guides",
+        "resource_limit": 6,
+        "show_search": true,
+        "source_note": "Start with the guide that matches your workflow. Move into manuals or support if the next step is still unclear.",
+        "link_label": "Open manuals",
+        "link_url": "/pages/manuals"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need a faster answer",
+        "heading": "Need a shorter path than a full guide?",
+        "copy": "Move into compatibility, manuals, or direct support when the guide is more than you need right now.",
+        "link_label": "Check compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "resources", "cta"]
+}

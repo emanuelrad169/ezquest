@@ -5,9 +5,9 @@
       "settings": {
         "eyebrow": "Contact",
         "heading": "Contact support when self-service is not enough",
-        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is no longer the fastest path.",
+        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is no longer the fastest option.",
         "support_eyebrow": "Best use",
-        "support_note": "Choose the right route first, then send the details support will need so the next step is clear from the first reply.",
+        "support_note": "Choose the right route first, then send the details support will need so the first reply can be more useful.",
         "link_label": "View support center",
         "link_url": "/pages/support"
       }
@@ -59,10 +59,10 @@
       "settings": {
         "eyebrow": "Contact form",
         "heading": "Send the details support will need",
-        "copy": "Send the details support needs so the right next step is clear from the first reply.",
+        "copy": "Send the details support needs so the first reply can point you in the right direction.",
         "side_eyebrow": "Before submitting",
         "side_heading": "Help support respond faster",
-        "side_copy": "Include the product name, order reference, setup context, and the issue summary so the next step is clear from the first reply.",
+        "side_copy": "Include the product name, order reference, setup details, and the issue summary so support can respond with a clearer answer.",
         "success_message": "Thanks for reaching out. Your message has been sent."
       }
     },
@@ -73,7 +73,7 @@
         "intro_copy": "Office details, business contact information, and response expectations live here when you need them.",
         "side_eyebrow": "Before contacting",
         "side_heading": "Start with self-service when it is faster",
-        "side_copy": "Downloads, manuals, compatibility, and FAQ may solve the issue before a direct handoff is needed.",
+        "side_copy": "Downloads, manuals, compatibility, and FAQ may solve the issue before direct support is needed.",
         "side_link_label": "View downloads",
         "side_link_url": "/pages/downloads"
       }
@@ -83,7 +83,7 @@
       "settings": {
         "eyebrow": "Need self-service first",
         "heading": "Need self-service before you reach out?",
-        "copy": "Move into support resources when that path is faster than waiting on a direct reply.",
+        "copy": "Move into support resources when they are faster than waiting on a direct reply.",
         "link_label": "Open manuals",
         "link_url": "/pages/manuals",
         "secondary_label": "Open FAQ",

@@ -134,11 +134,15 @@ This command does not mutate storefront data. It reports:
 
 - Support Center → `support` → `page.support`
 - Downloads → `downloads` → `page.downloads`
+- Firmware → `firmware` → `page.firmware`
 - Manuals → `manuals` → `page.manuals`
+- User Guides → `user-guides` → `page.user-guides`
+- Help Me Choose → `help-me-choose` → `page.help-me-choose`
 - Compatibility → `compatibility` → `page.compatibility`
 - FAQ → `faq` → `page.faq`
 - Troubleshooting → `troubleshooting` → `page.troubleshooting`
 - Contact Support → `contact` → `page.contact`
+- Ticket Submission → `ticket-submission` → `page.ticket-submission`
 - About EZQuest → `about` → `page.about`
 - Our Story → `our-story` → `page.our-story`
 - Warranty → `warranty` → `page.warranty`
@@ -154,8 +158,12 @@ This command does not mutate storefront data. It reports:
 - `ezquest_spec_row`
 - `ezquest_manual`
 - `ezquest_download`
+- `ezquest_firmware`
+- `ezquest_user_guide`
 - `ezquest_compatibility_entry`
+- `ezquest_troubleshooting_item`
 - `ezquest_comparison_group`
+- `ezquest_decision_guide_entry`
 - `ezquest_faq_item`
 
 ### Product metafield definitions
@@ -168,6 +176,8 @@ Namespace: `ezquest`
 - `compatibility_summary`
 - `manuals`
 - `downloads`
+- `firmware`
+- `user_guides`
 - `compatibility_entries`
 - `compare_group`
 - `faq_items`
@@ -193,10 +203,14 @@ The starter content seed is built around:
 - each product includes:
   - 4 spec rows
   - 2 manuals
-  - 2 downloads
+  - 1 download
+  - 1 firmware entry
+  - 2 user guides
   - 2 compatibility entries
   - 3 FAQ items
 - one comparison group links all three products
+- troubleshooting entries and decision guide entries are seeded globally
+- global support pages that read metaobject lists should honor each entry's `sort_order`
 
 Important:
 

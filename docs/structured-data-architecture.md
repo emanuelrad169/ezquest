@@ -24,7 +24,9 @@ Use the following product metafield definitions in `Settings > Custom data > Pro
 | Feature highlights | `ezquest.feature_highlights` | `List of single line text` | 3-6 short highlights for the PDP buy box or story modules |
 | Compatibility summary | `ezquest.compatibility_summary` | `Rich text` | Short compatibility overview for PDP and compatibility routing |
 | Linked manuals | `ezquest.manuals` | `List of metaobject references` to `ezquest_manual` | Product-specific manuals and setup guides |
-| Linked downloads | `ezquest.downloads` | `List of metaobject references` to `ezquest_download` | Product-specific drivers, firmware, and utilities |
+| Linked downloads | `ezquest.downloads` | `List of metaobject references` to `ezquest_download` | Product-specific drivers and utilities |
+| Linked firmware | `ezquest.firmware` | `List of metaobject references` to `ezquest_firmware` | Product-specific firmware update utilities |
+| Linked user guides | `ezquest.user_guides` | `List of metaobject references` to `ezquest_user_guide` | Long-form setup and workflow guides |
 | Linked compatibility entries | `ezquest.compatibility_entries` | `List of metaobject references` to `ezquest_compatibility_entry` | Product-specific compatibility records |
 | Comparison group | `ezquest.compare_group` | `Metaobject reference` to `ezquest_comparison_group` | Primary compare grouping for the PDP |
 | Linked FAQ items | `ezquest.faq_items` | `List of metaobject references` to `ezquest_faq_item` | Product-level FAQ overrides or additions |
@@ -78,7 +80,7 @@ Naming convention:
 
 - Type: `ezquest_download`
 - Display name field: `title`
-- Purpose: Drivers, firmware, utilities, and related downloadable resources
+- Purpose: Drivers, utilities, and related downloadable resources that are not firmware updates
 
 | Field label | Key | Type |
 |---|---|---|
@@ -99,6 +101,61 @@ Naming convention:
 
 - `PRODUCT OR FAMILY - DOWNLOAD TYPE - PLATFORM - VERSION`
 - Example: `USB-C Multimedia Hub - Driver - Windows - 2.1.0`
+
+### Firmware
+
+- Type: `ezquest_firmware`
+- Display name field: `title`
+- Purpose: Firmware update utilities tied to products and support paths
+
+| Field label | Key | Type |
+|---|---|---|
+| Title | `title` | `Single line text` |
+| Firmware type | `firmware_type` | `Single line text` |
+| Summary | `summary` | `Multi-line text` |
+| File | `file` | `File` |
+| External URL | `external_url` | `URL` |
+| Button label | `button_label` | `Single line text` |
+| Version | `version` | `Single line text` |
+| Platforms | `platforms` | `List of single line text` |
+| Products | `products` | `List of product references` |
+| Collections | `collections` | `List of collection references` |
+| Related manuals | `manuals` | `List of metaobject references` to `ezquest_manual` |
+| Related downloads | `downloads` | `List of metaobject references` to `ezquest_download` |
+| Sort order | `sort_order` | `Integer` |
+
+Naming convention:
+
+- `PRODUCT OR FAMILY - FIRMWARE TYPE - VERSION`
+- Example: `USB-C Multimedia Hub - Firmware Update - v1.4.2`
+
+### User guide
+
+- Type: `ezquest_user_guide`
+- Display name field: `title`
+- Purpose: Long-form setup guides, workflow guidance, and ownership education
+
+| Field label | Key | Type |
+|---|---|---|
+| Title | `title` | `Single line text` |
+| Guide type | `guide_type` | `Single line text` |
+| Summary | `summary` | `Multi-line text` |
+| File | `file` | `File` |
+| External URL | `external_url` | `URL` |
+| Button label | `button_label` | `Single line text` |
+| Version | `version` | `Single line text` |
+| Platforms | `platforms` | `List of single line text` |
+| Workflows | `workflows` | `List of single line text` |
+| Products | `products` | `List of product references` |
+| Collections | `collections` | `List of collection references` |
+| Related manuals | `manuals` | `List of metaobject references` to `ezquest_manual` |
+| Related downloads | `downloads` | `List of metaobject references` to `ezquest_download` |
+| Sort order | `sort_order` | `Integer` |
+
+Naming convention:
+
+- `PRODUCT OR FAMILY - GUIDE TYPE - VERSION`
+- Example: `USB-C Pro Dock - Workflow Guide - v1.0`
 
 ### Compatibility entry
 
@@ -125,6 +182,34 @@ Naming convention:
 - `PRODUCT OR FAMILY - PLATFORM - DEVICE OR WORKFLOW`
 - Example: `USB-C Multimedia Hub - macOS - MacBook Pro M3`
 
+### Troubleshooting item
+
+- Type: `ezquest_troubleshooting_item`
+- Display name field: `title`
+- Purpose: Symptom-first troubleshooting items that link to the right next step
+
+| Field label | Key | Type |
+|---|---|---|
+| Title | `title` | `Single line text` |
+| Issue type | `issue_type` | `Single line text` |
+| Summary | `summary` | `Multi-line text` |
+| Likely causes | `likely_causes` | `Multi-line text` |
+| Resolution | `resolution` | `Multi-line text` |
+| Primary label | `primary_label` | `Single line text` |
+| Primary URL | `primary_url` | `URL` |
+| Secondary label | `secondary_label` | `Single line text` |
+| Secondary URL | `secondary_url` | `URL` |
+| Platforms | `platforms` | `List of single line text` |
+| Workflows | `workflows` | `List of single line text` |
+| Products | `products` | `List of product references` |
+| Collections | `collections` | `List of collection references` |
+| Sort order | `sort_order` | `Integer` |
+
+Naming convention:
+
+- `ISSUE TYPE - SUMMARY`
+- Example: `Display - Display not detected`
+
 ### Comparison group
 
 - Type: `ezquest_comparison_group`
@@ -145,6 +230,31 @@ Naming convention:
 
 - `FAMILY OR USE CASE - COMPARE`
 - Example: `USB-C Hubs - Compare`
+
+### Decision guide entry
+
+- Type: `ezquest_decision_guide_entry`
+- Display name field: `title`
+- Purpose: Help-me-choose entries that map workflow needs to the right family or product
+
+| Field label | Key | Type |
+|---|---|---|
+| Title | `title` | `Single line text` |
+| Role label | `role_label` | `Single line text` |
+| Summary | `summary` | `Multi-line text` |
+| Primary label | `primary_label` | `Single line text` |
+| Primary URL | `primary_url` | `URL` |
+| Secondary label | `secondary_label` | `Single line text` |
+| Secondary URL | `secondary_url` | `URL` |
+| Products | `products` | `List of product references` |
+| Collections | `collections` | `List of collection references` |
+| Workflows | `workflows` | `List of single line text` |
+| Sort order | `sort_order` | `Integer` |
+
+Naming convention:
+
+- `ROLE - SUMMARY`
+- Example: `Travel - Portable travel setup`
 
 ### FAQ item
 
@@ -220,6 +330,8 @@ Why group-driven is better:
 | `product-compare-table` | `product.metafields.ezquest.compare_group` or group handle override | Section blocks | Layout, fallback cards, optional group handle |
 | `support-resource-list` | Product-linked manuals/downloads or global metaobject values | Section blocks | Source mode, resource kind, optional product/collection filters |
 | `faq-accordion` | Product-linked FAQs or global FAQ metaobjects | Section blocks | Source mode, group filter, heading and intro |
+
+Global support sections that render `metaobjects.*.values` should explicitly sort by `sort_order` before applying any filters or limits. Product-linked metafield lists keep their assigned reference order unless a section intentionally re-sorts them.
 
 ## Admin setup
 

@@ -67,6 +67,57 @@ async function findProductDetailByHandle(client, handle) {
   return data.products.nodes[0] || null;
 }
 
+async function findCollectionDetailByHandle(client, handle) {
+  const query = `
+    query CollectionByHandle($query: String!) {
+      collections(first: 1, query: $query) {
+        nodes {
+          id
+          title
+          handle
+          products(first: 250) {
+            nodes {
+              id
+              handle
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await client.graphql(query, { query: `handle:${handle}` }, { label: `Lookup collection ${handle}` });
+  return data.collections.nodes[0] || null;
+}
+
+async function addProductsToCollection(client, collectionId, productIds, handle) {
+  if (!Array.isArray(productIds) || productIds.length === 0) {
+    return;
+  }
+
+  const mutation = `
+    mutation AddProductsToCollection($id: ID!, $productIds: [ID!]!) {
+      collectionAddProducts(id: $id, productIds: $productIds) {
+        collection {
+          id
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const data = await client.graphql(
+    mutation,
+    { id: collectionId, productIds },
+    { label: `Add products to collection ${handle}` }
+  );
+
+  client.assertUserErrors(data.collectionAddProducts.userErrors, `Add products to collection ${handle}`);
+}
+
 function getSeedImageUrls(seed) {
   return Array.isArray(seed.imageUrls) ? seed.imageUrls.filter(Boolean) : [];
 }
@@ -490,6 +541,32 @@ async function syncGroupedVariants(client, existing, seed) {
 async function seedProductsCommand(context, summary) {
   const { client, dryRun } = context;
   const onlineStorePublication = dryRun ? null : await findPublicationByName(client, "Online Store");
+  const collectionCache = new Map();
+
+  async function syncProductCollections(productId, seed) {
+    const collectionHandles = Array.isArray(seed.collectionHandles) ? seed.collectionHandles.filter(Boolean) : [];
+    for (const handle of collectionHandles) {
+      let collection = collectionCache.get(handle);
+      if (!collection) {
+        collection = await findCollectionDetailByHandle(client, handle);
+        collectionCache.set(handle, collection || null);
+      }
+
+      if (!collection) {
+        console.warn(`[shopify-admin] Skipping collection assignment for ${seed.handle}; collection ${handle} was not found.`);
+        continue;
+      }
+
+      const existingProductIds = new Set((collection.products?.nodes || []).map((node) => node.id));
+      if (existingProductIds.has(productId)) {
+        continue;
+      }
+
+      await addProductsToCollection(client, collection.id, [productId], handle);
+      collection.products = collection.products || { nodes: [] };
+      collection.products.nodes.push({ id: productId, handle: seed.handle });
+    }
+  }
 
   for (const seed of seedProducts) {
     try {
@@ -514,6 +591,7 @@ async function seedProductsCommand(context, summary) {
         if (onlineStorePublication) {
           await publishResourceToPublication(client, created.id, onlineStorePublication.id);
         }
+        await syncProductCollections(created.id, seed);
         console.log(`[shopify-admin] Created product ${seed.handle}`);
         bump(summary, "created");
         continue;
@@ -544,6 +622,7 @@ async function seedProductsCommand(context, summary) {
       if (onlineStorePublication) {
         await publishResourceToPublication(client, existing.id, onlineStorePublication.id);
       }
+      await syncProductCollections(existing.id, seed);
       console.log(`[shopify-admin] Updated product ${seed.handle}`);
       bump(summary, "updated");
     } catch (error) {

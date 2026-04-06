@@ -6,7 +6,7 @@
         "eyebrow": "Documentation",
         "heading": "Manuals and setup guides that stay product-aware",
         "copy": "Find quick-start instructions, user guides, and setup notes by product family and install stage.",
-        "support_eyebrow": "Ownership path",
+        "support_eyebrow": "Ownership confidence",
         "support_note": "Manuals are where setup becomes clearer. Start with the guide that matches your product and stage, then move into troubleshooting or support only when you still need a deeper answer.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
@@ -22,7 +22,7 @@
         "resource_kind": "manuals",
         "resource_limit": 6,
         "show_search": true,
-        "source_note": "Start with the guide that matches your product and setup stage. Move into troubleshooting or direct help only if the next step is still unclear.",
+        "source_note": "Start with the guide that matches your product and setup stage. Move into troubleshooting or direct help only if one detail is still unclear.",
         "link_label": "Open support center",
         "link_url": "/pages/support"
       }

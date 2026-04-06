@@ -2,12 +2,6 @@
   assign feature_image = section.settings.image
   assign use_owned_support_visual = false
 
-  if feature_image == blank and all_products['usb-c-pro-dock'] != blank
-    assign feature_image = all_products['usb-c-pro-dock'].featured_image
-  elsif feature_image == blank and all_products['usb-c-multimedia-hub'] != blank
-    assign feature_image = all_products['usb-c-multimedia-hub'].featured_image
-  endif
-
   if feature_image == blank
     assign use_owned_support_visual = true
   endif
@@ -28,8 +22,8 @@
           <a href="{{ section.settings.link_url }}" class="home-feature-band-button">{{ section.settings.link_label }}</a>
         {% endif %}
         <div class="home-feature-band-note">
-          <p class="home-feature-band-note-kicker">Support stays in the buying path</p>
-          <p class="home-feature-band-note-copy">Check fit before you order, then move into manuals, downloads, and help without leaving the EZQuest flow.</p>
+          <p class="home-feature-band-note-kicker">Support built around the product</p>
+          <p class="home-feature-band-note-copy">Check compatibility before you order, then move into manuals, downloads, and setup help from there.</p>
         </div>
         <div class="home-feature-band-links">
           <a href="/pages/compatibility" class="support-inline-link">Check compatibility</a>
@@ -61,8 +55,8 @@
   "name": "Support card grid",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support-aware commerce" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "From compatibility before purchase to setup after delivery, support stays close." },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep compatibility, manuals, downloads, and direct help close to the buying path so the EZQuest experience feels complete before and after purchase." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From compatibility before purchase to setup after delivery, support stays built in." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep compatibility, manuals, downloads, and direct help close so the EZQuest experience feels complete before and after purchase." },
     { "type": "text", "id": "link_label", "label": "Section link label", "default": "Open support center" },
     { "type": "url", "id": "link_url", "label": "Section link URL" },
     { "type": "image_picker", "id": "image", "label": "Feature image" }

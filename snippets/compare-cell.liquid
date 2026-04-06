@@ -4,13 +4,24 @@
   assign compare_copy = block.settings.copy
   assign compare_vendor = blank
   assign compare_type = blank
-  assign compare_handoff_label = 'See product'
-  assign compare_support_label = 'Confirm fit'
+  assign compare_handoff_label = 'See product details'
+  assign compare_support_label = 'Check compatibility'
+  assign compare_visual_handle = blank
 
   if compare_product != blank
     assign compare_title = compare_product.title
     assign compare_vendor = compare_product.vendor
     assign compare_type = compare_product.type
+    assign compare_visual_handle = compare_product.handle
+  elsif compare_title != blank
+    assign normalized_compare_title = compare_title | downcase
+    if normalized_compare_title contains 'travel'
+      assign compare_visual_handle = 'usb-c-travel-hub'
+    elsif normalized_compare_title contains 'dock'
+      assign compare_visual_handle = 'usb-c-pro-dock'
+    elsif normalized_compare_title contains 'multimedia' or normalized_compare_title contains 'everyday'
+      assign compare_visual_handle = 'usb-c-multimedia-hub'
+    endif
   endif
 -%}
 
@@ -28,11 +39,23 @@
   </div>
 
   {% if compare_product != blank %}
-    {% render 'card-product', product: compare_product, card_style: 'featured-strip', image_variant: 'compare' %}
+    {% render 'card-product', product: compare_product, card_style: 'featured-strip', card_context: 'compare', image_variant: 'compare' %}
   {% else %}
     <article class="product-card-tile product-card-tile--featured-strip">
       <div class="product-card-featured-media">
-        {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+        {% if compare_visual_handle != blank %}
+          {% render 'owned-product-visual',
+            product_handle: compare_visual_handle,
+            product_title: compare_title,
+            variant: 'compare',
+            kind: 'compare',
+            width: 1200,
+            height: 900,
+            class: 'hero-media-frame aspect-card w-full object-cover'
+          %}
+        {% else %}
+          {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+        {% endif %}
       </div>
       <div class="product-card-featured-body">
         <h3 class="card-title product-card-featured-title">{{ compare_title }}</h3>
@@ -51,13 +74,13 @@
     {% elsif compare_copy != blank %}
       {{ compare_copy | truncatewords: 14 }}
     {% else %}
-      See how this option differs by fit, support, and everyday use.
+      See how this option differs by role, compatibility, and everyday use.
     {% endif %}
   </p>
   {% if compare_product != blank %}
     <div class="compare-card-links">
       <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
-      <a href="/pages/compatibility" class="site-meta-link">{{ compare_support_label }}</a>
+      <a href="/pages/compatibility?product={{ compare_product.handle }}" class="site-meta-link">{{ compare_support_label }}</a>
     </div>
   {% endif %}
 </article>

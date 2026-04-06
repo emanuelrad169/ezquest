@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Ticket submission",
+        "heading": "Open a support request with the right context",
+        "copy": "Use this form when self-service is not enough and the next step depends on your exact product or order.",
+        "support_eyebrow": "Before submitting",
+        "support_note": "Have the product name, order reference, and setup details ready so support can move faster.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      }
+    },
+    "form": {
+      "type": "contact-form-panel",
+      "settings": {
+        "eyebrow": "Ticket form",
+        "heading": "Submit a support request",
+        "copy": "Send the details support needs so the next step is clear from the first reply.",
+        "side_eyebrow": "Include",
+        "side_heading": "Details that speed resolution",
+        "side_copy": "Product name, order reference, setup context, and the issue summary are the fastest path to a response.",
+        "success_message": "Thanks for reaching out. Your message has been sent."
+      }
+    },
+    "support": {
+      "type": "support-link-grid",
+      "settings": {
+        "eyebrow": "Self-service first",
+        "heading": "Try a guided path before you submit",
+        "copy": "Downloads, manuals, compatibility, and troubleshooting can solve the issue faster when the answer is already known.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Downloads",
+            "copy": "Open drivers and utilities tied to your product before you submit a request.",
+            "meta": "Files",
+            "link_label": "Open downloads",
+            "link_url": "/pages/downloads"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Manuals",
+            "copy": "Open setup guides and user documentation when the issue is install-related.",
+            "meta": "Documentation",
+            "link_label": "Open manuals",
+            "link_url": "/pages/manuals"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Compatibility",
+            "copy": "Confirm device and workflow fit before you submit a direct support request.",
+            "meta": "Fit check",
+            "link_label": "Open compatibility",
+            "link_url": "/pages/compatibility"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    }
+  },
+  "order": ["hero", "form", "support"]
+}

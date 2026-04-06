@@ -43,21 +43,6 @@
             if card_image == blank and collection_object.featured_image != blank
               assign card_image = collection_object.featured_image
             endif
-            if card_image == blank and collection_object.products_count > 0 and collection_object.products.first.featured_image != blank
-              assign card_image = collection_object.products.first.featured_image
-            endif
-          endif
-
-          if card_image == blank
-            if card_url contains '/collections/hubs-adapters' and all_products['usb-c-multimedia-hub'] != blank
-              assign card_image = all_products['usb-c-multimedia-hub'].featured_image
-            elsif card_url contains '/collections/docking-stations' and all_products['usb-c-pro-dock'] != blank
-              assign card_image = all_products['usb-c-pro-dock'].featured_image
-            elsif card_url contains '/collections/chargers-power' and all_products['usb-c-travel-hub'] != blank
-              assign card_image = all_products['usb-c-travel-hub'].featured_image
-            elsif card_url contains '/collections/accessories' and all_products['usb-c-travel-hub'] != blank
-              assign card_image = all_products['usb-c-travel-hub'].featured_image
-            endif
           endif
 
           if card_title == blank

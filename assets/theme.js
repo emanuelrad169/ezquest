@@ -110,6 +110,157 @@ function animateMediaReveal(element, options) {
   });
 }());
 
+// ─── Compatibility: preserve product context ─────────────────────────────────
+(function () {
+  function formatProductHandle(handle) {
+    return handle
+      .split('-')
+      .filter(Boolean)
+      .map(function (part) {
+        if (part === 'usb' || part === 'c') return part.toUpperCase();
+        return part.charAt(0).toUpperCase() + part.slice(1);
+      })
+      .join(' ');
+  }
+
+  function appendProductParam(url, productHandle) {
+    try {
+      const resolved = new URL(url, window.location.origin);
+      resolved.searchParams.set('product', productHandle);
+      return resolved.pathname + resolved.search;
+    } catch (error) {
+      return url;
+    }
+  }
+
+  function initCompatibilityContext() {
+    const contextPanel = document.querySelector('[data-compatibility-product-context]');
+    if (!contextPanel) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const productHandle = params.get('product');
+    if (!productHandle) return;
+
+    const titleScript = document.querySelector('[data-compatibility-product-titles]');
+    let productTitles = {};
+    if (titleScript) {
+      try {
+        productTitles = JSON.parse(titleScript.textContent || '{}');
+      } catch (error) {
+        productTitles = {};
+      }
+    }
+
+    const productName = productTitles[productHandle] || formatProductHandle(productHandle);
+    const productNameTarget = contextPanel.querySelector('[data-compatibility-product-name]');
+
+    if (productNameTarget) {
+      productNameTarget.textContent = productName;
+    }
+
+    contextPanel.hidden = false;
+
+    document.querySelectorAll('[data-compatibility-context-link]').forEach(function (link) {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('/pages/')) return;
+      link.setAttribute('href', appendProductParam(href, productHandle));
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompatibilityContext);
+  } else {
+    initCompatibilityContext();
+  }
+}());
+
+// ─── Support: preserve product or compare context ────────────────────────────
+(function () {
+  function formatSupportProductHandle(handle) {
+    return handle
+      .split('-')
+      .filter(Boolean)
+      .map(function (part) {
+        if (part === 'usb' || part === 'c') return part.toUpperCase();
+        return part.charAt(0).toUpperCase() + part.slice(1);
+      })
+      .join(' ');
+  }
+
+  function appendContextParams(url, params) {
+    try {
+      const resolved = new URL(url, window.location.origin);
+      if (params.product) resolved.searchParams.set('product', params.product);
+      if (params.source) resolved.searchParams.set('source', params.source);
+      if (params.group) resolved.searchParams.set('group', params.group);
+      return resolved.pathname + resolved.search;
+    } catch (error) {
+      return url;
+    }
+  }
+
+  function initSupportContext() {
+    const panels = document.querySelectorAll('[data-support-context]');
+    if (!panels.length) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const configScript = document.querySelector('[data-support-context-config]');
+    let config = {};
+    if (configScript) {
+      try {
+        config = JSON.parse(configScript.textContent || '{}');
+      } catch (error) {
+        config = {};
+      }
+    }
+
+    const context = {
+      product: params.get('product') || config.product || '',
+      source: params.get('source') || config.source || '',
+      group: params.get('group') || config.group || ''
+    };
+
+    if (!context.product && !context.source && !context.group) return;
+
+    const productTitles = config.productTitles || {};
+    let kicker = 'Product context';
+    let title = 'Keep the product in view';
+    let copy = 'Support will stay tied to the product or lineup you were already checking.';
+
+    if (context.product) {
+      const productName = productTitles[context.product] || formatSupportProductHandle(context.product);
+      title = 'Support for ' + productName;
+      copy = 'Manuals, downloads, compatibility, and contact options stay tied to ' + productName + ' while you confirm the last detail.';
+    } else if (context.source === 'compare' || context.group) {
+      kicker = 'Compare context';
+      title = 'Still comparing the core lineup?';
+      copy = 'Use compatibility or support to confirm the last detail without losing the balanced, portable, and desk-ready roles you were weighing.';
+    }
+
+    panels.forEach(function (panel) {
+      const kickerTarget = panel.querySelector('[data-support-context-kicker]');
+      const titleTarget = panel.querySelector('[data-support-context-title]');
+      const copyTarget = panel.querySelector('[data-support-context-copy]');
+      if (kickerTarget) kickerTarget.textContent = kicker;
+      if (titleTarget) titleTarget.textContent = title;
+      if (copyTarget) copyTarget.textContent = copy;
+      panel.hidden = false;
+    });
+
+    document.querySelectorAll('[data-support-context-link]').forEach(function (link) {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('/pages/')) return;
+      link.setAttribute('href', appendContextParams(href, context));
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSupportContext);
+  } else {
+    initSupportContext();
+  }
+}());
+
 // ─── Product gallery: click thumbnail to swap main image ─────────────────────
 (function () {
   function updateActiveThumbs(stage, activeThumb) {

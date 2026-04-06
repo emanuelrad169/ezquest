@@ -1,0 +1,106 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Help me choose",
+        "heading": "Choose the right EZQuest setup before you shop",
+        "copy": "Start with the setup role, then move into the family and product that match the way you actually work.",
+        "support_eyebrow": "Decision guide",
+        "support_note": "This guide connects your setup intent with the right EZQuest family, then moves into the product that fits best.",
+        "link_label": "Compare options",
+        "link_url": "/pages/compare"
+      }
+    },
+    "guide": {
+      "type": "support-decision-guide",
+      "settings": {
+        "eyebrow": "Start here",
+        "heading": "Pick the setup role that matches the way you work",
+        "copy": "Choose the role first, then move into the family and the exact product that fits.",
+        "structured_source": "blocks",
+        "entry_limit": 6,
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      },
+      "blocks": {
+        "guide_1": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Most balanced",
+            "title": "Everyday hybrid desk",
+            "copy": "Best for daily desks that need ports, power, and display without a full dock.",
+            "primary_label": "Shop hubs & adapters",
+            "primary_url": "/collections/hubs-adapters",
+            "secondary_label": "Compare options",
+            "secondary_url": "/pages/compare"
+          }
+        },
+        "guide_2": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Most portable",
+            "title": "Mobile and travel-first",
+            "copy": "Best for hotel desks, meetings, and lightweight carry kits.",
+            "primary_label": "Shop hubs & adapters",
+            "primary_url": "/collections/hubs-adapters",
+            "secondary_label": "Compare options",
+            "secondary_url": "/pages/compare"
+          }
+        },
+        "guide_3": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Most desk-ready",
+            "title": "Permanent workstation",
+            "copy": "Best for desks that need displays, Ethernet, peripherals, and stable cable control.",
+            "primary_label": "Shop docking stations",
+            "primary_url": "/collections/docking-stations",
+            "secondary_label": "Compare options",
+            "secondary_url": "/pages/compare"
+          }
+        },
+        "guide_4": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Power first",
+            "title": "Charging and power layer",
+            "copy": "Best for setups that need reliable power before additional ports.",
+            "primary_label": "Shop chargers & power",
+            "primary_url": "/collections/chargers-power",
+            "secondary_label": "View support",
+            "secondary_url": "/pages/support"
+          }
+        },
+        "guide_5": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Finish the setup",
+            "title": "Cables and accessories",
+            "copy": "Best for tightening cable paths or completing the last step.",
+            "primary_label": "Shop accessories",
+            "primary_url": "/collections/accessories",
+            "secondary_label": "View support",
+            "secondary_url": "/pages/support"
+          }
+        }
+      },
+      "block_order": ["guide_1", "guide_2", "guide_3", "guide_4", "guide_5"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need a fit check",
+        "heading": "Need to confirm fit before you decide?",
+        "copy": "Use compatibility or support when the setup still needs a closer check.",
+        "link_label": "Check compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Open support center",
+        "secondary_url": "/pages/support",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "guide", "cta"]
+}

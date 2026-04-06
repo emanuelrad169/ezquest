@@ -5,14 +5,16 @@
       {%- liquid
         assign intro_copy = section.settings.intro_copy | default: collection.description
         assign category_label = 'Product family'
-        assign category_statement = 'Choose the EZQuest family that matches the setup, then narrow the right ports, power path, and footprint.'
-        assign category_support_note = 'Use compare or support only when the fit still needs a closer check.'
-        assign category_decision_note = 'Choose this family when the setup needs a clearer lane before you compare individual products.'
+        assign category_statement = 'Choose the EZQuest family that matches the setup, then narrow the right ports, power, and footprint.'
+        assign category_support_note = 'Use compare or support only when you want a final confirmation.'
+        assign category_decision_note = 'Choose this family when the setup already points in a clear direction.'
         assign category_stat_one = 'Built for cleaner workflows'
         assign category_stat_two = 'Engineered to reduce setup friction'
-        assign category_stat_three = 'Support stays close after the buy'
+        assign category_stat_three = 'Setup help after purchase'
         assign collection_visual = blank
         assign lead_product = collection.products.first
+        assign fallback_product_handles = blank
+        assign fallback_visible_count = 0
 
         if intro_copy == blank
           case collection.handle
@@ -32,42 +34,55 @@
         case collection.handle
           when 'hubs-adapters'
             assign category_label = 'Hybrid + travel'
-            assign category_statement = 'Hubs and adapters for everyday expansion, portable desks, presentations, and single-display workflows.'
-            assign category_support_note = 'Best for portable desks, presentations, single-display workflows, and everyday expansion.'
-            assign category_decision_note = 'Choose hubs and adapters when you need flexibility first, not a permanent workstation footprint.'
+            assign category_statement = 'Hubs and adapters for everyday expansion, portable desks, presentations, and lighter single-display setups.'
+            assign category_support_note = 'Best for portable desks, presentations, and everyday expansion.'
+            assign category_decision_note = 'Choose hubs and adapters when flexibility matters more than a permanent workstation footprint.'
             assign category_stat_one = 'Everyday port expansion'
             assign category_stat_two = 'Travel-to-desk flexibility'
             assign category_stat_three = 'Single-cable simplicity'
+            assign fallback_product_handles = 'usb-c-multimedia-hub,usb-c-travel-hub'
           when 'docking-stations'
             assign category_label = 'Desk command'
             assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and a calmer workstation footprint.'
-            assign category_support_note = 'Best for users stepping up from smaller hubs into a more stable multi-device desk setup.'
-            assign category_decision_note = 'Choose docking stations when the desk stays put and you need displays, Ethernet, charging, and accessory control.'
+            assign category_support_note = 'Best for stepping up from smaller hubs into a more complete desk setup.'
+            assign category_decision_note = 'Choose docking stations when the desk stays put and the workflow needs more authority.'
             assign category_stat_one = 'Permanent desk control'
             assign category_stat_two = 'Display + Ethernet ready'
             assign category_stat_three = 'Stronger workstation fit'
+            assign fallback_product_handles = 'usb-c-pro-dock'
           when 'chargers-power'
             assign category_label = 'Power layer'
             assign category_statement = 'Charging products that keep travel kits, home desks, and multi-device routines lighter, faster, and less cluttered.'
-            assign category_support_note = 'Best when the charging path matters before the port count does.'
-            assign category_decision_note = 'Choose chargers and power when the workflow already works, but the charging layer still needs to be cleaner and more reliable.'
+            assign category_support_note = 'Best when charging matters before port count does.'
+            assign category_decision_note = 'Choose chargers and power when the setup works, but the charging layer still needs to be cleaner and more reliable.'
             assign category_stat_one = 'Travel and desk charging'
             assign category_stat_two = 'Less charger clutter'
             assign category_stat_three = 'Multi-device routines'
           when 'accessories'
             assign category_label = 'Finish the setup'
-            assign category_statement = 'Cables and finishing pieces that make the EZQuest setup feel complete, dependable, and easier to live with every day.'
-            assign category_support_note = 'Best for tightening cable paths, replacing weak links, and finishing the workflow cleanly.'
+            assign category_statement = 'Cables and finishing pieces that make the setup feel complete, dependable, and easier to live with every day.'
+            assign category_support_note = 'Best for tightening cable paths, replacing weak links, and finishing the setup cleanly.'
             assign category_decision_note = 'Choose accessories when the last layer of the setup still needs cleaner routing or a more dependable final piece.'
             assign category_stat_one = 'Cleaner cable paths'
             assign category_stat_two = 'Reliable daily accessories'
             assign category_stat_three = 'Finishing-layer utility'
         endcase
 
+        if lead_product == blank and fallback_product_handles != blank
+          assign fallback_handle_list = fallback_product_handles | split: ','
+          for fallback_handle in fallback_handle_list
+            assign fallback_product = all_products[fallback_handle]
+            if fallback_product != blank
+              assign fallback_visible_count = fallback_visible_count | plus: 1
+              if lead_product == blank
+                assign lead_product = fallback_product
+              endif
+            endif
+          endfor
+        endif
+
         if section.settings.show_collection_image and collection.image != blank
           assign collection_visual = collection.image
-        elsif lead_product != blank and lead_product.featured_image != blank
-          assign collection_visual = lead_product.featured_image
         endif
       -%}
 
@@ -129,7 +144,7 @@
       </header>
 
       <div class="collection-toolbar">
-        <p class="collection-results-label">Showing {{ collection.products_count }} products</p>
+        <p class="collection-results-label">Showing {% if collection.products_count > 0 %}{{ collection.products_count }}{% else %}{{ fallback_visible_count }}{% endif %} products</p>
 
         <div class="collection-toolbar-actions">
           {% if section.settings.show_sort %}
@@ -144,7 +159,7 @@
             </form>
           {% endif %}
 
-          <p class="collection-toolbar-note">Use compare to narrow fit, then move into support only if the setup still needs a closer check.</p>
+          <p class="collection-toolbar-note">Compare nearby options if the choice is still close. Support is here if you want a final confirmation.</p>
         </div>
       </div>
 
@@ -160,18 +175,31 @@
       <div class="section-stack-lg product-grid">
         {% for product in collection.products %}
           <div class="collection-product-slot{% if forloop.first %} is-lead{% elsif forloop.index == 2 %} is-secondary{% endif %}">
-            {% render 'card-product', product: product, card_style: 'featured-strip', card_index: forloop.index0 %}
+            {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'collection', card_index: forloop.index0 %}
           </div>
         {% else %}
-          <div class="panel-primary md:col-span-2 xl:col-span-4">
-            <p class="section-kicker">Collection</p>
-            <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This product family is being merchandised now.</h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Browse the full catalog, compare nearby products, or move into support if you still need help choosing the right setup.</p>
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <a href="{{ routes.all_products_collection_url }}" class="button-secondary">Browse all products</a>
-              <a href="/pages/compare" class="site-meta-link">Compare options</a>
+          {% if fallback_visible_count > 0 %}
+            {% assign fallback_handle_list = fallback_product_handles | split: ',' %}
+            {% for fallback_handle in fallback_handle_list %}
+              {% assign fallback_product = all_products[fallback_handle] %}
+              {% if fallback_product != blank %}
+                <div class="collection-product-slot{% if forloop.first %} is-lead{% elsif forloop.index == 2 %} is-secondary{% endif %}">
+                  {% render 'card-product', product: fallback_product, card_style: 'featured-strip', card_context: 'collection', card_index: forloop.index0 %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div class="panel-primary md:col-span-2 xl:col-span-4">
+              <p class="section-kicker">Collection</p>
+              <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This product family is being merchandised now.</h2>
+              <p class="mt-3 text-sm leading-7 text-slate-600">Browse all product families, compare the core lineup, or open support if you want help choosing the right product.</p>
+              <div class="mt-6 flex flex-wrap items-center gap-3">
+                <a href="{{ routes.collections_url }}" class="button-secondary">Browse product families</a>
+                <a href="/pages/compare" class="site-meta-link">Compare core products</a>
+                <a href="/pages/support" class="site-meta-link">Open support center</a>
+              </div>
             </div>
-          </div>
+          {% endif %}
         {% endfor %}
       </div>
 

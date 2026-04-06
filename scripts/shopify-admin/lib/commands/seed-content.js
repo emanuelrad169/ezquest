@@ -160,17 +160,25 @@ async function seedStarterContent(context, summary) {
     const specRows = await listMetaobjectsByType(client, "ezquest_spec_row");
     const manuals = await listMetaobjectsByType(client, "ezquest_manual");
     const downloads = await listMetaobjectsByType(client, "ezquest_download");
+    const firmware = await listMetaobjectsByType(client, "ezquest_firmware");
+    const userGuides = await listMetaobjectsByType(client, "ezquest_user_guide");
     const compatibilityEntries = await listMetaobjectsByType(client, "ezquest_compatibility_entry");
+    const troubleshootingItems = await listMetaobjectsByType(client, "ezquest_troubleshooting_item");
     const faqItems = await listMetaobjectsByType(client, "ezquest_faq_item");
     const compareGroups = await listMetaobjectsByType(client, "ezquest_comparison_group");
+    const decisionGuideEntries = await listMetaobjectsByType(client, "ezquest_decision_guide_entry");
 
     const byType = {
       ezquest_spec_row: new Map(specRows.map((item) => [item.handle, item])),
       ezquest_manual: new Map(manuals.map((item) => [item.handle, item])),
       ezquest_download: new Map(downloads.map((item) => [item.handle, item])),
+      ezquest_firmware: new Map(firmware.map((item) => [item.handle, item])),
+      ezquest_user_guide: new Map(userGuides.map((item) => [item.handle, item])),
       ezquest_compatibility_entry: new Map(compatibilityEntries.map((item) => [item.handle, item])),
+      ezquest_troubleshooting_item: new Map(troubleshootingItems.map((item) => [item.handle, item])),
       ezquest_faq_item: new Map(faqItems.map((item) => [item.handle, item])),
-      ezquest_comparison_group: new Map(compareGroups.map((item) => [item.handle, item]))
+      ezquest_comparison_group: new Map(compareGroups.map((item) => [item.handle, item])),
+      ezquest_decision_guide_entry: new Map(decisionGuideEntries.map((item) => [item.handle, item]))
     };
 
     const productIdByHandle = new Map();
@@ -241,6 +249,36 @@ async function seedStarterContent(context, summary) {
         bump(summary, result.action);
       }
 
+      const userGuideIds = [];
+      for (const guide of productSeed.userGuides || []) {
+        const handle = guide.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        const result = await upsertMetaobject(
+          client,
+          {
+            type: "ezquest_user_guide",
+            handle,
+            fields: [
+              { key: "title", value: guide.title },
+              { key: "guide_type", value: guide.guide_type },
+              { key: "summary", value: guide.summary },
+              { key: "version", value: guide.version },
+              { key: "button_label", value: guide.button_label },
+              { key: "platforms", value: JSON.stringify(guide.platforms) },
+              { key: "workflows", value: JSON.stringify(guide.workflows || []) },
+              { key: "products", value: buildOptionalReferenceValue(productId ? [productId] : []) },
+              { key: "sort_order", value: String(guide.sort_order) }
+            ].filter((field) => field.value !== "")
+          },
+          byType.ezquest_user_guide,
+          dryRun
+        );
+        if (result.id) {
+          userGuideIds.push(result.id);
+          byType.ezquest_user_guide.set(handle, { id: result.id, handle, fields: [] });
+        }
+        bump(summary, result.action);
+      }
+
       const downloadIds = [];
       for (const download of productSeed.downloads) {
         const handle = download.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -266,6 +304,37 @@ async function seedStarterContent(context, summary) {
         if (result.id) {
           downloadIds.push(result.id);
           byType.ezquest_download.set(handle, { id: result.id, handle, fields: [] });
+        }
+        bump(summary, result.action);
+      }
+
+      const firmwareIds = [];
+      for (const firmwareEntry of productSeed.firmware || []) {
+        const handle = firmwareEntry.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        const result = await upsertMetaobject(
+          client,
+          {
+            type: "ezquest_firmware",
+            handle,
+            fields: [
+              { key: "title", value: firmwareEntry.title },
+              { key: "firmware_type", value: firmwareEntry.firmware_type },
+              { key: "summary", value: firmwareEntry.summary },
+              { key: "version", value: firmwareEntry.version },
+              { key: "button_label", value: firmwareEntry.button_label },
+              { key: "platforms", value: JSON.stringify(firmwareEntry.platforms) },
+              { key: "products", value: buildOptionalReferenceValue(productId ? [productId] : []) },
+              { key: "manuals", value: buildOptionalReferenceValue(manualIds) },
+              { key: "downloads", value: buildOptionalReferenceValue(downloadIds) },
+              { key: "sort_order", value: String(firmwareEntry.sort_order) }
+            ].filter((field) => field.value !== "")
+          },
+          byType.ezquest_firmware,
+          dryRun
+        );
+        if (result.id) {
+          firmwareIds.push(result.id);
+          byType.ezquest_firmware.set(handle, { id: result.id, handle, fields: [] });
         }
         bump(summary, result.action);
       }
@@ -370,6 +439,8 @@ async function seedStarterContent(context, summary) {
           { ownerId: productId, namespace: "ezquest", key: "spec_rows", type: "list.metaobject_reference", value: buildReferenceValue(specIds) },
           { ownerId: productId, namespace: "ezquest", key: "manuals", type: "list.metaobject_reference", value: buildReferenceValue(manualIds) },
           { ownerId: productId, namespace: "ezquest", key: "downloads", type: "list.metaobject_reference", value: buildReferenceValue(downloadIds) },
+          { ownerId: productId, namespace: "ezquest", key: "firmware", type: "list.metaobject_reference", value: buildReferenceValue(firmwareIds) },
+          { ownerId: productId, namespace: "ezquest", key: "user_guides", type: "list.metaobject_reference", value: buildReferenceValue(userGuideIds) },
           { ownerId: productId, namespace: "ezquest", key: "compatibility_entries", type: "list.metaobject_reference", value: buildReferenceValue(compatibilityIds) },
           { ownerId: productId, namespace: "ezquest", key: "faq_items", type: "list.metaobject_reference", value: buildReferenceValue(faqIds) },
           { ownerId: productId, namespace: "ezquest", key: "compare_group", type: "metaobject_reference", value: compareResult.id || "" }
@@ -378,6 +449,71 @@ async function seedStarterContent(context, summary) {
 
       console.log(`[shopify-admin] Linked starter content to product ${productSeed.handle}`);
       bump(summary, "updated", `Linked starter content to ${productSeed.handle}`);
+    }
+
+    for (const issue of starterContent.troubleshootingItems || []) {
+      const handle = issue.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      const linkedProductIds = (issue.productHandles || [])
+        .map((handleValue) => productIdByHandle.get(handleValue))
+        .filter(Boolean);
+      const result = await upsertMetaobject(
+        client,
+        {
+          type: "ezquest_troubleshooting_item",
+          handle,
+          fields: [
+            { key: "title", value: issue.title },
+            { key: "issue_type", value: issue.issue_type },
+            { key: "summary", value: issue.summary },
+            { key: "primary_label", value: issue.primary_label },
+            { key: "primary_url", value: issue.primary_url },
+            { key: "secondary_label", value: issue.secondary_label },
+            { key: "secondary_url", value: issue.secondary_url },
+            { key: "platforms", value: JSON.stringify(issue.platforms || []) },
+            { key: "workflows", value: JSON.stringify(issue.workflows || []) },
+            { key: "products", value: buildOptionalReferenceValue(linkedProductIds) },
+            { key: "sort_order", value: String(issue.sort_order) }
+          ].filter((field) => field.value !== "")
+        },
+        byType.ezquest_troubleshooting_item,
+        dryRun
+      );
+      if (result.id) {
+        byType.ezquest_troubleshooting_item.set(handle, { id: result.id, handle, fields: [] });
+      }
+      bump(summary, result.action);
+    }
+
+    for (const entry of starterContent.decisionGuideEntries || []) {
+      const handle = entry.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      const linkedProductIds = (entry.productHandles || [])
+        .map((handleValue) => productIdByHandle.get(handleValue))
+        .filter(Boolean);
+      const result = await upsertMetaobject(
+        client,
+        {
+          type: "ezquest_decision_guide_entry",
+          handle,
+          fields: [
+            { key: "title", value: entry.title },
+            { key: "role_label", value: entry.role_label },
+            { key: "summary", value: entry.summary },
+            { key: "primary_label", value: entry.primary_label },
+            { key: "primary_url", value: entry.primary_url },
+            { key: "secondary_label", value: entry.secondary_label },
+            { key: "secondary_url", value: entry.secondary_url },
+            { key: "workflows", value: JSON.stringify(entry.workflows || []) },
+            { key: "products", value: buildOptionalReferenceValue(linkedProductIds) },
+            { key: "sort_order", value: String(entry.sort_order) }
+          ].filter((field) => field.value !== "")
+        },
+        byType.ezquest_decision_guide_entry,
+        dryRun
+      );
+      if (result.id) {
+        byType.ezquest_decision_guide_entry.set(handle, { id: result.id, handle, fields: [] });
+      }
+      bump(summary, result.action);
     }
   } catch (error) {
     console.error("[shopify-admin] Failed starter content seed");

@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Firmware",
+        "heading": "Firmware updates tied to the right product and version",
+        "copy": "Use firmware updates when the next step is stability, compatibility, or a required device update.",
+        "support_eyebrow": "Ownership path",
+        "support_note": "Confirm the product and version first, then update only the firmware that matches your exact setup.",
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      }
+    },
+    "resources": {
+      "type": "support-resource-list",
+      "settings": {
+        "eyebrow": "Firmware",
+        "heading": "Firmware releases by product and platform",
+        "copy": "Review firmware updates by product, platform, and release guidance before you install.",
+        "structured_source": "global",
+        "resource_kind": "firmware",
+        "resource_limit": 6,
+        "show_search": true,
+        "source_note": "Start with the firmware that matches your exact product and platform. Move into manuals or support if the fit is still unclear.",
+        "link_label": "Open manuals",
+        "link_url": "/pages/manuals"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Need a fit check",
+        "heading": "Not sure which firmware applies?",
+        "copy": "Confirm the product fit first, then move into support if you still need guidance before updating.",
+        "link_label": "Check compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Contact support",
+        "secondary_url": "/pages/contact",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "resources", "cta"]
+}

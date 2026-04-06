@@ -7,6 +7,7 @@
   assign has_product_faqs = false
   assign use_product_faqs = false
   assign use_global_faqs = false
+  assign sorted_global_faq_keys = '' | split: ''
   assign support_page_context = false
   assign faq_group_filter = section.settings.faq_group | downcase
   assign faq_collection = section.settings.source_collection
@@ -50,6 +51,23 @@
         assign use_global_faqs = true
       endif
   endcase
+
+  if use_global_faqs and metaobjects.ezquest_faq_item != blank
+    capture sorted_faqs_raw
+      for faq_item in metaobjects.ezquest_faq_item.values
+        capture order_token_raw
+          echo '000000'
+          echo faq_item.sort_order.value | default: 999999 | plus: 0
+        endcapture
+        assign order_token = order_token_raw | strip | slice: -6, 6
+        echo order_token
+        echo '::'
+        echo faq_item.system.handle
+        echo '||'
+      endfor
+    endcapture
+    assign sorted_global_faq_keys = sorted_faqs_raw | split: '||' | sort_natural
+  endif
 -%}
 
 <section class="section-shell home-faq-section{% if support_page_context %} faq-section--support{% endif %}">
@@ -76,7 +94,12 @@
           {% endfor %}
         {% elsif use_global_faqs %}
           {%- assign rendered_faqs = 0 -%}
-          {% for faq_item in metaobjects.ezquest_faq_item.values %}
+          {% for faq_key in sorted_global_faq_keys %}
+            {% if faq_key == blank %}
+              {% continue %}
+            {% endif %}
+            {% assign faq_handle = faq_key | split: '::' | last %}
+            {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
             {%- liquid
               assign matches_group = true
               assign matches_collection = true
@@ -116,6 +139,11 @@
               <p class="section-kicker">FAQ</p>
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No FAQ items available yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Global FAQ entries will appear here once they are linked in Shopify.</p>
+              <div class="support-next-step-list mt-6">
+                <a href="/pages/troubleshooting" class="support-inline-link">Troubleshooting</a>
+                <a href="/pages/support" class="support-inline-link">Support hub</a>
+                <a href="/pages/contact" class="support-inline-link">Contact support</a>
+              </div>
             </div>
           {% endif %}
         {% else %}
@@ -129,6 +157,11 @@
               <p class="section-kicker">FAQ</p>
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No FAQ items available yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Add FAQ entries in Shopify to replace this empty state.</p>
+              <div class="support-next-step-list mt-6">
+                <a href="/pages/troubleshooting" class="support-inline-link">Troubleshooting</a>
+                <a href="/pages/support" class="support-inline-link">Support hub</a>
+                <a href="/pages/contact" class="support-inline-link">Contact support</a>
+              </div>
             </div>
           {% endfor %}
         {% endif %}

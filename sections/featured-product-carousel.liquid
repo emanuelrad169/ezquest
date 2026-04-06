@@ -27,7 +27,7 @@
       </div>
 
       <div class="featured-products-header-actions">
-        <p class="featured-products-header-note">Curated starting points for the clearest first decision.</p>
+        <p class="featured-products-header-note">A tighter first look at the EZQuest lineup.</p>
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
           <a href="{{ section.settings.link_url }}" class="featured-products-link">{{ section.settings.link_label }}</a>
         {% endif %}
@@ -47,7 +47,7 @@
         {% if featured_products != blank and featured_products.size > 0 %}
           {% for product in featured_products limit: products_limit %}
             <div class="featured-products-slide{% if forloop.first %} is-featured{% endif %}">
-              {% render 'card-product', product: product, card_style: 'featured-strip', card_index: forloop.index0 %}
+              {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'homepage', card_index: forloop.index0 %}
             </div>
           {% endfor %}
         {% else %}
@@ -94,7 +94,7 @@
     </div>
 
     <div class="featured-products-support-row">
-      <p class="featured-products-support-copy">Need a faster path to the right port mix or power setup? Compare fit first or move straight into guided help.</p>
+      <p class="featured-products-support-copy">Need a quicker way to narrow it down? Compare the core setups or get help choosing.</p>
       <div class="featured-products-support-links">
         <a href="/pages/compare" class="support-inline-link">Compare setups</a>
         <a href="/pages/support" class="support-inline-link">Get help choosing</a>
