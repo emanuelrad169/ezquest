@@ -11,15 +11,15 @@
         {% endif %}
       </div>
       <div class="home-confidence-header-note">
-        <p>Keep shipping, warranty, and support visible so the storefront closes with the same confidence as the product.</p>
+        <p>Keep shipping, warranty, manuals, and support visible so confidence comes from the product and the help behind it.</p>
       </div>
     </div>
 
     <div class="home-confidence-grid">
       <article class="home-confidence-card home-confidence-card--shipping">
         <div class="home-confidence-card-copy">
-          <h3>Fast shipping</h3>
-          <p>Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
+          <h3 class="card-title">Fast shipping</h3>
+          <p class="type-body">Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
         </div>
         <div class="home-confidence-card-visual">
           {% render 'icon', name: 'truck' %}
@@ -28,12 +28,12 @@
 
       <article class="home-confidence-card home-confidence-card--featured">
         <div class="home-confidence-card-copy">
-          <p class="home-confidence-card-eyebrow">Ownership confidence</p>
-          <h3>Support stays part of the product after checkout.</h3>
-          <p>Move from manuals and downloads into compatibility guidance and direct help without losing sight of what you bought.</p>
+          <p class="type-caption home-confidence-card-eyebrow">Direct support</p>
+          <h3 class="card-title">Support stays tied to what you bought.</h3>
+          <p class="type-body">Move from manuals and downloads into compatibility guidance and direct help without losing product context.</p>
           <div class="home-confidence-card-links">
-            <a href="/pages/support" class="home-confidence-link">Open support center</a>
-            <a href="/pages/compatibility" class="home-confidence-link home-confidence-link--subtle">Check compatibility</a>
+            {% render 'button', label: 'Open support center', url: '/pages/support', style: 'secondary', size: 'sm', class: 'home-confidence-link' %}
+            {% render 'button', label: 'Check compatibility', url: '/pages/compatibility', style: 'secondary', size: 'sm', class: 'home-confidence-link home-confidence-link--subtle' %}
           </div>
         </div>
         <div class="home-confidence-feature-visual">
@@ -43,8 +43,8 @@
 
       <article class="home-confidence-card home-confidence-card--returns">
         <div class="home-confidence-card-copy">
-          <h3>Returns and warranty</h3>
-          <p>Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
+          <h3 class="card-title">Returns and warranty</h3>
+          <p class="type-body">Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
         </div>
         <div class="home-confidence-card-visual">
           {% render 'icon', name: 'shield' %}
@@ -53,8 +53,8 @@
 
       <article class="home-confidence-card">
         <div class="home-confidence-card-copy">
-          <h3>Secure payment</h3>
-          <p>Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
+          <h3 class="card-title">Secure payment</h3>
+          <p class="type-body">Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
         </div>
         <div class="home-confidence-card-visual">
           {% render 'icon', name: 'shield' %}
@@ -63,32 +63,23 @@
 
       <article class="home-confidence-card">
         <div class="home-confidence-card-copy">
-          <h3>Manuals and downloads</h3>
-          <p>Setup guides, firmware, and downloads stay ready when the setup needs one more step to feel complete.</p>
+          <h3 class="card-title">Manuals and downloads</h3>
+          <p class="type-body">Setup guides, firmware, and downloads stay ready when you need product details or the latest file.</p>
         </div>
         <div class="home-confidence-card-visual">
           {% render 'icon', name: 'download' %}
         </div>
       </article>
 
-      <article class="home-confidence-card home-confidence-card--support">
-        <div class="home-confidence-card-copy">
-          <h3>Direct support</h3>
-          <p>From product questions to setup help, support stays connected to the storefront instead of sending customers elsewhere.</p>
-        </div>
-        <div class="home-confidence-card-visual">
-          {% render 'icon', name: 'support' %}
-        </div>
-      </article>
     </div>
 
     <div class="home-confidence-links-row">
-      <span class="home-confidence-links-label">Quick access</span>
-      <a href="/pages/shipping-returns" class="home-confidence-pill-link">Shipping &amp; returns</a>
-      <a href="/pages/warranty" class="home-confidence-pill-link">Warranty</a>
-      <a href="/pages/manuals" class="home-confidence-pill-link">Manuals</a>
-      <a href="/pages/downloads" class="home-confidence-pill-link">Downloads</a>
-      <a href="/pages/contact" class="home-confidence-pill-link">Contact support</a>
+      <span class="type-caption home-confidence-links-label">Quick access</span>
+      {% render 'button', label: 'Shipping & returns', url: '/pages/shipping-returns', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
+      {% render 'button', label: 'Warranty', url: '/pages/warranty', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
+      {% render 'button', label: 'Manuals', url: '/pages/manuals', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
+      {% render 'button', label: 'Downloads', url: '/pages/downloads', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
+      {% render 'button', label: 'Contact support', url: '/pages/contact', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
     </div>
   </div>
 </section>
@@ -97,9 +88,9 @@
 {
   "name": "Home confidence grid",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Ownership confidence" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence should stay visible before and after the purchase." },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and support visible so the EZQuest experience feels complete from first click to long-term ownership." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support and service" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence should stay visible before and after checkout." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and direct support easy to find so the EZQuest experience stays clear from first click onward." }
   ],
   "presets": [
     {

@@ -11,6 +11,12 @@
       assign platform_filter = section.settings.platform_filter | downcase | strip
       assign device_filter = section.settings.device_filter | downcase | strip
       assign workflow_filter = section.settings.workflow_filter | downcase | strip
+      assign seen_platform_tokens = '||'
+      assign seen_device_tokens = '||'
+      assign seen_workflow_tokens = '||'
+      assign platform_options_raw = ''
+      assign device_options_raw = ''
+      assign workflow_options_raw = ''
 
       if request.page_type == 'page' and page != blank and page.handle == 'compatibility'
         assign support_page_context = true
@@ -60,6 +66,136 @@
         endcapture
         assign sorted_global_entry_keys = sorted_entries_raw | split: '||' | sort_natural
       endif
+
+      if use_product_entries
+        for entry in structured_entries
+          if entry.platform != blank and entry.platform.value != blank
+            assign option_value = entry.platform.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_platform_tokens contains option_token
+              assign seen_platform_tokens = seen_platform_tokens | append: option_token
+              capture platform_options_raw
+                echo platform_options_raw
+                echo option_value
+                echo '::'
+                echo entry.platform.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+
+          if entry.device != blank and entry.device.value != blank
+            assign option_value = entry.device.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_device_tokens contains option_token
+              assign seen_device_tokens = seen_device_tokens | append: option_token
+              capture device_options_raw
+                echo device_options_raw
+                echo option_value
+                echo '::'
+                echo entry.device.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+
+          if entry.workflow != blank and entry.workflow.value != blank
+            assign option_value = entry.workflow.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_workflow_tokens contains option_token
+              assign seen_workflow_tokens = seen_workflow_tokens | append: option_token
+              capture workflow_options_raw
+                echo workflow_options_raw
+                echo option_value
+                echo '::'
+                echo entry.workflow.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+        endfor
+      elsif use_global_entries
+        for entry_key in sorted_global_entry_keys
+          if entry_key == blank
+            continue
+          endif
+          assign entry_handle = entry_key | split: '::' | last
+          assign entry = metaobjects.ezquest_compatibility_entry[entry_handle]
+
+          if entry.platform != blank and entry.platform.value != blank
+            assign option_value = entry.platform.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_platform_tokens contains option_token
+              assign seen_platform_tokens = seen_platform_tokens | append: option_token
+              capture platform_options_raw
+                echo platform_options_raw
+                echo option_value
+                echo '::'
+                echo entry.platform.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+
+          if entry.device != blank and entry.device.value != blank
+            assign option_value = entry.device.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_device_tokens contains option_token
+              assign seen_device_tokens = seen_device_tokens | append: option_token
+              capture device_options_raw
+                echo device_options_raw
+                echo option_value
+                echo '::'
+                echo entry.device.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+
+          if entry.workflow != blank and entry.workflow.value != blank
+            assign option_value = entry.workflow.value | downcase | strip
+            capture option_token
+              echo '||'
+              echo option_value
+              echo '||'
+            endcapture
+            unless seen_workflow_tokens contains option_token
+              assign seen_workflow_tokens = seen_workflow_tokens | append: option_token
+              capture workflow_options_raw
+                echo workflow_options_raw
+                echo option_value
+                echo '::'
+                echo entry.workflow.value
+                echo '||'
+              endcapture
+            endunless
+          endif
+        endfor
+      endif
+
+      assign platform_options = platform_options_raw | split: '||' | sort_natural
+      assign device_options = device_options_raw | split: '||' | sort_natural
+      assign workflow_options = workflow_options_raw | split: '||' | sort_natural
     -%}
 
     <div class="resource-list-shell resource-list-shell--support compatibility-shell{% if support_page_context %} compatibility-shell--support{% endif %}">
@@ -80,10 +216,9 @@
           <p class="compatibility-product-context-copy">Keep this product in view while you confirm platform, device, and workflow support.</p>
         </div>
         <div class="compatibility-next-steps">
-          <a href="/pages/support" class="site-meta-link" data-compatibility-context-link>Support center</a>
-          <a href="/pages/manuals" class="site-meta-link" data-compatibility-context-link>Manuals</a>
-          <a href="/pages/downloads" class="site-meta-link" data-compatibility-context-link>Downloads</a>
-          <a href="/pages/contact" class="site-meta-link" data-compatibility-context-link>Contact support</a>
+          <a href="/pages/manuals" class="site-meta-link" data-compatibility-context-link>Find manuals</a>
+          <a href="/pages/downloads" class="site-meta-link" data-compatibility-context-link>Find downloads</a>
+          <a href="/pages/contact" class="site-meta-link" data-compatibility-context-link>Get help now</a>
         </div>
         <script type="application/json" data-compatibility-product-titles>
           {
@@ -94,344 +229,407 @@
         </script>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-2">
-      {% if use_product_entries %}
-        {%- assign rendered_entries = 0 -%}
-        {% for entry in structured_entries %}
-          {%- liquid
-            assign entry_platform = blank
-            assign entry_device = blank
-            assign entry_workflow = blank
-            assign entry_status = blank
-            assign entry_summary = blank
-            assign entry_context = blank
-            assign primary_url = blank
-            assign primary_label = blank
-            assign secondary_url = blank
-            assign secondary_label = blank
-            assign matches_platform = true
-            assign matches_device = true
-            assign matches_workflow = true
+      <div data-compatibility-filter-set>
+        {% if platform_options_raw != blank or device_options_raw != blank or workflow_options_raw != blank %}
+          <div class="mb-6 rounded-card-sm border border-slate-200 bg-white p-5">
+            <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p class="section-kicker">Narrow faster</p>
+                <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-950">Choose the setup you are checking</h3>
+              </div>
+              <button type="button" class="site-meta-link" data-compatibility-reset>Clear filters</button>
+            </div>
+            <div class="mt-6 grid gap-4 md:grid-cols-3">
+              <label class="block">
+                <span class="mb-2 block text-sm font-medium text-slate-900">Platform</span>
+                <select class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" data-compatibility-filter="platform">
+                  <option value="">All platforms</option>
+                  {% for option in platform_options %}
+                    {% if option != blank %}
+                      {% assign option_parts = option | split: '::' %}
+                      <option value="{{ option_parts.first }}">{{ option_parts.last }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-2 block text-sm font-medium text-slate-900">Device</span>
+                <select class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" data-compatibility-filter="device">
+                  <option value="">All devices</option>
+                  {% for option in device_options %}
+                    {% if option != blank %}
+                      {% assign option_parts = option | split: '::' %}
+                      <option value="{{ option_parts.first }}">{{ option_parts.last }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-2 block text-sm font-medium text-slate-900">Workflow</span>
+                <select class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" data-compatibility-filter="workflow">
+                  <option value="">All workflows</option>
+                  {% for option in workflow_options %}
+                    {% if option != blank %}
+                      {% assign option_parts = option | split: '::' %}
+                      <option value="{{ option_parts.first }}">{{ option_parts.last }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </label>
+            </div>
+          </div>
+        {% endif %}
 
-            if entry.platform != blank and entry.platform.value != blank
-              assign entry_platform = entry.platform.value
-            endif
-            if entry.device != blank and entry.device.value != blank
-              assign entry_device = entry.device.value
-            endif
-            if entry.workflow != blank and entry.workflow.value != blank
-              assign entry_workflow = entry.workflow.value
-            endif
-            if entry.status != blank and entry.status.value != blank
-              assign entry_status = entry.status.value
-            endif
-            if entry.summary != blank and entry.summary.value != blank
-              assign entry_summary = entry.summary.value
-            endif
+        <div class="grid gap-6 lg:grid-cols-2">
+          {% if use_product_entries %}
+            {%- assign rendered_entries = 0 -%}
+            {% for entry in structured_entries %}
+              {%- liquid
+                assign entry_platform = blank
+                assign entry_device = blank
+                assign entry_workflow = blank
+                assign entry_status = blank
+                assign entry_summary = blank
+                assign entry_context = blank
+                assign primary_url = blank
+                assign primary_label = blank
+                assign secondary_url = blank
+                assign secondary_label = blank
+                assign matches_platform = true
+                assign matches_device = true
+                assign matches_workflow = true
 
-            if platform_filter != blank
-              assign normalized_platform = entry_platform | downcase
-              if normalized_platform != platform_filter
-                assign matches_platform = false
-              endif
-            endif
-            if device_filter != blank
-              assign normalized_device = entry_device | downcase
-              if normalized_device != device_filter
-                assign matches_device = false
-              endif
-            endif
-            if workflow_filter != blank
-              assign normalized_workflow = entry_workflow | downcase
-              if normalized_workflow != workflow_filter
-                assign matches_workflow = false
-              endif
-            endif
+                if entry.platform != blank and entry.platform.value != blank
+                  assign entry_platform = entry.platform.value
+                endif
+                if entry.device != blank and entry.device.value != blank
+                  assign entry_device = entry.device.value
+                endif
+                if entry.workflow != blank and entry.workflow.value != blank
+                  assign entry_workflow = entry.workflow.value
+                endif
+                if entry.status != blank and entry.status.value != blank
+                  assign entry_status = entry.status.value
+                endif
+                if entry.summary != blank and entry.summary.value != blank
+                  assign entry_summary = entry.summary.value
+                endif
 
-            if entry.products != blank and entry.products.value.count > 0
-              assign primary_url = entry.products.value.first.url
-              assign primary_label = section.settings.product_link_label
-            endif
+                if platform_filter != blank
+                  assign normalized_platform = entry_platform | downcase
+                  if normalized_platform != platform_filter
+                    assign matches_platform = false
+                  endif
+                endif
+                if device_filter != blank
+                  assign normalized_device = entry_device | downcase
+                  if normalized_device != device_filter
+                    assign matches_device = false
+                  endif
+                endif
+                if workflow_filter != blank
+                  assign normalized_workflow = entry_workflow | downcase
+                  if normalized_workflow != workflow_filter
+                    assign matches_workflow = false
+                  endif
+                endif
 
-            if entry.downloads != blank and entry.downloads.value.count > 0
-              assign linked_download = entry.downloads.value.first
-              if linked_download.file != blank and linked_download.file.value != blank
-                assign secondary_url = linked_download.file.value.url
-              elsif linked_download.external_url != blank and linked_download.external_url.value != blank
-                assign secondary_url = linked_download.external_url.value
-              endif
-              assign secondary_label = section.settings.download_link_label
-            elsif entry.manuals != blank and entry.manuals.value.count > 0
-              assign linked_manual = entry.manuals.value.first
-              if linked_manual.file != blank and linked_manual.file.value != blank
-                assign secondary_url = linked_manual.file.value.url
-              elsif linked_manual.external_url != blank and linked_manual.external_url.value != blank
-                assign secondary_url = linked_manual.external_url.value
-              endif
-              assign secondary_label = section.settings.manual_link_label
-            endif
+                if entry.products != blank and entry.products.value.count > 0
+                  assign primary_url = entry.products.value.first.url
+                  assign primary_label = section.settings.product_link_label
+                endif
 
-            if entry_platform != blank
-              assign entry_context = entry_platform
-            endif
-            if entry_device != blank
-              if entry_context != blank
-                assign entry_context = entry_context | append: ' / '
-              endif
-              assign entry_context = entry_context | append: entry_device
-            endif
-            if entry_workflow != blank
-              if entry_context != blank
-                assign entry_context = entry_context | append: ' / '
-              endif
-              assign entry_context = entry_context | append: entry_workflow
-            endif
-          -%}
+                if entry.downloads != blank and entry.downloads.value.count > 0
+                  assign linked_download = entry.downloads.value.first
+                  if linked_download.file != blank and linked_download.file.value != blank
+                    assign secondary_url = linked_download.file.value.url
+                  elsif linked_download.external_url != blank and linked_download.external_url.value != blank
+                    assign secondary_url = linked_download.external_url.value
+                  endif
+                  assign secondary_label = section.settings.download_link_label
+                elsif entry.manuals != blank and entry.manuals.value.count > 0
+                  assign linked_manual = entry.manuals.value.first
+                  if linked_manual.file != blank and linked_manual.file.value != blank
+                    assign secondary_url = linked_manual.file.value.url
+                  elsif linked_manual.external_url != blank and linked_manual.external_url.value != blank
+                    assign secondary_url = linked_manual.external_url.value
+                  endif
+                  assign secondary_label = section.settings.manual_link_label
+                endif
 
-          {% if matches_platform and matches_device and matches_workflow and rendered_entries < section.settings.entry_limit %}
-            <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                {% if entry_status != blank %}
-                  <p class="section-kicker">{{ entry_status }}</p>
+                if entry_platform != blank
+                  assign entry_context = entry_platform
+                endif
+                if entry_device != blank
+                  if entry_context != blank
+                    assign entry_context = entry_context | append: ' / '
+                  endif
+                  assign entry_context = entry_context | append: entry_device
+                endif
+                if entry_workflow != blank
+                  if entry_context != blank
+                    assign entry_context = entry_context | append: ' / '
+                  endif
+                  assign entry_context = entry_context | append: entry_workflow
+                endif
+              -%}
+
+              {% if matches_platform and matches_device and matches_workflow and rendered_entries < section.settings.entry_limit %}
+                <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}" data-compatibility-card data-compatibility-platform="{{ entry_platform | downcase | strip }}" data-compatibility-device="{{ entry_device | downcase | strip }}" data-compatibility-workflow="{{ entry_workflow | downcase | strip }}">
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    {% if entry_status != blank %}
+                      <p class="section-kicker">{{ entry_status }}</p>
+                    {% else %}
+                      <p class="section-kicker">Compatibility entry</p>
+                    {% endif %}
+                    {% if entry_context != blank %}
+                      <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
+                    {% endif %}
+                  </div>
+                  <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
+                  {% if entry_summary != blank %}
+                    <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
+                  {% endif %}
+                  <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+                    <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Use this check before you open the next resource</p>
+                    <div class="flex flex-wrap gap-3">
+                      {% if primary_url != blank %}
+                        {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
+                      {% endif %}
+                      {% if secondary_url != blank %}
+                        {% render 'button', label: secondary_label, url: secondary_url, style: 'secondary' %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </article>
+                {%- assign rendered_entries = rendered_entries | plus: 1 -%}
+              {% endif %}
+            {% endfor %}
+
+            {% if rendered_entries == 0 %}
+              <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+                <p class="section-kicker">Compatibility</p>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current product, collection, or filter set.</p>
+                <div class="support-next-step-list mt-6">
+                  <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
+                  <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Find downloads</a>
+                  <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Get help now</a>
+                </div>
+              </article>
+            {% endif %}
+          {% elsif use_global_entries %}
+            {%- assign rendered_entries = 0 -%}
+            {% for entry_key in sorted_global_entry_keys %}
+              {% if entry_key == blank %}
+                {% continue %}
+              {% endif %}
+              {% assign entry_handle = entry_key | split: '::' | last %}
+              {% assign entry = metaobjects.ezquest_compatibility_entry[entry_handle] %}
+              {%- liquid
+                assign entry_platform = blank
+                assign entry_device = blank
+                assign entry_workflow = blank
+                assign entry_status = blank
+                assign entry_summary = blank
+                assign entry_context = blank
+                assign primary_url = blank
+                assign primary_label = blank
+                assign secondary_url = blank
+                assign secondary_label = blank
+                assign matches_platform = true
+                assign matches_device = true
+                assign matches_workflow = true
+                assign matches_collection = true
+                assign matches_product = true
+
+                if entry.platform != blank and entry.platform.value != blank
+                  assign entry_platform = entry.platform.value
+                endif
+                if entry.device != blank and entry.device.value != blank
+                  assign entry_device = entry.device.value
+                endif
+                if entry.workflow != blank and entry.workflow.value != blank
+                  assign entry_workflow = entry.workflow.value
+                endif
+                if entry.status != blank and entry.status.value != blank
+                  assign entry_status = entry.status.value
+                endif
+                if entry.summary != blank and entry.summary.value != blank
+                  assign entry_summary = entry.summary.value
+                endif
+
+                if platform_filter != blank
+                  assign normalized_platform = entry_platform | downcase
+                  if normalized_platform != platform_filter
+                    assign matches_platform = false
+                  endif
+                endif
+                if device_filter != blank
+                  assign normalized_device = entry_device | downcase
+                  if normalized_device != device_filter
+                    assign matches_device = false
+                  endif
+                endif
+                if workflow_filter != blank
+                  assign normalized_workflow = entry_workflow | downcase
+                  if normalized_workflow != workflow_filter
+                    assign matches_workflow = false
+                  endif
+                endif
+
+                if section.settings.source_collection != blank
+                  assign matches_collection = false
+                  if entry.collections != blank and entry.collections.value.count > 0
+                    for linked_collection in entry.collections.value
+                      if linked_collection.id == section.settings.source_collection.id
+                        assign matches_collection = true
+                        break
+                      endif
+                    endfor
+                  endif
+                endif
+
+                if current_product != blank and section.settings.limit_to_source_product
+                  assign matches_product = false
+                  if entry.products != blank and entry.products.value.count > 0
+                    for linked_product in entry.products.value
+                      if linked_product.id == current_product.id
+                        assign matches_product = true
+                        break
+                      endif
+                    endfor
+                  endif
+                endif
+
+                if entry.products != blank and entry.products.value.count > 0
+                  assign primary_url = entry.products.value.first.url
+                  assign primary_label = section.settings.product_link_label
+                endif
+
+                if entry.downloads != blank and entry.downloads.value.count > 0
+                  assign linked_download = entry.downloads.value.first
+                  if linked_download.file != blank and linked_download.file.value != blank
+                    assign secondary_url = linked_download.file.value.url
+                  elsif linked_download.external_url != blank and linked_download.external_url.value != blank
+                    assign secondary_url = linked_download.external_url.value
+                  endif
+                  assign secondary_label = section.settings.download_link_label
+                elsif entry.manuals != blank and entry.manuals.value.count > 0
+                  assign linked_manual = entry.manuals.value.first
+                  if linked_manual.file != blank and linked_manual.file.value != blank
+                    assign secondary_url = linked_manual.file.value.url
+                  elsif linked_manual.external_url != blank and linked_manual.external_url.value != blank
+                    assign secondary_url = linked_manual.external_url.value
+                  endif
+                  assign secondary_label = section.settings.manual_link_label
+                endif
+
+                if entry_platform != blank
+                  assign entry_context = entry_platform
+                endif
+                if entry_device != blank
+                  if entry_context != blank
+                    assign entry_context = entry_context | append: ' / '
+                  endif
+                  assign entry_context = entry_context | append: entry_device
+                endif
+                if entry_workflow != blank
+                  if entry_context != blank
+                    assign entry_context = entry_context | append: ' / '
+                  endif
+                  assign entry_context = entry_context | append: entry_workflow
+                endif
+              -%}
+
+              {% if matches_platform and matches_device and matches_workflow and matches_collection and matches_product and rendered_entries < section.settings.entry_limit %}
+                <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}" data-compatibility-card data-compatibility-platform="{{ entry_platform | downcase | strip }}" data-compatibility-device="{{ entry_device | downcase | strip }}" data-compatibility-workflow="{{ entry_workflow | downcase | strip }}">
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    {% if entry_status != blank %}
+                      <p class="section-kicker">{{ entry_status }}</p>
+                    {% else %}
+                      <p class="section-kicker">Compatibility entry</p>
+                    {% endif %}
+                    {% if entry_context != blank %}
+                      <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
+                    {% endif %}
+                  </div>
+                  <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
+                  {% if entry_summary != blank %}
+                    <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
+                  {% endif %}
+                  <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+                    <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Use this check before you open manuals, downloads, or support</p>
+                    <div class="flex flex-wrap gap-3">
+                      {% if primary_url != blank %}
+                        {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
+                      {% endif %}
+                      {% if secondary_url != blank %}
+                        {% render 'button', label: secondary_label, url: secondary_url, style: 'secondary' %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </article>
+                {%- assign rendered_entries = rendered_entries | plus: 1 -%}
+              {% endif %}
+            {% endfor %}
+
+            {% if rendered_entries == 0 %}
+              <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+                <p class="section-kicker">Compatibility</p>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current collection, product, or filter set.</p>
+                <div class="support-next-step-list mt-6">
+                  <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
+                  <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Find downloads</a>
+                  <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Get help now</a>
+                </div>
+              </article>
+            {% endif %}
+          {% else %}
+            {% for block in section.blocks %}
+              <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}" {{ block.shopify_attributes }}>
+                {% if block.settings.eyebrow != blank %}
+                  <p class="section-kicker">{{ block.settings.eyebrow }}</p>
                 {% else %}
                   <p class="section-kicker">Compatibility entry</p>
                 {% endif %}
-                {% if entry_context != blank %}
-                  <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ block.settings.title }}</h3>
+                {% if block.settings.copy != blank %}
+                  <p class="mt-3 text-sm leading-6 text-slate-600">{{ block.settings.copy }}</p>
                 {% endif %}
-              </div>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
-              {% if entry_summary != blank %}
-                <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
-              {% endif %}
-              <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
-                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Confirm compatibility first, then open manuals, downloads, or support only if you need more detail</p>
-                <div class="flex flex-wrap gap-3">
-                  {% if primary_url != blank %}
-                    {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
-                  {% endif %}
-                  {% if secondary_url != blank %}
-                    {% render 'button', label: secondary_label, url: secondary_url, style: 'secondary' %}
+                <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
+                  <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Use this answer to choose the next useful action</p>
+                  {% if block.settings.link_url != blank %}
+                    {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
                   {% endif %}
                 </div>
-              </div>
-            </article>
-            {%- assign rendered_entries = rendered_entries | plus: 1 -%}
-          {% endif %}
-        {% endfor %}
-
-        {% if rendered_entries == 0 %}
-          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
-            <p class="section-kicker">Compatibility</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current product, collection, or filter set.</p>
-            <div class="support-next-step-list mt-6">
-              <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Manuals</a>
-              <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Downloads</a>
-              <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Contact support</a>
-            </div>
-          </article>
-        {% endif %}
-      {% elsif use_global_entries %}
-        {%- assign rendered_entries = 0 -%}
-        {% for entry_key in sorted_global_entry_keys %}
-          {% if entry_key == blank %}
-            {% continue %}
-          {% endif %}
-          {% assign entry_handle = entry_key | split: '::' | last %}
-          {% assign entry = metaobjects.ezquest_compatibility_entry[entry_handle] %}
-          {%- liquid
-            assign entry_platform = blank
-            assign entry_device = blank
-            assign entry_workflow = blank
-            assign entry_status = blank
-            assign entry_summary = blank
-            assign entry_context = blank
-            assign primary_url = blank
-            assign primary_label = blank
-            assign secondary_url = blank
-            assign secondary_label = blank
-            assign matches_platform = true
-            assign matches_device = true
-            assign matches_workflow = true
-            assign matches_collection = true
-            assign matches_product = true
-
-            if entry.platform != blank and entry.platform.value != blank
-              assign entry_platform = entry.platform.value
-            endif
-            if entry.device != blank and entry.device.value != blank
-              assign entry_device = entry.device.value
-            endif
-            if entry.workflow != blank and entry.workflow.value != blank
-              assign entry_workflow = entry.workflow.value
-            endif
-            if entry.status != blank and entry.status.value != blank
-              assign entry_status = entry.status.value
-            endif
-            if entry.summary != blank and entry.summary.value != blank
-              assign entry_summary = entry.summary.value
-            endif
-
-            if platform_filter != blank
-              assign normalized_platform = entry_platform | downcase
-              if normalized_platform != platform_filter
-                assign matches_platform = false
-              endif
-            endif
-            if device_filter != blank
-              assign normalized_device = entry_device | downcase
-              if normalized_device != device_filter
-                assign matches_device = false
-              endif
-            endif
-            if workflow_filter != blank
-              assign normalized_workflow = entry_workflow | downcase
-              if normalized_workflow != workflow_filter
-                assign matches_workflow = false
-              endif
-            endif
-
-            if section.settings.source_collection != blank
-              assign matches_collection = false
-              if entry.collections != blank and entry.collections.value.count > 0
-                for linked_collection in entry.collections.value
-                  if linked_collection.id == section.settings.source_collection.id
-                    assign matches_collection = true
-                    break
-                  endif
-                endfor
-              endif
-            endif
-
-            if current_product != blank and section.settings.limit_to_source_product
-              assign matches_product = false
-              if entry.products != blank and entry.products.value.count > 0
-                for linked_product in entry.products.value
-                  if linked_product.id == current_product.id
-                    assign matches_product = true
-                    break
-                  endif
-                endfor
-              endif
-            endif
-
-            if entry.products != blank and entry.products.value.count > 0
-              assign primary_url = entry.products.value.first.url
-              assign primary_label = section.settings.product_link_label
-            endif
-
-            if entry.downloads != blank and entry.downloads.value.count > 0
-              assign linked_download = entry.downloads.value.first
-              if linked_download.file != blank and linked_download.file.value != blank
-                assign secondary_url = linked_download.file.value.url
-              elsif linked_download.external_url != blank and linked_download.external_url.value != blank
-                assign secondary_url = linked_download.external_url.value
-              endif
-              assign secondary_label = section.settings.download_link_label
-            elsif entry.manuals != blank and entry.manuals.value.count > 0
-              assign linked_manual = entry.manuals.value.first
-              if linked_manual.file != blank and linked_manual.file.value != blank
-                assign secondary_url = linked_manual.file.value.url
-              elsif linked_manual.external_url != blank and linked_manual.external_url.value != blank
-                assign secondary_url = linked_manual.external_url.value
-              endif
-              assign secondary_label = section.settings.manual_link_label
-            endif
-
-            if entry_platform != blank
-              assign entry_context = entry_platform
-            endif
-            if entry_device != blank
-              if entry_context != blank
-                assign entry_context = entry_context | append: ' / '
-              endif
-              assign entry_context = entry_context | append: entry_device
-            endif
-            if entry_workflow != blank
-              if entry_context != blank
-                assign entry_context = entry_context | append: ' / '
-              endif
-              assign entry_context = entry_context | append: entry_workflow
-            endif
-          -%}
-
-          {% if matches_platform and matches_device and matches_workflow and matches_collection and matches_product and rendered_entries < section.settings.entry_limit %}
-            <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                {% if entry_status != blank %}
-                  <p class="section-kicker">{{ entry_status }}</p>
-                {% else %}
-                  <p class="section-kicker">Compatibility entry</p>
-                {% endif %}
-                {% if entry_context != blank %}
-                  <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
-                {% endif %}
-              </div>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
-              {% if entry_summary != blank %}
-                <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
-              {% endif %}
-              <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
-                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">A clearer buying check before you move into setup help</p>
-                <div class="flex flex-wrap gap-3">
-                  {% if primary_url != blank %}
-                    {% render 'button', label: primary_label, url: primary_url, style: 'secondary' %}
-                  {% endif %}
-                  {% if secondary_url != blank %}
-                    {% render 'button', label: secondary_label, url: secondary_url, style: 'secondary' %}
-                  {% endif %}
-                </div>
-              </div>
-            </article>
-            {%- assign rendered_entries = rendered_entries | plus: 1 -%}
-          {% endif %}
-        {% endfor %}
-
-        {% if rendered_entries == 0 %}
-          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
-            <p class="section-kicker">Compatibility</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current collection, product, or filter set.</p>
-            <div class="support-next-step-list mt-6">
-              <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Manuals</a>
-              <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Downloads</a>
-              <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Contact support</a>
-            </div>
-          </article>
-        {% endif %}
-      {% else %}
-        {% for block in section.blocks %}
-          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %}" {{ block.shopify_attributes }}>
-            {% if block.settings.eyebrow != blank %}
-              <p class="section-kicker">{{ block.settings.eyebrow }}</p>
+              </article>
             {% else %}
-              <p class="section-kicker">Compatibility entry</p>
-            {% endif %}
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ block.settings.title }}</h3>
-            {% if block.settings.copy != blank %}
-              <p class="mt-3 text-sm leading-6 text-slate-600">{{ block.settings.copy }}</p>
-            {% endif %}
-            <div class="compatibility-card-footer mt-6 border-t border-slate-200/80 pt-5">
-              <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Use this answer to choose the next useful action</p>
-              {% if block.settings.link_url != blank %}
-                {% render 'button', label: block.settings.link_label, url: block.settings.link_url, style: 'secondary' %}
-              {% endif %}
-            </div>
-          </article>
-        {% else %}
-          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+              <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
+                <p class="section-kicker">Compatibility</p>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No compatibility guidance available yet</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify to replace this empty state.</p>
+                <div class="support-next-step-list mt-6">
+                  <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
+                  <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Find downloads</a>
+                  <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Get help now</a>
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
+
+          <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2" data-compatibility-empty hidden>
             <p class="section-kicker">Compatibility</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No compatibility guidance available yet</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify to replace this empty state.</p>
+            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matches for this filter set</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Clear one filter or move into direct help if you are checking a more specific setup.</p>
             <div class="support-next-step-list mt-6">
-              <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Manuals</a>
-              <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Downloads</a>
-              <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Contact support</a>
+              <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
+              <a href="/pages/downloads" class="support-inline-link" data-compatibility-context-link>Find downloads</a>
+              <a href="/pages/contact" class="support-inline-link" data-compatibility-context-link>Get help now</a>
             </div>
           </article>
-        {% endfor %}
-      {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -442,8 +640,8 @@
   "name": "Compatibility entry list",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compatibility" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Compatibility and fit guidance" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Confirm fit, reduce uncertainty, and route customers into the right product or support resource." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compatibility guidance" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Confirm compatibility and route shoppers to the right product or support resource." },
     {
       "type": "select",
       "id": "structured_source",
@@ -471,7 +669,7 @@
       "step": 1,
       "default": 6
     },
-    { "type": "textarea", "id": "source_note", "label": "Support note", "default": "Use compatibility guidance to confirm fit first, then move customers into manuals, downloads, or direct help only when that next step is clear." },
+    { "type": "textarea", "id": "source_note", "label": "Support note", "default": "Use compatibility guidance to confirm the product, platform, or display first, then move into manuals, downloads, or support." },
     { "type": "text", "id": "product_link_label", "label": "Product link label", "default": "View related product" },
     { "type": "text", "id": "download_link_label", "label": "Download link label", "default": "Open related download" },
     { "type": "text", "id": "manual_link_label", "label": "Manual link label", "default": "Open related manual" }

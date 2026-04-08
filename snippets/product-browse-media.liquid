@@ -1,0 +1,113 @@
+{%- liquid
+  assign product = product | default: blank
+  assign resolved_context = context | default: 'default'
+  assign resolved_variant = variant | default: blank
+  assign resolved_class = class | default: ''
+  assign resolved_width = width | default: 1200
+  assign resolved_loading = loading | default: 'lazy'
+  assign resolved_fetchpriority = fetchpriority | default: 'auto'
+  assign resolved_alt = product.title | default: 'EZQuest product'
+  assign use_owned_visual = false
+  assign resolved_image = blank
+  assign preferred_ratio_min = 1.0
+  assign preferred_ratio_max = 1.8
+
+  if resolved_variant == blank
+    case resolved_context
+      when 'mega-menu', 'search', 'compare'
+        assign resolved_variant = 'compare'
+      else
+        assign resolved_variant = 'hero'
+    endcase
+  endif
+
+  case resolved_context
+    when 'mega-menu', 'search', 'homepage', 'collection', 'compare', 'recommendation', 'related'
+      assign preferred_ratio_min = 0.92
+      assign preferred_ratio_max = 1.6
+    when 'hero'
+      assign preferred_ratio_min = 1.1
+      assign preferred_ratio_max = 2.3
+  endcase
+
+  if product != blank and product.images.size > 0
+    assign resolved_image = product.featured_image | default: product.images.first
+    assign resolved_image_alt = resolved_image.alt | downcase
+    assign resolved_image_is_technical = false
+
+    if resolved_image_alt contains 'illustration'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'diagram'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'schematic'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'placeholder'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'port'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'icon'
+      assign resolved_image_is_technical = true
+    endif
+
+    if use_owned_visual == false and product.images.size > 1
+      assign preferred_image = blank
+      assign preferred_non_technical_image = blank
+      assign preferred_ratio_image = blank
+
+      for candidate_image in product.images
+        assign candidate_alt = candidate_image.alt | downcase
+        assign candidate_is_technical = false
+        assign candidate_has_preferred_ratio = false
+
+        if candidate_alt contains 'illustration'
+          assign candidate_is_technical = true
+        elsif candidate_alt contains 'diagram'
+          assign candidate_is_technical = true
+        elsif candidate_alt contains 'schematic'
+          assign candidate_is_technical = true
+        elsif candidate_alt contains 'placeholder'
+          assign candidate_is_technical = true
+        elsif candidate_alt contains 'port'
+          assign candidate_is_technical = true
+        elsif candidate_alt contains 'icon'
+          assign candidate_is_technical = true
+        endif
+
+        if candidate_image.aspect_ratio >= preferred_ratio_min and candidate_image.aspect_ratio <= preferred_ratio_max
+          assign candidate_has_preferred_ratio = true
+        endif
+
+        if preferred_image == blank and candidate_is_technical == false and candidate_has_preferred_ratio
+          assign preferred_image = candidate_image
+        endif
+
+        if preferred_non_technical_image == blank and candidate_is_technical == false
+          assign preferred_non_technical_image = candidate_image
+        endif
+
+        if preferred_ratio_image == blank and candidate_has_preferred_ratio
+          assign preferred_ratio_image = candidate_image
+        endif
+      endfor
+
+      if resolved_image_is_technical or resolved_image.aspect_ratio < preferred_ratio_min or resolved_image.aspect_ratio > preferred_ratio_max
+        assign resolved_image = preferred_image | default: preferred_non_technical_image | default: preferred_ratio_image | default: resolved_image
+      endif
+    endif
+  endif
+-%}
+{% if resolved_image != blank and use_owned_visual == false %}
+  {{ resolved_image | image_url: width: resolved_width | image_tag: loading: resolved_loading, fetchpriority: resolved_fetchpriority, class: resolved_class, alt: resolved_alt, widths: '480, 720, 900, 1200', sizes: '(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 50vw' }}
+{% else %}
+  {% render 'owned-product-visual',
+    product_handle: product.handle,
+    product_title: product.title | default: 'EZQuest Product',
+    variant: resolved_variant,
+    kind: 'product',
+    width: resolved_width,
+    height: height | default: 900,
+    class: resolved_class,
+    loading: resolved_loading,
+    fetchpriority: resolved_fetchpriority
+  %}
+{% endif %}

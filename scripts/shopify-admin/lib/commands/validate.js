@@ -1,5 +1,6 @@
 const { metaobjectDefinitions, productMetafieldDefinitions } = require("../../seeds/definitions");
 const starterContent = require("../../seeds/starter-content");
+const seedProducts = require("../../seeds/products");
 const { findProductByHandle } = require("../lookups");
 const { bump } = require("../summary");
 
@@ -13,6 +14,9 @@ async function safeGetMetaobjectDefinitions(client) {
               id
               type
               name
+              fieldDefinitions {
+                key
+              }
             }
           }
         }
@@ -99,7 +103,12 @@ async function getProductStructuredState(client, handle) {
           firmware: metafield(namespace: "ezquest", key: "firmware") { id }
           userGuides: metafield(namespace: "ezquest", key: "user_guides") { id }
           compatibilityEntries: metafield(namespace: "ezquest", key: "compatibility_entries") { id }
+          useCases: metafield(namespace: "ezquest", key: "use_cases") { id }
           compareGroup: metafield(namespace: "ezquest", key: "compare_group") { id }
+          compareRole: metafield(namespace: "ezquest", key: "compare_role") { id }
+          recommendedPriority: metafield(namespace: "ezquest", key: "recommended_priority") { id }
+          bestFor: metafield(namespace: "ezquest", key: "best_for") { id }
+          compareShortReason: metafield(namespace: "ezquest", key: "compare_short_reason") { id }
           faqItems: metafield(namespace: "ezquest", key: "faq_items") { id }
         }
       }
@@ -123,7 +132,12 @@ async function getProductStructuredState(client, handle) {
     firmware: Boolean(p.firmware),
     user_guides: Boolean(p.userGuides),
     compatibility_entries: Boolean(p.compatibilityEntries),
+    use_cases: Boolean(p.useCases),
     compare_group: Boolean(p.compareGroup),
+    compare_role: Boolean(p.compareRole),
+    recommended_priority: Boolean(p.recommendedPriority),
+    best_for: Boolean(p.bestFor),
+    compare_short_reason: Boolean(p.compareShortReason),
     faq_items: Boolean(p.faqItems)
   };
 }
@@ -152,6 +166,17 @@ async function runValidation(context, summary) {
         const existing = definitionState.byType.get(definition.type);
         const status = existing ? "exists" : "missing";
         console.log(`  - ${definition.type}: ${status}${existing ? ` (${existing.id})` : ""}`);
+        if (existing) {
+          const existingKeys = new Set((existing.fieldDefinitions || []).map((field) => field.key));
+          const missingKeys = definition.fieldDefinitions
+            .map((field) => field.key)
+            .filter((key) => !existingKeys.has(key));
+
+          if (missingKeys.length > 0) {
+            console.log(`    - missing fields: ${missingKeys.join(", ")}`);
+            bump(summary, "failed", `Missing fields on ${definition.type}: ${missingKeys.join(", ")}`);
+          }
+        }
         bump(summary, existing ? "skipped" : "failed", existing ? `Definition exists: ${definition.type}` : `Definition missing: ${definition.type}`);
       }
     }
@@ -179,6 +204,8 @@ async function runValidation(context, summary) {
     printSection("Product structured linkage");
     const linkedProducts = new Set([
       ...starterContent.products.map((product) => product.handle),
+      ...starterContent.useCases.flatMap((useCase) => useCase.productHandles || []),
+      ...seedProducts.filter((product) => Array.isArray(product.useCaseHandles) && product.useCaseHandles.length > 0).map((product) => product.handle),
       ...starterContent.comparisonGroups.flatMap((group) => group.productHandles)
     ]);
 
@@ -201,7 +228,12 @@ async function runValidation(context, summary) {
         "firmware",
         "user_guides",
         "compatibility_entries",
+        "use_cases",
         "compare_group",
+        "compare_role",
+        "recommended_priority",
+        "best_for",
+        "compare_short_reason",
         "faq_items"
       ]) {
         console.log(`  - ${key}: ${state[key] ? "linked" : "missing"}`);

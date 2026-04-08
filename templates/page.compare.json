@@ -1,42 +1,28 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero-page",
-      "settings": {
-        "structured_source": "group_handle",
-        "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
-        "support_eyebrow": "Decision note",
-        "support_note": "Start with the role: Travel Hub for portability, Multimedia Hub for balanced everyday use, and Pro Dock for the permanent desk.",
-        "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup"
-      }
-    },
     "compare": {
       "type": "product-compare-table",
       "settings": {
-        "eyebrow": "Guided choice",
-        "heading": "Choose the EZQuest product built for your setup",
-        "copy": "Start with the role: most portable, most balanced, or most desk-ready. From there, open the product page that matches it.",
-        "columns_desktop": 3,
+        "heading": "Choose the right EZQuest setup",
+        "copy": "Compare the ports, power, portability, and display support that separate each EZQuest option.",
         "structured_source": "group_handle",
-        "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
-        "source_note": "Choose the role first. Open the matching product page next. Use compatibility or support only when you want a final confirmation."
+        "comparison_group_handle": "ultimatepower-wall-chargers"
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need help choosing",
-        "heading": "Need a final confirmation?",
-        "copy": "Check compatibility first. If the setup is unusual, support can help from there.",
+        "eyebrow": "More guidance",
+        "heading": "Compatibility and support for this lineup",
+        "copy": "Open compatibility or support with this compare group attached.",
         "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup",
-        "secondary_label": "Open support center",
-        "secondary_url": "/pages/support?source=compare&group=usb-c-workspace-connectivity-lineup",
+        "link_url": "/pages/compatibility?source=compare&group=ultimatepower-wall-chargers",
+        "secondary_label": "Open support",
+        "secondary_url": "/pages/support?source=compare&group=ultimatepower-wall-chargers",
         "style": "light",
         "button_style": "secondary"
       }
     }
   },
-  "order": ["hero", "compare", "cta"]
+  "order": ["compare", "cta"]
 }

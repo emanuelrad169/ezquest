@@ -1,0 +1,224 @@
+{% comment %} ── About: Brand story + product visual ── {% endcomment %}
+<section class="section-shell about-story-section">
+  <div class="container-shell">
+    <div class="about-story-shell">
+      <div class="about-story-lead">
+        <p class="section-kicker">{{ section.settings.story_eyebrow | default: 'Our story' }}</p>
+        <h2 class="about-story-heading">{{ section.settings.story_heading | default: 'Built around how people actually work.' }}</h2>
+        <div class="about-story-body">
+          {% if section.settings.story_p1 != blank %}
+            <p class="about-story-para">{{ section.settings.story_p1 }}</p>
+          {% endif %}
+          {% if section.settings.story_p2 != blank %}
+            <p class="about-story-para">{{ section.settings.story_p2 }}</p>
+          {% endif %}
+          {% if section.settings.story_p3 != blank %}
+            <p class="about-story-para">{{ section.settings.story_p3 }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="about-story-visual">
+        <div class="about-story-visual-main">
+          {% render 'owned-product-visual',
+            product_handle: 'usb-c-multimedia-hub',
+            variant: 'hero',
+            width: 900,
+            height: 720,
+            class: 'about-story-img',
+            loading: 'lazy'
+          %}
+        </div>
+        <div class="about-story-visual-row">
+          <div class="about-story-visual-thumb">
+            {% render 'owned-product-visual',
+              product_handle: 'usb-c-travel-hub',
+              variant: 'hero',
+              width: 480,
+              height: 480,
+              class: 'about-story-thumb-img',
+              loading: 'lazy'
+            %}
+          </div>
+          <div class="about-story-visual-thumb">
+            {% render 'owned-product-visual',
+              product_handle: 'usb-c-pro-dock',
+              variant: 'hero',
+              width: 480,
+              height: 480,
+              class: 'about-story-thumb-img',
+              loading: 'lazy'
+            %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} ── About: What makes us different ── {% endcomment %}
+<section class="section-shell about-pillars-section">
+  <div class="container-shell">
+    <div class="about-pillars-header">
+      <p class="section-kicker">{{ section.settings.pillars_eyebrow | default: 'What makes us different' }}</p>
+    </div>
+    <div class="about-pillars-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'pillar' %}
+          <div class="about-pillar-card" {{ block.shopify_attributes }}>
+            <span class="about-pillar-number" aria-hidden="true">0{{ forloop.index }}</span>
+            <h3 class="about-pillar-title">{{ block.settings.title }}</h3>
+            <p class="about-pillar-copy">{{ block.settings.copy }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} ── About: Product philosophy + setup visual ── {% endcomment %}
+<section class="section-shell about-philosophy-section">
+  <div class="container-shell">
+    <div class="about-philosophy-shell">
+      <div class="about-philosophy-visual">
+        <div class="about-philosophy-img-wrap">
+          {% render 'owned-product-visual',
+            product_handle: 'usb-c-pro-dock',
+            variant: 'setup',
+            width: 900,
+            height: 720,
+            class: 'about-philosophy-img',
+            loading: 'lazy'
+          %}
+        </div>
+        <div class="about-philosophy-img-accent">
+          {% render 'owned-product-visual',
+            product_handle: 'usb-c-multimedia-hub',
+            variant: 'setup',
+            width: 480,
+            height: 380,
+            class: 'about-philosophy-accent-img',
+            loading: 'lazy'
+          %}
+        </div>
+      </div>
+
+      <div class="about-philosophy-copy">
+        <p class="section-kicker">{{ section.settings.philosophy_eyebrow | default: 'Product philosophy' }}</p>
+        <h2 class="about-philosophy-heading">{{ section.settings.philosophy_heading | default: 'Less friction. More flow.' }}</h2>
+        {% if section.settings.philosophy_body != blank %}
+          <p class="about-philosophy-body">{{ section.settings.philosophy_body }}</p>
+        {% endif %}
+        {% if section.settings.philosophy_body2 != blank %}
+          <p class="about-philosophy-body">{{ section.settings.philosophy_body2 }}</p>
+        {% endif %}
+        <div class="about-philosophy-stats">
+          {% for block in section.blocks %}
+            {% if block.type == 'stat' %}
+              <div class="about-stat" {{ block.shopify_attributes }}>
+                <span class="about-stat-value">{{ block.settings.value }}</span>
+                <span class="about-stat-label">{{ block.settings.label }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} ── About: Support & ownership ── {% endcomment %}
+<section class="section-shell about-support-section">
+  <div class="container-shell">
+    <div class="about-support-shell">
+      <div class="about-support-copy">
+        <p class="section-kicker">{{ section.settings.support_eyebrow | default: 'After the purchase' }}</p>
+        <h2 class="about-support-heading">{{ section.settings.support_heading | default: 'Support that stays close.' }}</h2>
+        {% if section.settings.support_body != blank %}
+          <p class="about-support-body">{{ section.settings.support_body }}</p>
+        {% endif %}
+        <div class="about-support-links">
+          {% if section.settings.support_link_label != blank %}
+            {% render 'button', label: section.settings.support_link_label, url: section.settings.support_link_url, style: 'primary' %}
+          {% endif %}
+          {% if section.settings.support_link2_label != blank %}
+            {% render 'button', label: section.settings.support_link2_label, url: section.settings.support_link2_url, style: 'secondary' %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="about-support-cards">
+        {% for block in section.blocks %}
+          {% if block.type == 'support_link' %}
+            <a href="{{ block.settings.url }}" class="about-support-card" {{ block.shopify_attributes }}>
+              <span class="about-support-card-title">{{ block.settings.title }}</span>
+              <span class="about-support-card-desc">{{ block.settings.desc }}</span>
+              <span class="about-support-card-arrow" aria-hidden="true">→</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About content",
+  "settings": [
+    { "type": "header", "content": "Brand story" },
+    { "type": "text",     "id": "story_eyebrow",  "label": "Eyebrow",     "default": "Our story" },
+    { "type": "text",     "id": "story_heading",  "label": "Heading",     "default": "Built around how people actually work." },
+    { "type": "textarea", "id": "story_p1",       "label": "Paragraph 1", "default": "EZQuest designs connectivity products for people who rely on their setups every day — hubs, docks, cables, and chargers built to work without thought." },
+    { "type": "textarea", "id": "story_p2",       "label": "Paragraph 2", "default": "We focus on the gap between what modern laptops offer and what real workflows need. One cable in, a clean desk, everything connected. No drivers, no guesswork." },
+    { "type": "textarea", "id": "story_p3",       "label": "Paragraph 3", "default": "Every product is designed to disappear into the setup — present when you need it, invisible when you don't." },
+
+    { "type": "header", "content": "What makes us different" },
+    { "type": "text", "id": "pillars_eyebrow", "label": "Eyebrow", "default": "What makes us different" },
+
+    { "type": "header", "content": "Product philosophy" },
+    { "type": "text",     "id": "philosophy_eyebrow",  "label": "Eyebrow",     "default": "Product philosophy" },
+    { "type": "text",     "id": "philosophy_heading",  "label": "Heading",     "default": "Less friction. More flow." },
+    { "type": "textarea", "id": "philosophy_body",     "label": "Paragraph 1", "default": "We design for the moment where your laptop's port count stops matching your workflow. Portable hubs for the bag, docks for the desk, cables that hold up mid-meeting." },
+    { "type": "textarea", "id": "philosophy_body2",    "label": "Paragraph 2", "default": "Reliability means getting the specs right, testing real-world conditions, and documenting everything clearly so setup is never a guessing game." },
+
+    { "type": "header", "content": "Support & ownership" },
+    { "type": "text",     "id": "support_eyebrow",      "label": "Eyebrow",            "default": "After the purchase" },
+    { "type": "text",     "id": "support_heading",      "label": "Heading",            "default": "Support that stays close." },
+    { "type": "textarea", "id": "support_body",         "label": "Body",               "default": "Manuals, downloads, compatibility guides, and direct help are always one click away. We build the support layer into the product experience — not as an afterthought." },
+    { "type": "text",     "id": "support_link_label",   "label": "Primary CTA label",  "default": "Visit support center" },
+    { "type": "url",      "id": "support_link_url",     "label": "Primary CTA URL" },
+    { "type": "text",     "id": "support_link2_label",  "label": "Secondary CTA label","default": "Browse products" },
+    { "type": "url",      "id": "support_link2_url",    "label": "Secondary CTA URL" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Differentiator",
+      "settings": [
+        { "type": "text",     "id": "title", "label": "Title", "default": "Built for real setups" },
+        { "type": "textarea", "id": "copy",  "label": "Copy",  "default": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand." }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Proof stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "20+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Years in business" }
+      ]
+    },
+    {
+      "type": "support_link",
+      "name": "Support link card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title",       "default": "Manuals & guides" },
+        { "type": "text", "id": "desc",  "label": "Description", "default": "Setup documentation for every product." },
+        { "type": "url",  "id": "url",   "label": "URL" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "About content" }
+  ]
+}
+{% endschema %}

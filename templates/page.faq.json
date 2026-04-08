@@ -4,77 +4,228 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Common questions, answered clearly",
-        "copy": "Start here for the questions customers ask most before moving into troubleshooting or support.",
-        "support_eyebrow": "FAQ guidance",
-        "support_note": "Come here for the broad answers first. When a question becomes product-specific, the next support step is easy to find."
+        "heading": "Common questions, answered.",
+        "copy": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly."
       }
     },
     "faq": {
       "type": "faq-accordion",
       "settings": {
-        "eyebrow": "Support FAQ",
         "heading": "Frequently asked questions",
-        "copy": "Find the broad answers here first, then move into a deeper support page only when the question becomes product-specific.",
-        "structured_source": "global"
-      }
-    },
-    "support": {
-      "type": "support-link-grid",
-      "settings": {
-        "eyebrow": "Need more help",
-        "heading": "Open the next support page when the FAQ is not enough",
-        "copy": "Keep setup, compatibility, downloads, troubleshooting, and direct support easy to reach from here.",
-        "columns_desktop": 3
+        "contact_heading": "Still need help?",
+        "contact_sub": "Send us your question and our team will help you find the right answer."
       },
       "blocks": {
-        "card_1": {
-          "type": "card",
+        "group_shipping": {
+          "type": "group",
           "settings": {
-            "title": "Manuals",
-            "copy": "Open setup guides and user documentation when the next step needs more detailed instructions.",
-            "meta": "Documentation",
-            "link_label": "Open manuals",
-            "link_url": "/pages/manuals"
+            "title": "Shipping & Returns",
+            "subtitle": "Shipping timelines, return eligibility, and refund details.",
+            "group_handle": "shipping"
           }
         },
-        "card_2": {
-          "type": "card",
+        "ship_1": {
+          "type": "faq",
           "settings": {
-            "title": "Troubleshooting",
-            "copy": "Move into symptom-based help when the answer depends on a specific issue or behavior.",
-            "meta": "Guided resolution",
-            "link_label": "Open troubleshooting",
-            "link_url": "/pages/troubleshooting"
+            "question": "Do you offer free shipping?",
+            "answer": "Yes. Free standard shipping is available on all orders over $35 within the contiguous US. Orders under that threshold ship at a flat rate shown at checkout.",
+            "group": "shipping"
           }
         },
-        "card_3": {
-          "type": "card",
+        "ship_2": {
+          "type": "faq",
           "settings": {
-            "title": "Contact support",
-            "copy": "Reach support directly when the answer depends on a more specific product or setup question.",
-            "meta": "Direct help",
-            "link_label": "Contact support",
-            "link_url": "/pages/contact"
+            "question": "How long does delivery take?",
+            "answer": "Most orders are processed within 1 business day. Standard delivery typically arrives within 3–7 business days. Expedited options are available at checkout.",
+            "group": "shipping"
+          }
+        },
+        "ship_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "We currently ship within the United States. International availability varies by product and region — check back as we continue to expand.",
+            "group": "shipping"
+          }
+        },
+        "ship_4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I return a product?",
+            "answer": "Returns are accepted within 30 days of delivery for unused products in original packaging. Start a return from your order confirmation email or reach us through the contact form on this page.",
+            "group": "shipping"
+          }
+        },
+        "ship_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How long do refunds take to process?",
+            "answer": "Once your return is received and inspected, refunds are issued within 3–5 business days. The time to appear on your statement depends on your payment provider.",
+            "group": "shipping"
+          }
+        },
+        "ship_6": {
+          "type": "faq",
+          "settings": {
+            "question": "What if my order arrives damaged?",
+            "answer": "If a product arrives damaged, take a photo of the packaging and item and contact us within 7 days. We'll arrange a replacement or refund at no cost to you.",
+            "group": "shipping"
+          }
+        },
+        "ship_7": {
+          "type": "faq",
+          "settings": {
+            "question": "My package shows delivered but I haven't received it.",
+            "answer": "Check with neighbors and look around entry points first — carrier scans can run slightly ahead of actual delivery. If it still hasn't turned up after 24 hours, contact us and we'll open an investigation with the carrier.",
+            "group": "shipping"
+          }
+        },
+        "group_orders": {
+          "type": "group",
+          "settings": {
+            "title": "Orders",
+            "subtitle": "Tracking, changes, payments, and common order questions.",
+            "group_handle": "orders"
+          }
+        },
+        "order_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I track my order?",
+            "answer": "A tracking number is sent to your email once your order ships. Use that number on the carrier's website for real-time status. It can take up to 24 hours to activate after dispatch.",
+            "group": "orders"
+          }
+        },
+        "order_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I change my order after placing it?",
+            "answer": "We process orders quickly, so changes are only possible within a short window after purchase. Contact us as soon as possible and we'll do our best to accommodate the request before it ships.",
+            "group": "orders"
+          }
+        },
+        "order_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I cancel my order?",
+            "answer": "Cancellations are possible if the order hasn't shipped yet. Once it's in transit, you'll need to complete a return after delivery. Contact us right away and we'll check the status.",
+            "group": "orders"
+          }
+        },
+        "order_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "We accept all major credit and debit cards, PayPal, Apple Pay, and Google Pay. Payment is charged at the time of order placement.",
+            "group": "orders"
+          }
+        },
+        "order_5": {
+          "type": "faq",
+          "settings": {
+            "question": "I didn't receive a confirmation email.",
+            "answer": "Check your spam or promotions folder first. If it's not there, the email address on file may have a typo. Contact us with your name and order details and we'll resend it.",
+            "group": "orders"
+          }
+        },
+        "order_6": {
+          "type": "faq",
+          "settings": {
+            "question": "I entered the wrong shipping address. What do I do?",
+            "answer": "Contact us immediately with the correct address. If the order hasn't shipped yet, we can update it. If it's already dispatched, we'll work with the carrier — but we can't guarantee a redirect once it's in transit.",
+            "group": "orders"
+          }
+        },
+        "order_7": {
+          "type": "faq",
+          "settings": {
+            "question": "Why did my order arrive in separate packages?",
+            "answer": "Some orders ship in multiple packages based on item size or warehouse location. Each shipment will have its own tracking number sent to your email.",
+            "group": "orders"
+          }
+        },
+        "group_products": {
+          "type": "group",
+          "settings": {
+            "title": "Products",
+            "subtitle": "Choosing the right product, compatibility, and feature details.",
+            "group_handle": "products"
+          }
+        },
+        "prod_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I find the right product for my setup?",
+            "answer": "Start with our Compare page to see the full lineup side by side. You can also use the Help me choose tool, which filters by device, port type, and use case.",
+            "group": "products"
+          }
+        },
+        "prod_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Are EZQuest products compatible with Mac and Windows?",
+            "answer": "Most EZQuest hubs, docks, and cables are plug-and-play on both macOS and Windows. No drivers are required for standard functionality. Check the individual product page for any OS-specific notes.",
+            "group": "products"
+          }
+        },
+        "prod_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Where can I find the manual or setup guide?",
+            "answer": "Manuals and setup guides are available on the Downloads page. Search by product name or SKU to find the correct documentation for your model.",
+            "group": "products"
+          }
+        },
+        "prod_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Does the hub support external displays?",
+            "answer": "Display support depends on the specific model. Hubs with HDMI or DisplayPort outputs support one or more monitors — check the product spec sheet for resolution and refresh rate limits. Thunderbolt models generally offer the most display flexibility.",
+            "group": "products"
+          }
+        },
+        "prod_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How much power does the hub deliver to connected devices?",
+            "answer": "Power delivery specs vary by model. Most hubs pass through between 60W and 100W to the host device while also charging peripherals. The exact wattage is listed in the specifications section on each product page.",
+            "group": "products"
+          }
+        },
+        "prod_6": {
+          "type": "faq",
+          "settings": {
+            "question": "What is covered under the EZQuest warranty?",
+            "answer": "EZQuest products are backed by a 2-year limited warranty covering manufacturing defects. Physical damage, misuse, and normal wear are not covered. Visit the Warranty page for full terms and how to file a claim.",
+            "group": "products"
+          }
+        },
+        "prod_7": {
+          "type": "faq",
+          "settings": {
+            "question": "What's the difference between USB-C and Thunderbolt?",
+            "answer": "USB-C is the connector shape; Thunderbolt is a higher-bandwidth protocol that uses the same port. Thunderbolt cables and hubs support faster data transfer, more displays, and higher power delivery — but require a Thunderbolt-compatible host port to unlock those speeds.",
+            "group": "products"
+          }
+        },
+        "prod_8": {
+          "type": "faq",
+          "settings": {
+            "question": "Do your cables support fast charging?",
+            "answer": "Yes. EZQuest USB-C cables rated for 60W or 100W support USB Power Delivery fast charging. The charging speed also depends on your charger and device — both need to support the same wattage to reach full speed.",
+            "group": "products"
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3"]
-    },
-    "cta": {
-      "type": "cta-banner",
-      "settings": {
-        "eyebrow": "Still unresolved",
-        "heading": "Need more than the FAQ?",
-        "copy": "Open downloads, manuals, troubleshooting, or direct contact when the FAQ is not enough.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support",
-        "secondary_label": "Contact support",
-        "secondary_url": "/pages/contact",
-        "style": "light",
-        "button_style": "secondary"
-      }
+      "block_order": [
+        "group_shipping",
+        "ship_1", "ship_2", "ship_3", "ship_4", "ship_5", "ship_6", "ship_7",
+        "group_orders",
+        "order_1", "order_2", "order_3", "order_4", "order_5", "order_6", "order_7",
+        "group_products",
+        "prod_1", "prod_2", "prod_3", "prod_4", "prod_5", "prod_6", "prod_7", "prod_8"
+      ]
     }
   },
-  "order": ["hero", "faq", "support", "cta"]
+  "order": ["hero", "faq"]
 }

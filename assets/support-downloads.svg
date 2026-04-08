@@ -1,135 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1440 1080">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: #0f172a;
-        fill-opacity: .3;
-      }
-
-      .st1 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st2 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st3 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st4 {
-        stroke: #334155;
-        stroke-linejoin: round;
-      }
-
-      .st4, .st5 {
-        stroke-width: 18px;
-      }
-
-      .st4, .st5, .st6 {
-        fill: none;
-        stroke-linecap: round;
-      }
-
-      .st7 {
-        fill: #facc15;
-      }
-
-      .st8 {
-        fill-opacity: .3;
-      }
-
-      .st8, .st9 {
-        fill: #f8fafc;
-      }
-
-      .st9 {
-        fill-opacity: .5;
-      }
-
-      .st5 {
-        stroke: #94a3b8;
-      }
-
-      .st10 {
-        fill: url(#linear-gradient);
-      }
-
-      .st11 {
-        fill-opacity: .7;
-      }
-
-      .st11, .st12, .st13, .st14 {
-        fill: #cbd5e1;
-      }
-
-      .st12 {
-        fill-opacity: .7;
-      }
-
-      .st15 {
-        fill: #fff1b8;
-      }
-
-      .st13 {
-        fill-opacity: .4;
-      }
-
-      .st6 {
-        stroke: url(#linear-gradient4);
-        stroke-width: 14px;
-      }
-
-      .st16 {
-        opacity: .9;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="-1" y1="539.5" x2="1440" y2="539.5" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset=".4" stop-color="#364152"/>
-      <stop offset="1" stop-color="#969eaa"/>
+    <linearGradient id="support-downloads-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
     </linearGradient>
-    <linearGradient id="linear-gradient1" x1="-.8" y1="234.5" x2="1439.2" y2="7.5" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#dbe4ef" stop-opacity=".1"/>
-      <stop offset="1" stop-color="#94a3b8" stop-opacity=".2"/>
+    <radialGradient id="support-downloads-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="support-downloads-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="support-downloads-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="linear-gradient2" x1="278.1" y1="764.9" x2="652.1" y2="298.9" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d6dee8"/>
-      <stop offset=".5" stop-color="#7a8698"/>
-      <stop offset="1" stop-color="#334155"/>
+    <linearGradient id="support-downloads-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
-    <linearGradient id="linear-gradient3" x1="811.3" y1="740" x2="1199.3" y2="400" xlink:href="#linear-gradient2"/>
-    <linearGradient id="linear-gradient4" x1="986.6" y1="425.8" x2="1246.6" y2="409.8" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#facc15" stop-opacity=".6"/>
-      <stop offset="1" stop-color="#cbd5e1" stop-opacity=".2"/>
+    <linearGradient id="support-downloads-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
+    <filter id="support-downloads-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="support-downloads-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="support-downloads-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st10" x="-1" y="-.9" width="1441" height="1080.7"/>
-  <path class="st2" d="M0,840.4c325.3-95.8,766.7-103.4,1195.4-40.4,90.8,12.6,174,30.3,244.6,60.5v219.4H0v-239.6Z"/>
-  <g>
-    <rect class="st1" x="252" y="298" width="426" height="500" rx="40" ry="40"/>
-    <path class="st14" d="M314,360h302c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-302c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
-    <path class="st12" d="M312,414h236c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-236c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
-    <rect class="st8" x="304" y="500" width="112" height="112" rx="24" ry="24"/>
-    <path class="st5" d="M360,520v68"/>
-    <path class="st4" d="M328,556l32,34,32-34"/>
-    <path class="st11" d="M312,648h254c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-254c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
-    <path class="st13" d="M311,690h180c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-180c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-  </g>
-  <g>
-    <rect class="st3" x="788" y="330" width="430" height="356" rx="38" ry="38"/>
-    <path class="st9" d="M845,380h302c5,0,9,4,9,9h0c0,5-4,9-9,9h-302c-5,0-9-4-9-9h0c0-5,4-9,9-9Z"/>
-    <path class="st8" d="M843,430h222c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-222c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <g class="st16">
-      <path class="st0" d="M860,550h58c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-58c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-      <path class="st0" d="M958,550h90c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-90c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-      <path class="st0" d="M1088,550h38c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-38c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-    </g>
-    <path class="st6" d="M986,662c76-18,178-14,260,18"/>
-  </g>
-  <circle class="st7" cx="1220" cy="244" r="12"/>
-  <circle class="st15" cx="734" cy="764" r="8"/>
+  <rect width="1600" height="1200" fill="url(#support-downloads-bg)"/>
+  <rect width="1600" height="1200" fill="url(#support-downloads-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#support-downloads-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#support-downloads-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#support-downloads-amber)"/>
+    <g transform="translate(864 576) rotate(-6 176 84.00000000000001)">
+      <ellipse cx="176" cy="154.56000000000003" rx="197.12" ry="30.240000000000006" fill="#0B1120" fill-opacity=".16" filter="url(#support-downloads-blur)"/>
+      <g filter="url(#support-downloads-shadow)">
+        <rect x="0" y="13.440000000000003" width="352" height="134.40000000000003" rx="28" fill="url(#support-downloads-metal-dark)" stroke="#465267"/>
+        <rect x="21.119999999999997" y="23.520000000000007" width="309.76" height="20.160000000000004" rx="10.080000000000002" fill="rgba(255,255,255,.12)" opacity=".8"/>
+        <rect x="35.2" y="20.160000000000004" width="183.04000000000002" height="13.440000000000003" rx="6.7200000000000015" fill="#F4D28A" opacity=".42"/>
+        <rect x="42.239999999999995" y="120.96000000000002" width="267.52" height="10.080000000000002" rx="5.040000000000001" fill="rgba(15,23,42,.08)"/>
+        <rect x="56.32" y="78.96000000000001" width="30.5536" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="105.6" y="78.96000000000001" width="30.5536" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="154.88" y="78.96000000000001" width="30.5536" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/>
+      </g>
+      
+    </g>    <g transform="translate(320 240)">
+      <rect x="35.84" y="30.24" width="331.52000000000004" height="413.28" rx="40.32" fill="#E9EFF5" stroke="#D4DEE8"/>
+      <rect x="0" y="0" width="331.52000000000004" height="413.28" rx="40.32" fill="url(#support-downloads-panel)" stroke="#D4DEE8" filter="url(#support-downloads-shadow)"/>
+      <rect x="44.80000000000001" y="60.48" width="80.64" height="20.16" rx="10.08" fill="#D7A24B" opacity=".9"/>
+      <rect x="44.80000000000001" y="120.96" width="215.04000000000002" height="15.12" rx="7.56" fill="#97A6B8"/>
+      <rect x="44.80000000000001" y="166.32000000000002" width="188.16000000000003" height="15.12" rx="7.56" fill="#C3CEDA"/>
+      <rect x="44.80000000000001" y="241.92" width="241.92000000000004" height="15.12" rx="7.56" fill="#97A6B8"/>
+      <rect x="44.80000000000001" y="287.28" width="170.24000000000004" height="15.12" rx="7.56" fill="#C3CEDA"/>
+    </g><path d="M704 528 v120" stroke="#7D8AA0" stroke-width="14" stroke-linecap="round"/>
+      <path d="M648 594 L704 648 L760 594" stroke="#7D8AA0" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

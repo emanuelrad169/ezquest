@@ -1,71 +1,74 @@
 {% paginate collection.products by section.settings.products_per_page %}
-  <section class="section-shell">
-    <div class="container-shell">
-      {% render 'breadcrumbs' %}
-      {%- liquid
+  {%- liquid
         assign intro_copy = section.settings.intro_copy | default: collection.description
-        assign category_label = 'Product family'
-        assign category_statement = 'Choose the EZQuest family that matches the setup, then narrow the right ports, power, and footprint.'
-        assign category_support_note = 'Use compare or support only when you want a final confirmation.'
-        assign category_decision_note = 'Choose this family when the setup already points in a clear direction.'
-        assign category_stat_one = 'Built for cleaner workflows'
-        assign category_stat_two = 'Engineered to reduce setup friction'
-        assign category_stat_three = 'Setup help after purchase'
+        assign category_label = section.settings.eyebrow | default: 'Product family'
+        assign category_statement = 'Find the EZQuest family with the right ports, power, and footprint.'
+        assign category_stat_one = 'Cleaner setups'
+        assign category_stat_two = 'Display-ready'
+        assign category_stat_three = 'Support ready'
         assign collection_visual = blank
         assign lead_product = collection.products.first
+        assign lead_price = blank
         assign fallback_product_handles = blank
         assign fallback_visible_count = 0
+        assign total_visible_products = collection.products_count
+        assign promo_handle = blank
+        assign promo_eyebrow = 'Next step'
+        assign promo_title = blank
+        assign promo_copy = blank
+        assign promo_link_label = blank
+        assign promo_insert_index = 4
+        assign family_handle_list = 'hubs-adapters|docking-stations|chargers-power|accessories' | split: '|'
+        assign setup_guide_url = '/pages/help-me-choose'
+        assign family_compare_url = '/pages/compare'
+        assign lead_product_url = blank
 
         if intro_copy == blank
           case collection.handle
             when 'hubs-adapters'
-              assign intro_copy = 'USB-C hubs and adapters for everyday expansion, presentations, travel setups, and lighter single-cable upgrades.'
+              assign intro_copy = 'USB-C hubs and adapters for lighter desks, travel kits, and everyday expansion.'
             when 'docking-stations'
-              assign intro_copy = 'Desk-ready docks that bring displays, charging, Ethernet, and peripherals into one calmer workstation footprint.'
+              assign intro_copy = 'Desk-ready docks that bring displays, charging, Ethernet, and peripherals into one cleaner footprint.'
             when 'chargers-power'
-              assign intro_copy = 'Charging essentials built for cleaner travel kits, lighter desk charging, and reliable everyday power.'
+              assign intro_copy = 'Charging essentials for lighter travel kits, cleaner desks, and reliable everyday power.'
             when 'accessories'
-              assign intro_copy = 'Charge-and-sync cables and finishing accessories that make the setup feel complete, dependable, and easier to live with.'
+              assign intro_copy = 'Cables and finishing pieces that make the setup feel complete and dependable.'
             else
-              assign intro_copy = 'Browse the EZQuest family that best matches your ports, power, charging, and workflow needs.'
+              assign intro_copy = 'EZQuest products with the right mix of ports, power, and display support.'
           endcase
         endif
 
         case collection.handle
           when 'hubs-adapters'
             assign category_label = 'Hybrid + travel'
-            assign category_statement = 'Hubs and adapters for everyday expansion, portable desks, presentations, and lighter single-display setups.'
-            assign category_support_note = 'Best for portable desks, presentations, and everyday expansion.'
-            assign category_decision_note = 'Choose hubs and adapters when flexibility matters more than a permanent workstation footprint.'
-            assign category_stat_one = 'Everyday port expansion'
-            assign category_stat_two = 'Travel-to-desk flexibility'
-            assign category_stat_three = 'Single-cable simplicity'
+            assign category_statement = 'Everyday expansion for travel, hybrid desks, and lighter display setups.'
             assign fallback_product_handles = 'usb-c-multimedia-hub,usb-c-travel-hub'
+            assign promo_handle = 'docking-stations'
+            assign promo_title = 'Ready for a full desk?'
+            assign promo_copy = 'See the docks built for displays, Ethernet, charging, and a cleaner desk.'
+            assign promo_link_label = 'View docking stations'
           when 'docking-stations'
             assign category_label = 'Desk command'
-            assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and a calmer workstation footprint.'
-            assign category_support_note = 'Best for stepping up from smaller hubs into a more complete desk setup.'
-            assign category_decision_note = 'Choose docking stations when the desk stays put and the workflow needs more authority.'
-            assign category_stat_one = 'Permanent desk control'
-            assign category_stat_two = 'Display + Ethernet ready'
-            assign category_stat_three = 'Stronger workstation fit'
+            assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and control.'
             assign fallback_product_handles = 'usb-c-pro-dock'
+            assign promo_handle = 'chargers-power'
+            assign promo_title = 'Power, refined'
+            assign promo_copy = 'Pair the desk with chargers and power accessories that keep every device ready.'
+            assign promo_link_label = 'View chargers and power'
           when 'chargers-power'
             assign category_label = 'Power layer'
-            assign category_statement = 'Charging products that keep travel kits, home desks, and multi-device routines lighter, faster, and less cluttered.'
-            assign category_support_note = 'Best when charging matters before port count does.'
-            assign category_decision_note = 'Choose chargers and power when the setup works, but the charging layer still needs to be cleaner and more reliable.'
-            assign category_stat_one = 'Travel and desk charging'
-            assign category_stat_two = 'Less charger clutter'
-            assign category_stat_three = 'Multi-device routines'
+            assign category_statement = 'Charging products for cleaner travel kits, desks, and multi-device routines.'
+            assign promo_handle = 'accessories'
+            assign promo_title = 'Finish the setup'
+            assign promo_copy = 'Add the cables and accessories that keep power clean and dependable.'
+            assign promo_link_label = 'View accessories'
           when 'accessories'
             assign category_label = 'Finish the setup'
-            assign category_statement = 'Cables and finishing pieces that make the setup feel complete, dependable, and easier to live with every day.'
-            assign category_support_note = 'Best for tightening cable paths, replacing weak links, and finishing the setup cleanly.'
-            assign category_decision_note = 'Choose accessories when the last layer of the setup still needs cleaner routing or a more dependable final piece.'
-            assign category_stat_one = 'Cleaner cable paths'
-            assign category_stat_two = 'Reliable daily accessories'
-            assign category_stat_three = 'Finishing-layer utility'
+            assign category_statement = 'Cables and finishing pieces that make the setup feel complete and dependable.'
+            assign promo_handle = 'hubs-adapters'
+            assign promo_title = 'Expand the setup'
+            assign promo_copy = 'Add hubs and adapters when the setup needs more ports and more reach.'
+            assign promo_link_label = 'View hubs and adapters'
         endcase
 
         if lead_product == blank and fallback_product_handles != blank
@@ -81,126 +84,298 @@
           endfor
         endif
 
-        if section.settings.show_collection_image and collection.image != blank
-          assign collection_visual = collection.image
+        if total_visible_products == 0
+          assign total_visible_products = fallback_visible_count
+        endif
+
+        if lead_product != blank and lead_product.selected_or_first_available_variant != blank
+          assign lead_price = lead_product.selected_or_first_available_variant.price | money
+        endif
+
+        if lead_product != blank
+          assign lead_product_url = lead_product.url | within: collection
+        endif
+
+        if collection.handle != blank
+          assign family_compare_url = family_compare_url | append: '?collection=' | append: collection.handle
+        endif
+
+        if total_visible_products < promo_insert_index
+          assign promo_insert_index = 2
+        endif
+
+        if section.settings.show_collection_image
+          if collection.image != blank
+            assign collection_visual = collection.image
+          elsif lead_product != blank and lead_product.images.size > 0
+            assign collection_candidate_image = lead_product.featured_image | default: lead_product.images.first
+            assign collection_best_image = blank
+            assign collection_non_technical_image = blank
+            assign collection_ratio_image = blank
+
+            for candidate_image in lead_product.images
+              assign candidate_alt = candidate_image.alt | downcase
+              assign candidate_is_technical = false
+              assign candidate_has_preferred_ratio = false
+
+              if candidate_alt contains 'illustration'
+                assign candidate_is_technical = true
+              elsif candidate_alt contains 'diagram'
+                assign candidate_is_technical = true
+              elsif candidate_alt contains 'schematic'
+                assign candidate_is_technical = true
+              elsif candidate_alt contains 'placeholder'
+                assign candidate_is_technical = true
+              elsif candidate_alt contains 'port'
+                assign candidate_is_technical = true
+              elsif candidate_alt contains 'icon'
+                assign candidate_is_technical = true
+              endif
+
+              if candidate_image.aspect_ratio >= 1.0 and candidate_image.aspect_ratio <= 1.9
+                assign candidate_has_preferred_ratio = true
+              endif
+
+              if collection_best_image == blank and candidate_is_technical == false and candidate_has_preferred_ratio
+                assign collection_best_image = candidate_image
+              endif
+
+              if collection_non_technical_image == blank and candidate_is_technical == false
+                assign collection_non_technical_image = candidate_image
+              endif
+
+              if collection_ratio_image == blank and candidate_has_preferred_ratio
+                assign collection_ratio_image = candidate_image
+              endif
+            endfor
+
+            assign collection_visual = collection_best_image | default: collection_non_technical_image | default: collection_ratio_image | default: collection_candidate_image
+          endif
+
+          if collection_visual == blank
+            for browse_product in collection.products limit: 4
+              if browse_product.images.size > 0
+                assign collection_candidate_image = browse_product.featured_image | default: browse_product.images.first
+                assign collection_best_image = blank
+                assign collection_non_technical_image = blank
+                assign collection_ratio_image = blank
+
+                for candidate_image in browse_product.images
+                  assign candidate_alt = candidate_image.alt | downcase
+                  assign candidate_is_technical = false
+                  assign candidate_has_preferred_ratio = false
+
+                  if candidate_alt contains 'illustration'
+                    assign candidate_is_technical = true
+                  elsif candidate_alt contains 'diagram'
+                    assign candidate_is_technical = true
+                  elsif candidate_alt contains 'schematic'
+                    assign candidate_is_technical = true
+                  elsif candidate_alt contains 'placeholder'
+                    assign candidate_is_technical = true
+                  elsif candidate_alt contains 'port'
+                    assign candidate_is_technical = true
+                  elsif candidate_alt contains 'icon'
+                    assign candidate_is_technical = true
+                  endif
+
+                  if candidate_image.aspect_ratio >= 1.0 and candidate_image.aspect_ratio <= 1.9
+                    assign candidate_has_preferred_ratio = true
+                  endif
+
+                  if collection_best_image == blank and candidate_is_technical == false and candidate_has_preferred_ratio
+                    assign collection_best_image = candidate_image
+                  endif
+
+                  if collection_non_technical_image == blank and candidate_is_technical == false
+                    assign collection_non_technical_image = candidate_image
+                  endif
+
+                  if collection_ratio_image == blank and candidate_has_preferred_ratio
+                    assign collection_ratio_image = candidate_image
+                  endif
+                endfor
+
+                assign collection_visual = collection_best_image | default: collection_non_technical_image | default: collection_ratio_image | default: collection_candidate_image
+              endif
+
+              if collection_visual != blank
+                break
+              endif
+            endfor
+          endif
         endif
       -%}
-
-      <header class="collection-hero{% if collection_visual == blank %} collection-hero--simple{% endif %}">
-        <div class="collection-hero-copy">
-          {% if section.settings.eyebrow != blank %}
-            <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-          {% endif %}
-          <p class="collection-hero-label">{{ category_label }}</p>
-          <h1 class="section-heading">{{ section.settings.intro_heading | default: collection.title }}</h1>
-          <p class="collection-hero-statement">{{ category_statement }}</p>
-          {% if intro_copy != blank %}
-            <p class="section-copy">{{ intro_copy | strip_html | truncatewords: 26 }}</p>
-          {% endif %}
-          <p class="collection-hero-decision-note">{{ category_decision_note }}</p>
-
-          <div class="merch-stat-grid">
-            <div class="merch-stat-card">{{ category_stat_one }}</div>
-            <div class="merch-stat-card">{{ category_stat_two }}</div>
-            <div class="merch-stat-card">{{ category_stat_three }}</div>
-          </div>
-
-          <div class="collection-hero-footer">
-            <p class="collection-hero-note">{{ category_support_note }}</p>
-            <div class="collection-inline-support" aria-label="Collection helpers">
-              <a href="/pages/compare" class="collection-inline-link">Compare nearby options</a>
-              <a href="{{ section.settings.support_url | default: '/pages/support' }}" class="collection-inline-link">Need help choosing the right setup?</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="collection-hero-side">
+  <section class="section-shell pt-0">
+    <div class="collection-showcase-shell">
+      <header class="collection-showcase">
+        <div class="collection-showcase-media">
           {% if collection_visual != blank %}
-            {{ collection_visual | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-hero-image' }}
+            {{ collection_visual | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-showcase-image' }}
           {% else %}
             {% render 'owned-collection-visual',
               collection_handle: collection.handle,
               collection_title: collection.title,
-              width: 1200,
-              height: 900,
-              class: 'collection-hero-image',
+              width: 1800,
+              height: 1200,
+              class: 'collection-showcase-image',
               loading: 'eager',
               fetchpriority: 'high'
             %}
           {% endif %}
-          {% if lead_product != blank %}
-            <div class="collection-hero-lead-product">
-              <p class="collection-hero-lead-kicker">First pick</p>
-              <h2 class="collection-hero-lead-title">{{ lead_product.title }}</h2>
-              {% if lead_product.metafields.ezquest.feature_highlights != blank and lead_product.metafields.ezquest.feature_highlights.value.count > 0 %}
-                <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.feature_highlights.value.first }}</p>
-              {% elsif lead_product.metafields.ezquest.compatibility_summary != blank %}
-                <p class="collection-hero-lead-copy">{{ lead_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | truncatewords: 14 }}</p>
+        </div>
+        <div class="collection-showcase-scrim" aria-hidden="true"></div>
+        <div class="container-shell collection-showcase-inner">
+
+          <nav class="collection-showcase-breadcrumb" aria-label="Breadcrumb">
+            <a href="{{ routes.root_url }}">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6L6 1.5 11 6M2 5.5V10.5H4.5V7.5H7.5V10.5H10V5.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <span>/</span>
+            <a href="{{ routes.collections_url }}">Collections</a>
+            <span>/</span>
+            <span>{{ collection.title }}</span>
+          </nav>
+
+          <div class="collection-showcase-copy">
+            <p class="collection-showcase-label">{{ category_label }}</p>
+            <h1 class="collection-showcase-heading">{{ section.settings.intro_heading | default: collection.title }}</h1>
+            <p class="collection-showcase-statement">{{ category_statement }}</p>
+            <div class="collection-showcase-actions">
+              {% render 'button', label: 'Shop ' | append: collection.title, url: collection.url | append: '#collection-grid', style: 'primary', class: 'button-context-collection-hero collection-showcase-action' %}
+              {% if lead_product != blank %}
+                <a href="{{ lead_product_url }}" class="site-meta-link">Start with {{ lead_product.title }}</a>
               {% endif %}
-              <a href="{{ lead_product.url }}" class="collection-inline-link">See first pick</a>
+              <a href="{{ setup_guide_url }}" class="site-meta-link">Need setup guidance?</a>
             </div>
-          {% endif %}
+          </div>
+
         </div>
       </header>
+    </div>
 
-      <div class="collection-toolbar">
-        <p class="collection-results-label">Showing {% if collection.products_count > 0 %}{{ collection.products_count }}{% else %}{{ fallback_visible_count }}{% endif %} products</p>
+    <div class="container-shell">
+      <div class="collection-merch-layer relative z-20 -mt-5 lg:-mt-8">
+        <div class="collection-merch-bar">
+          <div class="collection-merch-bar-inner">
 
-        <div class="collection-toolbar-actions">
-          {% if section.settings.show_sort %}
-            <form method="get" class="collection-sort-form">
-              <label class="sr-only" for="CollectionSort">Sort</label>
-              <select id="CollectionSort" name="sort_by" class="collection-sort-select" onchange="this.form.submit()">
-                {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-                {% for option in collection.sort_options %}
-                  <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
-                {% endfor %}
-              </select>
-            </form>
-          {% endif %}
+            <div class="collection-merch-bar-start">
+              <div class="collection-next-step-card">
+                <p class="collection-next-step-kicker">Next step</p>
+                <div class="collection-next-step-links">
+                  {% if lead_product != blank %}
+                    <a href="{{ lead_product_url }}" class="site-meta-link">Best pick: {{ lead_product.title }}</a>
+                  {% endif %}
+                  <a href="{{ family_compare_url }}" class="site-meta-link">Compare this family</a>
+                  <a href="{{ setup_guide_url }}" class="site-meta-link">Shop by setup</a>
+                </div>
+              </div>
+            </div>
 
-          <p class="collection-toolbar-note">Compare nearby options if the choice is still close. Support is here if you want a final confirmation.</p>
+            <nav class="collection-family-tabs" aria-label="Collection families">
+              {% assign tab_shown = false %}
+              {% for family_handle in family_handle_list %}
+                {% assign family_collection = collections[family_handle] %}
+                {% if family_collection != blank %}
+                  {% if tab_shown %}<span class="collection-family-sep" aria-hidden="true">/</span>{% endif %}
+                  <a href="{{ family_collection.url }}" class="collection-family-tab{% if family_handle == collection.handle %} is-active{% endif %}"{% if family_handle == collection.handle %} aria-current="page"{% endif %}>
+                    {{ family_collection.title }}<sup>{{ family_collection.products_count }}</sup>
+                  </a>
+                  {% assign tab_shown = true %}
+                {% endif %}
+              {% endfor %}
+            </nav>
+
+            <div class="collection-merch-bar-end">
+              {% if section.settings.show_sort %}
+                <form method="get" class="collection-sort-form">
+                  {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+                  {% assign active_sort_label = 'Featured' %}
+                  {% for option in collection.sort_options %}
+                    {% if option.value == sort_by %}
+                      {% assign active_sort_label = option.name %}
+                    {% endif %}
+                  {% endfor %}
+                  <div class="collection-sort-btn-wrap">
+                    <select id="CollectionSort" name="sort_by" class="collection-sort-select-native" aria-label="Sort by" onchange="this.form.submit()">
+                      {% for option in collection.sort_options %}
+                        <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="collection-sort-btn" aria-hidden="true">
+                      {{ active_sort_label }}
+                      <span class="collection-sort-btn-dot">•</span>
+                    </span>
+                  </div>
+                </form>
+              {% endif %}
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <div class="collection-shopping-note" aria-label="Collection guidance">
-        <p class="collection-shopping-note-kicker">Category confidence</p>
-        <p class="collection-shopping-note-copy">{{ category_support_note }}</p>
-        <div class="collection-inline-support">
-          <a href="/pages/compare" class="collection-inline-link">Compare nearby options</a>
-          <a href="{{ section.settings.support_url | default: '/pages/support' }}" class="collection-inline-link">Get setup help</a>
-        </div>
-      </div>
-
-      <div class="section-stack-lg product-grid">
+      <div id="collection-grid" class="section-stack-lg collection-showroom-grid mt-8 grid gap-x-5 gap-y-8 md:grid-cols-2 md:gap-x-6 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
+        {% assign promo_inserted = false %}
         {% for product in collection.products %}
-          <div class="collection-product-slot{% if forloop.first %} is-lead{% elsif forloop.index == 2 %} is-secondary{% endif %}">
+          {% assign showroom_slot_mod = forloop.index | modulo: 6 %}
+          <div class="collection-product-slot{% if showroom_slot_mod == 2 %} collection-product-slot--offset{% elsif showroom_slot_mod == 5 %} collection-product-slot--settled{% endif %}">
             {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'collection', card_index: forloop.index0 %}
           </div>
+          {% if promo_inserted == false and promo_handle != blank and forloop.index == promo_insert_index %}
+            {% render 'collection-promo-tile',
+              promo_handle: promo_handle,
+              promo_eyebrow: promo_eyebrow,
+              promo_title: promo_title,
+              promo_copy: promo_copy,
+              promo_link_label: promo_link_label
+            %}
+            {% assign promo_inserted = true %}
+          {% endif %}
         {% else %}
           {% if fallback_visible_count > 0 %}
             {% assign fallback_handle_list = fallback_product_handles | split: ',' %}
             {% for fallback_handle in fallback_handle_list %}
               {% assign fallback_product = all_products[fallback_handle] %}
               {% if fallback_product != blank %}
-                <div class="collection-product-slot{% if forloop.first %} is-lead{% elsif forloop.index == 2 %} is-secondary{% endif %}">
+                {% assign showroom_slot_mod = forloop.index | modulo: 6 %}
+                <div class="collection-product-slot{% if showroom_slot_mod == 2 %} collection-product-slot--offset{% elsif showroom_slot_mod == 5 %} collection-product-slot--settled{% endif %}">
                   {% render 'card-product', product: fallback_product, card_style: 'featured-strip', card_context: 'collection', card_index: forloop.index0 %}
                 </div>
+                {% if promo_inserted == false and promo_handle != blank and forloop.index == promo_insert_index %}
+                  {% render 'collection-promo-tile',
+                    promo_handle: promo_handle,
+                    promo_eyebrow: promo_eyebrow,
+                    promo_title: promo_title,
+                    promo_copy: promo_copy,
+                    promo_link_label: promo_link_label
+                  %}
+                  {% assign promo_inserted = true %}
+                {% endif %}
               {% endif %}
             {% endfor %}
           {% else %}
             <div class="panel-primary md:col-span-2 xl:col-span-4">
               <p class="section-kicker">Collection</p>
-              <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This product family is being merchandised now.</h2>
-              <p class="mt-3 text-sm leading-7 text-slate-600">Browse all product families, compare the core lineup, or open support if you want help choosing the right product.</p>
+              <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This collection is being refined.</h2>
+              <p class="mt-3 text-sm leading-7 text-slate-600">View all families, compare the lineup, or get product guidance.</p>
               <div class="mt-6 flex flex-wrap items-center gap-3">
-                <a href="{{ routes.collections_url }}" class="button-secondary">Browse product families</a>
-                <a href="/pages/compare" class="site-meta-link">Compare core products</a>
-                <a href="/pages/support" class="site-meta-link">Open support center</a>
+                <a href="{{ routes.collections_url }}" class="button-secondary">View all families</a>
+                <a href="/pages/compare" class="site-meta-link">Compare models</a>
+                <a href="/pages/support" class="site-meta-link">Product guidance</a>
               </div>
             </div>
           {% endif %}
         {% endfor %}
+        {% if promo_inserted == false and promo_handle != blank %}
+          {% render 'collection-promo-tile',
+            promo_handle: promo_handle,
+            promo_eyebrow: promo_eyebrow,
+            promo_title: promo_title,
+            promo_copy: promo_copy,
+            promo_link_label: promo_link_label
+          %}
+        {% endif %}
       </div>
 
       {% if paginate.pages > 1 %}
@@ -215,6 +390,126 @@
         </nav>
       {% endif %}
     </div>
+
+    {%- liquid
+      assign banner_eyebrow = section.settings.banner_eyebrow | default: collection.title
+      assign banner_heading = section.settings.banner_heading | default: collection.title
+      assign banner_copy = section.settings.banner_copy | default: collection.description
+    -%}
+    <div class="collection-editorial-banner-shell" data-ceb-root>
+      <div class="collection-editorial-banner" data-ceb-banner>
+        <div class="collection-editorial-banner-media" data-ceb-media>
+          {% if section.settings.banner_image != blank %}
+            {{ section.settings.banner_image | image_url: width: 2800 | image_tag: loading: 'lazy', fetchpriority: 'low', class: 'collection-editorial-banner-img' }}
+          {% endif %}
+        </div>
+        <div class="collection-editorial-banner-overlay"></div>
+        <div class="container-shell collection-editorial-banner-inner">
+          <div class="collection-editorial-banner-copy" data-ceb-copy>
+            <div class="collection-editorial-banner-copy-inner">
+              {% if banner_eyebrow != blank %}
+                <p class="collection-editorial-banner-eyebrow" data-ceb-item>{{ banner_eyebrow }}</p>
+              {% endif %}
+              {% if banner_heading != blank %}
+                <h2 class="collection-editorial-banner-heading" data-ceb-item>{{ banner_heading }}</h2>
+              {% endif %}
+              {% if banner_copy != blank %}
+                <p class="collection-editorial-banner-text" data-ceb-item>{{ banner_copy }}</p>
+              {% endif %}
+              <div class="collection-editorial-banner-actions" data-ceb-item>
+                <a href="{{ collection.url }}" class="collection-editorial-banner-cta">
+                  Shop {{ collection.title }}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="/pages/compare" class="collection-editorial-banner-link">Compare lineup</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      (function () {
+        var root = document.currentScript.closest('[data-ceb-root]');
+        if (!root) return;
+        var banner = root.querySelector('[data-ceb-banner]');
+        var media  = root.querySelector('[data-ceb-media]');
+        var copy   = root.querySelector('[data-ceb-copy]');
+        var items  = root.querySelectorAll('[data-ceb-item]');
+
+        /* ── Parallax ── */
+        if (media && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          function onScroll() {
+            var rect = banner.getBoundingClientRect();
+            var vh   = window.innerHeight;
+            if (rect.bottom < 0 || rect.top > vh) return;
+            var progress = (vh - rect.top) / (vh + rect.height);
+            media.style.transform = 'translateY(' + ((progress - 0.5) * 70) + 'px)';
+          }
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+        }
+
+        /* ── Entrance animation via IntersectionObserver ── */
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              items.forEach(function (el, i) {
+                el.style.transitionDelay = (0.08 + i * 0.1) + 's';
+                el.classList.add('is-visible');
+              });
+              io.unobserve(entry.target);
+            });
+          }, { threshold: 0.15 });
+          if (copy) io.observe(copy);
+        } else {
+          items.forEach(function (el) { el.classList.add('is-visible'); });
+        }
+      }());
+      </script>
+
+      <div class="collection-perks-bar">
+        <div class="container-shell">
+          <div class="collection-perks-grid">
+            {%- assign perks = section.blocks | where: 'type', 'perk' -%}
+            {% if perks.size > 0 %}
+              {% for block in perks %}
+                <div class="collection-perk" {{ block.shopify_attributes }}>
+                  <span class="collection-perk-icon" aria-hidden="true">
+                    {% render 'icon', name: block.settings.icon | default: 'shield' %}
+                  </span>
+                  <div class="collection-perk-copy">
+                    <strong>{{ block.settings.title }}</strong>
+                    {% if block.settings.text != blank %}
+                      <span>{{ block.settings.text }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="collection-perk">
+                <span class="collection-perk-icon" aria-hidden="true">{% render 'icon', name: 'headphones' %}</span>
+                <div class="collection-perk-copy"><strong>Customer service</strong><span>Dedicated support before and after purchase.</span></div>
+              </div>
+              <div class="collection-perk">
+                <span class="collection-perk-icon" aria-hidden="true">{% render 'icon', name: 'truck' %}</span>
+                <div class="collection-perk-copy"><strong>Fast Free Shipping</strong><span>Free shipping on orders of $150 or more.</span></div>
+              </div>
+              <div class="collection-perk">
+                <span class="collection-perk-icon" aria-hidden="true">{% render 'icon', name: 'user' %}</span>
+                <div class="collection-perk-copy"><strong>Refer a friend</strong><span>Refer a friend and get 15% off each other.</span></div>
+              </div>
+              <div class="collection-perk">
+                <span class="collection-perk-icon" aria-hidden="true">{% render 'icon', name: 'shield' %}</span>
+                <div class="collection-perk-copy"><strong>Secure payment</strong><span>Your payment information is processed securely.</span></div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 {% endpaginate %}
 
@@ -242,7 +537,7 @@
       "type": "text",
       "id": "support_label",
       "label": "Support panel heading",
-      "default": "Need help choosing the right fit?"
+      "default": "Product guidance"
     },
     {
       "type": "url",
@@ -275,6 +570,35 @@
       "id": "show_support_panel",
       "label": "Show support panel",
       "default": true
+    },
+    { "type": "header", "content": "Editorial banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner background image" },
+    { "type": "text", "id": "banner_eyebrow", "label": "Banner eyebrow (defaults to collection title)" },
+    { "type": "text", "id": "banner_heading", "label": "Banner heading (defaults to collection title)" },
+    { "type": "textarea", "id": "banner_copy", "label": "Banner body copy (defaults to collection description)" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "user", "label": "User" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "download", "label": "Download" },
+            { "value": "bolt", "label": "Bolt" }
+          ],
+          "default": "shield"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Customer service" },
+        { "type": "text", "id": "text", "label": "Description", "default": "Dedicated support before and after purchase." }
+      ]
     }
   ]
 }

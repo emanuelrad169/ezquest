@@ -1,26 +1,34 @@
 {%- liquid
   assign group_handle = group_handle | default: 'shop'
-  assign best_sellers_url = routes.all_products_collection_url | append: '?filter.v.availability=1&sort_by=best-selling'
+
   assign hub_product = all_products['usb-c-multimedia-hub']
   assign dock_product = all_products['usb-c-pro-dock']
   assign travel_product = all_products['usb-c-travel-hub']
 
-  assign hub_image = blank
-  assign dock_image = blank
-  assign travel_image = blank
+  assign hubs_collection = collections['hubs-adapters']
+  assign docks_collection = collections['docking-stations']
+  assign power_collection = collections['chargers-power']
 
-  if hub_product != blank and hub_product.featured_image != blank
-    assign hub_image = hub_product.featured_image
-  endif
-  if dock_product != blank and dock_product.featured_image != blank
-    assign dock_image = dock_product.featured_image
-  endif
-  if travel_product != blank and travel_product.featured_image != blank
-    assign travel_image = travel_product.featured_image
-  endif
+  assign category_handles = 'hubs-adapters|docking-stations|chargers-power|accessories' | split: '|'
+  assign category_labels = 'Hubs & adapters|Docking stations|Chargers & power|Cables & accessories' | split: '|'
+  assign sorted_use_case_keys = '' | split: ''
 
-  assign lifestyle_image = dock_image | default: hub_image | default: travel_image
-  assign collection_handles = 'hubs-adapters,docking-stations,chargers-power,accessories' | split: ','
+  if metaobjects.ezquest_use_case != blank
+    capture sorted_use_cases_raw
+      for use_case in metaobjects.ezquest_use_case.values
+        capture order_token_raw
+          echo '000000'
+          echo use_case.sort_order.value | default: 999999 | plus: 0
+        endcapture
+        assign order_token = order_token_raw | strip | slice: -6, 6
+        echo order_token
+        echo '::'
+        echo use_case.system.handle
+        echo '||'
+      endfor
+    endcapture
+    assign sorted_use_case_keys = sorted_use_cases_raw | split: '||' | sort_natural
+  endif
 -%}
 <section
   id="mega-menu-panel-{{ group_handle }}"
@@ -30,336 +38,445 @@
 >
   {% case group_handle %}
     {% when 'shop' %}
-      <div class="mega-menu-panel-surface mega-menu-panel-surface--shop">
-        <aside class="mega-menu-shop-rail">
-          <p class="mega-menu-side-label">Shop</p>
-          <p class="mega-menu-column-intro">Start with the clearest route into the EZQuest lineup.</p>
-          <div class="mega-menu-shop-link-list">
-            <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-link is-active">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'layers' %}</span>
-              <span>All products</span>
-            </a>
-            <a href="{{ best_sellers_url }}" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'spark' %}</span>
-              <span>Featured picks</span>
-            </a>
-            <a href="/pages/compare" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'check' %}</span>
-              <span>Compare products</span>
-            </a>
-            <a href="/pages/where-to-buy" class="mega-menu-shop-link">
-              <span class="mega-menu-shop-link-icon">{% render 'icon', name: 'tag' %}</span>
-              <span>Where to buy</span>
-            </a>
-          </div>
+      <div class="mega-menu-panel-surface rounded-shell bg-white p-4 shadow-lift lg:p-5">
+        <div class="grid gap-5 lg:grid-cols-12" data-mega-stage-root>
+          <aside class="mega-menu-panel-aside flex flex-col gap-3 rounded-card-sm border border-slate-200 bg-slate-50 p-3 lg:col-span-3">
+            <p class="mega-menu-side-label">Shop by setup</p>
 
-          <a href="{{ routes.all_products_collection_url }}" class="mega-menu-shop-view-all">
-            <span>Shop all products</span>
-            <span class="mega-menu-shop-view-icon">{% render 'icon', name: 'arrow-right' %}</span>
-          </a>
-        </aside>
-
-        <div class="mega-menu-shop-stage">
-          <div class="mega-menu-shop-stage-head">
-            <p class="mega-menu-side-label">Featured products</p>
-            <a href="{{ routes.collections_url }}" class="mega-menu-stage-link">
-              <span>Shop product families</span>
-              {% render 'icon', name: 'arrow-right' %}
-            </a>
-          </div>
-
-          <div class="mega-menu-product-grid">
-            {% if hub_product != blank %}
-              <a href="{{ hub_product.url }}" class="mega-menu-product-card">
-                <div class="mega-menu-product-card-media">
-                  {% render 'owned-product-visual',
-                    product_handle: hub_product.handle,
-                    product_title: hub_product.title,
-                    variant: 'compare',
-                    kind: 'product',
-                    width: 900,
-                    height: 675,
-                    class: 'mega-menu-product-card-image'
-                  %}
-                </div>
-                <div class="mega-menu-product-card-copy">
-                  <p class="mega-menu-product-brand">{{ hub_product.vendor | default: shop.name }}</p>
-                  <div class="mega-menu-product-title-row">
-                    <h3>{{ hub_product.title }}</h3>
-                    <span>{{ hub_product.price | money }}</span>
-                  </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Everyday ports, charging, and HDMI for hybrid desks.</p>
-                </div>
-              </a>
-            {% endif %}
-
-            {% if dock_product != blank %}
-              <a href="{{ dock_product.url }}" class="mega-menu-product-card">
-                <div class="mega-menu-product-card-media">
-                  {% render 'owned-product-visual',
-                    product_handle: dock_product.handle,
-                    product_title: dock_product.title,
-                    variant: 'compare',
-                    kind: 'product',
-                    width: 900,
-                    height: 675,
-                    class: 'mega-menu-product-card-image'
-                  %}
-                </div>
-                <div class="mega-menu-product-card-copy">
-                  <p class="mega-menu-product-brand">{{ dock_product.vendor | default: shop.name }}</p>
-                  <div class="mega-menu-product-title-row">
-                    <h3>{{ dock_product.title }}</h3>
-                    <span>{{ dock_product.price | money }}</span>
-                  </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Desk-ready expansion for displays, power, and a cleaner workstation.</p>
-                </div>
-              </a>
-            {% endif %}
-
-            {% if travel_product != blank %}
-              <a href="{{ travel_product.url }}" class="mega-menu-product-card">
-                <div class="mega-menu-product-card-media">
-                  {% render 'owned-product-visual',
-                    product_handle: travel_product.handle,
-                    product_title: travel_product.title,
-                    variant: 'compare',
-                    kind: 'product',
-                    width: 900,
-                    height: 675,
-                    class: 'mega-menu-product-card-image'
-                  %}
-                </div>
-                <div class="mega-menu-product-card-copy">
-                  <p class="mega-menu-product-brand">{{ travel_product.vendor | default: shop.name }}</p>
-                  <div class="mega-menu-product-title-row">
-                    <h3>{{ travel_product.title }}</h3>
-                    <span>{{ travel_product.price | money }}</span>
-                  </div>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">Lighter expansion for mobile setups, meetings, and travel days.</p>
-                </div>
-              </a>
-            {% endif %}
-          </div>
-        </div>
-
-        <a href="/pages/compare" class="mega-menu-promo-card">
-          <div class="mega-menu-promo-media">
-            {% render 'owned-product-visual',
-              product_handle: 'usb-c-pro-dock',
-              product_title: 'EZQuest',
-              variant: 'hero',
-              kind: 'product',
-              width: 900,
-              height: 1200,
-              class: 'mega-menu-promo-image'
-            %}
-          </div>
-          <div class="mega-menu-promo-overlay"></div>
-          <div class="mega-menu-promo-copy">
-            <h3>Choose the right setup</h3>
-            <p>Compare port mix, display support, and charging fit before checkout.</p>
-            <span class="mega-menu-promo-arrow">{% render 'icon', name: 'arrow-right' %}</span>
-          </div>
-        </a>
-      </div>
-
-    {% when 'resources' %}
-      <div class="mega-menu-panel-surface mega-menu-panel-surface--explore mega-menu-panel-surface--resources">
-        <div class="mega-menu-explore-shell">
-          <div class="mega-menu-explore-links">
-            <p class="mega-menu-side-label">Resources</p>
-            <p class="mega-menu-column-intro">Buying guidance, policies, and reference pages that sit beside the support center.</p>
-            <a href="/blogs/resources">Blog &amp; resources</a>
-            <a href="/pages/help-me-choose">Help me choose</a>
-            <a href="/pages/where-to-buy">Where to buy</a>
-            <a href="/pages/warranty">Warranty</a>
-            <a href="/pages/shipping-returns">Shipping &amp; returns</a>
-            <a href="/pages/cookie-policy">Cookie policy</a>
-          </div>
-
-          <a href="/blogs/resources" class="mega-menu-explore-hero mega-menu-support-hero">
-            {% if hub_image != blank %}
-              {{ hub_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'mega-menu-explore-image' }}
-            {% else %}
-              {% render 'placeholder-visual', kind: 'editorial', text: 'EZQuest Resources', width: 1600, height: 960, class: 'mega-menu-explore-image' %}
-            {% endif %}
-            <div class="mega-menu-compare-overlay"></div>
-            <div class="mega-menu-compare-copy">
-              <p class="mega-menu-side-label mega-menu-side-label--light">Resources</p>
-              <h3>Go straight to buying guidance, policies, and reference content.</h3>
-              <p>Use resources when you want a clearer answer before or after the purchase.</p>
+            <div class="grid gap-1" role="tablist" aria-label="Shop by setup">
+              {% if sorted_use_case_keys.size > 0 %}
+                {% for use_case_key in sorted_use_case_keys %}
+                  {% if use_case_key == blank %}
+                    {% continue %}
+                  {% endif %}
+                  {% assign use_case_handle = use_case_key | split: '::' | last %}
+                  {% assign use_case = metaobjects.ezquest_use_case[use_case_handle] %}
+                  {% if use_case == blank or use_case.title == blank or use_case.products == blank or use_case.products.value.count == 0 %}
+                    {% continue %}
+                  {% endif %}
+                  <button
+                    type="button"
+                    class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
+                    data-mega-stage-target="shop-{{ use_case.system.handle }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                  >
+                    <span class="mega-menu-rail-item-copy">
+                      <span class="mega-menu-rail-item-title">{{ use_case.title.value }}</span>
+                    </span>
+                  </button>
+                {% endfor %}
+              {% endif %}
             </div>
-          </a>
+
+            <a href="/pages/help-me-choose" class="mega-menu-rail-link">Open setup guide</a>
+          </aside>
+
+          <div class="grid lg:col-span-9">
+            {% if sorted_use_case_keys.size > 0 %}
+              {% for use_case_key in sorted_use_case_keys %}
+                {% if use_case_key == blank %}
+                  {% continue %}
+                {% endif %}
+                {% assign use_case_handle = use_case_key | split: '::' | last %}
+                {% assign use_case = metaobjects.ezquest_use_case[use_case_handle] %}
+                {% if use_case == blank or use_case.title == blank or use_case.products == blank or use_case.products.value.count == 0 %}
+                  {% continue %}
+                {% endif %}
+                {%- liquid
+                  assign use_case_slug = use_case.slug.value | default: use_case.system.handle
+                  assign use_case_description = use_case.description.value | default: blank
+                  assign use_case_destination_url = blank
+                  assign use_case_destination_label = 'Start with the recommended pick'
+                  assign use_case_best_for = 'Everyday'
+                  if use_case.products.value.first != blank
+                    assign use_case_destination_url = use_case.products.value.first.url
+                  endif
+                  case use_case_slug
+                    when 'balanced-everyday'
+                      assign use_case_destination_url = hubs_collection.url
+                      assign use_case_destination_label = 'Shop balanced setups'
+                      assign use_case_best_for = 'Balanced desks'
+                    when 'portable'
+                      assign use_case_destination_url = hubs_collection.url
+                      assign use_case_destination_label = 'Shop travel setups'
+                      assign use_case_best_for = 'Travel kits'
+                    when 'desk-ready'
+                      assign use_case_destination_url = docks_collection.url
+                      assign use_case_destination_label = 'See desk-ready docks'
+                      assign use_case_best_for = 'Desk setups'
+                    when 'chargers-power'
+                      assign use_case_destination_url = power_collection.url
+                      assign use_case_destination_label = 'Shop charging setups'
+                      assign use_case_best_for = 'Charging'
+                  endcase
+                  if use_case_description == blank
+                    assign use_case_description = 'Start with the setup path built for ' | append: use_case.title.value | downcase | append: '.'
+                  endif
+                -%}
+                <section class="mega-menu-stage-panel{% if forloop.first %} is-active{% endif %} grid content-start gap-4 rounded-card-sm border border-slate-200 bg-white p-4 lg:p-5" data-mega-stage-panel="shop-{{ use_case.system.handle }}"{% unless forloop.first %} hidden{% endunless %}>
+                  <div class="mega-menu-stage-head">
+                    <div class="grid gap-1">
+                      <p class="section-kicker text-slate-500">Start here</p>
+                      <h2 class="mega-menu-stage-title">{{ use_case.title.value }}</h2>
+                      <p class="type-body max-w-2xl">{{ use_case_description }}</p>
+                    </div>
+                  </div>
+
+                  <div class="grid gap-3 lg:grid-cols-2">
+                    {% for product in use_case.products.value limit: 2 %}
+                      {%- liquid
+                        assign stage_card_class = ''
+                        assign stage_card_eyebrow = blank
+                        if forloop.first
+                          assign stage_card_class = 'mega-menu-stage-card--priority'
+                          assign stage_card_eyebrow = use_case_best_for
+                        endif
+                      -%}
+                      {% render 'mega-menu-stage-card',
+                        product: product,
+                        card_layout: 'showcase',
+                        card_class: stage_card_class,
+                        eyebrow: stage_card_eyebrow,
+                        show_descriptor: false,
+                        show_price: false
+                      %}
+                    {% endfor %}
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-3 pt-0.5">
+                    <a href="{{ use_case_destination_url | default: '/pages/help-me-choose' }}" class="button-tertiary mega-menu-stage-view-all">{{ use_case_destination_label }}</a>
+                    <a href="/pages/help-me-choose" class="site-meta-link">Need a second opinion?</a>
+                  </div>
+                </section>
+              {% endfor %}
+            {% endif %}
+          </div>
         </div>
       </div>
 
     {% when 'collections' %}
-      <div class="mega-menu-panel-surface mega-menu-panel-surface--collections">
-        <div class="mega-menu-collections-grid">
-          {% assign all_collection_title = 'All Collections' %}
+      <div class="mega-menu-panel-surface rounded-shell bg-white p-4 shadow-lift lg:p-5">
+        <div class="grid gap-5 lg:grid-cols-12" data-mega-stage-root>
+          <aside class="mega-menu-panel-aside flex flex-col gap-3 rounded-card-sm border border-slate-200 bg-slate-50 p-3 lg:col-span-3">
+            <p class="mega-menu-side-label">Browse product families</p>
 
-          {% for handle in collection_handles %}
-            {% assign collection_object = collections[handle] %}
-            {% if collection_object != blank %}
-              <a href="{{ collection_object.url }}" class="mega-menu-collection-card">
-                <div class="mega-menu-collection-card-media">
-                  {% assign collection_image = collection_object.featured_image | default: collection_object.products.first.featured_image %}
-                  {% if collection_image != blank %}
-                    {{ collection_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-collection-card-image' }}
-                  {% else %}
-                    {% render 'owned-collection-visual',
-                      collection_handle: collection_object.handle,
-                      collection_title: collection_object.title,
-                      width: 900,
-                      height: 1200,
-                      class: 'mega-menu-collection-card-image'
-                    %}
-                  {% endif %}
-                </div>
-                <div class="mega-menu-collection-card-overlay"></div>
-                <div class="mega-menu-collection-card-copy mega-menu-collection-card-copy--light">
-                  <div>
-                    <h3>{{ collection_object.title }}</h3>
-                    <p>
-                      {% if forloop.first %}
-                        Expand ports, charging, and display support for modern laptops and tablets.
-                      {% elsif forloop.index == 2 %}
-                        Clean up desk setups with more power, displays, and everyday peripherals.
-                      {% elsif forloop.index == 3 %}
-                        Keep notebooks, tablets, and phones charged across work, home, and travel.
-                      {% else %}
-                        Finish the setup with dependable cables and everyday accessories.
-                      {% endif %}
-                    </p>
-                    <span class="mega-menu-collection-card-meta mega-menu-collection-card-meta--light">
-                      {{ collection_object.products_count }} product{% if collection_object.products_count != 1 %}s{% endif %}
-                    </span>
-                  </div>
-                  <span class="mega-menu-collection-card-arrow">{% render 'icon', name: 'arrow-right' %}</span>
-                </div>
-              </a>
-            {% endif %}
-          {% endfor %}
+            <div class="grid gap-1" role="tablist" aria-label="Browse product families">
+              {% for category_handle in category_handles %}
+                {% assign category_index = forloop.index0 %}
+                {% assign category_collection = collections[category_handle] %}
+                <button
+                  type="button"
+                  class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
+                  data-mega-stage-target="family-{{ category_handle }}"
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                >
+                  <span class="mega-menu-rail-item-copy">
+                    <span class="mega-menu-rail-item-title">{{ category_labels[category_index] }}</span>
+                  </span>
+                </button>
+              {% endfor %}
+            </div>
 
-          <a href="{{ routes.all_products_collection_url }}" class="mega-menu-collection-card mega-menu-collection-card--all">
-            <div class="mega-menu-collection-card-media">
-              {% if lifestyle_image != blank %}
-                {{ lifestyle_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-collection-card-image' }}
-              {% else %}
-                {% render 'owned-collection-visual',
-                  collection_handle: 'hubs-adapters',
-                  collection_title: all_collection_title,
-                  width: 900,
-                  height: 1200,
-                  class: 'mega-menu-collection-card-image'
-                %}
+            <a href="{{ routes.collections_url }}" class="mega-menu-rail-link">Browse all product families</a>
+          </aside>
+
+          <div class="grid lg:col-span-9">
+            {% for category_handle in category_handles %}
+              {% assign category_index = forloop.index0 %}
+              {% assign category_collection = collections[category_handle] %}
+              {% if category_collection == blank %}
+                {% continue %}
               {% endif %}
-            </div>
-            <div class="mega-menu-collection-card-overlay"></div>
-            <div class="mega-menu-collection-card-copy mega-menu-collection-card-copy--light">
-              <div>
-                <h3>{{ all_collection_title }}</h3>
-                <p>Browse hubs, docks, chargers, and accessories in one place.</p>
-                <span class="mega-menu-collection-card-meta mega-menu-collection-card-meta--light">Browse the full EZQuest catalog</span>
-              </div>
-              <span class="mega-menu-collection-card-arrow">{% render 'icon', name: 'arrow-right' %}</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    {% when 'explore' %}
-      <div class="mega-menu-panel-surface mega-menu-panel-surface--explore mega-menu-panel-surface--support">
-        <div class="mega-menu-support-shell">
-          <div class="mega-menu-support-links">
-            <p class="mega-menu-side-label">Support center</p>
-            <p class="mega-menu-column-intro">Stay in the buying flow when you need manuals, compatibility guidance, or a direct support path.</p>
-            <div class="mega-menu-support-grid">
-              <a href="/pages/downloads" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'download' %}</span>
-                <span>
-                  <strong>Downloads</strong>
-                  <small>Drivers and installation files.</small>
-                </span>
-              </a>
-              <a href="/pages/manuals" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'book-open' %}</span>
-                <span>
-                  <strong>Manuals</strong>
-                  <small>Quick-start guides and product instructions.</small>
-                </span>
-              </a>
-              <a href="/pages/compatibility" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'check' %}</span>
-                <span>
-                  <strong>Compatibility</strong>
-                  <small>Confirm fit for Mac, PC, and modern-device workflows.</small>
-                </span>
-              </a>
-              <a href="/pages/faq" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'spark' %}</span>
-                <span>
-                  <strong>FAQ</strong>
-                  <small>Fast answers to the common questions.</small>
-                </span>
-              </a>
-              <a href="/pages/troubleshooting" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'layers' %}</span>
-                <span>
-                  <strong>Troubleshooting</strong>
-                  <small>Symptom-led help when a product is not behaving as expected.</small>
-                </span>
-              </a>
-              <a href="/pages/contact" class="mega-menu-support-link">
-                <span class="mega-menu-support-link-icon">{% render 'icon', name: 'support' %}</span>
-                <span>
-                  <strong>Contact support</strong>
-                  <small>Reach the team when the answer depends on your setup.</small>
-                </span>
-              </a>
-            </div>
+              {%- liquid
+                assign category_best_for = 'All products'
+                case category_handle
+                  when 'hubs-adapters'
+                    assign category_best_for = 'Daily carry'
+                  when 'docking-stations'
+                    assign category_best_for = 'Desk setups'
+                  when 'chargers-power'
+                    assign category_best_for = 'Charging'
+                  when 'accessories'
+                    assign category_best_for = 'Accessories'
+                endcase
+              -%}
+              <section class="mega-menu-stage-panel{% if forloop.first %} is-active{% endif %} grid content-start gap-4 rounded-card-sm border border-slate-200 bg-white p-4 lg:p-5" data-mega-stage-panel="family-{{ category_handle }}"{% unless forloop.first %} hidden{% endunless %}>
+                <div class="mega-menu-stage-head">
+                  <h2 class="mega-menu-stage-title">{{ category_labels[category_index] }}</h2>
+                </div>
+                <div class="grid gap-3 lg:grid-cols-2">
+                  {% for product in category_collection.products limit: 2 %}
+                    {%- liquid
+                      assign stage_card_class = ''
+                      assign stage_card_eyebrow = blank
+                      if forloop.first
+                        assign stage_card_class = 'mega-menu-stage-card--priority'
+                        assign stage_card_eyebrow = category_best_for
+                      endif
+                    -%}
+                    {% render 'mega-menu-stage-card',
+                      product: product,
+                      card_layout: 'showcase',
+                      card_class: stage_card_class,
+                      eyebrow: stage_card_eyebrow,
+                      show_descriptor: false,
+                      show_price: false
+                    %}
+                  {% endfor %}
+                </div>
+                <div class="flex justify-start pt-0.5">
+                  <a href="{{ category_collection.url | default: routes.collections_url }}" class="button-tertiary mega-menu-stage-view-all">View all {{ category_labels[category_index] | downcase }}</a>
+                </div>
+              </section>
+            {% endfor %}
           </div>
-
-          <a href="/pages/support" class="mega-menu-explore-hero mega-menu-support-hero">
-            {% if lifestyle_image != blank %}
-              {{ lifestyle_image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'mega-menu-explore-image' }}
-            {% else %}
-              {% render 'owned-support-visual', context: 'support', alt: 'EZQuest Support', width: 1600, height: 960, class: 'mega-menu-explore-image' %}
-            {% endif %}
-            <div class="mega-menu-compare-overlay"></div>
-            <div class="mega-menu-compare-copy">
-              <p class="mega-menu-side-label mega-menu-side-label--light">Support center</p>
-              <h3>Buy with confidence, then move into setup without losing momentum.</h3>
-              <p>Manuals, downloads, compatibility, and direct help stay connected to the product.</p>
-            </div>
-          </a>
         </div>
       </div>
 
     {% when 'compare' %}
-      <div class="mega-menu-panel-surface mega-menu-panel-surface--compare">
-        <a href="/pages/compare" class="mega-menu-compare-hero">
-          {% if travel_image != blank %}
-            {{ travel_image | image_url: width: 1800 | image_tag: loading: 'lazy', class: 'mega-menu-compare-image' }}
-          {% else %}
-            {% render 'owned-product-visual',
-              product_handle: 'usb-c-multimedia-hub',
-              product_title: 'Compare EZQuest',
-              variant: 'compare',
-              kind: 'compare',
-              width: 1800,
-              height: 900,
-              class: 'mega-menu-compare-image'
-            %}
-          {% endif %}
-          <div class="mega-menu-compare-overlay"></div>
-          <div class="mega-menu-compare-copy">
-            <p class="mega-menu-side-label mega-menu-side-label--light">Compare</p>
-            <h3>Choose the right hub, dock, or charger before checkout.</h3>
-            <p>See the most portable, most balanced, and most desk-ready roles side by side.</p>
+      <div class="mega-menu-panel-surface mega-menu-panel-surface--editorial">
+        <div class="mega-menu-editorial-shell" data-mega-stage-root>
+          <aside class="mega-menu-editorial-rail">
+            <p class="mega-menu-side-label">Compare</p>
+
+            <div class="mega-menu-editorial-rail-list" role="tablist" aria-label="Compare by role">
+              <button type="button" class="mega-menu-editorial-rail-item is-active" data-mega-stage-target="compare-balanced" aria-selected="true">
+                <span>Balanced</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="compare-portable" aria-selected="false">
+                <span>Portable</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="compare-desk" aria-selected="false">
+                <span>Desk</span>
+              </button>
+            </div>
+          </aside>
+
+          <div class="mega-menu-editorial-stage">
+            <section class="mega-menu-stage-panel is-active" data-mega-stage-panel="compare-balanced">
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Balanced</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--products">
+                {% if hub_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: hub_product,
+                    card_class: 'mega-menu-stage-card--priority',
+                    eyebrow: 'Balanced desks',
+                    show_descriptor: false
+                  %}
+                {% endif %}
+                {% if travel_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: travel_product,
+                    show_descriptor: false
+                  %}
+                {% endif %}
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/compare" class="button-tertiary mega-menu-stage-view-all">Compare lineup</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="compare-portable" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Portable</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--products">
+                {% if travel_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: travel_product,
+                    card_class: 'mega-menu-stage-card--priority',
+                    eyebrow: 'Travel kits',
+                    show_descriptor: false
+                  %}
+                {% endif %}
+                {% if hub_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: hub_product,
+                    show_descriptor: false
+                  %}
+                {% endif %}
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/compare" class="button-tertiary mega-menu-stage-view-all">Compare options</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="compare-desk" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Desk</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--products">
+                {% if dock_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: dock_product,
+                    card_class: 'mega-menu-stage-card--priority',
+                    eyebrow: 'Desk setups',
+                    show_descriptor: false
+                  %}
+                {% endif %}
+                {% if hub_product != blank %}
+                  {% render 'mega-menu-stage-card',
+                    product: hub_product,
+                    show_descriptor: false
+                  %}
+                {% endif %}
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/compare" class="button-tertiary mega-menu-stage-view-all">Compare desk setups</a>
+              </div>
+            </section>
           </div>
-        </a>
+        </div>
+      </div>
+
+    {% when 'explore' %}
+      <div class="mega-menu-panel-surface mega-menu-panel-surface--editorial">
+        <div class="mega-menu-editorial-shell" data-mega-stage-root>
+          <aside class="mega-menu-editorial-rail">
+            <p class="mega-menu-side-label">Support</p>
+
+            <div class="mega-menu-editorial-rail-list" role="tablist" aria-label="Support center">
+              <button type="button" class="mega-menu-editorial-rail-item is-active" data-mega-stage-target="support-self-serve" aria-selected="true">
+                <span>Downloads</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="support-troubleshooting" aria-selected="false">
+                <span>Troubleshooting</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="support-contact" aria-selected="false">
+                <span>Direct help</span>
+              </button>
+            </div>
+          </aside>
+
+          <div class="mega-menu-editorial-stage">
+            <section class="mega-menu-stage-panel is-active" data-mega-stage-panel="support-self-serve">
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Downloads</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/downloads" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>Downloads</strong><span>Drivers and utilities.</span></a>
+                <a href="/pages/manuals" class="mega-menu-link-card card-base card-interactive"><strong>Manuals</strong><span>Quick starts and guides.</span></a>
+                <a href="/pages/firmware" class="mega-menu-link-card card-base card-interactive"><strong>Firmware</strong><span>Product updates.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/support" class="button-tertiary mega-menu-stage-view-all">All support</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="support-troubleshooting" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Troubleshooting</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/troubleshooting" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>Troubleshooting</strong><span>Common fixes.</span></a>
+                <a href="/pages/faq" class="mega-menu-link-card card-base card-interactive"><strong>FAQ</strong><span>Fast answers.</span></a>
+                <a href="/pages/contact" class="mega-menu-link-card card-base card-interactive"><strong>Contact support</strong><span>Reach the team.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/troubleshooting" class="button-tertiary mega-menu-stage-view-all">Open troubleshooting</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="support-contact" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Direct help</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/contact" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>Start support</strong><span>Setup-specific help.</span></a>
+                <a href="/pages/shipping-returns" class="mega-menu-link-card card-base card-interactive"><strong>Order help</strong><span>Shipping and returns.</span></a>
+                <a href="/pages/warranty" class="mega-menu-link-card card-base card-interactive"><strong>Warranty</strong><span>Coverage and claims.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/contact" class="button-tertiary mega-menu-stage-view-all">Start support request</a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+    {% when 'resources' %}
+      <div class="mega-menu-panel-surface mega-menu-panel-surface--editorial">
+        <div class="mega-menu-editorial-shell" data-mega-stage-root>
+          <aside class="mega-menu-editorial-rail">
+            <p class="mega-menu-side-label">Resources</p>
+
+            <div class="mega-menu-editorial-rail-list" role="tablist" aria-label="Resources">
+              <button type="button" class="mega-menu-editorial-rail-item is-active" data-mega-stage-target="resources-guidance" aria-selected="true">
+                <span>Guidance</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="resources-policies" aria-selected="false">
+                <span>Policies</span>
+              </button>
+              <button type="button" class="mega-menu-editorial-rail-item" data-mega-stage-target="resources-brand" aria-selected="false">
+                <span>About</span>
+              </button>
+            </div>
+          </aside>
+
+          <div class="mega-menu-editorial-stage">
+            <section class="mega-menu-stage-panel is-active" data-mega-stage-panel="resources-guidance">
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Guidance</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/help-me-choose" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>Help me choose</strong><span>Narrow the lineup.</span></a>
+                <a href="/pages/compatibility" class="mega-menu-link-card card-base card-interactive"><strong>Compatibility</strong><span>Check device compatibility.</span></a>
+                <a href="/blogs/resources" class="mega-menu-link-card card-base card-interactive"><strong>Guides</strong><span>Buying and setup help.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/blogs/resources" class="button-tertiary mega-menu-stage-view-all">Resources</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="resources-policies" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">Policies</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/shipping-returns" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>Shipping &amp; returns</strong><span>Order expectations.</span></a>
+                <a href="/pages/warranty" class="mega-menu-link-card card-base card-interactive"><strong>Warranty</strong><span>Coverage details.</span></a>
+                <a href="/pages/cookie-policy" class="mega-menu-link-card card-base card-interactive"><strong>Cookie policy</strong><span>Privacy details.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/shipping-returns" class="button-tertiary mega-menu-stage-view-all">Policies</a>
+              </div>
+            </section>
+
+            <section class="mega-menu-stage-panel" data-mega-stage-panel="resources-brand" hidden>
+              <div class="mega-menu-stage-head">
+                <div>
+                  <h2 class="mega-menu-stage-title">About</h2>
+                </div>
+              </div>
+              <div class="mega-menu-stage-grid mega-menu-stage-grid--links">
+                <a href="/pages/about" class="mega-menu-link-card mega-menu-link-card--priority card-base card-interactive"><strong>About EZQuest</strong><span>Brand overview.</span></a>
+                <a href="/pages/our-story" class="mega-menu-link-card card-base card-interactive"><strong>Our story</strong><span>Company background.</span></a>
+                <a href="/pages/where-to-buy" class="mega-menu-link-card card-base card-interactive"><strong>Where to buy</strong><span>Retail availability.</span></a>
+              </div>
+              <div class="mega-menu-stage-footer">
+                <a href="/pages/about" class="button-tertiary mega-menu-stage-view-all">About EZQuest</a>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
   {% endcase %}
 </section>

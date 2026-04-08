@@ -1,7 +1,14 @@
 {
   "sections": {
-    "hero": { "type": "hero-page", "settings": { "eyebrow": "404", "heading": "Page not found", "copy": "Use search or return to the homepage." } },
-    "support": { "type": "support-card-grid", "settings": {} }
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "heading": "This page went missing.",
+        "copy": "It may have moved or no longer exists. Here are some better places to start.",
+        "cta_primary": "Browse products",
+        "cta_secondary": "Compare products"
+      }
+    }
   },
-  "order": ["hero", "support"]
+  "order": ["main"]
 }

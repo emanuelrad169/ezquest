@@ -1,156 +1,84 @@
-<svg width="1800" height="2250" viewBox="0 0 1800 2250" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1800" height="2250" rx="84" fill="#0F1522"/>
-  <rect width="1800" height="2250" rx="84" fill="url(#bg)"/>
-  <ellipse cx="1458" cy="334" rx="532" ry="390" fill="url(#glowTop)"/>
-  <ellipse cx="1118" cy="1930" rx="694" ry="258" fill="url(#glowBase)"/>
-  <ellipse cx="564" cy="1212" rx="640" ry="720" fill="url(#quietGlow)"/>
-  <path d="M796 1508C1088 1424 1472 1450 1764 1606V2250H674L796 1508Z" fill="url(#deskPlane)"/>
-  <path d="M894 1504C1180 1444 1474 1476 1712 1606L1548 1700C1322 1588 1080 1560 842 1604L894 1504Z" fill="url(#deskEdge)" opacity="0.8"/>
-  <rect x="132" y="250" width="346" height="8" rx="4" fill="url(#quietAccent)"/>
-  <rect x="132" y="1716" width="390" height="2" rx="1" fill="url(#quietLine)"/>
-  <g filter="url(#shadowLarge)">
-    <path d="M978 616C1002 584 1040 566 1080 566H1430C1500 566 1556 622 1556 692V1210C1556 1280 1500 1336 1430 1336H1080C1010 1336 954 1280 954 1210V706C954 680 962 648 978 616Z" fill="url(#dockBody)"/>
-    <rect x="1010" y="612" width="480" height="650" rx="64" fill="url(#dockFace)"/>
-    <rect x="1052" y="668" width="314" height="16" rx="8" fill="#F8FAFC" fill-opacity="0.38"/>
-    <rect x="1052" y="720" width="232" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.22"/>
-    <rect x="1064" y="840" width="414" height="206" rx="60" fill="url(#screenGlow)"/>
-    <rect x="1112" y="882" width="318" height="122" rx="44" fill="#E2E8F0" fill-opacity="0.18"/>
-    <g opacity="0.84">
-      <rect x="980" y="976" width="28" height="102" rx="14" fill="#AAB5C6"/>
-      <rect x="980" y="1104" width="28" height="136" rx="14" fill="#AAB5C6"/>
-      <rect x="1490" y="862" width="34" height="80" rx="17" fill="#9FACC1"/>
-      <rect x="1490" y="958" width="34" height="64" rx="17" fill="#9FACC1"/>
-      <rect x="1490" y="1038" width="34" height="94" rx="17" fill="#9FACC1"/>
-      <rect x="1490" y="1148" width="34" height="82" rx="17" fill="#9FACC1"/>
-    </g>
-  </g>
-  <g filter="url(#shadowMedium)">
-    <path d="M632 1260C656 1228 694 1210 734 1210H1162C1228 1210 1282 1264 1282 1330V1588C1282 1654 1228 1708 1162 1708H734C668 1708 614 1654 614 1588V1348C614 1320 620 1292 632 1260Z" fill="url(#hubBody)"/>
-    <rect x="666" y="1256" width="558" height="378" rx="58" fill="url(#hubFace)"/>
-    <rect x="706" y="1302" width="388" height="16" rx="8" fill="#F8FAFC" fill-opacity="0.34"/>
-    <rect x="706" y="1354" width="280" height="14" rx="7" fill="#F8FAFC" fill-opacity="0.22"/>
-    <g opacity="0.9">
-      <rect x="720" y="1512" width="86" height="26" rx="13" fill="#0B1221" fill-opacity="0.44"/>
-      <rect x="826" y="1512" width="110" height="26" rx="13" fill="#0B1221" fill-opacity="0.44"/>
-      <rect x="954" y="1512" width="62" height="26" rx="13" fill="#0B1221" fill-opacity="0.44"/>
-      <rect x="1034" y="1512" width="62" height="26" rx="13" fill="#0B1221" fill-opacity="0.44"/>
-    </g>
-  </g>
-  <g filter="url(#shadowSmall)">
-    <path d="M1120 1470C1140 1442 1172 1426 1206 1426H1452C1508 1426 1552 1470 1552 1526V1710C1552 1766 1508 1810 1452 1810H1206C1150 1810 1106 1766 1106 1710V1544C1106 1514 1112 1490 1120 1470Z" fill="url(#chargerBody)"/>
-    <rect x="1148" y="1464" width="350" height="286" rx="48" fill="url(#chargerFace)"/>
-    <rect x="1196" y="1524" width="154" height="16" rx="8" fill="#F8FAFC" fill-opacity="0.36"/>
-    <rect x="1196" y="1570" width="96" height="12" rx="6" fill="#F8FAFC" fill-opacity="0.2"/>
-    <g opacity="0.9">
-      <rect x="1206" y="1660" width="64" height="24" rx="12" fill="#0B1221" fill-opacity="0.42"/>
-      <rect x="1288" y="1660" width="64" height="24" rx="12" fill="#0B1221" fill-opacity="0.42"/>
-      <rect x="1370" y="1660" width="64" height="24" rx="12" fill="#0B1221" fill-opacity="0.42"/>
-      <rect x="1452" y="1660" width="28" height="24" rx="12" fill="#0B1221" fill-opacity="0.42"/>
-    </g>
-  </g>
-  <path d="M1230 1704C1308 1678 1398 1682 1472 1714C1544 1748 1618 1748 1688 1716C1714 1704 1738 1690 1762 1668" stroke="url(#cableStroke)" stroke-width="16" stroke-linecap="round" opacity="0.82"/>
-  <circle cx="1020" cy="810" r="10" fill="#FACC15"/>
-  <circle cx="1470" cy="570" r="10" fill="#FFF4C7" fill-opacity="0.74"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2400" viewBox="0 0 1800 2400" fill="none">
   <defs>
-    <linearGradient id="bg" x1="220" y1="134" x2="1618" y2="2060" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#111827"/>
-      <stop offset="0.42" stop-color="#364152"/>
-      <stop offset="1" stop-color="#8F97A5"/>
+    <linearGradient id="hero-mobile-bg" x1="0" y1="0" x2="1800" y2="2400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A1020"/>
+      <stop offset="1" stop-color="#141D2F"/>
     </linearGradient>
-    <radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1458 334) rotate(146.52) scale(648.02 487.443)">
-      <stop stop-color="#F8FAFC" stop-opacity="0.8"/>
-      <stop offset="1" stop-color="#F8FAFC" stop-opacity="0"/>
+    <radialGradient id="hero-mobile-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1224 672.0000000000001) rotate(130) scale(684 816.0000000000001)">
+      <stop stop-color="#22304A" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#22304A" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowBase" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1118 1930) rotate(90) scale(258 694)">
-      <stop stop-color="#FACC15" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    <radialGradient id="hero-mobile-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1476 1776) rotate(130) scale(324 288)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="quietGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(564 1212) rotate(61.5044) scale(938.887 1015.78)">
-      <stop stop-color="#283548" stop-opacity="0.34"/>
-      <stop offset="1" stop-color="#283548" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="deskPlane" x1="830" y1="1490" x2="1764" y2="2250" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#556173" stop-opacity="0.22"/>
-      <stop offset="1" stop-color="#F8FAFC" stop-opacity="0.05"/>
+    <linearGradient id="hero-mobile-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="deskEdge" x1="842" y1="1594" x2="1712" y2="1594" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0"/>
-      <stop offset="0.48" stop-color="#FACC15" stop-opacity="0.28"/>
-      <stop offset="1" stop-color="#F8FAFC" stop-opacity="0.05"/>
+    <linearGradient id="hero-mobile-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
-    <linearGradient id="quietAccent" x1="132" y1="254" x2="478" y2="254" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    <linearGradient id="hero-mobile-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="quietLine" x1="132" y1="1717" x2="522" y2="1717" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E2E8F0" stop-opacity="0.32"/>
-      <stop offset="1" stop-color="#E2E8F0" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dockBody" x1="984" y1="582" x2="1532" y2="1336" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D1D9E5"/>
-      <stop offset="0.56" stop-color="#6A7688"/>
-      <stop offset="1" stop-color="#293446"/>
-    </linearGradient>
-    <linearGradient id="dockFace" x1="1010" y1="612" x2="1490" y2="1262" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#B0BBCB"/>
-      <stop offset="0.48" stop-color="#5A6679"/>
-      <stop offset="1" stop-color="#1E293B"/>
-    </linearGradient>
-    <radialGradient id="screenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1271 943) rotate(90) scale(103 207)">
-      <stop stop-color="#F8FAFC" stop-opacity="0.38"/>
-      <stop offset="1" stop-color="#94A3B8" stop-opacity="0.16"/>
-    </radialGradient>
-    <linearGradient id="hubBody" x1="636" y1="1220" x2="1256" y2="1708" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D2DAE6"/>
-      <stop offset="0.52" stop-color="#7D889A"/>
-      <stop offset="1" stop-color="#374255"/>
-    </linearGradient>
-    <linearGradient id="hubFace" x1="666" y1="1256" x2="1224" y2="1634" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#BBC5D3"/>
-      <stop offset="0.44" stop-color="#697488"/>
-      <stop offset="1" stop-color="#202B3A"/>
-    </linearGradient>
-    <linearGradient id="chargerBody" x1="1114" y1="1440" x2="1532" y2="1810" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D9E1EC"/>
-      <stop offset="0.5" stop-color="#8792A4"/>
-      <stop offset="1" stop-color="#3A4558"/>
-    </linearGradient>
-    <linearGradient id="chargerFace" x1="1148" y1="1464" x2="1498" y2="1750" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#BEC8D6"/>
-      <stop offset="0.5" stop-color="#6B768A"/>
-      <stop offset="1" stop-color="#243042"/>
-    </linearGradient>
-    <linearGradient id="cableStroke" x1="1230" y1="1688" x2="1762" y2="1688" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0.72"/>
-      <stop offset="0.46" stop-color="#FDE68A" stop-opacity="0.48"/>
-      <stop offset="1" stop-color="#CBD5E1" stop-opacity="0.18"/>
-    </linearGradient>
-    <filter id="shadowLarge" x="892" y="520" width="740" height="892" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-16" dy="28"/>
-      <feGaussianBlur stdDeviation="30"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0431373 0 0 0 0 0.0705882 0 0 0 0 0.129412 0 0 0 0.26 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_mobile"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_mobile" result="shape"/>
+    <filter id="hero-mobile-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
     </filter>
-    <filter id="shadowMedium" x="550" y="1160" width="808" height="628" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-14" dy="22"/>
-      <feGaussianBlur stdDeviation="24"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0431373 0 0 0 0 0.0705882 0 0 0 0 0.129412 0 0 0 0.22 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_mobile"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_mobile" result="shape"/>
+    <filter id="hero-mobile-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
     </filter>
-    <filter id="shadowSmall" x="1048" y="1384" width="576" height="502" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="-10" dy="18"/>
-      <feGaussianBlur stdDeviation="20"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0431373 0 0 0 0 0.0705882 0 0 0 0 0.129412 0 0 0 0.18 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_mobile"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_mobile" result="shape"/>
-    </filter>
+    <pattern id="hero-mobile-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
   </defs>
+  <rect width="1800" height="2400" fill="url(#hero-mobile-bg)"/>
+  <rect width="1800" height="2400" fill="url(#hero-mobile-grid)" opacity=".38"/>
+  <rect x="108" y="192" width="1584" height="1920" rx="144" fill="#0F172A" fill-opacity=".22" stroke="rgba(255,255,255,.08)" stroke-opacity=".4"/>
+  <ellipse cx="936" cy="1992" rx="540" ry="192" fill="#0B1120" fill-opacity=".22" filter="url(#hero-mobile-blur)"/>
+  <ellipse cx="936" cy="768" rx="612" ry="528" fill="url(#hero-mobile-glow)"/>
+  <ellipse cx="1476" cy="1776" rx="324" ry="288" fill="url(#hero-mobile-amber)"/>
+    <g transform="translate(162 1344.0000000000002) rotate(-14 234 120)">
+      <ellipse cx="234" cy="220.8" rx="262.08000000000004" ry="43.199999999999996" fill="#0B1120" fill-opacity=".16" filter="url(#hero-mobile-blur)"/>
+      <g filter="url(#hero-mobile-shadow)">
+        <rect x="0" y="19.2" width="468" height="192" rx="28" fill="url(#hero-mobile-metal)" stroke="#D8E0E8"/>
+        <rect x="28.08" y="33.6" width="411.84" height="28.799999999999997" rx="14.399999999999999" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        <rect x="46.800000000000004" y="28.799999999999997" width="243.36" height="19.2" rx="9.6" fill="#F4D28A" opacity=".42"/>
+        <rect x="56.16" y="172.79999999999998" width="355.68" height="14.399999999999999" rx="7.199999999999999" fill="rgba(15,23,42,.08)"/>
+        <rect x="74.88" y="112.8" width="40.622400000000006" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="140.4" y="112.8" width="40.622400000000006" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="205.92000000000002" y="112.8" width="40.622400000000006" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="271.44000000000005" y="112.8" width="40.622400000000006" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      <path d="M421.2 124.80000000000001 C 477.36 100.8, 542.88 43.199999999999996, 570.96 28.799999999999997" stroke="#162033" stroke-width="19.2" stroke-linecap="round" opacity=".9"/><circle cx="570.96" cy="28.799999999999997" r="14.399999999999999" fill="#162033"/>
+    </g>
+    <g transform="translate(684 1152) rotate(4 288 144)">
+      <ellipse cx="288" cy="264.96000000000004" rx="322.56000000000006" ry="51.839999999999996" fill="#0B1120" fill-opacity=".16" filter="url(#hero-mobile-blur)"/>
+      <g filter="url(#hero-mobile-shadow)">
+        <rect x="0" y="23.04" width="576" height="230.4" rx="28" fill="url(#hero-mobile-metal)" stroke="#D8E0E8"/>
+        <rect x="34.56" y="40.32000000000001" width="506.88" height="34.56" rx="17.28" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        <rect x="57.6" y="34.56" width="299.52" height="23.04" rx="11.52" fill="#F4D28A" opacity=".42"/>
+        <rect x="69.12" y="207.35999999999999" width="437.76" height="17.28" rx="8.64" fill="rgba(15,23,42,.08)"/>
+        <rect x="92.16" y="135.35999999999999" width="49.99680000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="172.8" y="135.35999999999999" width="49.99680000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="253.44000000000003" y="135.35999999999999" width="49.99680000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="334.08000000000004" y="135.35999999999999" width="49.99680000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="414.72" y="135.35999999999999" width="49.99680000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      <path d="M518.4 149.76 C 587.52 120.96, 668.16 51.839999999999996, 702.72 34.56" stroke="#162033" stroke-width="23.04" stroke-linecap="round" opacity=".9"/><circle cx="702.72" cy="34.56" r="17.28" fill="#162033"/>
+    </g>
+    <g transform="translate(1044 480)">
+      <rect x="37.44" y="0" width="336.96" height="285.12" rx="21.12" fill="url(#hero-mobile-panel)" stroke="#D6DEE8"/>
+      <rect x="60.84" y="26.400000000000002" width="290.16" height="221.76" rx="15.84" fill="#F3F7FB"/>
+      <rect x="0" y="285.12" width="468" height="52.800000000000004" rx="21.12" fill="url(#hero-mobile-metal)"/>
+      <rect x="177.84" y="300.96" width="74.88" height="7.92" rx="3.696" fill="#90A0B5"/>
+    </g>
+    <g transform="translate(1188 1367.9999999999998) rotate(-3 180 120)">
+      <ellipse cx="180" cy="220.8" rx="201.60000000000002" ry="43.199999999999996" fill="#0B1120" fill-opacity=".16" filter="url(#hero-mobile-blur)"/>
+      <g filter="url(#hero-mobile-shadow)">
+        <rect x="0" y="19.2" width="360" height="192" rx="28" fill="url(#hero-mobile-metal-dark)" stroke="#465267"/>
+        <rect x="21.599999999999998" y="33.6" width="316.8" height="28.799999999999997" rx="14.399999999999999" fill="rgba(255,255,255,.12)" opacity=".8"/>
+        
+        <rect x="43.199999999999996" y="172.79999999999998" width="273.6" height="14.399999999999999" rx="7.199999999999999" fill="rgba(15,23,42,.08)"/>
+        <rect x="57.6" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="108" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="158.4" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="208.8" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="259.20000000000005" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/><rect x="309.6" y="112.8" width="31.248000000000005" height="14" rx="7" fill="#0A1020" fill-opacity=".82"/>
+      </g>
+      <path d="M324 124.80000000000001 C 367.2 100.8, 417.59999999999997 43.199999999999996, 439.2 28.799999999999997" stroke="#162033" stroke-width="19.2" stroke-linecap="round" opacity=".9"/><circle cx="439.2" cy="28.799999999999997" r="14.399999999999999" fill="#162033"/>
+    </g>
 </svg>

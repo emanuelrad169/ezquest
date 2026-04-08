@@ -1,101 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st1 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st2 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st3 {
-        fill: #facc15;
-      }
-
-      .st4 {
-        fill-opacity: .2;
-      }
-
-      .st4, .st5 {
-        fill: #f8fafc;
-      }
-
-      .st5 {
-        fill-opacity: .3;
-      }
-
-      .st6 {
-        fill: url(#radial-gradient);
-      }
-
-      .st7 {
-        fill: url(#linear-gradient);
-      }
-
-      .st8 {
-        fill: #172031;
-        fill-opacity: .4;
-      }
-
-      .st9 {
-        fill: none;
-        stroke: url(#linear-gradient4);
-        stroke-linecap: round;
-        stroke-width: 14px;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="0" y1="600" x2="1600" y2="600" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset=".4" stop-color="#364152"/>
-      <stop offset="1" stop-color="#969eaa"/>
+    <linearGradient id="pdp-multimedia-hero-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
     </linearGradient>
-    <radialGradient id="radial-gradient" cx="492.4" cy="941.1" fx="492.4" fy="941.1" r="1" gradientTransform="translate(-501404 -78760) rotate(90) scale(162 -534)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#facc15" stop-opacity=".2"/>
-      <stop offset="1" stop-color="#facc15" stop-opacity="0"/>
+    <radialGradient id="pdp-multimedia-hero-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="linear-gradient1" x1="725.9" y1="665" x2="1267.9" y2="321" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d7dee8"/>
-      <stop offset=".5" stop-color="#8d99aa"/>
-      <stop offset="1" stop-color="#4a5568"/>
+    <radialGradient id="pdp-multimedia-hero-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pdp-multimedia-hero-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="linear-gradient2" x1="744" y1="622" x2="1250" y2="364" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset=".5" stop-color="#d4dce8"/>
-      <stop offset="1" stop-color="#b5c0d0"/>
+    <linearGradient id="pdp-multimedia-hero-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
-    <linearGradient id="linear-gradient3" x1="1134" y1="860.9" x2="1364" y2="702.9" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#e6edf6" stop-opacity=".8"/>
-      <stop offset="1" stop-color="#c9d4e3" stop-opacity=".4"/>
+    <linearGradient id="pdp-multimedia-hero-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="linear-gradient4" x1="1198" y1="313.4" x2="1544" y2="313.4" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#facc15" stop-opacity=".8"/>
-      <stop offset="1" stop-color="#94a3b8" stop-opacity=".3"/>
-    </linearGradient>
+    <filter id="pdp-multimedia-hero-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="pdp-multimedia-hero-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="pdp-multimedia-hero-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st7" width="1600" height="1200"/>
-  <ellipse class="st6" cx="1130" cy="1010" rx="534" ry="162"/>
-  <g>
-    <rect class="st1" x="698" y="532" width="598" height="350" rx="74" ry="74"/>
-    <rect class="st0" x="744" y="578" width="506" height="258" rx="54" ry="54"/>
-    <path class="st5" d="M800,624h306c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-306c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
-    <path class="st4" d="M799,674h194c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-194c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <path class="st8" d="M786,740h62c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-62c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-    <path class="st8" d="M888,740h80c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-80c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-    <path class="st8" d="M1008,740h36c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-36c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-    <path class="st8" d="M1084,740h36c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-36c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-    <path class="st8" d="M1160,740h54c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-54c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-  </g>
-  <g>
-    <rect class="st2" x="1122" y="332" width="248" height="168" rx="28" ry="28"/>
-    <rect class="st4" x="1170" y="370" width="152" height="92" rx="18" ry="18"/>
-  </g>
-  <path class="st9" d="M1198,882c70-26,154-26,224,6,40,18,82,26,122,20"/>
-  <circle class="st3" cx="734" cy="562" r="10"/>
+  <rect width="1600" height="1200" fill="url(#pdp-multimedia-hero-bg)"/>
+  <rect width="1600" height="1200" fill="url(#pdp-multimedia-hero-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#pdp-multimedia-hero-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#pdp-multimedia-hero-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#pdp-multimedia-hero-amber)"/>
+    <g transform="translate(320 408.00000000000006) rotate(4 432 132)">
+      <ellipse cx="432" cy="242.88000000000002" rx="483.84000000000003" ry="47.519999999999996" fill="#0B1120" fill-opacity=".16" filter="url(#pdp-multimedia-hero-blur)"/>
+      <g filter="url(#pdp-multimedia-hero-shadow)">
+        <rect x="0" y="21.12" width="864" height="211.20000000000002" rx="28" fill="url(#pdp-multimedia-hero-metal)" stroke="#D8E0E8"/>
+        <rect x="51.839999999999996" y="36.96" width="760.32" height="31.68" rx="15.84" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        <rect x="86.4" y="31.68" width="449.28000000000003" height="21.12" rx="10.56" fill="#F4D28A" opacity=".42"/>
+        <rect x="103.67999999999999" y="190.07999999999998" width="656.64" height="15.84" rx="7.92" fill="rgba(15,23,42,.08)"/>
+        <rect x="138.24" y="124.08" width="74.99520000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="259.20000000000005" y="124.08" width="74.99520000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="380.16" y="124.08" width="74.99520000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="501.12" y="124.08" width="74.99520000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="622.08" y="124.08" width="74.99520000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      <path d="M777.6 137.28 C 881.28 110.88, 1002.2399999999999 47.519999999999996, 1054.08 31.68" stroke="#162033" stroke-width="21.12" stroke-linecap="round" opacity=".9"/><circle cx="1054.08" cy="31.68" r="15.84" fill="#162033"/>
+    </g>
 </svg>

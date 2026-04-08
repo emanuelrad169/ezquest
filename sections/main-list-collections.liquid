@@ -1,169 +1,76 @@
 <section class="section-shell collections-index-section">
   <div class="container-shell">
     {%- liquid
-      assign section_heading = section.settings.heading | default: 'Choose the product family that fits your workflow.'
-      assign section_copy = section.settings.copy | default: 'Browse EZQuest collections by setup type, then move into the right family with a clearer idea of the ports, power, and footprint you need.'
-      assign section_note = section.settings.note | default: 'Start with the family built for your setup, then use compare or support only when you want a final confirmation.'
       assign primary_handles = 'hubs-adapters,docking-stations,chargers-power,accessories' | split: ','
       assign rendered_handles = ''
     -%}
 
-    {% render 'breadcrumbs' %}
-
-    <div class="home-collections-strip-header mt-6">
-      <div class="home-collections-strip-header-copy collections-index-header-copy">
-        <p class="section-kicker">Collections</p>
-        <div class="home-collections-strip-heading-row">
-          <h1 class="section-heading home-strip-heading">{{ section_heading }}</h1>
-          <span class="home-strip-rule" aria-hidden="true"></span>
-        </div>
-        {% if section_copy != blank %}
-          <p class="section-copy home-strip-copy">{{ section_copy }}</p>
-        {% endif %}
-      </div>
-
-      <div class="home-collections-strip-header-aside collections-index-header-aside">
-        <p class="home-collections-strip-header-note">{{ section_note }}</p>
-        <div class="collections-index-actions" aria-label="Collection helpers">
-          <a href="/pages/compare" class="collection-inline-link">Compare nearby setups</a>
-          <a href="/pages/support" class="collection-inline-link">Need help choosing the right product family?</a>
-        </div>
-      </div>
+    <div class="collections-index-header">
+      <p class="section-kicker">Shop by category</p>
+      <h1 class="collections-index-title">Collections</h1>
     </div>
 
-    <div class="home-collections-strip-grid collections-index-grid">
+    <div class="collections-grid">
       {% for preferred_handle in primary_handles %}
         {%- liquid
-          assign collection_object = collections[preferred_handle]
-          assign card_title = blank
-          assign card_summary = blank
-          assign card_eyebrow = blank
-          assign card_guidance = blank
-          assign card_class = 'home-collections-strip-card'
-
-          if collection_object != blank
-            assign rendered_handles = rendered_handles | append: collection_object.handle | append: ','
-            assign card_title = collection_object.title
-
-            if collection_object.description != blank
-              assign card_summary = collection_object.description | strip_html | truncatewords: 16
-            endif
-
-            case collection_object.handle
-              when 'hubs-adapters'
-                assign card_eyebrow = 'Hybrid + travel'
-                assign card_guidance = 'Best for everyday expansion, travel carry, and display-ready meetings.'
-                assign card_class = card_class | append: ' is-primary'
-                if card_summary == blank
-                  assign card_summary = 'Compact port expansion for everyday carry, hybrid desks, and display-ready meetings.'
-                endif
-              when 'docking-stations'
-                assign card_eyebrow = 'Desk command'
-                assign card_guidance = 'Best for permanent desks that need displays, Ethernet, power, and peripherals.'
-                assign card_class = card_class | append: ' is-secondary'
-                if card_summary == blank
-                  assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows.'
-                endif
-              when 'chargers-power'
-                assign card_eyebrow = 'Power layer'
-                assign card_guidance = 'Best when charging confidence matters before port count does.'
-                assign card_class = card_class | append: ' is-supporting'
-                if card_summary == blank
-                  assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines that need less friction.'
-                endif
-              when 'accessories'
-                assign card_eyebrow = 'Finish the setup'
-                assign card_guidance = 'Best for cleaner cable paths, travel finishing pieces, and daily dependability.'
-                assign card_class = card_class | append: ' is-supporting'
-                if card_summary == blank
-                  assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner, calmer, and more dependable.'
-                endif
-            endcase
+          assign col = collections[preferred_handle]
+          if col != blank
+            assign rendered_handles = rendered_handles | append: col.handle | append: ','
           endif
+          assign card_eyebrow = blank
+          case preferred_handle
+            when 'hubs-adapters'
+              assign card_eyebrow = 'Hubs & Adapters'
+            when 'docking-stations'
+              assign card_eyebrow = 'Docking Stations'
+            when 'chargers-power'
+              assign card_eyebrow = 'Chargers & Power'
+            when 'accessories'
+              assign card_eyebrow = 'Accessories'
+          endcase
         -%}
-
-        {% if collection_object != blank %}
-          <a href="{{ collection_object.url }}" class="{{ card_class }}">
-            <div class="home-collections-strip-media">
-              {% if collection_object.image != blank %}
-                {{ collection_object.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collections-strip-image' }}
+        {% if col != blank %}
+          <a href="{{ col.url }}" class="collection-card">
+            <div class="collection-card-media">
+              {% if col.image != blank %}
+                {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: col.title, class: 'collection-card-image' }}
               {% else %}
-                {% render 'owned-collection-visual',
-                  collection_handle: collection_object.handle,
-                  collection_title: collection_object.title,
-                  width: 1200,
-                  height: 900,
-                  class: 'home-collections-strip-image'
-                %}
+                {% render 'owned-collection-visual', collection_handle: col.handle, collection_title: col.title, width: 800, height: 800, class: 'collection-card-image' %}
               {% endif %}
             </div>
-            <div class="home-collections-strip-overlay"></div>
-            <div class="home-collections-strip-content">
-              {% if card_eyebrow != blank %}
-                <p class="home-collections-strip-eyebrow">{{ card_eyebrow }}</p>
-              {% endif %}
-              <h2 class="home-collections-strip-title">{{ card_title }}</h2>
-              {% if card_summary != blank %}
-                <p class="home-collections-strip-summary">{{ card_summary }}</p>
-              {% endif %}
-              <div class="home-collections-strip-footer">
-                <div class="home-collections-strip-footer-copy">
-                  <p class="home-collections-strip-count">
-                    {{ collection_object.products_count }} product{% if collection_object.products_count != 1 %}s{% endif %}
-                  </p>
-                  {% if card_guidance != blank %}
-                    <p class="home-collections-strip-guidance">{{ card_guidance }}</p>
-                  {% endif %}
-                </div>
-                <span class="home-collections-strip-link-label">Explore family</span>
-              </div>
+            <div class="collection-card-body">
+              <h2 class="collection-card-title">{{ col.title }}</h2>
+              <span class="collection-card-meta">{{ col.products_count }} products</span>
             </div>
+            <span class="collection-card-arrow" aria-hidden="true">→</span>
           </a>
         {% endif %}
       {% endfor %}
 
-      {% for collection_object in collections %}
+      {% for col in collections %}
         {%- liquid
           assign should_skip = false
-          if collection_object.handle == 'all' or collection_object.handle == 'frontpage'
+          if col.handle == 'all' or col.handle == 'frontpage'
             assign should_skip = true
           endif
-          if rendered_handles contains collection_object.handle
+          if rendered_handles contains col.handle
             assign should_skip = true
           endif
-
-          assign card_summary = collection_object.description | strip_html | truncatewords: 16
         -%}
-
         {% unless should_skip %}
-          <a href="{{ collection_object.url }}" class="home-collections-strip-card collections-index-card collections-index-card--secondary">
-            <div class="home-collections-strip-media">
-              {% if collection_object.image != blank %}
-                {{ collection_object.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-collections-strip-image' }}
+          <a href="{{ col.url }}" class="collection-card">
+            <div class="collection-card-media">
+              {% if col.image != blank %}
+                {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: col.title, class: 'collection-card-image' }}
               {% else %}
-                {% render 'owned-collection-visual',
-                  collection_handle: collection_object.handle,
-                  collection_title: collection_object.title,
-                  width: 1200,
-                  height: 900,
-                  class: 'home-collections-strip-image'
-                %}
+                {% render 'owned-collection-visual', collection_handle: col.handle, collection_title: col.title, width: 800, height: 800, class: 'collection-card-image' %}
               {% endif %}
             </div>
-            <div class="home-collections-strip-overlay"></div>
-            <div class="home-collections-strip-content">
-              <p class="home-collections-strip-eyebrow">Collection</p>
-              <h2 class="home-collections-strip-title">{{ collection_object.title }}</h2>
-              {% if card_summary != blank %}
-                <p class="home-collections-strip-summary">{{ card_summary }}</p>
-              {% endif %}
-              <div class="home-collections-strip-footer">
-                <p class="home-collections-strip-count">
-                  {{ collection_object.products_count }} product{% if collection_object.products_count != 1 %}s{% endif %}
-                </p>
-                <span class="home-collections-strip-link-label">Shop collection</span>
-              </div>
+            <div class="collection-card-body">
+              <h2 class="collection-card-title">{{ col.title }}</h2>
+              <span class="collection-card-meta">{{ col.products_count }} products</span>
             </div>
+            <span class="collection-card-arrow" aria-hidden="true">→</span>
           </a>
         {% endunless %}
       {% endfor %}
@@ -179,7 +86,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Choose the product family that fits your workflow."
+      "default": "Choose the product family built for your workflow."
     },
     {
       "type": "textarea",
@@ -191,7 +98,7 @@
       "type": "textarea",
       "id": "note",
       "label": "Header note",
-      "default": "Start with the family built for your setup, then use compare or support only when you need a closer fit check."
+      "default": "Start with the family built for your setup, then use compare or support only when you need more detail."
     }
   ],
   "presets": [

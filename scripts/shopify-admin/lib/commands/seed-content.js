@@ -1,4 +1,5 @@
 const starterContent = require("../../seeds/starter-content");
+const seedProducts = require("../../seeds/products");
 const { findProductByHandle } = require("../lookups");
 const { bump } = require("../summary");
 
@@ -153,8 +154,27 @@ function richTextFromHtml(html) {
   });
 }
 
+function normalizeSeedUrl(url, shopDomain) {
+  const normalized = String(url || "").trim();
+
+  if (normalized === "") {
+    return "";
+  }
+
+  if (/^(https?:|mailto:|sms:|tel:)/i.test(normalized)) {
+    return normalized;
+  }
+
+  if (normalized.startsWith("/")) {
+    return `https://${shopDomain}${normalized}`;
+  }
+
+  return normalized;
+}
+
 async function seedStarterContent(context, summary) {
   const { client, dryRun } = context;
+  const seedProductByHandle = new Map(seedProducts.map((product) => [product.handle, product]));
 
   try {
     const specRows = await listMetaobjectsByType(client, "ezquest_spec_row");
@@ -165,6 +185,7 @@ async function seedStarterContent(context, summary) {
     const compatibilityEntries = await listMetaobjectsByType(client, "ezquest_compatibility_entry");
     const troubleshootingItems = await listMetaobjectsByType(client, "ezquest_troubleshooting_item");
     const faqItems = await listMetaobjectsByType(client, "ezquest_faq_item");
+    const useCases = await listMetaobjectsByType(client, "ezquest_use_case");
     const compareGroups = await listMetaobjectsByType(client, "ezquest_comparison_group");
     const decisionGuideEntries = await listMetaobjectsByType(client, "ezquest_decision_guide_entry");
 
@@ -177,23 +198,169 @@ async function seedStarterContent(context, summary) {
       ezquest_compatibility_entry: new Map(compatibilityEntries.map((item) => [item.handle, item])),
       ezquest_troubleshooting_item: new Map(troubleshootingItems.map((item) => [item.handle, item])),
       ezquest_faq_item: new Map(faqItems.map((item) => [item.handle, item])),
+      ezquest_use_case: new Map(useCases.map((item) => [item.handle, item])),
       ezquest_comparison_group: new Map(compareGroups.map((item) => [item.handle, item])),
       ezquest_decision_guide_entry: new Map(decisionGuideEntries.map((item) => [item.handle, item]))
     };
 
     const productIdByHandle = new Map();
-    for (const productSeed of starterContent.products) {
-      const product = await findProductByHandle(client, productSeed.handle);
+    const referencedProductHandles = new Set([
+      ...seedProducts.map((product) => product.handle),
+      ...starterContent.products.map((product) => product.handle),
+      ...starterContent.comparisonGroups.flatMap((group) => group.productHandles || []),
+      ...(starterContent.compareAssignments || []).map((assignment) => assignment.handle)
+    ]);
+
+    for (const handle of referencedProductHandles) {
+      const product = await findProductByHandle(client, handle);
       if (!product) {
-        console.log(`[shopify-admin] Product ${productSeed.handle} not found yet; reusable starter entries will be created without product linkage`);
-        bump(summary, "skipped", `Product ${productSeed.handle} not found yet; content linkage deferred`);
+        console.log(`[shopify-admin] Product ${handle} not found yet; related content linkage will be deferred until it exists`);
+        bump(summary, "skipped", `Product ${handle} not found yet; content linkage deferred`);
         continue;
       }
-      productIdByHandle.set(productSeed.handle, product.id);
+      productIdByHandle.set(handle, product.id);
+    }
+
+    const useCaseIdByHandle = new Map();
+    for (const useCase of starterContent.useCases || []) {
+      const linkedProductIds = (useCase.productHandles || [])
+        .map((handleValue) => productIdByHandle.get(handleValue))
+        .filter(Boolean);
+      const result = await upsertMetaobject(
+        client,
+        {
+          type: "ezquest_use_case",
+          handle: useCase.slug,
+          fields: [
+            { key: "title", value: useCase.title },
+            { key: "slug", value: useCase.slug },
+            { key: "description", value: useCase.description },
+            { key: "sort_order", value: String(useCase.sort_order) },
+            { key: "products", value: buildOptionalReferenceValue(linkedProductIds) }
+          ].filter((field) => field.value !== "")
+        },
+        byType.ezquest_use_case,
+        dryRun
+      );
+      if (result.id) {
+        useCaseIdByHandle.set(useCase.slug, result.id);
+        byType.ezquest_use_case.set(useCase.slug, { id: result.id, handle: useCase.slug, fields: [] });
+      }
+      bump(summary, result.action);
+    }
+
+    const compareGroupIdByProductHandle = new Map();
+    for (const compareGroupSeed of starterContent.comparisonGroups || []) {
+      const compareProductIds = (compareGroupSeed.productHandles || [])
+        .map((handle) => productIdByHandle.get(handle))
+        .filter(Boolean);
+      const defaultProductIds = ((compareGroupSeed.defaultProductHandles || compareGroupSeed.productHandles || []))
+        .map((handle) => productIdByHandle.get(handle))
+        .filter(Boolean);
+      const compareResult = await upsertMetaobject(
+        client,
+        {
+          type: "ezquest_comparison_group",
+          handle: compareGroupSeed.key,
+          fields: [
+            { key: "title", value: compareGroupSeed.title || compareGroupSeed.heading },
+            { key: "slug", value: compareGroupSeed.slug || compareGroupSeed.key },
+            { key: "eyebrow", value: compareGroupSeed.eyebrow },
+            { key: "heading", value: compareGroupSeed.heading },
+            { key: "description", value: compareGroupSeed.description },
+            { key: "use_case", value: compareGroupSeed.use_case || compareGroupSeed.group_type },
+            { key: "group_type", value: compareGroupSeed.group_type },
+            { key: "default_products", value: buildOptionalReferenceValue(defaultProductIds) },
+            { key: "products", value: buildOptionalReferenceValue(compareProductIds) },
+            { key: "cta_label", value: compareGroupSeed.cta_label },
+            { key: "support_note", value: compareGroupSeed.support_note }
+          ].filter((field) => field.value !== "")
+        },
+        byType.ezquest_comparison_group,
+        dryRun
+      );
+      if (compareResult.id) {
+        byType.ezquest_comparison_group.set(compareGroupSeed.key, { id: compareResult.id, handle: compareGroupSeed.key, fields: [] });
+        for (const handle of compareGroupSeed.productHandles || []) {
+          compareGroupIdByProductHandle.set(handle, compareResult.id);
+        }
+      }
+      bump(summary, compareResult.action);
+    }
+
+    for (const compareAssignment of starterContent.compareAssignments || []) {
+      const productId = productIdByHandle.get(compareAssignment.handle) || null;
+      const compareGroupId = byType.ezquest_comparison_group.get(compareAssignment.compareGroupKey)?.id || "";
+
+      if (!productId) {
+        console.log(`[shopify-admin] Product ${compareAssignment.handle} not found yet; compare linkage deferred`);
+        bump(summary, "skipped", `Deferred compare linkage for ${compareAssignment.handle}`);
+        continue;
+      }
+
+      await setProductMetafields(
+        client,
+        productId,
+        [
+          { ownerId: productId, namespace: "ezquest", key: "compare_group", type: "metaobject_reference", value: compareGroupId },
+          { ownerId: productId, namespace: "ezquest", key: "compare_role", type: "single_line_text_field", value: compareAssignment.compareRole || "" },
+          {
+            ownerId: productId,
+            namespace: "ezquest",
+            key: "recommended_priority",
+            type: "number_integer",
+            value: compareAssignment.recommendedPriority != null ? String(compareAssignment.recommendedPriority) : ""
+          },
+          { ownerId: productId, namespace: "ezquest", key: "best_for", type: "single_line_text_field", value: compareAssignment.bestFor || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_short_reason", type: "multi_line_text_field", value: compareAssignment.compareShortReason || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_connector_type", type: "single_line_text_field", value: compareAssignment.compareConnectorType || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_charging_power", type: "single_line_text_field", value: compareAssignment.compareChargingPower || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_form_factor", type: "single_line_text_field", value: compareAssignment.compareFormFactor || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_portability", type: "single_line_text_field", value: compareAssignment.comparePortability || "" }
+        ].filter((item) => item.value !== "")
+      , dryRun);
+
+      console.log(`[shopify-admin] Linked compare fields to product ${compareAssignment.handle}`);
+      bump(summary, "updated", `Linked compare fields to ${compareAssignment.handle}`);
+    }
+
+    for (const productSeed of seedProducts) {
+      const productId = productIdByHandle.get(productSeed.handle);
+      if (!productId) {
+        continue;
+      }
+
+      const linkedUseCaseIds = (productSeed.useCaseHandles || [])
+        .map((handleValue) => useCaseIdByHandle.get(handleValue))
+        .filter(Boolean);
+
+      if (linkedUseCaseIds.length === 0) {
+        continue;
+      }
+
+      await setProductMetafields(
+        client,
+        productId,
+        [
+          {
+            ownerId: productId,
+            namespace: "ezquest",
+            key: "use_cases",
+            type: "list.metaobject_reference",
+            value: buildReferenceValue(linkedUseCaseIds)
+          }
+        ],
+        dryRun
+      );
+
+      console.log(`[shopify-admin] Linked use cases to product ${productSeed.handle}`);
+      bump(summary, "updated", `Linked use cases to ${productSeed.handle}`);
     }
 
     for (const productSeed of starterContent.products) {
       const productId = productIdByHandle.get(productSeed.handle) || null;
+      const linkedSeedProduct = seedProductByHandle.get(productSeed.handle);
+      const compareGroupId = compareGroupIdByProductHandle.get(productSeed.handle) || "";
 
       const specIds = [];
       for (const row of productSeed.specRows) {
@@ -396,33 +563,6 @@ async function seedStarterContent(context, summary) {
         bump(summary, result.action);
       }
 
-      const compareGroupSeed = starterContent.comparisonGroups[0];
-      const compareProductIds = compareGroupSeed.productHandles
-        .map((handle) => productIdByHandle.get(handle))
-        .filter(Boolean);
-      const compareResult = await upsertMetaobject(
-        client,
-        {
-          type: "ezquest_comparison_group",
-          handle: compareGroupSeed.key,
-          fields: [
-            { key: "eyebrow", value: compareGroupSeed.eyebrow },
-            { key: "heading", value: compareGroupSeed.heading },
-            { key: "description", value: compareGroupSeed.description },
-            { key: "group_type", value: compareGroupSeed.group_type },
-            { key: "products", value: buildOptionalReferenceValue(compareProductIds) },
-            { key: "cta_label", value: compareGroupSeed.cta_label },
-            { key: "support_note", value: compareGroupSeed.support_note }
-          ].filter((field) => field.value !== "")
-        },
-        byType.ezquest_comparison_group,
-        dryRun
-      );
-      if (compareResult.id) {
-        byType.ezquest_comparison_group.set(compareGroupSeed.key, { id: compareResult.id, handle: compareGroupSeed.key, fields: [] });
-        bump(summary, compareResult.action);
-      }
-
       if (!productId) {
         console.log(`[shopify-admin] Seeded reusable starter content for ${productSeed.handle}; product linkage deferred until the product exists`);
         bump(summary, "skipped", `Deferred product metafield linkage for ${productSeed.handle}`);
@@ -443,7 +583,16 @@ async function seedStarterContent(context, summary) {
           { ownerId: productId, namespace: "ezquest", key: "user_guides", type: "list.metaobject_reference", value: buildReferenceValue(userGuideIds) },
           { ownerId: productId, namespace: "ezquest", key: "compatibility_entries", type: "list.metaobject_reference", value: buildReferenceValue(compatibilityIds) },
           { ownerId: productId, namespace: "ezquest", key: "faq_items", type: "list.metaobject_reference", value: buildReferenceValue(faqIds) },
-          { ownerId: productId, namespace: "ezquest", key: "compare_group", type: "metaobject_reference", value: compareResult.id || "" }
+          { ownerId: productId, namespace: "ezquest", key: "use_cases", type: "list.metaobject_reference", value: buildOptionalReferenceValue(((linkedSeedProduct && linkedSeedProduct.useCaseHandles) || []).map((handleValue) => useCaseIdByHandle.get(handleValue)).filter(Boolean)) },
+          { ownerId: productId, namespace: "ezquest", key: "compare_group", type: "metaobject_reference", value: compareGroupId },
+          { ownerId: productId, namespace: "ezquest", key: "compare_role", type: "single_line_text_field", value: productSeed.compareRole || "" },
+          { ownerId: productId, namespace: "ezquest", key: "recommended_priority", type: "number_integer", value: productSeed.recommendedPriority != null ? String(productSeed.recommendedPriority) : "" },
+          { ownerId: productId, namespace: "ezquest", key: "best_for", type: "single_line_text_field", value: productSeed.bestFor || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_short_reason", type: "multi_line_text_field", value: productSeed.compareShortReason || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_connector_type", type: "single_line_text_field", value: productSeed.compareConnectorType || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_charging_power", type: "single_line_text_field", value: productSeed.compareChargingPower || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_form_factor", type: "single_line_text_field", value: productSeed.compareFormFactor || "" },
+          { ownerId: productId, namespace: "ezquest", key: "compare_portability", type: "single_line_text_field", value: productSeed.comparePortability || "" }
         ].filter((item) => item.value !== "")
       , dryRun);
 
@@ -466,9 +615,9 @@ async function seedStarterContent(context, summary) {
             { key: "issue_type", value: issue.issue_type },
             { key: "summary", value: issue.summary },
             { key: "primary_label", value: issue.primary_label },
-            { key: "primary_url", value: issue.primary_url },
+            { key: "primary_url", value: normalizeSeedUrl(issue.primary_url, client.shopDomain) },
             { key: "secondary_label", value: issue.secondary_label },
-            { key: "secondary_url", value: issue.secondary_url },
+            { key: "secondary_url", value: normalizeSeedUrl(issue.secondary_url, client.shopDomain) },
             { key: "platforms", value: JSON.stringify(issue.platforms || []) },
             { key: "workflows", value: JSON.stringify(issue.workflows || []) },
             { key: "products", value: buildOptionalReferenceValue(linkedProductIds) },
@@ -499,9 +648,9 @@ async function seedStarterContent(context, summary) {
             { key: "role_label", value: entry.role_label },
             { key: "summary", value: entry.summary },
             { key: "primary_label", value: entry.primary_label },
-            { key: "primary_url", value: entry.primary_url },
+            { key: "primary_url", value: normalizeSeedUrl(entry.primary_url, client.shopDomain) },
             { key: "secondary_label", value: entry.secondary_label },
-            { key: "secondary_url", value: entry.secondary_url },
+            { key: "secondary_url", value: normalizeSeedUrl(entry.secondary_url, client.shopDomain) },
             { key: "workflows", value: JSON.stringify(entry.workflows || []) },
             { key: "products", value: buildOptionalReferenceValue(linkedProductIds) },
             { key: "sort_order", value: String(entry.sort_order) }

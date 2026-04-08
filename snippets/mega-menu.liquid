@@ -1,9 +1,6 @@
 {%- liquid
-  assign shop_url = routes.all_products_collection_url
+  assign shop_url = '/pages/help-me-choose'
   assign collections_url = routes.collections_url
-  assign support_url = '/pages/support'
-  assign compare_url = '/pages/compare'
-  assign resources_url = '/blogs/resources'
   assign about_url = '/pages/about'
 -%}
 {%- comment -%}
@@ -21,28 +18,48 @@
   <ul class="mega-menu-nav-list" role="list">
     <li class="mega-menu-nav-item" data-mega-item="shop">
       <a href="{{ shop_url }}" class="mega-menu-trigger" data-mega-trigger="shop" aria-expanded="false" aria-controls="mega-menu-panel-shop">
-        <span>Shop</span>
+        <span>Shop by setup</span>
       </a>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="collections">
       <a href="{{ collections_url }}" class="mega-menu-trigger" data-mega-trigger="collections" aria-expanded="false" aria-controls="mega-menu-panel-collections">
-        <span>Product families</span>
+        <span>Browse product families</span>
       </a>
     </li>
-    <li class="mega-menu-nav-item" data-mega-item="compare">
-      <a href="{{ compare_url }}" class="mega-menu-trigger" data-mega-trigger="compare" aria-expanded="false" aria-controls="mega-menu-panel-compare">
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-compare" data-nav-submenu-trigger>
         <span>Compare</span>
-      </a>
+      </button>
+      <div id="nav-flyout-compare" class="nav-submenu-panel" hidden data-nav-submenu-panel>
+        <a href="/pages/compare" class="nav-submenu-link">Compare lineup</a>
+        <a href="/pages/help-me-choose" class="nav-submenu-link">Help me choose</a>
+        <a href="/pages/compatibility" class="nav-submenu-link">Compatibility</a>
+      </div>
     </li>
-    <li class="mega-menu-nav-item" data-mega-item="explore">
-      <a href="{{ support_url }}" class="mega-menu-trigger" data-mega-trigger="explore" aria-expanded="false" aria-controls="mega-menu-panel-explore">
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-support" data-nav-submenu-trigger>
         <span>Support</span>
-      </a>
+      </button>
+      <div id="nav-flyout-support" class="nav-submenu-panel" hidden data-nav-submenu-panel>
+        <a href="/pages/support" class="nav-submenu-link">Support hub</a>
+        <a href="/pages/downloads" class="nav-submenu-link">Downloads</a>
+        <a href="/pages/manuals" class="nav-submenu-link">Manuals</a>
+        <a href="/pages/troubleshooting" class="nav-submenu-link">Troubleshooting</a>
+        <a href="/pages/faq" class="nav-submenu-link">FAQ</a>
+        <a href="/pages/contact" class="nav-submenu-link">Contact</a>
+      </div>
     </li>
-    <li class="mega-menu-nav-item" data-mega-item="resources">
-      <a href="{{ resources_url }}" class="mega-menu-trigger" data-mega-trigger="resources" aria-expanded="false" aria-controls="mega-menu-panel-resources">
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-resources" data-nav-submenu-trigger>
         <span>Resources</span>
-      </a>
+      </button>
+      <div id="nav-flyout-resources" class="nav-submenu-panel" hidden data-nav-submenu-panel>
+        <a href="/blogs/resources" class="nav-submenu-link">Guides</a>
+        <a href="/pages/about" class="nav-submenu-link">About EZQuest</a>
+        <a href="/pages/our-story" class="nav-submenu-link">Our story</a>
+        <a href="/pages/warranty" class="nav-submenu-link">Warranty</a>
+        <a href="/pages/shipping-returns" class="nav-submenu-link">Shipping & returns</a>
+      </div>
     </li>
     <li class="mega-menu-nav-item">
       <a href="{{ about_url }}" class="mega-menu-trigger mega-menu-trigger--plain">
@@ -55,8 +72,5 @@
   <div class="mega-menu-panels" data-mega-panels>
     {% render 'mega-menu-panel', group_handle: 'shop' %}
     {% render 'mega-menu-panel', group_handle: 'collections' %}
-    {% render 'mega-menu-panel', group_handle: 'explore' %}
-    {% render 'mega-menu-panel', group_handle: 'resources' %}
-    {% render 'mega-menu-panel', group_handle: 'compare' %}
   </div>
 </div>

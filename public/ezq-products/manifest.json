@@ -1,0 +1,825 @@
+{
+  "generated_at": "2026-04-11T00:13:11.886Z",
+  "total_products": 55,
+  "total_images": 377,
+  "failed_downloads": 0,
+  "products": [
+    {
+      "product_handle": "usb-4-dual-display-8-in-1-hub-pro-series-details",
+      "source_url": "https://ezq.com/usb-4-dual-display-8-in-1-hub-pro-series-details.html",
+      "image_count": 10,
+      "hero_image": "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/01-hero.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/02-angle.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/03-angle-2.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/04-angle-3.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/05-angle-4.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/06-angle-5.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/07-angle-6.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/08-angle-7.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/09-angle-8.jpg",
+        "public/ezq-products/usb-4-dual-display-8-in-1-hub-pro-series-details/10-angle-9.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details",
+      "source_url": "https://ezq.com/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/01-hero.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/02-angle.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/03-angle-2.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/04-angle-3.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/05-angle-4.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/06-angle-5.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/07-angle-6.jpg",
+        "public/ezq-products/usb-c-dual-display-12-in-1-multimedia-hub-pro-series-details/08-angle-7.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-5-in-1-multimedia-hub-pro-series-details",
+      "source_url": "https://ezq.com/usb-c-5-in-1-multimedia-hub-pro-series-details.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/01-hero.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/02-angle.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/03-angle-2.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/04-angle-3.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/05-angle-4.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/06-angle-5.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/07-angle-6.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/08-angle-7.jpg",
+        "public/ezq-products/usb-c-5-in-1-multimedia-hub-pro-series-details/09-angle-8.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-slim-gen-2-hub-adapter-6-in-1-details",
+      "source_url": "https://ezq.com/usb-c-slim-gen-2-hub-adapter-6-in-1-details.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/01-hero.jpg",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/02-angle.webp",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/03-angle-2.jpg",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/04-angle-3.jpg",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/05-angle-4.jpg",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/06-angle-5.jpg",
+        "public/ezq-products/usb-c-slim-gen-2-hub-adapter-6-in-1-details/07-angle-6.webp"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-10-in-1-gen-2-hub",
+      "source_url": "https://ezq.com/usb-c-multimedia-10-in-1-gen-2-hub.htm",
+      "image_count": 10,
+      "hero_image": "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/01-hero.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/02-angle.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/03-angle-2.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/04-angle-3.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/05-angle-4.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/06-angle-5.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/07-angle-6.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/08-angle-7.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/09-angle-8.jpg",
+        "public/ezq-products/usb-c-multimedia-10-in-1-gen-2-hub/10-angle-9.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-gen-2-hub-adapter-7-ports",
+      "source_url": "https://ezq.com/usb-c-gen-2-hub-adapter-7-ports.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/01-hero.png",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/02-angle.png",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/03-angle-2.jpg",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/04-angle-3.jpg",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/05-angle-4.jpg",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/06-angle-5.jpg",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/07-angle-6.png",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/08-angle-7.jpg",
+        "public/ezq-products/usb-c-gen-2-hub-adapter-7-ports/09-angle-8.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-hub-adapter-8-ports",
+      "source_url": "https://ezq.com/usb-c-multimedia-hub-adapter-8-ports.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/01-hero.png",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/02-gallery.png",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/03-angle.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/04-angle-2.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/05-angle-3.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/06-angle-4.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/07-gallery-2.png",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports/08-gallery-3.png"
+      ]
+    },
+    {
+      "product_handle": "dual-hdmi-usb-c-multimedia-hub-adapter-12-ports",
+      "source_url": "https://ezq.com/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports.htm",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/01-hero.jpg",
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/02-angle.jpg",
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/03-angle-2.jpg",
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/04-angle-3.jpg",
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/05-angle-4.jpg",
+        "public/ezq-products/dual-hdmi-usb-c-multimedia-hub-adapter-12-ports/06-ports.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-7-in-1-hub-details",
+      "source_url": "https://ezq.com/usb-c-multimedia-7-in-1-hub-details.html",
+      "image_count": 11,
+      "hero_image": "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/01-hero.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/02-angle.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/03-angle-2.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/04-angle-3.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/05-angle-4.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/06-angle-5.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/07-angle-6.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/08-angle-7.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/09-angle-8.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/10-angle-9.jpg",
+        "public/ezq-products/usb-c-multimedia-7-in-1-hub-details/11-angle-10.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-8-in-1-hub-details",
+      "source_url": "https://ezq.com/usb-c-multimedia-8-in-1-hub-details.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/01-hero.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/02-angle.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/03-angle-2.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/04-angle-3.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/05-angle-4.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/06-angle-5.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/07-angle-6.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/08-angle-7.jpg",
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details/09-angle-8.jpg"
+      ]
+    },
+    {
+      "product_handle": "dual-usb-c-multimedia-hub-13-ports",
+      "source_url": "https://ezq.com/dual-USB-C-multimedia-hub-13-ports.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/01-hero.jpg",
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/02-gallery.jpg",
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/03-gallery-2.jpg",
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/04-angle.jpg",
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/05-angle-2.jpg",
+        "public/ezq-products/dual-usb-c-multimedia-hub-13-ports/06-gallery-3.jpg"
+      ]
+    },
+    {
+      "product_handle": "x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0",
+      "source_url": "https://ezq.com/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3.0.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/01-hero.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/02-angle.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/03-angle-2.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/04-angle-3.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/05-angle-4.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/06-angle-5.jpg",
+        "public/ezq-products/x40225-usb-c-dual-hdmi-multimedia-hub-adapter-5-ports-with-power-delivery-3-0/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3",
+      "source_url": "https://ezq.com/USB-C-multimedia-hub-adapter-8-ports-with-4K-60Hz-power-delivery-3.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/01-hero.png",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/02-gallery.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/04-gallery-3.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/05-gallery-4.jpg",
+        "public/ezq-products/usb-c-multimedia-hub-adapter-8-ports-with-4k-60hz-power-delivery-3/06-angle.jpg"
+      ]
+    },
+    {
+      "product_handle": "4-port-usb-3-hub-adapter-with-usb-c-pd-3",
+      "source_url": "https://ezq.com/4-port-USB-3-hub-adapter-with-USB-C-PD-3.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/01-hero.jpg",
+        "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/02-gallery.jpg",
+        "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/03-gallery-2.jpg",
+        "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/04-gallery-3.jpg",
+        "public/ezq-products/4-port-usb-3-hub-adapter-with-usb-c-pd-3/05-gallery-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-multimedia-charging-adapter-3-ports",
+      "source_url": "https://ezq.com/USB-C-multimedia-charging-adapter-3-ports.html",
+      "image_count": 4,
+      "hero_image": "public/ezq-products/usb-c-multimedia-charging-adapter-3-ports/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-multimedia-charging-adapter-3-ports/01-hero.png",
+        "public/ezq-products/usb-c-multimedia-charging-adapter-3-ports/02-gallery.png",
+        "public/ezq-products/usb-c-multimedia-charging-adapter-3-ports/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-multimedia-charging-adapter-3-ports/04-angle.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-card-reader-ss42",
+      "source_url": "https://ezq.com/usb-c-card-reader_ss42.html",
+      "image_count": 4,
+      "hero_image": "public/ezq-products/usb-c-card-reader-ss42/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-card-reader-ss42/01-hero.png",
+        "public/ezq-products/usb-c-card-reader-ss42/02-gallery.png",
+        "public/ezq-products/usb-c-card-reader-ss42/03-gallery-2.png",
+        "public/ezq-products/usb-c-card-reader-ss42/04-gallery-3.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd",
+      "source_url": "https://ezq.com/USB-C-Cfast-2.0-card-reader-5-ports-with-UHS-II-SD-Micro-SD.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/01-hero.jpg",
+        "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/02-gallery.jpg",
+        "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/04-gallery-3.jpg",
+        "public/ezq-products/usb-c-cfast-2-0-card-reader-5-ports-with-uhs-ii-sd-micro-sd/05-gallery-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "c40012-duraguard-usb4-v2-1point2-meter-cable",
+      "source_url": "https://ezq.com/c40012-duraguard-usb4-v2-1point2-meter-cable.htm",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/01-hero.jpg",
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/02-angle.jpg",
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/03-angle-2.jpg",
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/04-angle-3.jpg",
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/05-angle-4.jpg",
+        "public/ezq-products/c40012-duraguard-usb4-v2-1point2-meter-cable/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "c41005-duraguard-usb4-v2-0point5-meter-extension-cable",
+      "source_url": "https://ezq.com/c41005-duraguard-usb4-v2-0point5-meter-extension-cable.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/01-hero.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/02-angle.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/03-angle-2.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/04-angle-3.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/05-angle-4.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/06-angle-5.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/07-angle-6.jpg",
+        "public/ezq-products/c41005-duraguard-usb4-v2-0point5-meter-extension-cable/08-angle-7.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103",
+      "source_url": "https://ezq.com/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details_ss103.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/01-hero.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/02-angle.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/03-angle-2.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/04-angle-3.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/05-angle-4.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/06-angle-5.jpg",
+        "public/ezq-products/duraguard-usbc-to-hdmi-8k-60hz-cable-with-hdr-details-ss103/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details",
+      "source_url": "https://ezq.com/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/01-hero.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/02-angle.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/03-angle-2.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/04-angle-3.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/05-angle-4.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/06-angle-5.jpg",
+        "public/ezq-products/duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr-details/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-usb-c-to-displayport-4k-60hz-cable-details",
+      "source_url": "https://ezq.com/duraguard-usb-c-to-displayport-4k-60hz-cable-details.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/01-hero.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/02-angle.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/03-angle-2.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/04-angle-3.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/05-angle-4.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/06-angle-5.jpg",
+        "public/ezq-products/duraguard-usb-c-to-displayport-4k-60hz-cable-details/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable",
+      "source_url": "https://ezq.com/DuraGuard-USB-C-Right-Angled-Charge-Sync-100W-1.2-Meter-Cable.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/01-hero.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/02-angle.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/03-angle-2.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/04-angle-3.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/05-angle-4.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/06-angle-5.jpg",
+        "public/ezq-products/duraguard-usb-c-right-angled-charge-sync-100w-1-2-meter-cable/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable",
+      "source_url": "https://ezq.com/DuraGuard-Coiled-USB-C-Charge-Sync-100W-1.5-Meter-Black-Cable.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/01-hero.jpg",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/02-angle.jpg",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/03-angle-2.jpg",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/04-angle-3.png",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/05-angle-4.jpg",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/06-angle-5.jpg",
+        "public/ezq-products/duraguard-coiled-usb-c-charge-sync-100w-1-5-meter-black-cable/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "duraguard-usb-c-to-usb-c-charge-and-sync-cable",
+      "source_url": "https://ezq.com/duraguard-USB-C-to-USB-C-charge-and-sync-cable.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/01-hero.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/02-angle.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/03-angle-2.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/04-angle-3.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/05-angle-4.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/06-angle-5.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/07-angle-6.jpg",
+        "public/ezq-products/duraguard-usb-c-to-usb-c-charge-and-sync-cable/08-angle-7.jpg"
+      ]
+    },
+    {
+      "product_handle": "x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable",
+      "source_url": "https://ezq.com/X48912-X48922-duraguard-usb-c-to-usb-a-charge-sync-cable.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/01-hero.jpg",
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/02-angle.jpg",
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/03-angle-2.jpg",
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/04-angle-3.jpg",
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/05-angle-4.jpg",
+        "public/ezq-products/x48912-x48922-duraguard-usb-c-to-usb-a-charge-sync-cable/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-hdmi-4k-60hz-adapter",
+      "source_url": "https://ezq.com/USB-C-to-HDMI-4K-60Hz-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/01-hero.png",
+        "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/02-gallery.png",
+        "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/03-gallery-2.png",
+        "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/04-gallery-3.png",
+        "public/ezq-products/usb-c-to-hdmi-4k-60hz-adapter/05-gallery-4.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-displayport-4k-60hz-adapter",
+      "source_url": "https://ezq.com/usb-c-to-displayport-4k-60hz-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/01-hero.png",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/02-angle.png",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/03-gallery.png",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/04-gallery-2.png",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-adapter/05-gallery-3.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-dvi-adapter",
+      "source_url": "https://ezq.com/usb-c-to-dvi-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-to-dvi-adapter/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-dvi-adapter/01-hero.png",
+        "public/ezq-products/usb-c-to-dvi-adapter/02-gallery.png",
+        "public/ezq-products/usb-c-to-dvi-adapter/03-gallery-2.png",
+        "public/ezq-products/usb-c-to-dvi-adapter/04-gallery-3.png",
+        "public/ezq-products/usb-c-to-dvi-adapter/05-gallery-4.png"
+      ]
+    },
+    {
+      "product_handle": "x40013-usb-c-to-vga-adapter",
+      "source_url": "https://ezq.com/x40013-USB-C-to-VGA-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/x40013-usb-c-to-vga-adapter/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/x40013-usb-c-to-vga-adapter/01-hero.png",
+        "public/ezq-products/x40013-usb-c-to-vga-adapter/02-gallery.png",
+        "public/ezq-products/x40013-usb-c-to-vga-adapter/03-gallery-2.png",
+        "public/ezq-products/x40013-usb-c-to-vga-adapter/04-gallery-3.png",
+        "public/ezq-products/x40013-usb-c-to-vga-adapter/05-gallery-4.png"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-gigabit-ethernet-adapter",
+      "source_url": "https://ezq.com/usb-c-to-gigabit-ethernet-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/01-hero.jpg",
+        "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/02-gallery.jpg",
+        "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/04-gallery-3.jpg",
+        "public/ezq-products/usb-c-to-gigabit-ethernet-adapter/05-gallery-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-2-5-gigabit-ethernet-adapter",
+      "source_url": "https://ezq.com/usb-c-to-2.5-gigabit-ethernet-adapter.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/01-hero.jpg",
+        "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/02-gallery.jpg",
+        "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/04-gallery-3.jpg",
+        "public/ezq-products/usb-c-to-2-5-gigabit-ethernet-adapter/05-gallery-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-female-to-usb-a-male-mini-adapter-2-pack",
+      "source_url": "https://ezq.com/usb-c-female-to-usb-a-male-mini-adapter-2-pack.htm",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/01-hero.jpg",
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/02-angle.jpg",
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/03-angle-2.jpg",
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/04-angle-3.jpg",
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/05-angle-4.jpg",
+        "public/ezq-products/usb-c-female-to-usb-a-male-mini-adapter-2-pack/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor",
+      "source_url": "https://ezq.com/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/01-hero.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/02-angle.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/03-angle-2.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/04-angle-3.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/05-angle-4.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/06-angle-5.jpg",
+        "public/ezq-products/gen2-double-sided-usb-c-female-to-usb-3-male-mini-adaptor/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter",
+      "source_url": "https://ezq.com/x40100-duraguard-usb-c-to-usb-a-3.0-female-cable-adapter.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/01-hero.jpg",
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/02-angle.jpg",
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/03-angle-2.jpg",
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/04-angle-3.jpg",
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/05-angle-4.jpg",
+        "public/ezq-products/x40100-duraguard-usb-c-to-usb-a-3-0-female-cable-adapter/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-usb-3-mini-adapter",
+      "source_url": "https://ezq.com/usb-c-to-usb-3-mini-adapter.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/usb-c-to-usb-3-mini-adapter/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/01-hero.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/02-angle.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/03-angle-2.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/04-angle-3.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/05-angle-4.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/06-angle-5.jpg",
+        "public/ezq-products/usb-c-to-usb-3-mini-adapter/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack",
+      "source_url": "https://ezq.com/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack.htm",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/01-hero.jpg",
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/02-angle.jpg",
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/03-angle-2.jpg",
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/04-angle-3.jpg",
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/05-angle-4.jpg",
+        "public/ezq-products/usb-c-to-usb-c-female-90-degree-mini-adapter-2-pack/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "magnetic-usb-c-m-2-nvme-ssd-enclosure-details",
+      "source_url": "https://ezq.com/magnetic-usb-c-m-2-nvme-ssd-enclosure-details.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/01-hero.jpg",
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/02-angle.jpg",
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/03-angle-2.jpg",
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/04-angle-3.jpg",
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/05-angle-4.jpg",
+        "public/ezq-products/magnetic-usb-c-m-2-nvme-ssd-enclosure-details/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "mini-displayport-to-hdmi-4k-60hz-cable",
+      "source_url": "https://ezq.com/mini-displayport-to-HDMI-4K-60Hz-cable.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/01-hero.jpg",
+        "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/02-gallery.jpg",
+        "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/03-gallery-2.jpg",
+        "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/04-gallery-3.jpg",
+        "public/ezq-products/mini-displayport-to-hdmi-4k-60hz-cable/05-gallery-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "ultra-hd-high-speed-hdmi-10k-60hz-cable",
+      "source_url": "https://ezq.com/ultra-HD-high-speed-HDMI-10K-60Hz-cable.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/01-hero.jpg",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/02-gallery.jpg",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/03-gallery-2.jpg",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/04-gallery-3.jpg",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/05-gallery-4.png",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/06-gallery-5.jpg",
+        "public/ezq-products/ultra-hd-high-speed-hdmi-10k-60hz-cable/07-gallery-6.png"
+      ]
+    },
+    {
+      "product_handle": "ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details",
+      "source_url": "https://ezq.com/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/01-hero.jpg",
+        "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/02-angle.jpg",
+        "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/03-angle-2.jpg",
+        "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/04-angle-3.jpg",
+        "public/ezq-products/ultra-hd-high-speed-certified-hdmi-8k-60hz-cable-details/05-angle-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "high-speed-hdmi-premium-certified-4k-60hz-cable",
+      "source_url": "https://ezq.com/high-speed-hdmi-premium-certified-4k-60hz-cable.html",
+      "image_count": 5,
+      "hero_image": "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/01-hero.jpg",
+        "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/02-angle.jpg",
+        "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/03-angle-2.jpg",
+        "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/04-angle-3.jpg",
+        "public/ezq-products/high-speed-hdmi-premium-certified-4k-60hz-cable/05-angle-4.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-to-displayport-4k-60hz-cable",
+      "source_url": "https://ezq.com/USB-C-to-displayport-4K-60Hz-cable.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/01-hero.jpg",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/02-gallery.jpg",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/03-gallery-2.jpg",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/04-gallery-3.jpg",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/05-gallery-4.jpg",
+        "public/ezq-products/usb-c-to-displayport-4k-60hz-cable/06-gallery-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "x49910-duraguard-stereo-audio-cable",
+      "source_url": "https://ezq.com/x49910-duraguard-stereo-audio-cable.html",
+      "image_count": 6,
+      "hero_image": "public/ezq-products/x49910-duraguard-stereo-audio-cable/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/01-hero.jpg",
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/02-angle.jpg",
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/03-angle-2.jpg",
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/04-angle-3.jpg",
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/05-angle-4.jpg",
+        "public/ezq-products/x49910-duraguard-stereo-audio-cable/06-angle-5.jpg"
+      ]
+    },
+    {
+      "product_handle": "ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/UltraSlim-70W-GaN-II-Dual-USB-C-PD-Wall-Charger.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/01-hero.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/02-angle.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/03-angle-2.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/04-angle-3.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/05-angle-4.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/06-angle-5.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/07-angle-6.jpg",
+        "public/ezq-products/ultraslim-70w-gan-ii-dual-usb-c-pd-wall-charger/08-angle-7.jpg"
+      ]
+    },
+    {
+      "product_handle": "worldtravel-65w-gan-5-port-with-pd-wall-charger-details",
+      "source_url": "https://ezq.com/worldtravel-65w-gan-5-port-with-pd-wall-charger-details.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/01-hero.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/02-angle.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/03-angle-2.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/04-angle-3.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/05-angle-4.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/06-angle-5.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/07-angle-6.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/08-angle-7.jpg",
+        "public/ezq-products/worldtravel-65w-gan-5-port-with-pd-wall-charger-details/09-angle-8.jpg"
+      ]
+    },
+    {
+      "product_handle": "worldtravel-35w-gan-5-port-with-pd-wall-charger",
+      "source_url": "https://ezq.com/WorldTravel-35W-GaN-5-Port-with-PD-Wall-Charger.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/01-hero.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/02-angle.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/03-angle-2.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/04-angle-3.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/05-angle-4.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/06-angle-5.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/07-angle-6.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/08-angle-7.jpg",
+        "public/ezq-products/worldtravel-35w-gan-5-port-with-pd-wall-charger/09-angle-8.jpg"
+      ]
+    },
+    {
+      "product_handle": "ultimatepower-120w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/ultimatepower-120w-gan-usb-c-pd-wall-charger.html",
+      "image_count": 10,
+      "hero_image": "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/01-hero.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/02-angle.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/03-angle-2.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/04-angle-3.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/05-angle-4.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/06-angle-5.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/07-angle-6.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/08-angle-7.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/09-angle-8.png",
+        "public/ezq-products/ultimatepower-120w-gan-usb-c-pd-wall-charger/10-angle-9.png"
+      ]
+    },
+    {
+      "product_handle": "ultimatepower-90w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/ultimatepower-90w-gan-usb-c-pd-wall-charger.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/01-hero.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/02-angle.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/03-angle-2.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/04-angle-3.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/05-angle-4.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/06-angle-5.png",
+        "public/ezq-products/ultimatepower-90w-gan-usb-c-pd-wall-charger/07-angle-6.png"
+      ]
+    },
+    {
+      "product_handle": "ultimatepower-65w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/ultimatepower-65w-gan-usb-c-pd-wall-charger.html",
+      "image_count": 9,
+      "hero_image": "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/01-hero.png",
+      "image_paths": [
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/01-hero.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/02-angle.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/03-angle-2.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/04-angle-3.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/05-angle-4.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/06-angle-5.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/07-angle-6.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/08-angle-7.png",
+        "public/ezq-products/ultimatepower-65w-gan-usb-c-pd-wall-charger/09-angle-8.png"
+      ]
+    },
+    {
+      "product_handle": "65w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/65w-gan-usb-c-pd-wall-charger.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/65w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/02-angle.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/03-angle-2.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/04-angle-3.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/05-angle-4.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/06-angle-5.jpg",
+        "public/ezq-products/65w-gan-usb-c-pd-wall-charger/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "45w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/45w-gan-usb-c-pd-wall-charger.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/45w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/02-angle.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/03-angle-2.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/04-angle-3.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/05-angle-4.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/06-angle-5.jpg",
+        "public/ezq-products/45w-gan-usb-c-pd-wall-charger/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "mini-30w-gan-usb-c-pd-wall-charger",
+      "source_url": "https://ezq.com/mini-30w-gan-usb-c-pd-wall-charger.html",
+      "image_count": 8,
+      "hero_image": "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/01-hero.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/02-angle.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/03-angle-2.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/04-angle-3.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/05-angle-4.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/06-angle-5.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/07-angle-6.jpg",
+        "public/ezq-products/mini-30w-gan-usb-c-pd-wall-charger/08-angle-7.jpg"
+      ]
+    },
+    {
+      "product_handle": "usb-c-66w-car-charger-dual-port-with-display",
+      "source_url": "https://ezq.com/usb-c-66w-car-charger-dual-port-with-display.htm",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/01-hero.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/02-angle.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/03-angle-2.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/04-angle-3.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/05-angle-4.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/06-angle-5.jpg",
+        "public/ezq-products/usb-c-66w-car-charger-dual-port-with-display/07-angle-6.jpg"
+      ]
+    },
+    {
+      "product_handle": "ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details",
+      "source_url": "https://ezq.com/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details.html",
+      "image_count": 7,
+      "hero_image": "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/01-hero.jpg",
+      "image_paths": [
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/01-hero.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/02-angle.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/03-angle-2.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/04-angle-3.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/05-angle-4.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/06-angle-5.jpg",
+        "public/ezq-products/ultimatepower-usb-c-72w-car-charger-dual-port-with-display-details/07-angle-6.jpg"
+      ]
+    }
+  ]
+}

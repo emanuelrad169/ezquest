@@ -1,0 +1,141 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-page",
+      "settings": {
+        "eyebrow": "Resources",
+        "heading": "Product guidance, compatibility help, and downloads",
+        "copy": "Use guides, compatibility help, manuals, and downloads to get more from your EZQuest product."
+      }
+    },
+    "categories": {
+      "type": "resources-categories",
+      "settings": {
+        "eyebrow": "Browse by topic",
+        "heading": "Browse product guidance"
+      },
+      "blocks": {
+        "cat_guides": {
+          "type": "category",
+          "settings": {
+            "title": "Product guides",
+            "desc": "Step-by-step help for setting up and getting the most from EZQuest products.",
+            "link1_label": "Hub setup guide",
+            "link1_url": "/blogs/resources",
+            "link2_label": "Dock setup guide",
+            "link2_url": "/blogs/resources",
+            "link3_label": "Charger guide",
+            "link3_url": "/blogs/resources"
+          }
+        },
+        "cat_compat": {
+          "type": "category",
+          "settings": {
+            "title": "Compatibility help",
+            "desc": "Find out which products work with your laptop, OS, and display setup before you buy.",
+            "link1_label": "Check compatibility",
+            "link1_url": "/pages/compatibility",
+            "link2_label": "Mac compatibility",
+            "link2_url": "/pages/compatibility",
+            "link3_label": "Windows compatibility",
+            "link3_url": "/pages/compatibility"
+          }
+        },
+        "cat_setup": {
+          "type": "category",
+          "settings": {
+            "title": "Setup & usage",
+            "desc": "Real-world tips for cleaner desks, travel kits, and dual-display setups.",
+            "link1_label": "Dual display setup",
+            "link1_url": "/blogs/resources",
+            "link2_label": "Travel hub tips",
+            "link2_url": "/blogs/resources",
+            "link3_label": "Power delivery explained",
+            "link3_url": "/blogs/resources"
+          }
+        },
+        "cat_downloads": {
+          "type": "category",
+          "settings": {
+            "title": "Downloads & manuals",
+            "desc": "Drivers, firmware, and user guides for every product in the EZQuest lineup.",
+            "link1_label": "Browse downloads",
+            "link1_url": "/pages/downloads",
+            "link2_label": "View manuals",
+            "link2_url": "/pages/manuals",
+            "link3_label": "Firmware updates",
+            "link3_url": "/pages/firmware"
+          }
+        }
+      },
+      "block_order": ["cat_guides", "cat_compat", "cat_setup", "cat_downloads"]
+    },
+    "featured": {
+      "type": "resources-featured",
+      "settings": {
+        "eyebrow": "Featured guides",
+        "heading": "Featured guides",
+        "blog_handle": "resources",
+        "article_limit": 6
+      }
+    },
+    "actions": {
+      "type": "resources-quick-actions",
+      "settings": {
+        "eyebrow": "Quick actions",
+        "heading": "Go straight to the right resource",
+        "copy": "Open compare, compatibility, support, or the catalog without hunting through menus."
+      },
+      "blocks": {
+        "act_compare": {
+          "type": "action",
+          "settings": {
+            "title": "Compare products",
+            "desc": "See specs, ports, and power side by side.",
+            "url": "/pages/compare"
+          }
+        },
+        "act_compat": {
+          "type": "action",
+          "settings": {
+            "title": "Check compatibility",
+            "desc": "Confirm your device works before you order.",
+            "url": "/pages/compatibility"
+          }
+        },
+        "act_shop": {
+          "type": "action",
+          "settings": {
+            "title": "Browse products",
+            "desc": "Explore the full EZQuest lineup.",
+            "url": "/collections"
+          }
+        },
+        "act_support": {
+          "type": "action",
+          "settings": {
+            "title": "Get support",
+            "desc": "Troubleshooting, contact, and direct help.",
+            "url": "/pages/support"
+          }
+        }
+      },
+      "block_order": ["act_compare", "act_compat", "act_shop", "act_support"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Still have a question?",
+        "heading": "Our support team is one click away.",
+        "copy": "If a guide didn't answer your question, reach us directly and we'll help you find the right answer.",
+        "link_label": "Contact support",
+        "link_url": "/pages/contact",
+        "secondary_label": "Visit support hub",
+        "secondary_url": "/pages/support",
+        "style": "light",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": ["hero", "categories", "featured", "actions", "cta"]
+}

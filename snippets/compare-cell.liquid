@@ -1,86 +1,136 @@
 {%- liquid
-  assign compare_product = block.settings.product
-  assign compare_title = block.settings.title
-  assign compare_copy = block.settings.copy
-  assign compare_vendor = blank
-  assign compare_type = blank
-  assign compare_handoff_label = 'See product details'
-  assign compare_support_label = 'Check compatibility'
-  assign compare_visual_handle = blank
+  assign compare_product = product | default: compare_product | default: block.settings.product
+  assign compare_title = compare_product.title | default: title | default: block.settings.title | default: 'EZQuest product'
+  assign compare_group_handle = group_handle | default: ''
+  assign compare_source = source_context | default: 'compare'
+  assign compare_role = ''
+  assign compare_best_for = ''
+  assign compare_reason = ''
+  assign compare_price = ''
+  assign compare_compare_at_price = ''
+  assign compare_manual_count = 0
+  assign compare_download_count = 0
+  assign is_recommended = false
 
   if compare_product != blank
-    assign compare_title = compare_product.title
-    assign compare_vendor = compare_product.vendor
-    assign compare_type = compare_product.type
-    assign compare_visual_handle = compare_product.handle
-  elsif compare_title != blank
-    assign normalized_compare_title = compare_title | downcase
-    if normalized_compare_title contains 'travel'
-      assign compare_visual_handle = 'usb-c-travel-hub'
-    elsif normalized_compare_title contains 'dock'
-      assign compare_visual_handle = 'usb-c-pro-dock'
-    elsif normalized_compare_title contains 'multimedia' or normalized_compare_title contains 'everyday'
-      assign compare_visual_handle = 'usb-c-multimedia-hub'
+    assign compare_role = compare_product.metafields.ezquest.compare_role.value | default: compare_product.metafields.ezquest.compare_role
+    assign compare_best_for = compare_product.metafields.ezquest.best_for.value | default: compare_product.metafields.ezquest.best_for
+    assign compare_reason = compare_product.metafields.ezquest.compare_short_reason.value | default: compare_product.metafields.ezquest.compare_short_reason
+    assign compare_price = compare_product.price | money
+    assign compare_compare_at_price = compare_product.compare_at_price_max
+    assign compare_manual_count = compare_product.metafields.ezquest.manuals.value.count | default: 0
+    assign compare_download_count = compare_product.metafields.ezquest.downloads.value.count | default: 0
+
+    if recommended_handle != blank and compare_product.handle == recommended_handle
+      assign is_recommended = true
     endif
   endif
+
+  if compare_reason == blank and compare_product != blank and compare_product.metafields.ezquest.compatibility_summary != blank
+    assign compare_reason = compare_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html
+  endif
+
+  if compare_reason == blank and compare_product != blank and compare_product.metafields.ezquest.support_summary != blank
+    assign compare_reason = compare_product.metafields.ezquest.support_summary | metafield_tag | strip_html
+  endif
+
+  assign compare_role_label = compare_role | replace: '-', ' ' | strip
+  if compare_role_label != blank
+    assign compare_role_label = compare_role_label | capitalize
+  endif
+
+  capture compare_query
+    echo '?source='
+    echo compare_source
+    if compare_group_handle != blank
+      echo '&group='
+      echo compare_group_handle
+    endif
+    if compare_product != blank
+      echo '&product='
+      echo compare_product.handle
+    endif
+  endcapture
+
+  assign compare_pdp_url = '#'
+  assign compare_compatibility_url = '/pages/compatibility'
+  assign compare_support_url = '/pages/support'
+
+  if compare_product != blank
+    assign compare_pdp_url = compare_product.url | append: compare_query
+  endif
+
+  assign compare_compatibility_url = compare_compatibility_url | append: compare_query
+  assign compare_support_url = compare_support_url | append: compare_query
 -%}
 
-<article class="compare-card" {{ block.shopify_attributes }}>
-  <div class="compare-card-label-row">
-    {% if block.settings.eyebrow != blank %}
-      <p class="section-kicker">{{ block.settings.eyebrow }}</p>
-    {% elsif compare_vendor != blank %}
-      <p class="section-kicker">{{ compare_vendor }}</p>
-    {% endif %}
-
-    {% if compare_type != blank %}
-      <span class="compare-card-type">{{ compare_type }}</span>
+<article class="compare-choice-card card-base card-interactive{% if is_recommended %} is-recommended{% endif %}">
+  <div class="compare-choice-card-top">
+    <div class="compare-choice-card-flags">
+      {% if is_recommended %}
+        <span class="compare-choice-badge compare-choice-badge--recommended">Recommended</span>
+      {% endif %}
+      {% if compare_role_label != blank %}
+        <span class="compare-choice-badge">{{ compare_role_label }}</span>
+      {% endif %}
+    </div>
+    {% if compare_best_for != blank %}
+      <p class="compare-choice-best-for">{{ compare_best_for }}</p>
     {% endif %}
   </div>
 
-  {% if compare_product != blank %}
-    {% render 'card-product', product: compare_product, card_style: 'featured-strip', card_context: 'compare', image_variant: 'compare' %}
-  {% else %}
-    <article class="product-card-tile product-card-tile--featured-strip">
-      <div class="product-card-featured-media">
-        {% if compare_visual_handle != blank %}
-          {% render 'owned-product-visual',
-            product_handle: compare_visual_handle,
-            product_title: compare_title,
-            variant: 'compare',
-            kind: 'compare',
-            width: 1200,
-            height: 900,
-            class: 'hero-media-frame aspect-card w-full object-cover'
-          %}
-        {% else %}
-          {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
-        {% endif %}
-      </div>
-      <div class="product-card-featured-body">
-        <h3 class="card-title product-card-featured-title">{{ compare_title }}</h3>
-        {% if compare_copy != blank %}
-          <p class="product-card-featured-value">{{ compare_copy | truncatewords: 12 }}</p>
-        {% endif %}
-      </div>
-    </article>
-  {% endif %}
-
-  <p class="compare-context-note">
-    {% if compare_product != blank and compare_product.metafields.ezquest.support_summary != blank %}
-      {{ compare_product.metafields.ezquest.support_summary | metafield_tag | strip_html | truncatewords: 14 }}
-    {% elsif compare_product != blank and compare_product.metafields.ezquest.compatibility_summary != blank %}
-      {{ compare_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | truncatewords: 14 }}
-    {% elsif compare_copy != blank %}
-      {{ compare_copy | truncatewords: 14 }}
-    {% else %}
-      See how this option differs by role, compatibility, and everyday use.
+  <div class="compare-choice-media-wrap">
+    {% if compare_product != blank %}
+      {% render 'product-browse-media',
+        product: compare_product,
+        context: 'compare',
+        variant: 'compare',
+        width: 560,
+        height: 560,
+        class: 'compare-choice-media'
+      %}
     {% endif %}
-  </p>
-  {% if compare_product != blank %}
-    <div class="compare-card-links">
-      <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
-      <a href="/pages/compatibility?product={{ compare_product.handle }}" class="site-meta-link">{{ compare_support_label }}</a>
-    </div>
-  {% endif %}
+  </div>
+
+  <div class="compare-choice-body">
+    <h2 class="card-title compare-choice-title">{{ compare_title }}</h2>
+
+    {% if compare_price != blank %}
+      <div class="compare-choice-price-row">
+        <span class="compare-choice-price">{{ compare_price }}</span>
+        {% if compare_compare_at_price > compare_product.price %}
+          <span class="compare-choice-compare-price">{{ compare_compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if compare_reason != blank %}
+      <p class="type-body compare-choice-reason">{{ compare_reason | truncatewords: 20 }}</p>
+    {% endif %}
+
+    <p class="type-body compare-choice-resource-note">
+      {% if compare_manual_count > 0 or compare_download_count > 0 %}
+        {% if compare_manual_count > 0 %}{{ compare_manual_count }} manual{% if compare_manual_count != 1 %}s{% endif %}{% endif %}
+        {% if compare_manual_count > 0 and compare_download_count > 0 %} and {% endif %}
+        {% if compare_download_count > 0 %}{{ compare_download_count }} download{% if compare_download_count != 1 %}s{% endif %}{% endif %}
+        stay linked after purchase.
+      {% else %}
+        Compatibility and support stay linked to this product.
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="compare-choice-actions">
+    {% if compare_product != blank %}
+      {% if is_recommended %}
+        {% render 'button', label: 'Choose this setup', url: compare_pdp_url, style: 'primary' %}
+      {% else %}
+        {% render 'button', label: 'View details', url: compare_pdp_url, style: 'secondary' %}
+      {% endif %}
+      <div class="compare-choice-links">
+        <a href="{{ compare_compatibility_url }}" class="compare-choice-link">Compatibility</a>
+        <a href="{{ compare_support_url }}" class="compare-choice-link">Support</a>
+      </div>
+    {% endif %}
+  </div>
 </article>

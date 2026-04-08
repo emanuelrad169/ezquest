@@ -3,15 +3,15 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "eyebrow": "Product family",
+        "eyebrow": "Family",
         "intro_heading": "",
         "intro_copy": "",
-        "support_label": "Need help choosing the right product?",
+        "support_label": "Support",
         "support_url": "/pages/support",
         "products_per_page": 16,
         "show_collection_image": true,
         "show_sort": true,
-        "show_support_panel": true
+        "show_support_panel": false
       }
     }
   },

@@ -1,11 +1,32 @@
 {%- liquid
   assign current_variant = variant | default: product.selected_or_first_available_variant
   assign current_price = current_variant.price | default: product.price
+  assign compare_at_price = current_variant.compare_at_price | default: product.compare_at_price_max
+  assign show_price_promo_note = true
+
+  if show_promo_note == false
+    assign show_price_promo_note = false
+  endif
 -%}
 <div class="price-block space-y-1">
   <div class="flex flex-wrap items-end gap-3">
-    <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950">
+    <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950" data-price-amount>
       {{ current_price | money }}
     </span>
+    {% if compare_at_price > current_price %}
+      <span class="text-base font-medium text-slate-400 line-through" data-price-compare>
+        {{ compare_at_price | money }}
+      </span>
+      {% if show_price_promo_note %}
+        <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700" data-price-promo>
+          Save {{ compare_at_price | minus: current_price | money }}
+        </span>
+      {% endif %}
+    {% else %}
+      <span class="hidden text-base font-medium text-slate-400 line-through" data-price-compare></span>
+      {% if show_price_promo_note %}
+        <span class="hidden rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700" data-price-promo></span>
+      {% endif %}
+    {% endif %}
   </div>
 </div>

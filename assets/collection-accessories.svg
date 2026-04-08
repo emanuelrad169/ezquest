@@ -1,166 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st1 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st2 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st3 {
-        fill: url(#linear-gradient6);
-      }
-
-      .st4 {
-        fill: url(#linear-gradient5);
-      }
-
-      .st5 {
-        fill: url(#linear-gradient4);
-      }
-
-      .st6 {
-        fill-opacity: .2;
-      }
-
-      .st6, .st7 {
-        fill: #f8fafc;
-      }
-
-      .st7, .st8 {
-        fill-opacity: .3;
-      }
-
-      .st9 {
-        fill: #172131;
-        fill-opacity: .4;
-      }
-
-      .st10 {
-        fill: #d7dee9;
-      }
-
-      .st11 {
-        fill: url(#linear-gradient);
-      }
-
-      .st12 {
-        fill-opacity: .9;
-      }
-
-      .st12, .st13, .st14 {
-        fill: #facc15;
-      }
-
-      .st13 {
-        fill-opacity: .9;
-      }
-
-      .st14 {
-        fill-opacity: .8;
-      }
-
-      .st15 {
-        fill: #1a2536;
-        fill-opacity: .4;
-      }
-
-      .st16 {
-        fill: #0b1221;
-      }
-
-      .st16, .st17 {
-        fill-opacity: .4;
-      }
-
-      .st18 {
-        fill: #d8e0ea;
-      }
-
-      .st17 {
-        fill: #273245;
-      }
-
-      .st19 {
-        fill-opacity: .4;
-      }
-
-      .st19, .st8 {
-        fill: #fff;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="0" y1="600" x2="1600" y2="600" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#969eaa"/>
-      <stop offset=".6" stop-color="#364152"/>
+    <linearGradient id="collection-accessories-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
+    </linearGradient>
+    <radialGradient id="collection-accessories-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="collection-accessories-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="collection-accessories-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
+    </linearGradient>
+    <linearGradient id="collection-accessories-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
+    </linearGradient>
+    <linearGradient id="collection-accessories-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
       <stop offset="1" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="linear-gradient1" x1=".6" y1="211.1" x2="1600.6" y2="4.4" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d8e0eb" stop-opacity=".1"/>
-      <stop offset="1" stop-color="#98a6b8" stop-opacity=".2"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient2" x1="1216" y1="303.7" x2="1462" y2="143.7" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#a2aec0"/>
-      <stop offset=".5" stop-color="#556173"/>
-      <stop offset="1" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient3" x1="647.7" y1="635.3" x2="1190.5" y2="273.3" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#b8c2d0"/>
-      <stop offset=".5" stop-color="#677387"/>
-      <stop offset="1" stop-color="#1f2937"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient4" x1="677.8" y1="585.8" x2="1149.1" y2="330.3" xlink:href="#linear-gradient2"/>
-    <linearGradient id="linear-gradient5" x1="263.5" y1="385.4" x2="674" y2="122.7" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d2dae6"/>
-      <stop offset=".5" stop-color="#7d889a"/>
-      <stop offset="1" stop-color="#384355"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient6" x1="280.9" y1="347.3" x2="650.6" y2="164.7" xlink:href="#linear-gradient3"/>
+    <filter id="collection-accessories-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="collection-accessories-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="collection-accessories-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st11" width="1600" height="1200"/>
-  <path class="st1" d="M0,993.5c253.1-99.9,531.8-120.8,829-104.5,290.3,16.3,555,109.1,771,222.9v88.2H0v-206.7Z"/>
-  <g>
-    <rect class="st0" x="1202" y="889.4" width="268" height="170" rx="34" ry="34"/>
-    <rect class="st15" x="1238" y="925.4" width="196" height="98" rx="24" ry="24"/>
-    <path class="st9" d="M1289,967.4h42c5,0,9,4,9,9h0c0,5-4,9-9,9h-42c-5,0-9-4-9-9h0c0-5,4-9,9-9Z"/>
-    <path class="st9" d="M1365,967.4h42c5,0,9,4,9,9h0c0,5-4,9-9,9h-42c-5,0-9-4-9-9h0c0-5,4-9,9-9Z"/>
-  </g>
-  <g>
-    <rect class="st16" x="1224" y="228.3" width="224" height="152" rx="26" ry="26"/>
-    <path class="st14" d="M1270,270.3h112c3.3,0,6,2.7,6,6h0c0,3.3-2.7,6-6,6h-112c-3.3,0-6-2.7-6-6h0c0-3.3,2.7-6,6-6Z"/>
-    <path class="st8" d="M1269,304.3h156c2.8,0,5,2.2,5,5h0c0,2.8-2.2,5-5,5h-156c-2.8,0-5-2.2-5-5h0c0-2.8,2.2-5,5-5Z"/>
-  </g>
-  <g>
-    <g>
-      <rect class="st2" x="614.3" y="554.1" width="598.4" height="375.7" rx="92" ry="92"/>
-      <rect class="st5" x="679.8" y="615.3" width="467.4" height="253.4" rx="62" ry="62"/>
-      <path class="st7" d="M744.2,674.3h233.7c5.4,0,9.8,4.4,9.8,9.8h0c0,5.4-4.4,9.8-9.8,9.8h-233.7c-5.4,0-9.8-4.4-9.8-9.8h0c0-5.4,4.4-9.8,9.8-9.8Z"/>
-      <path class="st6" d="M743.1,726.7h168.2c4.8,0,8.7,3.9,8.7,8.7h0c0,4.8-3.9,8.7-8.7,8.7h-168.2c-4.8,0-8.7-3.9-8.7-8.7h0c0-4.8,3.9-8.7,8.7-8.7Z"/>
-      <path class="st15" d="M748.6,787.8h80.8c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-80.8c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-      <path class="st15" d="M873.1,787.8h104.8c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-104.8c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-      <path class="st15" d="M1021.6,787.8h52.4c6.6,0,12,5.4,12,12h0c0,6.6-5.4,12-12,12h-52.4c-6.6,0-12-5.4-12-12h0c0-6.6,5.4-12,12-12Z"/>
-      <path class="st18" d="M1121,733.2h0c9.6,0,17.5,7.8,17.5,17.5v78.6c0,9.6-7.8,17.5-17.5,17.5h0c-9.6,0-17.5-7.8-17.5-17.5v-78.6c0-9.6,7.8-17.5,17.5-17.5Z"/>
+  <rect width="1600" height="1200" fill="url(#collection-accessories-bg)"/>
+  <rect width="1600" height="1200" fill="url(#collection-accessories-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#collection-accessories-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#collection-accessories-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#collection-accessories-amber)"/>
+<g transform="translate(352 408.00000000000006)">
+      <circle cx="192" cy="216" r="180" stroke="#2C394A" stroke-width="18" fill="none" opacity=".9"/>
+      <circle cx="192" cy="216" r="120" stroke="#8797AC" stroke-width="14" fill="none" opacity=".75"/>
+      <rect x="400" y="96" width="192" height="96" rx="16" fill="url(#collection-accessories-metal)"/>
+    </g>    <g transform="translate(768 600) rotate(-7 176 78)">
+      <ellipse cx="176" cy="143.52" rx="197.12" ry="28.08" fill="#0B1120" fill-opacity=".16" filter="url(#collection-accessories-blur)"/>
+      <g filter="url(#collection-accessories-shadow)">
+        <rect x="0" y="12.48" width="352" height="124.80000000000001" rx="28" fill="url(#collection-accessories-metal)" stroke="#D8E0E8"/>
+        <rect x="21.119999999999997" y="21.840000000000003" width="309.76" height="18.72" rx="9.36" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        
+        <rect x="42.239999999999995" y="112.32" width="267.52" height="9.36" rx="4.68" fill="rgba(15,23,42,.08)"/>
+        <rect x="56.32" y="73.32" width="30.5536" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="105.6" y="73.32" width="30.5536" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      
     </g>
-    <g>
-      <rect class="st4" x="236.4" y="807.5" width="458.7" height="273" rx="72" ry="72"/>
-      <rect class="st3" x="282.3" y="853.4" width="366.9" height="181.3" rx="46" ry="46"/>
-      <path class="st17" d="M346.7,958.2h63.3c5.4,0,9.8,4.4,9.8,9.8h0c0,5.4-4.4,9.8-9.8,9.8h-63.3c-5.4,0-9.8-4.4-9.8-9.8h0c0-5.4,4.4-9.8,9.8-9.8Z"/>
-      <path class="st17" d="M451.6,958.2h83c5.4,0,9.8,4.4,9.8,9.8h0c0,5.4-4.4,9.8-9.8,9.8h-83c-5.4,0-9.8-4.4-9.8-9.8h0c0-5.4,4.4-9.8,9.8-9.8Z"/>
-      <path class="st17" d="M576,958.2h41.5c5.4,0,9.8,4.4,9.8,9.8h0c0,5.4-4.4,9.8-9.8,9.8h-41.5c-5.4,0-9.8-4.4-9.8-9.8h0c0-5.4,4.4-9.8,9.8-9.8Z"/>
-      <path class="st10" d="M645.9,908h0c9,0,16.4,7.3,16.4,16.4v67.7c0,9-7.3,16.4-16.4,16.4h0c-9,0-16.4-7.3-16.4-16.4v-67.7c0-9,7.3-16.4,16.4-16.4Z"/>
-    </g>
-    <g>
-      <rect class="st16" x="985.6" y="410" width="268.6" height="170.4" rx="28" ry="28"/>
-      <path class="st12" d="M1042.4,455.9h117.9c3.6,0,6.6,2.9,6.6,6.6h0c0,3.6-2.9,6.6-6.6,6.6h-117.9c-3.6,0-6.6-2.9-6.6-6.6h0c0-3.6,2.9-6.6,6.6-6.6Z"/>
-      <path class="st19" d="M1041.3,493h176.9c3,0,5.5,2.4,5.5,5.5h0c0,3-2.4,5.5-5.5,5.5h-176.9c-3,0-5.5-2.4-5.5-5.5h0c0-3,2.4-5.5,5.5-5.5Z"/>
-    </g>
-  </g>
-  <circle class="st13" cx="260.4" cy="811.9" r="24"/>
 </svg>

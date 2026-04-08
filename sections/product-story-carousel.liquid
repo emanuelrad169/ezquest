@@ -2,23 +2,34 @@
   <div class="container-shell">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Product details that matter in real setups'
-      assign section_copy = section.settings.copy | default: 'Explain the ports, workflows, and ownership benefits that shape the buying decision.'
+      assign section_copy = section.settings.copy | default: 'See the product details that matter most for ports, power, displays, and everyday use.'
       assign structured_highlights = blank
+      assign structured_highlight_count = 0
       assign has_structured_highlights = false
       assign use_structured_highlights = false
       assign support_summary_text = blank
       assign compatibility_summary_text = blank
       assign setup_label = 'Everyday setup'
-      assign story_intro_note = 'See how this product earns its place before you move deeper into specs or support.'
-      assign story_note_one = 'A closer look at why this matters in the setup.'
-      assign story_note_two = 'How the product keeps the workflow simpler once it is on the desk or in the bag.'
-      assign story_note_three = 'What this means for ownership confidence after the purchase.'
+      assign story_intro_note = 'See how this product handles ports, power, displays, and day-to-day setup.'
+      assign story_note_one = 'What this changes in the setup.'
+      assign story_note_two = 'How it keeps everyday use cleaner once it is on the desk or in the bag.'
+      assign story_note_three = 'What stays easy after purchase, from manuals to support.'
 
       if product != blank and product.metafields.ezquest.feature_highlights != blank
         assign structured_highlights = product.metafields.ezquest.feature_highlights.value
-        if structured_highlights.count > 0
-          assign has_structured_highlights = true
-        endif
+      endif
+
+      if structured_highlights != blank
+        for highlight in structured_highlights
+          assign normalized_highlight = highlight | strip
+          if normalized_highlight != blank
+            assign structured_highlight_count = structured_highlight_count | plus: 1
+          endif
+        endfor
+      endif
+
+      if structured_highlight_count > 0
+        assign has_structured_highlights = true
       endif
 
       if product != blank and product.metafields.ezquest.support_summary != blank
@@ -32,17 +43,17 @@
       case product.handle
         when 'usb-c-travel-hub'
           assign setup_label = 'Travel-first setup'
-          assign section_heading = 'Why this hub works better on the move'
+          assign section_heading = 'Why this hub works on the move'
           assign section_copy = 'See how the travel-first role, lighter footprint, and ownership path separate it from broader desk options.'
-          assign story_intro_note = 'Start here when the question is whether portability should win over extra desk-ready connectivity.'
+          assign story_intro_note = 'Choose this when portability matters more than extra desk connections.'
           assign story_note_one = 'Built for presentations, hotel desks, classrooms, and everyday carry where lighter expansion matters.'
           assign story_note_two = 'Keeps HDMI, charging, and core ports close without turning the mobile setup into a cable project.'
-          assign story_note_three = 'Support stays nearby when you need compatibility, downloads, or quick setup guidance on the move.'
+          assign story_note_three = 'Manuals, downloads, and support stay close when you need help on the move.'
         when 'usb-c-pro-dock'
           assign setup_label = 'Desk-first setup'
           assign section_heading = 'Why this dock belongs at the desk'
           assign section_copy = 'See how the workstation role, broader connectivity, and ownership support justify stepping up from lighter hubs.'
-          assign story_intro_note = 'Start here when the desk has become the center of the workflow and the setup needs more authority.'
+          assign story_intro_note = 'Choose this when the desk needs more displays, power, and permanent connections.'
           assign story_note_one = 'Designed for permanent desks that need more peripherals, stronger display support, and calmer cable control.'
           assign story_note_two = 'Makes the step up from smaller hubs feel clear when the setup has become more workstation-like.'
           assign story_note_three = 'Keeps longer-term ownership easier with manuals, downloads, and support attached to the product.'
@@ -50,15 +61,15 @@
           assign setup_label = 'Balanced everyday setup'
           assign section_heading = 'Why this hub earns its place on the everyday desk'
           assign section_copy = 'See how the balanced role, broader daily coverage, and support path make it the strongest all-around EZQuest choice.'
-          assign story_intro_note = 'Start here when you want one compact hub to cover the desk before stepping up to a full dock.'
+          assign story_intro_note = 'Choose this when one compact hub needs to cover the everyday desk.'
           assign story_note_one = 'Built for everyday desks that want HDMI, charging, Ethernet, and accessory access in one adapter.'
           assign story_note_two = 'Gives hybrid work setups a cleaner center of gravity without demanding a full dock footprint.'
           assign story_note_three = 'Keeps support and compatibility close when the desk needs one dependable everyday hub.'
       endcase
 
-      if section.settings.structured_source == 'product' and has_structured_highlights
-        assign use_structured_highlights = true
-      elsif section.settings.structured_source == 'auto' and section.blocks.size == 0 and has_structured_highlights
+      if section.settings.structured_source == 'blocks'
+        assign use_structured_highlights = false
+      elsif has_structured_highlights
         assign use_structured_highlights = true
       endif
     -%}
@@ -82,6 +93,10 @@
     <div class="scroll-snap-row mt-10">
       {% if use_structured_highlights %}
         {% for highlight in structured_highlights limit: section.settings.structured_limit %}
+          {% assign normalized_highlight = highlight | strip %}
+          {% if normalized_highlight == blank %}
+            {% continue %}
+          {% endif %}
           {%- liquid
             assign story_support_copy = story_note_one
             assign story_visual_variant = 'hero'
@@ -102,14 +117,14 @@
             endif
           -%}
           <article class="compare-card scroll-snap-item">
-            {% render 'owned-product-visual', product_handle: product.handle, product_title: highlight, variant: story_visual_variant, kind: 'story', width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+            {% render 'owned-product-visual', product_handle: product.handle, product_title: normalized_highlight, variant: story_visual_variant, kind: 'story', width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
             <div class="mt-5 flex items-center justify-between gap-4">
               <p class="section-kicker">{{ setup_label }}</p>
               {% if section.settings.show_sequence %}
                 <span class="text-sm font-medium text-slate-400">{{ forloop.index | prepend: '0' }}</span>
               {% endif %}
             </div>
-            <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ highlight }}</h3>
+            <h3 class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ normalized_highlight }}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ story_support_copy }}</p>
           </article>
         {% endfor %}
@@ -155,17 +170,17 @@
       {% else %}
         {% for i in (1..3) %}
           {%- liquid
-            assign fallback_title = 'Designed for cleaner desk setups'
-            assign fallback_copy = 'Use this space to highlight the one product benefit that matters most after the purchase decision.'
+            assign fallback_title = 'Built for cleaner setups'
+            assign fallback_copy = 'Highlight the product detail that matters most for ports, power, displays, or everyday use.'
             assign story_visual_variant = 'hero'
 
             if forloop.index == 2
-              assign fallback_title = 'Ports, power, and display in one step'
+              assign fallback_title = 'Ports, power, and displays in one place'
               assign fallback_copy = 'Show how the product reduces cable sprawl while keeping charging, display, and device expansion clear.'
               assign story_visual_variant = 'ports'
             elsif forloop.index == 3
-              assign fallback_title = 'Support stays close after purchase'
-              assign fallback_copy = 'Reinforce that manuals, downloads, and compatibility help remain close once the product arrives.'
+              assign fallback_title = 'Manuals and support stay close'
+              assign fallback_copy = 'Reinforce that manuals, downloads, and compatibility help stay easy to find after purchase.'
               assign story_visual_variant = 'setup'
             endif
           -%}
@@ -192,7 +207,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Product story" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Product details that matter in real setups" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Explain the ports, workflows, and ownership benefits that shape the buying decision." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "See the product details that matter most for ports, power, displays, and everyday use." },
     {
       "type": "select",
       "id": "structured_source",

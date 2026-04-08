@@ -3,52 +3,44 @@
     "hero": {
       "type": "hero-page",
       "settings": {
-        "eyebrow": "Contact",
-        "heading": "Contact support when self-service is not enough",
-        "copy": "Reach out for product help, warranty questions, order support, or business inquiries when self-service is no longer the fastest option.",
-        "support_eyebrow": "Best use",
-        "support_note": "Choose the right route first, then send the details support will need so the first reply can be more useful.",
-        "link_label": "View support center",
-        "link_url": "/pages/support"
+        "eyebrow": "Support request",
+        "heading": "Get help now",
+        "copy": "Choose the reason for your request, share the key details once, and we will take the next step with you.",
+        "support_eyebrow": "One support flow",
+        "support_note": "This is the single path for product help, order help, and warranty help."
       }
     },
     "details": {
       "type": "info-card-grid",
       "settings": {
-        "eyebrow": "Contact pathways",
-        "heading": "Direct the right question to the right route",
-        "copy": "Choose the right path for product help, warranty questions, or order issues without guessing where to start.",
+        "eyebrow": "Choose one",
+        "heading": "Three clear request types",
+        "copy": "Pick the reason that matches your need, then send one support request with the right context.",
         "columns_desktop": 3
       },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
-            "eyebrow": "Support",
-            "title": "Product and setup help",
-            "copy": "Get help with product questions, setup issues, and post-purchase support needs.",
-            "link_label": "Open support center",
-            "link_url": "/pages/support"
+            "eyebrow": "01",
+            "title": "Product help",
+            "copy": "Use this for setup questions, compatibility uncertainty, troubleshooting, or product-specific guidance."
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "eyebrow": "Warranty",
-            "title": "Claims and warranty guidance",
-            "copy": "Review warranty guidance, claim expectations, and the information needed before service support begins.",
-            "link_label": "View warranty",
-            "link_url": "/pages/warranty"
+            "eyebrow": "02",
+            "title": "Order help",
+            "copy": "Use this for shipping questions, returns, order references, and post-purchase order support."
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "eyebrow": "Orders",
-            "title": "Shipping and return questions",
-            "copy": "Find the right path for shipping questions, returns, and order-related help.",
-            "link_label": "Open shipping and returns",
-            "link_url": "/pages/shipping-returns"
+            "eyebrow": "03",
+            "title": "Warranty help",
+            "copy": "Use this for coverage questions, claim context, and warranty-related support."
           }
         }
       },
@@ -57,41 +49,15 @@
     "form": {
       "type": "contact-form-panel",
       "settings": {
-        "eyebrow": "Contact form",
-        "heading": "Send the details support will need",
-        "copy": "Send the details support needs so the first reply can point you in the right direction.",
-        "side_eyebrow": "Before submitting",
-        "side_heading": "Help support respond faster",
-        "side_copy": "Include the product name, order reference, setup details, and the issue summary so support can respond with a clearer answer.",
+        "eyebrow": "Support form",
+        "heading": "Tell us what you need",
+        "copy": "Choose the request type, add the key details, and keep the message focused on the next step you need.",
+        "side_eyebrow": "What to include",
+        "side_heading": "Help us respond clearly",
+        "side_copy": "Include the product name, order reference when relevant, and a short summary of what you expected versus what happened.",
         "success_message": "Thanks for reaching out. Your message has been sent."
-      }
-    },
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "show_title": false,
-        "intro_copy": "Office details, business contact information, and response expectations live here when you need them.",
-        "side_eyebrow": "Before contacting",
-        "side_heading": "Start with self-service when it is faster",
-        "side_copy": "Downloads, manuals, compatibility, and FAQ may solve the issue before direct support is needed.",
-        "side_link_label": "View downloads",
-        "side_link_url": "/pages/downloads"
-      }
-    },
-    "cta": {
-      "type": "cta-banner",
-      "settings": {
-        "eyebrow": "Need self-service first",
-        "heading": "Need self-service before you reach out?",
-        "copy": "Move into support resources when they are faster than waiting on a direct reply.",
-        "link_label": "Open manuals",
-        "link_url": "/pages/manuals",
-        "secondary_label": "Open FAQ",
-        "secondary_url": "/pages/faq",
-        "style": "light",
-        "button_style": "secondary"
       }
     }
   },
-  "order": ["hero", "details", "form", "main", "cta"]
+  "order": ["hero", "details", "form"]
 }

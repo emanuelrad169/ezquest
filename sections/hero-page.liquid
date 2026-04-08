@@ -1,109 +1,64 @@
-<section class="section-shell pt-8 lg:pt-10">
-  <div class="container-shell">
-    {%- liquid
-      assign structured_group = blank
-      assign support_page_context = false
-      assign hero_eyebrow = section.settings.eyebrow
-      assign hero_heading = section.settings.heading | default: page.title | default: blog.title | default: article.title
-      assign hero_copy = section.settings.copy
-      assign hero_support_eyebrow = section.settings.support_eyebrow
-      assign hero_support_note = section.settings.support_note
+{%- liquid
+  assign hero_eyebrow    = section.settings.eyebrow
+  assign hero_heading    = section.settings.heading | default: page.title | default: blog.title | default: article.title
+  assign hero_copy       = section.settings.copy
+  assign hero_image      = section.settings.background_image
+  assign structured_group = blank
 
-      if request.page_type == 'page' and page != blank
-        case page.handle
-          when 'support', 'downloads', 'firmware', 'manuals', 'user-guides', 'compatibility', 'faq', 'troubleshooting', 'help-me-choose', 'contact', 'ticket-submission', 'warranty', 'shipping-returns'
-            assign support_page_context = true
-        endcase
-      endif
+  if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
+    assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
+  endif
 
-      if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
-        assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
-      endif
+  if structured_group != blank
+    if structured_group.eyebrow != blank and structured_group.eyebrow.value != blank
+      assign hero_eyebrow = structured_group.eyebrow.value
+    endif
+    if structured_group.heading != blank and structured_group.heading.value != blank
+      assign hero_heading = structured_group.heading.value
+    endif
+    if structured_group.description != blank and structured_group.description.value != blank
+      assign hero_copy = structured_group.description.value
+    endif
+  endif
+-%}
 
-      if structured_group != blank
-        if structured_group.eyebrow != blank and structured_group.eyebrow.value != blank
-          assign hero_eyebrow = structured_group.eyebrow.value
-        endif
-        if structured_group.heading != blank and structured_group.heading.value != blank
-          assign hero_heading = structured_group.heading.value
-        endif
-        if structured_group.description != blank and structured_group.description.value != blank
-          assign hero_copy = structured_group.description.value
-        endif
-        if structured_group.support_note != blank and structured_group.support_note.value != blank
-          assign hero_support_note = structured_group.support_note.value
-        endif
-      endif
-    -%}
-    {% render 'breadcrumbs' %}
-    <div class="hero-surface{% if support_page_context %} hero-surface--support{% endif %} mt-6">
-      <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
-        <div class="max-w-3xl">
-          {% if hero_eyebrow != blank %}
-            <p class="section-kicker">{{ hero_eyebrow }}</p>
-          {% endif %}
-          <h1 class="section-heading mt-5">{{ hero_heading }}</h1>
-          {% if hero_copy != blank %}
-            <p class="section-copy mt-5">{{ hero_copy }}</p>
-          {% endif %}
-          {% if support_page_context %}
-            <div class="support-hero-paths">
-              <div class="support-hero-path-group support-hero-path-group--primary">
-                <a href="/pages/support" class="support-hero-path{% if page.handle == 'support' %} is-active{% endif %}">Support hub</a>
-                <a href="/pages/downloads" class="support-hero-path{% if page.handle == 'downloads' %} is-active{% endif %}">Downloads</a>
-                <a href="/pages/manuals" class="support-hero-path{% if page.handle == 'manuals' %} is-active{% endif %}">Manuals</a>
-                <a href="/pages/compatibility" class="support-hero-path{% if page.handle == 'compatibility' %} is-active{% endif %}">Compatibility</a>
-                <a href="/pages/faq" class="support-hero-path{% if page.handle == 'faq' %} is-active{% endif %}">FAQ</a>
-                <a href="/pages/troubleshooting" class="support-hero-path{% if page.handle == 'troubleshooting' %} is-active{% endif %}">Troubleshooting</a>
-                <a href="/pages/contact" class="support-hero-path{% if page.handle == 'contact' %} is-active{% endif %}">Contact</a>
-              </div>
-              <div class="support-hero-path-group support-hero-path-group--secondary">
-                <a href="/pages/firmware" class="support-hero-path support-hero-path--secondary{% if page.handle == 'firmware' %} is-active{% endif %}">Firmware</a>
-                <a href="/pages/user-guides" class="support-hero-path support-hero-path--secondary{% if page.handle == 'user-guides' %} is-active{% endif %}">User guides</a>
-                <a href="/pages/help-me-choose" class="support-hero-path support-hero-path--secondary{% if page.handle == 'help-me-choose' %} is-active{% endif %}">Help me choose</a>
-                <a href="/pages/ticket-submission" class="support-hero-path support-hero-path--secondary{% if page.handle == 'ticket-submission' %} is-active{% endif %}">Ticket submission</a>
-                <a href="/pages/warranty" class="support-hero-path support-hero-path--secondary{% if page.handle == 'warranty' %} is-active{% endif %}">Warranty</a>
-              </div>
-            </div>
-          {% endif %}
-        </div>
+<div class="collection-showcase-shell">
+  <div class="collection-showcase collection-showcase--page">
 
-        {% if hero_support_note != blank or section.settings.link_label != blank %}
-          <div class="hero-panel{% if support_page_context %} hero-panel--support{% endif %}">
-            {% if support_page_context %}
-              <div class="support-hero-visual-frame">
-                {% render 'owned-support-visual', context: page.handle, alt: hero_heading, class: 'support-hero-visual' %}
-              </div>
-            {% endif %}
-            {% if hero_support_eyebrow != blank %}
-              <p class="section-kicker">{{ hero_support_eyebrow }}</p>
-            {% endif %}
-            {% if hero_support_note != blank %}
-              <p class="mt-4 text-sm leading-7 text-slate-600">{{ hero_support_note }}</p>
-            {% endif %}
-            {% if support_page_context %}
-              <ul class="support-hero-signals">
-                <li>Resources stay tied to the product and setup already in front of you.</li>
-                <li>Compatibility, manuals, downloads, and FAQ stay connected as one system.</li>
-                <li>Direct help is nearby when self-service is no longer enough.</li>
-              </ul>
-            {% endif %}
-            {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-              <div class="mt-6">
-                {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
-              </div>
-            {% endif %}
-          </div>
+    {% if hero_image != blank %}
+      <div class="collection-showcase-media">
+        {{ hero_image | image_url: width: 2400 | image_tag: loading: 'eager', decoding: 'async', alt: hero_heading, class: 'collection-showcase-image' }}
+      </div>
+    {% endif %}
+
+    <div class="collection-showcase-scrim"></div>
+
+    <div class="collection-showcase-inner container-shell">
+      <nav class="collection-showcase-breadcrumb" aria-label="breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span aria-hidden="true">›</span>
+        <span>{{ hero_heading }}</span>
+      </nav>
+
+      <div class="collection-showcase-copy">
+        {% if hero_eyebrow != blank %}
+          <p class="collection-showcase-label">{{ hero_eyebrow }}</p>
+        {% endif %}
+        <h1 class="page-hero-heading">{{ hero_heading }}</h1>
+        {% if hero_copy != blank %}
+          <p class="collection-showcase-statement">{{ hero_copy }}</p>
         {% endif %}
       </div>
     </div>
+
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Page hero",
   "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Background image" },
     {
       "type": "select",
       "id": "structured_source",
@@ -117,11 +72,9 @@
     { "type": "text", "id": "comparison_group_handle", "label": "Comparison group handle" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading override" },
-    { "type": "textarea", "id": "copy", "label": "Copy" },
-    { "type": "text", "id": "support_eyebrow", "label": "Side panel eyebrow", "default": "Context" },
-    { "type": "textarea", "id": "support_note", "label": "Side panel note" },
-    { "type": "text", "id": "link_label", "label": "Side panel link label" },
-    { "type": "url", "id": "link_url", "label": "Side panel link URL" }
+    { "type": "textarea", "id": "copy", "label": "Subtext" },
+    { "type": "text", "id": "link_label", "label": "CTA label" },
+    { "type": "url", "id": "link_url", "label": "CTA URL" }
   ],
   "presets": [
     { "name": "Page hero" }

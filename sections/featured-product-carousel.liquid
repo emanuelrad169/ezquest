@@ -1,8 +1,21 @@
 {%- liquid
-  assign source_collection = section.settings.collection
   assign products_limit = section.settings.products_limit | default: 8
-  assign featured_products = blank
 
+  assign has_tabs = false
+  assign tab_count = 0
+  for i in (1..4)
+    assign tl = 'tab_' | append: i | append: '_label'
+    assign tc = 'tab_' | append: i | append: '_collection'
+    if section.settings[tl] != blank and section.settings[tc] != blank
+      assign tab_count = tab_count | plus: 1
+    endif
+  endfor
+  if tab_count > 0
+    assign has_tabs = true
+  endif
+
+  assign source_collection = section.settings.collection
+  assign featured_products = blank
   if source_collection != blank
     assign featured_products = source_collection.products
   elsif collections['all'] != blank
@@ -12,76 +25,108 @@
 
 <section class="section-shell featured-products-section">
   <div class="container-shell">
-    <div class="featured-products-header">
-      <div class="featured-products-header-copy">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <div class="featured-products-heading-row">
-          <h2 class="section-heading featured-products-heading">{{ section.settings.heading | default: 'Featured products' }}</h2>
-          <span class="home-strip-rule" aria-hidden="true"></span>
-        </div>
-        {% if section.settings.copy != blank %}
-          <p class="featured-products-copy">{{ section.settings.copy }}</p>
+
+    <div class="featured-products-header-v2 motion-fade-up reveal-tier-2">
+      <div class="featured-products-header-left">
+        <h2 class="featured-products-title-v2">{{ section.settings.heading | default: 'Best Sellers' }}</h2>
+
+        {% if has_tabs %}
+          <div class="featured-products-tabs" data-product-tabs role="tablist">
+            {%- assign tab_rendered = 0 -%}
+            {% for i in (1..4) %}
+              {%- assign tl = 'tab_' | append: i | append: '_label' -%}
+              {%- assign tc = 'tab_' | append: i | append: '_collection' -%}
+              {%- assign tab_label = section.settings[tl] -%}
+              {%- assign tab_col   = section.settings[tc] -%}
+              {% if tab_label != blank and tab_col != blank %}
+                <button
+                  class="featured-products-tab{% if tab_rendered == 0 %} is-active{% endif %}"
+                  type="button"
+                  data-tab="{{ tab_rendered }}"
+                  role="tab"
+                  aria-selected="{% if tab_rendered == 0 %}true{% else %}false{% endif %}"
+                >{{ tab_label }}</button>
+                {%- assign tab_rendered = tab_rendered | plus: 1 -%}
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
 
-      <div class="featured-products-header-actions">
-        <p class="featured-products-header-note">A tighter first look at the EZQuest lineup.</p>
+      <div class="featured-products-header-right" style="--reveal-delay: 100ms">
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
           <a href="{{ section.settings.link_url }}" class="featured-products-link">{{ section.settings.link_label }}</a>
         {% endif %}
-        <div class="featured-products-controls" aria-label="Featured product carousel controls">
-          <button class="featured-products-arrow" type="button" data-carousel-prev aria-label="Previous products">
+        <div class="featured-products-controls" aria-label="Carousel controls">
+          <button class="featured-products-arrow" type="button" data-carousel-prev aria-label="Previous">
             {% render 'icon', name: 'chevron-left' %}
           </button>
-          <button class="featured-products-arrow" type="button" data-carousel-next aria-label="Next products">
+          <span class="featured-products-controls-divider" aria-hidden="true"></span>
+          <button class="featured-products-arrow" type="button" data-carousel-next aria-label="Next">
             {% render 'icon', name: 'chevron-right' %}
           </button>
         </div>
       </div>
     </div>
 
-    <div class="featured-products-carousel" data-scroll-carousel aria-label="{{ section.settings.heading | default: 'Featured products' }}">
+    <div class="featured-products-carousel" data-scroll-carousel aria-label="{{ section.settings.heading | default: 'Best Sellers' }}">
       <div class="featured-products-track" data-carousel-track>
-        {% if featured_products != blank and featured_products.size > 0 %}
+
+        {% if has_tabs %}
+          {%- assign tab_rendered = 0 -%}
+          {% for i in (1..4) %}
+            {%- assign tl = 'tab_' | append: i | append: '_label' -%}
+            {%- assign tc = 'tab_' | append: i | append: '_collection' -%}
+            {%- assign tab_label = section.settings[tl] -%}
+            {%- assign tab_col   = section.settings[tc] -%}
+            {% if tab_label != blank and tab_col != blank %}
+              {% for product in tab_col.products limit: products_limit %}
+                <div
+                  class="featured-products-slide{% if forloop.first and tab_rendered == 0 %} is-featured{% endif %}"
+                  data-tab-group="{{ tab_rendered }}"
+                  {% if tab_rendered > 0 %}style="display:none"{% endif %}
+                >
+                  {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'featured', card_index: forloop.index0 %}
+                </div>
+              {% endfor %}
+              {%- assign tab_rendered = tab_rendered | plus: 1 -%}
+            {% endif %}
+          {% endfor %}
+
+        {% elsif featured_products != blank and featured_products.size > 0 %}
           {% for product in featured_products limit: products_limit %}
             <div class="featured-products-slide{% if forloop.first %} is-featured{% endif %}">
-              {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'homepage', card_index: forloop.index0 %}
+              {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'featured', card_index: forloop.index0 %}
             </div>
           {% endfor %}
+
         {% else %}
           {% for i in (1..5) %}
             <div class="featured-products-slide">
-              <article class="product-card-tile product-card-tile--featured-strip motion-fade-up" data-card-index="{{ forloop.index0 }}">
-                <div class="product-card-featured-media">
-                  {% render 'placeholder-visual',
-                    kind: 'product',
-                    text: 'EZQuest Product',
-                    width: 900,
-                    height: 700,
-                    class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
-                  %}
-                  <span class="product-card-featured-badge">Featured</span>
+              <article class="product-card-tile product-card-tile--featured-strip card-elevated card-interactive motion-fade-up" data-card-index="{{ forloop.index0 }}">
+                <div class="product-card-featured-media-shell relative">
+                  <div class="product-card-featured-media">
+                    {% render 'placeholder-visual',
+                      kind: 'product',
+                      text: 'EZQuest Product',
+                      width: 900,
+                      height: 700,
+                      class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
+                    %}
+                    <span class="product-card-featured-badge">New</span>
+                  </div>
                 </div>
-
-                <div class="product-card-featured-body">
-                  <div class="product-card-featured-meta">
-                    <span class="product-card-featured-brand">EZQuest</span>
-                    <span class="product-card-featured-category">USB-C hub</span>
-                  </div>
-
-                  <h3 class="card-title product-card-featured-title">EZQuest connectivity essential</h3>
-                  <p class="product-card-featured-value">Compact expansion for charging, display, and data.</p>
-
-                  <div class="product-card-featured-rating" aria-label="Buying confidence">
-                    <span class="product-card-featured-rating-copy">Choose the setup that fits first</span>
-                  </div>
-
-                  <div class="product-card-featured-price">
-                    <div class="price-block space-y-1">
-                      <div class="flex flex-wrap items-end gap-3">
-                        <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950">Explore the lineup</span>
+                <div class="product-card-featured-body flex flex-1 flex-col gap-3 px-4 pb-4 pt-3 lg:px-5">
+                  <div class="product-card-featured-copy grid gap-1.5">
+                    <p class="product-card-featured-vendor">Cable</p>
+                    <div class="product-card-featured-title-price-row">
+                      <h3 class="card-title product-card-featured-title">EZQuest USB-C Hub</h3>
+                      <div class="product-card-featured-price">
+                        <div class="price-block">
+                          <div class="flex flex-wrap items-end gap-3">
+                            <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950">$24.99</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -90,7 +135,12 @@
             </div>
           {% endfor %}
         {% endif %}
+
       </div>
+    </div>
+
+    <div class="featured-products-progress-track" aria-hidden="true">
+      <div class="featured-products-progress-bar" data-carousel-progress></div>
     </div>
 
     <div class="featured-products-support-row">
@@ -100,6 +150,7 @@
         <a href="/pages/support" class="support-inline-link">Get help choosing</a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -107,26 +158,34 @@
 {
   "name": "Featured carousel",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured products" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured products" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Curated EZQuest products for travel setups, desk docks, charging workflows, and everyday device expansion." },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop all products" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best Sellers" },
+    { "type": "text", "id": "link_label", "label": "Link label" },
     { "type": "url", "id": "link_url", "label": "Link URL" },
-    { "type": "collection", "id": "collection", "label": "Collection source" },
+    { "type": "collection", "id": "collection", "label": "Collection (used when no tabs are set)" },
+    { "type": "header", "content": "Tab 1" },
+    { "type": "text", "id": "tab_1_label", "label": "Label", "default": "Cables" },
+    { "type": "collection", "id": "tab_1_collection", "label": "Collection" },
+    { "type": "header", "content": "Tab 2" },
+    { "type": "text", "id": "tab_2_label", "label": "Label", "default": "Hubs" },
+    { "type": "collection", "id": "tab_2_collection", "label": "Collection" },
+    { "type": "header", "content": "Tab 3" },
+    { "type": "text", "id": "tab_3_label", "label": "Label" },
+    { "type": "collection", "id": "tab_3_collection", "label": "Collection" },
+    { "type": "header", "content": "Tab 4" },
+    { "type": "text", "id": "tab_4_label", "label": "Label" },
+    { "type": "collection", "id": "tab_4_collection", "label": "Collection" },
     {
       "type": "range",
       "id": "products_limit",
-      "label": "Products to show",
+      "label": "Products per tab",
       "min": 4,
-      "max": 10,
+      "max": 12,
       "step": 1,
       "default": 8
     }
   ],
   "presets": [
-    {
-      "name": "Featured carousel"
-    }
+    { "name": "Featured carousel" }
   ]
 }
 {% endschema %}

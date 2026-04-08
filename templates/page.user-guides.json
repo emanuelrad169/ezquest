@@ -20,8 +20,8 @@
         "copy": "Browse setup guides by workflow, product family, or the decision you are working through.",
         "structured_source": "global",
         "resource_kind": "guides",
-        "resource_limit": 6,
-        "show_search": true,
+        "resource_limit": 12,
+        "show_search": false,
         "source_note": "Start with the guide that matches your workflow. Move into manuals or support if the next step is still unclear.",
         "link_label": "Open manuals",
         "link_url": "/pages/manuals"

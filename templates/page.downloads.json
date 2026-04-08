@@ -4,39 +4,37 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support resources",
-        "heading": "Drivers and utilities that stay tied to your setup",
-        "copy": "Find the right file by product, platform, or the next task in front of you.",
-        "support_eyebrow": "Ownership confidence",
-        "support_note": "Use downloads when software or a utility is the clearest answer for the product you already own. Contact support only if install help is still needed.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support"
+        "heading": "Find the right download fast",
+        "copy": "Browse drivers, utilities, and update files by product and platform without bouncing between pages.",
+        "support_eyebrow": "Downloads support",
+        "support_note": "Use downloads when you need a driver, utility, or update file. If you are not sure which file applies, check compatibility or contact support."
       }
     },
     "resources": {
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Resources",
-        "heading": "Downloadable resources, organized for the job in front of you",
-        "copy": "Browse updates, drivers, and utilities by product family, platform, or support task without digging through a raw file list.",
+        "heading": "Downloadable resources in one place",
+        "copy": "Browse files by product and platform so the right download is easier to find.",
         "structured_source": "global",
         "resource_kind": "downloads",
-        "resource_limit": 6,
-        "show_search": true,
-        "source_note": "Choose the file that matches your product and platform first. Move into compatibility or direct help only when one detail is still unclear.",
-        "link_label": "Contact support",
+        "resource_limit": 12,
+        "show_search": false,
+        "source_note": "Start with product and platform. If the right file still is not obvious, check compatibility or contact support.",
+        "link_label": "Get help now",
         "link_url": "/pages/contact"
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need another resource",
-        "heading": "Not sure which download fits your setup?",
-        "copy": "If the right file is still unclear, move into compatibility or support before you install anything.",
-        "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility",
-        "secondary_label": "Contact support",
-        "secondary_url": "/pages/contact",
+        "eyebrow": "Need help",
+        "heading": "Need help choosing a download?",
+        "copy": "Check compatibility or contact support before installing the wrong file.",
+        "link_label": "Get help now",
+        "link_url": "/pages/contact",
+        "secondary_label": "Check compatibility",
+        "secondary_url": "/pages/compatibility",
         "style": "light",
         "button_style": "secondary"
       }

@@ -7,12 +7,12 @@
   {% if media != blank %}
     {% case media.media_type %}
       {% when 'image' %}
-        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', class: ratio_class | append: ' w-full ' | append: object_fit }}
+        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', alt: media.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
       {% else %}
         {{ media | media_tag: class: ratio_class | append: ' w-full ' | append: object_fit, image_size: '1600x' }}
     {% endcase %}
   {% elsif image != blank %}
-    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', class: ratio_class | append: ' w-full ' | append: object_fit }}
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', alt: image.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
   {% else %}
     {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: ratio_class | append: ' w-full ' | append: object_fit %}
   {% endif %}

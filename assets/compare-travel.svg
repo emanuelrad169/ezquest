@@ -1,91 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st1 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st2 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st3 {
-        fill: url(#linear-gradient4);
-      }
-
-      .st4, .st5 {
-        fill: #facc15;
-      }
-
-      .st6 {
-        fill-opacity: .3;
-      }
-
-      .st6, .st7 {
-        fill: #f8fafc;
-      }
-
-      .st7 {
-        fill-opacity: .2;
-      }
-
-      .st8 {
-        fill: url(#linear-gradient);
-      }
-
-      .st5 {
-        fill-opacity: .8;
-      }
-
-      .st9 {
-        fill: #111a2a;
-        fill-opacity: .4;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="0" y1="600" x2="1600" y2="600" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset=".4" stop-color="#364152"/>
-      <stop offset="1" stop-color="#969eaa"/>
+    <linearGradient id="compare-travel-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
     </linearGradient>
-    <linearGradient id="linear-gradient1" x1="2" y1="163.5" x2="1602" y2="22.8" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d8e0eb" stop-opacity=".1"/>
-      <stop offset="1" stop-color="#97a5b8" stop-opacity=".2"/>
+    <radialGradient id="compare-travel-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="compare-travel-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="compare-travel-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="linear-gradient2" x1="732.5" y1="676.1" x2="1156.5" y2="412.1" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d4dce7"/>
-      <stop offset=".5" stop-color="#8894a7"/>
-      <stop offset="1" stop-color="#4a5669"/>
+    <linearGradient id="compare-travel-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
-    <linearGradient id="linear-gradient3" x1="760" y1="634" x2="1126" y2="456" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset=".5" stop-color="#d7dfe9"/>
-      <stop offset="1" stop-color="#b7c2d1"/>
+    <linearGradient id="compare-travel-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
-    <linearGradient id="linear-gradient4" x1="1070.8" y1="852" x2="1292.8" y2="696" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#cad4e3"/>
-      <stop offset="1" stop-color="#a9b6c8"/>
-    </linearGradient>
+    <filter id="compare-travel-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="compare-travel-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="compare-travel-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st8" width="1600" height="1200"/>
-  <path class="st1" d="M0,1059.3c217.9-74.9,463-118,735.3-115.7,276.9,2.3,531.1,61.3,864.7,183.8v72.6H0v-140.7Z"/>
-  <g>
-    <rect class="st0" x="714" y="520" width="458" height="270" rx="72" ry="72"/>
-    <rect class="st2" x="760" y="566" width="366" height="178" rx="48" ry="48"/>
-    <path class="st6" d="M821,620h190c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-190c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <path class="st9" d="M824,668h96c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-96c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
-    <path class="st9" d="M958,668h64c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-64c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
-    <path class="st9" d="M1056,668h18c5.5,0,10,4.5,10,10h0c0,5.5-4.5,10-10,10h-18c-5.5,0-10-4.5-10-10h0c0-5.5,4.5-10,10-10Z"/>
-  </g>
-  <g>
-    <rect class="st3" x="1054" y="340" width="250" height="168" rx="28" ry="28"/>
-    <path class="st5" d="M1107,384h142c2.8,0,5,2.2,5,5h0c0,2.8-2.2,5-5,5h-142c-2.8,0-5-2.2-5-5h0c0-2.8,2.2-5,5-5Z"/>
-    <path class="st7" d="M1107,416h100c2.8,0,5,2.2,5,5h0c0,2.8-2.2,5-5,5h-100c-2.8,0-5-2.2-5-5h0c0-2.8,2.2-5,5-5Z"/>
-  </g>
-  <circle class="st4" cx="746" cy="546" r="9"/>
+  <rect width="1600" height="1200" fill="url(#compare-travel-bg)"/>
+  <rect width="1600" height="1200" fill="url(#compare-travel-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#compare-travel-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#compare-travel-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#compare-travel-amber)"/>
+    <g transform="translate(448.00000000000006 504) rotate(-10 352 120)">
+      <ellipse cx="352" cy="220.8" rx="394.24" ry="43.199999999999996" fill="#0B1120" fill-opacity=".16" filter="url(#compare-travel-blur)"/>
+      <g filter="url(#compare-travel-shadow)">
+        <rect x="0" y="19.2" width="704" height="192" rx="28" fill="url(#compare-travel-metal)" stroke="#D8E0E8"/>
+        <rect x="42.239999999999995" y="33.6" width="619.52" height="28.799999999999997" rx="14.399999999999999" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        <rect x="70.4" y="28.799999999999997" width="366.08000000000004" height="19.2" rx="9.6" fill="#F4D28A" opacity=".42"/>
+        <rect x="84.47999999999999" y="172.79999999999998" width="535.04" height="14.399999999999999" rx="7.199999999999999" fill="rgba(15,23,42,.08)"/>
+        <rect x="112.64" y="112.8" width="61.1072" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="211.2" y="112.8" width="61.1072" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="309.76" y="112.8" width="61.1072" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="408.32" y="112.8" width="61.1072" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      <path d="M633.6 124.80000000000001 C 718.08 100.8, 816.64 43.199999999999996, 858.88 28.799999999999997" stroke="#162033" stroke-width="19.2" stroke-linecap="round" opacity=".9"/><circle cx="858.88" cy="28.799999999999997" r="14.399999999999999" fill="#162033"/>
+    </g>
 </svg>

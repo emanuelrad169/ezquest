@@ -1,83 +1,109 @@
 {%- liquid
   assign account_url = routes.account_url | default: '/account'
-  assign support_url = section.settings.support_url | default: '/pages/support'
-  assign support_label = section.settings.support_label | default: 'Support'
-  assign support_phone_label = section.settings.support_phone_label | default: support_label
-  assign support_phone = section.settings.support_phone | strip
-
-  assign support_href = support_url
-  assign support_aria_label = 'Support center'
-  assign support_has_phone = false
-
-  if support_phone != blank
-    assign support_href = support_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' | replace: '.', ''
-    assign support_href = 'tel:' | append: support_href
-    assign support_aria_label = support_phone_label | append: ' ' | append: support_phone
-    assign support_has_phone = true
+  assign account_login_url = routes.account_login_url | default: '/account/login'
+  assign account_register_url = routes.account_register_url | default: '/account/register'
+  assign account_logout_url = routes.account_logout_url | default: '/account/logout'
+  assign is_home_template = false
+  if request.page_type == 'index'
+    assign is_home_template = true
   endif
 -%}
-<header class="site-header" role="banner">
-  <div class="site-header-inner">
-    <div class="site-header-shell">
-      <div class="site-header-main-row">
-        <a href="{{ routes.root_url }}" class="site-brandmark">
-          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="h-12 w-auto lg:h-14" width="240" height="56">
+<header class="site-header{% if is_home_template %} site-header--hero-overlay{% endif %}" role="banner"{% if is_home_template %} data-header-scroll-threshold="28"{% else %} data-header-scroll-threshold="8"{% endif %}>
+  <div class="site-header-inner container-shell">
+    <div class="site-header-shell grid w-full grid-cols-1 py-0">
+      <div class="site-header-main-row flex w-full items-center gap-3 lg:gap-6">
+        <a href="{{ routes.root_url }}" class="site-brandmark inline-flex shrink-0 items-center">
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-48 max-w-full lg:w-60" width="240" height="56">
         </a>
 
-        <a href="{{ routes.search_url }}" class="site-header-search-surface hidden lg:flex" aria-label="{{ 'header.search' | t }}">
-          <span class="site-header-search-label">Search</span>
-          <span class="site-header-search-icon">
-            {% render 'icon', name: 'search' %}
-          </span>
-        </a>
+        <nav aria-label="Primary" class="site-header-nav hidden min-w-0 flex-1 justify-center lg:flex">
+          {% render 'mega-menu', section: section %}
+        </nav>
 
-        <div class="site-header-utility-cluster">
-          <a href="{{ support_href }}" class="site-header-support-surface hidden lg:flex" aria-label="{{ support_aria_label }}">
-            <span class="site-header-support-icon">
-              {% render 'icon', name: 'support' %}
-            </span>
-            <span class="site-header-support-copy">
-              <span class="site-header-support-label">
-                {% if support_has_phone %}
-                  {{ support_phone_label }}
-                {% else %}
-                  {{ support_label }}
-                {% endif %}
-              </span>
-              <strong class="site-header-support-value">
-                {% if support_has_phone %}
-                  {{ support_phone }}
-                {% else %}
-                  Support center
-                {% endif %}
-              </strong>
-            </span>
-            {% unless support_has_phone %}
-              <span class="site-header-support-caret">
-                {% render 'icon', name: 'chevron-down' %}
-              </span>
-            {% endunless %}
-          </a>
-
-          <div class="site-header-actions">
+        <div class="site-header-utility-cluster ml-auto flex shrink-0 items-center gap-1 lg:gap-1.5">
+          <div class="site-header-actions flex items-center gap-1">
+            <button
+              type="button"
+              class="site-header-icon-button hidden lg:inline-flex"
+              aria-label="{{ 'header.search' | t }}"
+              aria-expanded="false"
+              aria-controls="site-header-search-panel"
+              data-search-mega-trigger
+            >
+              {% render 'icon', name: 'search' %}
+            </button>
             <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
               {% render 'icon', name: 'search' %}
             </a>
-            <a href="{{ account_url }}" class="site-header-icon-button" aria-label="Account">
+            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
+              <button
+                type="button"
+                class="site-header-icon-button"
+                aria-label="Account"
+                aria-expanded="false"
+                aria-controls="header-account-menu"
+                data-nav-submenu-trigger
+              >
+                {% render 'icon', name: 'user' %}
+              </button>
+              <div id="header-account-menu" class="nav-submenu-panel nav-submenu-panel--icon" hidden data-nav-submenu-panel>
+                {% if customer %}
+                  <a href="{{ account_url }}" class="nav-submenu-link">My account</a>
+                  <a href="{{ account_url }}#orders" class="nav-submenu-link">Orders</a>
+                  <a href="{{ account_logout_url }}" class="nav-submenu-link">Log out</a>
+                {% else %}
+                  <a href="{{ account_login_url }}" class="nav-submenu-link">Sign in</a>
+                  <a href="{{ account_register_url }}" class="nav-submenu-link">Create account</a>
+                {% endif %}
+              </div>
+            </div>
+            <a href="{{ account_url }}" class="site-header-icon-button lg:hidden" aria-label="Account">
               {% render 'icon', name: 'user' %}
             </a>
-            <a href="/pages/compare" class="site-header-icon-button" aria-label="Compare">
-              {% render 'icon', name: 'layers' %}
-            </a>
-            <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button" aria-label="{{ 'header.cart' | t }}">
+            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
+              <button
+                type="button"
+                class="site-header-icon-button site-header-cart-button"
+                aria-label="{{ 'header.cart' | t }}"
+                aria-expanded="false"
+                aria-controls="header-cart-menu"
+                data-nav-submenu-trigger
+              >
+                {% render 'icon', name: 'cart' %}
+                {% if cart.item_count > 0 %}
+                  <span class="site-header-cart-count">{{ cart.item_count }}</span>
+                {% endif %}
+              </button>
+              <div id="header-cart-menu" class="nav-submenu-panel nav-submenu-panel--icon nav-submenu-panel--cart" hidden data-nav-submenu-panel>
+                <div class="nav-submenu-summary">
+                  <strong>
+                    {% if cart.item_count > 0 %}
+                      {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}
+                    {% else %}
+                      Your cart is empty
+                    {% endif %}
+                  </strong>
+                  <span>
+                    {% if cart.item_count > 0 %}
+                      {{ cart.total_price | money }}
+                    {% else %}
+                      Add a product to get started.
+                    {% endif %}
+                  </span>
+                </div>
+                <a href="{{ routes.cart_url }}" class="nav-submenu-link">View cart</a>
+                {% if cart.item_count > 0 %}
+                  <a href="/checkout" class="nav-submenu-link">Checkout</a>
+                {% else %}
+                  <a href="{{ routes.all_products_collection_url }}" class="nav-submenu-link">Browse products</a>
+                {% endif %}
+              </div>
+            </div>
+            <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button lg:hidden" aria-label="{{ 'header.cart' | t }}">
               {% render 'icon', name: 'cart' %}
               {% if cart.item_count > 0 %}
                 <span class="site-header-cart-count">{{ cart.item_count }}</span>
               {% endif %}
-            </a>
-            <a href="{{ routes.cart_url }}" class="site-header-cart-summary hidden lg:block">
-              <span class="site-header-cart-summary-label">Subtotal</span>
-              <strong>{{ cart.total_price | money }}</strong>
             </a>
             <button
               class="site-header-icon-button lg:hidden"
@@ -92,30 +118,15 @@
           </div>
         </div>
       </div>
-
-      <div class="site-header-nav-row hidden lg:grid">
-        <nav aria-label="Primary" class="site-header-nav">
-          {% render 'mega-menu', section: section %}
-        </nav>
-
-        <div class="site-header-meta-links">
-          <a href="{{ routes.all_products_collection_url }}" class="site-header-meta-link">
-            {% render 'icon', name: 'tag' %}
-            <span>All products</span>
-          </a>
-          <a href="/pages/shipping-returns" class="site-header-meta-link">
-            {% render 'icon', name: 'truck' %}
-            <span>Shipping &amp; returns</span>
-          </a>
-        </div>
-      </div>
     </div>
+
+    {% render 'search-mega-panel' %}
   </div>
 
   {% render 'mobile-nav-drawer',
-    support_href: support_href,
-    support_has_phone: support_has_phone,
-    support_phone: support_phone,
-    support_phone_label: support_phone_label
+    support_href: '/pages/support',
+    support_has_phone: false,
+    support_phone: section.settings.support_phone,
+    support_phone_label: section.settings.support_phone_label
   %}
 </header>

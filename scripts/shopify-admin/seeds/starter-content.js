@@ -1,8 +1,51 @@
+const seedProducts = require("./products");
+
+const USE_CASES = [
+  {
+    title: "Balanced everyday",
+    slug: "balanced-everyday",
+    description: "Built for everyday setups that need reliable display, charging, and accessory support without moving up to a full dock.",
+    sort_order: 10
+  },
+  {
+    title: "Portable",
+    slug: "portable",
+    description: "Built for travel-ready setups, mobile work, and lighter everyday carry where flexibility matters more than a permanent desk footprint.",
+    sort_order: 20
+  },
+  {
+    title: "Desk-ready",
+    slug: "desk-ready",
+    description: "Built for permanent desks and workstation-style setups with more peripherals, more display demands, and a cleaner long-session footprint.",
+    sort_order: 30
+  },
+  {
+    title: "Chargers & power",
+    slug: "chargers-power",
+    description: "Built for charging layers that keep notebooks, tablets, and phones powered with less clutter across desks, travel kits, and shared setups.",
+    sort_order: 40
+  }
+];
+
+function buildUseCaseEntries(products) {
+  return USE_CASES.map((useCase) => ({
+    ...useCase,
+    productHandles: products
+      .filter((product) => Array.isArray(product.useCaseHandles) && product.useCaseHandles.includes(useCase.slug))
+      .map((product) => product.handle)
+  })).filter((useCase) => useCase.productHandles.length > 0);
+}
+
 module.exports = {
+  useCases: buildUseCaseEntries(seedProducts),
   products: [
     {
       handle: "usb-c-multimedia-hub",
       title: "USB-C Multimedia Hub",
+      compareRole: "balanced",
+      recommendedPriority: 1,
+      bestFor: "Everyday desks that need display, charging, Ethernet, and accessory access",
+      compareShortReason: "The most balanced choice for customers who want a fuller port mix without stepping up to a permanent desk dock.",
       supportSummaryHtml: "<p>The EZQuest USB-C Multimedia Hub supports the everyday desk with HDMI, charging, Ethernet, USB expansion, and card-reader access in one compact adapter that stays easy to set up and support.</p>",
       compatibilitySummaryHtml: "<p>Best for Mac, PC, and tablet users who want one everyday hub for a single external display, charging, wired networking, and accessory access.</p>",
       featureHighlights: [
@@ -128,6 +171,10 @@ module.exports = {
     {
       handle: "usb-c-travel-hub",
       title: "USB-C Travel Hub",
+      compareRole: "portable",
+      recommendedPriority: 2,
+      bestFor: "Travel kits, meeting rooms, and lighter mobile setups",
+      compareShortReason: "The lightest carry-friendly option for customers who care more about mobility and presentation-ready basics than maximum expansion.",
       supportSummaryHtml: "<p>The EZQuest USB-C Travel Hub is built for mobile setups that still need HDMI output, charging passthrough, and the core ports needed for meetings, hotel desks, classrooms, and everyday carry.</p>",
       compatibilitySummaryHtml: "<p>Best for lighter mobile setups where portability matters more than maximum port count or a permanent desktop footprint.</p>",
       featureHighlights: [
@@ -252,6 +299,10 @@ module.exports = {
     {
       handle: "usb-c-pro-dock",
       title: "USB-C Pro Dock",
+      compareRole: "desk",
+      recommendedPriority: 3,
+      bestFor: "Permanent desk setups with more displays and peripherals",
+      compareShortReason: "The desk-first step up for customers who need broader connectivity, stronger workstation support, and less compromise at a fixed setup.",
       supportSummaryHtml: "<p>The EZQuest USB-C Pro Dock is built for permanent desk setups that need broader connectivity, better cable control, external displays, wired networking, and a clearer step up from travel or multimedia hubs.</p>",
       compatibilitySummaryHtml: "<p>Best for Mac and Windows users building a more stable workstation with more peripherals, stronger desk organization, and a clearer dock-vs-hub buying decision.</p>",
       featureHighlights: [
@@ -376,14 +427,178 @@ module.exports = {
   ],
   comparisonGroups: [
     {
+      title: "USB-C workspace connectivity lineup",
       heading: "Choose the right EZQuest connectivity setup",
       key: "usb-c-workspace-connectivity-lineup",
+      slug: "usb-c-workspace-connectivity-lineup",
       eyebrow: "Compare",
       description: "Compare travel-first portability, balanced everyday expansion, and workstation-ready desktop connectivity before you buy.",
+      use_case: "USB-C workspace connectivity",
       group_type: "USB-C Connectivity",
       cta_label: "View product",
       support_note: "Use compare to narrow by port mix, display needs, and desk-versus-travel fit before escalating to support.",
-      productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"]
+      productHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"],
+      defaultProductHandles: ["usb-c-multimedia-hub", "usb-c-travel-hub", "usb-c-pro-dock"]
+    },
+    {
+      title: "Travel and desk wall chargers",
+      heading: "Choose the right EZQuest wall charger",
+      key: "travel-and-desk-wall-chargers",
+      slug: "travel-and-desk-wall-chargers",
+      eyebrow: "Compare",
+      description: "Compare laptop-ready travel charging, slim dual-USB-C desk power, and lighter multi-device travel charging before you buy.",
+      use_case: "Travel and desk charging",
+      group_type: "Chargers & Power",
+      cta_label: "View product",
+      support_note: "Use compare to narrow by charging headroom, travel flexibility, and desk-versus-carry fit before moving into support.",
+      productHandles: [
+        "worldtravel-65w-gan-5-port-pd-wall-charger",
+        "ultraslim-wall-charger-dual-usb-c-70w",
+        "worldtravel-35w-gan-5-port-pd-wall-charger"
+      ],
+      defaultProductHandles: [
+        "worldtravel-65w-gan-5-port-pd-wall-charger",
+        "ultraslim-wall-charger-dual-usb-c-70w",
+        "worldtravel-35w-gan-5-port-pd-wall-charger"
+      ]
+    },
+    {
+      title: "DuraGuard charge and sync cables",
+      heading: "Choose the right DuraGuard cable",
+      key: "duraguard-charge-and-sync-cables",
+      slug: "duraguard-charge-and-sync-cables",
+      eyebrow: "Compare",
+      description: "Compare USB-C to USB-C power delivery and USB-C to USB-A legacy compatibility so you can pick the right everyday DuraGuard cable faster.",
+      use_case: "Charge and sync cables",
+      group_type: "Cables & Charging",
+      cta_label: "View product",
+      support_note: "Use compare to confirm connector type, charging headroom, and legacy-device fit before you buy the wrong cable.",
+      productHandles: [
+        "duraguard-usb-c-to-usb-c-charge-and-sync-cable",
+        "duraguard-usb-c-to-usb-a-charge-and-sync-cable"
+      ],
+      defaultProductHandles: [
+        "duraguard-usb-c-to-usb-c-charge-and-sync-cable",
+        "duraguard-usb-c-to-usb-a-charge-and-sync-cable"
+      ]
+    },
+    {
+      title: "UltimatePower wall chargers",
+      heading: "Choose the right UltimatePower wall charger",
+      key: "ultimatepower-wall-chargers",
+      slug: "ultimatepower-wall-chargers",
+      eyebrow: "Compare",
+      description: "Compare lighter dual-USB-C carry charging, balanced everyday laptop power, and higher-output desk charging before you buy.",
+      use_case: "UltimatePower wall charging",
+      group_type: "Chargers & Power",
+      cta_label: "View product",
+      support_note: "Use compare to narrow by charging output, port configuration, and travel-versus-desk fit before moving deeper into support.",
+      productHandles: [
+        "65w-gan-usb-c-pd-wall-charger",
+        "ultimatepower-90w-gan-usb-c-pd-wall-charger",
+        "45w-gan-usb-c-pd-wall-charger",
+        "ultimatepower-120w-gan-usb-c-pd-wall-charger"
+      ],
+      defaultProductHandles: [
+        "65w-gan-usb-c-pd-wall-charger",
+        "ultimatepower-90w-gan-usb-c-pd-wall-charger",
+        "45w-gan-usb-c-pd-wall-charger",
+        "ultimatepower-120w-gan-usb-c-pd-wall-charger"
+      ]
+    }
+  ],
+  compareAssignments: [
+    {
+      handle: "worldtravel-65w-gan-5-port-pd-wall-charger",
+      compareGroupKey: "travel-and-desk-wall-chargers",
+      compareRole: "balanced",
+      recommendedPriority: 1,
+      bestFor: "International travel kits that still need laptop, tablet, and phone charging from one adapter",
+      compareShortReason: "The best balance of travel flexibility and charging headroom, with 65W USB-C PD, five total ports, and built-in world-travel coverage."
+    },
+    {
+      handle: "ultraslim-wall-charger-dual-usb-c-70w",
+      compareGroupKey: "travel-and-desk-wall-chargers",
+      compareRole: "desk",
+      recommendedPriority: 2,
+      bestFor: "Desk setups and lighter carry kits that want slim dual USB-C charging without extra bulk",
+      compareShortReason: "The slimmest dual-USB-C option, delivering up to 70W total output when cleaner everyday USB-C charging matters more than international plug coverage."
+    },
+    {
+      handle: "worldtravel-35w-gan-5-port-pd-wall-charger",
+      compareGroupKey: "travel-and-desk-wall-chargers",
+      compareRole: "portable",
+      recommendedPriority: 3,
+      bestFor: "Phones, tablets, and lighter travel kits that value global plug coverage and multi-device charging",
+      compareShortReason: "The most portable world-travel choice for lighter charging loads, pairing 35W USB-C PD with five total ports and broad outlet compatibility."
+    },
+    {
+      handle: "duraguard-usb-c-to-usb-c-charge-and-sync-cable",
+      compareGroupKey: "duraguard-charge-and-sync-cables",
+      compareRole: "balanced",
+      recommendedPriority: 1,
+      bestFor: "USB-C laptops, tablets, and phones that need one durable everyday cable with full USB-C charging headroom",
+      compareShortReason: "The best all-around DuraGuard cable when you need USB-C on both ends, up to 100W PD, and heavier-duty everyday durability.",
+      compareConnectorType: "USB-C to USB-C",
+      compareChargingPower: "Up to 100W PD / 480Mbps",
+      compareFormFactor: "Straight braided cable with Kevlar reinforcement and E-Mark chipset",
+      comparePortability: "Available in 1.2, 2, and 2.2 meter lengths"
+    },
+    {
+      handle: "duraguard-usb-c-to-usb-a-charge-and-sync-cable",
+      compareGroupKey: "duraguard-charge-and-sync-cables",
+      compareRole: "portable",
+      recommendedPriority: 2,
+      bestFor: "USB-C devices that still charge or sync through USB-A chargers, power banks, and older accessory ports",
+      compareShortReason: "The right pick when you still rely on USB-A chargers or legacy USB ports and want a durable cable for lighter charging and sync.",
+      compareConnectorType: "USB-C to USB-A",
+      compareChargingPower: "Up to 3A / 480Mbps",
+      compareFormFactor: "Straight braided cable with Kevlar reinforcement",
+      comparePortability: "Available in 1.2 and 2.2 meter lengths"
+    },
+    {
+      handle: "65w-gan-usb-c-pd-wall-charger",
+      compareGroupKey: "ultimatepower-wall-chargers",
+      compareRole: "balanced",
+      recommendedPriority: 1,
+      bestFor: "Everyday laptop, tablet, and phone charging that wants stronger 3-port flexibility without stepping up to the largest charger",
+      compareShortReason: "The best all-around UltimatePower choice, pairing up to 65W charging with 2 USB-C ports, 1 USB-A port, and an included 1.8 meter USB-C cable.",
+      compareChargingPower: "Up to 65W total output",
+      compareFormFactor: "3-port GaN II wall charger with foldable US plugs and included USB-C cable",
+      comparePortability: "Balanced carry-and-desk fit with 2 USB-C ports, 1 USB-A port, and a 1.8 meter USB-C cable"
+    },
+    {
+      handle: "ultimatepower-90w-gan-usb-c-pd-wall-charger",
+      compareGroupKey: "ultimatepower-wall-chargers",
+      compareRole: "desk",
+      recommendedPriority: 2,
+      bestFor: "Higher-output notebook and multi-device charging where more headroom matters more than the lightest travel footprint",
+      compareShortReason: "Steps up to 90W total output while keeping 2 USB-C ports, 1 USB-A port, a 2 meter USB-C cable, and an EU converter in the box.",
+      compareChargingPower: "Up to 90W total output",
+      compareFormFactor: "3-port GaN wall charger bundle with USB-C cable and EU converter",
+      comparePortability: "Desk-leaning charger bundle with a 2 meter USB-C cable and EU converter when you still need some travel flexibility"
+    },
+    {
+      handle: "45w-gan-usb-c-pd-wall-charger",
+      compareGroupKey: "ultimatepower-wall-chargers",
+      compareRole: "portable",
+      recommendedPriority: 3,
+      bestFor: "Phones, tablets, and lighter USB-C notebook charging when compact dual-USB-C carry matters most",
+      compareShortReason: "The lightest UltimatePower option, keeping charging simple with 2 USB-C ports, foldable US plugs, and up to 45W total output.",
+      compareChargingPower: "Up to 45W total output",
+      compareFormFactor: "Dual USB-C GaN II wall charger with built-in foldable US plugs",
+      comparePortability: "Most portable charging tier with 2 USB-C ports and a lighter everyday carry fit"
+    },
+    {
+      handle: "ultimatepower-120w-gan-usb-c-pd-wall-charger",
+      compareGroupKey: "ultimatepower-wall-chargers",
+      compareRole: "desk",
+      recommendedPriority: 4,
+      bestFor: "Highest-output desk charging for heavier laptop loads and multi-device charging where maximum wattage leads the decision",
+      compareShortReason: "The power-first option, delivering up to 120W total output with 2 USB-C ports, 1 USB-A port, a 2 meter USB-C cable, and an EU converter.",
+      compareChargingPower: "Up to 120W total output",
+      compareFormFactor: "High-output 3-port GaN wall charger bundle with USB-C cable and EU converter",
+      comparePortability: "Least carry-focused option, built for higher-output desk charging with the fuller charger bundle in the box"
     }
   ],
   troubleshootingItems: [

@@ -5,12 +5,15 @@
         <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
         <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        <p class="support-aside-meta">{{ section.blocks.size }} support routes, staged from self-serve to direct help</p>
+        <p class="support-aside-meta">{{ section.blocks.size }} support paths, from self-serve resources to direct help</p>
 
         <div class="support-context-panel" data-support-context hidden>
           <p class="section-kicker" data-support-context-kicker>Product context</p>
-          <h3 class="support-context-title mt-4" data-support-context-title>Keep the product in view</h3>
-          <p class="support-context-copy" data-support-context-copy>Support stays tied to the product or lineup you were already checking.</p>
+          <h3 class="support-context-title mt-4" data-support-context-title>The right help, tied to the right product</h3>
+          <p class="support-context-copy" data-support-context-copy>Support stays connected to the product you were already viewing.</p>
+          <div class="mt-5">
+            <a href="/pages/support" class="button-secondary" data-support-context-return hidden>Return to product</a>
+          </div>
         </div>
 
         {% if section.settings.show_search %}
@@ -25,13 +28,16 @@
           </div>
         {% endif %}
 
-        <div class="support-next-step-list">
-          <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-          <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-          <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Compatibility</a>
-          <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-          <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+        <div class="mt-8">
+          <p class="section-kicker">More support topics</p>
+          <div class="support-next-step-list mt-4">
+            <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
+            <a href="/pages/faq" class="support-inline-link" data-support-context-link>FAQ</a>
+            <a href="/pages/warranty" class="support-inline-link" data-support-context-link>Warranty</a>
+            <a href="/pages/shipping-returns" class="support-inline-link" data-support-context-link>Shipping & returns</a>
+          </div>
         </div>
+
         <script type="application/json" data-support-context-config>
           {
             "productTitles": {
@@ -55,14 +61,12 @@
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
               <span class="support-tile-badge">
-                {% if forloop.index <= 3 %}
-                  Self-serve first
-                {% elsif block.settings.link_url contains '/pages/troubleshooting' %}
-                  Middle step
-                {% elsif block.settings.link_url contains '/pages/contact' or block.settings.link_url contains '/pages/ticket-submission' %}
-                  Final step
+                {% if block.settings.link_url contains '/pages/contact' %}
+                  Direct support
+                {% elsif block.settings.link_url contains '/pages/compatibility' %}
+                  Compatibility
                 {% else %}
-                  Also useful
+                  Self-serve
                 {% endif %}
               </span>
             </div>
@@ -70,18 +74,16 @@
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
             <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
               <p class="support-tile-note">
-                {% if forloop.index <= 3 %}
-                  Best when you already know the file, guide, or check you need
-                {% elsif block.settings.link_url contains '/pages/troubleshooting' %}
-                  Best when the product is connected but not behaving the way it should
-                {% elsif block.settings.link_url contains '/pages/contact' or block.settings.link_url contains '/pages/ticket-submission' %}
-                  Best when files and troubleshooting are no longer enough
+                {% if block.settings.link_url contains '/pages/contact' %}
+                  Best for product, order, or warranty questions
+                {% elsif block.settings.link_url contains '/pages/compatibility' %}
+                  Best for checking devices, displays, and platform support
                 {% else %}
-                  Best when this is the clearest answer for the job in front of you
+                  Best for manuals, downloads, and setup files
                 {% endif %}
               </p>
               {% if block.settings.link_url != blank %}
-                <a href="{{ block.settings.link_url }}" class="button-secondary"{% if block.settings.link_url contains '/pages/' %} data-support-context-link{% endif %}>{{ block.settings.link_label | default: 'Open support page' }}</a>
+                <a href="{{ block.settings.link_url }}" class="button-secondary"{% if block.settings.link_url contains '/pages/' %} data-support-context-link{% endif %}>{{ block.settings.link_label | default: 'View page' }}</a>
               {% endif %}
             </div>
           </article>
@@ -94,13 +96,13 @@
               </div>
               <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
                 {% if forloop.index == 1 %}
-                  Downloads and drivers
+                  Find a download
                 {% elsif forloop.index == 2 %}
-                  Manuals and setup guides
+                  Find a manual
                 {% elsif forloop.index == 3 %}
-                  Compatibility checks
+                  Check compatibility
                 {% else %}
-                  Direct support
+                  Get help now
                 {% endif %}
               </h3>
               <p class="mt-3 text-sm leading-7 text-slate-600">
@@ -109,9 +111,9 @@
                 {% elsif forloop.index == 2 %}
                   Move into manuals when you need setup steps, product instructions, or a quick-start path.
                 {% elsif forloop.index == 3 %}
-                  Confirm the right device, display, or workflow fit before you buy or begin installation.
+                  Check device, display, and platform compatibility before you buy or install.
                 {% else %}
-                  Use direct support when the answer depends on your exact setup, order, or troubleshooting context.
+                  Start one support request when the answer depends on your exact setup, order, or warranty status.
                 {% endif %}
               </p>
             </article>
@@ -127,9 +129,9 @@
   "name": "Support nav grid",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support hub" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Start with the help you need" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Find downloads, manuals, compatibility guidance, troubleshooting, and direct support from one clear starting point." },
-    { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose the support path" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Choose downloads, manuals, compatibility, or direct support based on what you need." },
+    { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": false },
     { "type": "text", "id": "link_label", "label": "Section link label" },
     { "type": "url", "id": "link_url", "label": "Section link URL" }
   ],
@@ -140,8 +142,8 @@
       "settings": [
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
         { "type": "text", "id": "title", "label": "Title", "default": "Downloads" },
-        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Explain when this support destination is the right next step." },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "Open support page" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Show what belongs here and why it matters." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "View page" },
         { "type": "url", "id": "link_url", "label": "Link" }
       ]
     }

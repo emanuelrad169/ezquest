@@ -7,9 +7,9 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need product-specific guidance",
-        "heading": "Keep reading connected to products and support",
-        "copy": "Move from educational content into related products, support resources, or direct help with a clear next step.",
+        "eyebrow": "More product help",
+        "heading": "Keep product guidance close to support",
+        "copy": "Move from guides into related products, support resources, or direct help without losing context.",
         "link_label": "Open support center",
         "link_url": "/pages/support",
         "secondary_label": "Browse collections",

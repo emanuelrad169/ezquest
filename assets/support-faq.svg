@@ -1,108 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1440 1080">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st1 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st2 {
-        fill: url(#linear-gradient3);
-      }
-
-      .st3, .st4 {
-        fill: #facc15;
-      }
-
-      .st5 {
-        fill-opacity: .2;
-      }
-
-      .st5, .st6, .st7 {
-        fill: #f8fafc;
-      }
-
-      .st6 {
-        fill-opacity: .3;
-      }
-
-      .st7 {
-        fill-opacity: .5;
-      }
-
-      .st8 {
-        fill: url(#linear-gradient);
-      }
-
-      .st9 {
-        fill-opacity: .8;
-      }
-
-      .st9, .st10, .st11 {
-        fill: #cbd5e1;
-      }
-
-      .st10 {
-        fill-opacity: .5;
-      }
-
-      .st4 {
-        fill-opacity: .2;
-      }
-
-      .st12 {
-        fill: none;
-        stroke: url(#linear-gradient4);
-        stroke-linecap: round;
-        stroke-width: 12px;
-      }
-
-      .st13 {
-        fill: #fff5ca;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="1.3" y1="540.5" x2="1439.8" y2="540.5" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset=".4" stop-color="#364152"/>
-      <stop offset="1" stop-color="#969eaa"/>
+    <linearGradient id="support-faq-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
     </linearGradient>
-    <linearGradient id="linear-gradient1" x1=".5" y1="216" x2="1439.2" y2="6.9" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#dbe4ef" stop-opacity=".1"/>
-      <stop offset="1" stop-color="#94a3b8" stop-opacity=".2"/>
+    <radialGradient id="support-faq-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="support-faq-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="support-faq-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="linear-gradient2" x1="248.7" y1="787.4" x2="754.7" y2="387.4" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d6dee8"/>
-      <stop offset=".5" stop-color="#7a8698"/>
-      <stop offset="1" stop-color="#334155"/>
+    <linearGradient id="support-faq-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
-    <linearGradient id="linear-gradient3" x1="881" y1="705.8" x2="1191" y2="457.8" xlink:href="#linear-gradient2"/>
-    <linearGradient id="linear-gradient4" x1="1038.8" y1="474" x2="1198.8" y2="566" gradientTransform="translate(0 1080) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#cbd5e1" stop-opacity=".4"/>
-      <stop offset=".5" stop-color="#facc15" stop-opacity=".8"/>
-      <stop offset="1" stop-color="#cbd5e1" stop-opacity=".4"/>
+    <linearGradient id="support-faq-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
     </linearGradient>
+    <filter id="support-faq-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="support-faq-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="support-faq-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st8" x="1.3" y="1.1" width="1438.6" height="1078.9"/>
-  <path class="st1" d="M1.3,858.5c278.8-92.1,724.3-99.6,1172.4-39.8,124.5,17.4,214.1,39.8,266.3,59.7v201.6H1.3v-221.5Z"/>
-  <g>
-    <path class="st0" d="M224,338c0-35.3,28.7-64,64-64h418c35.3,0,64,28.7,64,64v270c0,35.3-28.7,64-64,64h-244l-110,100v-100h-64c-35.3,0-64-28.7-64-64v-270Z"/>
-    <path class="st11" d="M317,358h126c5,0,9,4,9,9h0c0,5-4,9-9,9h-126c-5,0-9-4-9-9h0c0-5,4-9,9-9Z"/>
-    <path class="st9" d="M316,418h284c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-284c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
-    <path class="st10" d="M315,470h214c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-214c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <circle class="st4" cx="332" cy="562" r="22"/>
-  </g>
-  <g>
-    <rect class="st2" x="860" y="362" width="344" height="266" rx="34" ry="34"/>
-    <path class="st7" d="M918,414h102c4.4,0,8,3.6,8,8h0c0,4.4-3.6,8-8,8h-102c-4.4,0-8-3.6-8-8h0c0-4.4,3.6-8,8-8Z"/>
-    <path class="st6" d="M917,464h204c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-204c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <path class="st5" d="M917,520h166c3.9,0,7,3.1,7,7h0c0,3.9-3.1,7-7,7h-166c-3.9,0-7-3.1-7-7h0c0-3.9,3.1-7,7-7Z"/>
-    <path class="st12" d="M1040,608c52-36,104-68,160-92"/>
-  </g>
-  <circle class="st3" cx="1210" cy="230" r="12"/>
-  <circle class="st13" cx="814" cy="310" r="8"/>
+  <rect width="1600" height="1200" fill="url(#support-faq-bg)"/>
+  <rect width="1600" height="1200" fill="url(#support-faq-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#support-faq-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#support-faq-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#support-faq-amber)"/>
+    <g transform="translate(320 264)">
+      <rect x="35.84" y="27.36" width="331.52000000000004" height="373.91999999999996" rx="36.480000000000004" fill="#E9EFF5" stroke="#D4DEE8"/>
+      <rect x="0" y="0" width="331.52000000000004" height="373.91999999999996" rx="36.480000000000004" fill="url(#support-faq-panel)" stroke="#D4DEE8" filter="url(#support-faq-shadow)"/>
+      <rect x="44.80000000000001" y="54.72" width="80.64" height="18.240000000000002" rx="9.120000000000001" fill="#D7A24B" opacity=".9"/>
+      <rect x="44.80000000000001" y="109.44" width="215.04000000000002" height="13.68" rx="6.84" fill="#97A6B8"/>
+      <rect x="44.80000000000001" y="150.48000000000002" width="188.16000000000003" height="13.68" rx="6.84" fill="#C3CEDA"/>
+      <rect x="44.80000000000001" y="218.88" width="241.92000000000004" height="13.68" rx="6.84" fill="#97A6B8"/>
+      <rect x="44.80000000000001" y="259.91999999999996" width="170.24000000000004" height="13.68" rx="6.84" fill="#C3CEDA"/>
+    </g><g transform="translate(832 384)">
+      <rect width="288" height="168.00000000000003" rx="26" fill="url(#support-faq-panel)" stroke="#D6DEE8" filter="url(#support-faq-shadow)"/>
+      <circle cx="80" cy="84.00000000000001" r="21.599999999999998" fill="#99A8BB"/>
+      <circle cx="144" cy="84.00000000000001" r="21.599999999999998" fill="#99A8BB"/>
+      <circle cx="208" cy="84.00000000000001" r="21.599999999999998" fill="#99A8BB"/>
+    </g>
 </svg>

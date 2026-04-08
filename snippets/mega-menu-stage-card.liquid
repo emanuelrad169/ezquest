@@ -1,0 +1,53 @@
+{%- liquid
+  assign product = product | default: blank
+  assign href = href | default: product.url
+  assign title = title | default: product.title
+  assign descriptor = descriptor | default: blank
+  assign eyebrow = eyebrow | default: blank
+  assign card_class = card_class | default: ''
+  assign image_variant = image_variant | default: 'compare'
+  assign media_context = media_context | default: 'mega-menu'
+  assign show_descriptor = show_descriptor | default: false
+  assign show_price = show_price | default: true
+  assign card_layout = card_layout | default: 'compact'
+  assign show_arrow = show_arrow | default: true
+
+  if show_descriptor and descriptor == blank and product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
+    assign descriptor = product.metafields.ezquest.feature_highlights.value.first | strip
+  endif
+-%}
+<a href="{{ href }}" class="mega-menu-stage-card mega-menu-stage-card--{{ card_layout }} card-soft card-interactive group no-underline {{ card_class | strip }}">
+  <div class="mega-menu-stage-card-media">
+    {% render 'product-browse-media',
+      product: product,
+      context: media_context,
+      variant: image_variant,
+      width: 900,
+      height: 675,
+      class: 'mega-menu-stage-card-image h-full w-full object-contain transition-transform duration-300 group-hover:scale-105'
+    %}
+  </div>
+  <div class="mega-menu-stage-card-copy">
+    {% if eyebrow != blank %}
+      <p class="mega-menu-stage-card-eyebrow type-caption">{{ eyebrow }}</p>
+    {% endif %}
+    <div class="mega-menu-stage-card-main">
+      <div class="mega-menu-stage-card-body">
+        <h3 class="card-title mega-menu-stage-card-title">{{ title }}</h3>
+        {% if show_descriptor and descriptor != blank %}
+          <p class="type-body mega-menu-stage-card-descriptor">{{ descriptor | truncatewords: 6 }}</p>
+        {% endif %}
+      </div>
+      <div class="mega-menu-stage-card-meta">
+        {% if show_price and product != blank %}
+          <div class="mega-menu-stage-card-price">
+            {% render 'price', product: product %}
+          </div>
+        {% endif %}
+        {% if show_arrow %}
+          <span class="mega-menu-stage-card-arrow" aria-hidden="true">→</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</a>

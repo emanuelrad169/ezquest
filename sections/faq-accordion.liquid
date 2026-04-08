@@ -1,58 +1,9 @@
-<script src="{{ 'component-accordion.js' | asset_url }}" defer="defer"></script>
-
 {%- liquid
-  assign faq_heading = section.settings.heading | default: 'Frequently asked questions'
-  assign current_product = blank
-  assign structured_product_faqs = blank
-  assign has_product_faqs = false
-  assign use_product_faqs = false
   assign use_global_faqs = false
   assign sorted_global_faq_keys = '' | split: ''
-  assign support_page_context = false
-  assign faq_group_filter = section.settings.faq_group | downcase
-  assign faq_collection = section.settings.source_collection
-  assign help_heading = 'Need setup help?'
-  assign help_copy = 'Move into support when the question depends on your exact product, connection path, or order details.'
-  assign help_url = '/pages/contact'
-  assign help_label = 'Contact support'
 
-  if request.page_type == 'page' and page != blank and page.handle == 'faq'
-    assign support_page_context = true
-    assign help_heading = 'Need the next ownership step?'
-    assign help_copy = 'Move from broad answers into manuals, downloads, compatibility, troubleshooting, or direct contact without losing the question you are already trying to solve.'
-    assign help_url = '/pages/support'
-    assign help_label = 'Open support center'
-  endif
-
-  if product != blank
-    assign current_product = product
-  elsif section.settings.source_product != blank
-    assign current_product = section.settings.source_product
-  endif
-
-  if current_product != blank and current_product.metafields.ezquest.faq_items != blank
-    assign structured_product_faqs = current_product.metafields.ezquest.faq_items.value
-    if structured_product_faqs.count > 0
-      assign has_product_faqs = true
-    endif
-  endif
-
-  case section.settings.structured_source
-    when 'product'
-      if has_product_faqs
-        assign use_product_faqs = true
-      endif
-    when 'global'
-      assign use_global_faqs = true
-    when 'auto'
-      if has_product_faqs
-        assign use_product_faqs = true
-      else
-        assign use_global_faqs = true
-      endif
-  endcase
-
-  if use_global_faqs and metaobjects.ezquest_faq_item != blank
+  if metaobjects.ezquest_faq_item != blank
+    assign use_global_faqs = true
     capture sorted_faqs_raw
       for faq_item in metaobjects.ezquest_faq_item.values
         capture order_token_raw
@@ -70,114 +21,95 @@
   endif
 -%}
 
-<section class="section-shell home-faq-section{% if support_page_context %} faq-section--support{% endif %}">
-  <div class="container-shell max-w-7xl">
-    <div class="home-faq-shell{% if support_page_context %} faq-shell--support{% endif %}">
-      <div class="home-faq-main">
-        <div class="home-faq-intro">
-          {% if section.settings.eyebrow != blank %}
-            <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-          {% endif %}
-          <h2 class="home-faq-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ faq_heading }}</h2>
-          {% if section.settings.copy != blank %}
-            <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-          {% endif %}
-        </div>
+<section class="faq-page-section section-shell">
+  <div class="container-shell">
+    <div class="faq-page-shell">
 
-        <div class="faq-list home-faq-list">
-        {% if use_product_faqs %}
-          {% for faq_item in structured_product_faqs limit: section.settings.faq_limit %}
-            {% capture answer %}
-              <p>{{ faq_item.answer.value | newline_to_br }}</p>
-            {% endcapture %}
-            {% render 'accordion-item', title: faq_item.question.value, content: answer %}
-          {% endfor %}
-        {% elsif use_global_faqs %}
-          {%- assign rendered_faqs = 0 -%}
-          {% for faq_key in sorted_global_faq_keys %}
-            {% if faq_key == blank %}
-              {% continue %}
-            {% endif %}
-            {% assign faq_handle = faq_key | split: '::' | last %}
-            {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-            {%- liquid
-              assign matches_group = true
-              assign matches_collection = true
-
-              if faq_group_filter != blank
-                assign faq_group_value = blank
-                if faq_item.faq_group != blank and faq_item.faq_group.value != blank
-                  assign faq_group_value = faq_item.faq_group.value | downcase
-                endif
-                if faq_group_value != faq_group_filter
-                  assign matches_group = false
-                endif
-              endif
-
-              if faq_collection != blank
-                assign matches_collection = false
-                if faq_item.collections != blank and faq_item.collections.value.count > 0
-                  for linked_collection in faq_item.collections.value
-                    if linked_collection.id == faq_collection.id
-                      assign matches_collection = true
-                      break
-                    endif
-                  endfor
-                endif
-              endif
-            -%}
-            {% if matches_group and matches_collection and rendered_faqs < section.settings.faq_limit %}
-              {% capture answer %}
-                <p>{{ faq_item.answer.value | newline_to_br }}</p>
-              {% endcapture %}
-              {% render 'accordion-item', title: faq_item.question.value, content: answer %}
-              {%- assign rendered_faqs = rendered_faqs | plus: 1 -%}
-            {% endif %}
-          {% endfor %}
-          {% if rendered_faqs == 0 %}
-            <div class="structured-empty-state">
-              <p class="section-kicker">FAQ</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No FAQ items available yet</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Global FAQ entries will appear here once they are linked in Shopify.</p>
-              <div class="support-next-step-list mt-6">
-                <a href="/pages/troubleshooting" class="support-inline-link">Troubleshooting</a>
-                <a href="/pages/support" class="support-inline-link">Support hub</a>
-                <a href="/pages/contact" class="support-inline-link">Contact support</a>
-              </div>
-            </div>
-          {% endif %}
-        {% else %}
+      <!-- FAQ groups -->
+      <div class="faq-page-main">
+        {% if section.blocks.size > 0 %}
           {% for block in section.blocks %}
-            {% capture answer %}
-              <p>{{ block.settings.answer }}</p>
-            {% endcapture %}
-            {% render 'accordion-item', title: block.settings.question, content: answer %}
-          {% else %}
-            <div class="structured-empty-state">
-              <p class="section-kicker">FAQ</p>
-              <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No FAQ items available yet</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Add FAQ entries in Shopify to replace this empty state.</p>
-              <div class="support-next-step-list mt-6">
-                <a href="/pages/troubleshooting" class="support-inline-link">Troubleshooting</a>
-                <a href="/pages/support" class="support-inline-link">Support hub</a>
-                <a href="/pages/contact" class="support-inline-link">Contact support</a>
-              </div>
-            </div>
-          {% endfor %}
-        {% endif %}
-        </div>
-      </div>
+            {% if block.type == 'group' %}
+              {%- assign group_filter = block.settings.group_handle | downcase -%}
+              {%- assign group_faq_count = 0 -%}
 
-      <aside class="home-faq-help-card{% if support_page_context %} home-faq-help-card--support{% endif %}">
-        {% if support_page_context %}
-          <div class="support-help-visual-frame">
-            {% render 'owned-support-visual', context: 'faq', alt: help_heading, class: 'support-help-visual' %}
+              <div class="faq-group-card" {{ block.shopify_attributes }}>
+                <div class="faq-group-header">
+                  <h2 class="faq-group-title">{{ block.settings.title }}</h2>
+                  {% if block.settings.subtitle != blank %}
+                    <p class="faq-group-subtitle">{{ block.settings.subtitle }}</p>
+                  {% endif %}
+                </div>
+
+                <div class="faq-list faq-group-list">
+                  {% if use_global_faqs and group_filter != blank %}
+                    {% for faq_key in sorted_global_faq_keys %}
+                      {% if faq_key == blank %}{% continue %}{% endif %}
+                      {% assign faq_handle = faq_key | split: '::' | last %}
+                      {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
+                      {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
+                      {% if item_group == group_filter %}
+                        {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
+                        {% render 'accordion-item', title: faq_item.question.value, content: answer %}
+                        {%- assign group_faq_count = group_faq_count | plus: 1 -%}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
+                  {% if group_faq_count == 0 %}
+                    {% for item_block in section.blocks %}
+                      {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
+                        {% capture answer %}<p>{{ item_block.settings.answer }}</p>{% endcapture %}
+                        {% render 'accordion-item', title: item_block.settings.question, content: answer %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <!-- Flat list fallback (no groups defined) -->
+          <div class="faq-group-card">
+            <div class="faq-group-header">
+              <h2 class="faq-group-title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
+            </div>
+            <div class="faq-list faq-group-list">
+              {% if use_global_faqs %}
+                {% for faq_key in sorted_global_faq_keys %}
+                  {% if faq_key == blank %}{% continue %}{% endif %}
+                  {% assign faq_handle = faq_key | split: '::' | last %}
+                  {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
+                  {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
+                  {% render 'accordion-item', title: faq_item.question.value, content: answer %}
+                {% endfor %}
+              {% endif %}
+            </div>
           </div>
         {% endif %}
-        <h3>{{ help_heading }}</h3>
-        <p>{{ help_copy }}</p>
-        <a href="{{ help_url }}" class="home-faq-help-button" aria-label="{{ help_label }}">{{ help_label }}</a>
+      </div>
+
+      <!-- Contact form sidebar -->
+      <aside class="faq-page-aside">
+        <div class="faq-contact-card">
+          <h3 class="faq-contact-heading">{{ section.settings.contact_heading | default: "Still need help?" }}</h3>
+          <p class="faq-contact-sub">{{ section.settings.contact_sub | default: "Send us your question and our team will help you find the right answer." }}</p>
+
+          {%- form 'contact', id: 'faq-contact-form' -%}
+            {% if form.posted_successfully? %}
+              <p class="faq-contact-success">Thanks! We'll get back to you soon.</p>
+            {% else %}
+              <div class="faq-contact-fields">
+                <input class="faq-contact-input" type="text" name="contact[name]" placeholder="Name" autocomplete="name" required>
+                <input class="faq-contact-input" type="email" name="contact[email]" placeholder="Email" autocomplete="email" required>
+                <textarea class="faq-contact-input faq-contact-textarea" name="contact[body]" placeholder="Message" rows="4"></textarea>
+                <button class="faq-contact-btn" type="submit">Send message</button>
+              </div>
+            {% endif %}
+          {%- endform -%}
+        </div>
       </aside>
+
     </div>
   </div>
 </section>
@@ -186,48 +118,33 @@
 {
   "name": "FAQ accordion",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Answer recurring questions clearly, then route into troubleshooting, manuals, or direct support when needed." },
-    {
-      "type": "select",
-      "id": "structured_source",
-      "label": "Structured source",
-      "default": "auto",
-      "options": [
-        { "value": "auto", "label": "Auto" },
-        { "value": "product", "label": "Product-linked FAQ" },
-        { "value": "global", "label": "Global FAQ metaobjects" },
-        { "value": "blocks", "label": "Blocks only" }
-      ]
-    },
-    { "type": "product", "id": "source_product", "label": "Source product" },
-    { "type": "collection", "id": "source_collection", "label": "Global FAQ collection filter" },
-    { "type": "text", "id": "faq_group", "label": "Global FAQ group filter" },
-    {
-      "type": "range",
-      "id": "faq_limit",
-      "label": "FAQ limit",
-      "min": 2,
-      "max": 10,
-      "step": 1,
-      "default": 6
-    }
+    { "type": "text", "id": "contact_heading", "label": "Contact card heading", "default": "Still need help?" },
+    { "type": "textarea", "id": "contact_sub", "label": "Contact card subtext", "default": "Send us your question and our team will help you find the right answer." }
   ],
   "blocks": [
     {
-      "type": "faq",
-      "name": "FAQ item",
+      "type": "group",
+      "name": "FAQ group",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "How do I confirm compatibility before I buy?" },
-        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Start with compatibility guidance on the product page, then move into manuals, downloads, or direct support only if your setup needs a deeper check." }
+        { "type": "text", "id": "title", "label": "Group title", "default": "Shipping & Returns" },
+        { "type": "text", "id": "subtitle", "label": "Group subtitle" },
+        { "type": "text", "id": "group_handle", "label": "Group handle (matches FAQ metaobject group field)", "default": "shipping" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item (manual)",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What is your return policy?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "We accept returns within 30 days of purchase." },
+        { "type": "text", "id": "group", "label": "Group handle (to assign to a group block)", "default": "shipping" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ accordion",
-      "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }]
+      "name": "FAQ accordion"
     }
   ]
 }

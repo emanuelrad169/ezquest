@@ -1,58 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1600 1200">
-  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
   <defs>
-    <style>
-      .st0 {
-        fill: url(#linear-gradient2);
-      }
-
-      .st1 {
-        fill: url(#linear-gradient1);
-      }
-
-      .st2 {
-        fill: #facc15;
-      }
-
-      .st3 {
-        fill: url(#linear-gradient);
-      }
-
-      .st4 {
-        fill: #172031;
-        fill-opacity: .5;
-      }
-
-      .st5 {
-        fill: #d6dee8;
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="-.5" y1="599.5" x2="1599.5" y2="599.5" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset=".4" stop-color="#364152"/>
-      <stop offset="1" stop-color="#969eaa"/>
+    <linearGradient id="pdp-multimedia-ports-bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="1" stop-color="#EAEFF5"/>
     </linearGradient>
-    <linearGradient id="linear-gradient1" x1="394.8" y1="771.4" x2="1192.8" y2="463.4" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#d6dee8"/>
-      <stop offset=".5" stop-color="#919cae"/>
-      <stop offset="1" stop-color="#4d596c"/>
+    <radialGradient id="pdp-multimedia-ports-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1088 336.00000000000006) rotate(130) scale(608 408.00000000000006)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pdp-multimedia-ports-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1312 888) rotate(130) scale(288 144)">
+      <stop stop-color="#D7A24B" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7A24B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pdp-multimedia-ports-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
     </linearGradient>
-    <linearGradient id="linear-gradient2" x1="430" y1="714" x2="1170" y2="516" gradientTransform="translate(0 1200) scale(1 -1)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset=".5" stop-color="#d3dbe6"/>
-      <stop offset="1" stop-color="#bac5d4"/>
+    <linearGradient id="pdp-multimedia-ports-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.45" stop-color="#C9D3DF"/>
+      <stop offset="1" stop-color="#7E91AF"/>
     </linearGradient>
+    <linearGradient id="pdp-multimedia-ports-metal-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B4758"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="pdp-multimedia-ports-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="pdp-multimedia-ports-shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000814" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="pdp-multimedia-ports-grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#D9E1EA" stroke-opacity=".4" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect class="st3" x="-.5" y="-.5" width="1600" height="1200"/>
-  <g>
-    <rect class="st1" x="368" y="430" width="864" height="310" rx="78" ry="78"/>
-    <rect class="st0" x="430" y="486" width="740" height="198" rx="54" ry="54"/>
-    <path class="st4" d="M536,562h82c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-82c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
-    <path class="st4" d="M686,562h116c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-116c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
-    <path class="st4" d="M872,562h50c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-50c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
-    <path class="st4" d="M990,562h50c12.2,0,22,9.8,22,22h0c0,12.2-9.8,22-22,22h-50c-12.2,0-22-9.8-22-22h0c0-12.2,9.8-22,22-22Z"/>
-    <path class="st5" d="M1097,554h0c5,0,9,4,9,9v42c0,5-4,9-9,9h0c-5,0-9-4-9-9v-42c0-5,4-9,9-9Z"/>
-  </g>
-  <circle class="st2" cx="386" cy="446" r="30.9"/>
+  <rect width="1600" height="1200" fill="url(#pdp-multimedia-ports-bg)"/>
+  <rect width="1600" height="1200" fill="url(#pdp-multimedia-ports-grid)" opacity=".55"/>
+  <rect x="96" y="96" width="1408" height="960" rx="72" fill="#FBFDFF" fill-opacity=".68" stroke="#E3E8EF" stroke-opacity="1"/>
+  <ellipse cx="832" cy="996" rx="480" ry="96" fill="#0B1120" fill-opacity=".08" filter="url(#pdp-multimedia-ports-blur)"/>
+  <ellipse cx="832" cy="384" rx="544" ry="264" fill="url(#pdp-multimedia-ports-glow)"/>
+  <ellipse cx="1312" cy="888" rx="288" ry="144" fill="url(#pdp-multimedia-ports-amber)"/>
+    <g transform="translate(224.00000000000003 408.00000000000006) rotate(0 576 156)">
+      <ellipse cx="576" cy="287.04" rx="645.1200000000001" ry="56.16" fill="#0B1120" fill-opacity=".16" filter="url(#pdp-multimedia-ports-blur)"/>
+      <g filter="url(#pdp-multimedia-ports-shadow)">
+        <rect x="0" y="24.96" width="1152" height="249.60000000000002" rx="28" fill="url(#pdp-multimedia-ports-metal)" stroke="#D8E0E8"/>
+        <rect x="69.12" y="43.68000000000001" width="1013.76" height="37.44" rx="18.72" fill="rgba(255,255,255,.8)" opacity=".8"/>
+        <rect x="115.2" y="37.44" width="599.04" height="24.96" rx="12.48" fill="#F4D28A" opacity=".42"/>
+        <rect x="138.24" y="224.64" width="875.52" height="18.72" rx="9.36" fill="rgba(15,23,42,.08)"/>
+        <rect x="184.32" y="146.64" width="99.99360000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="345.6" y="146.64" width="99.99360000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="506.88000000000005" y="146.64" width="99.99360000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="668.1600000000001" y="146.64" width="99.99360000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/><rect x="829.44" y="146.64" width="99.99360000000001" height="14" rx="7" fill="#1E293B" fill-opacity=".82"/>
+      </g>
+      
+    </g><rect x="352" y="816.0000000000001" width="896.0000000000001" height="21.599999999999998" rx="12" fill="#B3BFCE" opacity=".45"/>
 </svg>

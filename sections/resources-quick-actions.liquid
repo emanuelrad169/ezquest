@@ -1,0 +1,55 @@
+<section class="section-shell resources-actions-section">
+  <div class="container-shell">
+    <div class="resources-actions-shell">
+      <div class="resources-actions-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker resources-actions-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="resources-actions-heading">{{ section.settings.heading | default: 'Go straight to the right resource' }}</h2>
+        {% if section.settings.copy != blank %}
+          <p class="resources-actions-body">{{ section.settings.copy }}</p>
+        {% endif %}
+      </div>
+      <div class="resources-actions-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'action' %}
+            <a href="{{ block.settings.url }}" class="resources-action-card" {{ block.shopify_attributes }}>
+              <div class="resources-action-card-inner">
+                <span class="resources-action-title">{{ block.settings.title }}</span>
+                <span class="resources-action-desc">{{ block.settings.desc }}</span>
+              </div>
+              <span class="resources-action-arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Resource quick actions",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",  "label": "Eyebrow", "default": "Quick actions" },
+    { "type": "text",     "id": "heading",  "label": "Heading",  "default": "Go straight to the right resource" },
+    { "type": "textarea", "id": "copy",     "label": "Body",     "default": "Open compare, compatibility, support, or the catalog without hunting through menus." }
+  ],
+  "blocks": [
+    {
+      "type": "action",
+      "name": "Action",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Compare products" },
+        { "type": "text", "id": "desc",  "label": "Description", "default": "See specs, ports, and power side by side." },
+        { "type": "url",  "id": "url",   "label": "URL" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Resource quick actions" }
+  ]
+}
+{% endschema %}

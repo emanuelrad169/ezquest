@@ -24,6 +24,9 @@ async function getMetaobjectDefinitions(client) {
           id
           type
           name
+          fieldDefinitions {
+            key
+          }
         }
       }
     }
@@ -111,6 +114,40 @@ async function createMetaobjectDefinition(client, definition) {
   return data.metaobjectDefinitionCreate.metaobjectDefinition;
 }
 
+async function updateMetaobjectDefinition(client, id, definition) {
+  const mutation = `
+    mutation UpdateMetaobjectDefinition($id: ID!, $definition: MetaobjectDefinitionUpdateInput!) {
+      metaobjectDefinitionUpdate(id: $id, definition: $definition) {
+        metaobjectDefinition {
+          id
+          type
+          name
+          fieldDefinitions {
+            key
+          }
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const data = await client.graphql(
+    mutation,
+    { id, definition },
+    { label: `Update metaobject definition ${definition.type || id}` }
+  );
+
+  client.assertUserErrors(
+    data.metaobjectDefinitionUpdate.userErrors,
+    `Update metaobject definition ${definition.type || id}`
+  );
+
+  return data.metaobjectDefinitionUpdate.metaobjectDefinition;
+}
+
 async function seedMetaobjectDefinitions(context, summary) {
   const { client, dryRun } = context;
 
@@ -119,9 +156,34 @@ async function seedMetaobjectDefinitions(context, summary) {
     const byType = new Map(existing.map((definition) => [definition.type, definition]));
 
     for (const definition of metaobjectDefinitions) {
-      if (byType.has(definition.type)) {
-        console.log(`[shopify-admin] Skipped metaobject definition ${definition.type} (already exists)`);
-        bump(summary, "skipped");
+      const existing = byType.get(definition.type);
+
+      if (existing) {
+        const existingFieldKeys = new Set((existing.fieldDefinitions || []).map((field) => field.key));
+        const missingFields = definition.fieldDefinitions.filter((field) => !existingFieldKeys.has(field.key));
+
+        if (missingFields.length === 0) {
+          console.log(`[shopify-admin] Skipped metaobject definition ${definition.type} (already exists)`);
+          bump(summary, "skipped");
+          continue;
+        }
+
+        if (dryRun) {
+          console.log(`[dry-run] update metaobject definition ${definition.type} (+${missingFields.length} fields)`);
+          bump(summary, "updated", `Would add ${missingFields.length} fields to ${definition.type}`);
+          continue;
+        }
+
+        const updated = await updateMetaobjectDefinition(client, existing.id, {
+          name: definition.name,
+          fieldDefinitions: missingFields.map((field) => ({
+            create: buildFieldDefinitionPayload(field, new Map([...byType.entries()].map(([type, item]) => [type, item.id])))
+          }))
+        });
+
+        byType.set(definition.type, updated);
+        console.log(`[shopify-admin] Updated metaobject definition ${definition.type} (+${missingFields.length} fields)`);
+        bump(summary, "updated", `Added ${missingFields.length} fields to ${definition.type}`);
         continue;
       }
 

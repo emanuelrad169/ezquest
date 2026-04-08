@@ -5,7 +5,9 @@
     "announcement_bar": {
       "type": "announcement-bar",
       "settings": {
-        "message": "Free Shipping Over $100"
+        "message": "Free Shipping Over $100",
+        "support_phone_label": "Support",
+        "support_phone": "1-800-881-9305"
       }
     },
     "header": {

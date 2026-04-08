@@ -3,29 +3,32 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "show_vendor": true,
+        "show_vendor": false,
         "show_sku": false,
+        "show_product_type": false,
+        "show_description": false,
         "show_quantity_selector": true,
         "show_dynamic_checkout": false,
+        "show_support_panel": false,
         "support_heading": "Support for this product",
-        "support_copy": "Check compatibility, open the manual, or get the right download for this exact model."
+        "support_copy": "Compatibility, manuals, downloads, and help"
       }
     },
     "story": {
       "type": "product-story-carousel",
       "settings": {
         "eyebrow": "Product story",
-        "heading": "Why this product earns its place",
-        "copy": "Use the highlights below to see the setup role, everyday value, and ownership advantages that separate this product from nearby options.",
+        "heading": "Product highlights",
+        "copy": "See the product details that matter most for ports, power, displays, and everyday use.",
         "structured_source": "product"
       }
     },
     "specs": {
       "type": "product-spec-table",
       "settings": {
-        "heading": "Technical detail, without the noise",
-        "copy": "Review the ports, charging support, display capability, and host compatibility that matter before you commit.",
-        "source_note": "Start with the key specs here, then open compatibility or manuals only when one detail still needs confirmation."
+        "heading": "Specifications",
+        "copy": "Review the ports, charging support, display capability, and compatibility details before you order.",
+        "source_note": "Check the key specs here, then open compatibility or manuals if you need one last detail."
       }
     },
     "compare": {
@@ -36,7 +39,7 @@
         "copy": "See nearby EZQuest models side by side so the right role, port mix, power, and display support are easier to spot.",
         "columns_desktop": 3,
         "structured_source": "auto",
-        "source_note": "Compare nearby models by setup role, desk footprint, and everyday use before you go deeper into one product page."
+        "source_note": "Compare nearby models by ports, power, and display support before you go deeper into one product page."
       }
     },
     "compatibility": {
@@ -64,17 +67,17 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Still deciding",
-        "heading": "Need a final confirmation before you buy?",
-        "copy": "Use compare or support only when the choice is still close.",
-        "link_label": "Compare options",
-        "link_url": "/pages/compare",
-        "secondary_label": "Open support center",
+        "eyebrow": "More detail",
+        "heading": "Compatibility, manuals, and support",
+        "copy": "Check compatibility, open manuals, or contact support without leaving the product context.",
+        "link_label": "Compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Expert help",
         "secondary_url": "/pages/support",
         "style": "light",
         "button_style": "secondary"
       }
     }
   },
-  "order": ["main", "story", "specs", "compare", "compatibility", "faq", "cta"]
+  "order": ["main", "story", "specs", "compatibility", "faq", "compare", "cta"]
 }

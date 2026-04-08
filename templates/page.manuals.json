@@ -4,39 +4,37 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Documentation",
-        "heading": "Manuals and setup guides that stay product-aware",
-        "copy": "Find quick-start instructions, user guides, and setup notes by product family and install stage.",
+        "heading": "Find the right manual fast",
+        "copy": "Browse manuals and setup guides by product family and install stage without digging through side paths.",
         "support_eyebrow": "Ownership confidence",
-        "support_note": "Manuals are where setup becomes clearer. Start with the guide that matches your product and stage, then move into troubleshooting or support only when you still need a deeper answer.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support"
+        "support_note": "Start with the guide that matches your product and stage. If one detail is still unclear, move to compatibility or direct help."
       }
     },
     "resources": {
       "type": "support-resource-list",
       "settings": {
         "eyebrow": "Documentation",
-        "heading": "Manuals and setup guidance, organized for the way people install",
-        "copy": "Browse setup guides by product family, setup stage, or the answer you need right now.",
+        "heading": "Manuals and setup guidance in one place",
+        "copy": "See more of the manual library at once so the right setup guide is easier to spot.",
         "structured_source": "global",
         "resource_kind": "manuals",
-        "resource_limit": 6,
-        "show_search": true,
-        "source_note": "Start with the guide that matches your product and setup stage. Move into troubleshooting or direct help only if one detail is still unclear.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support"
+        "resource_limit": 12,
+        "show_search": false,
+        "source_note": "Start with product and setup stage. If the right guide still is not obvious, check compatibility or get help now.",
+        "link_label": "Get help now",
+        "link_url": "/pages/contact"
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need product-specific help",
-        "heading": "Need another step after the guide?",
-        "copy": "If a guide does not fully resolve the setup, move into troubleshooting, compatibility, or support without losing momentum.",
-        "link_label": "Open troubleshooting",
-        "link_url": "/pages/troubleshooting",
-        "secondary_label": "Contact support",
-        "secondary_url": "/pages/contact",
+        "eyebrow": "Still need help",
+        "heading": "Guide not enough for your setup?",
+        "copy": "Move straight to compatibility or a support request without restarting from the hub.",
+        "link_label": "Get help now",
+        "link_url": "/pages/contact",
+        "secondary_label": "Check compatibility",
+        "secondary_url": "/pages/compatibility",
         "style": "light",
         "button_style": "secondary"
       }

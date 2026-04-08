@@ -6,13 +6,61 @@
   assign fallback_mobile_image = section.settings.image_mobile
   assign owned_hero_desktop_asset = 'hero-home-desktop.svg'
   assign owned_hero_mobile_asset = 'hero-home-mobile.svg'
+  assign flagship_product = all_products['usb-c-multimedia-hub']
+  assign flagship_hero_image = blank
+  assign flagship_hero_mobile_image = blank
+
+  if flagship_product != blank and flagship_product.images.size > 0
+    assign flagship_hero_image = flagship_product.featured_image | default: flagship_product.images.first
+    assign flagship_hero_mobile_image = flagship_hero_image
+
+    if flagship_product.images.size > 1
+      assign flagship_desktop_candidate = blank
+      assign flagship_mobile_candidate = blank
+      assign flagship_non_technical_candidate = blank
+
+      for flagship_image in flagship_product.images
+        assign flagship_alt = flagship_image.alt | downcase
+        assign flagship_is_technical = false
+
+        if flagship_alt contains 'illustration'
+          assign flagship_is_technical = true
+        elsif flagship_alt contains 'diagram'
+          assign flagship_is_technical = true
+        elsif flagship_alt contains 'schematic'
+          assign flagship_is_technical = true
+        elsif flagship_alt contains 'placeholder'
+          assign flagship_is_technical = true
+        elsif flagship_alt contains 'port'
+          assign flagship_is_technical = true
+        elsif flagship_alt contains 'icon'
+          assign flagship_is_technical = true
+        endif
+
+        if flagship_desktop_candidate == blank and flagship_is_technical == false and flagship_image.aspect_ratio >= 1.1 and flagship_image.aspect_ratio <= 2.4
+          assign flagship_desktop_candidate = flagship_image
+        endif
+
+        if flagship_mobile_candidate == blank and flagship_is_technical == false and flagship_image.aspect_ratio >= 0.9 and flagship_image.aspect_ratio <= 1.5
+          assign flagship_mobile_candidate = flagship_image
+        endif
+
+        if flagship_non_technical_candidate == blank and flagship_is_technical == false
+          assign flagship_non_technical_candidate = flagship_image
+        endif
+      endfor
+
+      assign flagship_hero_image = flagship_desktop_candidate | default: flagship_non_technical_candidate | default: flagship_hero_image
+      assign flagship_hero_mobile_image = flagship_mobile_candidate | default: flagship_desktop_candidate | default: flagship_non_technical_candidate | default: flagship_hero_mobile_image
+    endif
+  endif
 
 -%}
 
-<section class="home-hero" data-hero>
-  <div class="container-shell">
-    <div class="home-hero-shell">
-      <div class="home-hero-slider-shell" data-hero-slider{% if slide_blocks.size > 1 %} data-hero-autoplay="true"{% endif %}>
+<section class="home-hero home-hero--fullbleed pt-0" data-hero>
+  <div class="w-full">
+    <div class="home-hero-shell w-full bg-transparent">
+      <div class="home-hero-slider-shell relative overflow-hidden bg-slate-950" data-hero-slider>
         <div class="home-hero-slider-track">
           {% if slide_blocks.size > 0 %}
             {% for block in slide_blocks %}
@@ -23,9 +71,7 @@
                 assign slide_heading = block.settings.heading | default: hero_heading
                 assign slide_copy = block.settings.copy | default: hero_copy
                 assign slide_primary_label = block.settings.primary_label | default: section.settings.primary_label
-                assign slide_primary_url = block.settings.primary_url | default: section.settings.primary_url
                 assign slide_secondary_label = block.settings.secondary_label | default: section.settings.secondary_label
-                assign slide_secondary_url = block.settings.secondary_url | default: section.settings.secondary_url
                 assign uses_owned_hero_asset = false
                 assign slide_image_loading = 'lazy'
                 assign slide_image_fetchpriority = 'auto'
@@ -35,12 +81,21 @@
                   assign slide_image_fetchpriority = 'high'
                 endif
 
-                if slide_image == blank and slide_mobile_image == blank
+                if slide_image == blank and slide_mobile_image == blank and flagship_hero_image != blank
+                  assign slide_desktop_image = flagship_hero_image
+                  assign slide_mobile_image = flagship_hero_mobile_image | default: flagship_hero_image
+                endif
+
+                if slide_desktop_image == blank
+                  assign slide_desktop_image = slide_mobile_image
+                endif
+
+                if slide_desktop_image == blank and slide_mobile_image == blank
                   assign uses_owned_hero_asset = true
                 endif
               -%}
               <article
-                class="home-hero-slide{% if forloop.first %} is-active{% endif %}"
+                class="home-hero-slide relative block min-h-hero xl:min-h-feature-lg{% if forloop.first %} is-active{% endif %}"
                 data-hero-slide
                 {% unless forloop.first %}hidden{% endunless %}
                 aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
@@ -83,54 +138,26 @@
                   <div class="home-hero-media-overlay"></div>
                 </div>
 
-                <div class="home-hero-copy-panel">
-                  <div class="home-hero-copy-meta">
-                    <span class="home-hero-copy-series">{{ shop.name }}</span>
-                    {% if slide_blocks.size > 1 %}
-                      <span class="home-hero-copy-meta-rule" aria-hidden="true"></span>
-                      <span class="home-hero-copy-index">0{{ forloop.index }} / 0{{ slide_blocks.size }}</span>
-                    {% endif %}
-                  </div>
-                  {% if block.settings.eyebrow != blank %}
-                    <p class="home-hero-copy-kicker" data-hero-kicker>{{ block.settings.eyebrow }}</p>
-                  {% endif %}
-                  <h1 class="display-heading home-hero-copy-heading" data-hero-heading>{{ slide_heading }}</h1>
-                  <p class="home-hero-copy-text" data-hero-copy>{{ slide_copy }}</p>
+                <div class="pointer-events-none absolute inset-0 z-10">
+                  <div class="container-shell relative h-full">
+                    <div class="home-hero-copy-panel pointer-events-auto">
+                      {% if block.settings.eyebrow != blank %}
+                        <p class="home-hero-copy-kicker" data-hero-kicker>{{ block.settings.eyebrow }}</p>
+                      {% endif %}
+                      <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ slide_heading }}</h1>
+                      <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ slide_copy }}</p>
 
-                  <div class="home-hero-actions" data-hero-actions>
-                    {% if slide_primary_label != blank %}
-                      <a href="{{ slide_primary_url | default: routes.all_products_collection_url }}" class="home-hero-primary-button">{{ slide_primary_label }}</a>
-                    {% endif %}
-                    {% if slide_secondary_label != blank %}
-                      <a href="{{ slide_secondary_url | default: '/pages/compare' }}" class="home-hero-secondary-link">{{ slide_secondary_label }}</a>
-                    {% endif %}
-                  </div>
+                      <div class="home-hero-actions mt-6 flex flex-wrap items-center gap-4 lg:mt-8" data-hero-actions>
+                        {% if slide_primary_label != blank %}
+                          {% render 'button', label: slide_primary_label, url: block.settings.primary_url | default: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
+                        {% endif %}
+                        {% if slide_secondary_label != blank %}
+                          {% render 'button', label: slide_secondary_label, url: block.settings.secondary_url | default: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link' %}
+                        {% endif %}
+                      </div>
+                    </div>
 
-                  <div class="home-hero-support-note">
-                    <p class="home-hero-support-note-kicker">Ownership confidence</p>
-                    <p class="home-hero-support-note-copy">Manuals, compatibility, and support stay within reach from first click to setup.</p>
                   </div>
-
-                  <div class="home-hero-trust-rail" data-hero-trust>
-                    <span class="home-hero-trust-chip">
-                      {% render 'icon', name: 'check' %}
-                      <span>Mac + PC confidence</span>
-                    </span>
-                    <a href="/pages/compare" class="home-hero-trust-link">
-                      {% render 'icon', name: 'layers' %}
-                      <span>Compare setups</span>
-                    </a>
-                    <a href="/pages/support" class="home-hero-trust-link">
-                      {% render 'icon', name: 'support' %}
-                      <span>Support nearby</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="home-hero-scene-note" aria-hidden="true">
-                  <span>Travel</span>
-                  <span>Desk</span>
-                  <span>Support</span>
                 </div>
               </article>
             {% endfor %}
@@ -140,11 +167,20 @@
               assign uses_owned_hero_asset = false
               assign fallback_image_loading = 'eager'
               assign fallback_image_fetchpriority = 'high'
-              if fallback_image == blank and fallback_mobile_image == blank
+              if fallback_desktop_image == blank and flagship_hero_image != blank
+                assign fallback_desktop_image = flagship_hero_image
+              endif
+              if fallback_mobile_image == blank and flagship_hero_mobile_image != blank
+                assign fallback_mobile_image = flagship_hero_mobile_image
+              endif
+              if fallback_desktop_image == blank
+                assign fallback_desktop_image = fallback_mobile_image
+              endif
+              if fallback_desktop_image == blank and fallback_mobile_image == blank
                 assign uses_owned_hero_asset = true
               endif
             -%}
-            <article class="home-hero-slide is-active" data-hero-slide aria-hidden="false">
+            <article class="home-hero-slide relative block min-h-hero xl:min-h-feature-lg is-active" data-hero-slide aria-hidden="false">
               <div class="home-hero-media-panel{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
                 {% if fallback_desktop_image != blank or fallback_mobile_image != blank %}
                   <picture class="home-hero-media-picture">
@@ -182,73 +218,49 @@
                 <div class="home-hero-media-overlay"></div>
               </div>
 
-              <div class="home-hero-copy-panel">
-                <div class="home-hero-copy-meta">
-                  <span class="home-hero-copy-series">{{ shop.name }}</span>
-                </div>
-                {% if section.settings.eyebrow != blank %}
-                  <p class="home-hero-copy-kicker" data-hero-kicker>{{ section.settings.eyebrow }}</p>
-                {% endif %}
-                <h1 class="display-heading home-hero-copy-heading" data-hero-heading>{{ hero_heading }}</h1>
-                <p class="home-hero-copy-text" data-hero-copy>{{ hero_copy }}</p>
-                <div class="home-hero-actions" data-hero-actions>
-                  {% if section.settings.primary_label != blank %}
-                    <a href="{{ section.settings.primary_url | default: routes.all_products_collection_url }}" class="home-hero-primary-button">{{ section.settings.primary_label }}</a>
-                  {% endif %}
-                  {% if section.settings.secondary_label != blank %}
-                    <a href="{{ section.settings.secondary_url | default: '/pages/compare' }}" class="home-hero-secondary-link">{{ section.settings.secondary_label }}</a>
-                  {% endif %}
-                </div>
-                <div class="home-hero-support-note">
-                  <p class="home-hero-support-note-kicker">Ownership confidence</p>
-                  <p class="home-hero-support-note-copy">Manuals, compatibility, and support stay within reach from first click to setup.</p>
-                </div>
-                <div class="home-hero-trust-rail" data-hero-trust>
-                  <span class="home-hero-trust-chip">
-                    {% render 'icon', name: 'check' %}
-                    <span>Mac + PC confidence</span>
-                  </span>
-                  <a href="/pages/compare" class="home-hero-trust-link">
-                    {% render 'icon', name: 'layers' %}
-                    <span>Compare setups</span>
-                  </a>
-                  <a href="/pages/support" class="home-hero-trust-link">
-                    {% render 'icon', name: 'support' %}
-                    <span>Support nearby</span>
-                  </a>
-                </div>
-              </div>
+              <div class="pointer-events-none absolute inset-0 z-10">
+                <div class="container-shell relative h-full">
+                  <div class="home-hero-copy-panel pointer-events-auto">
+                    {% if section.settings.eyebrow != blank %}
+                      <p class="home-hero-copy-kicker" data-hero-kicker>{{ section.settings.eyebrow }}</p>
+                    {% endif %}
+                    <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ hero_heading }}</h1>
+                    <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ hero_copy }}</p>
+                    <div class="home-hero-actions mt-6 flex flex-wrap items-center gap-4 lg:mt-8" data-hero-actions>
+                      {% if section.settings.primary_label != blank %}
+                        {% render 'button', label: section.settings.primary_label, url: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
+                      {% endif %}
+                      {% if section.settings.secondary_label != blank %}
+                        {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link' %}
+                      {% endif %}
+                    </div>
+                  </div>
 
-              <div class="home-hero-scene-note" aria-hidden="true">
-                <span>Travel</span>
-                <span>Desk</span>
-                <span>Support</span>
+                </div>
               </div>
             </article>
           {% endif %}
         </div>
 
         {% if slide_blocks.size > 1 %}
-          <div class="home-hero-slider-controls" aria-label="Hero slider controls">
-            <button class="home-hero-slider-arrow" type="button" data-hero-prev aria-label="Previous slide">
-              <span aria-hidden="true">&lsaquo;</span>
-            </button>
-            <div class="home-hero-slider-dots" role="tablist" aria-label="Hero slides">
-              {% for inner_block in slide_blocks %}
-                <button
-                  class="home-hero-slider-dot{% if forloop.first %} is-active{% endif %}"
-                  type="button"
-                  data-hero-dot
-                  data-hero-index="{{ forloop.index0 }}"
-                  role="tab"
-                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                  aria-label="Go to slide {{ forloop.index }}"
-                ></button>
-              {% endfor %}
+          <div class="home-hero-slider-controls-wrap">
+            <div class="container-shell">
+              <div class="home-hero-slider-controls" aria-label="Hero slider controls">
+                <div class="home-hero-slider-dots" role="tablist" aria-label="Hero slides">
+                  {% for inner_block in slide_blocks %}
+                    <button
+                      class="home-hero-slider-dot{% if forloop.first %} is-active{% endif %}"
+                      type="button"
+                      data-hero-dot
+                      data-hero-index="{{ forloop.index0 }}"
+                      role="tab"
+                      aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                      aria-label="Go to slide {{ forloop.index }}"
+                    ></button>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
-            <button class="home-hero-slider-arrow" type="button" data-hero-next aria-label="Next slide">
-              <span aria-hidden="true">&rsaquo;</span>
-            </button>
           </div>
         {% endif %}
       </div>

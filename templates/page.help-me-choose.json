@@ -5,9 +5,9 @@
       "settings": {
         "eyebrow": "Help me choose",
         "heading": "Choose the right EZQuest setup before you shop",
-        "copy": "Start with the setup role, then move into the family and product that match the way you actually work.",
+        "copy": "Start with the setup role, then move into the EZQuest family and product built for the way you work.",
         "support_eyebrow": "Decision guide",
-        "support_note": "This guide connects your setup intent with the right EZQuest family, then moves into the product that fits best.",
+        "support_note": "This guide connects your setup intent with the right EZQuest family, then points you to the strongest product match.",
         "link_label": "Compare options",
         "link_url": "/pages/compare"
       }
@@ -15,9 +15,9 @@
     "guide": {
       "type": "support-decision-guide",
       "settings": {
-        "eyebrow": "Start here",
+        "eyebrow": "Choose a setup",
         "heading": "Pick the setup role that matches the way you work",
-        "copy": "Choose the role first, then move into the family and the exact product that fits.",
+        "copy": "Choose the role first, then move into the family and the product built for that setup.",
         "structured_source": "blocks",
         "entry_limit": 6,
         "link_label": "Open support center",
@@ -90,9 +90,9 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need a fit check",
-        "heading": "Need to confirm fit before you decide?",
-        "copy": "Use compatibility or support when the setup still needs a closer check.",
+        "eyebrow": "Need compatibility help",
+        "heading": "Need to confirm compatibility before you decide?",
+        "copy": "Use compatibility or support when one device, display, or workflow detail still needs confirmation.",
         "link_label": "Check compatibility",
         "link_url": "/pages/compatibility",
         "secondary_label": "Open support center",

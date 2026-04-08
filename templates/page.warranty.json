@@ -17,7 +17,7 @@
       "settings": {
         "eyebrow": "Warranty flow",
         "heading": "Coverage, process, and next steps",
-        "copy": "These highlights help you understand coverage, prepare claim details, and know the clearest next step.",
+        "copy": "These highlights explain coverage, claim details, and where to go when you need warranty help.",
         "columns_desktop": 3
       },
       "blocks": {
@@ -57,7 +57,7 @@
         "intro_copy": "The full warranty policy, regional notes, and formal coverage language continue below.",
         "side_eyebrow": "Claim support",
         "side_heading": "Keep the claim path practical",
-        "side_copy": "Move into contact or troubleshooting depending on the clearest next step in the claim flow.",
+        "side_copy": "Use contact or troubleshooting depending on what the claim needs next.",
         "side_link_label": "Contact support",
         "side_link_url": "/pages/contact"
       }

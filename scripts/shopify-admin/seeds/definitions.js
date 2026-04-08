@@ -128,14 +128,30 @@ const metaobjectDefinitions = [
     ]
   },
   {
+    name: "EZQuest Use Case",
+    type: "ezquest_use_case",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Slug", key: "slug", type: "single_line_text_field", required: true },
+      { name: "Description", key: "description", type: "multi_line_text_field", required: false },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false }
+    ]
+  },
+  {
     name: "EZQuest Comparison Group",
     type: "ezquest_comparison_group",
     displayNameKey: "heading",
     fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: false },
+      { name: "Slug", key: "slug", type: "single_line_text_field", required: false },
       { name: "Eyebrow", key: "eyebrow", type: "single_line_text_field", required: false },
       { name: "Heading", key: "heading", type: "single_line_text_field", required: true },
       { name: "Description", key: "description", type: "multi_line_text_field", required: false },
+      { name: "Use case", key: "use_case", type: "single_line_text_field", required: false },
       { name: "Group type", key: "group_type", type: "single_line_text_field", required: false },
+      { name: "Default products", key: "default_products", type: "list.product_reference", required: false },
       { name: "Products", key: "products", type: "list.product_reference", required: false },
       { name: "CTA label", key: "cta_label", type: "single_line_text_field", required: false },
       { name: "Support note", key: "support_note", type: "multi_line_text_field", required: false }
@@ -186,7 +202,16 @@ const productMetafieldDefinitions = [
   { name: "Linked firmware", namespace: "ezquest", key: "firmware", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_firmware" },
   { name: "Linked user guides", namespace: "ezquest", key: "user_guides", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_user_guide" },
   { name: "Linked compatibility entries", namespace: "ezquest", key: "compatibility_entries", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_compatibility_entry" },
+  { name: "Linked use cases", namespace: "ezquest", key: "use_cases", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_use_case" },
   { name: "Comparison group", namespace: "ezquest", key: "compare_group", type: "metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_comparison_group" },
+  { name: "Compare role", namespace: "ezquest", key: "compare_role", type: "single_line_text_field", ownerType: "PRODUCT" },
+  { name: "Recommended priority", namespace: "ezquest", key: "recommended_priority", type: "number_integer", ownerType: "PRODUCT" },
+  { name: "Best for", namespace: "ezquest", key: "best_for", type: "single_line_text_field", ownerType: "PRODUCT" },
+  { name: "Compare short reason", namespace: "ezquest", key: "compare_short_reason", type: "multi_line_text_field", ownerType: "PRODUCT" },
+  { name: "Compare connector type", namespace: "ezquest", key: "compare_connector_type", type: "single_line_text_field", ownerType: "PRODUCT" },
+  { name: "Compare charging power", namespace: "ezquest", key: "compare_charging_power", type: "single_line_text_field", ownerType: "PRODUCT" },
+  { name: "Compare form factor", namespace: "ezquest", key: "compare_form_factor", type: "single_line_text_field", ownerType: "PRODUCT" },
+  { name: "Compare portability", namespace: "ezquest", key: "compare_portability", type: "single_line_text_field", ownerType: "PRODUCT" },
   { name: "Linked FAQ items", namespace: "ezquest", key: "faq_items", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_faq_item" }
 ];
 
