@@ -4,10 +4,10 @@
       "type": "hero-home",
       "settings": {
         "eyebrow": "Premium connectivity",
-        "heading": "Connectivity built for real desks, travel kits, and everyday carry.",
-        "copy": "From compact hubs to desk-ready docks, EZQuest keeps ports, power, and setup support working together.",
-        "primary_label": "Shop product families",
-        "primary_url": "/collections",
+        "heading": "Premium connectivity for desk and travel",
+        "copy": "Ports, power, and displays in one clean setup",
+        "primary_label": "Shop best sellers",
+        "primary_url": "/collections/all?sort_by=best-selling",
         "secondary_label": "",
         "secondary_url": "/pages/compare"
       },
@@ -16,10 +16,10 @@
           "type": "slide",
           "settings": {
             "eyebrow": "Premium connectivity",
-            "heading": "Connectivity built for real desks, travel kits, and everyday carry.",
-            "copy": "From compact hubs to desk-ready docks, EZQuest keeps ports, power, and setup support working together.",
-            "primary_label": "Shop product families",
-            "primary_url": "/collections",
+            "heading": "Premium connectivity for desk and travel",
+            "copy": "Ports, power, and displays in one clean setup",
+            "primary_label": "Shop best sellers",
+            "primary_url": "/collections/all?sort_by=best-selling",
             "secondary_label": "",
             "secondary_url": "/pages/compare"
           }
@@ -27,25 +27,25 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "eyebrow": "Choose by workflow",
-            "heading": "Start with the setup, then choose the right family.",
-            "copy": "Travel, desk, power, or finishing pieces. Narrow the right footprint, ports, and power from there.",
-            "primary_label": "Browse product families",
-            "primary_url": "/collections",
+            "eyebrow": "By setup",
+            "heading": "Find the right setup",
+            "copy": "Travel, desk, power, or everyday",
+            "primary_label": "Find your setup",
+            "primary_url": "/pages/compare",
             "secondary_label": "",
-            "secondary_url": "/pages/compare"
+            "secondary_url": "/collections"
           }
         },
         "slide_3": {
           "type": "slide",
           "settings": {
-            "eyebrow": "Ownership confidence",
-            "heading": "Support built around the product.",
-            "copy": "Manuals, downloads, and setup help stay tied to what you bought and what comes next.",
-            "primary_label": "Open support center",
+            "eyebrow": "Support",
+            "heading": "Support stays close",
+            "copy": "Manuals, downloads, and help",
+            "primary_label": "Support",
             "primary_url": "/pages/support",
             "secondary_label": "",
-            "secondary_url": "/pages/downloads"
+            "secondary_url": "/collections/all?sort_by=best-selling"
           }
         }
       },
@@ -54,8 +54,8 @@
     "categories": {
       "type": "home-collections-strip",
       "settings": {
-        "heading": "Start with the setup you can already picture",
-        "copy": "Choose the family first, then narrow the right footprint, power profile, and device mix."
+        "heading": "Start with the setup",
+        "copy": "Choose the family, then narrow the fit"
       },
       "blocks": {
         "category_1": {
@@ -100,25 +100,15 @@
     "support": {
       "type": "support-card-grid",
       "settings": {
-        "eyebrow": "Ownership confidence",
-        "heading": "Support should feel built into ownership.",
-        "copy": "Move from compatibility into manuals, downloads, and setup help without leaving the EZQuest product story.",
-        "link_label": "Open support center",
+        "eyebrow": "Support",
+        "heading": "Support built in",
+        "copy": "Compatibility, manuals, downloads, and help",
+        "link_label": "Support",
         "link_url": "/pages/support"
-      },
-      "blocks": {},
-      "block_order": []
-    },
-    "faq_home": {
-      "type": "home-confidence-grid",
-      "settings": {
-        "eyebrow": "Shop with confidence",
-        "heading": "Confidence should carry through checkout and beyond.",
-        "copy": "Keep shipping, warranty, manuals, downloads, and direct help close so ownership feels complete from the start."
       },
       "blocks": {},
       "block_order": []
     }
   },
-  "order": ["hero", "categories", "story", "support", "faq_home"]
+  "order": ["hero", "categories", "support", "story"]
 }

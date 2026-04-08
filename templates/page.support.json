@@ -4,22 +4,20 @@
       "type": "hero-page",
       "settings": {
         "eyebrow": "Support center",
-        "heading": "Support built around your product",
-        "copy": "Find the right file, guide, compatibility answer, or direct help in one place.",
+        "heading": "Choose the clearest next step",
+        "copy": "Start with one of four paths: download, manual, compatibility, or direct help.",
         "support_eyebrow": "Ownership confidence",
-        "support_note": "Setup help, troubleshooting, compatibility, and direct support stay tied to the product you own or the one you are choosing.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact"
+        "support_note": "Each path keeps the product and setup in view so you can move forward without guessing."
       }
     },
     "nav": {
       "type": "support-nav-grid",
       "settings": {
         "eyebrow": "Support hub",
-        "heading": "Start where the answer is most likely",
-        "copy": "Downloads, manuals, compatibility, troubleshooting, and direct support are organized to get you there faster.",
-        "show_search": true,
-        "link_label": "Contact support",
+        "heading": "Start with one clear path",
+        "copy": "Most support questions begin with a file, a guide, a fit check, or a support request.",
+        "show_search": false,
+        "link_label": "Get help now",
         "link_url": "/pages/contact"
       },
       "blocks": {
@@ -27,9 +25,9 @@
           "type": "nav_item",
           "settings": {
             "eyebrow": "01",
-            "title": "Downloads",
-            "copy": "Drivers and utilities for the product you already have.",
-            "link_label": "Open downloads",
+            "title": "Find a download",
+            "copy": "Start here when the next step is a driver, utility, or firmware file for the product you already own.",
+            "link_label": "Find downloads",
             "link_url": "/pages/downloads"
           }
         },
@@ -37,9 +35,9 @@
           "type": "nav_item",
           "settings": {
             "eyebrow": "02",
-            "title": "Manuals",
-            "copy": "Quick-start guides, user manuals, and setup notes by product family.",
-            "link_label": "Open manuals",
+            "title": "Find a manual",
+            "copy": "Start here when you need setup steps, a quick-start path, or product instructions.",
+            "link_label": "Find manuals",
             "link_url": "/pages/manuals"
           }
         },
@@ -47,9 +45,9 @@
           "type": "nav_item",
           "settings": {
             "eyebrow": "03",
-            "title": "Compatibility",
-            "copy": "Check the right device and workflow before you buy or set up.",
-            "link_label": "Open compatibility",
+            "title": "Check compatibility",
+            "copy": "Start here when you need to confirm platform, device, or workflow fit before you buy or install.",
+            "link_label": "Check compatibility",
             "link_url": "/pages/compatibility"
           }
         },
@@ -57,123 +55,29 @@
           "type": "nav_item",
           "settings": {
             "eyebrow": "04",
-            "title": "FAQ",
-            "copy": "Answer common questions before you go deeper.",
-            "link_label": "Open FAQ",
-            "link_url": "/pages/faq"
-          }
-        },
-        "nav_5": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "05",
-            "title": "Troubleshooting",
-            "copy": "Use symptom-led help when a product is connected but not behaving as expected.",
-            "link_label": "Open troubleshooting",
-            "link_url": "/pages/troubleshooting"
-          }
-        },
-        "nav_6": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "06",
-            "title": "Contact support",
-            "copy": "Reach support when the answer depends on your exact product, order, or setup.",
-            "link_label": "Contact support",
+            "title": "Get help now",
+            "copy": "Start a single support request when the answer depends on your exact product, order, or warranty status.",
+            "link_label": "Start support request",
             "link_url": "/pages/contact"
           }
-        },
-        "nav_7": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "07",
-            "title": "Shipping & returns",
-            "copy": "Review shipping, returns, and order guidance in one place.",
-            "link_label": "Open shipping & returns",
-            "link_url": "/pages/shipping-returns"
-          }
-        },
-        "nav_8": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "08",
-            "title": "Warranty",
-            "copy": "Review coverage, claim expectations, and when support should be contacted first.",
-            "link_label": "Open warranty page",
-            "link_url": "/pages/warranty"
-          }
         }
       },
-      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4", "nav_5", "nav_6", "nav_7", "nav_8"]
-    },
-    "cards": {
-      "type": "support-link-grid",
-      "settings": {
-        "eyebrow": "Common next steps",
-        "heading": "Keep deeper help close",
-        "copy": "Open firmware, long-form guides, decision help, or direct support without losing sight of the product or setup already in front of you.",
-        "columns_desktop": 3,
-        "link_label": "View all support pages",
-        "link_url": "/pages/support"
-      },
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "title": "Firmware",
-            "copy": "Firmware updates and release notes matched to product and version.",
-            "meta": "Updates",
-            "link_label": "Open firmware",
-            "link_url": "/pages/firmware"
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "title": "User guides",
-            "copy": "Long-form setup guides and best-practice guidance by workflow.",
-            "meta": "Guided setup",
-            "link_label": "Open user guides",
-            "link_url": "/pages/user-guides"
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "title": "Help me choose",
-            "copy": "Use guided product advice when you need to choose the right hub, dock, power, or accessory.",
-            "meta": "Decision guide",
-            "link_label": "Open help me choose",
-            "link_url": "/pages/help-me-choose"
-          }
-        },
-        "card_4": {
-          "type": "card",
-          "settings": {
-            "title": "Ticket submission",
-            "copy": "Send a direct support request when self-service is no longer enough.",
-            "meta": "Direct help",
-            "link_label": "Open ticket submission",
-            "link_url": "/pages/ticket-submission"
-          }
-        }
-      },
-      "block_order": ["card_1", "card_2", "card_3", "card_4"]
+      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"]
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Direct help",
-        "heading": "Need direct help?",
-        "copy": "If the answer depends on your exact product, order, or deployment, move into contact or warranty guidance with the right details in place.",
-        "link_label": "Contact support",
+        "eyebrow": "Need a person",
+        "heading": "Still unsure which path fits?",
+        "copy": "Start one support request and we will route product help, order help, or warranty help from the same place.",
+        "link_label": "Get help now",
         "link_url": "/pages/contact",
-        "secondary_label": "View warranty page",
-        "secondary_url": "/pages/warranty",
+        "secondary_label": "Check compatibility",
+        "secondary_url": "/pages/compatibility",
         "style": "light",
         "button_style": "secondary"
       }
     }
   },
-  "order": ["hero", "nav", "cards", "cta"]
+  "order": ["hero", "nav", "cta"]
 }

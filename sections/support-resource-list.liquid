@@ -131,25 +131,20 @@
         {% endif %}
 
         <div class="support-next-step-list">
-          <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
           {% if section.settings.resource_kind == 'downloads' %}
-            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-            <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-            <a href="/pages/support" class="support-inline-link" data-support-context-link>Support hub</a>
+            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+            <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
           {% elsif section.settings.resource_kind == 'firmware' %}
-            <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-            <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
+            <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Find downloads</a>
+            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
           {% elsif section.settings.resource_kind == 'guides' %}
-            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-            <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-            <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
+            <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+            <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
           {% else %}
-            <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-            <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-            <a href="/pages/support" class="support-inline-link" data-support-context-link>Support hub</a>
+            <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Find downloads</a>
+            <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
           {% endif %}
-          <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+          <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
         </div>
       </div>
 
@@ -252,8 +247,8 @@
               <p class="mt-3 text-sm leading-6 text-slate-600">Manuals and downloads will appear here when they are linked to the current product, collection, or platform filter.</p>
               <div class="support-next-step-list mt-6">
                 <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endif %}
@@ -368,9 +363,9 @@
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching manuals yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Manuals will appear here when they are linked to the current product, collection, or platform filter.</p>
               <div class="support-next-step-list mt-6">
-                <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Find downloads</a>
+                <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endif %}
@@ -485,9 +480,9 @@
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching firmware yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Firmware entries will appear here when they are linked to the current product, collection, or platform filter.</p>
               <div class="support-next-step-list mt-6">
-                <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Downloads</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Find downloads</a>
+                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endif %}
@@ -602,9 +597,9 @@
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching guides yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Guides will appear here when they are linked to the current product, collection, or platform filter.</p>
               <div class="support-next-step-list mt-6">
-                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+                <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endif %}
@@ -725,9 +720,9 @@
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching downloads yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Downloads will appear here when they are linked to the current product, collection, or platform filter.</p>
               <div class="support-next-step-list mt-6">
-                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Manuals</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+                <a href="/pages/compatibility" class="support-inline-link" data-support-context-link>Check compatibility</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endif %}
@@ -747,9 +742,9 @@
               <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No resources available yet</h3>
               <p class="mt-3 text-sm leading-6 text-slate-600">Add manuals or downloads in Shopify to replace this empty state.</p>
               <div class="support-next-step-list mt-6">
-                <a href="/pages/support" class="support-inline-link" data-support-context-link>Support hub</a>
-                <a href="/pages/troubleshooting" class="support-inline-link" data-support-context-link>Troubleshooting</a>
-                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Contact support</a>
+                <a href="/pages/downloads" class="support-inline-link" data-support-context-link>Find downloads</a>
+                <a href="/pages/manuals" class="support-inline-link" data-support-context-link>Find manuals</a>
+                <a href="/pages/contact" class="support-inline-link" data-support-context-link>Get help now</a>
               </div>
             </article>
           {% endfor %}
@@ -799,9 +794,9 @@
       "id": "resource_limit",
       "label": "Resource limit",
       "min": 2,
-      "max": 12,
+      "max": 24,
       "step": 1,
-      "default": 6
+      "default": 12
     },
     { "type": "checkbox", "id": "show_search", "label": "Show support search form", "default": true },
     { "type": "textarea", "id": "source_note", "label": "Source note" },

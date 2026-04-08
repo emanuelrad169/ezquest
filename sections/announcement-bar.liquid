@@ -1,12 +1,46 @@
-<section class="site-announcement-bar" aria-label="Store announcement">
-  <div class="site-announcement-inner">
-    <div class="site-announcement-shell">
-      <p class="site-announcement-message">
-        <span class="site-announcement-icon">
+<section class="site-announcement-bar relative z-50 border-0 bg-amber-400 text-black" aria-label="Store announcement">
+  <div class="site-announcement-inner container-shell">
+    <div class="flex min-h-announcement items-center gap-4 lg:gap-6">
+      <div class="hidden flex-1 items-center lg:flex">
+        {% if section.settings.support_phone != blank %}
+          <a
+            href="tel:{{ section.settings.support_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' | replace: '.', '' }}"
+            class="site-announcement-meta-item inline-flex items-center gap-1.5 text-body-micro font-medium text-black/90 no-underline transition-opacity hover:opacity-70"
+          >
+            <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
+              {% render 'icon', name: 'support' %}
+            </span>
+            <span>{{ section.settings.support_phone_label | default: 'Support' }} {{ section.settings.support_phone }}</span>
+          </a>
+        {% endif %}
+      </div>
+
+      <p class="flex flex-1 items-center justify-start gap-2 whitespace-nowrap text-body-2xs font-semibold tracking-subtle text-black/90 lg:justify-center lg:text-body-xs">
+        <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
           {% render 'icon', name: 'book-open' %}
         </span>
         <span>{{ section.settings.message }}</span>
       </p>
+
+      <div class="ml-auto flex items-center justify-end gap-2 lg:flex-1">
+        {% if localization.available_languages.size > 1 %}
+          {% form 'localization', id: 'announcement-language-form', class: 'm-0 hidden lg:block' %}
+            <label class="sr-only" for="announcement-language-select">Language</label>
+            <div class="site-announcement-language-wrap inline-flex min-h-7 items-center gap-1.5 rounded-full bg-white/15 px-2">
+              <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
+                {% render 'icon', name: 'layers' %}
+              </span>
+              <select id="announcement-language-select" name="locale_code" class="site-announcement-language-select border-0 bg-transparent pr-1 text-body-micro font-medium text-black/90 outline-none" onchange="this.form.submit()">
+                {% for language in localization.available_languages %}
+                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                    {{ language.endonym_name | capitalize }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endform %}
+        {% endif %}
+      </div>
     </div>
   </div>
 </section>
@@ -20,6 +54,18 @@
       "id": "message",
       "label": "Message",
       "default": "Free shipping over $100"
+    },
+    {
+      "type": "text",
+      "id": "support_phone_label",
+      "label": "Support phone label",
+      "default": "Support"
+    },
+    {
+      "type": "text",
+      "id": "support_phone",
+      "label": "Support phone number",
+      "default": "1-800-881-9305"
     }
   ],
   "presets": [

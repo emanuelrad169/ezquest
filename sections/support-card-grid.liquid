@@ -19,7 +19,7 @@
           <p class="home-feature-band-text">{{ section.settings.copy }}</p>
         {% endif %}
         {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-          <a href="{{ section.settings.link_url }}" class="home-feature-band-button">{{ section.settings.link_label }}</a>
+          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'primary', size: 'lg', class: 'button-context-support mt-10' %}
         {% endif %}
         <div class="home-feature-band-note">
           <p class="home-feature-band-note-kicker">Support built around the product</p>
@@ -29,6 +29,12 @@
           <a href="/pages/compatibility" class="support-inline-link">Check compatibility</a>
           <a href="/pages/manuals" class="support-inline-link">Manuals</a>
           <a href="/pages/downloads" class="support-inline-link">Downloads</a>
+        </div>
+        <div class="home-feature-band-confidence" aria-label="Ownership confidence">
+          <a href="/pages/shipping-returns" class="home-feature-band-pill">Shipping &amp; returns</a>
+          <a href="/pages/warranty" class="home-feature-band-pill">Warranty</a>
+          <a href="/pages/manuals" class="home-feature-band-pill">Manuals</a>
+          <a href="/pages/contact" class="home-feature-band-pill">Contact support</a>
         </div>
       </div>
 
@@ -40,11 +46,6 @@
         {% else %}
           {% render 'placeholder-visual', kind: 'support', text: 'EZQuest lifestyle', width: 1800, height: 1400, class: 'home-feature-band-image' %}
         {% endif %}
-        <div class="home-feature-band-dots" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span class="is-active"></span>
-        </div>
       </div>
     </div>
   </div>

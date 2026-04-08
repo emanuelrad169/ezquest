@@ -3,12 +3,15 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "show_vendor": true,
+        "show_vendor": false,
         "show_sku": false,
+        "show_product_type": false,
+        "show_description": false,
         "show_quantity_selector": true,
         "show_dynamic_checkout": false,
-        "support_heading": "Support for this product",
-        "support_copy": "Check compatibility, open the manual, or get the right download for this exact model."
+        "show_support_panel": false,
+        "support_heading": "Support stays close",
+        "support_copy": "Compatibility, manuals, downloads, and help"
       }
     },
     "story": {
@@ -64,17 +67,17 @@
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Still deciding",
-        "heading": "Need a final confirmation before you buy?",
-        "copy": "Use compare or support only when the choice is still close.",
-        "link_label": "Compare options",
-        "link_url": "/pages/compare",
-        "secondary_label": "Open support center",
+        "eyebrow": "More detail",
+        "heading": "Need a closer look?",
+        "copy": "Compatibility and expert help are here when you want a closer look.",
+        "link_label": "Compatibility",
+        "link_url": "/pages/compatibility",
+        "secondary_label": "Expert help",
         "secondary_url": "/pages/support",
         "style": "light",
         "button_style": "secondary"
       }
     }
   },
-  "order": ["main", "story", "specs", "compare", "compatibility", "faq", "cta"]
+  "order": ["main", "story", "specs", "compatibility", "faq", "compare", "cta"]
 }

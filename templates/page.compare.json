@@ -5,33 +5,33 @@
       "settings": {
         "structured_source": "group_handle",
         "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
-        "support_eyebrow": "Decision note",
-        "support_note": "Start with the role: Travel Hub for portability, Multimedia Hub for balanced everyday use, and Pro Dock for the permanent desk.",
-        "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup"
+        "support_eyebrow": "Recommended first",
+        "support_note": "Start with the balanced everyday fit unless portability or a permanent desk is clearly the bigger priority.",
+        "link_label": "View the balanced everyday fit",
+        "link_url": "/products/usb-c-multimedia-hub"
       }
     },
     "compare": {
       "type": "product-compare-table",
       "settings": {
         "eyebrow": "Guided choice",
-        "heading": "Choose the EZQuest product built for your setup",
-        "copy": "Start with the role: most portable, most balanced, or most desk-ready. From there, open the product page that matches it.",
+        "heading": "Pick the EZQuest fit for how you work",
+        "copy": "See the difference in portability, desk presence, ports, and power. When the choice is close, begin with the balanced everyday fit and adjust only if portability or a permanent desk clearly leads.",
         "columns_desktop": 3,
         "structured_source": "group_handle",
         "comparison_group_handle": "usb-c-workspace-connectivity-lineup",
-        "source_note": "Choose the role first. Open the matching product page next. Use compatibility or support only when you want a final confirmation."
+        "source_note": "Pick the fit. Start with the balanced everyday option when the choice is close. Use compatibility or support only when one last detail still needs confirming."
       }
     },
     "cta": {
       "type": "cta-banner",
       "settings": {
-        "eyebrow": "Need help choosing",
-        "heading": "Need a final confirmation?",
-        "copy": "Check compatibility first. If the setup is unusual, support can help from there.",
-        "link_label": "Check compatibility",
+        "eyebrow": "One last check",
+        "heading": "One last check?",
+        "copy": "Compatibility is close. Expert help is here for unusual setups.",
+        "link_label": "Compatibility",
         "link_url": "/pages/compatibility?source=compare&group=usb-c-workspace-connectivity-lineup",
-        "secondary_label": "Open support center",
+        "secondary_label": "Expert help",
         "secondary_url": "/pages/support?source=compare&group=usb-c-workspace-connectivity-lineup",
         "style": "light",
         "button_style": "secondary"

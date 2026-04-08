@@ -8,7 +8,7 @@
       <p class="mega-menu-preview-text" data-mega-preview-copy>{{ copy }}</p>
     {% endif %}
     {% if href != blank %}
-      <a href="{{ href }}" class="mega-menu-preview-cta" data-mega-preview-link>
+      <a href="{{ href }}" class="button-primary button-sm mega-menu-preview-cta" data-mega-preview-link>
         <span data-mega-preview-cta>{{ cta | default: 'Explore' }}</span>
         <span aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
       </a>

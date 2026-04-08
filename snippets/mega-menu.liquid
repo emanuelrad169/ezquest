@@ -1,9 +1,6 @@
 {%- liquid
   assign shop_url = routes.all_products_collection_url
   assign collections_url = routes.collections_url
-  assign support_url = '/pages/support'
-  assign compare_url = '/pages/compare'
-  assign resources_url = '/blogs/resources'
   assign about_url = '/pages/about'
 -%}
 {%- comment -%}
@@ -21,28 +18,46 @@
   <ul class="mega-menu-nav-list" role="list">
     <li class="mega-menu-nav-item" data-mega-item="shop">
       <a href="{{ shop_url }}" class="mega-menu-trigger" data-mega-trigger="shop" aria-expanded="false" aria-controls="mega-menu-panel-shop">
-        <span>Shop</span>
+        <span>Use cases</span>
       </a>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="collections">
       <a href="{{ collections_url }}" class="mega-menu-trigger" data-mega-trigger="collections" aria-expanded="false" aria-controls="mega-menu-panel-collections">
-        <span>Product families</span>
+        <span>Categories</span>
       </a>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="compare">
-      <a href="{{ compare_url }}" class="mega-menu-trigger" data-mega-trigger="compare" aria-expanded="false" aria-controls="mega-menu-panel-compare">
+      <button
+        type="button"
+        class="mega-menu-trigger mega-menu-trigger--plain"
+        data-mega-trigger="compare"
+        aria-expanded="false"
+        aria-controls="mega-menu-panel-compare"
+      >
         <span>Compare</span>
-      </a>
+      </button>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="explore">
-      <a href="{{ support_url }}" class="mega-menu-trigger" data-mega-trigger="explore" aria-expanded="false" aria-controls="mega-menu-panel-explore">
+      <button
+        type="button"
+        class="mega-menu-trigger mega-menu-trigger--plain"
+        data-mega-trigger="explore"
+        aria-expanded="false"
+        aria-controls="mega-menu-panel-explore"
+      >
         <span>Support</span>
-      </a>
+      </button>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="resources">
-      <a href="{{ resources_url }}" class="mega-menu-trigger" data-mega-trigger="resources" aria-expanded="false" aria-controls="mega-menu-panel-resources">
+      <button
+        type="button"
+        class="mega-menu-trigger mega-menu-trigger--plain"
+        data-mega-trigger="resources"
+        aria-expanded="false"
+        aria-controls="mega-menu-panel-resources"
+      >
         <span>Resources</span>
-      </a>
+      </button>
     </li>
     <li class="mega-menu-nav-item">
       <a href="{{ about_url }}" class="mega-menu-trigger mega-menu-trigger--plain">
@@ -55,8 +70,8 @@
   <div class="mega-menu-panels" data-mega-panels>
     {% render 'mega-menu-panel', group_handle: 'shop' %}
     {% render 'mega-menu-panel', group_handle: 'collections' %}
+    {% render 'mega-menu-panel', group_handle: 'compare' %}
     {% render 'mega-menu-panel', group_handle: 'explore' %}
     {% render 'mega-menu-panel', group_handle: 'resources' %}
-    {% render 'mega-menu-panel', group_handle: 'compare' %}
   </div>
 </div>

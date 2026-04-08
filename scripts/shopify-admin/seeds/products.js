@@ -98,6 +98,43 @@ function inferCollectionHandles(productType) {
   }
 }
 
+function inferUseCaseHandles(productType, handle, familyName) {
+  const source = `${handle} ${familyName}`.toLowerCase();
+  const useCases = new Set();
+
+  switch (productType) {
+    case "Dock":
+      useCases.add("desk-ready");
+      break;
+    case "Charger":
+      useCases.add("chargers-power");
+      break;
+    case "Hub":
+      if (source.includes("travel")) {
+        useCases.add("portable");
+      } else {
+        useCases.add("balanced-everyday");
+      }
+      break;
+    case "Cable":
+    case "Accessory":
+      if (source.includes("travel") || source.includes("portable") || source.includes("carry")) {
+        useCases.add("portable");
+      } else if (source.includes("desk") || source.includes("dock") || source.includes("workstation")) {
+        useCases.add("desk-ready");
+      } else {
+        useCases.add("balanced-everyday");
+      }
+      break;
+    case "Adapter":
+    default:
+      useCases.add("balanced-everyday");
+      break;
+  }
+
+  return Array.from(useCases);
+}
+
 function buildNormalizedSeedProduct(parent) {
   const optionNames = [parent.variant_option_1, parent.variant_option_2].filter(Boolean);
   const productType = inferProductType(parent.parent_handle, parent.normalized_family_name);
@@ -114,6 +151,7 @@ function buildNormalizedSeedProduct(parent) {
     descriptionHtml: buildDescription(productType, parent.normalized_family_name),
     imageUrls: buildTemporaryImageUrls(productType),
     collectionHandles: inferCollectionHandles(productType),
+    useCaseHandles: inferUseCaseHandles(productType, parent.parent_handle, parent.normalized_family_name),
     optionNames,
     variants: parent.children.map((child) => {
       const compareAtPrice = child.msrp || child.map || null;
@@ -145,7 +183,8 @@ const coreProducts = [
     descriptionHtml:
       "<p>The EZQuest USB-C Multimedia Hub is the balanced everyday hub for Mac, PC, and tablet users who want 4K HDMI, pass-through charging, wired networking, and removable-media access through one compact USB-C connection.</p>",
     imageUrls: buildTemporaryImageUrls("Hub"),
-    collectionHandles: ["hubs-adapters"]
+    collectionHandles: ["hubs-adapters"],
+    useCaseHandles: ["balanced-everyday"]
   },
   {
     title: "USB-C Travel Hub",
@@ -158,7 +197,8 @@ const coreProducts = [
     descriptionHtml:
       "<p>The EZQuest USB-C Travel Hub keeps mobile setups light with HDMI, USB access, and pass-through charging for hotel desks, meeting rooms, classrooms, and everyday work away from the main workstation.</p>",
     imageUrls: buildTemporaryImageUrls("Hub"),
-    collectionHandles: ["hubs-adapters"]
+    collectionHandles: ["hubs-adapters"],
+    useCaseHandles: ["portable"]
   },
   {
     title: "USB-C Pro Dock",
@@ -171,7 +211,8 @@ const coreProducts = [
     descriptionHtml:
       "<p>The EZQuest USB-C Pro Dock is built for permanent desk setups that need more ports, cleaner cable management, stable display support, wired networking, and a clearer upgrade path from compact travel or multimedia hubs.</p>",
     imageUrls: buildTemporaryImageUrls("Dock"),
-    collectionHandles: ["docking-stations"]
+    collectionHandles: ["docking-stations"],
+    useCaseHandles: ["desk-ready"]
   }
 ];
 

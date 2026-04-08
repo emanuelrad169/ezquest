@@ -1,6 +1,8 @@
-<section class="section-shell main-product-section">
+<section class="section-shell main-product-section" data-product-root>
   <div class="container-shell">
-    {% render 'breadcrumbs' %}
+    <div class="hidden lg:block">
+      {% render 'breadcrumbs' %}
+    </div>
     {%- liquid
       assign structured_highlights = blank
       assign has_structured_highlights = false
@@ -10,14 +12,19 @@
       assign first_structured_highlight = blank
       assign product_description_excerpt = blank
       assign product_positioning_text = blank
-      assign role_decision_note = 'Choose this when one product should keep the setup cleaner without complicating the desk.'
-      assign role_boundary_note = 'Step up only if the workflow needs more permanent desk connectivity.'
-      assign compare_cta_label = 'Still deciding? Compare nearby options'
-      assign ownership_heading = section.settings.support_heading | default: 'Support for this product'
-      assign ownership_copy = section.settings.support_copy | default: 'Check compatibility, open the manual, or get the right download for this product without crowding the decision.'
-      assign setup_label = 'Everyday setup'
-      assign setup_statement = 'Connectivity that keeps the setup cleaner, calmer, and easier to trust.'
-      assign setup_environment = 'Built for modern-device routines that need clearer expansion without extra clutter.'
+      assign review_rating_value = blank
+      assign review_rating_count = blank
+      assign selected_variant = product.selected_or_first_available_variant
+      assign mobile_proof_line = blank
+      assign proof_fallback_line = blank
+      assign sticky_trust_line = blank
+      assign variant_reinforcement_text = blank
+      assign role_decision_note = 'Clean connectivity.'
+      assign ownership_heading = section.settings.support_heading | default: 'Support stays close'
+      assign ownership_copy = section.settings.support_copy | default: 'Compatibility, manuals, downloads, and help.'
+      assign setup_label = 'Everyday'
+      assign setup_statement = 'Clean connectivity for everyday devices.'
+      assign setup_environment = 'Light, clean, ready.'
       assign spec_count = 0
       assign manual_count = 0
       assign download_count = 0
@@ -51,8 +58,8 @@
         assign product_positioning_text = compatibility_summary_text
       elsif support_summary_text != blank
         assign product_positioning_text = support_summary_text
-      elsif product_description_excerpt != blank
-        assign product_positioning_text = product_description_excerpt | truncatewords: 24
+      elsif section.settings.show_description and product_description_excerpt != blank
+        assign product_positioning_text = product_description_excerpt | truncatewords: 14
       endif
 
       if product.metafields.ezquest.spec_rows != blank
@@ -67,6 +74,11 @@
         assign download_count = product.metafields.ezquest.downloads.value.count
       endif
 
+      if product.metafields.reviews.rating != blank and product.metafields.reviews.rating.value != blank
+        assign review_rating_value = product.metafields.reviews.rating.value.rating
+        assign review_rating_count = product.metafields.reviews.rating_count.value | default: blank
+      endif
+
       if product.handle != blank
         assign compatibility_support_url = compatibility_support_url | append: '?product=' | append: product.handle
         assign manuals_support_url = manuals_support_url | append: '?product=' | append: product.handle
@@ -77,44 +89,85 @@
       case product.handle
         when 'usb-c-travel-hub'
           assign use_owned_product_gallery = true
-          assign setup_label = 'Travel-first setup'
-          assign setup_statement = 'Compact expansion for meetings, hotel desks, classrooms, and lighter mobile workflows.'
-          assign setup_environment = 'Choose it when portability matters more than maximum port count or a permanent desk footprint.'
-          assign role_decision_note = 'Choose this when the setup moves often and the hub should stay easy to carry.'
-          assign role_boundary_note = 'Step up only if the desk needs more ports, more power, or a steadier display chain.'
-          assign compare_cta_label = 'Still deciding? Compare against balanced and desk-ready options'
-          assign ownership_heading = 'Support that travels well'
+          assign setup_label = 'Travel'
+          assign setup_statement = 'Compact ports and power for work on the move.'
+          assign setup_environment = 'Light in the bag. Ready anywhere.'
+          assign role_decision_note = 'Made for work on the move.'
+          assign ownership_heading = 'Support for the move'
         when 'usb-c-pro-dock'
           assign use_owned_product_gallery = true
-          assign setup_label = 'Desk-first setup'
-          assign setup_statement = 'Broader connectivity for permanent desks that need displays, Ethernet, peripherals, and calmer cable control.'
-          assign setup_environment = 'Built for users stepping up from lighter hubs into a more stable workstation setup.'
-          assign role_decision_note = 'Choose this when the desk stays put and the workflow needs a more complete connection hub.'
-          assign role_boundary_note = 'Go lighter only if portability matters more than a permanent workstation setup.'
-          assign compare_cta_label = 'Still deciding? Compare against balanced and portable options'
-          assign ownership_heading = 'Support for the workstation'
+          assign setup_label = 'Desk'
+          assign setup_statement = 'Ports, power, and displays for the desk.'
+          assign setup_environment = 'Clean, connected, in control.'
+          assign role_decision_note = 'Made for the desk.'
+          assign ownership_heading = 'Support for the desk'
         when 'usb-c-multimedia-hub'
           assign use_owned_product_gallery = true
-          assign setup_label = 'Balanced everyday setup'
-          assign setup_statement = 'One everyday hub for charging, HDMI, Ethernet, storage access, and hybrid desk routines.'
-          assign setup_environment = 'Choose it when one compact adapter should cover the daily desk.'
-          assign role_decision_note = 'Choose this when one compact hub should cover the everyday desk.'
-          assign role_boundary_note = 'Go lighter only if portability wins. Step up only if the desk needs a fuller dock.'
-          assign compare_cta_label = 'Still deciding? Compare against travel and desk-ready options'
-          assign ownership_heading = 'Support for the everyday desk'
+          assign setup_label = 'Everyday'
+          assign setup_statement = 'Balanced ports and power for everyday desks.'
+          assign setup_environment = 'Charging, displays, Ethernet, and storage.'
+          assign role_decision_note = 'Made for everyday desks.'
+          assign ownership_heading = 'Support for everyday desks'
       endcase
 
       if support_summary_text != blank
         assign ownership_copy = support_summary_text
       endif
+
+      if review_rating_value != blank
+        assign mobile_proof_line = review_rating_value | append: ' / 5 rated'
+        if review_rating_count != blank
+          assign mobile_proof_line = mobile_proof_line | append: ' · ' | append: review_rating_count | append: ' reviews'
+        endif
+      endif
+
+      assign compatibility_text_downcase = compatibility_summary_text | downcase
+      assign description_text_downcase = product_description_excerpt | downcase
+      assign title_text_downcase = product.title | downcase
+      assign type_text_downcase = product.type | downcase
+
+      if compatibility_text_downcase contains 'mac' and compatibility_text_downcase contains 'window'
+        assign sticky_trust_line = 'Works with Mac & Windows'
+      elsif description_text_downcase contains 'mac' and description_text_downcase contains 'window'
+        assign sticky_trust_line = 'Works with Mac & Windows'
+      elsif title_text_downcase contains 'usb-c' or type_text_downcase contains 'usb-c' or description_text_downcase contains 'usb-c'
+        assign sticky_trust_line = 'Fits most USB-C laptops'
+      else
+        assign sticky_trust_line = 'Works with Mac & Windows'
+      endif
+
+      if review_rating_value == blank
+        if manual_count > 0 and download_count > 0
+          assign proof_fallback_line = 'Support, manuals, and downloads available'
+        elsif manual_count > 0
+          assign proof_fallback_line = 'Support and manuals available'
+        elsif download_count > 0
+          assign proof_fallback_line = 'Support and downloads available'
+        elsif compatibility_summary_text != blank
+          assign proof_fallback_line = 'Compatibility guidance available'
+        else
+          assign proof_fallback_line = 'EZQuest support available'
+        endif
+
+        assign mobile_proof_line = proof_fallback_line
+      endif
+
+      if product.has_only_default_variant == false and selected_variant != blank
+        assign variant_reinforcement_text = 'Selected: ' | append: selected_variant.title
+        if selected_variant.available
+          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · In stock'
+        else
+          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · Sold out'
+        endif
+      endif
     -%}
 
-    <div class="product-layout mt-6">
-      <div class="product-gallery">
+    <div class="mt-4 grid gap-10 lg:mt-6 lg:grid-cols-split lg:items-start">
+      <div class="space-y-5">
         <div class="product-gallery-stage product-gallery-stage-shell">
           <div class="product-gallery-stage-note">
             <span class="product-gallery-stage-label">{{ setup_label }}</span>
-            <p class="product-gallery-stage-copy">{{ setup_environment }}</p>
+            <p class="product-gallery-stage-copy hidden lg:block">{{ setup_environment }}</p>
           </div>
 
           <div class="product-gallery-main">
@@ -122,18 +175,18 @@
               {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
             {% elsif product.featured_image != blank %}
               {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
-            {% elsif use_owned_product_gallery %}
-              <div class="hero-media-frame p-2 lg:p-3">
-                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
-              </div>
+          {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
+            <div class="hero-media-frame p-2 lg:p-3">
+              {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
+            </div>
             {% else %}
               {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
             {% endif %}
           </div>
 
           {% if product.media.size > 1 %}
-            <div class="product-gallery-grid mt-5">
-              {% for media_item in product.media limit: 5 %}
+            <div class="product-gallery-grid product-gallery-grid--desktop mt-4 hidden gap-4 md:grid md:grid-cols-2 lg:mt-5">
+              {% for media_item in product.media limit: 3 %}
                 {% unless lead_media != blank and media_item.id == lead_media.id %}
                   <div class="product-thumb-card">
                     {% render 'media', media: media_item, aspect_ratio: 'aspect-card', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain' %}
@@ -141,11 +194,8 @@
                 {% endunless %}
               {% endfor %}
             </div>
-          {% elsif use_owned_product_gallery %}
-            <div class="product-gallery-grid mt-5">
-              <div class="product-thumb-card">
-                {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 800, height: 600, class: 'aspect-card w-full object-cover' %}
-              </div>
+          {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
+            <div class="product-gallery-grid product-gallery-grid--desktop mt-4 hidden gap-4 md:grid md:grid-cols-2 lg:mt-5">
               <div class="product-thumb-card">
                 {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'ports', width: 800, height: 600, class: 'aspect-card w-full object-cover' %}
               </div>
@@ -157,18 +207,18 @@
         </div>
       </div>
 
-      <div class="space-y-6 buybox-sticky">
-        <div class="product-buybox">
+      <div class="space-y-4 lg:space-y-5 buybox-sticky">
+        <div class="product-buybox card-elevated p-6 lg:p-8">
           <div class="product-buybox-header">
-            <div class="product-meta-row">
+            <div class="product-meta-row flex flex-wrap items-center gap-2">
               {% if section.settings.show_vendor and product.vendor != blank %}
-                <span class="product-meta-pill">{{ product.vendor }}</span>
+                <span class="product-meta-pill product-meta-pill--desktop">{{ product.vendor }}</span>
               {% endif %}
               {% if section.settings.show_product_type and product.type != blank %}
-                <span class="product-meta-pill">{{ product.type }}</span>
+                <span class="product-meta-pill product-meta-pill--desktop">{{ product.type }}</span>
               {% endif %}
               {% if product.available %}
-                <span class="product-meta-pill border-emerald-200 bg-emerald-50 text-emerald-700">Ready to order</span>
+                <span class="product-meta-pill border-emerald-200 bg-emerald-50 text-emerald-700">In stock</span>
               {% else %}
                 <span class="product-meta-pill border-slate-300 bg-slate-100 text-slate-600">Sold out</span>
               {% endif %}
@@ -176,10 +226,7 @@
 
             <div class="product-buybox-lead">
               <p class="product-buybox-setup-label">{{ setup_label }}</p>
-              <h1 class="section-heading mt-3">{{ product.title }}</h1>
-              <p class="product-buybox-setup-statement">{{ setup_statement }}</p>
-              <p class="product-buybox-role-note">{{ role_decision_note }}</p>
-              <p class="product-buybox-positioning">{{ role_boundary_note }}</p>
+              <h1 class="section-heading product-buybox-title mt-3">{{ product.title }}</h1>
             </div>
 
             <div class="product-buybox-price-row">
@@ -188,87 +235,76 @@
                   {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
                 </div>
               </div>
+              {% if mobile_proof_line != blank %}
+                <p class="product-buybox-proof-line lg:hidden">{{ mobile_proof_line }}</p>
+              {% endif %}
+              <p class="product-buybox-setup-statement hidden lg:block">{{ setup_statement }}</p>
               {% if product_positioning_text != blank %}
-                <p class="product-buybox-positioning">{{ product_positioning_text }}</p>
+                <p class="product-buybox-positioning hidden lg:block">{{ product_positioning_text }}</p>
+              {% else %}
+                <p class="product-buybox-positioning hidden lg:block">{{ role_decision_note }}</p>
               {% endif %}
             </div>
 
-            <div class="product-buybox-signal-grid">
-              <div class="product-buybox-signal">
-                <p class="product-buybox-signal-label">Setup fit</p>
-                <p class="product-buybox-signal-value">{{ setup_label }}</p>
-              </div>
-              {% if spec_count > 0 %}
-                <div class="product-buybox-signal">
-                  <p class="product-buybox-signal-label">Technical fit</p>
-                  <p class="product-buybox-signal-value">{{ spec_count }} key spec{% if spec_count != 1 %}s{% endif %}</p>
-                </div>
-              {% endif %}
-              {% if manual_count > 0 or download_count > 0 %}
-                <div class="product-buybox-signal">
-                  <p class="product-buybox-signal-label">Support nearby</p>
-                  <p class="product-buybox-signal-value">
-                    {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
-                    {% if manual_count > 0 and download_count > 0 %} + {% endif %}
-                    {% if download_count > 0 %}{{ download_count }} download{% if download_count != 1 %}s{% endif %}{% endif %}
-                  </p>
-                </div>
-              {% endif %}
-            </div>
-
-            <div class="product-buybox-confidence">
-              <p class="product-buybox-confidence-kicker">{{ section.settings.support_eyebrow | default: 'Ownership confidence' }}</p>
-              <p class="product-buybox-confidence-heading">{{ ownership_heading }}</p>
-              <div class="product-buybox-confidence-copy">
-                {{ ownership_copy }}
-              </div>
-              <div class="product-buybox-confidence-links">
-                <a href="{{ compatibility_support_url }}" class="collection-inline-link">Check compatibility for this product</a>
-                {% if manual_count > 0 %}
-                  <a href="{{ manuals_support_url }}" class="collection-inline-link">Open manuals for this product</a>
-                {% elsif download_count > 0 %}
-                  <a href="{{ downloads_support_url }}" class="collection-inline-link">View downloads for this product</a>
-                {% else %}
-                  <a href="{{ support_center_url }}" class="collection-inline-link">Open support for this model</a>
-                {% endif %}
-              </div>
-            </div>
           </div>
 
-          {% form 'product', product, class: 'mt-8 space-y-5' %}
-            <div class="product-form-panel space-y-5">
+          {% form 'product', product, id: 'ProductForm-' | append: section.id, class: 'mt-4 space-y-3 lg:mt-6 lg:space-y-4' %}
+            <div class="product-form-panel card-soft space-y-3.5 p-5 lg:space-y-5" data-main-buybox>
               {% if product.has_only_default_variant == false %}
-                <div>
+                <div class="space-y-2.5">
                   <label class="mb-2 block text-sm font-medium text-slate-900" for="ProductVariant-{{ section.id }}">Variant</label>
-                  <select id="ProductVariant-{{ section.id }}" name="id" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900">
+                  <select id="ProductVariant-{{ section.id }}" name="id" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" data-product-variant-select>
                     {% for variant in product.variants %}
-                      <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
+                      <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money | escape }}" data-variant-available="{% if variant.available %}true{% else %}false{% endif %}" data-variant-title="{{ variant.title | escape }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
                         {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
                       </option>
                     {% endfor %}
                   </select>
+                  {% if variant_reinforcement_text != blank %}
+                    <p class="product-variant-reinforcement" data-product-variant-reinforcement>{{ variant_reinforcement_text }}</p>
+                  {% endif %}
                 </div>
               {% else %}
                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
               {% endif %}
 
-              <div class="grid gap-4 sm:grid-cols-auto-fill sm:items-end">
+              <div class="grid gap-2 sm:grid-cols-auto-fill sm:items-end">
                 {% if section.settings.show_quantity_selector %}
-                  <div>
+                  <div class="hidden lg:block">
                     <label class="mb-2 block text-sm font-medium text-slate-900" for="ProductQuantity-{{ section.id }}">Quantity</label>
                     <input id="ProductQuantity-{{ section.id }}" class="min-h-12 w-28 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="number" name="quantity" value="1" min="1">
                   </div>
                 {% endif %}
-                <div class="product-primary-action-wrap">
-                  <button class="button-primary product-primary-action" type="submit" name="add"{% unless product.available %} disabled="disabled"{% endunless %}>
+                <div class="product-primary-action-wrap w-full" data-product-primary-action-wrap>
+                  <button class="button-primary product-primary-action" type="submit" name="add" data-product-primary-button{% unless product.available %} disabled="disabled"{% endunless %}>
                     {% if product.available %}Add to cart{% else %}Sold out{% endif %}
                   </button>
-                </div>
-              </div>
 
-              <div class="product-form-meta">
-              <p class="support-utility-note">Add to cart when this role matches the setup. Open compare or support only if one buying detail still needs a closer look.</p>
-              <a href="/pages/compare?product={{ product.handle }}" class="hero-secondary-action">{{ compare_cta_label }}</a>
+                  <div class="product-trust-layer" aria-label="Purchase trust details">
+                    {% if review_rating_value != blank %}
+                      <div class="product-trust-item" aria-label="Rated {{ review_rating_value }} out of 5{% if review_rating_count != blank %} from {{ review_rating_count }} reviews{% endif %}">
+                        <p class="product-trust-item-label">Reviews</p>
+                        <p class="product-trust-item-value">
+                          <span aria-hidden="true">★</span>
+                          {{ review_rating_value }} / 5{% if review_rating_count != blank %} · {{ review_rating_count }} reviews{% endif %}
+                        </p>
+                      </div>
+                    {% elsif proof_fallback_line != blank %}
+                      <div class="product-trust-item">
+                        <p class="product-trust-item-label">Support</p>
+                        <p class="product-trust-item-value">{{ proof_fallback_line }}</p>
+                      </div>
+                    {% endif %}
+                    <a href="/pages/shipping-returns" class="product-trust-item product-trust-item--link">
+                      <p class="product-trust-item-label">Shipping</p>
+                      <p class="product-trust-item-value">Shipping &amp; returns</p>
+                    </a>
+                    <div class="product-trust-item">
+                      <p class="product-trust-item-label">Checkout</p>
+                      <p class="product-trust-item-value">Secure Shopify checkout</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -279,77 +315,260 @@
             </div>
           {% endform %}
 
-          <div class="product-assurance-grid">
-            <div class="product-confidence-item">
-              <p class="section-kicker">Setup fit</p>
-              <p class="mt-2">
-                {% if compatibility_summary_text != blank %}
-                  {{ compatibility_summary_text | truncatewords: 14 }}
-                {% else %}
-                  Works with Mac + Windows
+          {%- capture product_fit_content -%}
+            <div class="product-mobile-detail-stack">
+              <p class="product-mobile-detail-copy">{{ setup_statement }}</p>
+              {% if product_positioning_text != blank %}
+                <p class="product-mobile-detail-copy">{{ product_positioning_text }}</p>
+              {% else %}
+                <p class="product-mobile-detail-copy">{{ role_decision_note }}</p>
+              {% endif %}
+              <div class="product-buybox-signal-grid product-buybox-signal-grid--mobile">
+                <div class="product-buybox-signal">
+                  <p class="product-buybox-signal-label">Fit</p>
+                  <p class="product-buybox-signal-value">{{ setup_label }}</p>
+                </div>
+                {% if spec_count > 0 %}
+                  <div class="product-buybox-signal">
+                    <p class="product-buybox-signal-label">Specs</p>
+                    <p class="product-buybox-signal-value">{{ spec_count }} key spec{% if spec_count != 1 %}s{% endif %}</p>
+                  </div>
                 {% endif %}
-              </p>
-            </div>
-            <div class="product-confidence-item">
-              <p class="section-kicker">Why choose it</p>
-              <p class="mt-2">
-                {% if first_structured_highlight != blank %}
-                  {{ first_structured_highlight }}
-                {% else %}
-                  Plug &amp; play setup
-                {% endif %}
-              </p>
-            </div>
-            <div class="product-confidence-item">
-              <p class="section-kicker">Ownership</p>
-              <p class="mt-2">
-                {% if support_summary_text != blank %}
-                  {{ support_summary_text | truncatewords: 14 }}
-                {% else %}
-                  Manuals, downloads, and setup help for this product
-                {% endif %}
-              </p>
-            </div>
-          </div>
-
-          <div class="product-link-row">
-            <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare this product</a>
-            <a href="{{ downloads_support_url }}" class="site-meta-link">Downloads</a>
-            <a href="{{ manuals_support_url }}" class="site-meta-link">Manuals</a>
-            <a href="{{ compatibility_support_url }}" class="site-meta-link">Compatibility</a>
-          </div>
-
-          {% if has_structured_highlights or section.blocks.size > 0 %}
-            {%- assign rendered_highlights = 0 -%}
-            <div class="product-highlight-shell">
-              <p class="section-kicker">At a glance</p>
-              <div class="product-highlights mt-4">
-                {% if has_structured_highlights %}
-                  {% for highlight in structured_highlights limit: section.settings.highlight_limit %}
-                    {% if rendered_highlights < 3 %}
-                      <div class="product-highlight-card">
-                        <p class="product-highlight-index">0{{ forloop.index }}</p>
-                        <div class="product-highlight-copy">{{ highlight }}</div>
-                      </div>
-                      {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
-                    {% endif %}
-                  {% endfor %}
-                {% elsif section.blocks.size > 0 %}
-                  {% for block in section.blocks %}
-                    {% if rendered_highlights < 3 %}
-                      <div class="product-highlight-card" {{ block.shopify_attributes }}>
-                        <p class="product-highlight-index">0{{ rendered_highlights | plus: 1 }}</p>
-                        <div class="product-highlight-copy">{{ block.settings.title }}</div>
-                      </div>
-                      {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
-                    {% endif %}
-                  {% endfor %}
+                {% if manual_count > 0 or download_count > 0 %}
+                  <div class="product-buybox-signal">
+                    <p class="product-buybox-signal-label">Support</p>
+                    <p class="product-buybox-signal-value">
+                      {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
+                      {% if manual_count > 0 and download_count > 0 %} + {% endif %}
+                      {% if download_count > 0 %}{{ download_count }} download{% if download_count != 1 %}s{% endif %}{% endif %}
+                    </p>
+                  </div>
                 {% endif %}
               </div>
             </div>
-          {% endif %}
+          {%- endcapture -%}
+
+          {%- capture product_support_content -%}
+            <div class="product-mobile-detail-stack">
+              <div class="product-assurance-grid product-assurance-grid--mobile">
+                <div class="product-confidence-item">
+                  <p class="product-confidence-title">Fit</p>
+                  <p class="mt-2">
+                    {% if compatibility_summary_text != blank %}
+                      {{ compatibility_summary_text | truncatewords: 10 }}
+                    {% else %}
+                      Mac and Windows ready
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="product-confidence-item">
+                  <p class="product-confidence-title">Why it stands out</p>
+                  <p class="mt-2">
+                    {% if first_structured_highlight != blank %}
+                      {{ first_structured_highlight | truncatewords: 10 }}
+                    {% else %}
+                      Clean, plug-in setup
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="product-confidence-item">
+                  <p class="product-confidence-title">Support</p>
+                  <p class="mt-2">
+                    {% if support_summary_text != blank %}
+                      {{ support_summary_text | truncatewords: 10 }}
+                    {% else %}
+                      Manuals, downloads, help
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+
+              {% if section.settings.show_support_panel %}
+                <div class="product-buybox-confidence mt-0">
+                  <p class="product-buybox-confidence-kicker">{{ section.settings.support_eyebrow | default: 'Support' }}</p>
+                  <p class="product-buybox-confidence-heading">{{ ownership_heading }}</p>
+                  <div class="product-buybox-confidence-copy">
+                    {{ ownership_copy | truncatewords: 22 }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {%- endcapture -%}
+
+          {%- capture product_features_content -%}
+            {% if has_structured_highlights or section.blocks.size > 0 %}
+              {%- assign mobile_rendered_highlights = 0 -%}
+              <div class="product-highlight-shell product-highlight-shell--mobile">
+                <div class="product-highlights">
+                  {% if has_structured_highlights %}
+                    {% for highlight in structured_highlights limit: section.settings.highlight_limit %}
+                      {% if mobile_rendered_highlights < 3 %}
+                        <div class="product-highlight-card">
+                          <p class="product-highlight-index">0{{ forloop.index }}</p>
+                          <div class="product-highlight-copy">{{ highlight }}</div>
+                        </div>
+                        {%- assign mobile_rendered_highlights = mobile_rendered_highlights | plus: 1 -%}
+                      {% endif %}
+                    {% endfor %}
+                  {% elsif section.blocks.size > 0 %}
+                    {% for block in section.blocks %}
+                      {% if mobile_rendered_highlights < 3 %}
+                        <div class="product-highlight-card" {{ block.shopify_attributes }}>
+                          <p class="product-highlight-index">0{{ mobile_rendered_highlights | plus: 1 }}</p>
+                          <div class="product-highlight-copy">{{ block.settings.title }}</div>
+                        </div>
+                        {%- assign mobile_rendered_highlights = mobile_rendered_highlights | plus: 1 -%}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+	          {%- endcapture -%}
+
+            {%- assign product_features_content_stripped = product_features_content | strip -%}
+            {%- assign product_support_content_stripped = product_support_content | strip -%}
+
+	          <div class="product-mobile-accordions lg:hidden">
+	            {% render 'accordion-item', title: 'Fit', content: product_fit_content %}
+	            {% if product_features_content_stripped != blank %}
+	              {% render 'accordion-item', title: 'Features', content: product_features_content %}
+	            {% endif %}
+	            {% if product_support_content_stripped != blank %}
+	              {% render 'accordion-item', title: 'Support', content: product_support_content %}
+	            {% endif %}
+	          </div>
+
+          <div class="product-link-row product-link-row--mobile lg:hidden">
+            <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare models</a>
+            <a href="{{ support_center_url }}" class="site-meta-link">Support</a>
+          </div>
+
+          <div class="hidden lg:block">
+            {% if section.settings.show_support_panel %}
+              <div class="product-buybox-confidence">
+                <p class="product-buybox-confidence-kicker">{{ section.settings.support_eyebrow | default: 'Support' }}</p>
+                <p class="product-buybox-confidence-heading">{{ ownership_heading }}</p>
+                <div class="product-buybox-confidence-copy">
+                  {{ ownership_copy | truncatewords: 22 }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="product-secondary-details hidden lg:block">
+      <div class="product-buybox-signal-grid">
+        <div class="product-buybox-signal">
+          <p class="product-buybox-signal-label">Fit</p>
+          <p class="product-buybox-signal-value">{{ setup_label }}</p>
+        </div>
+        {% if spec_count > 0 %}
+          <div class="product-buybox-signal">
+            <p class="product-buybox-signal-label">Specs</p>
+            <p class="product-buybox-signal-value">{{ spec_count }} key spec{% if spec_count != 1 %}s{% endif %}</p>
+          </div>
+        {% endif %}
+        {% if manual_count > 0 or download_count > 0 %}
+          <div class="product-buybox-signal">
+            <p class="product-buybox-signal-label">Support</p>
+            <p class="product-buybox-signal-value">
+              {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
+              {% if manual_count > 0 and download_count > 0 %} + {% endif %}
+              {% if download_count > 0 %}{{ download_count }} download{% if download_count != 1 %}s{% endif %}{% endif %}
+            </p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="product-assurance-grid">
+        <div class="product-confidence-item">
+          <p class="product-confidence-title">Fit</p>
+          <p class="mt-2">
+            {% if compatibility_summary_text != blank %}
+              {{ compatibility_summary_text | truncatewords: 10 }}
+            {% else %}
+              Mac and Windows ready
+            {% endif %}
+          </p>
+        </div>
+        <div class="product-confidence-item">
+          <p class="product-confidence-title">Why it stands out</p>
+          <p class="mt-2">
+            {% if first_structured_highlight != blank %}
+              {{ first_structured_highlight | truncatewords: 10 }}
+            {% else %}
+              Clean, plug-in setup
+            {% endif %}
+          </p>
+        </div>
+        <div class="product-confidence-item">
+          <p class="product-confidence-title">Support</p>
+          <p class="mt-2">
+            {% if support_summary_text != blank %}
+              {{ support_summary_text | truncatewords: 10 }}
+            {% else %}
+              Manuals, downloads, expert help
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      {% if has_structured_highlights or section.blocks.size > 0 %}
+        {%- assign rendered_highlights = 0 -%}
+        <div class="product-highlight-shell">
+          <p class="section-kicker">At a glance</p>
+          <div class="product-highlights mt-4">
+            {% if has_structured_highlights %}
+              {% for highlight in structured_highlights limit: section.settings.highlight_limit %}
+                {% if rendered_highlights < 3 %}
+                  <div class="product-highlight-card">
+                    <p class="product-highlight-index">0{{ forloop.index }}</p>
+                    <div class="product-highlight-copy">{{ highlight }}</div>
+                  </div>
+                  {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
+                {% endif %}
+              {% endfor %}
+            {% elsif section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                {% if rendered_highlights < 3 %}
+                  <div class="product-highlight-card" {{ block.shopify_attributes }}>
+                    <p class="product-highlight-index">0{{ rendered_highlights | plus: 1 }}</p>
+                    <div class="product-highlight-copy">{{ block.settings.title }}</div>
+                  </div>
+                  {%- assign rendered_highlights = rendered_highlights | plus: 1 -%}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="product-link-row">
+        <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare models</a>
+        <a href="{{ support_center_url }}" class="site-meta-link">Support</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-sticky-atc lg:hidden" hidden data-sticky-atc>
+    <div class="product-sticky-atc-shell">
+      <div class="product-sticky-atc-main">
+        <div class="product-sticky-atc-copy">
+          <p class="product-sticky-atc-title">{{ product.title | truncate: 28 }}</p>
+          <div class="product-sticky-atc-meta">
+            <p class="product-sticky-atc-price" data-sticky-atc-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+          </div>
+        </div>
+        <button class="button-primary product-sticky-atc-button" type="submit" name="add" form="ProductForm-{{ section.id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
+          {% if product.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
+      </div>
+      {% if sticky_trust_line != blank %}
+        <p class="product-sticky-atc-trust">{{ sticky_trust_line }}</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -425,13 +644,13 @@
       "type": "text",
       "id": "support_heading",
       "label": "Support panel heading",
-      "default": "Support guidance built around this product"
+      "default": "Support stays close"
     },
     {
       "type": "textarea",
       "id": "support_copy",
       "label": "Support panel copy",
-      "default": "Compatibility guidance, manuals, downloads, and direct support stay nearby without crowding the buying decision."
+      "default": "Compatibility, manuals, downloads, and help."
     }
   ],
   "blocks": [
@@ -444,13 +663,13 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Works with Mac + Windows"
+          "default": "Mac and Windows ready"
         },
         {
           "type": "textarea",
           "id": "copy",
           "label": "Copy",
-          "default": "Short buying-confidence point."
+          "default": "Clear product value."
         }
       ]
     }

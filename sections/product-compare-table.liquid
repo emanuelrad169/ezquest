@@ -23,11 +23,11 @@
         assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
       endif
 
-      assign section_heading = section.settings.heading | default: 'Compare the right product'
-      assign section_copy = section.settings.copy | default: 'See how this product compares by setup role, desk footprint, and the kind of work it serves best.'
+      assign section_heading = section.settings.heading | default: 'See the fit at a glance'
+      assign section_copy = section.settings.copy | default: 'Compare ports, power, and desk fit across the closest EZQuest options.'
       assign section_eyebrow = section.settings.eyebrow
-      assign product_compare_note = 'Compare nearby options only when the current product still feels close to one other role.'
-      assign compare_page_note = 'Start with the role first. Then open the product page that matches it. Compatibility and support are here only for a final confirmation.'
+      assign product_compare_note = 'A quick view of the closest EZQuest alternatives.'
+      assign compare_page_note = 'Pick what fits how you work.'
       assign compare_group_param = 'source=compare&group=usb-c-workspace-connectivity-lineup'
 
       if structured_group != blank
@@ -49,20 +49,20 @@
       if product != blank and compare_page_context == false
         case product.handle
           when 'usb-c-travel-hub'
-            assign section_heading = 'Compare the travel-first product with broader EZQuest options'
-            assign section_copy = 'See whether the lighter mobile setup is the right call, or if a more balanced or desk-ready option fits better.'
-            assign product_compare_note = 'Use compare only if portability leads, but you still want to confirm displays, power, or a more permanent desk role.'
+            assign section_heading = 'See how the travel fit compares'
+            assign section_copy = 'Compare the travel fit against balanced and desk-first EZQuest options.'
+            assign product_compare_note = 'Best when portability leads but you still want to size the setup right.'
           when 'usb-c-pro-dock'
-            assign section_heading = 'Compare the desk-first product with lighter EZQuest options'
-            assign section_copy = 'See whether the workflow really needs a fuller dock, or if a more balanced everyday or portable option fits better.'
-            assign product_compare_note = 'Use compare only if the desk is the center of the workflow, but you want to confirm that a full dock is worth it.'
+            assign section_heading = 'See how the desk fit compares'
+            assign section_copy = 'Compare the full desk fit against lighter EZQuest options.'
+            assign product_compare_note = 'Best when the desk is permanent but the footprint still matters.'
           when 'usb-c-multimedia-hub'
-            assign section_heading = 'Compare this balanced everyday product with travel and desk-ready options'
-            assign section_copy = 'See whether this all-around hub covers the daily desk, or if the workflow needs something lighter or more permanent.'
-            assign product_compare_note = 'Use compare only if one compact hub feels close, but you still need to choose between lighter travel and fuller desk setups.'
-        endcase
+            assign section_heading = 'See how the daily fit compares'
+            assign section_copy = 'Compare the everyday fit against lighter and fuller EZQuest options.'
+            assign product_compare_note = 'Best when two fits feel close.'
+          endcase
       elsif compare_page_context
-        assign compare_page_note = 'Start with the role that matches the setup, then move into compatibility or support only when you want a final confirmation.'
+        assign compare_page_note = 'Pick what fits how you work.'
       endif
     -%}
 
@@ -83,11 +83,11 @@
       <div class="section-intro-action">
         {% if compare_page_context %}
           <div class="compare-intro-actions">
-            <a href="/pages/compatibility?{{ compare_group_param }}" class="site-meta-link">Check compatibility</a>
-            <a href="/pages/support?{{ compare_group_param }}" class="site-meta-link">Open support center</a>
+            <a href="/pages/compatibility?{{ compare_group_param }}" class="site-meta-link">Compatibility</a>
+            <a href="/pages/support?{{ compare_group_param }}" class="site-meta-link">Expert help</a>
           </div>
         {% else %}
-          <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare nearby fits</a>
+          <a href="/pages/compare?product={{ product.handle }}" class="site-meta-link">Compare fits</a>
         {% endif %}
       </div>
     </div>
@@ -108,14 +108,15 @@
             assign compare_highlights = compare_product.metafields.ezquest.feature_highlights.value
             assign is_primary_product = false
             assign compare_context_label = 'Alternative'
-            assign compare_recommendation_label = 'Compare option'
-            assign compare_positioning = 'A premium EZQuest option for Apple, PC, and mobile workflows.'
-            assign compare_best_for = 'Choose this when you want one clear everyday setup.'
+            assign compare_recommendation_label = 'At a glance'
+            assign compare_positioning = 'Premium connectivity for modern devices.'
+            assign compare_best_for = 'A clean fit for everyday work.'
             assign compare_variant_class = 'compare-card--balanced'
-            assign compare_handoff_label = 'Go deeper into this product'
-            assign compare_support_label = 'Check compatibility'
+            assign compare_handoff_label = 'View product'
+            assign compare_support_label = 'Compatibility'
             assign compare_support_url = '/pages/compatibility'
-            assign compare_context_note = 'Use support only if one last buying detail still needs confirmation.'
+            assign compare_context_note = 'Compatibility and support stay close.'
+            assign compare_handoff_class = 'button-secondary'
 
             if current_product_id != blank and compare_product.id == current_product_id
               assign is_primary_product = true
@@ -124,28 +125,28 @@
 
             if compare_product.handle contains 'travel'
               assign compare_recommendation_label = 'Most portable'
-              assign compare_positioning = 'Built for lighter mobile setups, hotel desks, classroom work, and everyday carry.'
-              assign compare_best_for = 'Choose this when the setup moves often and portability leads.'
+              assign compare_positioning = 'Compact ports and power for lighter setups.'
+              assign compare_best_for = 'Light bags, hotel desks, and mobile work.'
               assign compare_variant_class = 'compare-card--portable'
-              assign compare_handoff_label = 'See the travel-first product page'
-              assign compare_support_label = 'Check travel compatibility'
-              assign compare_context_note = 'Step up only if the desk needs more ports, more power, or a steadier display chain.'
+              assign compare_handoff_label = 'View travel product'
+              assign compare_support_label = 'Compatibility'
+              assign compare_context_note = 'The lightest footprint of the three.'
             elsif compare_product.handle contains 'multimedia'
               assign compare_recommendation_label = 'Most balanced'
-              assign compare_positioning = 'The strongest all-around choice for hybrid desks that still need HDMI, charging, Ethernet, and accessory access.'
-              assign compare_best_for = 'Choose this when one compact hub should cover the everyday desk.'
+              assign compare_positioning = 'Balanced ports and power for the everyday desk.'
+              assign compare_best_for = 'Hybrid desks and everyday work.'
               assign compare_variant_class = 'compare-card--balanced'
-              assign compare_handoff_label = 'See the balanced everyday product page'
-              assign compare_support_label = 'Check everyday compatibility'
-              assign compare_context_note = 'Go lighter only if portability wins. Step up only if the desk needs a fuller dock.'
+              assign compare_handoff_label = 'View everyday product'
+              assign compare_support_label = 'Compatibility'
+              assign compare_context_note = 'The middle ground between travel lightness and full-desk power.'
             elsif compare_product.handle contains 'pro-dock' or compare_product.type contains 'Dock'
               assign compare_recommendation_label = 'Most desk-ready'
-              assign compare_positioning = 'Made for more permanent setups with broader connectivity, more peripherals, and a clearer workstation role.'
-              assign compare_best_for = 'Choose this when the desk stays put and the workflow needs a fuller connection hub.'
+              assign compare_positioning = 'Broader connectivity and power for a full workstation.'
+              assign compare_best_for = 'Permanent desks and heavier workflows.'
               assign compare_variant_class = 'compare-card--desk'
-              assign compare_handoff_label = 'See the desk-first product page'
-              assign compare_support_label = 'Check workstation compatibility'
-              assign compare_context_note = 'Go lighter only if portability matters more than a permanent workstation setup.'
+              assign compare_handoff_label = 'View desk product'
+              assign compare_support_label = 'Compatibility'
+              assign compare_context_note = 'The fullest connection set of the three.'
             endif
 
             if compare_product.handle != blank
@@ -154,10 +155,14 @@
 
             if compare_page_context and compare_product.handle contains 'multimedia'
               assign is_primary_product = true
+              assign compare_context_label = 'Recommended first'
+              assign compare_handoff_label = 'View the best fit'
+              assign compare_handoff_class = 'button-primary'
+              assign compare_context_note = 'Start here unless portability or a permanent desk clearly matters more.'
             endif
           -%}
-          <article class="compare-card {{ compare_variant_class }}{% if is_primary_product %} compare-card-primary{% endif %}">
-            <div class="compare-card-label-row">
+          <article class="compare-card card-soft flex h-full flex-col p-4 lg:p-5 {{ compare_variant_class }}{% if is_primary_product %} compare-card-primary{% endif %}">
+            <div class="compare-card-label-row mb-2 flex items-center justify-between gap-3">
               <p class="section-kicker">{{ compare_context_label }}</p>
               {% if compare_product.type != blank %}
                 <span class="compare-card-type">{{ compare_product.type }}</span>
@@ -176,8 +181,8 @@
               </div>
             {% endif %}
             <p class="compare-context-note">{{ compare_context_note }}</p>
-            <div class="compare-card-links">
-              <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
+            <div class="compare-card-links mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-slate-200/75 pt-3.5">
+              <a href="{{ compare_product.url }}" class="{{ compare_handoff_class }}">{{ compare_handoff_label }}</a>
               <a href="{{ compare_support_url }}" class="site-meta-link">{{ compare_support_label }}</a>
             </div>
           </article>
@@ -202,8 +207,8 @@
   "name": "Product compare table",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare nearby options" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Compare nearby products by setup role, support priority, and the kind of workflow each one serves best." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See the fit at a glance" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Compare ports, power, and desk fit across the closest EZQuest options." },
     {
       "type": "range",
       "id": "columns_desktop",
@@ -230,7 +235,7 @@
     { "type": "url", "id": "link_url", "label": "Section link URL" },
     { "type": "text", "id": "structured_link_label", "label": "Structured card link label", "default": "View product" },
     { "type": "text", "id": "empty_state_heading", "label": "Empty-state heading", "default": "EZQuest option" },
-    { "type": "textarea", "id": "empty_state_copy", "label": "Empty-state copy", "default": "Compare nearby options by setup style, power profile, and support fit so the right choice becomes clearer faster." }
+    { "type": "textarea", "id": "empty_state_copy", "label": "Empty-state copy", "default": "Compare the closest EZQuest fits by ports, power, and desk presence." }
   ],
   "blocks": [
     {
@@ -240,7 +245,7 @@
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
         { "type": "text", "id": "title", "label": "Title", "default": "EZQuest option" },
-        { "type": "textarea", "id": "copy", "label": "Content", "default": "Explain which setup, desk, or travel workflow this option fits best." },
+        { "type": "textarea", "id": "copy", "label": "Content", "default": "Show what this option does best." },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "View product" },
         { "type": "url", "id": "link", "label": "Link override" }
       ]

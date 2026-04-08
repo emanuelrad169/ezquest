@@ -12,10 +12,10 @@
     {% endif %}
     <div class="mega-menu-story-actions">
       {% if href != blank %}
-        <a href="{{ href }}" class="mega-menu-story-primary">{{ cta | default: 'Explore' }}</a>
+        <a href="{{ href }}" class="button-primary button-sm mega-menu-story-primary">{{ cta | default: 'Explore' }}</a>
       {% endif %}
       {% if secondary_href != blank %}
-        <a href="{{ secondary_href }}" class="mega-menu-story-secondary">{{ secondary_cta | default: 'Learn more' }}</a>
+        <a href="{{ secondary_href }}" class="button-tertiary mega-menu-story-secondary">{{ secondary_cta | default: 'Learn more' }}</a>
       {% endif %}
     </div>
   </article>
@@ -36,7 +36,7 @@
       </ul>
     {% endif %}
     {% if href != blank %}
-      <a href="{{ href }}" class="mega-menu-support-cta">{{ cta | default: 'Open support center' }}</a>
+      <a href="{{ href }}" class="button-primary button-sm mega-menu-support-cta">{{ cta | default: 'Open support center' }}</a>
     {% endif %}
   </aside>
 {%- else -%}
@@ -53,11 +53,11 @@
         {% if badge != blank %}
           <span class="mega-menu-featured-badge">{{ badge }}</span>
         {% endif %}
-        {% if price != blank %}
-          <span class="mega-menu-featured-price">{{ price }}</span>
-        {% endif %}
-      </div>
-      <span class="mega-menu-featured-cta">{{ cta | default: 'View product' }}</span>
+      {% if price != blank %}
+        <span class="mega-menu-featured-price">{{ price }}</span>
+      {% endif %}
+    </div>
+      <span class="button-tertiary mega-menu-featured-cta">{{ cta | default: 'View product' }}</span>
     </div>
     {% if image != blank %}
       <div class="mega-menu-featured-media">

@@ -1,4 +1,43 @@
+const seedProducts = require("./products");
+
+const USE_CASES = [
+  {
+    title: "Balanced everyday",
+    slug: "balanced-everyday",
+    description: "Built for everyday setups that need reliable display, charging, and accessory support without moving up to a full dock.",
+    sort_order: 10
+  },
+  {
+    title: "Portable",
+    slug: "portable",
+    description: "Built for travel-ready setups, mobile work, and lighter everyday carry where flexibility matters more than a permanent desk footprint.",
+    sort_order: 20
+  },
+  {
+    title: "Desk-ready",
+    slug: "desk-ready",
+    description: "Built for permanent desks and workstation-style setups with more peripherals, more display demands, and a cleaner long-session footprint.",
+    sort_order: 30
+  },
+  {
+    title: "Chargers & power",
+    slug: "chargers-power",
+    description: "Built for charging layers that keep notebooks, tablets, and phones powered with less clutter across desks, travel kits, and shared setups.",
+    sort_order: 40
+  }
+];
+
+function buildUseCaseEntries(products) {
+  return USE_CASES.map((useCase) => ({
+    ...useCase,
+    productHandles: products
+      .filter((product) => Array.isArray(product.useCaseHandles) && product.useCaseHandles.includes(useCase.slug))
+      .map((product) => product.handle)
+  })).filter((useCase) => useCase.productHandles.length > 0);
+}
+
 module.exports = {
+  useCases: buildUseCaseEntries(seedProducts),
   products: [
     {
       handle: "usb-c-multimedia-hub",

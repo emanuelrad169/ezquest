@@ -8,7 +8,103 @@
   assign resolved_kind = kind | default: 'product'
   assign resolved_loading = loading | default: 'lazy'
   assign resolved_fetchpriority = fetchpriority | default: 'auto'
+  assign resolved_alt = alt | default: resolved_title
+  assign resolved_product = blank
+  assign resolved_image = blank
+  assign preferred_ratio_min = 1.1
+  assign preferred_ratio_max = 2.3
+  assign preferred_keyword = blank
   assign visual_asset = blank
+
+  case resolved_variant
+    when 'compare'
+      assign preferred_ratio_min = 0.92
+      assign preferred_ratio_max = 1.6
+    when 'ports'
+      assign preferred_ratio_min = 1.0
+      assign preferred_ratio_max = 1.9
+      assign preferred_keyword = 'port'
+    when 'setup'
+      assign preferred_ratio_min = 1.0
+      assign preferred_ratio_max = 1.9
+      assign preferred_keyword = 'setup'
+  endcase
+
+  if resolved_handle != blank
+    assign resolved_product = all_products[resolved_handle]
+  endif
+
+  if resolved_product != blank and resolved_product.images.size > 0
+    assign resolved_image = resolved_product.featured_image | default: resolved_product.images.first
+    assign resolved_image_alt = resolved_image.alt | downcase
+    assign resolved_image_is_technical = false
+    assign preferred_image = blank
+    assign preferred_non_technical_image = blank
+    assign preferred_ratio_image = blank
+    assign preferred_keyword_image = blank
+
+    if resolved_image_alt contains 'illustration'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'diagram'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'schematic'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'placeholder'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'port'
+      assign resolved_image_is_technical = true
+    elsif resolved_image_alt contains 'icon'
+      assign resolved_image_is_technical = true
+    endif
+
+    for candidate_image in resolved_product.images
+      assign candidate_alt = candidate_image.alt | downcase
+      assign candidate_is_technical = false
+      assign candidate_has_preferred_ratio = false
+
+      if candidate_alt contains 'illustration'
+        assign candidate_is_technical = true
+      elsif candidate_alt contains 'diagram'
+        assign candidate_is_technical = true
+      elsif candidate_alt contains 'schematic'
+        assign candidate_is_technical = true
+      elsif candidate_alt contains 'placeholder'
+        assign candidate_is_technical = true
+      elsif candidate_alt contains 'icon'
+        assign candidate_is_technical = true
+      elsif preferred_keyword == blank and candidate_alt contains 'port'
+        assign candidate_is_technical = true
+      endif
+
+      if candidate_image.aspect_ratio >= preferred_ratio_min and candidate_image.aspect_ratio <= preferred_ratio_max
+        assign candidate_has_preferred_ratio = true
+      endif
+
+      if preferred_keyword != blank and preferred_keyword_image == blank and candidate_alt contains preferred_keyword
+        assign preferred_keyword_image = candidate_image
+      endif
+
+      if preferred_image == blank and candidate_is_technical == false and candidate_has_preferred_ratio
+        assign preferred_image = candidate_image
+      endif
+
+      if preferred_non_technical_image == blank and candidate_is_technical == false
+        assign preferred_non_technical_image = candidate_image
+      endif
+
+      if preferred_ratio_image == blank and candidate_has_preferred_ratio
+        assign preferred_ratio_image = candidate_image
+      endif
+    endfor
+
+    if preferred_keyword_image != blank
+      assign resolved_image = preferred_keyword_image
+    elsif resolved_image_is_technical or resolved_image.aspect_ratio < preferred_ratio_min or resolved_image.aspect_ratio > preferred_ratio_max
+      assign resolved_image = preferred_image | default: preferred_non_technical_image | default: preferred_ratio_image | default: resolved_image
+    elsif resolved_variant == 'compare' and preferred_image != blank
+      assign resolved_image = preferred_image
+    endif
+  endif
 
   case resolved_handle
     when 'usb-c-multimedia-hub'
@@ -46,10 +142,12 @@
       endcase
   endcase
 -%}
-{% if visual_asset != blank %}
+{% if resolved_image != blank %}
+  {{ resolved_image | image_url: width: resolved_width | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
+{% elsif visual_asset != blank %}
   <img
     src="{{ visual_asset | asset_url }}"
-    alt="{{ alt | default: resolved_title | escape }}"
+    alt="{{ resolved_alt | escape }}"
     class="{{ resolved_class }}"
     width="{{ resolved_width }}"
     height="{{ resolved_height }}"

@@ -5,7 +5,6 @@
   assign compare_vendor = blank
   assign compare_type = blank
   assign compare_handoff_label = 'See product details'
-  assign compare_support_label = 'Check compatibility'
   assign compare_visual_handle = blank
 
   if compare_product != blank
@@ -25,8 +24,8 @@
   endif
 -%}
 
-<article class="compare-card" {{ block.shopify_attributes }}>
-  <div class="compare-card-label-row">
+<article class="compare-card card-soft flex h-full flex-col p-4 lg:p-5" {{ block.shopify_attributes }}>
+  <div class="compare-card-label-row mb-2 flex items-center justify-between gap-3">
     {% if block.settings.eyebrow != blank %}
       <p class="section-kicker">{{ block.settings.eyebrow }}</p>
     {% elsif compare_vendor != blank %}
@@ -41,27 +40,31 @@
   {% if compare_product != blank %}
     {% render 'card-product', product: compare_product, card_style: 'featured-strip', card_context: 'compare', image_variant: 'compare' %}
   {% else %}
-    <article class="product-card-tile product-card-tile--featured-strip">
-      <div class="product-card-featured-media">
-        {% if compare_visual_handle != blank %}
-          {% render 'owned-product-visual',
-            product_handle: compare_visual_handle,
-            product_title: compare_title,
-            variant: 'compare',
-            kind: 'compare',
-            width: 1200,
-            height: 900,
-            class: 'hero-media-frame aspect-card w-full object-cover'
-          %}
-        {% else %}
-          {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
-        {% endif %}
+    <article class="product-card-tile product-card-tile--featured-strip product-card-tile--compare card-elevated flex h-full flex-col">
+      <div class="product-card-featured-media-shell relative px-3 pt-3">
+        <div class="product-card-featured-media">
+          {% if compare_visual_handle != blank %}
+            {% render 'owned-product-visual',
+              product_handle: compare_visual_handle,
+              product_title: compare_title,
+              variant: 'compare',
+              kind: 'compare',
+              width: 1200,
+              height: 900,
+              class: 'hero-media-frame aspect-card w-full object-cover'
+            %}
+          {% else %}
+            {% render 'placeholder-visual', kind: 'compare', text: compare_title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+          {% endif %}
+        </div>
       </div>
-      <div class="product-card-featured-body">
-        <h3 class="card-title product-card-featured-title">{{ compare_title }}</h3>
-        {% if compare_copy != blank %}
-          <p class="product-card-featured-value">{{ compare_copy | truncatewords: 12 }}</p>
-        {% endif %}
+      <div class="product-card-featured-body flex flex-1 flex-col gap-3 px-4 pb-5 pt-4">
+        <div class="product-card-featured-copy product-card-featured-copy--compare-fallback grid gap-2">
+          <h3 class="card-title product-card-featured-title">{{ compare_title }}</h3>
+          {% if compare_copy != blank %}
+            <p class="product-card-featured-value">{{ compare_copy | truncatewords: 12 }}</p>
+          {% endif %}
+        </div>
       </div>
     </article>
   {% endif %}
@@ -78,9 +81,9 @@
     {% endif %}
   </p>
   {% if compare_product != blank %}
-    <div class="compare-card-links">
-      <a href="{{ compare_product.url }}" class="site-meta-link">{{ compare_handoff_label }}</a>
-      <a href="/pages/compatibility?product={{ compare_product.handle }}" class="site-meta-link">{{ compare_support_label }}</a>
+    <div class="compare-card-links mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-slate-200/75 pt-3.5">
+      {% render 'button', label: compare_handoff_label, url: compare_product.url, style: 'tertiary' %}
+      {% render 'button', label: compare_support_label, url: '/pages/compatibility?product=' | append: compare_product.handle, style: 'tertiary' %}
     </div>
   {% endif %}
 </article>

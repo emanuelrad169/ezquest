@@ -5,23 +5,22 @@
       assign section_copy = section.settings.copy
     -%}
 
-    <div class="home-collections-strip-header">
-      <div class="home-collections-strip-header-copy">
-        <p class="section-kicker">Product families</p>
-        <div class="home-collections-strip-heading-row">
+    <div class="home-collections-strip-header flex flex-col gap-4">
+      <div class="home-collections-strip-header-copy min-w-0">
+        <p class="section-kicker">Product Categories</p>
+        <div class="home-collections-strip-heading-row flex items-center gap-5 mt-3">
           <h2 class="section-heading home-strip-heading">{{ section_heading }}</h2>
-          <span class="home-strip-rule" aria-hidden="true"></span>
+          <span class="home-strip-rule max-w-28 sm:max-w-36 lg:max-w-44 xl:max-w-56" aria-hidden="true"></span>
         </div>
-      </div>
-      <div class="home-collections-strip-header-aside">
-        <p class="home-collections-strip-header-note">Move from travel-ready hubs to desk-first docks without losing the thread.</p>
-        <a href="{{ routes.collections_url }}" class="site-meta-link">View all families</a>
       </div>
     </div>
 
-    {% if section_copy != blank %}
-      <p class="section-copy home-strip-copy">{{ section_copy }}</p>
-    {% endif %}
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between content-start lg:gap-6">
+      {% if section_copy != blank %}
+        <p class="section-copy home-strip-copy max-w-2xl">{{ section_copy }}</p>
+      {% endif %}
+      <a href="{{ routes.collections_url }}" class="site-meta-link shrink-0 lg:mt-1">View all categories</a>
+    </div>
 
     <div class="home-collections-strip-grid">
       {% for block in section.blocks %}
@@ -29,19 +28,20 @@
           assign collection_object = block.settings.collection
           assign card_title = block.settings.title
           assign card_url = block.settings.link
-          assign product_count = block.settings.product_count
           assign card_image = block.settings.image
           assign card_summary = blank
           assign card_eyebrow = blank
           assign card_guidance = blank
+          assign card_cta_label = 'Shop this family'
 
           if collection_object != blank
             assign card_title = collection_object.title
             assign card_url = collection_object.url
-            assign product_count = collection_object.products_count
 
             if card_image == blank and collection_object.featured_image != blank
               assign card_image = collection_object.featured_image
+            elsif card_image == blank and collection_object.products_count > 0 and collection_object.products.first.featured_image != blank
+              assign card_image = collection_object.products.first.featured_image
             endif
           endif
 
@@ -55,35 +55,43 @@
                 assign card_eyebrow = 'Hybrid + travel'
                 assign card_summary = 'Compact expansion for everyday carry, hybrid desks, and display-ready meetings'
                 assign card_guidance = 'Best for daily carry and hybrid desks'
+                assign card_cta_label = 'Shop hubs & adapters'
               when 'docking-stations'
                 assign card_eyebrow = 'Desk command'
                 assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
                 assign card_guidance = 'Best for permanent desks and displays'
+                assign card_cta_label = 'See desk-ready docks'
               when 'chargers-power'
                 assign card_eyebrow = 'Power layer'
                 assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines'
                 assign card_guidance = 'Best for charging routines and travel kits'
+                assign card_cta_label = 'Shop chargers & power'
               when 'accessories'
                 assign card_eyebrow = 'Finish the setup'
                 assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner and more dependable'
                 assign card_guidance = 'Best for finishing the setup cleanly'
+                assign card_cta_label = 'Browse cables & accessories'
             endcase
           elsif card_url contains '/collections/hubs-adapters'
             assign card_eyebrow = 'Hybrid + travel'
             assign card_summary = 'Compact expansion for everyday carry, hybrid desks, and display-ready meetings'
             assign card_guidance = 'Best for daily carry and hybrid desks'
+            assign card_cta_label = 'Shop hubs & adapters'
           elsif card_url contains '/collections/docking-stations'
             assign card_eyebrow = 'Desk command'
             assign card_summary = 'Permanent desk connectivity for displays, power, Ethernet, and accessory-heavy workflows'
             assign card_guidance = 'Best for permanent desks and displays'
+            assign card_cta_label = 'See desk-ready docks'
           elsif card_url contains '/collections/chargers-power'
             assign card_eyebrow = 'Power layer'
             assign card_summary = 'Charging systems for carry kits, shared desks, and multi-device routines'
             assign card_guidance = 'Best for charging routines and travel kits'
+            assign card_cta_label = 'Shop chargers & power'
           elsif card_url contains '/collections/accessories'
             assign card_eyebrow = 'Finish the setup'
             assign card_summary = 'Cables and finishing pieces that keep the workflow cleaner and more dependable'
             assign card_guidance = 'Best for finishing the setup cleanly'
+            assign card_cta_label = 'Browse cables & accessories'
           endif
         -%}
 
@@ -112,16 +120,11 @@
             {% endif %}
             <div class="home-collections-strip-footer">
               <div class="home-collections-strip-footer-copy">
-                {% if product_count != blank %}
-                  <p class="home-collections-strip-count">
-                    {{ product_count }} product{% if product_count != 1 %}s{% endif %}
-                  </p>
-                {% endif %}
                 {% if card_guidance != blank %}
                   <p class="home-collections-strip-guidance">{{ card_guidance }}</p>
                 {% endif %}
               </div>
-              <span class="home-collections-strip-link-label">Explore family</span>
+              <span class="home-collections-strip-link-label">{{ card_cta_label }}</span>
             </div>
           </div>
         </a>

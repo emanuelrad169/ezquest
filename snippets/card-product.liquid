@@ -1,161 +1,346 @@
 {%- liquid
   assign card_style = card_style | default: 'default'
   assign card_context = card_context | default: 'default'
-  assign image_variant = image_variant | default: 'hero'
+  assign image_variant = image_variant | default: blank
   assign featured_card = false
   if card_style == 'featured-strip'
     assign featured_card = true
   endif
 
+  if image_variant == blank
+    case card_context
+      when 'homepage', 'collection', 'search', 'compare'
+        assign image_variant = 'compare'
+      else
+        assign image_variant = 'hero'
+    endcase
+  endif
+
   assign value_line = blank
-  assign trust_cue = blank
   assign product_badge = blank
-  assign fit_cue = blank
-  assign support_text = blank
-  assign use_owned_visual = false
-  assign show_fit_cue = true
-  assign show_trust_cue = true
-  assign show_brand_meta = true
-  assign show_type_meta = true
-  assign cta_label = 'View product'
+  assign product_badge_modifier = blank
+  assign rating_value = blank
+  assign rating_count = blank
+  assign swatch_values = blank
+  assign swatch_limit = 4
+  assign swatch_overflow = 0
+  assign structured_spec_rows = blank
+  assign has_structured_spec_rows = false
+  assign show_spec_strip = true
+  assign spec_limit = 3
+  assign show_media_dots = false
+  assign media_dot_count = 0
+  assign fallback_type_value = blank
+  assign fallback_weight_value = blank
+  assign highlight_spec_value = blank
+  assign show_swatches = true
+  assign show_descriptor = true
+  assign show_quick_add = false
+  assign show_media_quick_add = true
+  assign show_footer_quick_add = true
+  assign selected_variant = blank
+  assign quick_add_label = 'Add to cart'
+  assign product_eyebrow = blank
+  assign show_product_eyebrow = true
 
   case card_context
     when 'homepage'
-      assign show_fit_cue = false
-      assign show_trust_cue = false
+      assign show_descriptor = false
+      assign show_spec_strip = false
+      assign show_swatches = false
+      assign spec_limit = 0
+      assign show_media_quick_add = false
     when 'collection'
-      assign show_trust_cue = false
-    when 'compare'
-      assign show_fit_cue = false
-      assign show_trust_cue = false
-      assign show_brand_meta = false
-      assign show_type_meta = false
-      assign cta_label = 'View details'
+      assign show_descriptor = false
+      assign show_spec_strip = false
+      assign show_swatches = false
+      assign spec_limit = 0
+      assign show_media_quick_add = false
     when 'search'
-      assign show_trust_cue = false
-      assign show_brand_meta = false
-      assign cta_label = 'Open product'
+      assign show_descriptor = false
+      assign show_spec_strip = false
+      assign show_swatches = false
+      assign spec_limit = 0
+      assign show_media_quick_add = false
+    when 'compare'
+      assign show_swatches = false
+      assign show_descriptor = false
+      assign show_spec_strip = false
+      assign show_product_eyebrow = false
+      assign show_media_quick_add = false
+      assign show_footer_quick_add = false
   endcase
 
   if product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
     assign value_line = product.metafields.ezquest.feature_highlights.value.first
+    assign highlight_spec_value = product.metafields.ezquest.feature_highlights.value.first
   elsif product != blank and product.type != blank
     assign normalized_type = product.type | downcase
     if normalized_type contains 'dock'
-      assign value_line = 'Desk-ready power, ports, and display expansion'
-      assign fit_cue = 'Best for desk setups'
+      assign value_line = 'Desk-ready connectivity'
     elsif normalized_type contains 'hub'
-      assign value_line = 'Compact expansion for charging, display, and data'
-      assign fit_cue = 'Best for everyday carry'
+      assign value_line = 'Compact everyday connectivity'
     elsif normalized_type contains 'charg' or normalized_type contains 'power'
-      assign value_line = 'Reliable charging for notebooks, tablets, and mobile devices'
-      assign fit_cue = 'Best for charging workflows'
+      assign value_line = 'Fast, reliable charging'
     elsif normalized_type contains 'cable' or normalized_type contains 'accessor'
-      assign value_line = 'Everyday cables and add-ons that keep the setup moving'
-      assign fit_cue = 'Best for finishing the setup'
+      assign value_line = 'Refined everyday accessories'
     else
-      assign value_line = 'Premium connectivity for Apple, PC, and mobile workflows'
+      assign value_line = 'Premium connectivity'
     endif
   else
-    assign value_line = 'Premium connectivity for Apple, PC, and mobile workflows'
+    assign value_line = 'Premium connectivity'
   endif
 
   if product != blank
-    if image_variant == 'compare' and product.handle != blank
-      assign use_owned_visual = true
-      assign show_fit_cue = false
-    endif
-
-    if product.metafields.ezquest.compatibility_summary != blank
-      assign support_text = product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | strip
-    elsif product.metafields.ezquest.support_summary != blank
-      assign support_text = product.metafields.ezquest.support_summary | metafield_tag | strip_html | strip
-    endif
-
-    if support_text != blank
-      assign trust_cue = support_text | truncatewords: 6
-    elsif product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 1
-      assign trust_cue = product.metafields.ezquest.feature_highlights.value[1]
-    endif
-
-    if image_variant == 'compare'
-      assign show_trust_cue = false
-    endif
-
     assign product_tags_downcase = product.tags | join: ',' | downcase
     if product.compare_at_price_max > product.price
       assign product_badge = 'Sale'
-    elsif product_tags_downcase contains 'best seller' or product_tags_downcase contains 'best-seller' or product_tags_downcase contains 'bestseller'
-      assign product_badge = 'Best seller'
+      assign product_badge_modifier = 'sale'
     elsif product_tags_downcase contains 'new'
       assign product_badge = 'New'
+      assign product_badge_modifier = 'new'
     endif
+
+    if product.metafields.reviews.rating != blank and product.metafields.reviews.rating.value != blank
+      assign rating_value = product.metafields.reviews.rating.value.rating
+      assign rating_count = product.metafields.reviews.rating_count.value | default: blank
+    endif
+
+    for option in product.options_with_values
+      assign option_name = option.name | downcase
+      if option_name contains 'color' or option_name contains 'finish'
+        assign swatch_values = option.values
+        break
+      endif
+    endfor
+
+    if swatch_values != blank and swatch_values.size > swatch_limit
+      assign swatch_overflow = swatch_values.size | minus: swatch_limit
+    endif
+
+    if product.metafields.ezquest.spec_rows != blank
+      assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
+      if structured_spec_rows.count > 0
+        assign has_structured_spec_rows = true
+      endif
+    endif
+
+    assign selected_variant = product.selected_or_first_available_variant
+    if selected_variant != blank and card_context != 'compare'
+      assign show_quick_add = true
+      if selected_variant.weight > 0
+        assign fallback_weight_value = selected_variant.weight | weight_with_unit
+      endif
+    endif
+
+    if product.type != blank
+      assign fallback_type_value = product.type
+      assign product_eyebrow = product.type
+    elsif product.vendor != blank
+      assign product_eyebrow = product.vendor
+    endif
+
+    if product.media.size > 1 and card_context == 'homepage'
+      assign show_media_dots = true
+      assign media_dot_count = product.media.size
+      if media_dot_count > 3
+        assign media_dot_count = 3
+      endif
+    endif
+
+    unless product.available
+      assign quick_add_label = 'Sold out'
+    endunless
   endif
 -%}
 
 {% if featured_card %}
-  <a
-    href="{{ product.url | default: '#' }}"
-    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} motion-fade-up{% if featured %} is-featured{% endif %}"
+  <article
+    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up{% if featured %} is-featured{% endif %}"
     {% if card_index != blank %}data-card-index="{{ card_index }}"{% endif %}
   >
-    <div class="product-card-featured-media">
-      {% if product != blank and product.featured_image != blank and use_owned_visual == false %}
-        {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'product-card-image product-card-featured-image aspect-card w-full object-contain' }}
-      {% else %}
-        {% render 'owned-product-visual',
-          product_handle: product.handle,
-          product_title: product.title | default: 'EZQuest Product',
+    <div class="product-card-featured-media-shell relative px-3 pt-3">
+      <a href="{{ product.url | default: '#' }}" class="product-card-featured-media product-card-featured-media-link" aria-label="View {{ product.title | default: 'product' }}">
+        {% render 'product-browse-media',
+          product: product,
+          context: card_context,
           variant: image_variant,
-          kind: 'product',
           width: 1200,
           height: 900,
           class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
         %}
-      {% endif %}
+      </a>
 
       {% if product_badge != blank %}
-        <span class="product-card-featured-badge">{{ product_badge }}</span>
+        <span class="product-card-featured-badge{% if product_badge_modifier != blank %} product-card-featured-badge--{{ product_badge_modifier }}{% endif %}">{{ product_badge }}</span>
+      {% endif %}
+
+      {% if rating_value != blank %}
+        <span class="product-card-featured-rating-badge" aria-label="Rated {{ rating_value }} out of 5{% if rating_count != blank %} from {{ rating_count }} reviews{% endif %}">
+          <span aria-hidden="true">★</span>
+          {{ rating_value }}
+        </span>
+      {% endif %}
+
+      {% if show_media_quick_add and show_quick_add %}
+        {% form 'product', product, class: 'product-card-featured-add-form product-card-featured-add-form--media' %}
+          <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          <button class="button-primary button-sm product-card-featured-media-cta" type="submit" name="add"{% unless product.available %} disabled="disabled"{% endunless %}>
+            {{ quick_add_label }}
+          </button>
+        {% endform %}
+      {% endif %}
+
+      {% if show_media_dots %}
+        <div class="product-card-featured-indicators" aria-hidden="true">
+          {% for i in (1..media_dot_count) %}
+            <span class="product-card-featured-indicator{% if forloop.first %} is-active{% endif %}"></span>
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
 
-    <div class="product-card-featured-body">
-      {% if show_brand_meta %}
-        <div class="product-card-featured-meta">
-          <span class="product-card-featured-brand">{{ product.vendor | default: shop.name }}</span>
+    <div class="product-card-featured-body flex flex-1 flex-col gap-4 px-4 pb-5 pt-4 lg:px-5">
+      <div class="product-card-featured-copy grid gap-2">
+        {% if show_product_eyebrow and product_eyebrow != blank %}
+          <p class="product-card-featured-vendor">{{ product_eyebrow }}</p>
+        {% endif %}
+
+        <h3 class="card-title product-card-featured-title">
+          <a href="{{ product.url | default: '#' }}" class="product-card-featured-title-link">{{ product.title | default: 'EZQuest connectivity essential' }}</a>
+        </h3>
+
+        <div class="product-card-featured-meta-row grid gap-1">
+          <div class="product-card-featured-price">
+            {% render 'price', product: product, show_promo_note: false %}
+          </div>
+
+          {% if show_descriptor and value_line != blank %}
+            <p class="product-card-featured-value">{{ value_line }}</p>
+          {% endif %}
         </div>
-      {% endif %}
-
-      {% if show_fit_cue and fit_cue != blank %}
-        <div class="product-card-featured-fit">{{ fit_cue }}</div>
-      {% endif %}
-
-      <h3 class="card-title product-card-featured-title">{{ product.title | default: 'EZQuest connectivity essential' }}</h3>
-      <p class="product-card-featured-value">{{ value_line }}</p>
-
-      {% if show_trust_cue and trust_cue != blank %}
-        <div class="product-card-featured-rating" aria-label="Buying confidence">
-          <span class="product-card-featured-rating-copy">{{ trust_cue }}</span>
-        </div>
-      {% endif %}
-
-      <div class="product-card-featured-footer">
-        <div class="product-card-featured-price">
-          {% render 'price', product: product, show_promo_note: false %}
-        </div>
-        <span class="product-card-featured-cta">{{ cta_label }}</span>
       </div>
+
+      {%- capture product_card_footer -%}
+        {%- capture product_card_detail_stack -%}
+          {% if show_swatches and swatch_values != blank and swatch_values.size > 0 %}
+            <div class="product-card-featured-swatches-row flex flex-wrap items-center justify-between gap-3">
+              <div class="product-card-featured-swatches" aria-label="Available finishes">
+                {% for swatch_value in swatch_values limit: swatch_limit %}
+                  <span
+                    class="product-card-featured-swatch product-card-featured-swatch--{{ swatch_value | handleize }}"
+                    title="{{ swatch_value }}"
+                    aria-hidden="true"
+                  ></span>
+                {% endfor %}
+                {% if swatch_overflow > 0 %}
+                  <span class="product-card-featured-swatch-count">+{{ swatch_overflow }}</span>
+                {% endif %}
+              </div>
+              <span class="product-card-featured-swatch-caption">
+                {{ swatch_values.size }} finish{% if swatch_values.size != 1 %}es{% endif %}
+              </span>
+            </div>
+          {% endif %}
+
+          {%- capture spec_strip_markup -%}
+            {% if show_spec_strip %}
+              {%- assign rendered_spec_cells = 0 -%}
+              {%- capture spec_cells -%}
+                {% if has_structured_spec_rows %}
+                  {% for spec_row in structured_spec_rows %}
+                    {% if rendered_spec_cells >= spec_limit %}{% break %}{% endif %}
+                    {%- assign spec_label = spec_row.label.value | strip -%}
+                    {%- assign spec_value = spec_row.spec_value.value | strip_html | strip -%}
+                    {% if spec_label != blank and spec_value != blank %}
+                      <div class="product-card-featured-spec">
+                        <span class="product-card-featured-spec-label">{{ spec_label }}</span>
+                        <span class="product-card-featured-spec-value">{{ spec_value | truncatewords: 6 }}</span>
+                      </div>
+                      {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+
+                {% if rendered_spec_cells < spec_limit and fallback_type_value != blank %}
+                  <div class="product-card-featured-spec">
+                    <span class="product-card-featured-spec-label">Type</span>
+                    <span class="product-card-featured-spec-value">{{ fallback_type_value }}</span>
+                  </div>
+                  {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
+                {% endif %}
+
+                {% if rendered_spec_cells < spec_limit and fallback_weight_value != blank %}
+                  <div class="product-card-featured-spec">
+                    <span class="product-card-featured-spec-label">Weight</span>
+                    <span class="product-card-featured-spec-value">{{ fallback_weight_value }}</span>
+                  </div>
+                  {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
+                {% endif %}
+
+                {% if rendered_spec_cells < spec_limit and highlight_spec_value != blank and has_structured_spec_rows == false %}
+                  <div class="product-card-featured-spec">
+                    <span class="product-card-featured-spec-label">Highlight</span>
+                    <span class="product-card-featured-spec-value">{{ highlight_spec_value | truncatewords: 6 }}</span>
+                  </div>
+                {% endif %}
+              {%- endcapture -%}
+              {%- assign spec_cells = spec_cells | strip -%}
+                {% if spec_cells != blank %}
+                <div class="product-card-featured-specs grid gap-3 sm:grid-cols-2" aria-label="Key details">
+                  {{ spec_cells }}
+                </div>
+              {% endif %}
+            {% endif %}
+          {%- endcapture -%}
+
+          {%- assign spec_strip_markup = spec_strip_markup | strip -%}
+          {% if spec_strip_markup != blank %}
+            {{ spec_strip_markup }}
+          {% endif %}
+        {%- endcapture -%}
+
+        {%- assign product_card_detail_stack = product_card_detail_stack | strip -%}
+        {% if product_card_detail_stack != blank %}
+          <div class="product-card-featured-detail-stack grid gap-3">
+            {{ product_card_detail_stack }}
+          </div>
+        {% endif %}
+
+        {% if show_footer_quick_add and show_quick_add %}
+          {% form 'product', product, class: 'product-card-featured-add-form product-card-featured-add-form--footer' %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+            <button class="button-primary product-card-featured-footer-cta" type="submit" name="add"{% unless product.available %} disabled="disabled"{% endunless %}>
+              {{ quick_add_label }}
+            </button>
+          {% endform %}
+        {% endif %}
+      {%- endcapture -%}
+      {%- assign product_card_footer = product_card_footer | strip -%}
+
+      {% if product_card_footer != blank %}
+        <div class="product-card-featured-footer mt-auto grid gap-4 border-t border-slate-200/70 pt-4">
+          {{ product_card_footer }}
+        </div>
+      {% endif %}
     </div>
-  </a>
+  </article>
 {% else %}
-<article class="product-card-tile product-card-tile--{{ card_context | handleize }} motion-lift flex h-full flex-col">
-  {% if product != blank and product.featured_image != blank %}
+<article class="product-card-tile product-card-tile--{{ card_context | handleize }} card-base motion-lift flex h-full flex-col">
+  {% if product != blank %}
     <div class="product-thumb-card product-card-media relative">
-      {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'product-card-image aspect-card w-full object-cover' }}
+      {% render 'product-browse-media',
+        product: product,
+        context: card_context,
+        variant: image_variant,
+        width: 900,
+        height: 675,
+        class: 'product-card-image aspect-card w-full object-contain'
+      %}
       {% if product.available == false %}
         <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-caption font-semibold uppercase tracking-wide text-slate-900">Sold out</span>
       {% elsif product.compare_at_price_max > product.price %}
-        <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-caption font-semibold uppercase tracking-wide text-slate-900">On sale</span>
+        <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-caption font-semibold uppercase tracking-wide text-slate-900">Sale</span>
       {% endif %}
     </div>
   {% else %}
@@ -172,7 +357,7 @@
     </div>
   {% endif %}
 
-  <div class="product-card-body mt-4 flex flex-1 flex-col">
+  <div class="product-card-body mt-4 flex flex-1 flex-col gap-3 px-1">
   <div class="flex items-center justify-between gap-3">
     {% if show_brand_meta and product != blank and product.vendor != blank %}
       <p class="section-kicker">{{ product.vendor }}</p>
@@ -198,7 +383,7 @@
     <div class="product-card-trust mt-3">{{ trust_cue }}</div>
   {% endif %}
 
-  <div class="product-card-footer mt-5">
+  <div class="product-card-footer mt-auto flex items-center justify-between gap-3 border-t border-slate-200/70 pt-5">
     {% render 'price', product: product %}
     <div class="flex items-center gap-3">
       {% if product != blank %}

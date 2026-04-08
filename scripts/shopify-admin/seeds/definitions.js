@@ -128,6 +128,18 @@ const metaobjectDefinitions = [
     ]
   },
   {
+    name: "EZQuest Use Case",
+    type: "ezquest_use_case",
+    displayNameKey: "title",
+    fieldDefinitions: [
+      { name: "Title", key: "title", type: "single_line_text_field", required: true },
+      { name: "Slug", key: "slug", type: "single_line_text_field", required: true },
+      { name: "Description", key: "description", type: "multi_line_text_field", required: false },
+      { name: "Sort order", key: "sort_order", type: "number_integer", required: false },
+      { name: "Products", key: "products", type: "list.product_reference", required: false }
+    ]
+  },
+  {
     name: "EZQuest Comparison Group",
     type: "ezquest_comparison_group",
     displayNameKey: "heading",
@@ -186,6 +198,7 @@ const productMetafieldDefinitions = [
   { name: "Linked firmware", namespace: "ezquest", key: "firmware", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_firmware" },
   { name: "Linked user guides", namespace: "ezquest", key: "user_guides", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_user_guide" },
   { name: "Linked compatibility entries", namespace: "ezquest", key: "compatibility_entries", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_compatibility_entry" },
+  { name: "Linked use cases", namespace: "ezquest", key: "use_cases", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_use_case" },
   { name: "Comparison group", namespace: "ezquest", key: "compare_group", type: "metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_comparison_group" },
   { name: "Linked FAQ items", namespace: "ezquest", key: "faq_items", type: "list.metaobject_reference", ownerType: "PRODUCT", metaobjectDefinitionType: "ezquest_faq_item" }
 ];

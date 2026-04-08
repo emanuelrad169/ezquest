@@ -39,7 +39,7 @@
             <p class="blog-lead-excerpt">{{ lead_article.excerpt_or_content | strip_html | truncatewords: 28 }}</p>
             <div class="blog-lead-footer">
               <span>{{ lead_article.published_at | date: '%B %d, %Y' }}</span>
-              <a href="{{ lead_article.url }}" class="button-tertiary">Read article</a>
+              {% render 'button', label: 'Read article', url: lead_article.url, style: 'tertiary' %}
             </div>
           </div>
         </article>

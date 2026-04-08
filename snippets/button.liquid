@@ -2,9 +2,31 @@
   assign button_label = label | default: 'Learn more'
   assign button_url = url | default: '#'
   assign button_style = style | default: 'primary'
+  assign button_tag = tag | default: 'a'
+  assign button_type = type | default: 'button'
   assign button_class = 'button-primary'
-  if button_style == 'secondary'
-    assign button_class = 'button-secondary'
+
+  case button_style
+    when 'secondary'
+      assign button_class = 'button-secondary'
+    when 'tertiary'
+      assign button_class = 'button-tertiary'
+    when 'icon'
+      assign button_class = 'button-icon'
+  endcase
+
+  if size == 'sm'
+    assign button_class = button_class | append: ' button-sm'
+  elsif size == 'lg'
+    assign button_class = button_class | append: ' button-lg'
+  endif
+
+  if class != blank
+    assign button_class = button_class | append: ' ' | append: class
   endif
 -%}
-<a href="{{ button_url }}" class="{{ button_class }}">{{ button_label }}</a>
+{%- if button_tag == 'button' -%}
+  <button type="{{ button_type }}" class="{{ button_class }}"{% if attributes != blank %} {{ attributes }}{% endif %}>{{ button_label }}</button>
+{%- else -%}
+  <a href="{{ button_url }}" class="{{ button_class }}"{% if attributes != blank %} {{ attributes }}{% endif %}>{{ button_label }}</a>
+{%- endif -%}

@@ -1,5 +1,6 @@
 const { metaobjectDefinitions, productMetafieldDefinitions } = require("../../seeds/definitions");
 const starterContent = require("../../seeds/starter-content");
+const seedProducts = require("../../seeds/products");
 const { findProductByHandle } = require("../lookups");
 const { bump } = require("../summary");
 
@@ -99,6 +100,7 @@ async function getProductStructuredState(client, handle) {
           firmware: metafield(namespace: "ezquest", key: "firmware") { id }
           userGuides: metafield(namespace: "ezquest", key: "user_guides") { id }
           compatibilityEntries: metafield(namespace: "ezquest", key: "compatibility_entries") { id }
+          useCases: metafield(namespace: "ezquest", key: "use_cases") { id }
           compareGroup: metafield(namespace: "ezquest", key: "compare_group") { id }
           faqItems: metafield(namespace: "ezquest", key: "faq_items") { id }
         }
@@ -123,6 +125,7 @@ async function getProductStructuredState(client, handle) {
     firmware: Boolean(p.firmware),
     user_guides: Boolean(p.userGuides),
     compatibility_entries: Boolean(p.compatibilityEntries),
+    use_cases: Boolean(p.useCases),
     compare_group: Boolean(p.compareGroup),
     faq_items: Boolean(p.faqItems)
   };
@@ -179,6 +182,8 @@ async function runValidation(context, summary) {
     printSection("Product structured linkage");
     const linkedProducts = new Set([
       ...starterContent.products.map((product) => product.handle),
+      ...starterContent.useCases.flatMap((useCase) => useCase.productHandles || []),
+      ...seedProducts.filter((product) => Array.isArray(product.useCaseHandles) && product.useCaseHandles.length > 0).map((product) => product.handle),
       ...starterContent.comparisonGroups.flatMap((group) => group.productHandles)
     ]);
 
@@ -201,6 +206,7 @@ async function runValidation(context, summary) {
         "firmware",
         "user_guides",
         "compatibility_entries",
+        "use_cases",
         "compare_group",
         "faq_items"
       ]) {

@@ -13,15 +13,15 @@
   assign faq_collection = section.settings.source_collection
   assign help_heading = 'Need setup help?'
   assign help_copy = 'Move into support when the question depends on your exact product, connection path, or order details.'
-  assign help_url = '/pages/contact'
   assign help_label = 'Contact support'
+  assign help_url = '/pages/contact'
 
   if request.page_type == 'page' and page != blank and page.handle == 'faq'
     assign support_page_context = true
     assign help_heading = 'Need the next ownership step?'
     assign help_copy = 'Move from broad answers into manuals, downloads, compatibility, troubleshooting, or direct contact without losing the question you are already trying to solve.'
-    assign help_url = '/pages/support'
     assign help_label = 'Open support center'
+    assign help_url = '/pages/support'
   endif
 
   if product != blank
@@ -176,7 +176,7 @@
         {% endif %}
         <h3>{{ help_heading }}</h3>
         <p>{{ help_copy }}</p>
-        <a href="{{ help_url }}" class="home-faq-help-button" aria-label="{{ help_label }}">{{ help_label }}</a>
+        {% render 'button', label: help_label, url: help_url, style: 'primary', size: 'lg', class: 'button-context-faq mt-8' %}
       </aside>
     </div>
   </div>

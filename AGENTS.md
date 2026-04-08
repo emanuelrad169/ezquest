@@ -43,6 +43,13 @@ EZQuest is a custom Shopify Online Store 2.0 theme.
 - When changing storefront structure, check whether the work belongs in a section, snippet, template, or config before editing.
 - Maintain semantic Liquid markup and preserve existing merchant-configurable schema patterns.
 - Avoid unrelated refactors.
+- Follow the global frontend architecture rule in [docs/frontend-architecture.md](./docs/frontend-architecture.md).
+- Default to Tailwind utilities in Liquid for local layout, spacing, alignment, width, ordering, visibility, and responsive composition.
+- Keep shared CSS focused on tokens, typography primitives, buttons, cards, surfaces, shadows, radius, motion, and reusable interaction states.
+- Do not use inline `style=""`.
+- Do not use arbitrary Tailwind values.
+- Do not keep duplicate layout logic in both Liquid utilities and shared CSS for the same component.
+- When a component is refactored to the hybrid pattern, remove dead CSS tied to the replaced layout logic.
 
 ## Validation
 - Prefer targeted validation first, then broader checks if needed.
