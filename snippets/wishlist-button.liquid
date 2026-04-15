@@ -1,0 +1,20 @@
+{%- liquid
+  assign wb_id = product_id | default: product.id
+  assign wb_title = product_title | default: product.title
+  assign wb_url = product_url | default: product.url
+  assign wb_image = product_image | default: product.featured_image
+-%}
+<button
+  class="wishlist-btn"
+  data-wishlist-id="{{ wb_id }}"
+  data-wishlist-title="{{ wb_title | escape }}"
+  data-wishlist-url="{{ wb_url }}"
+  data-wishlist-image="{{ wb_image | image_url: width: 300 }}"
+  aria-label="Add {{ wb_title | escape }} to wishlist"
+  aria-pressed="false"
+  type="button"
+>
+  <svg class="wishlist-btn__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+    <path d="M10 16.5S2.5 12 2.5 6.5a4 4 0 017.5-2A4 4 0 0117.5 6.5c0 5.5-7.5 10-7.5 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
+</button>

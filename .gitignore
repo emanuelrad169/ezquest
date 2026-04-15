@@ -4,3 +4,7 @@ shopify.theme.toml
 .shopify/
 dist/
 .DS_Store
+.claude/
+scripts/image-upload-report.json
+scripts/missing-images.json
+scripts/qa-results.json

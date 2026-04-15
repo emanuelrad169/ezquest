@@ -184,8 +184,19 @@
             {{ rating_value }}
             {% if rating_count != blank %}<span class="rating-count">({{ rating_count }})</span>{% endif %}
           </span>
+        {% elsif settings.reviews_app == 'judgeme' %}
+          {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
         {% endif %}
       </a>
+
+      <div class="product-card__wishlist">
+        {% render 'wishlist-button',
+          product_id: product.id,
+          product_title: product.title,
+          product_url: product.url,
+          product_image: product.featured_image
+        %}
+      </div>
 
       {% if show_media_quick_add and show_quick_add %}
         {% form 'product', product, class: 'product-card-featured-add-form product-card-featured-add-form--media' %}

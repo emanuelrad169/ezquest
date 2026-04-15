@@ -434,6 +434,9 @@
                     <span data-product-primary-button-price>{{ product.selected_or_first_available_variant.price | money }}</span>
                   </button>
                 </div>
+                <div class="product-wishlist-wrap">
+                  {% render 'wishlist-button', product: product %}
+                </div>
               </div>
 
               {% if section.settings.show_dynamic_checkout %}
@@ -444,6 +447,28 @@
 
             </div>
           {% endform %}
+
+          {% unless product.available %}
+            <div class="notify-form" id="notify-form-{{ section.id }}" data-notify-form>
+              <p class="notify-form__message">This item is currently out of stock.</p>
+              <div class="notify-form__input-row" data-notify-input-row>
+                <input
+                  type="email"
+                  class="notify-form__input"
+                  data-notify-email
+                  placeholder="Enter your email"
+                  aria-label="Email address for restock notification"
+                  autocomplete="email"
+                >
+                <button class="btn btn--primary notify-form__submit" data-notify-submit type="button">
+                  Notify me
+                </button>
+              </div>
+              <p class="notify-form__success" data-notify-success hidden role="status">
+                You will be notified when this item is back in stock.
+              </p>
+            </div>
+          {% endunless %}
 
           {% if section.settings.show_pickup_availability %}
             <div class="product-pickup-row">

@@ -1,0 +1,24 @@
+<section class="wishlist-section section-shell" aria-label="Your wishlist">
+  <div class="container-shell">
+    <div class="section-intro reveal-on-scroll">
+      <p class="section-kicker">Saved items</p>
+      <h1 class="section-heading">Your wishlist</h1>
+    </div>
+    <div class="wishlist-grid" id="wishlist-grid">
+      <div class="wishlist-empty" id="wishlist-empty" hidden>
+        <p class="wishlist-empty__message">
+          No items saved yet. Heart any product to save it here.
+        </p>
+        <a href="{{ routes.collections_url }}" class="btn btn--primary">Browse products</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

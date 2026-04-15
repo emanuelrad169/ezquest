@@ -62,6 +62,7 @@
     }
     </script>
 
+    {%- comment -%}v2026-04-15b{%- endcomment -%}
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
@@ -77,5 +78,7 @@
     {% render 'cart-drawer' %}
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'reveal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'notify.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

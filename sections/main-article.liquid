@@ -51,6 +51,35 @@
   </div>
 </article>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt | default: article.content | strip_html | truncate: 200 | json }},
+  "url": {{ canonical_url | json }},
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ settings.share_image | image_url: width: 400 }}"
+    }
+  }{% if article.image %},
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ article.image | image_url: width: 1200 }}",
+    "width": 1200
+  }{% endif %}
+}
+</script>
+
 {% schema %}
 {
   "name": "Main article",

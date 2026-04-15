@@ -35,8 +35,6 @@
     assign placeholder_asset = 'placeholder-collection.svg'
   elsif placeholder_kind == 'collection'
     assign placeholder_asset = 'placeholder-collection.svg'
-  elsif placeholder_kind == 'product'
-    assign placeholder_asset = 'placeholder-product.svg'
   elsif placeholder_kind == 'support'
     assign placeholder_asset = 'placeholder-support.svg'
   elsif placeholder_kind == 'editorial'
@@ -49,12 +47,27 @@
     assign placeholder_asset = 'placeholder-support.svg'
   endif
 -%}
-<img
-  src="{{ placeholder_asset | asset_url }}"
-  alt="{{ placeholder_alt | escape }}"
-  class="home-placeholder-image {{ placeholder_class }}"
-  width="{{ placeholder_width }}"
-  height="{{ placeholder_height }}"
-  loading="lazy"
-  decoding="async"
->
+{% if placeholder_kind == 'product' %}
+  <div class="product-visual-placeholder {{ placeholder_class }}"
+       role="img"
+       aria-label="{{ placeholder_alt | escape }} — image coming soon">
+    <img
+      src="{{ 'ezquest-logo.svg' | asset_url }}"
+      alt="EZQuest"
+      class="product-visual-placeholder__logo"
+      width="80"
+      height="24"
+      loading="lazy"
+    >
+  </div>
+{% else %}
+  <img
+    src="{{ placeholder_asset | asset_url }}"
+    alt="{{ placeholder_alt | escape }}"
+    class="home-placeholder-image {{ placeholder_class }}"
+    width="{{ placeholder_width }}"
+    height="{{ placeholder_height }}"
+    loading="lazy"
+    decoding="async"
+  >
+{% endif %}
