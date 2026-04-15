@@ -1,16 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-home",
-      "settings": {
-        "eyebrow": "Premium connectivity",
-        "heading": "Premium connectivity for desk and travel",
-        "copy": "Ports, power, and displays in one clean setup",
-        "primary_label": "Shop best sellers",
-        "primary_url": "/collections/all?sort_by=best-selling",
-        "secondary_label": "",
-        "secondary_url": "/pages/compare"
-      },
       "blocks": {
         "slide_1": {
           "type": "slide",
@@ -21,7 +21,8 @@
             "primary_label": "Shop best sellers",
             "primary_url": "/collections/all?sort_by=best-selling",
             "secondary_label": "",
-            "secondary_url": "/pages/compare"
+            "secondary_url": "/pages/compare",
+            "image": "shopify://shop_images/slide-001.jpg"
           }
         },
         "slide_2": {
@@ -49,41 +50,77 @@
           }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3"]
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "eyebrow": "Premium connectivity",
+        "heading": "Premium connectivity for desk and travel",
+        "copy": "Ports, power, and displays in one clean setup",
+        "primary_label": "Shop best sellers",
+        "primary_url": "/collections/all?sort_by=best-selling",
+        "secondary_label": "",
+        "secondary_url": "/pages/compare"
+      }
     },
     "categories": {
       "type": "home-collections-strip",
-      "settings": {
-        "heading": "Start with the setup",
-        "copy": "Choose the family, then narrow the fit"
-      },
       "blocks": {
         "category_1": {
           "type": "collection_card",
           "settings": {
-            "collection": "hubs-adapters"
+            "collection": "hubs-adapters",
+            "title": "",
+            "link": ""
           }
         },
         "category_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "docking-stations"
+            "collection": "docking-stations",
+            "title": "",
+            "link": ""
           }
         },
         "category_3": {
           "type": "collection_card",
           "settings": {
-            "collection": "chargers-power"
+            "collection": "chargers-power",
+            "title": "",
+            "link": ""
           }
         },
         "category_4": {
           "type": "collection_card",
           "settings": {
-            "collection": "accessories"
+            "collection": "accessories",
+            "title": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["category_1", "category_2", "category_3", "category_4"]
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4"
+      ],
+      "settings": {
+        "heading": "Start with the setup",
+        "copy": "Choose the family, then narrow the fit"
+      }
+    },
+    "support": {
+      "type": "support-card-grid",
+      "settings": {
+        "eyebrow": "Support",
+        "heading": "Support built in",
+        "copy": "Compatibility, manuals, downloads, and help",
+        "link_label": "Support",
+        "link_url": "/pages/support"
+      }
     },
     "story": {
       "type": "featured-product-carousel",
@@ -96,19 +133,12 @@
         "collection": "all",
         "products_limit": 8
       }
-    },
-    "support": {
-      "type": "support-card-grid",
-      "settings": {
-        "eyebrow": "Support",
-        "heading": "Support built in",
-        "copy": "Compatibility, manuals, downloads, and help",
-        "link_label": "Support",
-        "link_url": "/pages/support"
-      },
-      "blocks": {},
-      "block_order": []
     }
   },
-  "order": ["hero", "categories", "support", "story"]
+  "order": [
+    "hero",
+    "categories",
+    "support",
+    "story"
+  ]
 }
