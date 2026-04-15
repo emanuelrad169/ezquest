@@ -1,22 +1,12 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero-page",
-      "settings": {
-        "eyebrow": "Legal",
-        "heading": "Cookie policy",
-        "copy": "Review how cookies and similar technologies are used across the EZQuest storefront.",
-        "support_eyebrow": "Policy note",
-        "support_note": "This page should stay clean, readable, and easy to scan without losing the storefront’s trust signals."
-      }
-    },
     "main": {
       "type": "main-page",
       "settings": {
-        "show_title": false,
-        "intro_copy": "The full policy language and any region-specific notes continue below."
+        "show_title": true,
+        "intro_copy": "Review how cookies and similar technologies are used across the EZQuest storefront."
       }
     }
   },
-  "order": ["hero", "main"]
+  "order": ["main"]
 }

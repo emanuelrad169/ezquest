@@ -30,7 +30,6 @@
   assign spec_limit = 3
   assign show_media_dots = false
   assign media_dot_count = 0
-  assign fallback_type_value = blank
   assign fallback_weight_value = blank
   assign highlight_spec_value = blank
   assign show_swatches = true
@@ -141,7 +140,6 @@
     endif
 
     if product.type != blank
-      assign fallback_type_value = product.type
       assign product_eyebrow = product.type
     elsif product.vendor != blank
       assign product_eyebrow = product.vendor
@@ -164,11 +162,11 @@
 
 {% if featured_card %}
   <article
-    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up{% if featured %} is-featured{% endif %}"
+    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up relative flex h-full flex-col overflow-hidden text-slate-950 no-underline{% if featured %} is-featured{% endif %}"
     {% if card_index != blank %}data-card-index="{{ card_index }}"{% endif %}
   >
     <div class="product-card-featured-media-shell relative">
-      <a href="{{ product_card_url }}" class="product-card-featured-media product-card-featured-media-link" aria-label="View {{ product.title | default: 'product' }}">
+      <a href="{{ product_card_url }}" class="product-card-featured-media product-card-featured-media-link relative flex min-h-56 items-center justify-center overflow-hidden border-b border-slate-200/70 bg-white no-underline" aria-label="View {{ product.title | default: 'product' }}">
         {% render 'product-browse-media',
           product: product,
           context: card_context,
@@ -211,7 +209,7 @@
           <p class="product-card-featured-vendor">{{ product_eyebrow }}</p>
         {% endif %}
 
-        <div class="product-card-featured-title-price-row">
+        <div class="product-card-featured-title-price-row flex items-start justify-between gap-3">
           <h3 class="card-title product-card-featured-title">
             <a href="{{ product_card_url }}" class="product-card-featured-title-link">{{ product.title | default: 'EZQuest connectivity essential' }}</a>
           </h3>
@@ -221,7 +219,7 @@
         </div>
 
         {% if show_swatches and swatch_values != blank and swatch_values.size > 0 %}
-          <div class="product-card-featured-swatches" aria-label="Available finishes">
+          <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" aria-label="Available finishes">
             {% for swatch_value in swatch_values limit: swatch_limit %}
               <span
                 class="product-card-featured-swatch product-card-featured-swatch--{{ swatch_value | handleize }}"
@@ -256,6 +254,7 @@
             {%- assign spec_value = spec_row.spec_value.value | strip_html | strip -%}
             {% if spec_label != blank and spec_value != blank %}
               {%- assign spec_lower = spec_label | downcase -%}
+              {%- if spec_lower contains 'sku' or spec_lower contains 'barcode' or spec_lower contains 'upc' or spec_lower contains 'ean' or spec_lower contains 'part number' or spec_lower contains 'item number' or spec_lower contains 'asin' or spec_lower contains 'model number' -%}{%- continue -%}{%- endif -%}
               {%- assign spec_icon_name = 'spark' -%}
               {%- if spec_lower contains 'speed' or spec_lower contains 'transfer' -%}{%- assign spec_icon_name = 'bolt' -%}{%- endif -%}
               {%- if spec_lower contains 'port' or spec_lower contains 'hub' -%}{%- assign spec_icon_name = 'layers' -%}{%- endif -%}
@@ -301,7 +300,7 @@
       {%- endcapture -%}
       {%- assign spec_cells_html = spec_cells_html | strip -%}
       {% if spec_cells_html != blank %}
-        <div class="product-card-featured-spec-strip" aria-label="Key details">
+        <div class="product-card-featured-spec-strip grid grid-cols-1" aria-label="Key details">
           {{ spec_cells_html }}
         </div>
       {% endif %}
@@ -312,7 +311,7 @@
 
   {%- comment -%} ── Image wrapper ── {%- endcomment -%}
   {% if product != blank %}
-    <div class="product-thumb-card product-card-image-wrapper">
+    <div class="product-thumb-card product-card-image-wrapper relative overflow-hidden">
       <a href="{{ product_card_url }}" class="product-card-image-link" aria-label="{{ product.title }}">
         {% render 'product-browse-media',
           product: product,
@@ -347,7 +346,7 @@
   {% endif %}
 
   {%- comment -%} ── Info row: title left, price right ── {%- endcomment -%}
-  <div class="product-card-info">
+  <div class="product-card-info mt-3 flex items-start justify-between gap-3">
     <h3 class="product-card-title">
       {% if product != blank %}
         <a href="{{ product_card_url }}" class="product-card-title-link">{{ product.title }}</a>

@@ -1,31 +1,43 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Support request",
-        "heading": "Support requests now start in one place",
-        "copy": "Ticket submission has been merged into the main support request flow for product, order, and warranty help.",
-        "support_eyebrow": "One path",
-        "support_note": "Use the main support request page so you only choose your request type once.",
-        "link_label": "Go to support request",
-        "link_url": "/pages/contact"
+        "kicker": "Support",
+        "heading": "Submit a support ticket",
+        "subheading": "Describe your issue and our team will respond within 1 business day.",
+        "light_mode": true
+      }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
+    },
+    "ticket_form": {
+      "type": "ticket-form",
+      "settings": {
+        "kicker": "Get help",
+        "heading": "Tell us what's happening",
+        "body": "The more detail you provide, the faster we can help. Required fields are marked with an asterisk."
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Go to the new flow",
-        "heading": "Use the merged support request page",
-        "copy": "Start one support request and choose product help, order help, or warranty help from the same form.",
-        "link_label": "Go to support request",
-        "link_url": "/pages/contact",
-        "secondary_label": "Open support hub",
-        "secondary_url": "/pages/support",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Need a faster answer",
+        "heading": "Check self-service resources first.",
+        "body": "Our FAQ, compatibility checker, and troubleshooting guides resolve most issues without a ticket.",
+        "cta_label": "Browse FAQ",
+        "cta_url": "/pages/faq",
+        "cta2_label": "Check compatibility",
+        "cta2_url": "/pages/compatibility"
       }
     }
   },
-  "order": ["hero", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "ticket_form",
+    "cta"
+  ]
 }

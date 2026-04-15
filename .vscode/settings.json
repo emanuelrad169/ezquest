@@ -1,5 +1,18 @@
 {
   "css.validate": false,
   "scss.validate": false,
-  "less.validate": false
+  "less.validate": false,
+  "cSpell.words": [
+    "endcase",
+    "endfor",
+    "endform",
+    "endcapture",
+    "endcomment",
+    "forloop",
+    "handleize",
+    "truncatewords",
+    "metafields",
+    "ezquest",
+    "charg"
+  ]
 }

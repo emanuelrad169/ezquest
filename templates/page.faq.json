@@ -1,12 +1,17 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "FAQ",
+        "kicker": "FAQ",
         "heading": "Common questions, answered.",
-        "copy": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly."
+        "subheading": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly.",
+        "light_mode": true
       }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
     },
     "faq": {
       "type": "faq-accordion",
@@ -36,7 +41,7 @@
           "type": "faq",
           "settings": {
             "question": "How long does delivery take?",
-            "answer": "Most orders are processed within 1 business day. Standard delivery typically arrives within 3–7 business days. Expedited options are available at checkout.",
+            "answer": "Most orders are processed within 1 business day. Standard delivery typically arrives within 3\u20137 business days. Expedited options are available at checkout.",
             "group": "shipping"
           }
         },
@@ -44,7 +49,7 @@
           "type": "faq",
           "settings": {
             "question": "Do you ship internationally?",
-            "answer": "We currently ship within the United States. International availability varies by product and region — check back as we continue to expand.",
+            "answer": "We currently ship within the United States. International availability varies by product and region \u2014 check back as we continue to expand.",
             "group": "shipping"
           }
         },
@@ -60,7 +65,7 @@
           "type": "faq",
           "settings": {
             "question": "How long do refunds take to process?",
-            "answer": "Once your return is received and inspected, refunds are issued within 3–5 business days. The time to appear on your statement depends on your payment provider.",
+            "answer": "Once your return is received and inspected, refunds are issued within 3\u20135 business days. The time to appear on your statement depends on your payment provider.",
             "group": "shipping"
           }
         },
@@ -76,7 +81,7 @@
           "type": "faq",
           "settings": {
             "question": "My package shows delivered but I haven't received it.",
-            "answer": "Check with neighbors and look around entry points first — carrier scans can run slightly ahead of actual delivery. If it still hasn't turned up after 24 hours, contact us and we'll open an investigation with the carrier.",
+            "answer": "Check with neighbors and look around entry points first \u2014 carrier scans can run slightly ahead of actual delivery. If it still hasn't turned up after 24 hours, contact us and we'll open an investigation with the carrier.",
             "group": "shipping"
           }
         },
@@ -132,7 +137,7 @@
           "type": "faq",
           "settings": {
             "question": "I entered the wrong shipping address. What do I do?",
-            "answer": "Contact us immediately with the correct address. If the order hasn't shipped yet, we can update it. If it's already dispatched, we'll work with the carrier — but we can't guarantee a redirect once it's in transit.",
+            "answer": "Contact us immediately with the correct address. If the order hasn't shipped yet, we can update it. If it's already dispatched, we'll work with the carrier \u2014 but we can't guarantee a redirect once it's in transit.",
             "group": "orders"
           }
         },
@@ -180,7 +185,7 @@
           "type": "faq",
           "settings": {
             "question": "Does the hub support external displays?",
-            "answer": "Display support depends on the specific model. Hubs with HDMI or DisplayPort outputs support one or more monitors — check the product spec sheet for resolution and refresh rate limits. Thunderbolt models generally offer the most display flexibility.",
+            "answer": "Display support depends on the specific model. Hubs with HDMI or DisplayPort outputs support one or more monitors \u2014 check the product spec sheet for resolution and refresh rate limits. Thunderbolt models generally offer the most display flexibility.",
             "group": "products"
           }
         },
@@ -204,7 +209,7 @@
           "type": "faq",
           "settings": {
             "question": "What's the difference between USB-C and Thunderbolt?",
-            "answer": "USB-C is the connector shape; Thunderbolt is a higher-bandwidth protocol that uses the same port. Thunderbolt cables and hubs support faster data transfer, more displays, and higher power delivery — but require a Thunderbolt-compatible host port to unlock those speeds.",
+            "answer": "USB-C is the connector shape; Thunderbolt is a higher-bandwidth protocol that uses the same port. Thunderbolt cables and hubs support faster data transfer, more displays, and higher power delivery \u2014 but require a Thunderbolt-compatible host port to unlock those speeds.",
             "group": "products"
           }
         },
@@ -212,20 +217,56 @@
           "type": "faq",
           "settings": {
             "question": "Do your cables support fast charging?",
-            "answer": "Yes. EZQuest USB-C cables rated for 60W or 100W support USB Power Delivery fast charging. The charging speed also depends on your charger and device — both need to support the same wattage to reach full speed.",
+            "answer": "Yes. EZQuest USB-C cables rated for 60W or 100W support USB Power Delivery fast charging. The charging speed also depends on your charger and device \u2014 both need to support the same wattage to reach full speed.",
             "group": "products"
           }
         }
       },
       "block_order": [
         "group_shipping",
-        "ship_1", "ship_2", "ship_3", "ship_4", "ship_5", "ship_6", "ship_7",
+        "ship_1",
+        "ship_2",
+        "ship_3",
+        "ship_4",
+        "ship_5",
+        "ship_6",
+        "ship_7",
         "group_orders",
-        "order_1", "order_2", "order_3", "order_4", "order_5", "order_6", "order_7",
+        "order_1",
+        "order_2",
+        "order_3",
+        "order_4",
+        "order_5",
+        "order_6",
+        "order_7",
         "group_products",
-        "prod_1", "prod_2", "prod_3", "prod_4", "prod_5", "prod_6", "prod_7", "prod_8"
+        "prod_1",
+        "prod_2",
+        "prod_3",
+        "prod_4",
+        "prod_5",
+        "prod_6",
+        "prod_7",
+        "prod_8"
       ]
+    },
+    "cta": {
+      "type": "support-cta-rail",
+      "settings": {
+        "kicker": "Support",
+        "heading": "Still have questions?",
+        "body": "Send a support request and we'll help you find the right answer.",
+        "cta_label": "Contact support",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Open support hub",
+        "cta2_url": "/pages/support"
+      }
     }
   },
-  "order": ["hero", "faq"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "faq",
+    "cta"
+  ]
 }

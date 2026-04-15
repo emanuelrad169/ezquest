@@ -1,0 +1,170 @@
+<section class="download-center section-shell" aria-labelledby="download-center-heading-{{ section.id }}">
+  <div class="container-shell">
+    {% if section.settings.kicker != blank %}
+      <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="section-heading mt-4" id="download-center-heading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <p class="section-copy mt-4">{{ section.settings.body | escape }}</p>
+    {% endif %}
+
+    {%- liquid
+      assign has_families = false
+      for block in section.blocks
+        if block.type == 'family'
+          assign has_families = true
+          break
+        endif
+      endfor
+    -%}
+
+    {% if has_families %}
+      <div class="filter-pills mt-8" role="group" aria-label="Filter by product family">
+        <button class="filter-pill is-active" data-filter="all">All products</button>
+        {% for block in section.blocks %}
+          {% if block.type == 'family' %}
+            <button class="filter-pill" data-filter="{{ block.settings.handle | escape }}" {{ block.shopify_attributes }}>
+              {{ block.settings.label | escape }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%- liquid
+      assign has_files = false
+      for block in section.blocks
+        if block.type == 'file'
+          assign has_files = true
+          break
+        endif
+      endfor
+    -%}
+
+    {% if has_files %}
+      <div class="download-list" id="download-list-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'file' %}
+            <div class="download-item" data-family="{{ block.settings.family | escape }}" {{ block.shopify_attributes }}>
+              <div class="download-item__info">
+                {% if block.settings.product_name != blank %}
+                  <p class="download-item__product">{{ block.settings.product_name | escape }}</p>
+                {% endif %}
+                <h3 class="download-item__title">{{ block.settings.file_title | default: 'Download' | escape }}</h3>
+                <p class="download-item__meta">
+                  {% if block.settings.file_type != blank %}{{ block.settings.file_type | escape }}{% endif %}
+                  {% if block.settings.file_size != blank %} · {{ block.settings.file_size | escape }}{% endif %}
+                  {% if block.settings.version != blank %} · v{{ block.settings.version | escape }}{% endif %}
+                  {% if block.settings.updated != blank %} · Updated {{ block.settings.updated | escape }}{% endif %}
+                </p>
+              </div>
+              {% if block.settings.file_url != blank %}
+                <a
+                  href="{{ block.settings.file_url }}"
+                  class="btn btn--secondary btn--sm download-item__cta"
+                  download
+                  aria-label="Download {{ block.settings.file_title | escape }}"
+                >
+                  Download
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="section-empty-state">
+        <p class="section-empty-state__message">
+          {{ section.settings.empty_message | default: 'Files for this section are coming soon. Check back shortly, or contact support for immediate help.' }}
+        </p>
+        <a href="/pages/contact" class="btn btn--secondary btn--sm">Contact support</a>
+      </div>
+    {% endif %}
+
+    {% if section.settings.link_label != blank %}
+      <div class="mt-8">
+        {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if has_families %}
+<script>
+(function() {
+  var section = document.getElementById('download-list-{{ section.id }}');
+  if (!section) return;
+  var pills = document.querySelectorAll('#download-center-heading-{{ section.id }}')
+    .item(0)
+    .closest('.section-shell')
+    .querySelectorAll('.filter-pill');
+
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      pills.forEach(function(p) {
+        p.classList.remove('is-active');
+        p.setAttribute('aria-pressed', 'false');
+      });
+      pill.classList.add('is-active');
+      pill.setAttribute('aria-pressed', 'true');
+
+      var filter = pill.dataset.filter;
+      section.querySelectorAll('.download-item').forEach(function(item) {
+        item.hidden = filter !== 'all' && item.dataset.family !== filter;
+      });
+    });
+  });
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Download center",
+  "settings": [
+    { "type": "text",     "id": "kicker",     "label": "Kicker" },
+    { "type": "text",     "id": "heading",    "label": "Heading" },
+    { "type": "textarea", "id": "body",       "label": "Body copy" },
+    { "type": "text",     "id": "link_label",     "label": "Footer link label" },
+    { "type": "url",      "id": "link_url",       "label": "Footer link URL" },
+    { "type": "textarea", "id": "empty_message",  "label": "Empty state message", "default": "Files for this section are coming soon. Check back shortly, or contact support for immediate help." }
+  ],
+  "blocks": [
+    {
+      "type": "family",
+      "name": "Product family filter",
+      "settings": [
+        { "type": "text", "id": "label",  "label": "Label",  "default": "Hubs & Adapters" },
+        { "type": "text", "id": "handle", "label": "Handle", "default": "hubs-adapters" }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "File",
+      "settings": [
+        { "type": "text", "id": "product_name", "label": "Product name" },
+        { "type": "text", "id": "file_title",   "label": "File title" },
+        { "type": "text", "id": "file_type",    "label": "File type", "default": "PDF" },
+        { "type": "text", "id": "file_size",    "label": "File size" },
+        { "type": "text", "id": "version",      "label": "Version" },
+        { "type": "text", "id": "updated",      "label": "Updated date" },
+        { "type": "text", "id": "family",       "label": "Product family handle" },
+        { "type": "url",  "id": "file_url",     "label": "File URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Download center",
+      "blocks": [
+        { "type": "family", "settings": { "label": "Hubs & Adapters", "handle": "hubs-adapters" } },
+        { "type": "family", "settings": { "label": "Docking Stations", "handle": "docking-stations" } },
+        { "type": "family", "settings": { "label": "Chargers & Power", "handle": "chargers-power" } },
+        { "type": "family", "settings": { "label": "Accessories", "handle": "accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

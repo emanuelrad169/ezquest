@@ -13,7 +13,19 @@
         "show_sort": true,
         "show_support_panel": false
       }
+    },
+    "cta": {
+      "type": "support-cta-rail",
+      "settings": {
+        "kicker": "Go further",
+        "heading": "Compare the full lineup or get setup guidance.",
+        "body": "Use the compare tool or Help me choose to find the right product before you add to cart.",
+        "cta_label": "Compare lineup",
+        "cta_url": "/pages/compare",
+        "cta2_label": "Help me choose",
+        "cta2_url": "/pages/help-me-choose"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "cta"]
 }

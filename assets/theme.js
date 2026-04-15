@@ -78,12 +78,12 @@ function animateMediaReveal(element, options) {
   const reduced = prefersReducedMotion();
   const revealGroups = [
     {
-      selector: '.collection-hero, .product-layout, .home-feature-band, .home-faq-shell, .blog-lead-card, .editorial-shell, .hero-surface, .cta-surface-light, .cta-surface-dark',
+      selector: '.collection-hero, .product-layout, .home-feature-band, .home-faq-shell, .blog-lead-card, .editorial-shell, .hero-surface, .cta-surface-light, .cta-surface-dark, .home-feature-banner-content, .home-testimonials-section, .home-feature-bento-section',
       tier: '1',
       stagger: 0
     },
     {
-      selector: '.home-collections-strip-card, .featured-products-slide, .support-link-card, .support-tile, .resource-card, .compatibility-card, .compare-card, .blog-stack-card, .search-result-card, .info-card, .troubleshooting-card',
+      selector: '.home-collections-strip-card, .featured-products-slide, .support-link-card, .support-tile, .resource-card, .compatibility-card, .compare-card, .blog-stack-card, .search-result-card, .info-card, .troubleshooting-card, .home-confidence-card, .resources-article-card, .home-feature-bento-card, .collection-card',
       tier: '2',
       stagger: 55
     },

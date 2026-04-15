@@ -1,14 +1,17 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Support request",
+        "kicker": "Support request",
         "heading": "Get help now",
-        "copy": "Choose the reason for your request, share the key details once, and we will take the next step with you.",
-        "support_eyebrow": "One support flow",
-        "support_note": "This is the single path for product help, order help, and warranty help."
+        "subheading": "Choose the reason for your request, share the key details once, and we will take the next step with you.",
+        "light_mode": true
       }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
     },
     "details": {
       "type": "info-card-grid",
@@ -44,7 +47,11 @@
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3"]
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
     },
     "form": {
       "type": "contact-form-panel",
@@ -59,5 +66,10 @@
       }
     }
   },
-  "order": ["hero", "details", "form"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "details",
+    "form"
+  ]
 }

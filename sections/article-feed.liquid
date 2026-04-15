@@ -31,34 +31,34 @@
         {% endif %}
       </div>
       {% if section.settings.link_url != blank %}
-        <a href="{{ section.settings.link_url }}" class="resources-featured-all section-intro-action">
+        <a href="{{ section.settings.link_url }}" class="resources-featured-all section-intro-action inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 text-xs font-medium uppercase text-slate-600 no-underline transition hover:border-slate-300 hover:text-slate-950">
           {{ section.settings.link_label | default: 'View all articles' }} →
         </a>
       {% endif %}
     </div>
 
-    <div class="resources-articles-grid mt-10">
+    <div class="resources-articles-grid mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 reveal-stagger">
       {% if source_blog != blank and source_blog.articles.size > 0 %}
         {% for article in source_blog.articles limit: article_limit %}
-          <a href="{{ article.url }}" class="resources-article-card">
-            <div class="resources-article-media">
+          <a href="{{ article.url }}" class="resources-article-card group block overflow-hidden rounded-3xl border border-slate-200/80 bg-white no-underline shadow-soft transition duration-200 hover:border-slate-300/80 hover:shadow-soft-hover">
+            <div class="resources-article-media overflow-hidden bg-slate-100">
               {%- if article.image != blank -%}
-                {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img' }}
+                {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img h-full w-full object-cover transition duration-300 group-hover:scale-105' }}
               {%- elsif forloop.index == 1 and lead_fallback != blank -%}
-                {{ lead_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img' }}
+                {{ lead_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img h-full w-full object-cover transition duration-300 group-hover:scale-105' }}
               {%- elsif forloop.index == 2 and sec_fallback != blank -%}
-                {{ sec_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img' }}
+                {{ sec_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img h-full w-full object-cover transition duration-300 group-hover:scale-105' }}
               {%- elsif ter_fallback != blank -%}
-                {{ ter_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img' }}
+                {{ ter_fallback | image_url: width: 900 | image_tag: loading: 'lazy', alt: article.title, class: 'resources-article-img h-full w-full object-cover transition duration-300 group-hover:scale-105' }}
               {%- else -%}
-                {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 900, height: 600, class: 'resources-article-img', loading: 'lazy' %}
+                {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 900, height: 600, class: 'resources-article-img h-full w-full object-cover transition duration-300 group-hover:scale-105', loading: 'lazy' %}
               {%- endif -%}
             </div>
-            <div class="resources-article-body">
-              <p class="resources-article-meta">{{ article.published_at | date: '%b %Y' }}</p>
-              <h3 class="resources-article-title">{{ article.title }}</h3>
+            <div class="resources-article-body flex flex-col gap-1.5 p-6">
+              <p class="resources-article-meta m-0 text-xs font-medium uppercase tracking-widest text-slate-400">{{ article.published_at | date: '%b %Y' }}</p>
+              <h3 class="resources-article-title m-0 text-base font-medium leading-snug tracking-tight text-slate-950">{{ article.title }}</h3>
               {% if article.excerpt != blank %}
-                <p class="resources-article-excerpt">{{ article.excerpt | strip_html | truncatewords: 18 }}</p>
+                <p class="resources-article-excerpt m-0 text-sm leading-6 text-slate-500">{{ article.excerpt | strip_html | truncatewords: 18 }}</p>
               {% endif %}
             </div>
           </a>
@@ -76,18 +76,18 @@
               assign ph_img = ter_fallback
             endif
           -%}
-          <div class="resources-article-card resources-article-card--placeholder">
-            <div class="resources-article-media">
+          <div class="resources-article-card resources-article-card--placeholder block cursor-default overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-soft">
+            <div class="resources-article-media overflow-hidden bg-slate-100">
               {%- if ph_img != blank -%}
-                {{ ph_img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'resources-article-img' }}
+                {{ ph_img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'resources-article-img h-full w-full object-cover' }}
               {%- else -%}
-                {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 900, height: 600, class: 'resources-article-img', loading: 'lazy' %}
+                {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 900, height: 600, class: 'resources-article-img h-full w-full object-cover', loading: 'lazy' %}
               {%- endif -%}
             </div>
-            <div class="resources-article-body">
-              <p class="resources-article-meta">Guide</p>
-              <h3 class="resources-article-title">{{ ph_title }}</h3>
-              <p class="resources-article-excerpt">Practical guidance to help you get the most from your EZQuest product.</p>
+            <div class="resources-article-body flex flex-col gap-1.5 p-6">
+              <p class="resources-article-meta m-0 text-xs font-medium uppercase tracking-widest text-slate-400">Guide</p>
+              <h3 class="resources-article-title m-0 text-base font-medium leading-snug tracking-tight text-slate-950">{{ ph_title }}</h3>
+              <p class="resources-article-excerpt m-0 text-sm leading-6 text-slate-500">Practical guidance to help you get the most from your EZQuest product.</p>
             </div>
           </div>
         {% endfor %}

@@ -2,7 +2,7 @@
   <div class="container-shell">
 
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
-      <div class="home-feature-bento-header">
+      <div class="home-feature-bento-header reveal-on-scroll">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
@@ -12,7 +12,7 @@
       </div>
     {% endif %}
 
-    <div class="home-feature-bento-grid">
+    <div class="home-feature-bento-grid reveal-stagger">
       {% for block in section.blocks %}
         {%- liquid
           assign card_size = block.settings.size | default: 'normal'
@@ -26,7 +26,7 @@
           <div class="home-feature-bento-media">
             {% if card_image != blank %}
               {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'home-feature-bento-img', alt: card_label }}
-            {% else %}
+            {% elsif card_stat == blank and card_label == blank %}
               <div class="home-feature-bento-placeholder">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
                   <rect width="48" height="48" rx="12" fill="currentColor" fill-opacity="0.06"/>

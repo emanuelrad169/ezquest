@@ -1,0 +1,45 @@
+<section class="support-cta-rail" aria-label="{{ section.settings.heading | default: 'Support resources' | escape }}">
+  <div class="support-cta-rail__inner">
+    <div class="support-cta-rail__text">
+      {% if section.settings.kicker != blank %}
+        <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="support-cta-rail__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <p class="support-cta-rail__body">{{ section.settings.body | escape }}</p>
+      {% endif %}
+    </div>
+    {% if section.settings.cta_label != blank %}
+      <div class="support-cta-rail__actions">
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="btn btn--primary">
+          {{ section.settings.cta_label | escape }}
+        </a>
+        {% if section.settings.cta2_label != blank %}
+          <a href="{{ section.settings.cta2_url | default: '#' }}" class="btn btn--secondary">
+            {{ section.settings.cta2_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Support CTA rail",
+  "settings": [
+    { "type": "text",     "id": "kicker",     "label": "Kicker",     "default": "Support" },
+    { "type": "text",     "id": "heading",    "label": "Heading" },
+    { "type": "textarea", "id": "body",       "label": "Body" },
+    { "type": "text",     "id": "cta_label",  "label": "Primary CTA label" },
+    { "type": "url",      "id": "cta_url",    "label": "Primary CTA URL" },
+    { "type": "text",     "id": "cta2_label", "label": "Secondary CTA label" },
+    { "type": "url",      "id": "cta2_url",   "label": "Secondary CTA URL" }
+  ],
+  "presets": [
+    { "name": "Support CTA rail" }
+  ]
+}
+{% endschema %}

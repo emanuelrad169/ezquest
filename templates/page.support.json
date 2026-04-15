@@ -1,14 +1,17 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Support center",
+        "kicker": "Support center",
         "heading": "Support for products, downloads, and orders",
-        "copy": "Choose downloads, manuals, compatibility, or direct support based on what you need.",
-        "support_eyebrow": "Direct support",
-        "support_note": "Each path keeps the product and order context in view so you can move forward with the right information."
+        "subheading": "Choose downloads, manuals, compatibility, or direct support based on what you need.",
+        "light_mode": true
       }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
     },
     "nav": {
       "type": "support-nav-grid",
@@ -62,22 +65,30 @@
           }
         }
       },
-      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"]
+      "block_order": [
+        "nav_1",
+        "nav_2",
+        "nav_3",
+        "nav_4"
+      ]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Direct support",
+        "kicker": "Direct support",
         "heading": "Need help with a specific product or order?",
-        "copy": "Send one support request and we will route product, order, or warranty help from the same place.",
-        "link_label": "Get help now",
-        "link_url": "/pages/contact",
-        "secondary_label": "Check compatibility",
-        "secondary_url": "/pages/compatibility",
-        "style": "light",
-        "button_style": "secondary"
+        "body": "Send one support request and we will route product, order, or warranty help from the same place.",
+        "cta_label": "Get help now",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Check compatibility",
+        "cta2_url": "/pages/compatibility"
       }
     }
   },
-  "order": ["hero", "nav", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "nav",
+    "cta"
+  ]
 }

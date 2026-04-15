@@ -1,46 +1,135 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Firmware",
-        "heading": "Firmware updates tied to the right product and version",
-        "copy": "Use firmware updates when the next step is stability, compatibility, or a required device update.",
-        "support_eyebrow": "Ownership path",
-        "support_note": "Confirm the product and version first, then update only the firmware that matches your exact setup.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support"
+        "kicker": "Firmware",
+        "heading": "Firmware updates by product and version",
+        "subheading": "Confirm the product and version first, then update only the firmware that matches your exact setup.",
+        "light_mode": true
       }
     },
-    "resources": {
-      "type": "support-resource-list",
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
+    },
+    "downloads": {
+      "type": "download-center",
       "settings": {
-        "eyebrow": "Firmware",
+        "kicker": "Firmware",
         "heading": "Firmware releases by product and platform",
-        "copy": "Review firmware updates by product, platform, and release guidance before you install.",
-        "structured_source": "global",
-        "resource_kind": "firmware",
-        "resource_limit": 12,
-        "show_search": false,
-        "source_note": "Use the firmware that matches your exact product and platform. Open manuals or support if you need confirmation first.",
-        "link_label": "Open manuals",
-        "link_url": "/pages/manuals"
-      }
+        "body": "Review firmware updates by product, platform, and release guidance before you install."
+      },
+      "blocks": {
+        "fam_1": {
+          "type": "family",
+          "settings": {
+            "label": "Hubs & Adapters",
+            "handle": "hubs-adapters"
+          }
+        },
+        "fam_2": {
+          "type": "family",
+          "settings": {
+            "label": "Docking Stations",
+            "handle": "docking-stations"
+          }
+        },
+        "fam_3": {
+          "type": "family",
+          "settings": {
+            "label": "Chargers & Power",
+            "handle": "chargers-power"
+          }
+        },
+        "fam_4": {
+          "type": "family",
+          "settings": {
+            "label": "Accessories",
+            "handle": "accessories"
+          }
+        },
+        "file_f1": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
+            "file_title": "Firmware Update \u2014 Windows",
+            "file_type": "ZIP",
+            "file_size": "8.4 MB",
+            "version": "1.2.1",
+            "updated": "March 2024",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_f2": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
+            "file_title": "Firmware Update \u2014 macOS",
+            "file_type": "ZIP",
+            "file_size": "8.1 MB",
+            "version": "1.2.1",
+            "updated": "March 2024",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_f3": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C Dual HDMI Hub Adapter",
+            "file_title": "Firmware Update",
+            "file_type": "ZIP",
+            "file_size": "6.7 MB",
+            "version": "1.0.3",
+            "updated": "January 2024",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_f4": {
+          "type": "file",
+          "settings": {
+            "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
+            "file_title": "Firmware Update",
+            "file_type": "ZIP",
+            "file_size": "12.1 MB",
+            "version": "2.0.0",
+            "updated": "December 2023",
+            "family": "accessories",
+            "file_url": "#"
+          }
+        }
+      },
+      "block_order": [
+        "fam_1",
+        "fam_2",
+        "fam_3",
+        "fam_4",
+        "file_f1",
+        "file_f2",
+        "file_f3",
+        "file_f4"
+      ]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need confirmation",
+        "kicker": "Support",
         "heading": "Need help choosing firmware?",
-        "copy": "Check compatibility or contact support before you update.",
-        "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility",
-        "secondary_label": "Contact support",
-        "secondary_url": "/pages/contact",
-        "style": "light",
-        "button_style": "secondary"
+        "body": "Check compatibility or contact support before you update.",
+        "cta_label": "Check compatibility",
+        "cta_url": "/pages/compatibility",
+        "cta2_label": "Contact support",
+        "cta2_url": "/pages/contact"
       }
     }
   },
-  "order": ["hero", "resources", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "downloads",
+    "cta"
+  ]
 }

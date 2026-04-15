@@ -4,11 +4,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f8f9f5">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     <title>{% if page_title %}{{ page_title }}{% endif %}{% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} - Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="{{ shop.name }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:type" content="{% if template == 'product' %}product{% elsif template == 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+    {% if page_image %}
+      <meta property="og:image" content="{{ page_image | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+    {% elsif settings.share_image %}
+      <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
+    {% if page_image %}
+      <meta name="twitter:image" content="{{ page_image | image_url: width: 1200 }}">
+    {% elsif settings.share_image %}
+      <meta name="twitter:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+    {% endif %}
+
+    <!-- Structured data: Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "logo": "{{ settings.share_image | image_url: width: 400 }}"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
@@ -21,5 +74,8 @@
       {{ content_for_layout }}
     </main>
     {% sections 'footer-group' %}
+    {% render 'cart-drawer' %}
+    <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'reveal.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

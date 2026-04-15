@@ -1,5 +1,13 @@
 {
   "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Shop by family",
+        "heading": "Find the right EZQuest product",
+        "subheading": "Browse by product family, then compare models or open support when you need more detail."
+      }
+    },
     "main": {
       "type": "main-list-collections",
       "settings": {
@@ -9,5 +17,5 @@
       }
     }
   },
-  "order": ["main"]
+  "order": ["hero", "main"]
 }

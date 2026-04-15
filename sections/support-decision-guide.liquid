@@ -1,4 +1,4 @@
-<section class="section-shell">
+<section class="section-shell pb-8 lg:pb-12">
   <div class="container-shell">
     {%- liquid
       assign guide_heading = section.settings.heading | default: 'Help me choose the right setup'
@@ -92,7 +92,7 @@
         {% if rendered_entries == 0 %}
           <article class="info-card structured-empty-state">
             <p class="section-kicker">Decision guide</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No decision entries yet</h3>
+            <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No decision entries yet</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Decision entries will appear here when they are added to the EZQuest decision guide metaobjects.</p>
           </article>
         {% endif %}
@@ -118,7 +118,7 @@
         {% else %}
           <article class="info-card structured-empty-state">
             <p class="section-kicker">Decision guide</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No decision entries yet</h3>
+            <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No decision entries yet</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Add decision guide blocks or enable metaobject entries to populate this guide.</p>
           </article>
         {% endfor %}

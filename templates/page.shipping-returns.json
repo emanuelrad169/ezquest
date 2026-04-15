@@ -1,81 +1,29 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero-page",
-      "settings": {
-        "eyebrow": "Shipping and returns",
-        "heading": "Shipping and returns",
-        "copy": "Clarify fulfillment timing, return windows, and the right next step for order-related help.",
-        "support_eyebrow": "Order support",
-        "support_note": "See order timing, return windows, and where to go for shipping or returns questions.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact"
-      }
-    },
-    "details": {
-      "type": "info-card-grid",
-      "settings": {
-        "eyebrow": "Order details",
-        "heading": "Set expectations before customers need to escalate",
-        "copy": "These highlights cover shipping windows, return timing, and the policy boundaries customers need to understand quickly.",
-        "columns_desktop": 3
-      },
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Shipping",
-            "title": "Order processing and delivery expectations",
-            "copy": "Set clear expectations for processing times, shipping cadence, and delivery timing."
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Returns",
-            "title": "Return windows and eligibility",
-            "copy": "Explain return windows, condition expectations, and any exceptions customers should know."
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Help",
-            "title": "Where order questions should go next",
-            "copy": "Direct customers into order support or FAQ guidance when they need help beyond the policy text.",
-            "link_label": "Open contact page",
-            "link_url": "/pages/contact"
-          }
-        }
-      },
-      "block_order": ["card_1", "card_2", "card_3"]
-    },
     "main": {
       "type": "main-page",
       "settings": {
-        "show_title": false,
-        "intro_copy": "The full policy and any merchant-specific operational details continue below.",
-        "side_eyebrow": "Need product help instead",
-        "side_heading": "Separate order help from technical support when needed",
-        "side_copy": "Route technical product questions back into the support center while keeping order help clear and operational.",
-        "side_link_label": "Open support center",
-        "side_link_url": "/pages/support"
+        "show_title": true,
+        "intro_copy": "Review shipping timelines, return windows, and the right next step for order-related help.",
+        "side_eyebrow": "Order support",
+        "side_heading": "Need order help?",
+        "side_copy": "Contact support for shipping questions, returns, or order references.",
+        "side_link_label": "Contact support",
+        "side_link_url": "/pages/contact"
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need direct help",
+        "kicker": "Need direct help",
         "heading": "Still need support with a shipment or return?",
-        "copy": "Move into direct order help when the policy answers are no longer enough.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact",
-        "secondary_label": "Open FAQ",
-        "secondary_url": "/pages/faq",
-        "style": "light",
-        "button_style": "secondary"
+        "body": "Move into direct order help when the policy answers are no longer enough.",
+        "cta_label": "Contact support",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Open FAQ",
+        "cta2_url": "/pages/faq"
       }
     }
   },
-  "order": ["hero", "details", "main", "cta"]
+  "order": ["main", "cta"]
 }

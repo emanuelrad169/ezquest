@@ -1,0 +1,242 @@
+<section class="ticket-form-section section-shell" aria-label="Submit a support ticket">
+  <div class="ticket-form-layout page-width">
+
+    <div class="ticket-form-main">
+      {% if section.settings.kicker != blank %}
+        <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+      {% endif %}
+      <h2 class="ticket-form-section__heading mt-4">
+        {{ section.settings.heading | default: 'Submit a support ticket' | escape }}
+      </h2>
+      {% if section.settings.body != blank %}
+        <p class="ticket-form-section__body">{{ section.settings.body | escape }}</p>
+      {% endif %}
+
+      {% form 'contact', id: 'ticket-form' %}
+        {% if form.posted_successfully? %}
+          <div class="ticket-success" role="alert">
+            <div class="ticket-success__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M7 12l3.5 3.5L17 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="ticket-success__heading">Ticket submitted</h3>
+            <p class="ticket-success__body">
+              We received your request and will respond to
+              <strong>{{ form.email | escape }}</strong> within 1 business day.
+            </p>
+          </div>
+        {% else %}
+
+          {% if form.errors %}
+            <div class="ticket-errors" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="ticket-form__grid">
+
+            <div class="ticket-form__field">
+              <label for="ticket-name" class="ticket-form__label">
+                Full name <span aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="ticket-name"
+                name="contact[name]"
+                class="ticket-form__input"
+                required
+                autocomplete="name"
+                value="{{ form.name | escape }}"
+              >
+            </div>
+
+            <div class="ticket-form__field">
+              <label for="ticket-email" class="ticket-form__label">
+                Email address <span aria-hidden="true">*</span>
+              </label>
+              <input
+                type="email"
+                id="ticket-email"
+                name="contact[email]"
+                class="ticket-form__input"
+                required
+                autocomplete="email"
+                value="{{ form.email | escape }}"
+              >
+            </div>
+
+            <div class="ticket-form__field">
+              <label for="ticket-order" class="ticket-form__label">
+                Order number
+                <span class="ticket-form__label-note">(optional)</span>
+              </label>
+              <input
+                type="text"
+                id="ticket-order"
+                name="contact[order_number]"
+                class="ticket-form__input"
+                placeholder="e.g. #1234"
+                autocomplete="off"
+              >
+            </div>
+
+            <div class="ticket-form__field">
+              <label for="ticket-product" class="ticket-form__label">
+                Product model or SKU <span aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="ticket-product"
+                name="contact[product_model]"
+                class="ticket-form__input"
+                required
+                placeholder="e.g. USB-C Hub 13-Port or X40214"
+              >
+            </div>
+
+            <div class="ticket-form__field">
+              <label for="ticket-issue-type" class="ticket-form__label">
+                Issue type <span aria-hidden="true">*</span>
+              </label>
+              <select
+                id="ticket-issue-type"
+                name="contact[issue_type]"
+                class="ticket-form__input"
+                required
+              >
+                <option value="" disabled selected>Select an issue type</option>
+                <option value="Not working / no power">Not working / no power</option>
+                <option value="Not recognized by computer">Not recognized by computer</option>
+                <option value="Display / video not working">Display / video not working</option>
+                <option value="Charging not working">Charging not working</option>
+                <option value="Driver / software issue">Driver / software issue</option>
+                <option value="Physical damage">Physical damage</option>
+                <option value="Compatibility question">Compatibility question</option>
+                <option value="Missing parts / wrong item">Missing parts / wrong item</option>
+                <option value="Warranty claim">Warranty claim</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="ticket-form__field">
+              <label for="ticket-os" class="ticket-form__label">
+                Operating system <span aria-hidden="true">*</span>
+              </label>
+              <select
+                id="ticket-os"
+                name="contact[operating_system]"
+                class="ticket-form__input"
+                required
+              >
+                <option value="" disabled selected>Select your OS</option>
+                <option value="macOS Sequoia (15)">macOS Sequoia (15)</option>
+                <option value="macOS Sonoma (14)">macOS Sonoma (14)</option>
+                <option value="macOS Ventura (13)">macOS Ventura (13)</option>
+                <option value="macOS Monterey (12)">macOS Monterey (12)</option>
+                <option value="Windows 11">Windows 11</option>
+                <option value="Windows 10">Windows 10</option>
+                <option value="iPad OS">iPad OS</option>
+                <option value="ChromeOS">ChromeOS</option>
+                <option value="Linux">Linux</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="ticket-form__field ticket-form__field--full">
+              <label for="ticket-description" class="ticket-form__label">
+                Describe the issue <span aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="ticket-description"
+                name="contact[body]"
+                class="ticket-form__input ticket-form__textarea"
+                rows="5"
+                required
+                placeholder="What is happening? When did it start?"
+              >{{ form.body | escape }}</textarea>
+            </div>
+
+            <div class="ticket-form__field ticket-form__field--full">
+              <label for="ticket-tried" class="ticket-form__label">
+                What have you already tried?
+                <span class="ticket-form__label-note">(optional)</span>
+              </label>
+              <textarea
+                id="ticket-tried"
+                name="contact[already_tried]"
+                class="ticket-form__input ticket-form__textarea"
+                rows="3"
+                placeholder="e.g. Restarted computer, tried different USB port, updated drivers"
+              ></textarea>
+            </div>
+
+          </div>
+
+          <p class="ticket-form__required-note">Fields marked * are required.</p>
+
+          <button type="submit" class="btn btn--primary ticket-form__submit">
+            Submit ticket
+          </button>
+
+        {% endif %}
+      {% endform %}
+    </div>
+
+    <aside class="ticket-form-sidebar" aria-label="Support contact details">
+      <div class="ticket-sidebar-card">
+        <p class="section-kicker">Response time</p>
+        <p class="ticket-sidebar-card__stat">1 business day</p>
+        <p class="ticket-sidebar-card__note">
+          We respond to every ticket. Check your spam folder if you do not hear from us.
+        </p>
+      </div>
+
+      <div class="ticket-sidebar-card">
+        <p class="section-kicker">Prefer to call?</p>
+        <p class="ticket-sidebar-card__stat">1-800-881-9305</p>
+        <p class="ticket-sidebar-card__note">Mon–Fri, 9am–5pm PST</p>
+      </div>
+
+      <div class="ticket-sidebar-card">
+        <p class="section-kicker">Before you submit</p>
+        <ul class="ticket-sidebar-card__list">
+          <li>Check our <a href="/pages/faq">FAQ</a> for quick answers</li>
+          <li>Check <a href="/pages/compatibility">compatibility</a> for your device</li>
+          <li>Review <a href="/pages/troubleshooting">troubleshooting</a> guides</li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ticket form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Get help"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Submit a support ticket"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Description",
+      "default": "Describe your issue and we will respond within 1 business day."
+    }
+  ],
+  "presets": [
+    { "name": "Ticket form" }
+  ]
+}
+{% endschema %}

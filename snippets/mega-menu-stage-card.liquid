@@ -16,8 +16,8 @@
     assign descriptor = product.metafields.ezquest.feature_highlights.value.first | strip
   endif
 -%}
-<a href="{{ href }}" class="mega-menu-stage-card mega-menu-stage-card--{{ card_layout }} card-soft card-interactive group no-underline {{ card_class | strip }}">
-  <div class="mega-menu-stage-card-media">
+<a href="{{ href }}" class="mega-menu-stage-card mega-menu-stage-card--{{ card_layout }} card-soft card-interactive group flex items-stretch gap-0 overflow-hidden text-slate-950 no-underline {{ card_class | strip }}">
+  <div class="mega-menu-stage-card-media relative flex w-20 shrink-0 items-center justify-center overflow-hidden border-r border-slate-100 bg-slate-50 p-2.5 sm:w-24">
     {% render 'product-browse-media',
       product: product,
       context: media_context,
@@ -27,18 +27,18 @@
       class: 'mega-menu-stage-card-image h-full w-full object-contain transition-transform duration-300 group-hover:scale-105'
     %}
   </div>
-  <div class="mega-menu-stage-card-copy">
+  <div class="mega-menu-stage-card-copy flex min-w-0 flex-col justify-between gap-2 p-4">
     {% if eyebrow != blank %}
       <p class="mega-menu-stage-card-eyebrow type-caption">{{ eyebrow }}</p>
     {% endif %}
-    <div class="mega-menu-stage-card-main">
-      <div class="mega-menu-stage-card-body">
+    <div class="mega-menu-stage-card-main flex min-w-0 flex-1 flex-col gap-1">
+      <div class="mega-menu-stage-card-body min-w-0">
         <h3 class="card-title mega-menu-stage-card-title">{{ title }}</h3>
         {% if show_descriptor and descriptor != blank %}
           <p class="type-body mega-menu-stage-card-descriptor">{{ descriptor | truncatewords: 6 }}</p>
         {% endif %}
       </div>
-      <div class="mega-menu-stage-card-meta">
+      <div class="mega-menu-stage-card-meta mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-2">
         {% if show_price and product != blank %}
           <div class="mega-menu-stage-card-price">
             {% render 'price', product: product %}

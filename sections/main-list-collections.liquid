@@ -19,7 +19,7 @@
             <div class="collections-directory-group-divider" aria-hidden="true"></div>
           </div>
 
-          <div class="collections-grid">
+          <div class="collections-grid reveal-stagger">
             {% for collection_group_item in collection_group_payload %}
               {%- liquid
                 assign collection_group_parts = collection_group_item | split: '^'

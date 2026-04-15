@@ -1,0 +1,56 @@
+<section class="about-support-section" aria-labelledby="about-support-heading">
+  <div class="container-shell">
+    <div class="about-support-inner">
+
+      <div class="about-support-copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="section-kicker about-support-kicker">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+
+        <h2 class="about-support-heading" id="about-support-heading">
+          {{ section.settings.heading | default: 'Support that stays close.' | escape }}
+        </h2>
+
+        {% if section.settings.body != blank %}
+          <p class="about-support-body">{{ section.settings.body | escape }}</p>
+        {% endif %}
+
+        <div class="about-support-actions">
+          {% if section.settings.primary_label != blank %}
+            {% render 'button',
+              label: section.settings.primary_label,
+              url: section.settings.primary_url,
+              style: 'primary'
+            %}
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            {% render 'button',
+              label: section.settings.secondary_label,
+              url: section.settings.secondary_url,
+              style: 'secondary'
+            %}
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About support",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",         "label": "Eyebrow",          "default": "After the purchase" },
+    { "type": "text",     "id": "heading",          "label": "Heading",          "default": "Support that stays close." },
+    { "type": "textarea", "id": "body",             "label": "Body",             "default": "Manuals, downloads, compatibility guides, and direct help are always one click away. We build the support layer into the product experience — not as an afterthought." },
+    { "type": "text",     "id": "primary_label",    "label": "Primary CTA label",    "default": "Visit support center" },
+    { "type": "url",      "id": "primary_url",      "label": "Primary CTA URL" },
+    { "type": "text",     "id": "secondary_label",  "label": "Secondary CTA label",  "default": "Browse products" },
+    { "type": "url",      "id": "secondary_url",    "label": "Secondary CTA URL" }
+  ],
+  "presets": [
+    { "name": "About support" }
+  ]
+}
+{% endschema %}

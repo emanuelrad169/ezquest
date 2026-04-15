@@ -235,10 +235,10 @@
       </div>
     </div>
 
-    <div class="mt-4 grid gap-8 lg:mt-6 product-layout-grid lg:items-start lg:gap-10">
+    <div class="mt-4 grid gap-8 lg:mt-6 lg:grid-cols-2 lg:items-start lg:gap-10 product-layout-grid">
       <div class="space-y-5 motion-fade-up">
         <div class="product-gallery-stage product-gallery-stage-shell">
-          <div class="product-gallery-layout">
+          <div class="product-gallery-layout grid gap-4">
             <div class="product-gallery-grid product-gallery-grid--rail">
               {% if lead_media != blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
@@ -299,27 +299,27 @@
         </div>
       </div>
 
-      <div class="space-y-4 lg:space-y-5 buybox-sticky motion-fade-up" style="--reveal-delay: 80ms">
+      <div class="space-y-4 lg:space-y-5 buybox-sticky motion-fade-up reveal-tier-2">
         <div class="product-buybox card-elevated p-5 lg:p-6">
-          <div class="product-buybox-header">
-            <div class="product-buybox-topline">
+          <div class="product-buybox-header space-y-4">
+            <div class="product-buybox-topline flex flex-wrap items-center justify-between gap-3">
               {% if section.settings.show_vendor and product.vendor != blank %}
-                <p class="product-buybox-brand">{{ product.vendor }}</p>
+                <p class="product-buybox-brand text-sm font-medium text-slate-600">{{ product.vendor }}</p>
               {% endif %}
               {% if section.settings.show_product_type and product.type != blank %}
                 <span class="product-meta-pill product-meta-pill--desktop">{{ product.type }}</span>
               {% endif %}
             </div>
 
-            <div class="product-buybox-headline-row">
-              <div class="product-buybox-lead">
-                <h1 class="section-heading product-buybox-title">{{ product.title }}</h1>
+            <div class="product-buybox-headline-row flex flex-col gap-3">
+              <div class="product-buybox-lead space-y-2.5">
+                <h1 class="section-heading product-buybox-title max-w-none text-2xl leading-tight tracking-tight lg:text-2xl">{{ product.title }}</h1>
                 {% if display_rating_value != blank %}
-                  <div class="product-buybox-review-row" aria-label="Rated {{ display_rating_value }} out of 5{% if display_rating_count != blank %} from {{ display_rating_count }} reviews{% endif %}">
-                    <span class="product-buybox-stars" aria-hidden="true">★★★★★</span>
-                    <span class="product-buybox-review-value">{{ display_rating_value }}</span>
+                  <div class="product-buybox-review-row flex flex-wrap items-center gap-2 text-sm text-slate-600" aria-label="Rated {{ display_rating_value }} out of 5{% if display_rating_count != blank %} from {{ display_rating_count }} reviews{% endif %}">
+                    <span class="product-buybox-stars tracking-wide text-amber-500/90" aria-hidden="true">★★★★★</span>
+                    <span class="product-buybox-review-value font-medium text-slate-900">{{ display_rating_value }}</span>
                     {% if display_rating_count != blank %}
-                      <span class="product-buybox-review-count">{{ display_rating_count }} reviews</span>
+                      <span class="product-buybox-review-count text-slate-500">{{ display_rating_count }} reviews</span>
                     {% endif %}
                   </div>
                 {% endif %}
@@ -330,12 +330,12 @@
               </div>
             </div>
 
-            <div class="product-buybox-price-row">
-              <p class="product-buybox-setup-statement">{{ setup_statement }}</p>
+            <div class="product-buybox-price-row flex flex-col gap-2">
+              <p class="product-buybox-setup-statement text-sm leading-relaxed text-slate-700">{{ setup_statement }}</p>
               {% if product_positioning_text != blank %}
-                <p class="product-buybox-positioning">{{ product_positioning_text }}</p>
+                <p class="product-buybox-positioning text-sm leading-6 text-slate-500">{{ product_positioning_text }}</p>
               {% else %}
-                <p class="product-buybox-positioning">{{ role_decision_note }}</p>
+                <p class="product-buybox-positioning text-sm leading-6 text-slate-500">{{ role_decision_note }}</p>
               {% endif %}
             </div>
           </div>
@@ -343,10 +343,10 @@
           {% form 'product', product, id: product_form_id, class: 'mt-5 space-y-4 lg:mt-6 lg:space-y-5' %}
             <div class="product-form-panel card-soft space-y-4 p-5 lg:space-y-5" data-main-buybox>
               {% if product.has_only_default_variant == false %}
-                <div class="product-buybox-option-shell">
-                  <div class="product-buybox-option-head">
-                    <p class="product-buybox-option-label">{{ selected_option_label }}</p>
-                    <p class="product-buybox-option-selected" data-product-selected-variant-label>{{ selected_option_summary }}</p>
+                <div class="product-buybox-option-shell grid gap-3">
+                  <div class="product-buybox-option-head flex flex-wrap items-center justify-between gap-2">
+                    <p class="product-buybox-option-label text-sm font-medium text-slate-500">{{ selected_option_label }}</p>
+                    <p class="product-buybox-option-selected text-sm font-medium text-slate-950" data-product-selected-variant-label>{{ selected_option_summary }}</p>
                   </div>
                   <select id="ProductVariant-{{ section.id }}" name="id" class="sr-only" data-product-variant-select>
                     {% for variant in product.variants %}
@@ -381,12 +381,12 @@
                       {% endfor %}
                     </div>
                   {% else %}
-                    <div class="product-variant-chip-row" role="list">
+                    <div class="product-variant-chip-row flex flex-wrap gap-2" role="list">
                       {% for variant in product.variants %}
-                        <button type="button" class="product-variant-chip{% if variant == product.selected_or_first_available_variant %} is-active{% endif %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
-                          <span class="product-variant-chip-title">{{ variant.options.first | default: variant.title }}</span>
+                        <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-slate-900 text-slate-950 ring-1 ring-slate-900/15{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
+                          <span class="product-variant-chip-title leading-none">{{ variant.options.first | default: variant.title }}</span>
                           {% unless variant.available %}
-                            <span class="product-variant-chip-meta">Sold out</span>
+                            <span class="product-variant-chip-meta text-xs text-slate-400">Sold out</span>
                           {% endunless %}
                         </button>
                       {% endfor %}
@@ -421,9 +421,9 @@
 
               <div class="product-purchase-row">
                 {% if section.settings.show_quantity_selector %}
-                  <div class="hidden lg:block product-buybox-quantity-shell">
+                  <div class="hidden lg:block product-buybox-quantity-shell min-w-28">
                     <label class="mb-2 block text-sm font-medium text-slate-900" for="ProductQuantity-{{ section.id }}">Quantity</label>
-                    <input id="ProductQuantity-{{ section.id }}" class="product-buybox-quantity-input" type="number" name="quantity" value="1" min="1">
+                    <input id="ProductQuantity-{{ section.id }}" class="product-buybox-quantity-input min-h-12 w-28 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="number" name="quantity" value="1" min="1">
                   </div>
                 {% endif %}
 
@@ -473,21 +473,21 @@
             </a>
           </div>
 
-          <div class="product-trust-grid" aria-label="Purchase confidence">
-            <div class="product-trust-item">
-              {% render 'icon', name: 'check' %}
+          <div class="product-trust-grid" role="list" aria-label="Purchase confidence">
+            <div class="product-trust-item" role="listitem">
+              <span class="product-trust-icon" role="img" aria-label="In stock">{% render 'icon', name: 'check' %}</span>
               <span>In stock</span>
             </div>
-            <div class="product-trust-item">
-              {% render 'icon', name: 'shield' %}
+            <div class="product-trust-item" role="listitem">
+              <span class="product-trust-icon" role="img" aria-label="30-day returns">{% render 'icon', name: 'shield' %}</span>
               <span>30-day returns</span>
             </div>
-            <div class="product-trust-item">
-              {% render 'icon', name: 'spark' %}
+            <div class="product-trust-item" role="listitem">
+              <span class="product-trust-icon" role="img" aria-label="2-year warranty">{% render 'icon', name: 'spark' %}</span>
               <span>2-year warranty</span>
             </div>
-            <div class="product-trust-item">
-              {% render 'icon', name: 'truck' %}
+            <div class="product-trust-item" role="listitem">
+              <span class="product-trust-icon" role="img" aria-label="Free shipping">{% render 'icon', name: 'truck' %}</span>
               <span>Free shipping</span>
             </div>
           </div>
@@ -722,6 +722,110 @@
     </div>
   </div>
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | escape }}",
+  "description": "{{ product.description | strip_html | strip | escape | truncate: 200 }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.vendor | default: shop.name | escape }}"
+  },
+  "image": "{{ product.featured_image | image_url: width: 1200 }}",
+  "sku": "{{ product.selected_or_first_available_variant.sku | escape }}",
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "price": {{ product.price | divided_by: 100.0 }},
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ shop.name | escape }}"
+    }
+  }
+  {%- if display_rating_value != blank -%}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ display_rating_value }},
+    "reviewCount": {{ display_rating_count | default: 1 }}
+  }
+  {%- endif -%}
+}
+</script>
+
+<script>
+(function () {
+  var productRoot = document.querySelector('[data-product-root]');
+  if (!productRoot) return;
+
+  var productForm = productRoot.querySelector('form[id^="ProductForm-"]');
+  if (!productForm) return;
+
+  var primaryButton = productRoot.querySelector('[data-product-primary-button]');
+  var primaryButtonLabel = productRoot.querySelector('[data-product-primary-button-label]');
+  var primaryButtonPrice = productRoot.querySelector('[data-product-primary-button-price]');
+  var primaryButtonDivider = productRoot.querySelector('[data-product-primary-button-divider]');
+  var stickyButton = productRoot.querySelector('[data-sticky-atc-button]');
+  var stickyButtonLabel = productRoot.querySelector('[data-sticky-atc-button-label]');
+  var stickyButtonPrice = productRoot.querySelector('[data-sticky-atc-button-price]');
+  var stickyButtonDivider = productRoot.querySelector('[data-sticky-atc-button-divider]');
+
+  function setLoading(loading) {
+    [primaryButton, stickyButton].forEach(function (btn) {
+      if (!btn) return;
+      btn.classList.toggle('is-loading', loading);
+      btn.disabled = loading;
+      btn.setAttribute('aria-busy', loading ? 'true' : 'false');
+    });
+    if (primaryButtonLabel) primaryButtonLabel.textContent = loading ? 'Adding\u2026' : 'Add to cart';
+    if (primaryButtonPrice) primaryButtonPrice.hidden = loading;
+    if (primaryButtonDivider) primaryButtonDivider.hidden = loading;
+    if (stickyButtonLabel) stickyButtonLabel.textContent = loading ? 'Adding\u2026' : 'Add to cart';
+    if (stickyButtonPrice) stickyButtonPrice.hidden = loading;
+    if (stickyButtonDivider) stickyButtonDivider.hidden = loading;
+  }
+
+  productForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var variantInput = productForm.querySelector('[name="id"]');
+    var quantityInput = productForm.querySelector('[name="quantity"]');
+    if (!variantInput || !variantInput.value) return;
+
+    setLoading(true);
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body: JSON.stringify({
+        items: [{ id: parseInt(variantInput.value, 10), quantity: quantityInput ? parseInt(quantityInput.value, 10) || 1 : 1 }]
+      })
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('cart_error');
+      return res.json();
+    })
+    .then(function () {
+      if (primaryButtonLabel) primaryButtonLabel.textContent = 'Added!';
+      if (stickyButtonLabel) stickyButtonLabel.textContent = 'Added!';
+      setTimeout(function () {
+        if (typeof window.refreshAndOpenCartDrawer === 'function') {
+          window.refreshAndOpenCartDrawer();
+          setTimeout(function () { setLoading(false); }, 350);
+        } else {
+          window.location.href = '/cart';
+        }
+      }, 700);
+    })
+    .catch(function () {
+      setLoading(false);
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {

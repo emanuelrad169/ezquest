@@ -1,44 +1,149 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Documentation",
+        "kicker": "Manuals",
         "heading": "Find the right manual fast",
-        "copy": "Browse manuals and setup guides by product family and install stage without digging through side paths.",
-        "support_eyebrow": "Ownership confidence",
-        "support_note": "Start with the guide that matches your product and stage. If one detail is still unclear, move to compatibility or direct help."
+        "subheading": "Setup guides, quick-start instructions, and product documentation by family.",
+        "light_mode": true
       }
     },
-    "resources": {
-      "type": "support-resource-list",
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
+    },
+    "downloads": {
+      "type": "download-center",
       "settings": {
-        "eyebrow": "Documentation",
-        "heading": "Manuals and setup guidance in one place",
-        "copy": "See more of the manual library at once so the right setup guide is easier to spot.",
-        "structured_source": "global",
-        "resource_kind": "manuals",
-        "resource_limit": 12,
-        "show_search": false,
-        "source_note": "Start with product and setup stage. If the right guide still is not obvious, check compatibility or get help now.",
-        "link_label": "Get help now",
-        "link_url": "/pages/contact"
-      }
+        "kicker": "Manuals",
+        "heading": "Manuals by product family",
+        "body": "Find the setup guide or quick-start document for your EZQuest product."
+      },
+      "blocks": {
+        "fam_1": {
+          "type": "family",
+          "settings": {
+            "label": "Hubs & Adapters",
+            "handle": "hubs-adapters"
+          }
+        },
+        "fam_2": {
+          "type": "family",
+          "settings": {
+            "label": "Docking Stations",
+            "handle": "docking-stations"
+          }
+        },
+        "fam_3": {
+          "type": "family",
+          "settings": {
+            "label": "Chargers & Power",
+            "handle": "chargers-power"
+          }
+        },
+        "fam_4": {
+          "type": "family",
+          "settings": {
+            "label": "Accessories",
+            "handle": "accessories"
+          }
+        },
+        "file_m1": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
+            "file_title": "User Manual",
+            "file_type": "PDF",
+            "file_size": "3.8 MB",
+            "version": "",
+            "updated": "March 2024",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_m2": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C Multimedia Hub Adapter 8 Ports",
+            "file_title": "User Manual",
+            "file_type": "PDF",
+            "file_size": "3.2 MB",
+            "version": "",
+            "updated": "March 2024",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_m3": {
+          "type": "file",
+          "settings": {
+            "product_name": "USB-C to 2.5 Gigabit Ethernet Adapter",
+            "file_title": "User Manual",
+            "file_type": "PDF",
+            "file_size": "2.1 MB",
+            "version": "",
+            "updated": "November 2023",
+            "family": "hubs-adapters",
+            "file_url": "#"
+          }
+        },
+        "file_m4": {
+          "type": "file",
+          "settings": {
+            "product_name": "UltimatePower 120W GaN USB-C PD Wall Charger",
+            "file_title": "User Manual",
+            "file_type": "PDF",
+            "file_size": "2.8 MB",
+            "version": "",
+            "updated": "January 2024",
+            "family": "chargers-power",
+            "file_url": "#"
+          }
+        },
+        "file_m5": {
+          "type": "file",
+          "settings": {
+            "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
+            "file_title": "User Manual",
+            "file_type": "PDF",
+            "file_size": "4.2 MB",
+            "version": "",
+            "updated": "October 2023",
+            "family": "accessories",
+            "file_url": "#"
+          }
+        }
+      },
+      "block_order": [
+        "fam_1",
+        "fam_2",
+        "fam_3",
+        "fam_4",
+        "file_m1",
+        "file_m2",
+        "file_m3",
+        "file_m4",
+        "file_m5"
+      ]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Still need help",
-        "heading": "Guide not enough for your setup?",
-        "copy": "Move straight to compatibility or a support request without restarting from the hub.",
-        "link_label": "Get help now",
-        "link_url": "/pages/contact",
-        "secondary_label": "Check compatibility",
-        "secondary_url": "/pages/compatibility",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Support",
+        "heading": "Can't find the right manual?",
+        "body": "Open support when the documentation still leaves a question open.",
+        "cta_label": "Open support",
+        "cta_url": "/pages/support",
+        "cta2_label": "Find downloads",
+        "cta2_url": "/pages/downloads"
       }
     }
   },
-  "order": ["hero", "resources", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "downloads",
+    "cta"
+  ]
 }

@@ -1,23 +1,29 @@
 {
   "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Resources",
+        "heading": "Setup guides, tips, and product deep-dives",
+        "subheading": "Practical guides for choosing, setting up, and getting more from EZQuest products."
+      }
+    },
     "main": {
       "type": "main-blog",
       "settings": {}
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "More product help",
-        "heading": "Keep product guidance close to support",
-        "copy": "Move from guides into related products, support resources, or direct help without losing context.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support",
-        "secondary_label": "Browse collections",
-        "secondary_url": "/collections/all",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "More product help",
+        "heading": "Questions about a product? We can help.",
+        "body": "Move from guides into related products, support resources, or direct help without losing context.",
+        "cta_label": "Open support center",
+        "cta_url": "/pages/support",
+        "cta2_label": "Browse collections",
+        "cta2_url": "/collections/all"
       }
     }
   },
-  "order": ["main", "cta"]
+  "order": ["hero", "main", "cta"]
 }

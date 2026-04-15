@@ -98,25 +98,25 @@
                 endif
               -%}
               <article
-                class="home-hero-slide relative block min-h-hero xl:min-h-feature-lg{% if forloop.first %} is-active{% endif %}"
+                class="home-hero-slide relative block h-full min-h-hero xl:min-h-feature-lg{% if forloop.first %} is-active{% endif %}"
                 data-hero-slide
                 {% unless forloop.first %}hidden{% endunless %}
                 aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                <div class="home-hero-media-panel{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
+                <div class="home-hero-media-panel absolute inset-0 overflow-hidden{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
                   {% if slide_desktop_image != blank or slide_mobile_image != blank %}
-                    <picture class="home-hero-media-picture">
+                    <picture class="home-hero-media-picture block h-full w-full">
                       {% if slide_mobile_image != blank %}
                         <source media="(max-width: 767px)" srcset="{{ slide_mobile_image | image_url: width: 1800 }}">
                       {% endif %}
                       {% if slide_desktop_image != blank %}
-                        {{ slide_desktop_image | image_url: width: 2400 | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, class: 'home-hero-media-image', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                        {{ slide_desktop_image | image_url: width: 2400 | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                       {% else %}
                         <img
                           src="{{ owned_hero_desktop_asset | asset_url }}"
                           alt="{{ slide_heading | escape }}"
-                          class="home-hero-media-image"
+                          class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
                           loading="{{ slide_image_loading }}"
                           fetchpriority="{{ slide_image_fetchpriority }}"
                           width="3600"
@@ -132,12 +132,12 @@
                       fetchpriority: slide_image_fetchpriority
                     %}
                   {% else %}
-                    <picture class="home-hero-media-picture">
+                    <picture class="home-hero-media-picture block h-full w-full">
                       <source media="(max-width: 767px)" srcset="{{ owned_hero_mobile_asset | asset_url }}">
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"
                         alt="{{ slide_heading | escape }}"
-                        class="home-hero-media-image"
+                        class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
                         loading="{{ slide_image_loading }}"
                         fetchpriority="{{ slide_image_fetchpriority }}"
                         width="3600"
@@ -150,9 +150,9 @@
 
                 <div class="pointer-events-none absolute inset-0 z-10">
                   <div class="container-shell relative h-full">
-                    <div class="home-hero-copy-panel pointer-events-auto">
+                    <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
                       {% if block.settings.eyebrow != blank %}
-                        <p class="home-hero-copy-kicker" data-hero-kicker>{{ block.settings.eyebrow }}</p>
+                        <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ block.settings.eyebrow }}</p>
                       {% endif %}
                       <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ slide_heading }}</h1>
                       <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ slide_copy }}</p>
@@ -162,7 +162,7 @@
                           {% render 'button', label: slide_primary_label, url: block.settings.primary_url | default: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
                         {% endif %}
                         {% if slide_secondary_label != blank %}
-                          {% render 'button', label: slide_secondary_label, url: block.settings.secondary_url | default: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link' %}
+                          {% render 'button', label: slide_secondary_label, url: block.settings.secondary_url | default: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link min-h-11' %}
                         {% endif %}
                       </div>
                     </div>
@@ -191,20 +191,20 @@
                 assign uses_owned_hero_asset = true
               endif
             -%}
-            <article class="home-hero-slide relative block min-h-hero xl:min-h-feature-lg is-active" data-hero-slide aria-hidden="false">
-              <div class="home-hero-media-panel{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
+            <article class="home-hero-slide relative block h-full min-h-hero xl:min-h-feature-lg is-active" data-hero-slide aria-hidden="false">
+              <div class="home-hero-media-panel absolute inset-0 overflow-hidden{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
                 {% if fallback_desktop_image != blank or fallback_mobile_image != blank %}
-                  <picture class="home-hero-media-picture">
+                  <picture class="home-hero-media-picture block h-full w-full">
                     {% if fallback_mobile_image != blank %}
                       <source media="(max-width: 767px)" srcset="{{ fallback_mobile_image | image_url: width: 1800 }}">
                     {% endif %}
                     {% if fallback_desktop_image != blank %}
-                      {{ fallback_desktop_image | image_url: width: 2400 | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, class: 'home-hero-media-image', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                      {{ fallback_desktop_image | image_url: width: 2400 | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                     {% else %}
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"
                         alt="{{ hero_heading | escape }}"
-                        class="home-hero-media-image"
+                        class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
                         loading="{{ fallback_image_loading }}"
                         fetchpriority="{{ fallback_image_fetchpriority }}"
                         width="3600"
@@ -220,12 +220,12 @@
                     fetchpriority: fallback_image_fetchpriority
                   %}
                 {% else %}
-                  <picture class="home-hero-media-picture">
+                  <picture class="home-hero-media-picture block h-full w-full">
                     <source media="(max-width: 767px)" srcset="{{ owned_hero_mobile_asset | asset_url }}">
                     <img
                       src="{{ owned_hero_desktop_asset | asset_url }}"
                       alt="{{ hero_heading | escape }}"
-                      class="home-hero-media-image"
+                      class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
                       loading="{{ fallback_image_loading }}"
                       fetchpriority="{{ fallback_image_fetchpriority }}"
                       width="3600"
@@ -238,9 +238,9 @@
 
               <div class="pointer-events-none absolute inset-0 z-10">
                 <div class="container-shell relative h-full">
-                  <div class="home-hero-copy-panel pointer-events-auto">
+                  <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
                     {% if section.settings.eyebrow != blank %}
-                      <p class="home-hero-copy-kicker" data-hero-kicker>{{ section.settings.eyebrow }}</p>
+                      <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ section.settings.eyebrow }}</p>
                     {% endif %}
                     <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ hero_heading }}</h1>
                     <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ hero_copy }}</p>
@@ -249,7 +249,7 @@
                         {% render 'button', label: section.settings.primary_label, url: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
                       {% endif %}
                       {% if section.settings.secondary_label != blank %}
-                        {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link' %}
+                        {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link min-h-11' %}
                       {% endif %}
                     </div>
                   </div>

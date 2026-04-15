@@ -36,7 +36,7 @@
                 {{ item.object_type | default: 'Result' }}
               {% endif %}
             </p>
-            <a href="{{ item.url }}" class="mt-4 block text-2xl font-semibold tracking-tight text-slate-950">{{ item.title }}</a>
+            <a href="{{ item.url }}" class="mt-4 block text-2xl font-medium tracking-tight text-slate-950">{{ item.title }}</a>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ item.content | strip_html | truncatewords: 24 }}</p>
             <div class="mt-6 border-t border-slate-200/80 pt-5">
               {% render 'button', label: 'Open result', url: item.url, style: 'tertiary' %}
@@ -47,7 +47,7 @@
         <div class="search-empty-shell">
           {% if search.performed %}
             <p class="section-kicker">No results yet</p>
-            <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">No matches for “{{ search.terms }}”</h2>
+            <h2 class="mt-4 text-2xl font-medium tracking-tight text-slate-950">No matches for “{{ search.terms }}”</h2>
             <p class="mt-3 text-sm leading-7 text-slate-600">Try a product name, connection type, compatibility keyword, or support topic. If nothing matches yet, browse the product families, compare the core lineup, or open support.</p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
               <a href="{{ routes.collections_url }}" class="button-secondary">Browse product families</a>
@@ -56,7 +56,7 @@
             </div>
           {% else %}
             <p class="section-kicker">Search the storefront</p>
-            <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">Start with a product name, resource type, or support topic</h2>
+            <h2 class="mt-4 text-2xl font-medium tracking-tight text-slate-950">Start with a product name, resource type, or support topic</h2>
             <p class="mt-3 text-sm leading-7 text-slate-600">Use search as the fastest bridge between shopping, setup guidance, downloads, and support.</p>
           {% endif %}
         </div>

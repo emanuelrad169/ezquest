@@ -56,13 +56,20 @@
                     {% endfor %}
                   {% endif %}
 
+                  {%- assign block_faq_count = 0 -%}
                   {% if group_faq_count == 0 %}
                     {% for item_block in section.blocks %}
                       {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
                         {% capture answer %}<p>{{ item_block.settings.answer }}</p>{% endcapture %}
                         {% render 'accordion-item', title: item_block.settings.question, content: answer %}
+                        {%- assign block_faq_count = block_faq_count | plus: 1 -%}
                       {% endif %}
                     {% endfor %}
+                  {% endif %}
+                  {% if group_faq_count == 0 and block_faq_count == 0 %}
+                    <div class="section-empty-state">
+                      <p class="section-empty-state__message">No FAQs added to this group yet.</p>
+                    </div>
                   {% endif %}
                 </div>
               </div>
@@ -83,6 +90,11 @@
                   {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
                   {% render 'accordion-item', title: faq_item.question.value, content: answer %}
                 {% endfor %}
+              {% else %}
+                <div class="section-empty-state">
+                  <p class="section-empty-state__message">No FAQ entries configured yet. Add FAQ metaobject items in Shopify, or add FAQ group and item blocks in the editor.</p>
+                  <a href="/pages/contact" class="btn btn--secondary btn--sm mt-4">Contact support</a>
+                </div>
               {% endif %}
             </div>
           </div>

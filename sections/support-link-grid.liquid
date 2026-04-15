@@ -26,7 +26,7 @@
       endif
     -%}
 
-    <div class="support-link-grid support-link-grid--ownership {{ columns_class }}">
+    <div class="support-link-grid support-link-grid--ownership {{ columns_class }} reveal-stagger">
       {% for block in section.blocks %}
         <article class="support-link-card{% if forloop.first %} support-link-card--featured{% endif %} motion-lift" {{ block.shopify_attributes }}>
           <div class="support-link-card-top">

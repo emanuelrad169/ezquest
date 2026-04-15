@@ -16,17 +16,15 @@
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need the next step",
-        "heading": "Need the next step after this article?",
-        "copy": "Move from reading into support, compatibility help, or product discovery without losing the thread.",
-        "link_label": "Open support center",
-        "link_url": "/pages/support",
-        "secondary_label": "Browse products",
-        "secondary_url": "/collections/all",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Questions about a product",
+        "heading": "Questions about a product? We can help.",
+        "body": "Move from reading into support, compatibility help, or product discovery without losing the thread.",
+        "cta_label": "Open support center",
+        "cta_url": "/pages/support",
+        "cta2_label": "Browse products",
+        "cta2_url": "/collections/all"
       }
     }
   },

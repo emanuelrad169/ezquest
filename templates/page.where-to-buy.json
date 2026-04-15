@@ -1,50 +1,48 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Where to buy",
-        "heading": "Where to buy EZQuest",
-        "copy": "Help customers choose the right channel, region, or partner before they complete the purchase.",
-        "support_eyebrow": "Retail note",
-        "support_note": "Choose the right purchase channel here, then move back into products or support when more help is needed.",
-        "link_label": "Browse products",
-        "link_url": "/collections/all"
+        "kicker": "Where to buy",
+        "heading": "Get EZQuest everywhere you shop",
+        "subheading": "Buy direct for the best price and clearest post-purchase support, or find EZQuest at a retailer near you."
       }
     },
-    "details": {
+    "channels": {
       "type": "info-card-grid",
       "settings": {
         "eyebrow": "Purchase channels",
-        "heading": "Clarify direct, partner, and retail pathways",
-        "copy": "Choose between direct, partner, and retail paths without guessing where to buy.",
+        "heading": "Choose the right channel for your purchase",
+        "copy": "Direct purchase gives you the best price, warranty registration, and direct support access.",
         "columns_desktop": 3
       },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
-            "eyebrow": "Direct",
-            "title": "Buy directly from the storefront",
-            "copy": "Explain the benefits of buying directly, including product access and clearer support after purchase."
+            "eyebrow": "Recommended",
+            "title": "Buy direct from EZQuest.com",
+            "copy": "Best price, fastest support, and direct warranty registration. No middleman.",
+            "link_label": "Browse products",
+            "link_url": "/collections/all"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "eyebrow": "Retail",
-            "title": "Retail partner and in-market options",
-            "copy": "Point customers toward the most useful regional, reseller, or retail path without sending them into guesswork."
+            "eyebrow": "Online retail",
+            "title": "Amazon and major online retailers",
+            "copy": "Available on Amazon and select online marketplaces with Prime shipping where supported."
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "eyebrow": "Support",
-            "title": "Need help choosing the right product first?",
-            "copy": "Send customers back into collections or support if they still need product guidance before buying.",
-            "link_label": "Open support center",
-            "link_url": "/pages/support"
+            "eyebrow": "Need guidance first",
+            "title": "Not sure which product to buy?",
+            "copy": "Use Help me choose or open Support before completing your purchase.",
+            "link_label": "Help me choose",
+            "link_url": "/pages/help-me-choose"
           }
         }
       },
@@ -55,27 +53,25 @@
       "settings": {
         "show_title": false,
         "intro_copy": "Reseller lists, territory notes, and fuller channel guidance continue below.",
-        "side_eyebrow": "Need product guidance",
-        "side_heading": "Keep channel pages connected to products",
-        "side_copy": "If a customer is not sure what they need yet, route them back into collections or support from here.",
+        "side_eyebrow": "Why buy direct",
+        "side_heading": "Best price, best support",
+        "side_copy": "Buying directly gives you the clearest path to warranty registration, support, and any order questions.",
         "side_link_label": "Browse collections",
         "side_link_url": "/collections/all"
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Still deciding",
-        "heading": "Move from where-to-buy into product and support discovery",
-        "copy": "Move from purchase channels into products, support, or direct help without friction.",
-        "link_label": "Browse collections",
-        "link_url": "/collections/all",
-        "secondary_label": "Contact support",
-        "secondary_url": "/pages/contact",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Still deciding",
+        "heading": "Not sure where to start?",
+        "body": "Move from purchase channels into products, support, or direct help without friction.",
+        "cta_label": "Browse collections",
+        "cta_url": "/collections/all",
+        "cta2_label": "Contact support",
+        "cta2_url": "/pages/contact"
       }
     }
   },
-  "order": ["hero", "details", "main", "cta"]
+  "order": ["hero", "channels", "main", "cta"]
 }

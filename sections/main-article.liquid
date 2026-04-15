@@ -1,60 +1,52 @@
-<article class="section-shell">
+<article class="section-shell main-article-section">
+  {%- liquid
+    assign words = article.content | strip_html | split: ' '
+    assign read_time = words.size | divided_by: 200 | plus: 1
+  -%}
   <div class="container-shell">
     {% render 'breadcrumbs' %}
 
-    <div class="article-header-shell mt-6">
-      <div class="article-header-copy">
-        <p class="section-kicker">{{ article.blog.title | default: 'Article' }}</p>
-        <h1 class="section-heading mt-4">{{ article.title }}</h1>
-        <div class="article-meta-row mt-4">
-          <span class="article-meta-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
-          {% if article.tags.size > 0 %}
-            {% for tag in article.tags limit: 2 %}
-              <span class="product-meta-pill">{{ tag }}</span>
-            {% endfor %}
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="article-header-panel section-frame">
-        <p class="section-kicker">Next useful step</p>
-        <p class="mt-3 text-sm leading-6 text-slate-500">Use this guide to answer the product question first, then open support, manuals, or downloads if you need more detail.</p>
-        <div class="support-crosslink-list mt-4">
-          <a href="{{ article.blog.url | default: '/blogs/resources' }}" class="support-crosslink">
-            <span>Back to resources</span>
-            <span class="text-slate-400">Browse</span>
-          </a>
-          <a href="/pages/compatibility" class="support-crosslink">
-            <span>Check compatibility</span>
-            <span class="text-slate-400">Guide</span>
-          </a>
-          <a href="/pages/support" class="support-crosslink">
-            <span>Need direct help</span>
-            <span class="text-slate-400">Support</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="article-content-shell mt-10">
-      <div class="article-feature-shell">
-        {% if article.image != blank %}
-          {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-feature-image' }}
-        {% else %}
-          {% render 'owned-editorial-visual', visual: 'guide', title: article.title, class: 'article-feature-image' %}
+    <div class="article-header">
+      <p class="article-header__category">{{ article.blog.title | default: 'Article' }}</p>
+      <h1 class="article-header__title">{{ article.title }}</h1>
+      <div class="article-header__meta">
+        <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
+        <span class="article-header__meta-divider" aria-hidden="true"></span>
+        <span>{{ read_time }} min read</span>
+        {% if article.tags.size > 0 %}
+          <span class="article-header__meta-divider" aria-hidden="true"></span>
+          {% for tag in article.tags limit: 2 %}
+            <span>{{ tag }}</span>
+          {% endfor %}
         {% endif %}
       </div>
-      <div class="richtext-content max-w-none">
-        {{ article.content }}
-      </div>
     </div>
 
-    <div class="article-continuation-shell">
-      <span class="article-continuation-label">Continue</span>
-      <a href="/pages/support" class="support-inline-link">Support center</a>
-      <a href="/pages/manuals" class="support-inline-link">Manuals</a>
-      <a href="/pages/downloads" class="support-inline-link">Downloads</a>
-      <a href="/pages/compatibility" class="support-inline-link">Compatibility</a>
+    <div class="article-featured-image-wrap">
+      {% if article.image != blank %}
+        {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-featured-image' }}
+      {% else %}
+        {% render 'owned-editorial-visual', visual: 'guide', title: article.title, class: 'article-featured-image' %}
+      {% endif %}
+    </div>
+
+    <div class="article-body richtext-content">
+      {{ article.content }}
+    </div>
+
+    <div class="article-footer">
+      <div class="article-tags">
+        {% for tag in article.tags %}
+          <a href="{{ article.blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      <div class="article-continuation-links">
+        <span class="article-continuation-label">Continue:</span>
+        <a href="/pages/support" class="support-inline-link">Support center</a>
+        <a href="/pages/manuals" class="support-inline-link">Manuals</a>
+        <a href="/pages/downloads" class="support-inline-link">Downloads</a>
+        <a href="/pages/compatibility" class="support-inline-link">Compatibility</a>
+      </div>
     </div>
   </div>
 </article>

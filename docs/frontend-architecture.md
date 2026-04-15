@@ -92,48 +92,68 @@ Every new or updated component must:
 - keep styling consistent with the existing design system
 - remove legacy CSS if the component’s old layout logic was replaced
 
+## Phase 6 Enforcement Lock (Final)
+
+This project is now locked to a **≥90% Tailwind-in-Liquid** standard for all component-local styling. This was established after a complete Phase 1–6 migration audit and is the enforced baseline for all future work.
+
+### What This Means
+- Any new section or snippet must use Tailwind utilities in Liquid for layout, spacing, alignment, grid/flex composition, responsive visibility, and max-width.
+- Shared CSS (`src/styles/theme.css`) is reserved exclusively for design-system primitives: tokens, custom shadows, card surfaces with custom `box-shadow`/`border-radius`, typography with `clamp()` or `letter-spacing` values not covered by standard Tailwind, fractional grid columns, CSS-variable-dependent properties (e.g. `top: calc(var(--header-height) + 1.5rem)`), and pseudo-element / focus / motion rules.
+- Verify alignment on every PR: no new CSS-backed local layout classes should be introduced without documenting a justification in this file.
+
 ## Current Theme Audit
 
-### Already Aligned With This Rule
-These components are already using the hybrid direction well enough to be treated as the standard:
+### Fully Aligned (Phases 1–6)
+All sections and snippets below have been migrated to the Tailwind-in-Liquid hybrid pattern. Orphaned CSS was removed after each migration.
 
 - `sections/announcement-bar.liquid`
-- `snippets/site-header.liquid`
 - `sections/hero-home.liquid`
-- `assets/theme.js` header scroll-threshold behavior
-
-Why:
-- local structure and breakpoint behavior now live close to markup
-- reusable visual states still live in shared CSS
-- old duplicate layout CSS for those areas has already been reduced
-
-### Not Yet Aligned
-These components still rely too heavily on centralized CSS for local layout/composition and should move next:
-
-- `snippets/mega-menu-panel.liquid`
-- `snippets/search-mega-panel.liquid`
+- `sections/home-feature-banner.liquid`
+- `sections/home-confidence-grid.liquid`
+- `sections/resources-featured.liquid`
+- `sections/article-feed.liquid`
+- `sections/support-nav-grid.liquid`
+- `sections/main-collection.liquid`
+- `sections/main-blog.liquid` *(Phase 6)*
+- `sections/main-article.liquid` *(Phase 6)*
+- `sections/main-product.liquid` *(buybox: brand, title, reviews, options, variants, quantity — Phase 5)*
 - `snippets/mega-menu-stage-card.liquid`
+- `snippets/search-mega-panel.liquid`
 - `snippets/mobile-nav-drawer.liquid`
 - `snippets/card-product.liquid`
 - `snippets/compare-cell.liquid`
-- `sections/main-product.liquid`
-- `sections/product-compare-table.liquid`
+- `snippets/site-header.liquid`
 
-Likely broader next-wave candidates after those:
+### Justified Shared CSS — Still In Use
+These CSS classes remain in `src/styles/theme.css` and are intentionally kept there. Each has a documented reason why it cannot move to standard Tailwind utilities.
 
-- collection hero and toolbar surfaces
-- support hub and support resource sections
-- featured product carousel composition
-- search result layout
+| Class | File | Reason |
+|---|---|---|
+| `.article-header-shell` | `main-article.liquid` | Fractional grid column `1fr 0.52fr` |
+| `.article-header-panel` | `main-article.liquid` | `top: calc(var(--header-height) + 1.5rem)` |
+| `.article-continuation-label` | `main-article.liquid` | `letter-spacing: 0.18em` (no standard Tailwind equiv) |
+| `.blog-lead-shell` | `main-blog.liquid` | Fractional grid column `1.12fr 0.88fr` |
+| `.blog-lead-card` | `main-blog.liquid` | Custom `box-shadow`, `border-radius: 2rem`, transition |
+| `.blog-lead-image` | `main-blog.liquid` | Custom `transition: 0.4s ease`, `aspect-ratio: 16/10`, parent-hover scale |
+| `.blog-lead-title` | `main-blog.liquid` | `font-size: 2rem/2.45rem` (non-standard scale), `letter-spacing: -0.04em` |
+| `.blog-stack-card` | `main-blog.liquid` | Custom `box-shadow`, `border-radius: 1.75rem`, transition |
+| `.product-highlight-card` | `main-product.liquid` | Complex multi-property card surface |
+| `.product-sticky-atc` | `main-product.liquid` | Sticky bar with CSS-var-dependent offset |
+| `.product-trust-grid` | `main-product.liquid` | Grid with custom column distribution |
+| `.product-share-row` | `main-product.liquid` | Complex flex with custom gap and state |
 
-## Recommended Refactor Order
+### Remaining Migration Candidates (Low Priority)
+These sections have component-local CSS classes that could move to Tailwind in a future pass. They are not blockers.
 
-1. Mega nav and search panel internals
-2. Product cards
-3. PDP layout
-4. Compare layout
-5. Collection and search result layouts
-6. Support section layouts
+- `sections/main-product.liquid`: `product-view-details-row`, `product-mobile-accordions`, `product-mobile-detail-stack`, `product-mobile-detail-copy`
+- `sections/product-compare-table.liquid`: complex table column layout
+
+## Recommended Next Steps
+
+If a future pass continues migration:
+1. Finish `main-product.liquid` remaining mobile accordion layout classes
+2. Audit `product-compare-table.liquid` table composition
+3. Run `npm run build && npm run check` after each batch
 
 ## Validation Rule
 After any hybrid refactor:

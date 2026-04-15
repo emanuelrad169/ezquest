@@ -1,15 +1,11 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Help me choose",
-        "heading": "Choose the right EZQuest setup before you shop",
-        "copy": "Start with the setup role, then move into the EZQuest family and product built for the way you work.",
-        "support_eyebrow": "Decision guide",
-        "support_note": "This guide connects your setup intent with the right EZQuest family, then points you to the strongest product match.",
-        "link_label": "Compare options",
-        "link_url": "/pages/compare"
+        "kicker": "Help me choose",
+        "heading": "Find the right setup before you shop",
+        "subheading": "Start with the setup role, then move into the EZQuest family and product built for the way you work."
       }
     },
     "guide": {
@@ -83,22 +79,32 @@
             "secondary_label": "View support",
             "secondary_url": "/pages/support"
           }
+        },
+        "guide_6": {
+          "type": "guide",
+          "settings": {
+            "eyebrow": "Still deciding?",
+            "title": "Talk to support",
+            "copy": "Not sure which setup fits? Support can help narrow it down before you buy.",
+            "primary_label": "Contact support",
+            "primary_url": "/pages/support",
+            "secondary_label": "Compare options",
+            "secondary_url": "/pages/compare"
+          }
         }
       },
-      "block_order": ["guide_1", "guide_2", "guide_3", "guide_4", "guide_5"]
+      "block_order": ["guide_1", "guide_2", "guide_3", "guide_4", "guide_5", "guide_6"]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need compatibility help",
+        "kicker": "Need compatibility help",
         "heading": "Need to confirm compatibility before you decide?",
-        "copy": "Use compatibility or support when one device, display, or workflow detail still needs confirmation.",
-        "link_label": "Check compatibility",
-        "link_url": "/pages/compatibility",
-        "secondary_label": "Open support center",
-        "secondary_url": "/pages/support",
-        "style": "light",
-        "button_style": "secondary"
+        "body": "Use compatibility or support when one device, display, or workflow detail still needs confirmation.",
+        "cta_label": "Check compatibility",
+        "cta_url": "/pages/compatibility",
+        "cta2_label": "Open support center",
+        "cta2_url": "/pages/support"
       }
     }
   },

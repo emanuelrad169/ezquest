@@ -1,7 +1,7 @@
-<section class="section-shell home-confidence-section">
+<section class="section-shell pt-10 lg:pt-16 home-confidence-section">
   <div class="container-shell">
-    <div class="home-confidence-header">
-      <div class="home-confidence-header-copy">
+    <div class="home-confidence-header grid gap-8 lg:grid-cols-2 lg:items-end reveal-on-scroll">
+      <div class="home-confidence-header-copy max-w-3xl">
         {% if section.settings.eyebrow != blank %}
           <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
@@ -10,76 +10,76 @@
           <p class="section-copy mt-4">{{ section.settings.copy }}</p>
         {% endif %}
       </div>
-      <div class="home-confidence-header-note">
+      <div class="home-confidence-header-note max-w-sm text-sm leading-6 text-slate-500 lg:justify-self-end">
         <p>Keep shipping, warranty, manuals, and support visible so confidence comes from the product and the help behind it.</p>
       </div>
     </div>
 
-    <div class="home-confidence-grid">
-      <article class="home-confidence-card home-confidence-card--shipping">
+    <div class="home-confidence-grid mt-8 grid gap-4 lg:grid-cols-3 reveal-stagger">
+      <article class="home-confidence-card home-confidence-card--shipping card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
         <div class="home-confidence-card-copy">
           <h3 class="card-title">Fast shipping</h3>
-          <p class="type-body">Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
+          <p class="type-body mt-3">Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
         </div>
-        <div class="home-confidence-card-visual">
+        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
           {% render 'icon', name: 'truck' %}
         </div>
       </article>
 
-      <article class="home-confidence-card home-confidence-card--featured">
+      <article class="home-confidence-card home-confidence-card--featured card-base flex h-full flex-col justify-between gap-6 bg-gradient-to-b from-white to-slate-50 p-6 shadow-md lg:col-span-1 lg:row-span-2 lg:p-7">
         <div class="home-confidence-card-copy">
           <p class="type-caption home-confidence-card-eyebrow">Direct support</p>
           <h3 class="card-title">Support stays tied to what you bought.</h3>
-          <p class="type-body">Move from manuals and downloads into compatibility guidance and direct help without losing product context.</p>
-          <div class="home-confidence-card-links">
-            {% render 'button', label: 'Open support center', url: '/pages/support', style: 'secondary', size: 'sm', class: 'home-confidence-link' %}
-            {% render 'button', label: 'Check compatibility', url: '/pages/compatibility', style: 'secondary', size: 'sm', class: 'home-confidence-link home-confidence-link--subtle' %}
+          <p class="type-body mt-3">Move from manuals and downloads into compatibility guidance and direct help without losing product context.</p>
+          <div class="home-confidence-card-links mt-5 flex flex-wrap items-center gap-3">
+            {% render 'button', label: 'Open support center', url: '/pages/support', style: 'secondary', size: 'sm', class: 'home-confidence-link no-underline' %}
+            {% render 'button', label: 'Check compatibility', url: '/pages/compatibility', style: 'secondary', size: 'sm', class: 'home-confidence-link home-confidence-link--subtle bg-slate-50 text-slate-600 no-underline' %}
           </div>
         </div>
-        <div class="home-confidence-feature-visual">
+        <div class="home-confidence-feature-visual mt-auto overflow-hidden rounded-2xl border border-white/70 bg-white/75 p-3">
           {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', class: 'home-confidence-feature-image' %}
         </div>
       </article>
 
-      <article class="home-confidence-card home-confidence-card--returns">
+      <article class="home-confidence-card home-confidence-card--returns card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
         <div class="home-confidence-card-copy">
           <h3 class="card-title">Returns and warranty</h3>
-          <p class="type-body">Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
+          <p class="type-body mt-3">Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
         </div>
-        <div class="home-confidence-card-visual">
+        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
           {% render 'icon', name: 'shield' %}
         </div>
       </article>
 
-      <article class="home-confidence-card">
+      <article class="home-confidence-card card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
         <div class="home-confidence-card-copy">
           <h3 class="card-title">Secure payment</h3>
-          <p class="type-body">Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
+          <p class="type-body mt-3">Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
         </div>
-        <div class="home-confidence-card-visual">
+        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
           {% render 'icon', name: 'shield' %}
         </div>
       </article>
 
-      <article class="home-confidence-card">
+      <article class="home-confidence-card card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
         <div class="home-confidence-card-copy">
           <h3 class="card-title">Manuals and downloads</h3>
-          <p class="type-body">Setup guides, firmware, and downloads stay ready when you need product details or the latest file.</p>
+          <p class="type-body mt-3">Setup guides, firmware, and downloads stay ready when you need product details or the latest file.</p>
         </div>
-        <div class="home-confidence-card-visual">
+        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
           {% render 'icon', name: 'download' %}
         </div>
       </article>
 
     </div>
 
-    <div class="home-confidence-links-row">
+    <div class="home-confidence-links-row mt-8 flex flex-wrap items-center gap-3 border-t border-slate-200/80 pt-6">
       <span class="type-caption home-confidence-links-label">Quick access</span>
-      {% render 'button', label: 'Shipping & returns', url: '/pages/shipping-returns', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
-      {% render 'button', label: 'Warranty', url: '/pages/warranty', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
-      {% render 'button', label: 'Manuals', url: '/pages/manuals', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
-      {% render 'button', label: 'Downloads', url: '/pages/downloads', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
-      {% render 'button', label: 'Contact support', url: '/pages/contact', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link' %}
+      {% render 'button', label: 'Shipping & returns', url: '/pages/shipping-returns', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
+      {% render 'button', label: 'Warranty', url: '/pages/warranty', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
+      {% render 'button', label: 'Manuals', url: '/pages/manuals', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
+      {% render 'button', label: 'Downloads', url: '/pages/downloads', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
+      {% render 'button', label: 'Contact support', url: '/pages/contact', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
     </div>
   </div>
 </section>

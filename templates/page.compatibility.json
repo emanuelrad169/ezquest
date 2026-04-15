@@ -1,14 +1,17 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Compatibility",
+        "kicker": "Compatibility",
         "heading": "Check compatibility with confidence",
-        "copy": "Check platform, device, and workflow compatibility before you buy or install.",
-        "support_eyebrow": "Compatibility guidance",
-        "support_note": "Use compatibility to confirm the product, platform, and display setup before moving into manuals, downloads, or support."
+        "subheading": "Check platform, device, and workflow compatibility before you buy or install.",
+        "light_mode": true
       }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
     },
     "entries": {
       "type": "compatibility-entry-list",
@@ -64,22 +67,30 @@
           }
         }
       },
-      "block_order": ["support_1", "support_2", "support_3"]
+      "block_order": [
+        "support_1",
+        "support_2",
+        "support_3"
+      ]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need more help",
-        "heading": "Need help with one last compatibility detail?",
-        "copy": "Contact support when one product, device, or display detail still needs confirmation.",
-        "link_label": "Get help now",
-        "link_url": "/pages/contact",
-        "secondary_label": "Find manuals",
-        "secondary_url": "/pages/manuals",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Support",
+        "heading": "Need help confirming compatibility?",
+        "body": "Open support if you need a direct answer about a device, port, or workflow combination.",
+        "cta_label": "Contact support",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Help me choose",
+        "cta2_url": "/pages/help-me-choose"
       }
     }
   },
-  "order": ["hero", "entries", "support", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "entries",
+    "support",
+    "cta"
+  ]
 }

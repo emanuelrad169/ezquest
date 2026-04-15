@@ -3,10 +3,8 @@
     "main": {
       "type": "main-404",
       "settings": {
-        "heading": "This page went missing.",
-        "copy": "It may have moved or no longer exists. Here are some better places to start.",
-        "cta_primary": "Browse products",
-        "cta_secondary": "Compare products"
+        "heading": "This page isn't connected.",
+        "copy": "The link might have moved or the URL might be wrong. Here is where to go instead."
       }
     }
   },

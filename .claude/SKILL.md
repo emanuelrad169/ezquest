@@ -885,3 +885,188 @@ When asked to review Shopify code, you flag:
 ---
 
 *This skill was written for Claude Code. Place this file at `.claude/SKILL.md` in your Shopify theme root, or reference it in your `CLAUDE.md` file with `@.claude/SKILL.md`.*
+
+---
+
+## APPLE × UGREEN DESIGN SYSTEM (EZQuest Pattern)
+
+### Typography Scale (Fluid via clamp)
+```css
+:root {
+  --text-display:   clamp(3.5rem, 8vw, 7rem);
+  --text-headline:  clamp(2.25rem, 5vw, 4.5rem);
+  --text-subhead:   clamp(1.5rem, 3vw, 2.5rem);
+  --text-title:     clamp(1.125rem, 2vw, 1.5rem);
+  --text-body-xl:   clamp(1.0625rem, 1.5vw, 1.3125rem);
+
+  --leading-display:  1.02;
+  --leading-headline: 1.06;
+  --leading-title:    1.2;
+
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.03em;
+  --tracking-title:   -0.02em;
+}
+```
+
+**Rule: Font weights are ALWAYS 400 (body) or 500 (headings). NEVER 600/700/800.**
+- In CSS source: replace all `font-weight: 600|700|800|900` → `font-weight: 500`
+- In Tailwind CSS: replace all `@apply font-semibold|font-bold` → `@apply font-medium`
+- In Liquid templates: replace all `font-semibold` classes → `font-medium`
+
+### Section Background Rhythm
+Alternating dark → white → grey creates visual rhythm and breathing room:
+
+```css
+.section--white { background-color: #ffffff; }
+.section--grey  { background-color: #f5f5f7; }
+.section--dark  { background-color: #0a0a0a; color: #f5f5f7; }
+
+.section--dark .section-heading,
+.section--dark .type-heading,
+.section--dark .display-heading { color: #f5f5f7; }
+```
+
+Apply to section elements in Liquid: `<section class="section-shell section--grey">`.
+Replace legacy `surface-muted` class with `section--grey` for token consistency.
+
+### Reveal-on-Scroll Animation System
+```javascript
+// assets/reveal.js — IntersectionObserver pattern
+var observer = new IntersectionObserver(
+  function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { rootMargin: '0px 0px -80px 0px', threshold: 0.1 }
+);
+
+// observeAll() targets:
+// 1. .reveal-on-scroll — individual elements (headings, headers)
+// 2. .reveal-stagger > * — grid children (adds reveal-on-scroll to each child)
+// 3. .section-intro — auto-observed site-wide, no template changes needed
+```
+
+```css
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.reveal-on-scroll.is-revealed { opacity: 1; transform: translateY(0); }
+
+/* Stagger: apply to grid container */
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 400ms; }
+```
+
+Always guard with:
+- `prefers-reduced-motion: reduce` → instant reveal
+- IntersectionObserver unavailable → instant reveal (graceful degradation)
+
+### Cart Drawer: Shopify Sections API Pattern
+```javascript
+// Refresh drawer contents without page reload
+function refreshDrawerContents(callback) {
+  fetch('/cart?sections=cart-drawer-body,cart-drawer-footer')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var parser = new DOMParser();
+      // cart-drawer-body section
+      var bodyDoc = parser.parseFromString(data['cart-drawer-body'], 'text/html');
+      var newBody = bodyDoc.querySelector('.cart-drawer__body');
+      if (newBody) document.getElementById('cart-drawer-body').innerHTML = newBody.innerHTML;
+      // cart-drawer-footer section  
+      var footerDoc = parser.parseFromString(data['cart-drawer-footer'], 'text/html');
+      var newFooter = footerDoc.querySelector('.cart-drawer__footer');
+      if (newFooter) document.getElementById('cart-drawer-footer').innerHTML = newFooter.innerHTML;
+      if (callback) callback();
+    });
+}
+```
+
+Requires two registration sections (`sections/cart-drawer-body.liquid`, `sections/cart-drawer-footer.liquid`) whose schemas register section IDs. The sections wrap the snippet content with matching selector elements.
+
+### data-drawer Open/Close System
+Reuse existing drawer infrastructure rather than building new:
+```liquid
+{{! drawer element }}
+<div id="cart-drawer" data-drawer hidden role="dialog" aria-modal="true">
+  <div class="overlay" data-drawer-close></div>
+  <div class="panel" data-drawer-panel tabindex="-1">
+    <button data-drawer-close>Close</button>
+  </div>
+</div>
+```
+```javascript
+// Open/close via global functions from theme.js
+openDrawer(document.getElementById('cart-drawer'));
+closeDrawer(document.getElementById('cart-drawer'));
+// Or expose:
+window.openCartDrawer = function() { openDrawer(...); }
+window.refreshAndOpenCartDrawer = function() { refreshDrawerContents(openCartDrawer); }
+```
+
+### Build + QA Commands
+```bash
+npm run build          # Tailwind PostCSS compile: src/styles/theme.css → assets/theme.css --minify
+shopify theme check    # Lint all .liquid files for offenses (target: 0 offenses)
+```
+
+After any significant change, always run both. The theme check inspects section schemas, Liquid syntax, and asset references.
+
+### Button System (Pill Buttons)
+```css
+.btn, .button-primary, .button-secondary {
+  border-radius: 980px;   /* pill shape */
+  font-weight: 500;
+  min-height: 44px;       /* WCAG touch target */
+}
+.btn--amber { background-color: #F59E0B; color: #000000; }
+.btn--lg    { font-size: 1.0625rem; padding: 1rem 2rem; min-height: 52px; }
+```
+
+### CSS Tailwind @layer Components Pattern
+Override Tailwind defaults without specificity battles:
+```css
+@layer components {
+  .section-heading {
+    @apply text-3xl font-medium text-slate-950;
+    line-height: var(--leading-headline);
+  }
+  /* Rules inside @layer components are overrideable by outside-layer rules */
+}
+
+/* Outside @layer — higher specificity, overrides the @layer components rules */
+.section--dark .section-heading { color: #f5f5f7; }
+```
+
+### Cinematic Line-Clip Reveal Pattern
+```css
+.cinematic-reveal-line { overflow: hidden; line-height: 1.02; }
+.cinematic-reveal-line-inner {
+  display: block;
+  transform: translateY(105%);          /* hidden below clip */
+  transition: transform 0.72s ease;
+  transition-delay: calc(var(--line-index, 0) * 0.13s);
+}
+.cinematic-reveal-section.is-revealed .cinematic-reveal-line-inner {
+  transform: translateY(0);             /* reveal by sliding up */
+}
+```
+Liquid: `style="--line-index: {{ forloop.index0 }}"` on each line element.
+
+### Shopify Theme Check Zero-Offense Maintenance
+- Always use `{% schema %}` in every section file
+- Never use `{% liquid %}` blocks without closing `{%- endliquid -%}`
+- Snippet `{% render %}` calls — pass only declared parameters
+- Never access `request.design_mode` outside layout/theme.liquid
+- `shopify theme check` before every commit

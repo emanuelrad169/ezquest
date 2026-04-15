@@ -1,143 +1,65 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "About EZQuest",
+        "kicker": "About EZQuest",
         "heading": "Connectivity built for real setups.",
-        "copy": "We make hubs, docks, cables, and chargers for people who need their gear to simply work."
+        "subheading": "We make hubs, docks, cables, and chargers for people who need their gear to simply work.",
+        "cta_label": "Browse the lineup",
+        "cta_url": "/collections/all"
       }
     },
-    "about": {
-      "type": "about-content",
+    "brand_belief": {
+      "type": "homepage-cinematic-reveal",
       "settings": {
-        "story_eyebrow": "Our story",
-        "story_heading": "Built around how people actually work.",
-        "story_p1": "EZQuest designs connectivity products for people who rely on their setups every day — hubs, docks, cables, and chargers built to work without thought.",
-        "story_p2": "We focus on the gap between what modern laptops offer and what real workflows need. One cable in, a clean desk, everything connected. No drivers, no guesswork.",
-        "story_p3": "Every product is designed to disappear into the setup — present when you need it, invisible when you don't.",
-
-        "pillars_eyebrow": "What makes us different",
-
-        "philosophy_eyebrow": "Product philosophy",
-        "philosophy_heading": "Less friction. More flow.",
-        "philosophy_body": "We design for the moment where your laptop's port count stops matching your workflow. Portable hubs for the bag, docks for the desk, cables that hold up mid-meeting.",
-        "philosophy_body2": "Reliability means getting the specs right, testing real-world conditions, and documenting everything clearly so setup is never a guessing game.",
-
-        "support_eyebrow": "After the purchase",
-        "support_heading": "Support that stays close.",
-        "support_body": "Manuals, downloads, compatibility guides, and direct help are always one click away. We build the support layer into the product experience — not as an afterthought.",
-        "support_link_label": "Visit support center",
-        "support_link_url": "/pages/support",
-        "support_link2_label": "Browse products",
-        "support_link2_url": "/collections"
+        "kicker": "Our product philosophy.",
+        "headline": "Less friction.|More flow.",
+        "body_text": "We design for the moment where your laptop's port count stops matching your workflow. One cable in, a clean desk, everything connected.",
+        "cta_label": "Browse the lineup",
+        "cta_url": "/collections/all",
+        "aria_label": "Product philosophy"
+      }
+    },
+    "features": {
+      "type": "about-features",
+      "settings": {
+        "kicker": "What makes us different",
+        "heading": "Four things we care about above all else."
       },
       "blocks": {
-        "pillar_1": {
-          "type": "pillar",
-          "settings": {
-            "title": "Built for real setups",
-            "copy": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand."
-          }
-        },
-        "pillar_2": {
-          "type": "pillar",
-          "settings": {
-            "title": "Universal compatibility",
-            "copy": "Plug-and-play on Mac and Windows. No drivers, no configuration, no surprises."
-          }
-        },
-        "pillar_3": {
-          "type": "pillar",
-          "settings": {
-            "title": "Portable and permanent",
-            "copy": "A hub for the bag. A dock for the desk. Products designed for both ends of the workflow spectrum."
-          }
-        },
-        "pillar_4": {
-          "type": "pillar",
-          "settings": {
-            "title": "Support built in",
-            "copy": "Every product ships with clear documentation and connects to a full support system — not a FAQ dead end."
-          }
-        },
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "20+",
-            "label": "Years in business"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "100+",
-            "label": "Products designed"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "value": "Mac & Windows",
-            "label": "Universal compatibility"
-          }
-        },
-        "stat_4": {
-          "type": "stat",
-          "settings": {
-            "value": "2-Year",
-            "label": "Warranty on every product"
-          }
-        },
-        "sl_1": {
-          "type": "support_link",
-          "settings": {
-            "title": "Manuals & guides",
-            "desc": "Setup documentation for every product.",
-            "url": "/pages/manuals"
-          }
-        },
-        "sl_2": {
-          "type": "support_link",
-          "settings": {
-            "title": "Compatibility",
-            "desc": "Check device and system support before you buy.",
-            "url": "/pages/compatibility"
-          }
-        },
-        "sl_3": {
-          "type": "support_link",
-          "settings": {
-            "title": "Downloads",
-            "desc": "Drivers, firmware, and software when needed.",
-            "url": "/pages/downloads"
-          }
-        },
-        "sl_4": {
-          "type": "support_link",
-          "settings": {
-            "title": "Contact support",
-            "desc": "Reach the team directly for product-specific help.",
-            "url": "/pages/contact"
-          }
-        }
+        "f1": { "type": "feature", "settings": { "title": "Built for real setups", "body": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand." } },
+        "f2": { "type": "feature", "settings": { "title": "Universal compatibility", "body": "Plug-and-play on Mac and Windows. No drivers, no configuration, no surprises." } },
+        "f3": { "type": "feature", "settings": { "title": "Portable and permanent", "body": "A hub for the bag. A dock for the desk. Products designed for both ends of the workflow spectrum." } },
+        "f4": { "type": "feature", "settings": { "title": "Support built in", "body": "Every product ships with clear documentation and connects to a full support system — not a FAQ dead end." } }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3", "pillar_4", "stat_1", "stat_2", "stat_3", "stat_4", "sl_1", "sl_2", "sl_3", "sl_4"]
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "promise": {
+      "type": "about-promise",
+      "settings": {
+        "aria_label": "Brand proof points"
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "20+",    "label": "Years designing connectivity products" } },
+        "s2": { "type": "stat", "settings": { "value": "100%",   "label": "Mac & Windows compatible, no drivers" } },
+        "s3": { "type": "stat", "settings": { "value": "2-Year", "label": "Warranty on every product" } },
+        "s4": { "type": "stat", "settings": { "value": "Zero",   "label": "Driver installs required" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Ready to explore",
-        "heading": "Find the product built for your setup.",
-        "copy": "Browse the full lineup, compare models side by side, or start with support if you have a question first.",
-        "link_label": "Shop all products",
-        "link_url": "/collections",
-        "secondary_label": "Compare products",
-        "secondary_url": "/pages/compare",
-        "style": "dark",
-        "button_style": "primary"
+        "kicker": "After the purchase",
+        "heading": "Support that stays close.",
+        "body": "Manuals, downloads, compatibility guides, and direct help are always one click away.",
+        "cta_label": "Visit support center",
+        "cta_url": "/pages/support",
+        "cta2_label": "Browse products",
+        "cta2_url": "/collections/all"
       }
     }
   },
-  "order": ["hero", "about", "cta"]
+  "order": ["hero", "brand_belief", "features", "promise", "cta"]
 }

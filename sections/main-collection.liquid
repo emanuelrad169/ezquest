@@ -1,14 +1,19 @@
+{% comment %}
+  COLLECTION FILTERS
+  Filter sidebar is built and ready.
+  For filters to appear, configure filter groups in Shopify admin:
+  Online Store → Navigation → Search & discovery → Filters
+  Or: Online Store → Themes → Customize → Collections → Enable filtering
+  Without admin config, collection.filters.size = 0 and
+  the sidebar will not render (this is correct behavior).
+{% endcomment %}
 {% paginate collection.products by section.settings.products_per_page %}
   {%- liquid
         assign intro_copy = section.settings.intro_copy | default: collection.description
         assign category_label = section.settings.eyebrow | default: 'Product family'
         assign category_statement = 'Find the EZQuest family with the right ports, power, and footprint.'
-        assign category_stat_one = 'Cleaner setups'
-        assign category_stat_two = 'Display-ready'
-        assign category_stat_three = 'Support ready'
         assign collection_visual = blank
         assign lead_product = collection.products.first
-        assign lead_price = blank
         assign fallback_product_handles = blank
         assign fallback_visible_count = 0
         assign total_visible_products = collection.products_count
@@ -91,10 +96,6 @@
 
         if total_visible_products == 0
           assign total_visible_products = fallback_visible_count
-        endif
-
-        if lead_product != blank and lead_product.selected_or_first_available_variant != blank
-          assign lead_price = lead_product.selected_or_first_available_variant.price | money
         endif
 
         if lead_product != blank
@@ -212,9 +213,9 @@
         endif
       -%}
   <section class="section-shell pt-0">
-    <div class="collection-showcase-shell">
-      <header class="collection-showcase">
-        <div class="collection-showcase-media">
+    <div class="collection-showcase-shell relative">
+      <header class="collection-showcase relative min-h-96 overflow-hidden bg-slate-950">
+        <div class="collection-showcase-media absolute inset-0">
           {% if use_owned_collection_scene %}
             {% render 'owned-collection-visual',
               collection_handle: collection.handle,
@@ -239,10 +240,10 @@
             %}
           {% endif %}
         </div>
-        <div class="collection-showcase-scrim" aria-hidden="true"></div>
-        <div class="container-shell collection-showcase-inner">
+        <div class="collection-showcase-scrim absolute inset-0" aria-hidden="true"></div>
+        <div class="container-shell collection-showcase-inner relative z-10 flex h-full min-h-full flex-col justify-between pt-6 pb-16 lg:pt-8 lg:pb-24">
 
-          <nav class="collection-showcase-breadcrumb" aria-label="Breadcrumb">
+          <nav class="collection-showcase-breadcrumb flex items-center gap-2 text-xs font-medium text-white/45" aria-label="Breadcrumb">
             <a href="{{ routes.root_url }}">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6L6 1.5 11 6M2 5.5V10.5H4.5V7.5H7.5V10.5H10V5.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -252,11 +253,11 @@
             <span>{{ collection.title }}</span>
           </nav>
 
-          <div class="collection-showcase-copy">
+          <div class="collection-showcase-copy flex max-w-2xl flex-col gap-4">
             <p class="collection-showcase-label">{{ category_label }}</p>
             <h1 class="collection-showcase-heading">{{ section.settings.intro_heading | default: collection.title }}</h1>
             <p class="collection-showcase-statement">{{ category_statement }}</p>
-            <div class="collection-showcase-actions">
+            <div class="collection-showcase-actions flex flex-wrap items-center gap-3 pt-1.5">
               {% render 'button', label: 'Shop ' | append: collection.title, url: collection.url | append: '#collection-grid', style: 'primary', class: 'button-context-collection-hero collection-showcase-action' %}
               {% if lead_product != blank %}
                 <a href="{{ lead_product_url }}" class="site-meta-link">Start with {{ lead_product.title }}</a>
@@ -272,9 +273,9 @@
     <div class="container-shell">
       <div class="collection-merch-layer relative z-20 -mt-5 lg:-mt-8">
         <div class="collection-merch-bar">
-          <div class="collection-merch-bar-inner">
+          <div class="collection-merch-bar-inner flex flex-wrap items-start justify-between gap-4 px-3.5 py-2.5 lg:flex-nowrap lg:items-center">
 
-            <div class="collection-merch-bar-start">
+            <div class="collection-merch-bar-start flex-1 basis-full lg:basis-auto">
               <div class="collection-next-step-card">
                 <p class="collection-next-step-kicker">Next step</p>
                 <div class="collection-next-step-links">
@@ -301,7 +302,7 @@
               {% endfor %}
             </nav>
 
-            <div class="collection-merch-bar-end">
+            <div class="collection-merch-bar-end shrink-0">
               {% if section.settings.show_sort %}
                 <form method="get" class="collection-sort-form">
                   {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
@@ -312,7 +313,7 @@
                     {% endif %}
                   {% endfor %}
                   <div class="collection-sort-btn-wrap">
-                    <select id="CollectionSort" name="sort_by" class="collection-sort-select-native" aria-label="Sort by" onchange="this.form.submit()">
+                    <select id="CollectionSort" name="sort_by" class="collection-sort-select-native" aria-label="Sort by">
                       {% for option in collection.sort_options %}
                         <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
                       {% endfor %}
@@ -330,7 +331,156 @@
         </div>
       </div>
 
-      <div id="collection-grid" class="section-stack-lg collection-showroom-grid mt-8 grid gap-x-5 gap-y-8 md:grid-cols-2 md:gap-x-6 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7">
+      {%- liquid
+        assign active_count = 0
+        for filter in collection.filters
+          assign active_count = active_count | plus: filter.active_values.size
+        endfor
+      -%}
+
+      <div class="collection-layout mt-8 lg:mt-10">
+
+        {% if collection.filters.size > 0 %}
+          <aside class="collection-filters" id="collection-filters" aria-label="Product filters">
+
+            <div class="collection-filters__header">
+              <h2 class="collection-filters__title">Filter</h2>
+              {% if active_count > 0 %}
+                <a href="{{ collection.url }}" class="collection-filters__clear">
+                  Clear all ({{ active_count }})
+                </a>
+              {% endif %}
+            </div>
+
+            <form id="collection-filter-form" action="{{ collection.url }}" method="get">
+              {% if collection.sort_by != blank %}
+                <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
+              {% endif %}
+
+              {% for filter in collection.filters %}
+                <details class="collection-filter-group" {% if filter.active_values.size > 0 or forloop.first %}open{% endif %}>
+                  <summary class="collection-filter-group__header">
+                    <span class="collection-filter-group__name">{{ filter.label }}</span>
+                    {% if filter.active_values.size > 0 %}
+                      <span class="collection-filter-group__count" aria-label="{{ filter.active_values.size }} active">{{ filter.active_values.size }}</span>
+                    {% endif %}
+                    <svg class="collection-filter-group__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </summary>
+
+                  <div class="collection-filter-group__body">
+                    {% case filter.type %}
+                      {% when 'boolean', 'list' %}
+                        <ul class="collection-filter-options" role="list">
+                          {% for value in filter.values %}
+                            <li class="collection-filter-option">
+                              <label class="collection-filter-option__label{% if value.active %} is-active{% endif %}{% if value.count == 0 and value.active == false %} is-disabled{% endif %}">
+                                <input
+                                  type="checkbox"
+                                  name="{{ value.param_name }}"
+                                  value="{{ value.value }}"
+                                  {% if value.active %}checked{% endif %}
+                                  {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                                  class="collection-filter-option__input"
+                                >
+                                <span class="collection-filter-option__text">{{ value.label }}</span>
+                                <span class="collection-filter-option__count">{{ value.count }}</span>
+                              </label>
+                            </li>
+                          {% endfor %}
+                        </ul>
+
+                      {% when 'price_range' %}
+                        <div class="collection-filter-price">
+                          <div class="collection-filter-price__inputs">
+                            <div class="collection-filter-price__field">
+                              <label for="filter-price-min" class="collection-filter-price__label">Min</label>
+                              <div class="collection-filter-price__input-wrap">
+                                <span class="collection-filter-price__symbol">$</span>
+                                <input
+                                  type="number"
+                                  id="filter-price-min"
+                                  name="{{ filter.min_value.param_name }}"
+                                  value="{{ filter.min_value.value | divided_by: 100 | default: '' }}"
+                                  min="0"
+                                  max="{{ filter.range_max | divided_by: 100 }}"
+                                  placeholder="0"
+                                  class="collection-filter-price__input"
+                                >
+                              </div>
+                            </div>
+                            <span class="collection-filter-price__separator">—</span>
+                            <div class="collection-filter-price__field">
+                              <label for="filter-price-max" class="collection-filter-price__label">Max</label>
+                              <div class="collection-filter-price__input-wrap">
+                                <span class="collection-filter-price__symbol">$</span>
+                                <input
+                                  type="number"
+                                  id="filter-price-max"
+                                  name="{{ filter.max_value.param_name }}"
+                                  value="{{ filter.max_value.value | divided_by: 100 | default: '' }}"
+                                  min="0"
+                                  max="{{ filter.range_max | divided_by: 100 }}"
+                                  placeholder="{{ filter.range_max | divided_by: 100 }}"
+                                  class="collection-filter-price__input"
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn--secondary btn--sm">Apply</button>
+                        </div>
+
+                    {% endcase %}
+                  </div>
+                </details>
+              {% endfor %}
+            </form>
+
+          </aside>
+        {% endif %}
+
+        <div class="collection-main">
+
+          {% if collection.filters.size > 0 %}
+            <div class="collection-filter-toolbar">
+              <div class="collection-filter-toolbar__left">
+                <button
+                  class="collection-filter-toggle"
+                  id="collection-filter-toggle"
+                  aria-expanded="false"
+                  aria-controls="collection-filters"
+                  type="button"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  Filters
+                  {% if active_count > 0 %}
+                    <span class="collection-filter-toggle__badge">{{ active_count }}</span>
+                  {% endif %}
+                </button>
+                <p class="collection-filter-toolbar__count">
+                  {{ collection.products_count }}
+                  {{ collection.products_count | pluralize: 'product', 'products' }}
+                </p>
+              </div>
+              <div class="collection-filter-toolbar__right">
+                {% for filter in collection.filters %}
+                  {% for value in filter.active_values %}
+                    <a href="{{ value.url_to_remove }}" class="collection-active-filter" aria-label="Remove filter: {{ value.label | escape }}">
+                      {{ value.label }}
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                        <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                    </a>
+                  {% endfor %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          <div id="collection-grid" class="collection-showroom-grid grid gap-x-5 gap-y-8 md:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7 reveal-stagger" aria-busy="false">
         {% assign promo_inserted = false %}
         {% for product in collection.products %}
           {% assign showroom_slot_mod = forloop.index | modulo: 6 %}
@@ -372,7 +522,7 @@
           {% else %}
             <div class="panel-primary md:col-span-2 xl:col-span-4">
               <p class="section-kicker">Collection</p>
-              <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-950">This collection is being refined.</h2>
+              <h2 class="mt-4 text-2xl font-medium tracking-tight text-slate-950">This collection is being refined.</h2>
               <p class="mt-3 text-sm leading-7 text-slate-600">View all families, compare the lineup, or get product guidance.</p>
               <div class="mt-6 flex flex-wrap items-center gap-3">
                 <a href="{{ routes.collections_url }}" class="button-secondary">View all families</a>
@@ -404,7 +554,146 @@
           {% endif %}
         </nav>
       {% endif %}
-    </div>
+
+        </div>{% comment %} /collection-main {% endcomment %}
+      </div>{% comment %} /collection-layout {% endcomment %}
+    </div>{% comment %} /container-shell {% endcomment %}
+
+    <script>
+    (function() {
+      'use strict';
+
+      /* ── Mobile sidebar toggle ── */
+      var toggle = document.getElementById('collection-filter-toggle');
+      var sidebar = document.getElementById('collection-filters');
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+          var isOpen = sidebar.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', isOpen.toString());
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+      }
+
+      /* ── AJAX filter / sort ── */
+      var filterForm = document.getElementById('collection-filter-form');
+      var collectionGrid = document.getElementById('collection-grid');
+      if (!filterForm || !collectionGrid) return;
+
+      var currentRequest = null;
+
+      function showSkeleton() {
+        Array.from(collectionGrid.children).forEach(function(item) {
+          item.style.opacity = '0.4';
+          item.style.pointerEvents = 'none';
+        });
+        collectionGrid.setAttribute('aria-busy', 'true');
+      }
+
+      function hideSkeleton() {
+        Array.from(collectionGrid.children).forEach(function(item) {
+          item.style.opacity = '';
+          item.style.pointerEvents = '';
+        });
+        collectionGrid.setAttribute('aria-busy', 'false');
+      }
+
+      function buildUrl() {
+        var formData = new FormData(filterForm);
+        var params = new URLSearchParams(formData);
+        var sortSelect = document.getElementById('CollectionSort');
+        if (sortSelect && sortSelect.value) params.set('sort_by', sortSelect.value);
+        var toDelete = [];
+        params.forEach(function(v, k) { if (!v) toDelete.push(k); });
+        toDelete.forEach(function(k) { params.delete(k); });
+        return window.location.pathname + '?' + params.toString();
+      }
+
+      function fetchFilteredProducts(url) {
+        if (currentRequest) currentRequest.abort();
+        showSkeleton();
+        var controller = new AbortController();
+        currentRequest = controller;
+
+        fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'sections=main', {
+          signal: controller.signal
+        })
+        .then(function(response) {
+          if (!response.ok) throw new Error('filter-fetch-failed');
+          return response.json();
+        })
+        .then(function(data) {
+          if (data['main']) {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(data['main'], 'text/html');
+            var newGrid = doc.getElementById('collection-grid');
+            if (newGrid) {
+              collectionGrid.innerHTML = newGrid.innerHTML;
+              collectionGrid.className = newGrid.className;
+            }
+            if (window.EZReveal) {
+              collectionGrid.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
+                window.EZReveal.observe(el);
+              });
+            }
+          } else {
+            window.location.href = url;
+          }
+        })
+        .catch(function(err) {
+          if (err.name === 'AbortError') return;
+          window.location.href = url;
+        })
+        .finally(function() {
+          hideSkeleton();
+          currentRequest = null;
+        });
+
+        history.pushState({}, '', url);
+        var gridTop = collectionGrid.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: gridTop, behavior: 'smooth' });
+      }
+
+      filterForm.addEventListener('change', function(e) {
+        if (e.target.type === 'checkbox') fetchFilteredProducts(buildUrl());
+      });
+
+      var priceApplyBtns = filterForm.querySelectorAll('.collection-filter-price__apply');
+      priceApplyBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          fetchFilteredProducts(buildUrl());
+        });
+      });
+
+      var sortSelect = document.getElementById('CollectionSort');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+          fetchFilteredProducts(buildUrl());
+        });
+      }
+
+      document.addEventListener('click', function(e) {
+        var pill = e.target.closest('.collection-active-filter');
+        if (!pill) return;
+        e.preventDefault();
+        var href = pill.getAttribute('href');
+        if (href) fetchFilteredProducts(href);
+      });
+
+      document.addEventListener('click', function(e) {
+        var clearLink = e.target.closest('.collection-filters__clear');
+        if (!clearLink) return;
+        e.preventDefault();
+        var href = clearLink.getAttribute('href');
+        if (href) fetchFilteredProducts(href);
+      });
+
+      window.addEventListener('popstate', function() {
+        fetchFilteredProducts(window.location.href);
+      });
+
+    })();
+    </script>
 
     {%- liquid
       assign banner_eyebrow = section.settings.banner_eyebrow | default: collection.title
@@ -412,7 +701,7 @@
       assign banner_copy = section.settings.banner_copy | default: collection.description
     -%}
     <div class="collection-editorial-banner-shell" data-ceb-root>
-      <div class="collection-editorial-banner" data-ceb-banner>
+      <div class="collection-editorial-banner{% if section.settings.banner_image == blank %} collection-editorial-banner--no-image{% endif %}" data-ceb-banner>
         <div class="collection-editorial-banner-media" data-ceb-media>
           {% if section.settings.banner_image != blank %}
             {{ section.settings.banner_image | image_url: width: 2800 | image_tag: loading: 'lazy', fetchpriority: 'low', class: 'collection-editorial-banner-img' }}

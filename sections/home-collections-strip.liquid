@@ -1,11 +1,11 @@
-<section class="section-shell home-collections-strip-section">
+<section class="section-shell section--grey home-collections-strip-section">
   <div class="container-shell">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Collections'
       assign section_copy = section.settings.copy
     -%}
 
-    <div class="home-collections-strip-header flex flex-col gap-4">
+    <div class="home-collections-strip-header flex flex-col gap-4 reveal-on-scroll">
       <div class="home-collections-strip-header-copy min-w-0">
         <p class="section-kicker">Product families</p>
         <div class="home-collections-strip-heading-row flex items-center gap-5 mt-3">
@@ -22,7 +22,7 @@
       <a href="{{ routes.collections_url }}" class="site-meta-link shrink-0 lg:mt-1">View all categories</a>
     </div>
 
-    <div class="home-collections-strip-grid">
+    <div class="home-collections-strip-grid reveal-stagger">
       {% for block in section.blocks %}
         {%- liquid
           assign collection_object = block.settings.collection

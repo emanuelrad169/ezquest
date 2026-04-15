@@ -1,0 +1,45 @@
+<section class="about-promise-section" aria-label="{{ section.settings.aria_label | default: 'Brand proof points' | escape }}">
+  <div class="container-shell">
+    {% if section.blocks.size > 0 %}
+      <div class="about-promise-strip reveal-stagger" role="list">
+        {% for block in section.blocks %}
+          <div class="about-promise-stat" role="listitem" {{ block.shopify_attributes }}>
+            <span class="about-promise-value">{{ block.settings.value | escape }}</span>
+            <span class="about-promise-label">{{ block.settings.label | escape }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About promise",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Section aria-label", "default": "Brand proof points" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "20+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Years in business" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "About promise",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "20+",    "label": "Years designing connectivity products" } },
+        { "type": "stat", "settings": { "value": "100%",   "label": "Mac & Windows compatible, no drivers" } },
+        { "type": "stat", "settings": { "value": "2-Year", "label": "Warranty on every product" } },
+        { "type": "stat", "settings": { "value": "Zero",   "label": "Driver installs required" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

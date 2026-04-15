@@ -7,10 +7,16 @@
   if show_promo_note == false
     assign show_price_promo_note = false
   endif
+
+  assign savings_amount = compare_at_price | minus: current_price
+  assign savings_percent = 0
+  if compare_at_price > 0 and savings_amount > 0
+    assign savings_percent = savings_amount | times: 100.0 | divided_by: compare_at_price | round
+  endif
 -%}
 <div class="price-block space-y-1">
   <div class="flex flex-wrap items-end gap-3">
-    <span class="price-amount text-3xl font-semibold tracking-heading text-slate-950" data-price-amount>
+    <span class="price-amount text-3xl font-medium tracking-heading text-slate-950" data-price-amount>
       {{ current_price | money }}
     </span>
     {% if compare_at_price > current_price %}
@@ -18,14 +24,14 @@
         {{ compare_at_price | money }}
       </span>
       {% if show_price_promo_note %}
-        <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700" data-price-promo>
-          Save {{ compare_at_price | minus: current_price | money }}
+        <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-700" data-price-promo>
+          Save {{ savings_amount | money }}{% if savings_percent > 0 %} ({{ savings_percent }}%){% endif %}
         </span>
       {% endif %}
     {% else %}
       <span class="hidden text-base font-medium text-slate-400 line-through" data-price-compare></span>
       {% if show_price_promo_note %}
-        <span class="hidden rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700" data-price-promo></span>
+        <span class="hidden rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-700" data-price-promo></span>
       {% endif %}
     {% endif %}
   </div>

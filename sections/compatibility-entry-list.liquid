@@ -1,4 +1,4 @@
-<section class="section-shell surface-muted">
+<section class="section-shell section--grey">
   <div class="container-shell">
     {%- liquid
       assign current_product = blank
@@ -235,7 +235,7 @@
             <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <p class="section-kicker">Narrow faster</p>
-                <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-950">Choose the setup you are checking</h3>
+                <h3 class="mt-3 text-xl font-medium tracking-tight text-slate-950">Choose the setup you are checking</h3>
               </div>
               <button type="button" class="site-meta-link" data-compatibility-reset>Clear filters</button>
             </div>
@@ -386,7 +386,7 @@
                       <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
                     {% endif %}
                   </div>
-                  <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
+                  <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">{{ entry.title.value }}</h3>
                   {% if entry_summary != blank %}
                     <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
                   {% endif %}
@@ -409,7 +409,7 @@
             {% if rendered_entries == 0 %}
               <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
                 <p class="section-kicker">Compatibility</p>
-                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+                <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
                 <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current product, collection, or filter set.</p>
                 <div class="support-next-step-list mt-6">
                   <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
@@ -554,7 +554,7 @@
                       <span class="text-xs uppercase tracking-wide text-slate-400">{{ entry_context }}</span>
                     {% endif %}
                   </div>
-                  <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ entry.title.value }}</h3>
+                  <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">{{ entry.title.value }}</h3>
                   {% if entry_summary != blank %}
                     <p class="mt-3 text-sm leading-6 text-slate-600">{{ entry_summary }}</p>
                   {% endif %}
@@ -577,7 +577,7 @@
             {% if rendered_entries == 0 %}
               <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
                 <p class="section-kicker">Compatibility</p>
-                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
+                <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No matching compatibility guidance yet</h3>
                 <p class="mt-3 text-sm leading-6 text-slate-600">Compatibility entries will appear here when they are linked to the current collection, product, or filter set.</p>
                 <div class="support-next-step-list mt-6">
                   <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
@@ -594,7 +594,7 @@
                 {% else %}
                   <p class="section-kicker">Compatibility entry</p>
                 {% endif %}
-                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">{{ block.settings.title }}</h3>
+                <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">{{ block.settings.title }}</h3>
                 {% if block.settings.copy != blank %}
                   <p class="mt-3 text-sm leading-6 text-slate-600">{{ block.settings.copy }}</p>
                 {% endif %}
@@ -608,7 +608,7 @@
             {% else %}
               <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2">
                 <p class="section-kicker">Compatibility</p>
-                <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No compatibility guidance available yet</h3>
+                <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No compatibility guidance available yet</h3>
                 <p class="mt-3 text-sm leading-6 text-slate-600">Add compatibility entries in Shopify to replace this empty state.</p>
                 <div class="support-next-step-list mt-6">
                   <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>
@@ -621,7 +621,7 @@
 
           <article class="compatibility-card{% if support_page_context %} compatibility-card--support{% endif %} structured-empty-state lg:col-span-2" data-compatibility-empty hidden>
             <p class="section-kicker">Compatibility</p>
-            <h3 class="mt-4 text-xl font-semibold tracking-tight text-slate-900">No matches for this filter set</h3>
+            <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No matches for this filter set</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Clear one filter or move into direct help if you are checking a more specific setup.</p>
             <div class="support-next-step-list mt-6">
               <a href="/pages/manuals" class="support-inline-link" data-compatibility-context-link>Find manuals</a>

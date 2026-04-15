@@ -1,0 +1,57 @@
+<section class="about-features-section section-shell" aria-labelledby="about-features-heading">
+  <div class="container-shell">
+
+    {% if section.settings.kicker != blank %}
+      <p class="section-kicker about-features-kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="about-features-heading" id="about-features-heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="about-features-grid reveal-stagger" role="list">
+        {% for block in section.blocks %}
+          <div class="about-feature-card" role="listitem" {{ block.shopify_attributes }}>
+            <p class="about-feature-number" aria-hidden="true">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</p>
+            <h3 class="about-feature-title">{{ block.settings.title | escape }}</h3>
+            <p class="about-feature-body">{{ block.settings.body | escape }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About features",
+  "settings": [
+    { "type": "text", "id": "kicker",  "label": "Kicker",  "default": "What makes us different" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four things we care about above all else." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text",     "id": "title", "label": "Title", "default": "Built for real setups" },
+        { "type": "textarea", "id": "body",  "label": "Body",  "default": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "About features",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Built for real setups", "body": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand." } },
+        { "type": "feature", "settings": { "title": "Universal compatibility", "body": "Plug-and-play on Mac and Windows. No drivers, no configuration, no surprises." } },
+        { "type": "feature", "settings": { "title": "Portable and permanent", "body": "A hub for the bag. A dock for the desk. Products designed for both ends of the workflow spectrum." } },
+        { "type": "feature", "settings": { "title": "Support built in", "body": "Every product ships with clear documentation and connects to a full support system — not a FAQ dead end." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

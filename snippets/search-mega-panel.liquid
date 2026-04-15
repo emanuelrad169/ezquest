@@ -18,7 +18,7 @@
             <h2 class="type-heading text-heading-lg">Search products or support</h2>
           </div>
 
-          <form action="{{ routes.search_url }}" method="get" class="search-mega-form flex min-h-panel flex-1 items-center gap-4 rounded-panel-sm border border-slate-200/90 bg-slate-50/70 px-5" role="search">
+          <form action="{{ routes.search_url }}" method="get" class="search-mega-form grid min-h-14 flex-1 items-center gap-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 px-4" role="search">
             <label class="sr-only" for="site-header-search-input">Search EZQuest</label>
             <span class="search-mega-form-icon inline-flex h-10 w-10 items-center justify-center text-slate-700">{% render 'icon', name: 'search' %}</span>
             <input
@@ -45,25 +45,25 @@
 
       <div class="grid gap-5 border-t border-slate-200/70 pt-5 xl:grid-cols-12 xl:gap-6 xl:pt-6">
         <aside class="grid content-start gap-4 xl:col-span-4 2xl:col-span-3">
-          <div class="search-mega-block card-soft p-4">
+          <div class="search-mega-block card-soft grid gap-2.5 p-4">
             <div class="space-y-2">
               <p class="search-mega-label">Suggested searches</p>
             </div>
-            <div class="search-mega-chip-list">
-              <a href="{{ routes.search_url }}?q=pro+dock" class="search-mega-chip">Pro dock</a>
-              <a href="{{ routes.search_url }}?q=usb-c+hub" class="search-mega-chip">USB-C hub</a>
-              <a href="{{ routes.search_url }}?q=compatibility" class="search-mega-chip">Compatibility</a>
-              <a href="{{ routes.search_url }}?q=manual" class="search-mega-chip">Manuals</a>
+            <div class="search-mega-chip-list flex flex-wrap gap-2">
+              <a href="{{ routes.search_url }}?q=pro+dock" class="search-mega-chip inline-flex min-h-8 items-center rounded-full border border-slate-200/90 bg-slate-50/70 px-3 text-xs font-medium text-slate-700 no-underline transition duration-200 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:text-slate-950">Pro dock</a>
+              <a href="{{ routes.search_url }}?q=usb-c+hub" class="search-mega-chip inline-flex min-h-8 items-center rounded-full border border-slate-200/90 bg-slate-50/70 px-3 text-xs font-medium text-slate-700 no-underline transition duration-200 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:text-slate-950">USB-C hub</a>
+              <a href="{{ routes.search_url }}?q=compatibility" class="search-mega-chip inline-flex min-h-8 items-center rounded-full border border-slate-200/90 bg-slate-50/70 px-3 text-xs font-medium text-slate-700 no-underline transition duration-200 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:text-slate-950">Compatibility</a>
+              <a href="{{ routes.search_url }}?q=manual" class="search-mega-chip inline-flex min-h-8 items-center rounded-full border border-slate-200/90 bg-slate-50/70 px-3 text-xs font-medium text-slate-700 no-underline transition duration-200 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:text-slate-950">Manuals</a>
             </div>
           </div>
 
-          <div class="search-mega-block card-soft p-4">
+          <div class="search-mega-block card-soft grid gap-2.5 p-4">
             <div class="space-y-2">
               <p class="search-mega-label">Quick links</p>
             </div>
-            <div class="search-mega-link-stack">
-              <a href="/pages/compatibility">Check compatibility</a>
-              <a href="/pages/support">Open support center</a>
+            <div class="search-mega-link-stack grid gap-2">
+              <a href="/pages/compatibility" class="text-sm font-medium text-slate-900 no-underline transition duration-200 hover:text-blue-600">Check compatibility</a>
+              <a href="/pages/support" class="text-sm font-medium text-slate-900 no-underline transition duration-200 hover:text-blue-600">Open support center</a>
             </div>
           </div>
         </aside>
@@ -71,28 +71,43 @@
         <div class="grid gap-4 xl:col-span-8 2xl:col-span-9">
           <div class="space-y-2">
             <p class="search-mega-label">Suggested products</p>
-            <h2 class="text-heading-base font-semibold tracking-title text-slate-950">Quick starts</h2>
+            <h2 class="text-heading-base font-medium tracking-title text-slate-950">Quick starts</h2>
           </div>
 
-          <div class="grid gap-4 xl:grid-cols-2">
-            {% if hub_product != blank %}
-              {% render 'mega-menu-stage-card',
-                product: hub_product,
-                media_context: 'search',
-                eyebrow: 'Popular',
-                show_descriptor: false,
-                card_class: 'search-mega-stage-card'
-              %}
-            {% endif %}
-            {% if dock_product != blank %}
-              {% render 'mega-menu-stage-card',
-                product: dock_product,
-                media_context: 'search',
-                eyebrow: 'Desk',
-                show_descriptor: false,
-                card_class: 'search-mega-stage-card'
-              %}
-            {% endif %}
+          <div class="search-mega-results" aria-live="polite" aria-busy="false" data-search-results>
+            <div class="search-mega-products grid gap-4 xl:grid-cols-2" data-search-products>
+              {% if hub_product != blank %}
+                {% render 'mega-menu-stage-card',
+                  product: hub_product,
+                  media_context: 'search',
+                  eyebrow: 'Popular',
+                  show_descriptor: true,
+                  card_class: 'search-mega-stage-card'
+                %}
+              {% endif %}
+              {% if dock_product != blank %}
+                {% render 'mega-menu-stage-card',
+                  product: dock_product,
+                  media_context: 'search',
+                  eyebrow: 'Desk',
+                  show_descriptor: true,
+                  card_class: 'search-mega-stage-card'
+                %}
+              {% endif %}
+            </div>
+
+            <div class="search-mega-skeleton grid gap-4 xl:grid-cols-2" aria-hidden="true" hidden data-search-skeleton>
+              {% for i in (1..2) %}
+                <div class="search-skeleton-card card-base overflow-hidden">
+                  <div class="search-skeleton-media"></div>
+                  <div class="search-skeleton-body">
+                    <div class="search-skeleton-line"></div>
+                    <div class="search-skeleton-line search-skeleton-line--short"></div>
+                    <div class="search-skeleton-line search-skeleton-line--price"></div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>

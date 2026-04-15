@@ -1,6 +1,18 @@
 {
   "sections": {
-    "main": { "type": "main-search", "settings": {} }
+    "main": { "type": "main-search", "settings": {} },
+    "cta": {
+      "type": "support-cta-rail",
+      "settings": {
+        "kicker": "Support",
+        "heading": "Can't find what you need?",
+        "body": "Browse by product family, use compatibility check, or open support for direct help.",
+        "cta_label": "Browse products",
+        "cta_url": "/collections/all",
+        "cta2_label": "Contact support",
+        "cta2_url": "/pages/contact"
+      }
+    }
   },
-  "order": ["main"]
+  "order": ["main", "cta"]
 }

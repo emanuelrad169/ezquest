@@ -1,11 +1,11 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Resources",
+        "kicker": "Resources",
         "heading": "Product guidance, compatibility help, and downloads",
-        "copy": "Use guides, compatibility help, manuals, and downloads to get more from your EZQuest product."
+        "subheading": "Use guides, compatibility help, manuals, and downloads to get more from your EZQuest product."
       }
     },
     "categories": {
@@ -123,17 +123,15 @@
       "block_order": ["act_compare", "act_compat", "act_shop", "act_support"]
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Still have a question?",
+        "kicker": "Still have a question",
         "heading": "Our support team is one click away.",
-        "copy": "If a guide didn't answer your question, reach us directly and we'll help you find the right answer.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact",
-        "secondary_label": "Visit support hub",
-        "secondary_url": "/pages/support",
-        "style": "light",
-        "button_style": "secondary"
+        "body": "If a guide didn't answer your question, reach us directly and we'll help you find the right answer.",
+        "cta_label": "Contact support",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Visit support hub",
+        "cta2_url": "/pages/support"
       }
     }
   },

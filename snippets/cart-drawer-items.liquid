@@ -1,0 +1,76 @@
+{% comment %} snippets/cart-drawer-items.liquid {% endcomment %}
+<ul class="cart-drawer__items" role="list" aria-label="Cart items">
+  {% for item in cart.items %}
+    <li class="cart-drawer-item" data-key="{{ item.key }}">
+
+      <a href="{{ item.url }}" class="cart-drawer-item__image-link" tabindex="-1" aria-hidden="true">
+        {% if item.image %}
+          <img
+            src="{{ item.image | image_url: width: 120 }}"
+            alt="{{ item.image.alt | escape }}"
+            width="80"
+            height="80"
+            class="cart-drawer-item__image"
+            loading="lazy"
+          >
+        {% endif %}
+      </a>
+
+      <div class="cart-drawer-item__details">
+        <a href="{{ item.url }}" class="cart-drawer-item__name">
+          {{ item.product.title }}
+        </a>
+
+        {% unless item.product.has_only_default_variant %}
+          <p class="cart-drawer-item__variant">{{ item.variant.title }}</p>
+        {% endunless %}
+
+        <div class="cart-drawer-item__bottom">
+          <div class="cart-drawer-item__qty-wrap">
+            <button
+              class="cart-drawer-item__qty-btn"
+              data-cart-action="decrease"
+              data-key="{{ item.key }}"
+              aria-label="Decrease quantity of {{ item.product.title | escape }}"
+              type="button"
+              {% if item.quantity <= 1 %}disabled{% endif %}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <span class="cart-drawer-item__qty" aria-live="polite" data-cart-qty="{{ item.key }}">
+              {{ item.quantity }}
+            </span>
+
+            <button
+              class="cart-drawer-item__qty-btn"
+              data-cart-action="increase"
+              data-key="{{ item.key }}"
+              aria-label="Increase quantity of {{ item.product.title | escape }}"
+              type="button"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <p class="cart-drawer-item__price">{{ item.final_line_price | money }}</p>
+        </div>
+
+        <button
+          class="cart-drawer-item__remove"
+          data-cart-action="remove"
+          data-key="{{ item.key }}"
+          aria-label="Remove {{ item.product.title | escape }} from cart"
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+
+    </li>
+  {% endfor %}
+</ul>

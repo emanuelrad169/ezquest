@@ -1,16 +1,17 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Warranty",
+        "kicker": "Warranty",
         "heading": "Warranty guidance that keeps the next step clear",
-        "copy": "Review coverage, claim expectations, and the steps customers should take before service begins.",
-        "support_eyebrow": "Coverage guidance",
-        "support_note": "See what is covered, what information to prepare, and when support should be contacted before a claim moves forward.",
-        "link_label": "Contact support",
-        "link_url": "/pages/contact"
+        "subheading": "Review coverage, claim expectations, and the steps customers should take before service begins.",
+        "light_mode": true
       }
+    },
+    "nav_rail": {
+      "type": "support-nav-rail",
+      "settings": {}
     },
     "details": {
       "type": "info-card-grid",
@@ -48,7 +49,11 @@
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3"]
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
     },
     "main": {
       "type": "main-page",
@@ -63,19 +68,23 @@
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Need troubleshooting first",
-        "heading": "Some warranty questions resolve through support first",
-        "copy": "Some warranty questions are resolved faster through troubleshooting, compatibility review, or direct support.",
-        "link_label": "Open troubleshooting",
-        "link_url": "/pages/troubleshooting",
-        "secondary_label": "Open FAQ",
-        "secondary_url": "/pages/faq",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Support",
+        "heading": "Have a warranty question?",
+        "body": "Some warranty questions are resolved faster through troubleshooting or direct support.",
+        "cta_label": "Open troubleshooting",
+        "cta_url": "/pages/troubleshooting",
+        "cta2_label": "Contact support",
+        "cta2_url": "/pages/contact"
       }
     }
   },
-  "order": ["hero", "details", "main", "cta"]
+  "order": [
+    "hero",
+    "nav_rail",
+    "details",
+    "main",
+    "cta"
+  ]
 }

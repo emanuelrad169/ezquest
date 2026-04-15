@@ -64,9 +64,9 @@
   assign compare_support_url = compare_support_url | append: compare_query
 -%}
 
-<article class="compare-choice-card card-base card-interactive{% if is_recommended %} is-recommended{% endif %}">
-  <div class="compare-choice-card-top">
-    <div class="compare-choice-card-flags">
+<article class="compare-choice-card card-base card-interactive flex min-h-full flex-col p-6{% if is_recommended %} is-recommended{% endif %}">
+  <div class="compare-choice-card-top grid gap-2.5">
+    <div class="compare-choice-card-flags flex flex-wrap gap-2">
       {% if is_recommended %}
         <span class="compare-choice-badge compare-choice-badge--recommended">Recommended</span>
       {% endif %}
@@ -79,7 +79,7 @@
     {% endif %}
   </div>
 
-  <div class="compare-choice-media-wrap">
+  <div class="compare-choice-media-wrap mt-4 flex min-h-52 items-center justify-center rounded-2xl border border-slate-100 bg-gradient-to-b from-white to-slate-50 p-4">
     {% if compare_product != blank %}
       {% render 'product-browse-media',
         product: compare_product,
@@ -92,11 +92,11 @@
     {% endif %}
   </div>
 
-  <div class="compare-choice-body">
+  <div class="compare-choice-body mt-4 grid gap-3">
     <h2 class="card-title compare-choice-title">{{ compare_title }}</h2>
 
     {% if compare_price != blank %}
-      <div class="compare-choice-price-row">
+      <div class="compare-choice-price-row flex items-baseline gap-2">
         <span class="compare-choice-price">{{ compare_price }}</span>
         {% if compare_compare_at_price > compare_product.price %}
           <span class="compare-choice-compare-price">{{ compare_compare_at_price | money }}</span>
@@ -120,14 +120,14 @@
     </p>
   </div>
 
-  <div class="compare-choice-actions">
+  <div class="compare-choice-actions mt-auto grid gap-3 pt-4">
     {% if compare_product != blank %}
       {% if is_recommended %}
         {% render 'button', label: 'Choose this setup', url: compare_pdp_url, style: 'primary' %}
       {% else %}
         {% render 'button', label: 'View details', url: compare_pdp_url, style: 'secondary' %}
       {% endif %}
-      <div class="compare-choice-links">
+      <div class="compare-choice-links flex flex-wrap gap-x-4 gap-y-3">
         <a href="{{ compare_compatibility_url }}" class="compare-choice-link">Compatibility</a>
         <a href="{{ compare_support_url }}" class="compare-choice-link">Support</a>
       </div>

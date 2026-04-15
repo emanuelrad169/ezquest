@@ -13,7 +13,7 @@
     assign target_product_count = target_collection.products_count
   endif
 -%}
-<a href="{{ target_url }}" class="collection-promo-tile collection-promo-tile--{{ resolved_handle | handleize }} md:col-span-2 xl:col-span-1" aria-label="{{ resolved_eyebrow }}: {{ resolved_title }}">
+<a href="{{ target_url }}" class="collection-promo-tile collection-promo-tile--{{ resolved_handle | handleize }} md:col-span-2 xl:col-span-2" aria-label="{{ resolved_eyebrow }}: {{ resolved_title }}">
   <div class="collection-promo-tile-media">
     {% render 'owned-collection-visual',
       collection_handle: resolved_handle,

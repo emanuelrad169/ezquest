@@ -1,13 +1,11 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-page",
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Our story",
-        "heading": "The story behind a cleaner setup experience",
-        "copy": "Follow the EZQuest story through product thinking, practical design, and customer confidence.",
-        "support_eyebrow": "Story note",
-        "support_note": "This story should feel grounded in product experience, ownership, and the way support stays connected after purchase."
+        "kicker": "Our story",
+        "heading": "30 years building what setups need",
+        "subheading": "Follow the EZQuest story through product thinking, practical design, and customer confidence."
       }
     },
     "story": {
@@ -23,21 +21,24 @@
       "type": "main-page",
       "settings": {
         "show_title": false,
-        "intro_copy": "The longer narrative, brand milestones, and the ideas that shaped EZQuest hubs, docks, chargers, and accessories continue here."
+        "intro_copy": "The longer narrative, brand milestones, and the ideas that shaped EZQuest hubs, docks, chargers, and accessories continue here.",
+        "side_eyebrow": "Explore next",
+        "side_heading": "From story to product",
+        "side_copy": "Browse the lineup or use Help me choose to find the right EZQuest product for your workflow.",
+        "side_link_label": "Browse collections",
+        "side_link_url": "/collections/all"
       }
     },
     "cta": {
-      "type": "cta-banner",
+      "type": "support-cta-rail",
       "settings": {
-        "eyebrow": "Explore next",
-        "heading": "Move from story into products, support, or channel discovery",
-        "copy": "Move from story into products, support, or where-to-buy guidance without losing the thread.",
-        "link_label": "Browse collections",
-        "link_url": "/collections/all",
-        "secondary_label": "Where to buy",
-        "secondary_url": "/pages/where-to-buy",
-        "style": "light",
-        "button_style": "secondary"
+        "kicker": "Explore next",
+        "heading": "Build the right setup.",
+        "body": "Move from story into products, support, or where-to-buy guidance.",
+        "cta_label": "Browse collections",
+        "cta_url": "/collections/all",
+        "cta2_label": "Where to buy",
+        "cta2_url": "/pages/where-to-buy"
       }
     }
   },

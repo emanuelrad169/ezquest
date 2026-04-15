@@ -1,0 +1,11 @@
+<div class="cart-drawer__footer" id="cart-drawer-footer">
+  {% if cart.item_count > 0 %}
+    {% render 'cart-drawer-footer' %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer footer"
+}
+{% endschema %}

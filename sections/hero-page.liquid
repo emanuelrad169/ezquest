@@ -41,7 +41,7 @@
 -%}
 
 <div class="collection-showcase-shell">
-  <div class="collection-showcase collection-showcase--page">
+  <div class="collection-showcase collection-showcase--page{% if hero_image == blank and support_scene == blank %} collection-showcase--ambient{% endif %}">
 
     {% if hero_image != blank %}
       <div class="collection-showcase-media">

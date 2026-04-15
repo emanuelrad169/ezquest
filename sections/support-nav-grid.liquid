@@ -1,6 +1,6 @@
-<section class="section-shell surface-muted">
+<section class="section-shell section--grey">
   <div class="container-shell">
-    <div class="support-nav-layout">
+    <div class="support-nav-layout grid gap-8 lg:grid-cols-2 lg:items-start">
       <div class="support-aside">
         <p class="section-kicker">{{ section.settings.eyebrow }}</p>
         <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
@@ -49,7 +49,7 @@
         </script>
       </div>
 
-      <div class="support-nav-cards">
+      <div class="support-nav-cards grid gap-4 sm:grid-cols-2 reveal-stagger">
         {% for block in section.blocks %}
           {%- liquid
             assign block_eyebrow = block.settings.eyebrow
@@ -65,13 +65,13 @@
               assign support_visual = 'compatibility'
             endif
           -%}
-          <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %} motion-lift" {{ block.shopify_attributes }}>
-            <div class="support-tile-visual">
+          <article class="support-tile{% if forloop.first %} support-tile--featured lg:col-span-2{% endif %} motion-lift border border-slate-200/80 bg-white p-5 shadow-soft transition duration-200 hover:border-slate-300/80 hover:shadow-lift lg:p-6" {{ block.shopify_attributes }}>
+            <div class="support-tile-visual mb-4 overflow-hidden rounded-2xl">
               {% render 'owned-support-visual', visual: support_visual, class: 'support-tile-visual-image' %}
             </div>
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
-              <span class="support-tile-badge">
+              <span class="support-tile-badge text-xs font-medium uppercase tracking-widest text-slate-400">
                 {% if block.settings.link_url contains '/pages/contact' %}
                   Direct support
                 {% elsif block.settings.link_url contains '/pages/compatibility' %}
@@ -81,10 +81,10 @@
                 {% endif %}
               </span>
             </div>
-            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{{ block.settings.title | default: 'Support path' }}</h3>
+            <h3 class="mt-5 text-2xl font-medium tracking-tight text-slate-950">{{ block.settings.title | default: 'Support path' }}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600">{{ block.settings.copy }}</p>
             <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/80 pt-5">
-              <p class="support-tile-note">
+              <p class="support-tile-note text-xs font-medium uppercase tracking-widest text-slate-400">
                 {% if block.settings.link_url contains '/pages/contact' %}
                   Best for product, order, or warranty questions
                 {% elsif block.settings.link_url contains '/pages/compatibility' %}
@@ -100,15 +100,15 @@
             </article>
           {% else %}
           {% for i in (1..4) %}
-            <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %}">
-              <div class="support-tile-visual">
+            <article class="support-tile{% if forloop.first %} support-tile--featured lg:col-span-2{% endif %} border border-slate-200/80 bg-white p-5 shadow-soft transition duration-200 hover:border-slate-300/80 hover:shadow-lift lg:p-6">
+              <div class="support-tile-visual mb-4 overflow-hidden rounded-2xl">
                 {% render 'owned-support-visual', visual: 'support', class: 'support-tile-visual-image' %}
               </div>
               <div class="flex items-center justify-between gap-4">
                 <p class="section-kicker">{{ i | prepend: '0' }}</p>
-                <span class="support-tile-badge">{% if forloop.first %}Fastest start{% else %}Support path{% endif %}</span>
+                <span class="support-tile-badge text-xs font-medium uppercase tracking-widest text-slate-400">{% if forloop.first %}Fastest start{% else %}Support path{% endif %}</span>
               </div>
-              <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
+              <h3 class="mt-5 text-2xl font-medium tracking-tight text-slate-950">
                 {% if forloop.index == 1 %}
                   Find a download
                 {% elsif forloop.index == 2 %}

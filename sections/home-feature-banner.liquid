@@ -1,10 +1,10 @@
-<section class="home-feature-banner-section" data-parallax-banner>
+<section class="home-feature-banner-section relative flex items-center overflow-hidden bg-slate-900" data-parallax-banner>
 
-  <div class="home-feature-banner-media" data-parallax-media>
+  <div class="home-feature-banner-media absolute -inset-y-10 inset-x-0 will-change-transform" data-parallax-media>
     {% if section.settings.image != blank %}
-      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'home-feature-banner-img', alt: section.settings.heading }}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'home-feature-banner-img h-full w-full object-cover', alt: section.settings.heading }}
     {% else %}
-      <div class="home-feature-banner-placeholder">
+      <div class="home-feature-banner-placeholder flex h-full w-full flex-col items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest text-white/30">
         <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <rect width="64" height="64" rx="16" fill="currentColor" fill-opacity="0.06"/>
           <rect x="12" y="12" width="40" height="28" rx="4" fill="currentColor" fill-opacity="0.1"/>
@@ -18,24 +18,24 @@
     {% endif %}
   </div>
 
-  <div class="home-feature-banner-overlay"></div>
+  <div class="home-feature-banner-overlay absolute inset-0 bg-gradient-to-r from-slate-900/20 via-slate-900/65 to-slate-900/85"></div>
 
-  <div class="container-shell home-feature-banner-inner">
-    <div class="home-feature-banner-content{% if section.settings.text_position == 'left' %} home-feature-banner-content--left{% else %} home-feature-banner-content--right{% endif %}">
+  <div class="container-shell home-feature-banner-inner relative z-10 w-full py-20">
+    <div class="home-feature-banner-content flex max-w-3xl flex-col gap-3{% if section.settings.text_position == 'left' %}{% else %} ml-auto{% endif %}">
       {% if section.settings.eyebrow != blank %}
-        <p class="section-kicker home-feature-banner-eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="section-kicker home-feature-banner-eyebrow text-white/55">{{ section.settings.eyebrow }}</p>
       {% endif %}
       {% if section.settings.heading != blank %}
-        <h2 class="section-heading home-feature-banner-heading">{{ section.settings.heading }}</h2>
+        <h2 class="section-heading home-feature-banner-heading mt-0 text-white">{{ section.settings.heading }}</h2>
       {% endif %}
       {% if section.settings.subheading != blank %}
-        <p class="type-heading home-feature-banner-subheading">{{ section.settings.subheading }}</p>
+        <p class="type-heading home-feature-banner-subheading mt-0 text-white">{{ section.settings.subheading }}</p>
       {% endif %}
       {% if section.settings.copy != blank %}
-        <p class="section-copy home-feature-banner-copy">{{ section.settings.copy }}</p>
+        <p class="section-copy home-feature-banner-copy mt-0 max-w-2xl text-white/65">{{ section.settings.copy }}</p>
       {% endif %}
       {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-        {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary', class: 'button-context-hero-secondary home-feature-banner-link' %}
+        {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary', class: 'button-context-hero-secondary home-feature-banner-link mt-4 w-fit' %}
       {% endif %}
     </div>
   </div>
