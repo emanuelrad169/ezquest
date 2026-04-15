@@ -1,16 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-home",
-      "settings": {
-        "eyebrow": "USB-C essentials",
-        "heading": "USB-C hubs, docks, chargers, and cables for modern devices",
-        "copy": "Add the ports, power, and display support your desk or travel kit actually needs.",
-        "primary_label": "Shop everyday setups",
-        "primary_url": "/collections/hubs-adapters",
-        "secondary_label": "Shop best-selling hub",
-        "secondary_url": "/products/usb-c-multimedia-hub"
-      },
       "blocks": {
         "slide_1": {
           "type": "slide",
@@ -21,7 +21,9 @@
             "primary_label": "Shop everyday setups",
             "primary_url": "/collections/hubs-adapters",
             "secondary_label": "Shop best-selling hub",
-            "secondary_url": "/products/usb-c-multimedia-hub"
+            "secondary_url": "/products/usb-c-multimedia-hub",
+            "image": "shopify://shop_images/slide-001.jpg",
+            "image_mobile": "shopify://shop_images/slide-001-m.jpg"
           }
         },
         "slide_2": {
@@ -49,78 +51,184 @@
           }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3"]
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "eyebrow": "USB-C essentials",
+        "heading": "USB-C hubs, docks, chargers, and cables for modern devices",
+        "copy": "Add the ports, power, and display support your desk or travel kit actually needs.",
+        "primary_label": "Shop everyday setups",
+        "primary_url": "/collections/hubs-adapters",
+        "secondary_label": "Shop best-selling hub",
+        "secondary_url": "/products/usb-c-multimedia-hub"
+      }
     },
     "categories": {
       "type": "home-collections-strip",
-      "settings": {
-        "heading": "Shop by product family",
-        "copy": "Browse hubs, docks, chargers, and accessories."
-      },
       "blocks": {
         "category_1": {
           "type": "collection_card",
           "settings": {
-            "collection": "hubs-adapters"
+            "collection": "hubs-adapters",
+            "title": "",
+            "link": ""
           }
         },
         "category_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "docking-stations"
+            "collection": "docking-stations",
+            "title": "",
+            "link": ""
           }
         },
         "category_3": {
           "type": "collection_card",
           "settings": {
-            "collection": "chargers-power"
+            "collection": "chargers-power",
+            "title": "",
+            "link": ""
           }
         },
         "category_4": {
           "type": "collection_card",
           "settings": {
-            "collection": "accessories"
+            "collection": "accessories",
+            "title": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["category_1", "category_2", "category_3", "category_4"]
-    },
-    "story": {
-      "type": "featured-product-carousel",
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4"
+      ],
       "settings": {
-        "eyebrow": "Best sellers",
-        "heading": "Start with the most useful EZQuest products",
-        "copy": "These picks cover everyday desks, travel kits, charging, and display expansion without overcomplicating the choice.",
-        "link_label": "Open setup guide",
-        "link_url": "/pages/help-me-choose",
-        "collection": "hubs-adapters",
-        "products_limit": 8
+        "heading": "Shop by product family",
+        "copy": "Browse hubs, docks, chargers, and accessories."
       }
     },
     "feature_bento": {
       "type": "home-feature-bento",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "8-in-1",
+            "label": "Hub expansion",
+            "sublabel": ""
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "blue",
+            "stat": "",
+            "label": "USB-C charging",
+            "sublabel": ""
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "4K 60Hz",
+            "label": "Display support",
+            "sublabel": ""
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "",
+            "label": "Desk-ready docks",
+            "sublabel": ""
+          }
+        },
+        "f5": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "100W",
+            "label": "Power delivery",
+            "sublabel": ""
+          }
+        },
+        "f6": {
+          "type": "feature",
+          "settings": {
+            "size": "wide",
+            "card_style": "blue",
+            "stat": "Travel-ready",
+            "label": "Compact chargers and hubs",
+            "sublabel": ""
+          }
+        },
+        "f7": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "2.5GbE",
+            "label": "Faster wired networking",
+            "sublabel": ""
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7"
+      ],
       "settings": {
         "eyebrow": "What EZQuest helps with",
         "heading": "Ports, power, displays, and everyday setup clarity"
-      },
-      "blocks": {
-        "f1": { "type": "feature", "settings": { "size": "normal", "card_style": "light", "stat": "8-in-1", "label": "Hub expansion" } },
-        "f2": { "type": "feature", "settings": { "size": "normal", "card_style": "blue", "label": "USB-C charging" } },
-        "f3": { "type": "feature", "settings": { "size": "normal", "card_style": "light", "stat": "4K 60Hz", "label": "Display support" } },
-        "f4": { "type": "feature", "settings": { "size": "normal", "card_style": "light", "label": "Desk-ready docks" } },
-        "f5": { "type": "feature", "settings": { "size": "normal", "card_style": "light", "stat": "100W", "label": "Power delivery" } },
-        "f6": { "type": "feature", "settings": { "size": "wide", "card_style": "blue", "stat": "Travel-ready", "label": "Compact chargers and hubs" } },
-        "f7": { "type": "feature", "settings": { "size": "normal", "card_style": "light", "stat": "2.5GbE", "label": "Faster wired networking" } }
-      },
-      "block_order": ["f1", "f2", "f3", "f4", "f5", "f6", "f7"]
+      }
     },
     "feature_banner": {
       "type": "home-feature-banner",
       "settings": {
+        "text_position": "right",
         "eyebrow": "Desk and travel coverage",
         "heading": "Choose the right mix of ports, power, and displays.",
+        "subheading": "Desk-ready docks, travel hubs, and chargers built for modern devices.",
         "copy": "From compact travel hubs to desk-ready docks and multi-device chargers, EZQuest keeps modern-device setups cleaner and easier to manage.",
-        "text_position": "right"
+        "link_label": "",
+        "link_url": ""
+      }
+    },
+    "story": {
+      "type": "featured-product-carousel",
+      "settings": {
+        "heading": "Start with the most useful EZQuest products",
+        "link_label": "Open setup guide",
+        "link_url": "/pages/help-me-choose",
+        "collection": "hubs-adapters",
+        "tab_1_label": "Cables",
+        "tab_1_collection": "",
+        "tab_2_label": "Hubs",
+        "tab_2_collection": "",
+        "tab_3_label": "",
+        "tab_3_collection": "",
+        "tab_4_label": "",
+        "tab_4_collection": "",
+        "products_limit": 8
       }
     },
     "confidence": {
@@ -133,17 +241,14 @@
     },
     "testimonials": {
       "type": "home-testimonials",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Trusted by Over 200+ Million Users Worldwide"
-      },
       "blocks": {
         "review_1": {
           "type": "review",
           "settings": {
             "reviewer_name": "Michail T.",
             "rating": 5,
-            "review_text": "A very strong power bank, able to charge a gaming laptop... Very useful that you can plug in 3 cables as you can charge laptop and phone at the same time. Overall really happy — thumbs up!"
+            "review_text": "A very strong power bank, able to charge a gaming laptop... Very useful that you can plug in 3 cables as you can charge laptop and phone at the same time. Overall really happy — thumbs up!",
+            "product": ""
           }
         },
         "review_2": {
@@ -151,7 +256,8 @@
           "settings": {
             "reviewer_name": "Ryan",
             "rating": 5,
-            "review_text": "Excellent fast charging with attached USB-C cable. Everyone needs a power bank and this one charges faster than others, and is Qi 2 compatible. Highly recommended."
+            "review_text": "Excellent fast charging with attached USB-C cable. Everyone needs a power bank and this one charges faster than others, and is Qi 2 compatible. Highly recommended.",
+            "product": ""
           }
         },
         "review_3": {
@@ -159,7 +265,8 @@
           "settings": {
             "reviewer_name": "Holly",
             "rating": 4,
-            "review_text": "The multiple ports make it very flexible, so I can keep a mix of devices going from one unit instead of carrying several separate chargers. Build quality is very good and it feels solid and premium."
+            "review_text": "The multiple ports make it very flexible, so I can keep a mix of devices going from one unit instead of carrying several separate chargers. Build quality is very good and it feels solid and premium.",
+            "product": ""
           }
         },
         "review_4": {
@@ -167,7 +274,8 @@
           "settings": {
             "reviewer_name": "Joe",
             "rating": 4,
-            "review_text": "I love the form factor of this charger — it's compact for travel or minimalist space usage on a desk. It charges at 25W for my iPhone 17 and has an extension port if I want to plug something else in."
+            "review_text": "I love the form factor of this charger — it's compact for travel or minimalist space usage on a desk. It charges at 25W for my iPhone 17 and has an extension port if I want to plug something else in.",
+            "product": ""
           }
         },
         "review_5": {
@@ -175,7 +283,8 @@
           "settings": {
             "reviewer_name": "David",
             "rating": 5,
-            "review_text": "A very well designed and built charger. The retractable lead is a great idea and I can recommend this for anyone who needs a neat and solid charger for their travels."
+            "review_text": "A very well designed and built charger. The retractable lead is a great idea and I can recommend this for anyone who needs a neat and solid charger for their travels.",
+            "product": ""
           }
         },
         "review_6": {
@@ -183,11 +292,23 @@
           "settings": {
             "reviewer_name": "Chris",
             "rating": 4,
-            "review_text": "This USB-C hub has been a game changer for my MacBook Air. It has a great selection of ports. I was able to achieve fast and stable data transfer and upload speeds compared to the built-in gigabit port."
+            "review_text": "This USB-C hub has been a game changer for my MacBook Air. It has a great selection of ports. I was able to achieve fast and stable data transfer and upload speeds compared to the built-in gigabit port.",
+            "product": ""
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5", "review_6"]
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Trusted by Over 200+ Million Users Worldwide"
+      }
     },
     "press": {
       "type": "home-press",
@@ -196,5 +317,14 @@
       }
     }
   },
-  "order": ["hero", "categories", "feature_bento", "feature_banner", "story", "confidence", "testimonials", "press"]
+  "order": [
+    "hero",
+    "categories",
+    "feature_bento",
+    "feature_banner",
+    "story",
+    "confidence",
+    "testimonials",
+    "press"
+  ]
 }
