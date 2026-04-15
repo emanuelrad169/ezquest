@@ -63,7 +63,9 @@
         "primary_label": "Shop best sellers",
         "primary_url": "/collections/all?sort_by=best-selling",
         "secondary_label": "",
-        "secondary_url": "/pages/compare"
+        "secondary_url": "/pages/compare",
+        "image": "shopify://shop_images/slide-001.jpg",
+        "image_mobile": "shopify://shop_images/slide-001-m.jpg"
       }
     },
     "categories": {
