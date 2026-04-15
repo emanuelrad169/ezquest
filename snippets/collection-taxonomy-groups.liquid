@@ -1,0 +1,199 @@
+{%- liquid
+  assign context = context | default: 'page'
+  assign menu_handle = menu_handle | default: blank
+  if menu_handle == blank and section != blank and section.settings != blank and section.settings.menu != blank
+    assign menu_handle = section.settings.menu
+  endif
+  if menu_handle == blank and settings.header_primary_menu != blank
+    assign menu_handle = settings.header_primary_menu
+  endif
+  if menu_handle == blank
+    assign menu_handle = 'main-menu'
+  endif
+
+  assign primary_menu = linklists[menu_handle]
+  assign taxonomy_root_links = primary_menu.links
+  assign taxonomy_column_titles = 'USB-C|Cables/Adapters|Power' | split: '|'
+  assign taxonomy_groups_found = 0
+
+  if primary_menu != blank and primary_menu.links != blank
+    for primary_link in primary_menu.links
+      assign primary_link_title = primary_link.title | strip | downcase
+      if primary_link_title == 'browse products' or primary_link_title == 'browse product families'
+        if primary_link.links != blank and primary_link.links.size > 0
+          assign taxonomy_root_links = primary_link.links
+        endif
+        break
+      endif
+    endfor
+  endif
+
+  capture taxonomy_groups_markup
+    for taxonomy_column_title in taxonomy_column_titles
+      assign taxonomy_column_key = taxonomy_column_title | strip | downcase
+      assign taxonomy_parent_link = blank
+
+      for taxonomy_menu_link in taxonomy_root_links
+        assign taxonomy_menu_title = taxonomy_menu_link.title | strip | downcase
+        if taxonomy_menu_title == taxonomy_column_key and taxonomy_menu_link.links != blank and taxonomy_menu_link.links.size > 0
+          assign taxonomy_parent_link = taxonomy_menu_link
+          break
+        endif
+
+        if taxonomy_menu_link.links != blank and taxonomy_menu_link.links.size > 0
+          for taxonomy_menu_child_link in taxonomy_menu_link.links
+            assign taxonomy_menu_child_title = taxonomy_menu_child_link.title | strip | downcase
+            if taxonomy_menu_child_title == taxonomy_column_key and taxonomy_menu_child_link.links != blank and taxonomy_menu_child_link.links.size > 0
+              assign taxonomy_parent_link = taxonomy_menu_child_link
+              break
+            endif
+
+            if taxonomy_menu_child_link.links != blank and taxonomy_menu_child_link.links.size > 0
+              for taxonomy_menu_grandchild_link in taxonomy_menu_child_link.links
+                assign taxonomy_menu_grandchild_title = taxonomy_menu_grandchild_link.title | strip | downcase
+                if taxonomy_menu_grandchild_title == taxonomy_column_key and taxonomy_menu_grandchild_link.links != blank and taxonomy_menu_grandchild_link.links.size > 0
+                  assign taxonomy_parent_link = taxonomy_menu_grandchild_link
+                  break
+                endif
+              endfor
+            endif
+
+            if taxonomy_parent_link != blank
+              break
+            endif
+          endfor
+        endif
+
+        if taxonomy_parent_link != blank
+          break
+        endif
+      endfor
+
+      if taxonomy_parent_link == blank
+        continue
+      endif
+
+      assign taxonomy_groups_found = taxonomy_groups_found | plus: 1
+
+      echo '<section class="collection-taxonomy-group">'
+        echo '<div class="collection-taxonomy-group-head">'
+          echo '<h2 class="collection-taxonomy-group-title">'
+            echo taxonomy_parent_link.title
+          echo '</h2>'
+        echo '</div>'
+        echo '<div class="collection-taxonomy-group-divider" aria-hidden="true"></div>'
+        echo '<ul class="collection-taxonomy-link-list" role="list">'
+          for taxonomy_child_link in taxonomy_parent_link.links
+            echo '<li>'
+              echo '<a href="'
+              echo taxonomy_child_link.url
+              echo '" class="collection-taxonomy-link">'
+                echo '<span class="collection-taxonomy-link-label">'
+                  echo taxonomy_child_link.title
+                echo '</span>'
+
+                if context == 'page' and taxonomy_child_link.object != blank and taxonomy_child_link.type == 'collection_link'
+                  echo '<span class="collection-taxonomy-link-meta">'
+                    echo taxonomy_child_link.object.products_count
+                    echo ' products'
+                  echo '</span>'
+                endif
+              echo '</a>'
+            echo '</li>'
+          endfor
+        echo '</ul>'
+      echo '</section>'
+    endfor
+  endcapture
+
+  if taxonomy_groups_found == 0
+    assign fallback_group_payloads = 'Hubs^hubs-adapters~Cables^accessories~Adapters^hubs-adapters~Card Readers^hubs-adapters~Enclosure^hubs-adapters||HDMI^accessories~DisplayPort^accessories~Mini DisplayPort^accessories~Audio^accessories||Wall Charger^chargers-power~Car Charger^chargers-power' | split: '||'
+
+    capture taxonomy_groups_markup
+      for taxonomy_column_title in taxonomy_column_titles
+        assign fallback_group_payload = fallback_group_payloads[forloop.index0] | split: '~'
+        assign fallback_group_item_count = 0
+
+        capture fallback_group_items_markup
+          for fallback_group_item in fallback_group_payload
+            assign fallback_group_parts = fallback_group_item | split: '^'
+            assign fallback_group_label = fallback_group_parts[0] | strip
+            assign fallback_group_handle = fallback_group_parts[1] | strip
+            assign fallback_group_collection = collections[fallback_group_handle]
+            if fallback_group_collection == blank
+              continue
+            endif
+
+            assign fallback_group_item_count = fallback_group_item_count | plus: 1
+
+            echo '<li>'
+              echo '<a href="'
+              echo fallback_group_collection.url
+              echo '" class="collection-taxonomy-link">'
+                echo '<span class="collection-taxonomy-link-label">'
+                  echo fallback_group_label
+                echo '</span>'
+
+                if context == 'page'
+                  echo '<span class="collection-taxonomy-link-meta">'
+                    echo fallback_group_collection.products_count
+                    echo ' products'
+                  echo '</span>'
+                endif
+              echo '</a>'
+            echo '</li>'
+          endfor
+        endcapture
+
+        if fallback_group_item_count == 0
+          continue
+        endif
+
+        assign taxonomy_groups_found = taxonomy_groups_found | plus: 1
+
+        echo '<section class="collection-taxonomy-group">'
+          echo '<div class="collection-taxonomy-group-head">'
+            echo '<h2 class="collection-taxonomy-group-title">'
+              echo taxonomy_column_title
+            echo '</h2>'
+          echo '</div>'
+          echo '<div class="collection-taxonomy-group-divider" aria-hidden="true"></div>'
+          echo '<ul class="collection-taxonomy-link-list" role="list">'
+            echo fallback_group_items_markup
+          echo '</ul>'
+        echo '</section>'
+      endfor
+    endcapture
+  endif
+-%}
+
+{% if taxonomy_groups_found > 0 %}
+  <div class="collection-taxonomy collection-taxonomy--{{ context }}">
+    {% if eyebrow != blank or heading != blank or copy != blank or note != blank %}
+      <div class="collection-taxonomy-header">
+        {% if eyebrow != blank %}
+          <p class="section-kicker">{{ eyebrow }}</p>
+        {% endif %}
+        {% if heading != blank %}
+          <h1 class="collection-taxonomy-heading">{{ heading }}</h1>
+        {% endif %}
+        {% if copy != blank %}
+          <p class="collection-taxonomy-copy">{{ copy }}</p>
+        {% endif %}
+        {% if note != blank %}
+          <p class="collection-taxonomy-note">{{ note }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="collection-taxonomy-columns">
+      {{ taxonomy_groups_markup }}
+    </div>
+
+    {% if footer_href != blank and footer_label != blank %}
+      <div class="collection-taxonomy-footer">
+        <a href="{{ footer_href }}" class="button-tertiary collection-taxonomy-footer-link">{{ footer_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

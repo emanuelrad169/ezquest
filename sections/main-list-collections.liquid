@@ -1,8 +1,8 @@
 <section class="section-shell collections-index-section">
   <div class="container-shell">
     {%- liquid
-      assign primary_handles = 'hubs-adapters,docking-stations,chargers-power,accessories' | split: ','
-      assign rendered_handles = ''
+      assign collection_group_titles = 'USB-C|Cables/Adapters|Power' | split: '|'
+      assign collection_group_items = 'Hubs^hubs-adapters^usb-c-multimedia-7-in-1-hub|Cables^accessories^duraguard-usb-c-to-usb-a-charge-and-sync-cable|Adapters^hubs-adapters^usb-c-to-hdmi-4k-60hz-adapter|Card Readers^hubs-adapters^usb-c-card-reader-ss42|Enclosure^hubs-adapters^magnetic-usb-c-m-2-nvme-ssd-enclosure||HDMI^accessories^ultra-hd-high-speed-certified-hdmi-8k-60hz-cable|DisplayPort^accessories^usb-c-to-displayport-4k-60hz-cable|Mini DisplayPort^accessories^mini-displayport-to-hdmi-4k-60hz-cable|Audio^accessories^duraguard-stereo-audio-cable||Wall Charger^chargers-power^worldtravel-65w-gan-5-port-pd-wall-charger|Car Charger^chargers-power^ultimatepower-usb-c-72w-car-charger-dual-port-with-display' | split: '||'
     -%}
 
     <div class="collections-index-header">
@@ -10,69 +10,53 @@
       <h1 class="collections-index-title">Collections</h1>
     </div>
 
-    <div class="collections-grid">
-      {% for preferred_handle in primary_handles %}
-        {%- liquid
-          assign col = collections[preferred_handle]
-          if col != blank
-            assign rendered_handles = rendered_handles | append: col.handle | append: ','
-          endif
-          assign card_eyebrow = blank
-          case preferred_handle
-            when 'hubs-adapters'
-              assign card_eyebrow = 'Hubs & Adapters'
-            when 'docking-stations'
-              assign card_eyebrow = 'Docking Stations'
-            when 'chargers-power'
-              assign card_eyebrow = 'Chargers & Power'
-            when 'accessories'
-              assign card_eyebrow = 'Accessories'
-          endcase
-        -%}
-        {% if col != blank %}
-          <a href="{{ col.url }}" class="collection-card">
-            <div class="collection-card-media">
-              {% if col.image != blank %}
-                {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: col.title, class: 'collection-card-image' }}
-              {% else %}
-                {% render 'owned-collection-visual', collection_handle: col.handle, collection_title: col.title, width: 800, height: 800, class: 'collection-card-image' %}
-              {% endif %}
-            </div>
-            <div class="collection-card-body">
-              <h2 class="collection-card-title">{{ col.title }}</h2>
-              <span class="collection-card-meta">{{ col.products_count }} products</span>
-            </div>
-            <span class="collection-card-arrow" aria-hidden="true">→</span>
-          </a>
-        {% endif %}
-      {% endfor %}
+    <div class="collections-directory">
+      {% for collection_group_title in collection_group_titles %}
+        {% assign collection_group_payload = collection_group_items[forloop.index0] | split: '|' %}
+        <section class="collections-directory-group">
+          <div class="collections-directory-group-head">
+            <h2 class="collections-directory-group-title">{{ collection_group_title }}</h2>
+            <div class="collections-directory-group-divider" aria-hidden="true"></div>
+          </div>
 
-      {% for col in collections %}
-        {%- liquid
-          assign should_skip = false
-          if col.handle == 'all' or col.handle == 'frontpage'
-            assign should_skip = true
-          endif
-          if rendered_handles contains col.handle
-            assign should_skip = true
-          endif
-        -%}
-        {% unless should_skip %}
-          <a href="{{ col.url }}" class="collection-card">
-            <div class="collection-card-media">
-              {% if col.image != blank %}
-                {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: col.title, class: 'collection-card-image' }}
-              {% else %}
-                {% render 'owned-collection-visual', collection_handle: col.handle, collection_title: col.title, width: 800, height: 800, class: 'collection-card-image' %}
+          <div class="collections-grid">
+            {% for collection_group_item in collection_group_payload %}
+              {%- liquid
+                assign collection_group_parts = collection_group_item | split: '^'
+                assign collection_card_title = collection_group_parts[0] | strip
+                assign collection_card_handle = collection_group_parts[1] | strip
+                assign collection_card_product = collection_group_parts[2] | strip
+                assign col = collections[collection_card_handle]
+              -%}
+              {% if col == blank %}
+                {% continue %}
               {% endif %}
-            </div>
-            <div class="collection-card-body">
-              <h2 class="collection-card-title">{{ col.title }}</h2>
-              <span class="collection-card-meta">{{ col.products_count }} products</span>
-            </div>
-            <span class="collection-card-arrow" aria-hidden="true">→</span>
-          </a>
-        {% endunless %}
+              <a href="{{ col.url }}" class="collection-card">
+                <div class="collection-card-media">
+                  {% if collection_card_product != blank %}
+                    {% render 'owned-product-visual',
+                      product_handle: collection_card_product,
+                      product_title: collection_card_title,
+                      variant: 'hero',
+                      width: 800,
+                      height: 800,
+                      class: 'collection-card-image'
+                    %}
+                  {% elsif col.image != blank %}
+                    {{ col.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection_card_title, class: 'collection-card-image' }}
+                  {% else %}
+                    {% render 'owned-collection-visual', collection_handle: col.handle, collection_title: collection_card_title, width: 800, height: 800, class: 'collection-card-image' %}
+                  {% endif %}
+                </div>
+                <div class="collection-card-body">
+                  <h2 class="collection-card-title">{{ collection_card_title }}</h2>
+                  <span class="collection-card-meta">{{ col.title }}</span>
+                </div>
+                <span class="collection-card-arrow" aria-hidden="true">→</span>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
       {% endfor %}
     </div>
   </div>

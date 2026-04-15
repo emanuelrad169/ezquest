@@ -264,10 +264,13 @@
                 {% endfor %}
               {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
                 <button type="button" class="product-thumb-card">
+                  {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'setup', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
+                </button>
+                <button type="button" class="product-thumb-card">
                   {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'ports', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
                 <button type="button" class="product-thumb-card">
-                  {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'setup', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
+                  {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'scale', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
               {% endif %}
             </div>
@@ -611,7 +614,7 @@
             {%- assign product_support_content_stripped = product_support_content | strip -%}
 
 	          <div class="product-mobile-accordions lg:hidden">
-	            {% render 'accordion-item', title: 'Fit', content: product_fit_content %}
+	            {% render 'accordion-item', title: 'Why it fits', content: product_fit_content, expanded: true %}
 	            {% if product_features_content_stripped != blank %}
 	              {% render 'accordion-item', title: 'Features', content: product_features_content %}
 	            {% endif %}
@@ -701,9 +704,6 @@
         <div class="product-sticky-atc-copy">
           <p class="product-sticky-atc-title">{{ product.title | truncate: 28 }}</p>
           <div class="product-sticky-atc-meta">
-            {% if product.has_only_default_variant == false %}
-              <p class="product-sticky-atc-variant" data-sticky-atc-variant>{{ selected_option_summary }}</p>
-            {% endif %}
             <p class="product-sticky-atc-availability" data-sticky-atc-availability>
               {% if product.available %}In stock{% else %}Sold out{% endif %}
             </p>

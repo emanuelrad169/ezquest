@@ -1,0 +1,57 @@
+{%- liquid
+  assign resolved_visual = visual | default: 'guide'
+  assign resolved_class = class | default: ''
+  assign resolved_loading = loading | default: 'lazy'
+  assign resolved_fetchpriority = fetchpriority | default: 'auto'
+  assign visual_title = title | default: 'EZQuest guide'
+  assign primary_handle = 'usb-c-multimedia-7-in-1-hub'
+  assign secondary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+  assign label = 'Guide'
+
+  case resolved_visual
+    when 'compatibility'
+      assign primary_handle = 'usb-c-pro-dock'
+      assign secondary_handle = 'dual-hdmi-usb-c-multimedia-hub-adapter-12-ports'
+      assign label = 'Compatibility'
+    when 'power'
+      assign primary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+      assign secondary_handle = 'ultimatepower-65w-gan-usb-c-pd-wall-charger'
+      assign label = 'Power guide'
+    when 'travel'
+      assign primary_handle = 'usb-c-slim-gen-2-hub-adapter-6-in-1'
+      assign secondary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+      assign label = 'Travel setup'
+  endcase
+-%}
+<div class="owned-editorial-visual owned-editorial-visual--{{ resolved_visual }} {{ resolved_class }}">
+  <div class="owned-editorial-visual-grid">
+    <div class="owned-editorial-visual-copy">
+      <p class="owned-editorial-visual-label">{{ label }}</p>
+      <h3 class="owned-editorial-visual-title">{{ visual_title }}</h3>
+    </div>
+    <div class="owned-editorial-visual-stage">
+      <div class="owned-editorial-visual-product owned-editorial-visual-product--primary">
+        {% render 'owned-product-visual',
+          product_handle: primary_handle,
+          variant: 'setup',
+          width: 1000,
+          height: 750,
+          class: 'owned-editorial-visual-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+      <div class="owned-editorial-visual-product owned-editorial-visual-product--secondary">
+        {% render 'owned-product-visual',
+          product_handle: secondary_handle,
+          variant: 'detail',
+          width: 720,
+          height: 540,
+          class: 'owned-editorial-visual-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+    </div>
+  </div>
+</div>

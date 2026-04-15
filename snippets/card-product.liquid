@@ -360,5 +360,13 @@
     </div>
   </div>
 
+  {% if value_line != blank %}
+    <p class="product-card-proof">{{ value_line | truncatewords: 7 }}</p>
+  {% endif %}
+
+  {% if product != blank %}
+    <a href="{{ product_card_url }}" class="product-card-mobile-cta button-secondary">View product</a>
+  {% endif %}
+
 </article>
 {% endif %}

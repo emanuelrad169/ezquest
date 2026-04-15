@@ -4,6 +4,7 @@
   assign hero_copy       = section.settings.copy
   assign hero_image      = section.settings.background_image
   assign structured_group = blank
+  assign support_scene = blank
 
   if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
     assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
@@ -20,6 +21,23 @@
       assign hero_copy = structured_group.description.value
     endif
   endif
+
+  if hero_image == blank
+    if page != blank
+      case page.handle
+        when 'support'
+          assign support_scene = 'support'
+        when 'downloads'
+          assign support_scene = 'downloads'
+        when 'manuals'
+          assign support_scene = 'manuals'
+        when 'compatibility'
+          assign support_scene = 'compatibility'
+      endcase
+    elsif blog != blank and blog.handle == 'resources'
+      assign support_scene = 'resources'
+    endif
+  endif
 -%}
 
 <div class="collection-showcase-shell">
@@ -28,6 +46,14 @@
     {% if hero_image != blank %}
       <div class="collection-showcase-media">
         {{ hero_image | image_url: width: 2400 | image_tag: loading: 'eager', decoding: 'async', alt: hero_heading, class: 'collection-showcase-image' }}
+      </div>
+    {% elsif support_scene == 'resources' %}
+      <div class="collection-showcase-media">
+        {% render 'owned-editorial-visual', visual: 'guide', title: hero_heading, class: 'collection-showcase-image collection-showcase-image--scene', loading: 'eager', fetchpriority: 'high' %}
+      </div>
+    {% elsif support_scene != blank %}
+      <div class="collection-showcase-media">
+        {% render 'owned-support-visual', visual: support_scene, class: 'collection-showcase-image collection-showcase-image--scene', loading: 'eager', fetchpriority: 'high' %}
       </div>
     {% endif %}
 

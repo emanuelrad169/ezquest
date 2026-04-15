@@ -1,4 +1,11 @@
 <article class="editorial-card motion-lift">
+  <div class="editorial-card-visual">
+    {% if article != blank and article.image != blank %}
+      {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'editorial-card-visual-image' }}
+    {% else %}
+      {% render 'owned-editorial-visual', visual: 'guide', title: article.title | default: 'EZQuest guide', class: 'editorial-card-visual-image' %}
+    {% endif %}
+  </div>
   <div class="editorial-card-meta-row">
     <p class="section-kicker">
       {% if article != blank and article.blog != blank %}

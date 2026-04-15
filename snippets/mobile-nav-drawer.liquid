@@ -55,17 +55,41 @@
     </div>
 
     <div class="mega-mobile-primary-actions">
-      <a href="/pages/help-me-choose" class="mega-mobile-primary-link">Shop by setup</a>
-      <a href="{{ routes.collections_url }}" class="mega-mobile-primary-link mega-mobile-primary-link--secondary">Browse products</a>
+      <a href="/pages/help-me-choose" class="mega-mobile-primary-link" data-drawer-close>Shop by setup</a>
+      <a href="{{ routes.collections_url }}" class="mega-mobile-primary-link mega-mobile-primary-link--secondary" data-drawer-close>Browse products</a>
     </div>
 
     <nav aria-label="Mobile" class="mega-mobile-nav">
       <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="shop" aria-controls="mega-mobile-panel-shop">
-          <span>Shop by setup</span>
+        <a href="/pages/compare" class="mega-mobile-trigger mega-mobile-trigger--link" data-drawer-close>
+          <span>Compare</span>
+        </a>
+      </div>
+
+      <div class="mega-mobile-section">
+        <a href="/pages/support" class="mega-mobile-trigger mega-mobile-trigger--link" data-drawer-close>
+          <span>Support</span>
+        </a>
+      </div>
+
+      <div class="mega-mobile-section">
+        <a href="/blogs/resources" class="mega-mobile-trigger mega-mobile-trigger--link" data-drawer-close>
+          <span>Resources</span>
+        </a>
+      </div>
+
+      <div class="mega-mobile-section">
+        <a href="/pages/about" class="mega-mobile-trigger mega-mobile-trigger--link" data-drawer-close>
+          <span>About</span>
+        </a>
+      </div>
+
+      <div class="mega-mobile-section">
+        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="more" aria-controls="mega-mobile-panel-more">
+          <span>More destinations</span>
           <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
         </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-shop" data-mega-mobile-panel="shop" hidden>
+        <div class="mega-mobile-panel" id="mega-mobile-panel-more" data-mega-mobile-panel="more" hidden>
           <div class="mega-mobile-stack-links mega-mobile-stack-links--detailed">
             {% if sorted_use_case_keys.size > 0 %}
               {% for use_case_key in sorted_use_case_keys %}
@@ -92,113 +116,62 @@
                       assign use_case_destination_url = power_collection.url
                   endcase
                   if use_case_description == blank
-                    assign use_case_description = 'Start with the products built for ' | append: use_case.title.value | downcase | append: '.'
+                    assign use_case_description = 'Products for ' | append: use_case.title.value | downcase | append: '.'
                   endif
                 -%}
-                <a href="{{ use_case_destination_url | default: '/pages/help-me-choose' }}">
+                <a href="{{ use_case_destination_url | default: '/pages/help-me-choose' }}" data-drawer-close>
                   <span>{{ use_case.title.value }}</span>
                   <span class="mega-mobile-link-detail">{{ use_case_description }}</span>
                 </a>
               {% endfor %}
             {% endif %}
-            <a href="/pages/help-me-choose">
-              <span>Open full setup guide</span>
-              <span class="mega-mobile-link-detail">Compare the setup roles before you move into a family.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="collections" aria-controls="mega-mobile-panel-collections">
-          <span>Browse product families</span>
-          <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
-        </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-collections" data-mega-mobile-panel="collections" hidden>
-          <div class="mega-mobile-stack-links mega-mobile-stack-links--detailed">
-            <a href="{{ routes.collections_url }}/hubs-adapters">
+            <a href="{{ routes.collections_url }}/hubs-adapters" data-drawer-close>
               <span>Hubs & adapters</span>
-              <span class="mega-mobile-link-detail">Best for daily carry, hybrid desks, and flexible USB-C expansion.</span>
+              <span class="mega-mobile-link-detail">USB-C expansion for desks, travel, and everyday carry.</span>
             </a>
-            <a href="{{ routes.collections_url }}/docking-stations">
+            <a href="{{ routes.collections_url }}/docking-stations" data-drawer-close>
               <span>Docking stations</span>
-              <span class="mega-mobile-link-detail">Best for permanent desks with displays, Ethernet, and charging.</span>
+              <span class="mega-mobile-link-detail">Display, Ethernet, charging, and desk-ready connectivity.</span>
             </a>
-            <a href="{{ routes.collections_url }}/chargers-power">
+            <a href="{{ routes.collections_url }}/chargers-power" data-drawer-close>
               <span>Chargers & power</span>
-              <span class="mega-mobile-link-detail">Best for keeping phones, tablets, and laptops ready across the day.</span>
+              <span class="mega-mobile-link-detail">Wall chargers, car chargers, and power for daily devices.</span>
             </a>
-            <a href="{{ routes.collections_url }}/accessories">
-              <span>Accessories</span>
-              <span class="mega-mobile-link-detail">Best for cables and finishing pieces that complete the setup.</span>
+            <a href="{{ routes.collections_url }}/accessories" data-drawer-close>
+              <span>Cables & accessories</span>
+              <span class="mega-mobile-link-detail">Cables, adapters, and finishing pieces for the setup.</span>
+            </a>
+            <a href="/pages/downloads" data-drawer-close>
+              <span>Downloads</span>
+              <span class="mega-mobile-link-detail">Drivers, utilities, and supporting files.</span>
+            </a>
+            <a href="/pages/manuals" data-drawer-close>
+              <span>Manuals</span>
+              <span class="mega-mobile-link-detail">Product guides and setup instructions.</span>
+            </a>
+            <a href="/pages/compatibility" data-drawer-close>
+              <span>Compatibility</span>
+              <span class="mega-mobile-link-detail">Check displays, systems, and connection support.</span>
+            </a>
+            <a href="/pages/faq" data-drawer-close>
+              <span>FAQ</span>
+              <span class="mega-mobile-link-detail">Common answers without leaving the flow.</span>
             </a>
           </div>
         </div>
-      </div>
-
-      <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="compare" aria-controls="mega-mobile-panel-compare">
-          <span>Compare</span>
-          <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
-        </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-compare" data-mega-mobile-panel="compare" hidden>
-          <div class="mega-mobile-stack-links">
-            <a href="/pages/compare">Choose the right setup</a>
-            <a href="/pages/compatibility">Check compatibility</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="explore" aria-controls="mega-mobile-panel-explore">
-          <span>Support</span>
-          <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
-        </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-explore" data-mega-mobile-panel="explore" hidden>
-          <div class="mega-mobile-stack-links">
-            <a href="/pages/downloads">Downloads</a>
-            <a href="/pages/manuals">Manuals</a>
-            <a href="/pages/compatibility">Compatibility</a>
-            <a href="/pages/troubleshooting">Troubleshooting</a>
-            <a href="/pages/contact">Contact support</a>
-            <a href="/pages/faq">FAQ</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mega-mobile-section">
-        <button class="mega-mobile-trigger" type="button" aria-expanded="false" data-mega-mobile-trigger="resources" aria-controls="mega-mobile-panel-resources">
-          <span>Resources</span>
-          <span aria-hidden="true">{% render 'icon', name: 'chevron-down' %}</span>
-        </button>
-        <div class="mega-mobile-panel" id="mega-mobile-panel-resources" data-mega-mobile-panel="resources" hidden>
-          <div class="mega-mobile-stack-links">
-            <a href="/blogs/resources">Blog &amp; resources</a>
-            <a href="/pages/help-me-choose">Help me choose</a>
-            <a href="/pages/where-to-buy">Where to buy</a>
-            <a href="/pages/warranty">Warranty</a>
-            <a href="/pages/shipping-returns">Shipping &amp; returns</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mega-mobile-section">
-        <a href="/pages/about" class="mega-mobile-trigger mega-mobile-trigger--link">
-          <span>About</span>
-        </a>
       </div>
     </nav>
 
     <div class="support-crosslink-list">
-      <a href="{{ routes.search_url }}" class="support-crosslink">
+      <a href="{{ routes.search_url }}" class="support-crosslink" data-drawer-close>
         <span>{{ 'header.search' | t }}</span>
         <span class="text-slate-400">Browse</span>
       </a>
-      <a href="/pages/support" class="support-crosslink">
+      <a href="/pages/support" class="support-crosslink" data-drawer-close>
         <span>Support center</span>
-        <span class="text-slate-400">Start here</span>
+        <span class="text-slate-400">Direct help</span>
       </a>
-      <a href="{{ routes.cart_url }}" class="support-crosslink">
+      <a href="{{ routes.cart_url }}" class="support-crosslink" data-drawer-close>
         <span>{{ 'header.cart' | t }}</span>
         <span class="text-slate-400">Checkout</span>
       </a>

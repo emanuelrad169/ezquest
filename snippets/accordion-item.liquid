@@ -1,11 +1,14 @@
+{%- liquid
+  assign is_expanded = expanded | default: false
+-%}
 <div class="accordion-shell" data-accordion-item>
-  <button class="flex w-full items-start justify-between gap-4 text-left" type="button" aria-expanded="false" data-accordion-trigger>
+  <button class="flex w-full items-start justify-between gap-4 text-left" type="button" aria-expanded="{% if is_expanded %}true{% else %}false{% endif %}" data-accordion-trigger>
     <span class="accordion-trigger-text">{{ title }}</span>
     <span class="accordion-icon-btn">
       {% render 'icon', name: 'plus' %}
     </span>
   </button>
-  <div class="accordion-body ms-0 border-t border-slate-200/80" aria-hidden="true" data-accordion-content>
+  <div class="accordion-body ms-0 border-t border-slate-200/80" aria-hidden="{% if is_expanded %}false{% else %}true{% endif %}" data-accordion-content>
     <div class="accordion-body-inner pt-4 pb-1">
       <div class="accordion-content-text">{{ content }}</div>
     </div>

@@ -20,7 +20,7 @@
           {% if lead_article.image != blank %}
             {{ lead_article.image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'blog-lead-image' }}
           {% else %}
-            {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 1400, height: 900, class: 'blog-lead-image' %}
+            {% render 'owned-editorial-visual', visual: 'guide', title: lead_article.title, class: 'blog-lead-image' %}
           {% endif %}
           <div class="blog-lead-copy">
             <p class="section-kicker">{{ lead_article.blog.title }}</p>

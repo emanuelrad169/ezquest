@@ -30,7 +30,11 @@
       assign preferred_ratio_max = 2.3
   endcase
 
-  if product != blank and product.images.size > 0
+  if product != blank and product.handle != blank
+    assign use_owned_visual = true
+  endif
+
+  if product != blank and product.images.size > 0 and use_owned_visual == false
     assign resolved_image = product.featured_image | default: product.images.first
     assign resolved_image_alt = resolved_image.alt | downcase
     assign resolved_image_is_technical = false

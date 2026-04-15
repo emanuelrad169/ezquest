@@ -345,11 +345,36 @@ function animateMediaReveal(element, options) {
 
 // ─── Product gallery: click thumbnail to swap main image ─────────────────────
 (function () {
+  function readThumbSource(thumb) {
+    if (!thumb) return null;
+    const thumbImg = thumb.querySelector('img');
+    if (!thumbImg) return null;
+    return {
+      src: thumbImg.currentSrc || thumbImg.src,
+      srcset: thumbImg.getAttribute('srcset') || thumbImg.srcset || ''
+    };
+  }
+
   function updateActiveThumbs(stage, activeThumb) {
     stage.querySelectorAll('.product-gallery-grid .product-thumb-card').forEach(function (thumb) {
       const isActive = thumb === activeThumb;
       thumb.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
+  }
+
+  function syncStageIndex(stage, thumbs, nextIndex) {
+    const safeIndex = Math.max(0, Math.min(nextIndex, thumbs.length - 1));
+    const activeThumb = thumbs[safeIndex];
+    const mainImg = stage.querySelector('.product-gallery-main img');
+    if (!activeThumb || !mainImg) return;
+    const source = readThumbSource(activeThumb);
+    if (!source) return;
+    animateMainImage(mainImg, source.src, source.srcset);
+    updateActiveThumbs(stage, activeThumb);
+    stage.setAttribute('data-gallery-index', String(safeIndex));
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      activeThumb.scrollIntoView({ block: 'nearest', inline: 'center', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    }
   }
 
   function animateMainImage(mainImg, nextSrc, nextSrcset) {
@@ -374,14 +399,35 @@ function animateMediaReveal(element, options) {
 
   document.querySelectorAll('.product-gallery-stage').forEach(function (stage) {
     const thumbs = Array.from(stage.querySelectorAll('.product-gallery-grid .product-thumb-card'));
+    stage.setAttribute('data-gallery-index', '0');
     thumbs.forEach(function (thumb, index) {
       thumb.setAttribute('tabindex', '0');
       thumb.setAttribute('role', 'button');
       thumb.setAttribute('aria-label', 'Open gallery image ' + (index + 1));
+      thumb.setAttribute('data-gallery-thumb-index', String(index));
     });
     if (thumbs.length) {
       updateActiveThumbs(stage, thumbs[0]);
     }
+
+    const mainFrame = stage.querySelector('.product-gallery-main');
+    if (!mainFrame || thumbs.length < 2) return;
+
+    let pointerStartX = null;
+    mainFrame.addEventListener('pointerdown', function (event) {
+      if (!window.matchMedia('(max-width: 1023px)').matches) return;
+      pointerStartX = event.clientX;
+    });
+
+    mainFrame.addEventListener('pointerup', function (event) {
+      if (!window.matchMedia('(max-width: 1023px)').matches || pointerStartX === null) return;
+      const deltaX = event.clientX - pointerStartX;
+      pointerStartX = null;
+      if (Math.abs(deltaX) < 36) return;
+      const currentIndex = Number(stage.getAttribute('data-gallery-index') || 0);
+      const nextIndex = deltaX < 0 ? currentIndex + 1 : currentIndex - 1;
+      syncStageIndex(stage, thumbs, nextIndex);
+    });
   });
 
   document.addEventListener('click', function (event) {
@@ -389,12 +435,10 @@ function animateMediaReveal(element, options) {
     if (!thumb) return;
     const stage = thumb.closest('.product-gallery-stage');
     if (!stage) return;
-    const mainImg = stage.querySelector('.product-gallery-main img');
-    if (!mainImg) return;
-    const thumbImg = thumb.querySelector('img');
-    if (!thumbImg) return;
-    animateMainImage(mainImg, thumbImg.src, thumbImg.srcset);
-    updateActiveThumbs(stage, thumb);
+    const thumbs = Array.from(stage.querySelectorAll('.product-gallery-grid .product-thumb-card'));
+    const index = thumbs.indexOf(thumb);
+    if (index < 0) return;
+    syncStageIndex(stage, thumbs, index);
   });
 
   document.addEventListener('keydown', function (event) {
@@ -581,7 +625,7 @@ function animateMediaReveal(element, options) {
       const rect = primaryActionWrap.getBoundingClientRect();
       const ctaVisible = rect.top < window.innerHeight - 32 && rect.bottom > 0;
       const desktop = window.matchMedia('(min-width: 1024px)').matches;
-      const scrollThreshold = desktop ? 220 : 140;
+      const scrollThreshold = desktop ? 220 : 48;
       const shouldShow = window.scrollY > scrollThreshold && !ctaVisible;
 
       stickyBar.hidden = false;
@@ -941,6 +985,16 @@ document.addEventListener('click', function(event) {
     const target = closeButton.closest('[data-drawer]');
     if (target) {
       closeDrawer(target);
+    }
+  }
+
+  if (!closeButton) {
+    const mobileDestination = event.target.closest('#mobile-nav-drawer a[href]');
+    if (mobileDestination) {
+      const target = mobileDestination.closest('[data-drawer]');
+      if (target) {
+        closeDrawer(target);
+      }
     }
   }
 });

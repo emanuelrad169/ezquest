@@ -11,10 +11,23 @@
   assign resolved_alt = alt | default: resolved_title
   assign resolved_product = blank
   assign resolved_image = blank
+  assign secondary_image = blank
+  assign tertiary_image = blank
+  assign quaternary_image = blank
   assign preferred_ratio_min = 1.1
   assign preferred_ratio_max = 2.3
   assign preferred_keyword = blank
-  assign visual_asset = blank
+  assign detail_keyword_image = blank
+  assign context_keyword_image = blank
+  assign scale_keyword_image = blank
+  assign preferred_non_technical_image = blank
+  assign preferred_ratio_image = blank
+  assign preferred_image = blank
+  assign curated_hero_image = blank
+  assign curated_setup_image = blank
+  assign curated_detail_image = blank
+  assign curated_scale_image = blank
+  assign curated_compare_image = blank
 
   case resolved_variant
     when 'compare'
@@ -28,6 +41,10 @@
       assign preferred_ratio_min = 1.0
       assign preferred_ratio_max = 1.9
       assign preferred_keyword = 'setup'
+    when 'scale'
+      assign preferred_ratio_min = 0.9
+      assign preferred_ratio_max = 1.8
+      assign preferred_keyword = 'scale'
   endcase
 
   if resolved_handle != blank
@@ -36,11 +53,28 @@
 
   if resolved_product != blank and resolved_product.images.size > 0
     assign resolved_image = resolved_product.featured_image | default: resolved_product.images.first
+    assign curated_hero_image = resolved_product.images.first | default: resolved_image
+    if resolved_product.images.size > 1
+      assign curated_setup_image = resolved_product.images[1]
+    endif
+    if resolved_product.images.size > 2
+      assign curated_detail_image = resolved_product.images[2]
+    endif
+    if resolved_product.images.size > 3
+      assign curated_scale_image = resolved_product.images[3]
+    endif
+    assign curated_compare_image = curated_hero_image
+    if resolved_product.images.size > 1
+      assign secondary_image = resolved_product.images[1]
+    endif
+    if resolved_product.images.size > 2
+      assign tertiary_image = resolved_product.images[2]
+    endif
+    if resolved_product.images.size > 3
+      assign quaternary_image = resolved_product.images[3]
+    endif
     assign resolved_image_alt = resolved_image.alt | downcase
     assign resolved_image_is_technical = false
-    assign preferred_image = blank
-    assign preferred_non_technical_image = blank
-    assign preferred_ratio_image = blank
     assign preferred_keyword_image = blank
 
     if resolved_image_alt contains 'illustration'
@@ -80,6 +114,46 @@
         assign candidate_has_preferred_ratio = true
       endif
 
+      if detail_keyword_image == blank
+        if candidate_alt contains 'detail'
+          assign detail_keyword_image = candidate_image
+        elsif candidate_alt contains 'port'
+          assign detail_keyword_image = candidate_image
+        elsif candidate_alt contains 'rear'
+          assign detail_keyword_image = candidate_image
+        elsif candidate_alt contains 'side'
+          assign detail_keyword_image = candidate_image
+        elsif candidate_alt contains 'angle'
+          assign detail_keyword_image = candidate_image
+        endif
+      endif
+
+      if context_keyword_image == blank
+        if candidate_alt contains 'setup'
+          assign context_keyword_image = candidate_image
+        elsif candidate_alt contains 'desk'
+          assign context_keyword_image = candidate_image
+        elsif candidate_alt contains 'travel'
+          assign context_keyword_image = candidate_image
+        elsif candidate_alt contains 'lifestyle'
+          assign context_keyword_image = candidate_image
+        elsif candidate_alt contains 'use'
+          assign context_keyword_image = candidate_image
+        endif
+      endif
+
+      if scale_keyword_image == blank
+        if candidate_alt contains 'scale'
+          assign scale_keyword_image = candidate_image
+        elsif candidate_alt contains 'size'
+          assign scale_keyword_image = candidate_image
+        elsif candidate_alt contains 'hand'
+          assign scale_keyword_image = candidate_image
+        elsif candidate_alt contains 'carry'
+          assign scale_keyword_image = candidate_image
+        endif
+      endif
+
       if preferred_keyword != blank and preferred_keyword_image == blank and candidate_alt contains preferred_keyword
         assign preferred_keyword_image = candidate_image
       endif
@@ -97,64 +171,30 @@
       endif
     endfor
 
-    if preferred_keyword_image != blank
-      assign resolved_image = preferred_keyword_image
-    elsif resolved_image_is_technical or resolved_image.aspect_ratio < preferred_ratio_min or resolved_image.aspect_ratio > preferred_ratio_max
-      assign resolved_image = preferred_image | default: preferred_non_technical_image | default: preferred_ratio_image | default: resolved_image
-    elsif resolved_variant == 'compare' and preferred_image != blank
-      assign resolved_image = preferred_image
+      if preferred_keyword_image != blank
+        assign resolved_image = preferred_keyword_image
+      else
+        case resolved_variant
+        when 'hero'
+          assign resolved_image = curated_hero_image | default: preferred_image | default: preferred_non_technical_image | default: resolved_image
+        when 'ports', 'detail'
+          assign resolved_image = curated_detail_image | default: detail_keyword_image | default: secondary_image | default: tertiary_image | default: preferred_image | default: preferred_non_technical_image | default: resolved_image
+        when 'setup', 'story'
+          assign resolved_image = curated_setup_image | default: context_keyword_image | default: tertiary_image | default: secondary_image | default: preferred_image | default: preferred_non_technical_image | default: resolved_image
+        when 'scale'
+          assign resolved_image = curated_scale_image | default: scale_keyword_image | default: quaternary_image | default: tertiary_image | default: secondary_image | default: preferred_non_technical_image | default: resolved_image
+        when 'compare'
+          assign resolved_image = curated_compare_image | default: preferred_image | default: preferred_non_technical_image | default: preferred_ratio_image | default: resolved_image
+        else
+          if resolved_image_is_technical or resolved_image.aspect_ratio < preferred_ratio_min or resolved_image.aspect_ratio > preferred_ratio_max
+            assign resolved_image = curated_hero_image | default: preferred_image | default: preferred_non_technical_image | default: preferred_ratio_image | default: resolved_image
+          endif
+      endcase
     endif
   endif
-
-  case resolved_handle
-    when 'usb-c-multimedia-hub'
-      case resolved_variant
-        when 'hero'
-          assign visual_asset = 'pdp-multimedia-hero.svg'
-        when 'compare'
-          assign visual_asset = 'compare-multimedia.svg'
-        when 'ports'
-          assign visual_asset = 'pdp-multimedia-ports.svg'
-        when 'setup'
-          assign visual_asset = 'pdp-multimedia-setup.svg'
-      endcase
-    when 'usb-c-travel-hub'
-      case resolved_variant
-        when 'hero'
-          assign visual_asset = 'pdp-travel-hero.svg'
-        when 'compare'
-          assign visual_asset = 'compare-travel.svg'
-        when 'ports'
-          assign visual_asset = 'pdp-travel-ports.svg'
-        when 'setup'
-          assign visual_asset = 'pdp-travel-setup.svg'
-      endcase
-    when 'usb-c-pro-dock'
-      case resolved_variant
-        when 'hero'
-          assign visual_asset = 'pdp-dock-hero.svg'
-        when 'compare'
-          assign visual_asset = 'compare-dock.svg'
-        when 'ports'
-          assign visual_asset = 'pdp-dock-ports.svg'
-        when 'setup'
-          assign visual_asset = 'pdp-dock-setup.svg'
-      endcase
-  endcase
 -%}
 {% if resolved_image != blank %}
   {{ resolved_image | image_url: width: resolved_width | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
-{% elsif visual_asset != blank %}
-  <img
-    src="{{ visual_asset | asset_url }}"
-    alt="{{ resolved_alt | escape }}"
-    class="{{ resolved_class }}"
-    width="{{ resolved_width }}"
-    height="{{ resolved_height }}"
-    loading="{{ resolved_loading }}"
-    fetchpriority="{{ resolved_fetchpriority }}"
-    decoding="async"
-  >
 {% else %}
   {% render 'placeholder-visual',
     kind: resolved_kind,

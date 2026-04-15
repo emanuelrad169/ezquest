@@ -6,30 +6,76 @@
   assign resolved_class = class | default: ''
   assign resolved_loading = loading | default: 'lazy'
   assign resolved_fetchpriority = fetchpriority | default: 'auto'
-  assign visual_asset = blank
+  assign primary_handle = blank
+  assign secondary_handle = blank
+  assign tertiary_handle = blank
 
   case resolved_handle
     when 'hubs-adapters'
-      assign visual_asset = 'collection-hubs-adapters.svg'
+      assign primary_handle = 'usb-c-multimedia-7-in-1-hub'
+      assign secondary_handle = 'usb-c-slim-gen-2-hub-adapter-6-in-1'
+      assign tertiary_handle = 'usb-c-multimedia-8-in-1-hub'
     when 'docking-stations'
-      assign visual_asset = 'collection-docking-stations.svg'
+      assign primary_handle = 'usb-c-pro-dock'
+      assign secondary_handle = 'dual-hdmi-usb-c-multimedia-hub-adapter-12-ports'
+      assign tertiary_handle = 'dual-usb-c-multimedia-hub-13-ports'
     when 'chargers-power'
-      assign visual_asset = 'collection-chargers-power.svg'
+      assign primary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+      assign secondary_handle = 'ultraslim-wall-charger-dual-usb-c-70w'
+      assign tertiary_handle = 'ultimatepower-65w-gan-usb-c-pd-wall-charger'
     when 'accessories'
-      assign visual_asset = 'collection-accessories.svg'
+      assign primary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+      assign secondary_handle = 'usb-c-to-displayport-4k-60hz-cable'
+      assign tertiary_handle = 'usb-c-to-hdmi-4k-60hz-adapter'
   endcase
 -%}
-{% if visual_asset != blank %}
-  <img
-    src="{{ visual_asset | asset_url }}"
-    alt="{{ alt | default: resolved_title | escape }}"
-    class="{{ resolved_class }}"
-    width="{{ resolved_width }}"
-    height="{{ resolved_height }}"
-    loading="{{ resolved_loading }}"
-    fetchpriority="{{ resolved_fetchpriority }}"
-    decoding="async"
-  >
+{% if primary_handle != blank or secondary_handle != blank or tertiary_handle != blank %}
+  <div class="owned-collection-scene {{ resolved_class }}" aria-label="{{ alt | default: resolved_title | escape }}">
+    <div class="owned-collection-scene-glow" aria-hidden="true"></div>
+    <div class="owned-collection-scene-floor" aria-hidden="true"></div>
+    <div class="owned-collection-scene-copy">
+      <p class="owned-collection-scene-label">{{ resolved_title }}</p>
+      <p class="owned-collection-scene-subtitle">Curated EZQuest family lineup</p>
+    </div>
+    <div class="owned-collection-scene-stage">
+      <div class="owned-collection-product owned-collection-product--primary">
+        {% render 'owned-product-visual',
+          product_handle: primary_handle,
+          product_title: resolved_title,
+          variant: 'hero',
+          width: resolved_width,
+          height: resolved_height,
+          class: 'owned-collection-scene-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+      <div class="owned-collection-product owned-collection-product--secondary">
+        {% render 'owned-product-visual',
+          product_handle: secondary_handle,
+          product_title: resolved_title,
+          variant: 'setup',
+          width: resolved_width,
+          height: resolved_height,
+          class: 'owned-collection-scene-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+      <div class="owned-collection-product owned-collection-product--tertiary">
+        {% render 'owned-product-visual',
+          product_handle: tertiary_handle,
+          product_title: resolved_title,
+          variant: 'ports',
+          width: resolved_width,
+          height: resolved_height,
+          class: 'owned-collection-scene-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+    </div>
+  </div>
 {% else %}
   {% render 'placeholder-visual',
     kind: 'collection',

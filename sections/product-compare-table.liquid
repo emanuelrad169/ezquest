@@ -140,6 +140,10 @@
 
   assign support_url = '/pages/support' | append: compare_group_query
   assign compatibility_url = '/pages/compatibility' | append: compare_group_query
+  assign recommended_product = blank
+  if recommended_handle != blank
+    assign recommended_product = all_products[recommended_handle]
+  endif
 -%}
 
 <section class="compare-page-section section-shell" data-compare-count="{{ compare_count }}">
@@ -166,6 +170,60 @@
           <p class="compare-intent-note">{{ section_note }}</p>
         {% endif %}
       </div>
+
+      {% if recommended_product != blank %}
+        <div class="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch">
+          <div class="overflow-hidden rounded-card-md border border-slate-200 bg-slate-50 p-4 shadow-soft">
+            <div class="flex items-end justify-between gap-4">
+              <div>
+                <p class="section-kicker">Lineup</p>
+                <h2 class="card-title mt-3">See the products side by side</h2>
+              </div>
+              <a href="{{ recommended_product.url | append: compare_group_query }}" class="site-meta-link">Open recommended product</a>
+            </div>
+            <div class="compare-lineup-scene mt-5">
+              {% for compare_handle in ordered_handles %}
+                {% assign compare_product = all_products[compare_handle] %}
+                {% if compare_product != blank %}
+                  <div class="compare-lineup-product{% if compare_handle == recommended_handle %} is-recommended{% endif %}">
+                    {% render 'product-browse-media',
+                      product: compare_product,
+                      context: 'compare',
+                      variant: 'compare',
+                      width: 480,
+                      height: 480,
+                      class: 'compare-lineup-image'
+                    %}
+                    <p class="compare-lineup-title">{{ compare_product.title }}</p>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="overflow-hidden rounded-card-md border border-slate-200 bg-white p-4 shadow-soft">
+            <p class="section-kicker">Recommended view</p>
+            <h2 class="card-title mt-3">{{ recommended_product.title }}</h2>
+            <div class="compare-recommended-scene mt-5">
+              {% render 'product-browse-media',
+                product: recommended_product,
+                context: 'compare',
+                variant: 'setup',
+                width: 900,
+                height: 675,
+                class: 'compare-recommended-image'
+              %}
+            </div>
+            {% assign recommended_summary = recommended_product.metafields.ezquest.compare_short_reason.value | default: recommended_product.metafields.ezquest.compare_short_reason | strip %}
+            {% if recommended_summary == blank and recommended_product.metafields.ezquest.support_summary != blank %}
+              {% assign recommended_summary = recommended_product.metafields.ezquest.support_summary | metafield_tag | strip_html | strip %}
+            {% endif %}
+            {% if recommended_summary != blank %}
+              <p class="mt-4 text-sm leading-7 text-slate-600">{{ recommended_summary | truncatewords: 24 }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
 
       <div class="compare-choice-grid" data-compare-count="{{ compare_count }}">
         {% for compare_handle in ordered_handles %}

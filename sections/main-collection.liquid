@@ -19,6 +19,7 @@
         assign promo_link_label = blank
         assign promo_insert_index = 4
         assign family_handle_list = 'hubs-adapters|docking-stations|chargers-power|accessories' | split: '|'
+        assign use_owned_collection_scene = false
         assign setup_guide_url = '/pages/help-me-choose'
         assign family_compare_url = '/pages/compare'
         assign lead_product_url = blank
@@ -40,6 +41,7 @@
 
         case collection.handle
           when 'hubs-adapters'
+            assign use_owned_collection_scene = true
             assign category_label = 'Hybrid + travel'
             assign category_statement = 'Everyday expansion for travel, hybrid desks, and lighter display setups.'
             assign fallback_product_handles = 'usb-c-multimedia-hub,usb-c-travel-hub'
@@ -48,6 +50,7 @@
             assign promo_copy = 'See the docks built for displays, Ethernet, charging, and a cleaner desk.'
             assign promo_link_label = 'View docking stations'
           when 'docking-stations'
+            assign use_owned_collection_scene = true
             assign category_label = 'Desk command'
             assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and control.'
             assign fallback_product_handles = 'usb-c-pro-dock'
@@ -56,6 +59,7 @@
             assign promo_copy = 'Pair the desk with chargers and power accessories that keep every device ready.'
             assign promo_link_label = 'View chargers and power'
           when 'chargers-power'
+            assign use_owned_collection_scene = true
             assign category_label = 'Power layer'
             assign category_statement = 'Charging products for cleaner travel kits, desks, and multi-device routines.'
             assign promo_handle = 'accessories'
@@ -63,6 +67,7 @@
             assign promo_copy = 'Add the cables and accessories that keep power clean and dependable.'
             assign promo_link_label = 'View accessories'
           when 'accessories'
+            assign use_owned_collection_scene = true
             assign category_label = 'Finish the setup'
             assign category_statement = 'Cables and finishing pieces that make the setup feel complete and dependable.'
             assign promo_handle = 'hubs-adapters'
@@ -210,7 +215,17 @@
     <div class="collection-showcase-shell">
       <header class="collection-showcase">
         <div class="collection-showcase-media">
-          {% if collection_visual != blank %}
+          {% if use_owned_collection_scene %}
+            {% render 'owned-collection-visual',
+              collection_handle: collection.handle,
+              collection_title: collection.title,
+              width: 1800,
+              height: 1200,
+              class: 'collection-showcase-image',
+              loading: 'eager',
+              fetchpriority: 'high'
+            %}
+          {% elsif collection_visual != blank %}
             {{ collection_visual | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-showcase-image' }}
           {% else %}
             {% render 'owned-collection-visual',

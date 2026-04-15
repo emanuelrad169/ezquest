@@ -156,81 +156,94 @@
 
     {% when 'collections' %}
       <div class="mega-menu-panel-surface rounded-shell bg-white p-4 shadow-lift lg:p-5">
-        <div class="grid gap-5 lg:grid-cols-12" data-mega-stage-root>
-          <aside class="mega-menu-panel-aside flex flex-col gap-3 rounded-card-sm border border-slate-200 bg-slate-50 p-3 lg:col-span-3">
-            <p class="mega-menu-side-label">Browse product families</p>
+        {% capture collection_taxonomy_markup %}
+          {% render 'collection-taxonomy-groups',
+            context: 'mega',
+            section: section,
+            eyebrow: 'Browse product families',
+            footer_href: routes.collections_url,
+            footer_label: 'Browse all product families'
+          %}
+        {% endcapture %}
+        {% if collection_taxonomy_markup != blank %}
+          {{ collection_taxonomy_markup }}
+        {% else %}
+          <div class="grid gap-5 lg:grid-cols-12" data-mega-stage-root>
+            <aside class="mega-menu-panel-aside flex flex-col gap-3 rounded-card-sm border border-slate-200 bg-slate-50 p-3 lg:col-span-3">
+              <p class="mega-menu-side-label">Browse product families</p>
 
-            <div class="grid gap-1" role="tablist" aria-label="Browse product families">
+              <div class="grid gap-1" role="tablist" aria-label="Browse product families">
+                {% for category_handle in category_handles %}
+                  {% assign category_index = forloop.index0 %}
+                  {% assign category_collection = collections[category_handle] %}
+                  <button
+                    type="button"
+                    class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
+                    data-mega-stage-target="family-{{ category_handle }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                  >
+                    <span class="mega-menu-rail-item-copy">
+                      <span class="mega-menu-rail-item-title">{{ category_labels[category_index] }}</span>
+                    </span>
+                  </button>
+                {% endfor %}
+              </div>
+
+              <a href="{{ routes.collections_url }}" class="mega-menu-rail-link">Browse all product families</a>
+            </aside>
+
+            <div class="grid lg:col-span-9">
               {% for category_handle in category_handles %}
                 {% assign category_index = forloop.index0 %}
                 {% assign category_collection = collections[category_handle] %}
-                <button
-                  type="button"
-                  class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
-                  data-mega-stage-target="family-{{ category_handle }}"
-                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                >
-                  <span class="mega-menu-rail-item-copy">
-                    <span class="mega-menu-rail-item-title">{{ category_labels[category_index] }}</span>
-                  </span>
-                </button>
+                {% if category_collection == blank %}
+                  {% continue %}
+                {% endif %}
+                {%- liquid
+                  assign category_best_for = 'All products'
+                  case category_handle
+                    when 'hubs-adapters'
+                      assign category_best_for = 'Daily carry'
+                    when 'docking-stations'
+                      assign category_best_for = 'Desk setups'
+                    when 'chargers-power'
+                      assign category_best_for = 'Charging'
+                    when 'accessories'
+                      assign category_best_for = 'Accessories'
+                  endcase
+                -%}
+                <section class="mega-menu-stage-panel{% if forloop.first %} is-active{% endif %} grid content-start gap-4 rounded-card-sm border border-slate-200 bg-white p-4 lg:p-5" data-mega-stage-panel="family-{{ category_handle }}"{% unless forloop.first %} hidden{% endunless %}>
+                  <div class="mega-menu-stage-head">
+                    <h2 class="mega-menu-stage-title">{{ category_labels[category_index] }}</h2>
+                  </div>
+                  <div class="grid gap-3 lg:grid-cols-2">
+                    {% for product in category_collection.products limit: 2 %}
+                      {%- liquid
+                        assign stage_card_class = ''
+                        assign stage_card_eyebrow = blank
+                        if forloop.first
+                          assign stage_card_class = 'mega-menu-stage-card--priority'
+                          assign stage_card_eyebrow = category_best_for
+                        endif
+                      -%}
+                      {% render 'mega-menu-stage-card',
+                        product: product,
+                        card_layout: 'showcase',
+                        card_class: stage_card_class,
+                        eyebrow: stage_card_eyebrow,
+                        show_descriptor: false,
+                        show_price: false
+                      %}
+                    {% endfor %}
+                  </div>
+                  <div class="flex justify-start pt-0.5">
+                    <a href="{{ category_collection.url | default: routes.collections_url }}" class="button-tertiary mega-menu-stage-view-all">View all {{ category_labels[category_index] | downcase }}</a>
+                  </div>
+                </section>
               {% endfor %}
             </div>
-
-            <a href="{{ routes.collections_url }}" class="mega-menu-rail-link">Browse all product families</a>
-          </aside>
-
-          <div class="grid lg:col-span-9">
-            {% for category_handle in category_handles %}
-              {% assign category_index = forloop.index0 %}
-              {% assign category_collection = collections[category_handle] %}
-              {% if category_collection == blank %}
-                {% continue %}
-              {% endif %}
-              {%- liquid
-                assign category_best_for = 'All products'
-                case category_handle
-                  when 'hubs-adapters'
-                    assign category_best_for = 'Daily carry'
-                  when 'docking-stations'
-                    assign category_best_for = 'Desk setups'
-                  when 'chargers-power'
-                    assign category_best_for = 'Charging'
-                  when 'accessories'
-                    assign category_best_for = 'Accessories'
-                endcase
-              -%}
-              <section class="mega-menu-stage-panel{% if forloop.first %} is-active{% endif %} grid content-start gap-4 rounded-card-sm border border-slate-200 bg-white p-4 lg:p-5" data-mega-stage-panel="family-{{ category_handle }}"{% unless forloop.first %} hidden{% endunless %}>
-                <div class="mega-menu-stage-head">
-                  <h2 class="mega-menu-stage-title">{{ category_labels[category_index] }}</h2>
-                </div>
-                <div class="grid gap-3 lg:grid-cols-2">
-                  {% for product in category_collection.products limit: 2 %}
-                    {%- liquid
-                      assign stage_card_class = ''
-                      assign stage_card_eyebrow = blank
-                      if forloop.first
-                        assign stage_card_class = 'mega-menu-stage-card--priority'
-                        assign stage_card_eyebrow = category_best_for
-                      endif
-                    -%}
-                    {% render 'mega-menu-stage-card',
-                      product: product,
-                      card_layout: 'showcase',
-                      card_class: stage_card_class,
-                      eyebrow: stage_card_eyebrow,
-                      show_descriptor: false,
-                      show_price: false
-                    %}
-                  {% endfor %}
-                </div>
-                <div class="flex justify-start pt-0.5">
-                  <a href="{{ category_collection.url | default: routes.collections_url }}" class="button-tertiary mega-menu-stage-view-all">View all {{ category_labels[category_index] | downcase }}</a>
-                </div>
-              </section>
-            {% endfor %}
           </div>
-        </div>
+        {% endif %}
       </div>
 
     {% when 'compare' %}

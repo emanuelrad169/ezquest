@@ -1,72 +1,72 @@
 {%- liquid
-  assign resolved_context = context | default: page.handle | default: 'support'
-  assign resolved_width = width | default: 1440
-  assign resolved_height = height | default: 1080
+  assign resolved_visual = visual | default: 'support'
   assign resolved_class = class | default: ''
   assign resolved_loading = loading | default: 'lazy'
   assign resolved_fetchpriority = fetchpriority | default: 'auto'
-  assign visual_asset = blank
-  assign visual_label = alt | default: 'EZQuest support visual'
+  assign primary_handle = 'usb-c-multimedia-7-in-1-hub'
+  assign secondary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+  assign tertiary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+  assign label = 'Support'
 
-  case resolved_context
-    when 'support'
-      assign visual_asset = 'support-hub.svg'
-      assign visual_label = alt | default: 'EZQuest ownership support hub'
+  case resolved_visual
     when 'downloads'
-      assign visual_asset = 'support-downloads.svg'
-      assign visual_label = alt | default: 'EZQuest downloads and firmware support'
-    when 'firmware'
-      assign visual_asset = 'support-downloads.svg'
-      assign visual_label = alt | default: 'EZQuest firmware updates and release guidance'
+      assign primary_handle = 'usb-c-multimedia-7-in-1-hub'
+      assign secondary_handle = 'usb-c-slim-gen-2-hub-adapter-6-in-1'
+      assign tertiary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+      assign label = 'Downloads'
     when 'manuals'
-      assign visual_asset = 'support-manuals.svg'
-      assign visual_label = alt | default: 'EZQuest manuals and setup guidance'
-    when 'user-guides'
-      assign visual_asset = 'support-manuals.svg'
-      assign visual_label = alt | default: 'EZQuest user guides and setup flows'
+      assign primary_handle = 'usb-c-multimedia-8-in-1-hub'
+      assign secondary_handle = 'usb-c-multimedia-7-in-1-hub'
+      assign tertiary_handle = 'usb-c-slim-gen-2-hub-adapter-6-in-1'
+      assign label = 'Manuals'
     when 'compatibility'
-      assign visual_asset = 'support-compatibility.svg'
-      assign visual_label = alt | default: 'EZQuest compatibility guidance'
-    when 'faq'
-      assign visual_asset = 'support-faq.svg'
-      assign visual_label = alt | default: 'EZQuest FAQ and support guidance'
-    when 'troubleshooting'
-      assign visual_asset = 'support-faq.svg'
-      assign visual_label = alt | default: 'EZQuest troubleshooting and guided resolution'
-    when 'help-me-choose'
-      assign visual_asset = 'support-compatibility.svg'
-      assign visual_label = alt | default: 'EZQuest setup selection and product guidance'
-    when 'contact'
-      assign visual_asset = 'support-faq.svg'
-      assign visual_label = alt | default: 'EZQuest direct support and ownership help'
-    when 'ticket-submission'
-      assign visual_asset = 'support-faq.svg'
-      assign visual_label = alt | default: 'EZQuest ticket submission and direct support'
-    when 'warranty'
-      assign visual_asset = 'support-hub.svg'
-      assign visual_label = alt | default: 'EZQuest warranty and claim guidance'
-    when 'shipping-returns'
-      assign visual_asset = 'support-hub.svg'
-      assign visual_label = alt | default: 'EZQuest shipping and returns guidance'
+      assign primary_handle = 'usb-c-pro-dock'
+      assign secondary_handle = 'dual-hdmi-usb-c-multimedia-hub-adapter-12-ports'
+      assign tertiary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+      assign label = 'Compatibility'
   endcase
 -%}
-{% if visual_asset != blank %}
-  <img
-    src="{{ visual_asset | asset_url }}"
-    alt="{{ visual_label | escape }}"
-    class="{{ resolved_class }}"
-    width="{{ resolved_width }}"
-    height="{{ resolved_height }}"
-    loading="{{ resolved_loading }}"
-    fetchpriority="{{ resolved_fetchpriority }}"
-    decoding="async"
-  >
-{% else %}
-  {% render 'placeholder-visual',
-    kind: 'support',
-    text: visual_label,
-    width: resolved_width,
-    height: resolved_height,
-    class: resolved_class
-  %}
-{% endif %}
+<div class="owned-support-visual owned-support-visual--{{ resolved_visual }} {{ resolved_class }}">
+  <div class="owned-support-visual-glow" aria-hidden="true"></div>
+  <div class="owned-support-visual-stage">
+    <div class="owned-support-visual-copy">
+      <p class="owned-support-visual-label">{{ label }}</p>
+      <p class="owned-support-visual-note">EZQuest help, tied to the right product.</p>
+    </div>
+    <div class="owned-support-visual-stack">
+      <div class="owned-support-visual-card owned-support-visual-card--primary">
+        {% render 'owned-product-visual',
+          product_handle: primary_handle,
+          variant: 'setup',
+          width: 1000,
+          height: 750,
+          class: 'owned-support-visual-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+      <div class="owned-support-visual-card owned-support-visual-card--secondary">
+        {% render 'owned-product-visual',
+          product_handle: secondary_handle,
+          variant: 'detail',
+          width: 720,
+          height: 540,
+          class: 'owned-support-visual-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+      <div class="owned-support-visual-card owned-support-visual-card--tertiary">
+        {% render 'owned-product-visual',
+          product_handle: tertiary_handle,
+          variant: 'hero',
+          width: 720,
+          height: 540,
+          class: 'owned-support-visual-image',
+          loading: resolved_loading,
+          fetchpriority: resolved_fetchpriority
+        %}
+      </div>
+    </div>
+  </div>
+</div>

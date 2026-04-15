@@ -53,11 +53,22 @@
         {% for block in section.blocks %}
           {%- liquid
             assign block_eyebrow = block.settings.eyebrow
+            assign support_visual = 'support'
             if block_eyebrow == blank
               assign block_eyebrow = forloop.index | prepend: '0'
             endif
+            if block.settings.link_url contains '/pages/downloads'
+              assign support_visual = 'downloads'
+            elsif block.settings.link_url contains '/pages/manuals'
+              assign support_visual = 'manuals'
+            elsif block.settings.link_url contains '/pages/compatibility'
+              assign support_visual = 'compatibility'
+            endif
           -%}
           <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %} motion-lift" {{ block.shopify_attributes }}>
+            <div class="support-tile-visual">
+              {% render 'owned-support-visual', visual: support_visual, class: 'support-tile-visual-image' %}
+            </div>
             <div class="flex items-center justify-between gap-4">
               <p class="section-kicker">{{ block_eyebrow }}</p>
               <span class="support-tile-badge">
@@ -86,10 +97,13 @@
                 <a href="{{ block.settings.link_url }}" class="button-secondary"{% if block.settings.link_url contains '/pages/' %} data-support-context-link{% endif %}>{{ block.settings.link_label | default: 'View page' }}</a>
               {% endif %}
             </div>
-          </article>
-        {% else %}
+            </article>
+          {% else %}
           {% for i in (1..4) %}
             <article class="support-tile{% if forloop.first %} support-tile--featured{% endif %}">
+              <div class="support-tile-visual">
+                {% render 'owned-support-visual', visual: 'support', class: 'support-tile-visual-image' %}
+              </div>
               <div class="flex items-center justify-between gap-4">
                 <p class="section-kicker">{{ i | prepend: '0' }}</p>
                 <span class="support-tile-badge">{% if forloop.first %}Fastest start{% else %}Support path{% endif %}</span>

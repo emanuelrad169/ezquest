@@ -55,7 +55,7 @@
       "type": "home-collections-strip",
       "settings": {
         "heading": "Shop by product family",
-        "copy": "Browse hubs, docks, chargers, and accessories by the ports, power, and display support you need."
+        "copy": "Browse hubs, docks, chargers, and accessories."
       },
       "blocks": {
         "category_1": {
@@ -193,46 +193,7 @@
       "type": "home-press",
       "settings": {
         "heading": "As Featured In"
-      },
-      "blocks": {
-        "press_1": {
-          "type": "logo",
-          "settings": {
-            "label": "Great Value"
-          }
-        },
-        "press_2": {
-          "type": "logo",
-          "settings": {
-            "label": "How-To Geek"
-          }
-        },
-        "press_3": {
-          "type": "logo",
-          "settings": {
-            "label": "Forbes"
-          }
-        },
-        "press_4": {
-          "type": "logo",
-          "settings": {
-            "label": "CNN"
-          }
-        },
-        "press_5": {
-          "type": "logo",
-          "settings": {
-            "label": "One More Gadget"
-          }
-        },
-        "press_6": {
-          "type": "logo",
-          "settings": {
-            "label": "Tom's Guide"
-          }
-        }
-      },
-      "block_order": ["press_1", "press_2", "press_3", "press_4", "press_5", "press_6"]
+      }
     }
   },
   "order": ["hero", "categories", "feature_bento", "feature_banner", "story", "confidence", "testimonials", "press"]

@@ -1,0 +1,71 @@
+{%- liquid
+  assign resolved_scene = scene | default: 'desk'
+  assign resolved_class = class | default: ''
+  assign resolved_loading = loading | default: 'lazy'
+  assign resolved_fetchpriority = fetchpriority | default: 'auto'
+  assign primary_handle = 'usb-c-pro-dock'
+  assign secondary_handle = 'usb-c-multimedia-7-in-1-hub'
+  assign tertiary_handle = 'dual-hdmi-usb-c-multimedia-hub-adapter-12-ports'
+  assign primary_variant = 'hero'
+  assign secondary_variant = 'setup'
+  assign tertiary_variant = 'detail'
+  assign accent_label = 'Desk-ready'
+
+  case resolved_scene
+    when 'travel'
+      assign primary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+      assign secondary_handle = 'usb-c-slim-gen-2-hub-adapter-6-in-1'
+      assign tertiary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+      assign secondary_variant = 'hero'
+      assign tertiary_variant = 'detail'
+      assign accent_label = 'Travel-ready'
+    when 'support'
+      assign primary_handle = 'usb-c-multimedia-7-in-1-hub'
+      assign secondary_handle = 'duraguard-usb-c-to-usb-a-charge-and-sync-cable'
+      assign tertiary_handle = 'worldtravel-65w-gan-5-port-pd-wall-charger'
+      assign primary_variant = 'setup'
+      assign secondary_variant = 'detail'
+      assign tertiary_variant = 'hero'
+      assign accent_label = 'Ownership'
+  endcase
+-%}
+<div class="owned-hero-scene owned-hero-scene--{{ resolved_scene }} {{ resolved_class }}">
+  <div class="owned-hero-scene-glow" aria-hidden="true"></div>
+  <div class="owned-hero-scene-floor" aria-hidden="true"></div>
+  <p class="owned-hero-scene-kicker">{{ accent_label }}</p>
+  <div class="owned-hero-scene-stage">
+    <div class="owned-hero-scene-product owned-hero-scene-product--primary">
+      {% render 'owned-product-visual',
+        product_handle: primary_handle,
+        variant: primary_variant,
+        width: 1800,
+        height: 1350,
+        class: 'owned-hero-scene-image',
+        loading: resolved_loading,
+        fetchpriority: resolved_fetchpriority
+      %}
+    </div>
+    <div class="owned-hero-scene-product owned-hero-scene-product--secondary">
+      {% render 'owned-product-visual',
+        product_handle: secondary_handle,
+        variant: secondary_variant,
+        width: 1200,
+        height: 900,
+        class: 'owned-hero-scene-image',
+        loading: resolved_loading,
+        fetchpriority: resolved_fetchpriority
+      %}
+    </div>
+    <div class="owned-hero-scene-product owned-hero-scene-product--tertiary">
+      {% render 'owned-product-visual',
+        product_handle: tertiary_handle,
+        variant: tertiary_variant,
+        width: 900,
+        height: 720,
+        class: 'owned-hero-scene-image',
+        loading: resolved_loading,
+        fetchpriority: resolved_fetchpriority
+      %}
+    </div>
+  </div>
+</div>
