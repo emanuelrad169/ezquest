@@ -1,6 +1,7 @@
 {%- liquid
   assign use_global_faqs = false
   assign sorted_global_faq_keys = '' | split: ''
+  assign has_group_blocks = false
 
   if metaobjects.ezquest_faq_item != blank
     assign use_global_faqs = true
@@ -19,158 +20,206 @@
     endcapture
     assign sorted_global_faq_keys = sorted_faqs_raw | split: '||' | sort_natural
   endif
+
+  for block in section.blocks
+    if block.type == 'group'
+      assign has_group_blocks = true
+      break
+    endif
+  endfor
 -%}
 
-<section class="faq-two-col" id="faq-section-{{ section.id }}">
-  <div class="faq-beam-wrap" aria-hidden="true">
-    <svg class="faq-tracing-beam" viewBox="0 0 2 400" preserveAspectRatio="none">
-      <path d="M1 0 L1 400" class="faq-beam-track"/>
-      <path d="M1 0 L1 400" class="faq-beam-fill" id="faq-beam-fill-{{ section.id }}"/>
-    </svg>
-  </div>
-
-  <div class="page-width faq-two-col__inner">
-
-    <!-- Sticky header column -->
-    <div class="faq-two-col__header">
-      <div class="faq-header-sticky">
+<section class="faq-accordion-section section-shell" id="faq-section-{{ section.id }}">
+  <div class="container-shell faq-accordion-shell">
+    {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.header_copy != blank %}
+      <div class="faq-accordion-intro">
         {% if section.settings.eyebrow != blank %}
-          <p class="faq-header__kicker">{{ section.settings.eyebrow }}</p>
+          <p class="faq-accordion-intro__kicker">{{ section.settings.eyebrow }}</p>
         {% endif %}
-        <h1 class="faq-header__heading">{{ section.settings.heading | default: 'Frequently asked questions' }}</h1>
+        {% if section.settings.heading != blank %}
+          <h2 class="faq-accordion-intro__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
         {% if section.settings.header_copy != blank %}
-          <p class="faq-header__copy">{{ section.settings.header_copy }}</p>
+          <p class="faq-accordion-intro__copy">{{ section.settings.header_copy }}</p>
         {% endif %}
-        <div class="faq-header__support">
-          <p class="faq-header__support-label">Still have a question?</p>
-          <a href="/pages/contact" class="faq-header__support-link">Contact support <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
       </div>
-    </div>
+    {% endif %}
 
-    <!-- Accordion list column -->
-    <div class="faq-two-col__list" id="faq-list-{{ section.id }}">
-      {% if section.blocks.size > 0 %}
+    <div class="faq-accordion-groups">
+      {% if has_group_blocks %}
         {%- assign item_index = 0 -%}
         {% for block in section.blocks %}
           {% if block.type == 'group' %}
             {%- assign group_filter = block.settings.group_handle | downcase -%}
             {%- assign group_faq_count = 0 -%}
-            <div class="faq-group" {{ block.shopify_attributes }}>
-              <h2 class="faq-group__title faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}">{{ block.settings.title }}</h2>
-              {% if block.settings.subtitle != blank %}
-                <p class="faq-group__subtitle">{{ block.settings.subtitle }}</p>
-              {% endif %}
+            <section class="faq-group" {{ block.shopify_attributes }}>
+              <div class="faq-group__header faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}">
+                <h3 class="faq-group__title">{{ block.settings.title }}</h3>
+                {% if block.settings.subtitle != blank %}
+                  <p class="faq-group__subtitle">{{ block.settings.subtitle }}</p>
+                {% endif %}
+              </div>
 
-              {% if use_global_faqs and group_filter != blank %}
-                {% for faq_key in sorted_global_faq_keys %}
-                  {% if faq_key == blank %}{% continue %}{% endif %}
-                  {% assign faq_handle = faq_key | split: '::' | last %}
-                  {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-                  {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
-                  {% if item_group == group_filter %}
-                    <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
-                      <summary class="faq-item__q">
-                        <span>{{ faq_item.question.value }}</span>
-                        <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </summary>
-                      <div class="faq-item__a"><p>{{ faq_item.answer.value | newline_to_br }}</p></div>
-                    </details>
-                    {%- assign group_faq_count = group_faq_count | plus: 1 -%}
-                    {%- assign item_index = item_index | plus: 1 -%}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
+              <div class="faq-group__items">
+                {% if use_global_faqs and group_filter != blank %}
+                  {% for faq_key in sorted_global_faq_keys %}
+                    {% if faq_key == blank %}{% continue %}{% endif %}
+                    {% assign faq_handle = faq_key | split: '::' | last %}
+                    {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
+                    {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
+                    {% if item_group == group_filter %}
+                      {%- assign item_number = item_index | plus: 1 -%}
+                      {%- capture faq_number_raw -%}00{{ item_number }}{%- endcapture -%}
+                      {%- assign faq_number = faq_number_raw | slice: -2, 2 -%}
+                      <details class="faq-card faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
+                        <summary class="faq-card__summary">
+                          <span class="faq-card__number">{{ faq_number }}</span>
+                          <span class="faq-card__question">{{ faq_item.question.value }}</span>
+                          <span class="faq-card__toggle" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-card__body">
+                          <div class="faq-card__body-inner">{{ faq_item.answer.value | newline_to_br }}</div>
+                        </div>
+                      </details>
+                      {%- assign group_faq_count = group_faq_count | plus: 1 -%}
+                      {%- assign item_index = item_index | plus: 1 -%}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
 
-              {%- assign block_faq_count = 0 -%}
-              {% if group_faq_count == 0 %}
-                {% for item_block in section.blocks %}
-                  {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
-                    <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-block-{{ item_block.id }}">
-                      <summary class="faq-item__q">
-                        <span>{{ item_block.settings.question }}</span>
-                        <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </summary>
-                      <div class="faq-item__a"><p>{{ item_block.settings.answer }}</p></div>
-                    </details>
-                    {%- assign block_faq_count = block_faq_count | plus: 1 -%}
-                    {%- assign item_index = item_index | plus: 1 -%}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
+                {%- assign block_faq_count = 0 -%}
+                {% if group_faq_count == 0 %}
+                  {% for item_block in section.blocks %}
+                    {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
+                      {%- assign item_number = item_index | plus: 1 -%}
+                      {%- capture faq_number_raw -%}00{{ item_number }}{%- endcapture -%}
+                      {%- assign faq_number = faq_number_raw | slice: -2, 2 -%}
+                      <details class="faq-card faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-block-{{ item_block.id }}">
+                        <summary class="faq-card__summary">
+                          <span class="faq-card__number">{{ faq_number }}</span>
+                          <span class="faq-card__question">{{ item_block.settings.question }}</span>
+                          <span class="faq-card__toggle" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-card__body">
+                          <div class="faq-card__body-inner">{{ item_block.settings.answer | newline_to_br }}</div>
+                        </div>
+                      </details>
+                      {%- assign block_faq_count = block_faq_count | plus: 1 -%}
+                      {%- assign item_index = item_index | plus: 1 -%}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
 
-              {% if group_faq_count == 0 and block_faq_count == 0 %}
-                <p class="faq-empty">No FAQs added to this group yet.</p>
-              {% endif %}
-            </div>
+                {% if group_faq_count == 0 and block_faq_count == 0 %}
+                  <p class="faq-empty">No FAQs added to this group yet.</p>
+                {% endif %}
+              </div>
+            </section>
           {% endif %}
         {% endfor %}
-
       {% else %}
-        <!-- Flat list fallback (no groups defined) -->
-        <div class="faq-group">
-          <h2 class="faq-group__title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
-          {% if use_global_faqs %}
+        <section class="faq-group">
+          <div class="faq-group__header faq-blur-in" data-reveal-delay="0">
+            <h3 class="faq-group__title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h3>
+          </div>
+
+          <div class="faq-group__items">
             {%- assign item_index = 0 -%}
-            {% for faq_key in sorted_global_faq_keys %}
-              {% if faq_key == blank %}{% continue %}{% endif %}
-              {% assign faq_handle = faq_key | split: '::' | last %}
-              {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-              <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
-                <summary class="faq-item__q">
-                  <span>{{ faq_item.question.value }}</span>
-                  <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </summary>
-                <div class="faq-item__a"><p>{{ faq_item.answer.value | newline_to_br }}</p></div>
-              </details>
-              {%- assign item_index = item_index | plus: 1 -%}
+            {% if use_global_faqs %}
+              {% for faq_key in sorted_global_faq_keys %}
+                {% if faq_key == blank %}{% continue %}{% endif %}
+                {% assign faq_handle = faq_key | split: '::' | last %}
+                {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
+                {%- assign item_number = item_index | plus: 1 -%}
+                {%- capture faq_number_raw -%}00{{ item_number }}{%- endcapture -%}
+                {%- assign faq_number = faq_number_raw | slice: -2, 2 -%}
+                <details class="faq-card faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
+                  <summary class="faq-card__summary">
+                    <span class="faq-card__number">{{ faq_number }}</span>
+                    <span class="faq-card__question">{{ faq_item.question.value }}</span>
+                    <span class="faq-card__toggle" aria-hidden="true"></span>
+                  </summary>
+                  <div class="faq-card__body">
+                    <div class="faq-card__body-inner">{{ faq_item.answer.value | newline_to_br }}</div>
+                  </div>
+                </details>
+                {%- assign item_index = item_index | plus: 1 -%}
+              {% endfor %}
+            {% endif %}
+
+            {% for block in section.blocks %}
+              {% if block.type == 'faq' %}
+                {%- assign item_number = item_index | plus: 1 -%}
+                {%- capture faq_number_raw -%}00{{ item_number }}{%- endcapture -%}
+                {%- assign faq_number = faq_number_raw | slice: -2, 2 -%}
+                <details class="faq-card faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-block-{{ block.id }}">
+                  <summary class="faq-card__summary">
+                    <span class="faq-card__number">{{ faq_number }}</span>
+                    <span class="faq-card__question">{{ block.settings.question }}</span>
+                    <span class="faq-card__toggle" aria-hidden="true"></span>
+                  </summary>
+                  <div class="faq-card__body">
+                    <div class="faq-card__body-inner">{{ block.settings.answer | newline_to_br }}</div>
+                  </div>
+                </details>
+                {%- assign item_index = item_index | plus: 1 -%}
+              {% endif %}
             {% endfor %}
-          {% else %}
-            <p class="faq-empty">No FAQ entries configured yet. <a href="/pages/contact">Contact support</a></p>
-          {% endif %}
-        </div>
+
+            {% if item_index == 0 %}
+              <p class="faq-empty">No FAQ entries configured yet. <a href="/pages/contact">Contact support</a></p>
+            {% endif %}
+          </div>
+        </section>
       {% endif %}
     </div>
 
+    <div class="faq-support-footer">
+      <div class="faq-support-footer__copy">
+        <p class="faq-support-footer__eyebrow">Still need help?</p>
+        <h3 class="faq-support-footer__title">{{ section.settings.contact_heading | default: 'Still need help?' }}</h3>
+        {% if section.settings.contact_sub != blank %}
+          <p class="faq-support-footer__text">{{ section.settings.contact_sub }}</p>
+        {% endif %}
+      </div>
+      <div class="faq-support-footer__action">
+        <a href="/pages/contact" class="button-secondary">Message</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
 (function () {
+  var section = document.getElementById('faq-section-{{ section.id }}');
+  if (!section) return;
+
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = section.querySelectorAll('.faq-blur-in');
+  var cards = section.querySelectorAll('.faq-card');
 
-  // TracingBeam: scroll-linked stroke-dashoffset
-  if (!prefersReduced) {
-    var section = document.getElementById('faq-section-{{ section.id }}');
-    var fill = document.getElementById('faq-beam-fill-{{ section.id }}');
-    if (section && fill) {
-      var pathLen = fill.getTotalLength ? fill.getTotalLength() : 400;
-      fill.style.strokeDasharray = pathLen;
-      fill.style.strokeDashoffset = pathLen;
-      function updateBeam() {
-        var rect = section.getBoundingClientRect();
-        var winH = window.innerHeight;
-        var progress = Math.max(0, Math.min(1, (-rect.top + winH * 0.25) / (rect.height - winH * 0.5)));
-        fill.style.strokeDashoffset = pathLen * (1 - progress);
-      }
-      window.addEventListener('scroll', updateBeam, { passive: true });
-      updateBeam();
-    }
-  }
+  cards.forEach(function (card) {
+    card.addEventListener('toggle', function () {
+      if (!card.open) return;
+      cards.forEach(function (other) {
+        if (other !== card) other.open = false;
+      });
+    });
+  });
 
-  // BlurFade reveal via IntersectionObserver
-  var items = document.querySelectorAll('#faq-section-{{ section.id }} .faq-blur-in');
   if (!prefersReduced) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          var el = e.target;
-          var delay = parseInt(el.dataset.revealDelay || '0', 10) || 0;
-          setTimeout(function () { el.classList.add('is-visible'); }, delay);
-          io.unobserve(el);
-        }
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var delay = parseInt(el.dataset.revealDelay || '0', 10) || 0;
+        setTimeout(function () {
+          el.classList.add('is-visible');
+        }, delay);
+        io.unobserve(el);
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.08 });
+
     items.forEach(function (el) { io.observe(el); });
   } else {
     items.forEach(function (el) { el.classList.add('is-visible'); });
