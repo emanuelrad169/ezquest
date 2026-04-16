@@ -13706,6 +13706,7 @@ select {
 }
 
 .faq-accordion-shell {
+  width: 100%;
   max-width: 52rem;
 }
 
@@ -13972,6 +13973,32 @@ select {
   .faq-card__body {
     padding: 0 1rem 1rem 3.65rem;
   }
+}
+
+/* Legacy FAQ layout fallback: collapse cached 40/60 split into one column */
+.faq-two-col {
+  background: var(--color-bg, #fff);
+}
+
+.faq-two-col__inner {
+  display: block;
+  width: 100%;
+}
+
+.faq-two-col__header,
+.faq-two-col__list {
+  width: 100%;
+  max-width: none;
+}
+
+.faq-header-sticky {
+  position: static;
+  top: auto;
+  margin-bottom: 2rem;
+}
+
+.faq-beam-wrap {
+  display: none;
 }
 
 /* ── Compare Sticky Table ─────────────────────────────────────────────────── */
