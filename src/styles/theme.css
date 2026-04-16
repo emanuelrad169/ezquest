@@ -13975,7 +13975,7 @@ select {
   }
 }
 
-/* Legacy FAQ layout fallback: collapse cached 40/60 split into one column */
+/* Legacy FAQ layout fallback: keep cached two-column FAQ at 40/60 */
 .faq-two-col {
   background: var(--color-bg, #fff);
 }
@@ -13999,6 +13999,25 @@ select {
 
 .faq-beam-wrap {
   display: none;
+}
+
+@media (min-width: 1024px) {
+  .faq-two-col__inner {
+    display: grid;
+    grid-template-columns: minmax(18rem, 40%) minmax(0, 60%);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .faq-two-col__header,
+  .faq-two-col__list {
+    width: auto;
+  }
+
+  .faq-header-sticky {
+    margin-bottom: 0;
+    padding-right: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
 }
 
 /* ── Compare Sticky Table ─────────────────────────────────────────────────── */
