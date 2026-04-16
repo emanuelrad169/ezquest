@@ -21,116 +21,170 @@
   endif
 -%}
 
-<section class="faq-page-section section-shell">
-  <div class="container-shell">
-    <div class="faq-page-shell">
+<section class="faq-two-col" id="faq-section-{{ section.id }}">
+  <div class="faq-beam-wrap" aria-hidden="true">
+    <svg class="faq-tracing-beam" viewBox="0 0 2 400" preserveAspectRatio="none">
+      <path d="M1 0 L1 400" class="faq-beam-track"/>
+      <path d="M1 0 L1 400" class="faq-beam-fill" id="faq-beam-fill-{{ section.id }}"/>
+    </svg>
+  </div>
 
-      <!-- FAQ groups -->
-      <div class="faq-page-main">
-        {% if section.blocks.size > 0 %}
-          {% for block in section.blocks %}
-            {% if block.type == 'group' %}
-              {%- assign group_filter = block.settings.group_handle | downcase -%}
-              {%- assign group_faq_count = 0 -%}
+  <div class="page-width faq-two-col__inner">
 
-              <div class="faq-group-card" {{ block.shopify_attributes }}>
-                <div class="faq-group-header">
-                  <h2 class="faq-group-title">{{ block.settings.title }}</h2>
-                  {% if block.settings.subtitle != blank %}
-                    <p class="faq-group-subtitle">{{ block.settings.subtitle }}</p>
-                  {% endif %}
-                </div>
+    <!-- Sticky header column -->
+    <div class="faq-two-col__header">
+      <div class="faq-header-sticky">
+        {% if section.settings.eyebrow != blank %}
+          <p class="faq-header__kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h1 class="faq-header__heading">{{ section.settings.heading | default: 'Frequently asked questions' }}</h1>
+        {% if section.settings.header_copy != blank %}
+          <p class="faq-header__copy">{{ section.settings.header_copy }}</p>
+        {% endif %}
+        <div class="faq-header__support">
+          <p class="faq-header__support-label">Still have a question?</p>
+          <a href="/pages/contact" class="faq-header__support-link">Contact support <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-                <div class="faq-list faq-group-list">
-                  {% if use_global_faqs and group_filter != blank %}
-                    {% for faq_key in sorted_global_faq_keys %}
-                      {% if faq_key == blank %}{% continue %}{% endif %}
-                      {% assign faq_handle = faq_key | split: '::' | last %}
-                      {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-                      {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
-                      {% if item_group == group_filter %}
-                        {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
-                        {% render 'accordion-item', title: faq_item.question.value, content: answer %}
-                        {%- assign group_faq_count = group_faq_count | plus: 1 -%}
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
+    <!-- Accordion list column -->
+    <div class="faq-two-col__list" id="faq-list-{{ section.id }}">
+      {% if section.blocks.size > 0 %}
+        {%- assign item_index = 0 -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'group' %}
+            {%- assign group_filter = block.settings.group_handle | downcase -%}
+            {%- assign group_faq_count = 0 -%}
+            <div class="faq-group" {{ block.shopify_attributes }}>
+              <h2 class="faq-group__title faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}">{{ block.settings.title }}</h2>
+              {% if block.settings.subtitle != blank %}
+                <p class="faq-group__subtitle">{{ block.settings.subtitle }}</p>
+              {% endif %}
 
-                  {%- assign block_faq_count = 0 -%}
-                  {% if group_faq_count == 0 %}
-                    {% for item_block in section.blocks %}
-                      {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
-                        {% capture answer %}<p>{{ item_block.settings.answer }}</p>{% endcapture %}
-                        {% render 'accordion-item', title: item_block.settings.question, content: answer %}
-                        {%- assign block_faq_count = block_faq_count | plus: 1 -%}
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                  {% if group_faq_count == 0 and block_faq_count == 0 %}
-                    <div class="section-empty-state">
-                      <p class="section-empty-state__message">No FAQs added to this group yet.</p>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          <!-- Flat list fallback (no groups defined) -->
-          <div class="faq-group-card">
-            <div class="faq-group-header">
-              <h2 class="faq-group-title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
-            </div>
-            <div class="faq-list faq-group-list">
-              {% if use_global_faqs %}
+              {% if use_global_faqs and group_filter != blank %}
                 {% for faq_key in sorted_global_faq_keys %}
                   {% if faq_key == blank %}{% continue %}{% endif %}
                   {% assign faq_handle = faq_key | split: '::' | last %}
                   {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-                  {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
-                  {% render 'accordion-item', title: faq_item.question.value, content: answer %}
+                  {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
+                  {% if item_group == group_filter %}
+                    <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
+                      <summary class="faq-item__q">
+                        <span>{{ faq_item.question.value }}</span>
+                        <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </summary>
+                      <div class="faq-item__a"><p>{{ faq_item.answer.value | newline_to_br }}</p></div>
+                    </details>
+                    {%- assign group_faq_count = group_faq_count | plus: 1 -%}
+                    {%- assign item_index = item_index | plus: 1 -%}
+                  {% endif %}
                 {% endfor %}
-              {% else %}
-                <div class="section-empty-state">
-                  <p class="section-empty-state__message">No FAQ entries configured yet. Add FAQ metaobject items in Shopify, or add FAQ group and item blocks in the editor.</p>
-                  <a href="/pages/contact" class="btn btn--secondary btn--sm mt-4">Contact support</a>
-                </div>
+              {% endif %}
+
+              {%- assign block_faq_count = 0 -%}
+              {% if group_faq_count == 0 %}
+                {% for item_block in section.blocks %}
+                  {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
+                    <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-block-{{ item_block.id }}">
+                      <summary class="faq-item__q">
+                        <span>{{ item_block.settings.question }}</span>
+                        <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </summary>
+                      <div class="faq-item__a"><p>{{ item_block.settings.answer }}</p></div>
+                    </details>
+                    {%- assign block_faq_count = block_faq_count | plus: 1 -%}
+                    {%- assign item_index = item_index | plus: 1 -%}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+              {% if group_faq_count == 0 and block_faq_count == 0 %}
+                <p class="faq-empty">No FAQs added to this group yet.</p>
               {% endif %}
             </div>
-          </div>
-        {% endif %}
-      </div>
+          {% endif %}
+        {% endfor %}
 
-      <!-- Contact form sidebar -->
-      <aside class="faq-page-aside">
-        <div class="faq-contact-card">
-          <h3 class="faq-contact-heading">{{ section.settings.contact_heading | default: "Still need help?" }}</h3>
-          <p class="faq-contact-sub">{{ section.settings.contact_sub | default: "Send us your question and our team will help you find the right answer." }}</p>
-
-          {%- form 'contact', id: 'faq-contact-form' -%}
-            {% if form.posted_successfully? %}
-              <p class="faq-contact-success">Thanks! We'll get back to you soon.</p>
-            {% else %}
-              <div class="faq-contact-fields">
-                <input class="faq-contact-input" type="text" name="contact[name]" placeholder="Name" autocomplete="name" required>
-                <input class="faq-contact-input" type="email" name="contact[email]" placeholder="Email" autocomplete="email" required>
-                <textarea class="faq-contact-input faq-contact-textarea" name="contact[body]" placeholder="Message" rows="4"></textarea>
-                <button class="faq-contact-btn" type="submit">Send message</button>
-              </div>
-            {% endif %}
-          {%- endform -%}
+      {% else %}
+        <!-- Flat list fallback (no groups defined) -->
+        <div class="faq-group">
+          <h2 class="faq-group__title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
+          {% if use_global_faqs %}
+            {%- assign item_index = 0 -%}
+            {% for faq_key in sorted_global_faq_keys %}
+              {% if faq_key == blank %}{% continue %}{% endif %}
+              {% assign faq_handle = faq_key | split: '::' | last %}
+              {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
+              <details class="faq-item faq-blur-in" data-reveal-delay="{{ item_index | times: 40 }}" id="faq-{{ faq_handle }}">
+                <summary class="faq-item__q">
+                  <span>{{ faq_item.question.value }}</span>
+                  <svg class="faq-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </summary>
+                <div class="faq-item__a"><p>{{ faq_item.answer.value | newline_to_br }}</p></div>
+              </details>
+              {%- assign item_index = item_index | plus: 1 -%}
+            {% endfor %}
+          {% else %}
+            <p class="faq-empty">No FAQ entries configured yet. <a href="/pages/contact">Contact support</a></p>
+          {% endif %}
         </div>
-      </aside>
-
+      {% endif %}
     </div>
+
   </div>
 </section>
+
+<script>
+(function () {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // TracingBeam: scroll-linked stroke-dashoffset
+  if (!prefersReduced) {
+    var section = document.getElementById('faq-section-{{ section.id }}');
+    var fill = document.getElementById('faq-beam-fill-{{ section.id }}');
+    if (section && fill) {
+      var pathLen = fill.getTotalLength ? fill.getTotalLength() : 400;
+      fill.style.strokeDasharray = pathLen;
+      fill.style.strokeDashoffset = pathLen;
+      function updateBeam() {
+        var rect = section.getBoundingClientRect();
+        var winH = window.innerHeight;
+        var progress = Math.max(0, Math.min(1, (-rect.top + winH * 0.25) / (rect.height - winH * 0.5)));
+        fill.style.strokeDashoffset = pathLen * (1 - progress);
+      }
+      window.addEventListener('scroll', updateBeam, { passive: true });
+      updateBeam();
+    }
+  }
+
+  // BlurFade reveal via IntersectionObserver
+  var items = document.querySelectorAll('#faq-section-{{ section.id }} .faq-blur-in');
+  if (!prefersReduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          var delay = parseInt(el.dataset.revealDelay || '0', 10) || 0;
+          setTimeout(function () { el.classList.add('is-visible'); }, delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
 
 {% schema %}
 {
   "name": "FAQ accordion",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "textarea", "id": "header_copy", "label": "Header copy", "default": "Find quick answers to the most common questions about orders, products, and support." },
     { "type": "text", "id": "contact_heading", "label": "Contact card heading", "default": "Still need help?" },
     { "type": "textarea", "id": "contact_sub", "label": "Contact card subtext", "default": "Send us your question and our team will help you find the right answer." }
   ],

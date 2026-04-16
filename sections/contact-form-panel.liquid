@@ -1,57 +1,81 @@
-<section class="section-shell">
-  <div class="container-shell max-w-6xl">
-    <div class="content-page-shell">
-      <div class="content-page-sidebar">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
-        {% if section.settings.copy != blank %}
-          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        {% endif %}
+<section class="contact-panel">
+  <div class="contact-panel__inner">
 
-        {% if section.settings.side_heading != blank or section.settings.side_copy != blank %}
-          <div class="product-support-panel mt-6">
-            {% if section.settings.side_eyebrow != blank %}
-              <p class="section-kicker">{{ section.settings.side_eyebrow }}</p>
-            {% endif %}
-            {% if section.settings.side_heading != blank %}
-              <h3 class="mt-3 text-xl font-medium tracking-tight text-slate-950">{{ section.settings.side_heading }}</h3>
-            {% endif %}
-            {% if section.settings.side_copy != blank %}
-              <p class="mt-3 text-sm leading-7 text-slate-600">{{ section.settings.side_copy }}</p>
-            {% endif %}
-            <div class="mt-6 space-y-3">
-              <div class="flex items-start gap-3">
-                <span class="inline-flex min-h-8 min-w-8 items-center justify-center rounded-full border border-slate-200 text-xs font-medium text-slate-500">01</span>
-                <p class="pt-1 text-sm leading-6 text-slate-600">Choose the request type that matches your need.</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="inline-flex min-h-8 min-w-8 items-center justify-center rounded-full border border-slate-200 text-xs font-medium text-slate-500">02</span>
-                <p class="pt-1 text-sm leading-6 text-slate-600">Add the product name and order reference when relevant.</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="inline-flex min-h-8 min-w-8 items-center justify-center rounded-full border border-slate-200 text-xs font-medium text-slate-500">03</span>
-                <p class="pt-1 text-sm leading-6 text-slate-600">Describe the one outcome or issue you need help with next.</p>
-              </div>
-            </div>
+    <!-- Info column -->
+    <div class="contact-panel__info">
+      {% if section.settings.eyebrow != blank %}
+        <span class="contact-kicker">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="contact-heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.copy != blank %}
+        <p class="contact-subhead">{{ section.settings.copy }}</p>
+      {% endif %}
+
+      <div class="contact-channels">
+        <!-- Phone -->
+        <div class="contact-channel">
+          <div class="contact-channel__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 10.5c-.83 0-1.63-.13-2.38-.37a.75.75 0 00-.77.18l-1.47 1.47A11.3 11.3 0 014.22 7.12l1.47-1.47a.75.75 0 00.18-.77A7.5 7.5 0 015.5 2.5a.75.75 0 00-.75-.75H2a.75.75 0 00-.75.75C1.25 9.63 6.37 14.75 13.5 14.75a.75.75 0 00.75-.75v-2.75a.75.75 0 00-.75-.75z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-        {% endif %}
+          <div class="contact-channel__info">
+            <span class="contact-channel__label">Phone</span>
+            <a href="tel:18008819305" class="contact-channel__link">1-800-881-9305</a>
+            <span class="contact-channel__meta">Mon–Fri 9am–5pm PST</span>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-channel">
+          <div class="contact-channel__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.75" y="3.75" width="12.5" height="8.5" rx="1.25" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.5l6.25 4 6.25-4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+          </div>
+          <div class="contact-channel__info">
+            <span class="contact-channel__label">Email</span>
+            <a href="mailto:support@ezquest.com" class="contact-channel__link">support@ezquest.com</a>
+            <span class="contact-channel__meta">Response within 1 business day</span>
+          </div>
+        </div>
+
+        <!-- Hours -->
+        <div class="contact-channel">
+          <div class="contact-channel__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.25"/><path d="M8 5v3.25l2 2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="contact-channel__info">
+            <span class="contact-channel__label">Support hours</span>
+            <span class="contact-channel__value">Mon–Fri, 9am–5pm PST</span>
+            <span class="contact-channel__meta">Closed weekends and US holidays</span>
+          </div>
+        </div>
       </div>
 
-      <div class="content-page-body">
-        {% form 'contact', class: 'space-y-5' %}
-          {% if form.posted_successfully? %}
-            <div class="rounded-card-xs border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-700">
-              {{ section.settings.success_message }}
-            </div>
-          {% endif %}
+      <div class="contact-support-links">
+        <a href="/pages/faq" class="contact-link-pill">FAQ</a>
+        <a href="/pages/troubleshooting" class="contact-link-pill">Troubleshooting</a>
+        <a href="/pages/warranty" class="contact-link-pill">Warranty</a>
+        <a href="/pages/compatibility" class="contact-link-pill">Compatibility</a>
+        <a href="/pages/downloads" class="contact-link-pill">Downloads</a>
+      </div>
+    </div>
 
-          {{ form.errors | default_errors }}
+    <!-- Form card column -->
+    <div class="contact-form-card" id="contact-form-card-{{ section.id }}">
+      <div class="contact-form-card__spotlight" aria-hidden="true"></div>
+      <div class="contact-form-card__beam" aria-hidden="true"></div>
 
-          <div>
-            <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormIntent-{{ section.id }}">Request type</label>
-            <select id="ContactFormIntent-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" name="contact[Request type]" required>
+      {% form 'contact', class: 'contact-form', id: 'contact-form-{{ section.id }}' %}
+        {% if form.posted_successfully? %}
+          <div class="contact-success" role="alert">{{ section.settings.success_message }}</div>
+        {% endif %}
+
+        {% if form.errors %}
+          <div class="contact-errors" role="alert">{{ form.errors | default_errors }}</div>
+        {% endif %}
+
+        <div class="contact-form__grid">
+          <div class="contact-form__field contact-form__field--full">
+            <label class="contact-form__label" for="ContactFormIntent-{{ section.id }}">Request type</label>
+            <select id="ContactFormIntent-{{ section.id }}" class="contact-form__select" name="contact[Request type]" required>
               <option value="">Select one</option>
               <option value="Product help">Product help</option>
               <option value="Order help">Order help</option>
@@ -59,59 +83,74 @@
             </select>
           </div>
 
-          <div class="grid gap-4 md:grid-cols-2">
-            <div>
-              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormProduct-{{ section.id }}">Product name</label>
-              <input id="ContactFormProduct-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="text" name="contact[Product name]">
-            </div>
-            <div>
-              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormOrder-{{ section.id }}">Order reference</label>
-              <input id="ContactFormOrder-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="text" name="contact[Order reference]">
-            </div>
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="ContactFormProduct-{{ section.id }}">Product name</label>
+            <input id="ContactFormProduct-{{ section.id }}" class="contact-form__input" type="text" name="contact[Product name]">
+          </div>
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="ContactFormOrder-{{ section.id }}">Order reference</label>
+            <input id="ContactFormOrder-{{ section.id }}" class="contact-form__input" type="text" name="contact[Order reference]">
           </div>
 
-          <div class="grid gap-4 md:grid-cols-2">
-            <div>
-              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormName-{{ section.id }}">Name</label>
-              <input id="ContactFormName-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="ContactFormName-{{ section.id }}">Name</label>
+            <input id="ContactFormName-{{ section.id }}" class="contact-form__input" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="ContactFormEmail-{{ section.id }}">Email</label>
+            <input id="ContactFormEmail-{{ section.id }}" class="contact-form__input" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocorrect="off" autocapitalize="off" required>
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="ContactFormPhone-{{ section.id }}">Phone</label>
+            <input id="ContactFormPhone-{{ section.id }}" class="contact-form__input" type="tel" name="contact[phone]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+          </div>
+
+          <div class="contact-form__field contact-form__field--full">
+            <label class="contact-form__label" for="ContactFormMessage-{{ section.id }}">Message</label>
+            <textarea id="ContactFormMessage-{{ section.id }}" class="contact-form__textarea" rows="5" name="contact[body]" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <div class="contact-form__field contact-form__field--full">
+            <div class="contact-form__submit-row">
+              <button type="submit" class="contact-form__submit">Send support request</button>
+              <p class="contact-form__note">We reply with product, order, or warranty help based on your request.</p>
             </div>
-            <div>
-              <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormEmail-{{ section.id }}">Email</label>
-              <input id="ContactFormEmail-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocorrect="off" autocapitalize="off" required>
-            </div>
           </div>
-
-          <div>
-            <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormPhone-{{ section.id }}">Phone</label>
-            <input id="ContactFormPhone-{{ section.id }}" class="min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="tel" name="contact[phone]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
-          </div>
-
-          <div>
-            <label class="mb-2 block text-sm font-medium text-slate-900" for="ContactFormMessage-{{ section.id }}">Message</label>
-            <textarea id="ContactFormMessage-{{ section.id }}" class="min-h-40 w-full rounded-card-sm border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" rows="7" name="contact[body]" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
-          </div>
-
-          <div class="action-cluster">
-            <button type="submit" class="button-primary">Send support request</button>
-            <p class="text-sm leading-6 text-slate-500">We reply with product, order, or warranty help based on your request.</p>
-          </div>
-        {% endform %}
-      </div>
+        </div>
+      {% endform %}
     </div>
+
   </div>
 </section>
+
+<script>
+(function () {
+  var card = document.getElementById('contact-form-card-{{ section.id }}');
+  if (!card) return;
+  var spotlight = card.querySelector('.contact-form-card__spotlight');
+  if (!spotlight) return;
+
+  card.addEventListener('mousemove', function (e) {
+    var rect = card.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    spotlight.style.background = 'radial-gradient(500px circle at ' + x + 'px ' + y + 'px, rgba(245,158,11,0.1), transparent 60%)';
+  });
+  card.addEventListener('mouseleave', function () {
+    spotlight.style.background = '';
+  });
+})();
+</script>
 
 {% schema %}
 {
   "name": "Contact form panel",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact form" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Send a message" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "This form handles direct support, business questions, and order-related help when self-service is not enough." },
-    { "type": "text", "id": "side_eyebrow", "label": "Side card eyebrow", "default": "Before submitting" },
-    { "type": "text", "id": "side_heading", "label": "Side card heading", "default": "Use direct contact when self-service is not enough" },
-    { "type": "textarea", "id": "side_copy", "label": "Side card copy", "default": "Include the product name, order details, and a short issue summary so support can respond faster." },
-    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks for reaching out. Your message has been sent." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get in touch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Send us a message" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use the form for support requests, order questions, and warranty claims. For fastest help, include your product name and order number." },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks for reaching out. Your message has been sent and our team will reply within one business day." }
   ],
   "presets": [
     { "name": "Contact form panel" }

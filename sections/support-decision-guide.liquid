@@ -1,139 +1,179 @@
-<section class="section-shell pb-8 lg:pb-12">
-  <div class="container-shell">
-    {%- liquid
-      assign guide_heading = section.settings.heading | default: 'Help me choose the right setup'
-      assign guide_copy = section.settings.copy
-      assign use_global_entries = false
-      assign sorted_guide_keys = '' | split: ''
-      if section.settings.structured_source == 'global'
-        assign use_global_entries = true
-      elsif section.settings.structured_source == 'auto'
-        assign use_global_entries = true
-      endif
-      if use_global_entries and metaobjects.ezquest_decision_guide_entry != blank
-        capture sorted_guides_raw
-          for guide_entry in metaobjects.ezquest_decision_guide_entry.values
-            capture order_token_raw
-              echo '000000'
-              echo guide_entry.sort_order.value | default: 999999 | plus: 0
-            endcapture
-            assign order_token = order_token_raw | strip | slice: -6, 6
-            echo order_token
-            echo '::'
-            echo guide_entry.system.handle
-            echo '||'
-          endfor
+{%- liquid
+  assign use_global_entries = false
+  assign sorted_guide_keys = '' | split: ''
+  if section.settings.structured_source == 'global' or section.settings.structured_source == 'auto'
+    assign use_global_entries = true
+  endif
+  if use_global_entries and metaobjects.ezquest_decision_guide_entry != blank
+    capture sorted_guides_raw
+      for guide_entry in metaobjects.ezquest_decision_guide_entry.values
+        capture order_token_raw
+          echo '000000'
+          echo guide_entry.sort_order.value | default: 999999 | plus: 0
         endcapture
-        assign sorted_guide_keys = sorted_guides_raw | split: '||' | sort_natural
-      endif
-    -%}
+        assign order_token = order_token_raw | strip | slice: -6, 6
+        echo order_token
+        echo '::'
+        echo guide_entry.system.handle
+        echo '||'
+      endfor
+    endcapture
+    assign sorted_guide_keys = sorted_guides_raw | split: '||' | sort_natural
+  endif
+-%}
 
-    <div class="section-intro">
-      <div class="max-w-3xl">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <h2 class="section-heading mt-4">{{ guide_heading }}</h2>
-        {% if guide_copy != blank %}
-          <p class="section-copy mt-4">{{ guide_copy }}</p>
-        {% endif %}
-      </div>
-      {% if section.settings.link_label != blank and section.settings.link_url != blank %}
-        <div class="section-intro-action">
-          {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: 'secondary' %}
-        </div>
+<section class="decision-guide" aria-label="Find your setup">
+  <div class="page-width">
+    <div class="decision-guide__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="decision-guide__kicker"><span class="shiny-text">{{ section.settings.eyebrow }}</span></p>
+      {% endif %}
+      <h2 class="decision-guide__heading">{{ section.settings.heading | default: 'Pick the role that matches the way you work' }}</h2>
+      {% if section.settings.copy != blank %}
+        <p class="decision-guide__subhead">{{ section.settings.copy }}</p>
       {% endif %}
     </div>
 
-    <div class="decision-guide-grid">
-      {% if use_global_entries and metaobjects.ezquest_decision_guide_entry != blank %}
+    <div class="decision-bento" id="decision-bento-{{ section.id }}">
+      {%- if use_global_entries and metaobjects.ezquest_decision_guide_entry != blank -%}
         {%- assign rendered_entries = 0 -%}
-        {% for guide_key in sorted_guide_keys %}
-          {% if guide_key == blank %}
-            {% continue %}
-          {% endif %}
-          {% assign guide_handle = guide_key | split: '::' | last %}
-          {% assign guide_entry = metaobjects.ezquest_decision_guide_entry[guide_handle] %}
-          {%- liquid
-            assign entry_title = guide_entry.title.value
-            assign entry_summary = guide_entry.summary.value
-            assign entry_role = guide_entry.role_label.value
-            assign entry_primary_label = guide_entry.primary_label.value
-            assign entry_primary_url = guide_entry.primary_url.value
-            assign entry_secondary_label = guide_entry.secondary_label.value
-            assign entry_secondary_url = guide_entry.secondary_url.value
-
-            if entry_primary_label == blank
-              assign entry_primary_label = 'View setup'
-            endif
-          -%}
-          {% if rendered_entries < section.settings.entry_limit %}
-            <article class="info-card decision-guide-card">
-              {% if entry_role != blank %}
-                <p class="section-kicker">{{ entry_role }}</p>
-              {% endif %}
-              <h3 class="card-title mt-4">{{ entry_title }}</h3>
-              {% if entry_summary != blank %}
-                <p class="section-copy mt-3">{{ entry_summary }}</p>
-              {% endif %}
-              <div class="decision-guide-actions">
-                {% if entry_primary_url != blank %}
-                  {% render 'button', label: entry_primary_label, url: entry_primary_url, style: 'secondary' %}
-                {% endif %}
-                {% if entry_secondary_url != blank and entry_secondary_label != blank %}
-                  <a href="{{ entry_secondary_url }}" class="site-meta-link">{{ entry_secondary_label }}</a>
-                {% endif %}
+        {%- for guide_key in sorted_guide_keys -%}
+          {%- if guide_key == blank -%}{%- continue -%}{%- endif -%}
+          {%- if rendered_entries >= section.settings.entry_limit -%}{%- break -%}{%- endif -%}
+          {%- assign guide_handle = guide_key | split: '::' | last -%}
+          {%- assign guide_entry = metaobjects.ezquest_decision_guide_entry[guide_handle] -%}
+          {%- assign idx = rendered_entries -%}
+          {%- assign cta_url = guide_entry.primary_url.value -%}
+          <a href="{{ cta_url | default: '/collections' }}"
+             class="decision-card decision-card--{{ idx }}"
+             data-bento-index="{{ idx }}"
+             data-reveal-delay="{{ idx | times: 60 }}"
+             aria-label="{{ guide_entry.title.value | escape }}">
+            <div class="decision-card__spotlight" aria-hidden="true"></div>
+            {%- if idx == 0 -%}<div class="decision-card__beam" aria-hidden="true"></div>{%- endif -%}
+            <div class="decision-card__inner">
+              <div class="decision-card__top">
+                {%- if guide_entry.role_label.value != blank -%}
+                  <span class="decision-card__kicker">{{ guide_entry.role_label.value }}</span>
+                {%- endif -%}
+                {%- if idx == 0 -%}<span class="decision-card__badge">Most popular</span>{%- endif -%}
               </div>
-            </article>
-            {%- assign rendered_entries = rendered_entries | plus: 1 -%}
-          {% endif %}
-        {% endfor %}
-
-        {% if rendered_entries == 0 %}
-          <article class="info-card structured-empty-state">
-            <p class="section-kicker">Decision guide</p>
-            <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No decision entries yet</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Decision entries will appear here when they are added to the EZQuest decision guide metaobjects.</p>
-          </article>
-        {% endif %}
-      {% else %}
-        {% for block in section.blocks %}
-          <article class="info-card decision-guide-card" {{ block.shopify_attributes }}>
-            {% if block.settings.eyebrow != blank %}
-              <p class="section-kicker">{{ block.settings.eyebrow }}</p>
-            {% endif %}
-            <h3 class="card-title mt-4">{{ block.settings.title }}</h3>
-            {% if block.settings.copy != blank %}
-              <p class="section-copy mt-3">{{ block.settings.copy }}</p>
-            {% endif %}
-            <div class="decision-guide-actions">
-              {% if block.settings.primary_url != blank %}
-                {% render 'button', label: block.settings.primary_label, url: block.settings.primary_url, style: 'secondary' %}
-              {% endif %}
-              {% if block.settings.secondary_url != blank and block.settings.secondary_label != blank %}
-                <a href="{{ block.settings.secondary_url }}" class="site-meta-link">{{ block.settings.secondary_label }}</a>
-              {% endif %}
+              <h3 class="decision-card__title">{{ guide_entry.title.value }}</h3>
+              {%- if guide_entry.summary.value != blank -%}
+                <p class="decision-card__body">{{ guide_entry.summary.value }}</p>
+              {%- endif -%}
+              <div class="decision-card__actions">
+                {%- if cta_url != blank -%}
+                  <span class="decision-card__cta">{{ guide_entry.primary_label.value | default: 'Shop this setup' }} <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                {%- endif -%}
+              </div>
             </div>
-          </article>
-        {% else %}
-          <article class="info-card structured-empty-state">
-            <p class="section-kicker">Decision guide</p>
-            <h3 class="mt-4 text-xl font-medium tracking-tight text-slate-900">No decision entries yet</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Add decision guide blocks or enable metaobject entries to populate this guide.</p>
-          </article>
-        {% endfor %}
-      {% endif %}
+          </a>
+          {%- assign rendered_entries = rendered_entries | plus: 1 -%}
+        {%- endfor -%}
+
+        {%- if rendered_entries == 0 -%}
+          <div class="decision-card decision-card--0 decision-card--is-revealed">
+            <div class="decision-card__inner">
+              <p class="decision-card__kicker">Decision guide</p>
+              <h3 class="decision-card__title">No entries yet</h3>
+              <p class="decision-card__body">Add decision guide metaobject entries in Shopify to populate this guide.</p>
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign cta_url = block.settings.primary_url -%}
+          <a href="{{ cta_url | default: '/collections' }}"
+             class="decision-card decision-card--{{ idx }}"
+             data-bento-index="{{ idx }}"
+             data-reveal-delay="{{ idx | times: 60 }}"
+             aria-label="{{ block.settings.title | escape }}"
+             {{ block.shopify_attributes }}>
+            <div class="decision-card__spotlight" aria-hidden="true"></div>
+            {%- if idx == 0 -%}<div class="decision-card__beam" aria-hidden="true"></div>{%- endif -%}
+            <div class="decision-card__inner">
+              <div class="decision-card__top">
+                {%- if block.settings.eyebrow != blank -%}
+                  <span class="decision-card__kicker">{{ block.settings.eyebrow }}</span>
+                {%- endif -%}
+                {%- if idx == 0 -%}<span class="decision-card__badge">Most popular</span>{%- endif -%}
+              </div>
+              <h3 class="decision-card__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.copy != blank -%}
+                <p class="decision-card__body">{{ block.settings.copy }}</p>
+              {%- endif -%}
+              <div class="decision-card__actions">
+                {%- if cta_url != blank -%}
+                  <span class="decision-card__cta">{{ block.settings.primary_label | default: 'Shop this setup' }} <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                {%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- else -%}
+          <div class="decision-card decision-card--0 decision-card--is-revealed">
+            <div class="decision-card__inner">
+              <p class="decision-card__kicker">Decision guide</p>
+              <h3 class="decision-card__title">No entries configured</h3>
+              <p class="decision-card__body">Add decision guide blocks or enable metaobject entries to populate this guide.</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  var bento = document.getElementById('decision-bento-{{ section.id }}');
+  if (!bento) return;
+  var cards = bento.querySelectorAll('.decision-card');
+
+  // BlurFade reveal via IntersectionObserver
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          var delay = parseInt(el.dataset.revealDelay || '0', 10) || 0;
+          setTimeout(function () { el.classList.add('is-revealed'); }, delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(function (c) { io.observe(c); });
+  } else {
+    cards.forEach(function (c) { c.classList.add('is-revealed'); });
+  }
+
+  // CardSpotlight: radial-gradient follow on mousemove
+  cards.forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var sp = card.querySelector('.decision-card__spotlight');
+      if (sp) sp.style.background = 'radial-gradient(400px circle at ' + x + 'px ' + y + 'px, rgba(245,158,11,0.13), transparent 60%)';
+    });
+    card.addEventListener('mouseleave', function () {
+      var sp = card.querySelector('.decision-card__spotlight');
+      if (sp) sp.style.background = '';
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
   "name": "Support decision guide",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Help me choose" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Help me choose the right setup" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Choose the setup role first, then move into the product family and the product built for that setup." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Choose a setup" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick the role that matches the way you work" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Choose the role first, then move into the product family and the product built for that setup." },
     {
       "type": "select",
       "id": "structured_source",
