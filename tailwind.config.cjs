@@ -6,6 +6,26 @@ module.exports = {
     "./snippets/**/*.liquid",
     "./src/**/*.css"
   ],
+  safelist: [
+    'is-open',
+    'is-revealed',
+    'is-active',
+    'is-hidden',
+    { pattern: /^faq-/ },
+    { pattern: /^reveal-/ },
+    { pattern: /^decision-/ },
+    { pattern: /^compare-/ },
+    { pattern: /^contact-/ },
+    { pattern: /^download-/ },
+    { pattern: /^support-/ },
+    { pattern: /^product-/ },
+    { pattern: /^pdp-/ },
+    { pattern: /^hero-/ },
+    { pattern: /^cart-/ },
+    { pattern: /^mega-/ },
+    { pattern: /^trust-/ },
+    { pattern: /^collection-/ },
+  ],
   theme: {
     extend: {
       colors: {
