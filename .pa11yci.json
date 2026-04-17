@@ -1,0 +1,14 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "reporters": ["cli"],
+    "ignore": ["notice", "warning"]
+  },
+  "urls": [
+    "https://ezquest-4.myshopify.com/",
+    "https://ezquest-4.myshopify.com/collections/hubs-adapters",
+    "https://ezquest-4.myshopify.com/products/4-port-usb-3-hub-adapter-with-usb-c-pd-3",
+    "https://ezquest-4.myshopify.com/pages/faq",
+    "https://ezquest-4.myshopify.com/pages/contact"
+  ]
+}
