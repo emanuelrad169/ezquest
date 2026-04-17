@@ -242,11 +242,11 @@
             <div class="product-gallery-grid product-gallery-grid--rail">
               {% if lead_media != blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
-                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain' %}
+                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
                 </button>
               {% elsif product.featured_image != blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
-                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain' %}
+                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
                 </button>
               {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
@@ -283,9 +283,9 @@
 
               <div class="product-gallery-main">
                 {% if lead_media != blank %}
-                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
+                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
                 {% elsif product.featured_image != blank %}
-                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain' %}
+                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
                 {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
                   <div class="hero-media-frame p-2 lg:p-3">
                     {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
@@ -621,7 +621,7 @@
                     {% endfor %}
                   {% elsif section.blocks.size > 0 %}
                     {% for block in section.blocks %}
-                      {% if mobile_rendered_highlights < 3 %}
+                      {% if mobile_rendered_highlights < 3 and block.settings.title != blank %}
                         <div class="product-highlight-card" {{ block.shopify_attributes }}>
                           <p class="product-highlight-index">0{{ mobile_rendered_highlights | plus: 1 }}</p>
                           <div class="product-highlight-copy">{{ block.settings.title }}</div>
@@ -692,11 +692,13 @@
             {% endfor %}
           {% elsif section.blocks.size > 0 %}
             {% for block in section.blocks limit: 6 %}
-              <div class="product-highlight-card product-highlight-card--spec" {{ block.shopify_attributes }}>
-                <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
-                <span class="product-highlight-spec-label">Highlight {{ forloop.index }}</span>
-                <span class="product-highlight-spec-value">{{ block.settings.title | truncatewords: 4 }}</span>
-              </div>
+              {% if block.settings.title != blank %}
+                <div class="product-highlight-card product-highlight-card--spec" {{ block.shopify_attributes }}>
+                  <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
+                  <span class="product-highlight-spec-label">Highlight {{ forloop.index }}</span>
+                  <span class="product-highlight-spec-value">{{ block.settings.title | truncatewords: 4 }}</span>
+                </div>
+              {% endif %}
             {% endfor %}
           {% else %}
             <div class="product-highlight-card product-highlight-card--spec">

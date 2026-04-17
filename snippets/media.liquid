@@ -2,17 +2,19 @@
   assign wrapper_class = class | default: ''
   assign ratio_class = aspect_ratio | default: 'aspect-card'
   assign object_fit = object_fit | default: 'object-contain'
+  assign img_loading = loading | default: 'lazy'
+  assign img_fetchpriority = fetchpriority | default: 'auto'
 -%}
 <div class="overflow-hidden {{ wrapper_class }}">
   {% if media != blank %}
     {% case media.media_type %}
       {% when 'image' %}
-        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', alt: media.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
+        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: 'async', alt: media.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
       {% else %}
         {{ media | media_tag: class: ratio_class | append: ' w-full ' | append: object_fit, image_size: '1600x' }}
     {% endcase %}
   {% elsif image != blank %}
-    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', decoding: 'async', alt: image.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
+    {{ image | image_url: width: 1600 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: 'async', alt: image.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
   {% else %}
     {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: ratio_class | append: ' w-full ' | append: object_fit %}
   {% endif %}
