@@ -1,0 +1,151 @@
+{{ 'support-cluster.css' | asset_url | stylesheet_tag }}
+
+<section class="support-hero">
+  <div class="support-hero__wrap">
+    <p class="support-hero__kicker">Warranty</p>
+    <h1 class="support-hero__heading">
+      2-year limited<br>warranty
+    </h1>
+    <p class="support-hero__sub">
+      Every EZQuest product is covered from the day you buy it.
+      No registration required. No hoops to jump through.
+    </p>
+  </div>
+</section>
+
+{% render 'support-nav', current: 'warranty' %}
+
+<div class="support-body">
+  <div class="warranty-layout">
+
+    <div class="warranty-policy">
+
+      <div class="warranty-stat-row">
+        <div class="warranty-stat">
+          <span class="warranty-stat__number">2</span>
+          <span class="warranty-stat__unit">years</span>
+          <span class="warranty-stat__label">Coverage period</span>
+        </div>
+        <div class="warranty-stat">
+          <span class="warranty-stat__number">30</span>
+          <span class="warranty-stat__unit">days</span>
+          <span class="warranty-stat__label">Return window</span>
+        </div>
+        <div class="warranty-stat">
+          <span class="warranty-stat__number">1</span>
+          <span class="warranty-stat__unit">day</span>
+          <span class="warranty-stat__label">Typical response</span>
+        </div>
+      </div>
+
+      <div class="warranty-section">
+        <h2 class="warranty-section__heading">What is covered</h2>
+        <ul class="warranty-list warranty-list--covered">
+          <li>Manufacturing defects in materials and workmanship</li>
+          <li>Electrical failures under normal operating conditions</li>
+          <li>Port and connector defects not caused by physical damage</li>
+          <li>Firmware issues attributable to the hardware itself</li>
+        </ul>
+      </div>
+
+      <div class="warranty-section">
+        <h2 class="warranty-section__heading">What is not covered</h2>
+        <ul class="warranty-list warranty-list--excluded">
+          <li>Physical damage from drops, liquid exposure, or misuse</li>
+          <li>Normal wear and cosmetic changes over time</li>
+          <li>Use outside the product's rated specifications</li>
+          <li>Third-party modifications or unauthorized repairs</li>
+          <li>Lost or stolen products</li>
+        </ul>
+      </div>
+
+      <div class="warranty-section">
+        <h2 class="warranty-section__heading">How to claim</h2>
+        <ol class="warranty-steps">
+          <li>Contact us via the form or call 1-800-881-9305</li>
+          <li>Provide your order number and describe the issue</li>
+          <li>We may request photos or a short video of the defect</li>
+          <li>If approved, a replacement ships within 3–5 business days at no cost</li>
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="warranty-claim-col">
+
+      <div class="warranty-claim-card">
+        <div class="warranty-claim-card__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 4l9 3.5V14c0 5.25-3.75 8.25-9 10.5C9.75 22.25 5 20.25 5 14V7.5L14 4z" stroke="#F59E0B" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10 14l2.5 2.5 5.5-5.5" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="warranty-claim-card__heading">Start a warranty claim</h3>
+        <p class="warranty-claim-card__body">
+          If your product has a defect covered under the 2-year limited warranty,
+          contact us here. We respond within 1 business day.
+        </p>
+        <a href="/pages/contact" class="btn btn--primary" style="display:block;text-align:center;width:100%">
+          Submit a claim
+        </a>
+        <p class="warranty-claim-card__note">Have your order number ready — we'll ask for it.</p>
+      </div>
+
+      <div class="info-card info-card--amber" style="margin-top:1rem">
+        <div class="info-card__icon info-card__icon--amber">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2l1.5 4.5H15l-3.75 2.75 1.5 4.5L9 11l-3.75 2.75 1.5-4.5L3 6.5h4.5L9 2z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <p class="info-card__title">30-day no-questions return</p>
+          <p class="info-card__body">
+            Not the right fit? Return any product within 30 days of delivery — unused, in original packaging.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:1rem">
+        <div class="info-card__icon info-card__icon--amber">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M2 5.5A1.5 1.5 0 013.5 4h11A1.5 1.5 0 0116 5.5v7A1.5 1.5 0 0114.5 14h-11A1.5 1.5 0 012 12.5v-7z" stroke="currentColor" stroke-width="1.25"/>
+            <path d="M2 6.5l7 4.5 7-4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <p class="info-card__title">Questions about coverage?</p>
+          <p class="info-card__body">
+            Email or call us and we'll confirm your warranty status and walk you through the next step.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.warranty-layout{display:grid;grid-template-columns:1fr 360px;gap:clamp(2rem,5vw,5rem);align-items:start}
+@media(max-width:900px){.warranty-layout{grid-template-columns:1fr}}
+.warranty-stat-row{display:flex;gap:2rem;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(0,0,0,.07);flex-wrap:wrap}
+.warranty-stat{display:flex;flex-direction:column;gap:.125rem}
+.warranty-stat__number{font-size:clamp(40px,6vw,64px);font-weight:500;letter-spacing:-.04em;color:#1d1d1f;line-height:1}
+.warranty-stat__unit{font-size:14px;color:#F59E0B;font-weight:500;margin-bottom:.125rem}
+.warranty-stat__label{font-size:12px;color:#6e6e73}
+.warranty-section{margin-bottom:2.5rem}
+.warranty-section__heading{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6e6e73;margin:0 0 1rem}
+.warranty-list{padding:0;margin:0;list-style:none;display:flex;flex-direction:column;gap:.625rem}
+.warranty-list li{font-size:15px;line-height:1.5;padding-left:1.75rem;position:relative;color:#1d1d1f}
+.warranty-list--covered li::before{content:'✓';position:absolute;left:0;color:#22c55e;font-weight:700;font-size:13px;top:.1rem}
+.warranty-list--excluded li::before{content:'×';position:absolute;left:0;color:#ef4444;font-weight:500;font-size:16px;top:-.05rem}
+.warranty-steps{padding:0;margin:0;list-style:none;counter-reset:ws;display:flex;flex-direction:column;gap:.875rem}
+.warranty-steps li{counter-increment:ws;display:flex;gap:1rem;font-size:15px;line-height:1.5;align-items:flex-start;color:#1d1d1f}
+.warranty-steps li::before{content:counter(ws);width:26px;height:26px;border-radius:50%;background:#f5f5f7;color:#1d1d1f;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.warranty-claim-card{border:1.5px solid rgba(245,158,11,.2);border-radius:18px;padding:2rem;background:rgba(245,158,11,.03)}
+.warranty-claim-card__icon{width:48px;height:48px;border-radius:14px;background:rgba(245,158,11,.08);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.warranty-claim-card__heading{font-size:20px;font-weight:500;letter-spacing:-.02em;color:#1d1d1f;margin:0 0 .625rem}
+.warranty-claim-card__body{font-size:14px;color:#6e6e73;line-height:1.65;margin:0 0 1.5rem}
+.warranty-claim-card__note{font-size:12px;color:#6e6e73;text-align:center;margin:.875rem 0 0}
+</style>
+
+{% schema %}{"name":"Warranty","tag":"section","settings":[],"presets":[{"name":"Warranty"}]}{% endschema %}

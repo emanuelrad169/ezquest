@@ -1,0 +1,179 @@
+{{ 'support-cluster.css' | asset_url | stylesheet_tag }}
+
+<section class="support-hero">
+  <div class="support-hero__wrap">
+    <p class="support-hero__kicker">Compatibility</p>
+    <h1 class="support-hero__heading">
+      Device compatibility<br>checker
+    </h1>
+    <p class="support-hero__sub">
+      Find out if your device, port, or operating system
+      works with an EZQuest product before you buy.
+    </p>
+  </div>
+</section>
+
+{% render 'support-nav', current: 'compatibility' %}
+
+<div class="support-body">
+
+  <div class="compat-search-row">
+    <input
+      type="search"
+      id="compat-search"
+      class="compat-search"
+      placeholder="Search by device, product, or port type…"
+      aria-label="Search compatibility"
+    >
+    <div class="filter-pills" style="margin:0">
+      <button class="filter-pill is-active" data-filter="all" type="button">All</button>
+      <button class="filter-pill" data-filter="Mac" type="button">Mac</button>
+      <button class="filter-pill" data-filter="Windows" type="button">Windows</button>
+      <button class="filter-pill" data-filter="iPad" type="button">iPad</button>
+    </div>
+  </div>
+
+  {% assign entries = shop.metaobjects.ezquest_compatibility_entry.values %}
+
+  {% if entries.size > 0 %}
+
+    <div class="data-table-wrap">
+      <table class="data-table" id="compat-table">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Model</th>
+            <th>EZQuest product</th>
+            <th>Port type</th>
+            <th>OS</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in entries %}
+            {% assign status = entry.status.value | default: 'full' %}
+            <tr data-os="{{ entry.os.value }}"
+                data-search="{{ entry.device_brand.value | downcase }} {{ entry.device_model.value | downcase }} {{ entry.port_type.value | downcase }}">
+              <td data-label="Brand" style="font-weight:500">{{ entry.device_brand.value }}</td>
+              <td data-label="Model" style="color:#6e6e73">{{ entry.device_model.value }}</td>
+              <td data-label="Product">
+                {% assign p = entry.product.value %}
+                {% if p != blank %}
+                  <a href="{{ p.url }}" style="color:#F59E0B;text-decoration:none;font-weight:500">{{ p.title | truncate: 40 }}</a>
+                {% else %}
+                  <span class="product-pill">EZQuest Hub</span>
+                {% endif %}
+              </td>
+              <td data-label="Port" style="color:#6e6e73">{{ entry.port_type.value }}</td>
+              <td data-label="OS" style="color:#6e6e73">{{ entry.os.value }}</td>
+              <td data-label="Status">
+                {% case status %}
+                  {% when 'full' %}
+                    <span class="status-full"><span class="status-dot status-dot--full" aria-hidden="true"></span>Full</span>
+                  {% when 'partial' %}
+                    <span class="status-partial"><span class="status-dot status-dot--partial" aria-hidden="true"></span>Partial</span>
+                  {% else %}
+                    <span class="status-no"><span class="status-dot status-dot--no" aria-hidden="true"></span>No</span>
+                {% endcase %}
+              </td>
+              <td data-label="Notes" style="font-size:13px;color:#6e6e73;max-width:200px">{{ entry.notes.value | default: '—' }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  {% else %}
+
+    <div class="data-table-wrap">
+      <table class="data-table" id="compat-table">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Model</th>
+            <th>Port type</th>
+            <th>OS</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% assign compat_rows = 'Apple,MacBook Pro 14-inch (M1–M4),Thunderbolt / USB-C,macOS,full,All ports functional. No drivers required.|Apple,MacBook Air 13-inch (M1–M3),USB-C,macOS,full,Full compatibility.|Apple,iPad Pro (USB-C models),USB-C,iPadOS,partial,Display output limited to one screen on iPad.|Dell,XPS 13 / XPS 15,USB-C,Windows 11,full,Ethernet may require one-time driver install.|Microsoft,Surface Pro 9,USB-C,Windows 11,full,Use USB-C port only.|HP,Spectre x360,USB-C / Thunderbolt 4,Windows 11,full,Full compatibility.' | split: '|' %}
+          {% for row in compat_rows %}
+            {% assign cols = row | split: ',' %}
+            <tr data-os="{{ cols[3] }}" data-search="{{ cols[0] | downcase }} {{ cols[1] | downcase }} {{ cols[2] | downcase }}">
+              <td data-label="Device" style="font-weight:500">{{ cols[0] }}</td>
+              <td data-label="Model" style="color:#6e6e73">{{ cols[1] }}</td>
+              <td data-label="Port" style="color:#6e6e73">{{ cols[2] }}</td>
+              <td data-label="OS" style="color:#6e6e73">{{ cols[3] }}</td>
+              <td data-label="Status">
+                {% if cols[4] == 'full' %}
+                  <span class="status-full"><span class="status-dot status-dot--full"></span>Full</span>
+                {% elsif cols[4] == 'partial' %}
+                  <span class="status-partial"><span class="status-dot status-dot--partial"></span>Partial</span>
+                {% else %}
+                  <span class="status-no"><span class="status-dot status-dot--no"></span>No</span>
+                {% endif %}
+              </td>
+              <td data-label="Notes" style="font-size:13px;color:#6e6e73">{{ cols[5] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  {% endif %}
+
+  <div class="support-cta-strip">
+    <div>
+      <p class="support-cta-strip__heading">Don't see your device?</p>
+      <p class="support-cta-strip__body">Send us your device details and we'll verify compatibility for you.</p>
+    </div>
+    <div class="support-cta-strip__actions">
+      <a href="/pages/contact" class="btn btn--primary">Ask about compatibility</a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.compat-search-row{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+@media(min-width:640px){.compat-search-row{flex-direction:row;align-items:center}}
+.compat-search{flex:1;height:44px;padding:0 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:100px;font-size:14px;font-family:inherit;color:#1d1d1f;background:#fff;outline:none;transition:border-color .2s}
+.compat-search:focus{border-color:#F59E0B}
+.compat-search::placeholder{color:#6e6e73}
+</style>
+
+<script>
+(function(){
+  var table = document.getElementById('compat-table');
+  if (!table) return;
+  var rows = table.querySelectorAll('tbody tr[data-os]');
+
+  function applyFilters(){
+    var searchVal = document.getElementById('compat-search')
+      ? document.getElementById('compat-search').value.toLowerCase() : '';
+    var osFilter = (document.querySelector('.filter-pill.is-active') || {}).dataset
+      ? document.querySelector('.filter-pill.is-active').dataset.filter : 'all';
+    rows.forEach(function(row){
+      var matchOs = osFilter === 'all' || (row.dataset.os || '').indexOf(osFilter) !== -1;
+      var matchSearch = !searchVal || (row.dataset.search || '').indexOf(searchVal) !== -1;
+      row.style.display = (matchOs && matchSearch) ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.filter-pill').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter-pill').forEach(function(b){ b.classList.remove('is-active'); });
+      this.classList.add('is-active');
+      applyFilters();
+    });
+  });
+
+  var searchInput = document.getElementById('compat-search');
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+})();
+</script>
+
+{% schema %}{"name":"Compatibility","tag":"section","settings":[],"presets":[{"name":"Compatibility"}]}{% endschema %}
