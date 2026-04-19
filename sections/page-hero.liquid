@@ -6,7 +6,7 @@
   {% if hero_image != blank %}style="--hero-bg: url({{ hero_image | image_url: width: 1800 }})"{% endif %}
   aria-label="{{ section.settings.heading | escape }}"
 >
-  <div class="page-hero__inner page-width">
+  <div class="page-hero__inner container-shell">
     {% if section.settings.kicker != blank %}
       <p class="page-hero__kicker">{{ section.settings.kicker | escape }}</p>
     {% endif %}

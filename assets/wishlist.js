@@ -20,7 +20,16 @@
     return getWishlist().some(function (item) { return String(item.id) === String(id); });
   }
 
-  function toggleWishlist(id, title, url, image) {
+  function escapeHTML(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function toggleWishlist(id, title, url, image, price) {
     var items = getWishlist();
     var idx = items.findIndex(function (item) { return String(item.id) === String(id); });
     if (idx > -1) {
@@ -28,7 +37,7 @@
       saveWishlist(items);
       return false;
     } else {
-      items.push({ id: String(id), title: title, url: url, image: image, added: Date.now() });
+      items.push({ id: String(id), title: title, url: url, image: image, price: price, added: Date.now() });
       saveWishlist(items);
       return true;
     }
@@ -47,51 +56,66 @@
 
   function renderWishlistPage() {
     var grid = document.getElementById('wishlist-grid');
+    var items = document.getElementById('wishlist-items');
     var empty = document.getElementById('wishlist-empty');
+    var counter = document.getElementById('wishlist-count');
     if (!grid) return;
 
-    var items = getWishlist();
+    var saved = getWishlist();
 
-    var existing = grid.querySelector('.wishlist-products');
-    if (existing) existing.remove();
+    if (counter) {
+      counter.textContent = saved.length === 0
+        ? ''
+        : saved.length + ' item' + (saved.length !== 1 ? 's' : '');
+    }
 
-    if (items.length === 0) {
+    if (saved.length === 0) {
       if (empty) empty.hidden = false;
+      if (items) items.innerHTML = '';
       return;
     }
 
     if (empty) empty.hidden = true;
 
-    var container = document.createElement('div');
-    container.className = 'wishlist-products collection-product-grid';
+    if (!items) return;
+    items.innerHTML = '';
 
-    items.forEach(function (item) {
+    saved.forEach(function (item) {
       var card = document.createElement('div');
-      card.className = 'wishlist-item';
+      card.className = 'wishlist-card';
+      var itemTitle = escapeHTML(item.title || 'Product');
+      var itemUrl = escapeHTML(item.url || '#');
+      var itemImage = escapeHTML(item.image || '');
+      var itemPrice = escapeHTML(item.price || '');
+      var itemId = escapeHTML(item.id || '');
       card.innerHTML =
-        '<a href="' + (item.url || '/') + '" class="wishlist-item__link">' +
-          (item.image
-            ? '<img src="' + item.image + '" alt="' + (item.title || '').replace(/"/g, '&quot;') + '" class="wishlist-item__image" loading="lazy" decoding="async">'
-            : '<div class="wishlist-item__image-placeholder"></div>') +
-          '<div class="wishlist-item__body">' +
-            '<p class="wishlist-item__title">' + (item.title || '') + '</p>' +
-          '</div>' +
-        '</a>' +
-        '<button class="wishlist-item__remove btn btn--secondary btn--sm" data-remove-id="' + item.id + '" type="button">Remove</button>';
-      container.appendChild(card);
-    });
+        '<div class="wishlist-card__image-wrap">' +
+          (itemImage
+            ? '<img src="' + itemImage + '" alt="' + itemTitle + '" class="wishlist-card__image" loading="lazy" decoding="async">'
+            : '<div class="wishlist-card__image-placeholder" aria-hidden="true"></div>') +
+          '<button class="wishlist-card__remove" data-remove-id="' + itemId + '" type="button" aria-label="Remove from wishlist">' +
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">' +
+              '<path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
+            '</svg>' +
+          '</button>' +
+        '</div>' +
+        '<div class="wishlist-card__body">' +
+          '<a href="' + itemUrl + '" class="wishlist-card__title">' + itemTitle + '</a>' +
+          (itemPrice ? '<div class="wishlist-card__price">' + itemPrice + '</div>' : '') +
+        '</div>' +
+        '<a href="' + itemUrl + '" class="wishlist-card__atc">View product</a>';
 
-    grid.appendChild(container);
-
-    container.querySelectorAll('[data-remove-id]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      card.querySelector('[data-remove-id]').addEventListener('click', function () {
         var current = getWishlist();
-        var i = current.findIndex(function (x) { return String(x.id) === String(btn.dataset.removeId); });
+        var i = current.findIndex(function (x) { return String(x.id) === String(this.dataset.removeId); }, this);
         if (i > -1) current.splice(i, 1);
         saveWishlist(current);
         renderWishlistPage();
         updateButtons();
+        updateWishlistCount();
       });
+
+      items.appendChild(card);
     });
   }
 
@@ -103,7 +127,8 @@
     var title = btn.dataset.wishlistTitle || '';
     var url = btn.dataset.wishlistUrl || '';
     var image = btn.dataset.wishlistImage || '';
-    var active = toggleWishlist(id, title, url, image);
+    var price = btn.dataset.wishlistPrice || '';
+    var active = toggleWishlist(id, title, url, image, price);
     btn.classList.toggle('is-wishlisted', active);
     btn.setAttribute('aria-pressed', String(active));
     showToast(active ? title + ' saved to wishlist' : title + ' removed from wishlist');

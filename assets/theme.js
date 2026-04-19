@@ -1010,9 +1010,9 @@ document.addEventListener('keydown', function(event) {
 
 // ─── Mega menu controller ────────────────────────────────────────────────────
 (function () {
-  const OPEN_DELAY = 120;
-  const CLOSE_DELAY = 240;
-  const PANEL_HIDE_DELAY = 220;
+  const OPEN_DELAY = 500;
+  const CLOSE_DELAY = 500;
+  const PANEL_HIDE_DELAY = 80;
 
   function MegaMenu(root) {
     this.root = root;
@@ -1158,7 +1158,7 @@ document.addEventListener('keydown', function(event) {
     window.clearTimeout(this.openTimer);
     this.openTimer = window.setTimeout(function () {
       self.open(key, false);
-    }, this.activeKey ? 60 : OPEN_DELAY);
+    }, this.activeKey ? 0 : OPEN_DELAY);
   };
 
   MegaMenu.prototype.clearCloseTimer = function () {

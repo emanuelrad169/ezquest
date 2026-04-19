@@ -49,8 +49,6 @@
              data-bento-index="{{ idx }}"
              data-reveal-delay="{{ idx | times: 60 }}"
              aria-label="{{ guide_entry.title.value | escape }}">
-            <div class="decision-card__spotlight" aria-hidden="true"></div>
-            {%- if idx == 0 -%}<div class="decision-card__beam" aria-hidden="true"></div>{%- endif -%}
             <div class="decision-card__inner">
               <div class="decision-card__top">
                 {%- if guide_entry.role_label.value != blank -%}
@@ -92,8 +90,6 @@
              data-reveal-delay="{{ idx | times: 60 }}"
              aria-label="{{ block.settings.title | escape }}"
              {{ block.shopify_attributes }}>
-            <div class="decision-card__spotlight" aria-hidden="true"></div>
-            {%- if idx == 0 -%}<div class="decision-card__beam" aria-hidden="true"></div>{%- endif -%}
             <div class="decision-card__inner">
               <div class="decision-card__top">
                 {%- if block.settings.eyebrow != blank -%}
@@ -149,21 +145,6 @@
   } else {
     cards.forEach(function (c) { c.classList.add('is-revealed'); });
   }
-
-  // CardSpotlight: radial-gradient follow on mousemove
-  cards.forEach(function (card) {
-    card.addEventListener('mousemove', function (e) {
-      var rect = card.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      var sp = card.querySelector('.decision-card__spotlight');
-      if (sp) sp.style.background = 'radial-gradient(400px circle at ' + x + 'px ' + y + 'px, rgba(245,158,11,0.13), transparent 60%)';
-    });
-    card.addEventListener('mouseleave', function () {
-      var sp = card.querySelector('.decision-card__spotlight');
-      if (sp) sp.style.background = '';
-    });
-  });
 })();
 </script>
 

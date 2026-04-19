@@ -3,6 +3,7 @@
   assign wb_title = product_title | default: product.title
   assign wb_url = product_url | default: product.url
   assign wb_image = product_image | default: product.featured_image
+  assign wb_price = product_price | default: product.price
 -%}
 <button
   class="wishlist-btn"
@@ -10,6 +11,7 @@
   data-wishlist-title="{{ wb_title | escape }}"
   data-wishlist-url="{{ wb_url }}"
   data-wishlist-image="{{ wb_image | image_url: width: 300 }}"
+  data-wishlist-price="{{ wb_price | money }}"
   aria-label="Add {{ wb_title | escape }} to wishlist"
   aria-pressed="false"
   type="button"

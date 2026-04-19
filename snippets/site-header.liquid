@@ -66,51 +66,26 @@
               </svg>
               <span class="site-header-wishlist-count" data-wishlist-count hidden>0</span>
             </a>
-            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
-              <button
-                type="button"
-                class="site-header-icon-button site-header-cart-button"
-                aria-label="{{ 'header.cart' | t }}"
-                aria-expanded="false"
-                aria-controls="header-cart-menu"
-                data-nav-submenu-trigger
-              >
-                {% render 'icon', name: 'cart' %}
-                {% if cart.item_count > 0 %}
-                  <span class="site-header-cart-count">{{ cart.item_count }}</span>
-                {% endif %}
-              </button>
-              <div id="header-cart-menu" class="nav-submenu-panel nav-submenu-panel--icon nav-submenu-panel--cart" hidden data-nav-submenu-panel>
-                <div class="nav-submenu-summary">
-                  <strong>
-                    {% if cart.item_count > 0 %}
-                      {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}
-                    {% else %}
-                      Your cart is empty
-                    {% endif %}
-                  </strong>
-                  <span>
-                    {% if cart.item_count > 0 %}
-                      {{ cart.total_price | money }}
-                    {% else %}
-                      Add a product to get started.
-                    {% endif %}
-                  </span>
-                </div>
-                <a href="{{ routes.cart_url }}" class="nav-submenu-link">View cart</a>
-                {% if cart.item_count > 0 %}
-                  <a href="/checkout" class="nav-submenu-link">Checkout</a>
-                {% else %}
-                  <a href="{{ routes.all_products_collection_url }}" class="nav-submenu-link">Browse products</a>
-                {% endif %}
-              </div>
-            </div>
-            <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button lg:hidden" aria-label="{{ 'header.cart' | t }}">
+            <button
+              class="site-header-icon-button site-header-cart-button header-icon-btn"
+              type="button"
+              aria-label="Open cart"
+              aria-expanded="false"
+              aria-controls="cart-drawer"
+              id="header-cart-btn"
+              data-cart-drawer-trigger
+              data-cart-count="{{ cart.item_count }}"
+            >
               {% render 'icon', name: 'cart' %}
-              {% if cart.item_count > 0 %}
-                <span class="site-header-cart-count">{{ cart.item_count }}</span>
-              {% endif %}
-            </a>
+              <span
+                class="site-header-cart-count header-icon-btn__count"
+                data-cart-count-badge
+                aria-label="{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in cart"
+                {% if cart.item_count == 0 %}hidden{% endif %}
+              >
+                {{ cart.item_count }}
+              </span>
+            </button>
             <button
               class="site-header-icon-button lg:hidden"
               type="button"

@@ -1,4 +1,5 @@
-<section class="section-shell main-product-section" data-product-root>
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="section-shell main-product-section" id="pdp-overview" data-product-root>
   <div class="container-shell">
     <div class="hidden lg:block">
       {% render 'breadcrumbs' %}
@@ -31,7 +32,6 @@
       assign ownership_copy = section.settings.support_copy | default: 'Compatibility, manuals, downloads, and help.'
       assign setup_label = 'Everyday'
       assign setup_statement = 'Clean connectivity for everyday devices.'
-      assign setup_environment = 'Light, clean, ready.'
       assign spec_count = 0
       assign product_spec_rows = blank
       assign manual_count = 0
@@ -43,6 +43,7 @@
       assign support_center_url = '/pages/support'
       assign setup_guide_url = '/pages/help-me-choose'
       assign compare_products_url = '/pages/compare'
+      assign amazon_url = product.metafields.ezquest.amazon_url.value
       assign back_collection = collection
       assign back_collection_url = blank
       assign back_collection_title = blank
@@ -138,21 +139,18 @@
           assign use_owned_product_gallery = true
           assign setup_label = 'Travel'
           assign setup_statement = 'Compact ports and power for work on the move.'
-          assign setup_environment = 'Light in the bag. Ready anywhere.'
           assign role_decision_note = 'Made for work on the move.'
           assign ownership_heading = 'Support for the move'
         when 'usb-c-pro-dock'
           assign use_owned_product_gallery = true
           assign setup_label = 'Desk'
           assign setup_statement = 'Ports, power, and displays for the desk.'
-          assign setup_environment = 'Clean, connected, in control.'
           assign role_decision_note = 'Made for the desk.'
           assign ownership_heading = 'Support for the desk'
         when 'usb-c-multimedia-hub'
           assign use_owned_product_gallery = true
           assign setup_label = 'Everyday'
           assign setup_statement = 'Balanced ports and power for everyday desks.'
-          assign setup_environment = 'Charging, displays, Ethernet, and storage.'
           assign role_decision_note = 'Made for everyday desks.'
           assign ownership_heading = 'Support for everyday desks'
       endcase
@@ -238,15 +236,33 @@
     <div class="mt-4 grid gap-8 lg:mt-6 lg:grid-cols-2 lg:items-start lg:gap-10 product-layout-grid">
       <div class="space-y-5 motion-fade-up">
         <div class="product-gallery-stage product-gallery-stage-shell">
-          <div class="product-gallery-layout grid gap-4">
+          <div class="product-gallery-layout">
+
+            <div class="product-gallery-main-shell">
+
+              <div class="product-gallery-main">
+                {% if lead_media != blank %}
+                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', decoding: 'sync', max_width: 1200, sizes: '(max-width: 1023px) 100vw, 600px' %}
+                {% elsif product.featured_image != blank %}
+                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', decoding: 'sync', max_width: 1200, sizes: '(max-width: 1023px) 100vw, 600px' %}
+                {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
+                  <div class="hero-media-frame p-2 lg:p-3">
+                    {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
+                  </div>
+                {% else %}
+                  {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
+                {% endif %}
+              </div>
+            </div>
+
             <div class="product-gallery-grid product-gallery-grid--rail">
               {% if lead_media != blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
-                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
+                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', max_width: 200, widths: '100, 200', sizes: '80px' %}
                 </button>
               {% elsif product.featured_image != blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
-                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
+                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', max_width: 200, widths: '100, 200', sizes: '80px' %}
                 </button>
               {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
                 <button type="button" class="product-thumb-card" aria-current="true">
@@ -258,7 +274,7 @@
                 {% for media_item in product.media limit: 6 %}
                   {% unless lead_media != blank and media_item.id == lead_media.id %}
                     <button type="button" class="product-thumb-card">
-                      {% render 'media', media: media_item, aspect_ratio: 'aspect-square', class: 'bg-white p-2 shadow-none', object_fit: 'object-contain' %}
+                      {% render 'media', media: media_item, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', max_width: 200, widths: '100, 200', sizes: '80px' %}
                     </button>
                   {% endunless %}
                 {% endfor %}
@@ -275,26 +291,6 @@
               {% endif %}
             </div>
 
-            <div class="product-gallery-main-shell">
-              <div class="product-gallery-stage-note">
-                <span class="product-gallery-stage-label">{{ setup_label }}</span>
-                <p class="product-gallery-stage-copy hidden lg:block">{{ setup_environment }}</p>
-              </div>
-
-              <div class="product-gallery-main">
-                {% if lead_media != blank %}
-                  {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
-                {% elsif product.featured_image != blank %}
-                  {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-card', class: 'hero-media-frame p-2 lg:p-3', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high' %}
-                {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
-                  <div class="hero-media-frame p-2 lg:p-3">
-                    {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 1600, height: 1200, class: 'aspect-card w-full object-cover', loading: 'eager', fetchpriority: 'high' %}
-                  </div>
-                {% else %}
-                  {% render 'placeholder-visual', kind: 'product', text: product.title, width: 1200, height: 900, class: 'hero-media-frame aspect-card w-full object-cover' %}
-                {% endif %}
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -333,9 +329,9 @@
             <div class="product-buybox-price-row flex flex-col gap-2">
               <p class="product-buybox-setup-statement text-sm leading-relaxed text-slate-700">{{ setup_statement }}</p>
               {% if product_positioning_text != blank %}
-                <p class="product-buybox-positioning text-sm leading-6 text-slate-500">{{ product_positioning_text }}</p>
+                <p class="pdp-subtitle">{{ product_positioning_text | truncate: 90 }}</p>
               {% else %}
-                <p class="product-buybox-positioning text-sm leading-6 text-slate-500">{{ role_decision_note }}</p>
+                <p class="pdp-subtitle">{{ role_decision_note }}</p>
               {% endif %}
             </div>
           </div>
@@ -383,7 +379,7 @@
                   {% else %}
                     <div class="product-variant-chip-row flex flex-wrap gap-2" role="list">
                       {% for variant in product.variants %}
-                        <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-slate-900 text-slate-950 ring-1 ring-slate-900/15{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
+                        <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-amber-500 bg-amber-50 text-amber-900 ring-1 ring-amber-500/20{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
                           <span class="product-variant-chip-title leading-none">{{ variant.options.first | default: variant.title }}</span>
                           {% unless variant.available %}
                             <span class="product-variant-chip-meta text-xs text-slate-400">Sold out</span>
@@ -427,11 +423,9 @@
                   </div>
                 {% endif %}
 
-                <div class="product-primary-action-wrap w-full" data-product-primary-action-wrap>
+                <div class="product-primary-action-wrap w-full self-end" data-product-primary-action-wrap>
                   <button class="button-primary product-primary-action" type="submit" name="add" data-product-primary-button{% unless product.available %} disabled="disabled"{% endunless %}>
                     <span data-product-primary-button-label>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span>
-                    <span class="product-primary-action-divider" aria-hidden="true" data-product-primary-button-divider>·</span>
-                    <span data-product-primary-button-price>{{ product.selected_or_first_available_variant.price | money }}</span>
                   </button>
                 </div>
                 <div class="product-wishlist-wrap">
@@ -447,6 +441,62 @@
 
             </div>
           {% endform %}
+
+          {% comment %} ── Action row: Social share ── {% endcomment %}
+          <div class="pdp-action-row">
+
+            {% if amazon_url != blank %}
+              <a href="{{ amazon_url }}"
+                 class="pdp-amazon-btn"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Buy {{ product.title | escape }} on Amazon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-amazon" viewBox="0 0 16 16">
+  <path d="M10.813 11.968c.157.083.36.074.5-.05l.005.005a90 90 0 0 1 1.623-1.405c.173-.143.143-.372.006-.563l-.125-.17c-.345-.465-.673-.906-.673-1.791v-3.3l.001-.335c.008-1.265.014-2.421-.933-3.305C10.404.274 9.06 0 8.03 0 6.017 0 3.77.75 3.296 3.24c-.047.264.143.404.316.443l2.054.22c.19-.009.33-.196.366-.387.176-.857.896-1.271 1.703-1.271.435 0 .929.16 1.188.55.264.39.26.91.257 1.376v.432q-.3.033-.621.065c-1.113.114-2.397.246-3.36.67C3.873 5.91 2.94 7.08 2.94 8.798c0 2.2 1.387 3.298 3.168 3.298 1.506 0 2.328-.354 3.489-1.54l.167.246c.274.405.456.675 1.047 1.166ZM6.03 8.431C6.03 6.627 7.647 6.3 9.177 6.3v.57c.001.776.002 1.434-.396 2.133-.336.595-.87.961-1.465.961-.812 0-1.286-.619-1.286-1.533M.435 12.174c2.629 1.603 6.698 4.084 13.183.997.28-.116.475.078.199.431C13.538 13.96 11.312 16 7.57 16 3.832 16 .968 13.446.094 12.386c-.24-.275.036-.4.199-.299z"/>
+  <path d="M13.828 11.943c.567-.07 1.468-.027 1.645.204.135.176-.004.966-.233 1.533-.23.563-.572.961-.762 1.115s-.333.094-.23-.137c.105-.23.684-1.663.455-1.963-.213-.278-1.177-.177-1.625-.13l-.09.009q-.142.013-.233.024c-.193.021-.245.027-.274-.032-.074-.209.779-.556 1.347-.623"/>
+</svg>
+                <span>Buy on Amazon</span>
+              </a>
+            {% endif %}
+
+            <div class="pdp-share-strip">
+              <span class="pdp-share-label">Share</span>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}"
+                 class="pdp-share-btn pdp-share-btn--fb"
+                 target="_blank" rel="noopener"
+                 aria-label="Share on Facebook">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}"
+                 class="pdp-share-btn pdp-share-btn--tw"
+                 target="_blank" rel="noopener"
+                 aria-label="Share on X / Twitter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url | url_encode }}&media={{ product.featured_image | image_url: width: 600 | url_encode }}&description={{ product.title | url_encode }}"
+                 class="pdp-share-btn pdp-share-btn--pin"
+                 target="_blank" rel="noopener"
+                 aria-label="Save to Pinterest">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+                </svg>
+              </a>
+              <button class="pdp-share-btn pdp-share-btn--copy"
+                      type="button"
+                      aria-label="Copy link"
+                      onclick="navigator.clipboard.writeText('{{ shop.url | append: product.url }}');this.setAttribute('data-copied','true');setTimeout(()=>this.removeAttribute('data-copied'),2000)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
 
           {% unless product.available %}
             <div class="notify-form" id="notify-form-{{ section.id }}" data-notify-form>
@@ -488,41 +538,37 @@
             </div>
           {% endif %}
 
-          <div class="product-share-row">
-            <span class="product-share-label">Share</span>
-            <a href="https://www.facebook.com/sharer.php?u={{ shop.url }}{{ product.url | url_encode }}" class="product-share-link" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">{% render 'icon', name: 'facebook' %}</a>
-            <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url | url_encode }}&amp;text={{ product.title | url_encode }}" class="product-share-link" target="_blank" rel="noopener noreferrer" aria-label="Share on X">{% render 'icon', name: 'x-social' %}</a>
-            <a href="https://pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url | url_encode }}&amp;description={{ product.title | url_encode }}" class="product-share-link" target="_blank" rel="noopener noreferrer" aria-label="Share on Pinterest">{% render 'icon', name: 'pinterest' %}</a>
-            <a href="mailto:?subject={{ product.title | url_encode }}&amp;body={{ shop.url }}{{ product.url }}" class="product-share-link" aria-label="Share via Email">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.7"/><path d="M2.5 6.5 9 11l6.5-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+          <div class="pdp-trust-strip" role="list" aria-label="Purchase confidence">
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
+              </svg>
+              <span class="pdp-trust-label">2-yr warranty</span>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="pdp-trust-label">No drivers</span>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="9" cy="9" r="6.5" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
+                <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>
+              <span class="pdp-trust-label">Mac + Windows</span>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M1.5 4.5h10v7.5H1.5V4.5zM11.5 7.5H15l1.5 3v1.5h-5V7.5z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="4.5" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
+                <circle cx="13" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
+              </svg>
+              <span class="pdp-trust-label">Free shipping</span>
+            </div>
           </div>
 
-          <div class="product-trust-grid" role="list" aria-label="Purchase confidence">
-            <div class="product-trust-item" role="listitem">
-              <span class="product-trust-icon" role="img" aria-label="In stock">{% render 'icon', name: 'check' %}</span>
-              <span>In stock</span>
-            </div>
-            <div class="product-trust-item" role="listitem">
-              <span class="product-trust-icon" role="img" aria-label="30-day returns">{% render 'icon', name: 'shield' %}</span>
-              <span>30-day returns</span>
-            </div>
-            <div class="product-trust-item" role="listitem">
-              <span class="product-trust-icon" role="img" aria-label="2-year warranty">{% render 'icon', name: 'spark' %}</span>
-              <span>2-year warranty</span>
-            </div>
-            <div class="product-trust-item" role="listitem">
-              <span class="product-trust-icon" role="img" aria-label="Free shipping">{% render 'icon', name: 'truck' %}</span>
-              <span>Free shipping</span>
-            </div>
-          </div>
 
-          <div class="product-view-details-row">
-            <a href="#product-highlights" class="product-view-details-link">
-              View full details
-              {% render 'icon', name: 'arrow-right' %}
-            </a>
-          </div>
 
           {%- capture product_fit_content -%}
             <div class="product-mobile-detail-stack">
@@ -648,81 +694,11 @@
 	            {% endif %}
 	          </div>
 
-	          <div class="product-link-row product-link-row--mobile lg:hidden">
-              {% if back_collection_url != blank %}
-	            <a href="{{ back_collection_url }}" class="site-meta-link">{{ back_collection_label }}</a>
-              {% endif %}
-	            <a href="{{ compare_products_url }}" class="site-meta-link">Compare models</a>
-	            <a href="{{ support_center_url }}" class="site-meta-link">Support</a>
-	          </div>
 
         </div>
       </div>
     </div>
 
-    <div class="product-secondary-details hidden lg:block" id="product-highlights">
-      <div class="product-highlight-shell">
-        <p class="product-highlight-kicker">Key specs</p>
-        <div class="product-highlights product-highlights--specs">
-          {% if product_spec_rows != blank and product_spec_rows.count > 0 %}
-            {% for row in product_spec_rows limit: 6 %}
-              {%- assign hl_label_lower = row.label.value | downcase -%}
-              {%- assign hl_icon = 'spark' -%}
-              {%- if hl_label_lower contains 'speed' or hl_label_lower contains 'transfer' -%}{%- assign hl_icon = 'bolt' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'port' or hl_label_lower contains 'hub' -%}{%- assign hl_icon = 'layers' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'power' or hl_label_lower contains 'watt' or hl_label_lower contains 'charg' -%}{%- assign hl_icon = 'bolt' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'display' or hl_label_lower contains 'resolution' or hl_label_lower contains 'video' -%}{%- assign hl_icon = 'monitor' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'length' -%}{%- assign hl_icon = 'map' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'weight' -%}{%- assign hl_icon = 'layers' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'compat' or hl_label_lower contains 'system' -%}{%- assign hl_icon = 'check' -%}{%- endif -%}
-              {%- if hl_label_lower contains 'connect' or hl_label_lower contains 'type' -%}{%- assign hl_icon = 'tag' -%}{%- endif -%}
-              <div class="product-highlight-card product-highlight-card--spec">
-                <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: hl_icon %}</span>
-                <span class="product-highlight-spec-label">{{ row.label.value }}</span>
-                <span class="product-highlight-spec-value">{{ row.spec_value.value | truncatewords: 5 }}</span>
-              </div>
-            {% endfor %}
-          {% elsif has_structured_highlights %}
-            {% for highlight in structured_highlights limit: 6 %}
-              <div class="product-highlight-card product-highlight-card--spec">
-                <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
-                <span class="product-highlight-spec-label">Highlight {{ forloop.index }}</span>
-                <span class="product-highlight-spec-value">{{ highlight | truncatewords: 5 }}</span>
-              </div>
-            {% endfor %}
-          {% elsif section.blocks.size > 0 %}
-            {% for block in section.blocks limit: 6 %}
-              {% if block.settings.title != blank %}
-                <div class="product-highlight-card product-highlight-card--spec" {{ block.shopify_attributes }}>
-                  <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
-                  <span class="product-highlight-spec-label">Highlight {{ forloop.index }}</span>
-                  <span class="product-highlight-spec-value">{{ block.settings.title | truncatewords: 4 }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <div class="product-highlight-card product-highlight-card--spec">
-              <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
-              <span class="product-highlight-spec-label">Fit</span>
-              <span class="product-highlight-spec-value">{{ setup_label }}</span>
-            </div>
-            <div class="product-highlight-card product-highlight-card--spec">
-              <span class="product-highlight-icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
-              <span class="product-highlight-spec-label">Compatibility</span>
-              <span class="product-highlight-spec-value">Mac &amp; Windows</span>
-            </div>
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="product-link-row">
-        {% if back_collection_url != blank %}
-          <a href="{{ back_collection_url }}" class="site-meta-link">{{ back_collection_label }}</a>
-        {% endif %}
-        <a href="{{ compare_products_url }}" class="site-meta-link">Compare models</a>
-        <a href="{{ support_center_url }}" class="site-meta-link">Support</a>
-      </div>
-    </div>
   </div>
 
   <div class="product-sticky-atc" hidden data-sticky-atc>
@@ -747,6 +723,265 @@
         <p class="product-sticky-atc-trust">{{ sticky_trust_line }}</p>
       {% endif %}
     </div>
+  </div>
+</section>
+
+{%- liquid
+  assign show_features_tab = false
+  if section.settings.youtube_url != blank
+    assign show_features_tab = true
+  endif
+  for block in section.blocks
+    if block.type == 'feature' and block.settings.image != blank
+      assign show_features_tab = true
+      break
+    endif
+  endfor
+-%}
+<div class="pdp-tab-strip" data-pdp-tab-strip>
+  <div class="pdp-tab-strip-inner">
+    <a href="#pdp-overview" class="pdp-tab" data-pdp-tab>Overview</a>
+    {% if show_features_tab %}
+      <a href="#pdp-features" class="pdp-tab" data-pdp-tab>Features</a>
+    {% endif %}
+    {% if product != blank and product.metafields.ezquest.spec_rows != blank %}
+      <a href="#pdp-specs" class="pdp-tab" data-pdp-tab>Specs</a>
+    {% endif %}
+    <a href="#pdp-compat" class="pdp-tab" data-pdp-tab>Compatibility</a>
+    <a href="#pdp-downloads" class="pdp-tab" data-pdp-tab>Downloads</a>
+    <a href="#pdp-faq" class="pdp-tab" data-pdp-tab>FAQ</a>
+  </div>
+</div>
+
+{% comment %}──────────────────────────────────────────────────────────────
+  ZONE 3 — FEATURES
+  Guard: requires youtube_url setting OR at least one feature block
+         with an image. Renders nothing if neither is set.
+──────────────────────────────────────────────────────────────{% endcomment %}
+{% if show_features_tab %}
+<section class="section-shell pdp-section pdp-section--features" id="pdp-features">
+  <div class="container-shell">
+    <div class="section-intro">
+      <div class="max-w-2xl">
+        <p class="section-kicker">Product features</p>
+        <h2 class="section-heading mt-4">{{ product.title | split: '—' | first | strip }}</h2>
+      </div>
+    </div>
+
+    {% if section.settings.youtube_url != blank %}
+      {%- assign yt_raw = section.settings.youtube_url -%}
+      {%- if yt_raw contains 'youtu.be/' -%}
+        {%- assign yt_id = yt_raw | split: 'youtu.be/' | last | split: '?' | first -%}
+      {%- else -%}
+        {%- assign yt_id = yt_raw | split: 'v=' | last | split: '&' | first -%}
+      {%- endif -%}
+      <div class="pdp-video-wrap mt-8">
+        <div class="pdp-video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/{{ yt_id }}"
+            title="{{ product.title | escape }} — product video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    {% endif %}
+
+    {%- assign feature_block_count = 0 -%}
+    {% for block in section.blocks %}
+      {% if block.type == 'feature' and block.settings.image != blank %}
+        {%- assign feature_block_count = feature_block_count | plus: 1 -%}
+      {% endif %}
+    {% endfor %}
+    {% if feature_block_count > 0 %}
+      <div class="pdp-feature-grid mt-8">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' and block.settings.image != blank %}
+            <div class="pdp-feature-panel{% if block.settings.span == '2' %} pdp-feature-panel--wide{% endif %}" {{ block.shopify_attributes }}>
+              {% render 'media', image: block.settings.image, aspect_ratio: 'aspect-video', class: 'pdp-feature-panel-img', object_fit: 'object-cover', sizes: '(max-width: 1023px) 100vw, 50vw' %}
+              {% if block.settings.caption != blank %}
+                <p class="pdp-feature-panel-caption">{{ block.settings.caption }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% comment %}──────────────────────────────────────────────────────────────
+  ZONE 4 — SPECIFICATIONS
+  Guard: requires spec_rows metafield with at least one row.
+──────────────────────────────────────────────────────────────{% endcomment %}
+{% if spec_count > 0 %}
+<section class="section-shell pdp-section pdp-section--specs" id="pdp-specs">
+  <div class="container-shell max-w-5xl">
+    {%- liquid
+      assign pdp_specs_heading = 'Specifications'
+      assign pdp_specs_copy = 'Review the ports, charging support, display path, and host details before you order.'
+      case product.handle
+        when 'usb-c-travel-hub'
+          assign pdp_specs_heading = 'Specifications for mobile setups'
+          assign pdp_specs_copy = 'Review the core ports, charging path, and display support that matter when the setup needs to stay light and mobile.'
+        when 'usb-c-pro-dock'
+          assign pdp_specs_heading = 'Specifications for desk setups'
+          assign pdp_specs_copy = 'Review the broader connectivity, display support, charging path, and host details that matter before you commit to a permanent desk setup.'
+        when 'usb-c-multimedia-hub'
+          assign pdp_specs_heading = 'Specifications for everyday desks'
+          assign pdp_specs_copy = 'Review the ports, charging support, display path, and host details that make this a strong everyday choice.'
+      endcase
+    -%}
+    <div class="grid gap-8 lg:grid-cols-article-aside lg:items-start">
+      <div class="product-technical-intro">
+        <p class="section-kicker">Technical sheet</p>
+        <h2 class="section-heading mt-4">{{ pdp_specs_heading }}</h2>
+        <p class="section-copy mt-4">{{ pdp_specs_copy }}</p>
+      </div>
+      <div class="pdp-spec-table">
+        <div class="pdp-spec-table-head">
+          <p class="section-kicker">Technical profile</p>
+        </div>
+        <div class="pdp-spec-table-body">
+          {% for row in product_spec_rows %}
+            <div class="pdp-spec-row{% if forloop.first %} pdp-spec-row--first{% endif %}">
+              <span class="pdp-spec-label">{{ row.label.value }}</span>
+              <span class="pdp-spec-value">{{ row.spec_value.value }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% comment %}──────────────────────────────────────────────────────────────
+  ZONE 5 — HIGHLIGHTS
+  No guard — always renders with hardcoded fallback copy.
+  Shows product metafield highlights when available.
+──────────────────────────────────────────────────────────────{% endcomment %}
+{%- liquid
+  assign pdp_hl_one = 'Clean connectivity for every device on the desk'
+  assign pdp_hl_two = 'Ports, power, and display support — one adapter'
+  assign pdp_hl_three = 'Mac and Windows ready, no drivers needed'
+  if has_structured_highlights
+    assign pdp_hl_one = structured_highlights[0] | strip
+    if structured_highlights.size > 1
+      assign pdp_hl_two = structured_highlights[1] | strip
+    endif
+    if structured_highlights.size > 2
+      assign pdp_hl_three = structured_highlights[2] | strip
+    endif
+  endif
+-%}
+<section class="section-shell pdp-section pdp-section--highlights" id="pdp-highlights">
+  <div class="container-shell">
+    <p class="section-kicker">Why it stands out</p>
+    <h2 class="section-heading mt-4">{{ product.title | split: '—' | first | strip }}</h2>
+    <div class="pdp-highlight-grid mt-8">
+      <div class="pdp-highlight-card">
+        <span class="pdp-highlight-num" aria-hidden="true">01</span>
+        <p class="pdp-highlight-copy">{{ pdp_hl_one }}</p>
+      </div>
+      <div class="pdp-highlight-card">
+        <span class="pdp-highlight-num" aria-hidden="true">02</span>
+        <p class="pdp-highlight-copy">{{ pdp_hl_two }}</p>
+      </div>
+      <div class="pdp-highlight-card">
+        <span class="pdp-highlight-num" aria-hidden="true">03</span>
+        <p class="pdp-highlight-copy">{{ pdp_hl_three }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %}──────────────────────────────────────────────────────────────
+  ZONE 6 — COMPATIBILITY
+  No guard — OS chips always render.
+  Compat table renders only if compatibility_entries metafield exists.
+  Driver callout always renders.
+──────────────────────────────────────────────────────────────{% endcomment %}
+<section class="section-shell pdp-section pdp-section--compat" id="pdp-compat">
+  <div class="container-shell">
+    <div class="section-intro">
+      <div class="max-w-2xl">
+        <p class="section-kicker">Compatibility</p>
+        <h2 class="section-heading mt-4">Works with your setup</h2>
+        <p class="section-copy mt-4">{% if compatibility_summary_text != blank %}{{ compatibility_summary_text }}{% else %}Compatible with Mac, Windows, iPad, and most USB-C host devices.{% endif %}</p>
+      </div>
+    </div>
+
+    <div class="pdp-os-chips mt-6" role="list" aria-label="Compatible platforms">
+      <span class="pdp-os-chip" role="listitem">macOS</span>
+      <span class="pdp-os-chip" role="listitem">Windows</span>
+      <span class="pdp-os-chip" role="listitem">iPadOS</span>
+      <span class="pdp-os-chip" role="listitem">ChromeOS</span>
+    </div>
+
+    {% if product != blank and product.metafields.ezquest.compatibility_entries != blank %}
+      {%- assign compat_entries = product.metafields.ezquest.compatibility_entries.value -%}
+      {% if compat_entries.size > 0 %}
+        <div class="pdp-compat-table mt-8">
+          {% for entry in compat_entries limit: 10 %}
+            {%- assign entry_status = entry.status.value | default: 'Compatible' -%}
+            <div class="pdp-compat-row">
+              <span class="pdp-compat-device">{{ entry.device.value | default: entry.label.value }}</span>
+              <span class="pdp-compat-status pdp-compat-status--{{ entry_status | handleize }}">{{ entry_status }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <div class="pdp-driver-callout mt-6">
+      <span class="pdp-driver-icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+      <span>No drivers required — plug in and use immediately on supported hosts.</span>
+    </div>
+  </div>
+</section>
+
+{% comment %}──────────────────────────────────────────────────────────────
+  ZONE 7 — DOWNLOADS
+  No guard — always renders.
+  Shows file count + support link when files exist.
+  Shows fallback link to downloads page when no files are set.
+──────────────────────────────────────────────────────────────{% endcomment %}
+<section class="section-shell pdp-section pdp-section--downloads" id="pdp-downloads">
+  <div class="container-shell">
+    <p class="section-kicker">Downloads &amp; manuals</p>
+    <h2 class="section-heading mt-4">Support files</h2>
+
+    {% if manual_count > 0 or download_count > 0 %}
+      <div class="pdp-download-list mt-8">
+        {% if manual_count > 0 %}
+          <a href="{{ manuals_support_url }}" class="pdp-download-row">
+            <span class="pdp-download-icon" aria-hidden="true">{% render 'icon', name: 'file' %}</span>
+            <span class="pdp-download-name">Product manual{% if manual_count > 1 %}s{% endif %}</span>
+            <span class="pdp-download-badge">{{ manual_count }} PDF{% if manual_count > 1 %}s{% endif %}</span>
+            <span class="pdp-download-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
+          </a>
+        {% endif %}
+        {% if download_count > 0 %}
+          <a href="{{ downloads_support_url }}" class="pdp-download-row">
+            <span class="pdp-download-icon" aria-hidden="true">{% render 'icon', name: 'file' %}</span>
+            <span class="pdp-download-name">Software &amp; driver download{% if download_count > 1 %}s{% endif %}</span>
+            <span class="pdp-download-badge">{{ download_count }} file{% if download_count > 1 %}s{% endif %}</span>
+            <span class="pdp-download-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
+          </a>
+        {% endif %}
+      </div>
+      <p class="pdp-download-note mt-4">
+        <a href="{{ support_center_url }}" class="site-meta-link">Open full support hub</a>
+      </p>
+    {% else %}
+      <div class="pdp-download-fallback mt-8">
+        <p class="pdp-download-fallback-copy">Find product documentation, drivers, and support files on the EZQuest support hub.</p>
+        <a href="{{ downloads_support_url }}" class="pdp-download-fallback-link mt-4">View downloads &amp; manuals {% render 'icon', name: 'arrow-right' %}</a>
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -851,6 +1086,56 @@
       setLoading(false);
     });
   });
+})();
+</script>
+
+<script>
+(function () {
+  var strip = document.querySelector('[data-pdp-tab-strip]');
+  if (!strip) return;
+  strip.setAttribute('data-ready', '');
+
+  var tabs = Array.prototype.slice.call(strip.querySelectorAll('[data-pdp-tab]'));
+  var targets = tabs.map(function (t) {
+    var id = (t.getAttribute('href') || '').replace(/^#/, '');
+    return id ? document.getElementById(id) : null;
+  });
+
+  function setActive(idx) {
+    tabs.forEach(function (t, i) { t.classList.toggle('is-active', i === idx); });
+    var activeTab = tabs[idx];
+    if (activeTab) {
+      var stripRect = strip.getBoundingClientRect();
+      var tabRect = activeTab.getBoundingClientRect();
+      if (tabRect.left < stripRect.left || tabRect.right > stripRect.right) {
+        activeTab.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+      }
+    }
+  }
+
+  tabs.forEach(function (tab, idx) {
+    tab.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = targets[idx];
+      if (!target) return;
+      var stripH = strip.offsetHeight;
+      var y = target.getBoundingClientRect().top + window.scrollY - stripH - 8;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+  if (!window.IntersectionObserver) { setActive(0); return; }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var idx = targets.indexOf(entry.target);
+      if (idx >= 0) setActive(idx);
+    });
+  }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+
+  targets.forEach(function (t) { if (t) io.observe(t); });
+  setActive(0);
 })();
 </script>
 
@@ -986,6 +1271,22 @@
       "id": "support_copy",
       "label": "Support panel copy",
       "default": "Compatibility, manuals, downloads, and help."
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube video URL",
+      "info": "Embeds an inline video in the features section when set."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_3d_badge",
+      "label": "Show 3D badge on gallery image",
+      "default": false
     }
   ],
   "blocks": [
@@ -1005,6 +1306,34 @@
           "id": "copy",
           "label": "Copy",
           "default": "Clear product value."
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature panel",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Key feature"
+        },
+        {
+          "type": "select",
+          "id": "span",
+          "label": "Column span",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "1 column" },
+            { "value": "2", "label": "2 columns (wide)" }
+          ]
         }
       ]
     }

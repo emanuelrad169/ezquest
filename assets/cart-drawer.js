@@ -16,6 +16,23 @@
     if (body) body.classList.toggle('is-loading', loading);
   }
 
+  function updateCartBadges(cart) {
+    var count = cart && typeof cart.item_count === 'number' ? cart.item_count : 0;
+
+    document.querySelectorAll('[data-cart-count]').forEach(function (el) {
+      el.setAttribute('data-cart-count', String(count));
+      if (!el.matches('button, a')) {
+        el.textContent = count;
+      }
+    });
+
+    document.querySelectorAll('[data-cart-count-badge]').forEach(function (el) {
+      el.textContent = count;
+      el.hidden = count === 0;
+      el.setAttribute('aria-label', count + ' item' + (count === 1 ? '' : 's') + ' in cart');
+    });
+  }
+
   /* ── Refresh via Sections API ────────────────────────────── */
 
   function refreshDrawerContents(callback) {
@@ -50,9 +67,7 @@
       .then(function (cart) {
         var countEl = document.getElementById('cart-drawer-count');
         if (countEl) countEl.textContent = '(' + cart.item_count + ')';
-        document.querySelectorAll('[data-cart-count]').forEach(function (el) {
-          el.textContent = cart.item_count;
-        });
+        updateCartBadges(cart);
         if (typeof callback === 'function') callback(cart);
       })
       .catch(function (err) {
@@ -65,10 +80,10 @@
 
   /* ── Public API ──────────────────────────────────────────── */
 
-  window.openCartDrawer = function () {
+  window.openCartDrawer = function (controller) {
     var drawer = getDrawer();
     if (drawer && typeof openDrawer === 'function') {
-      openDrawer(drawer);
+      openDrawer(drawer, controller);
     }
   };
 
@@ -86,9 +101,22 @@
     });
   };
 
+  document.addEventListener('cart:open', function () {
+    window.refreshAndOpenCartDrawer();
+  });
+
   /* ── Delegated click handlers inside drawer ──────────────── */
 
   document.addEventListener('click', function (e) {
+    var cartTrigger = e.target.closest('[data-cart-drawer-trigger]');
+    if (cartTrigger) {
+      e.preventDefault();
+      refreshDrawerContents(function () {
+        window.openCartDrawer(cartTrigger);
+      });
+      return;
+    }
+
     /* Continue shopping */
     if (e.target.closest('[data-cart-continue]')) {
       window.closeCartDrawer();

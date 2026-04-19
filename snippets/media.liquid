@@ -4,18 +4,36 @@
   assign object_fit = object_fit | default: 'object-contain'
   assign img_loading = loading | default: 'lazy'
   assign img_fetchpriority = fetchpriority | default: 'auto'
+  assign img_decoding = decoding | default: 'async'
+  assign img_max_width = max_width | default: 800
+  assign img_sizes = sizes | default: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px'
+  assign img_class = ratio_class | append: ' w-full ' | append: object_fit
+  assign media_alt = media.alt | default: ''
+  assign image_alt = image.alt | default: ''
 -%}
 <div class="overflow-hidden {{ wrapper_class }}">
   {% if media != blank %}
     {% case media.media_type %}
       {% when 'image' %}
-        {{ media.preview_image | image_url: width: 1600 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: 'async', alt: media.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
+        {% if img_max_width == 1200 %}
+          {{ media.preview_image | image_url: width: 1200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
+        {% elsif img_max_width == 200 %}
+          {{ media.preview_image | image_url: width: 200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '100, 200', sizes: '80px', alt: media_alt, class: img_class }}
+        {% else %}
+          {{ media.preview_image | image_url: width: 800 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
+        {% endif %}
       {% else %}
-        {{ media | media_tag: class: ratio_class | append: ' w-full ' | append: object_fit, image_size: '1600x' }}
+        {{ media | media_tag: class: img_class, image_size: '1600x' }}
     {% endcase %}
   {% elsif image != blank %}
-    {{ image | image_url: width: 1600 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: 'async', alt: image.alt | default: '', class: ratio_class | append: ' w-full ' | append: object_fit }}
+    {% if img_max_width == 1200 %}
+      {{ image | image_url: width: 1200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
+    {% elsif img_max_width == 200 %}
+      {{ image | image_url: width: 200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '100, 200', sizes: '80px', alt: image_alt, class: img_class }}
+    {% else %}
+      {{ image | image_url: width: 800 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
+    {% endif %}
   {% else %}
-    {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: ratio_class | append: ' w-full ' | append: object_fit %}
+    {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: img_class %}
   {% endif %}
 </div>

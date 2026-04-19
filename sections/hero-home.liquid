@@ -62,7 +62,7 @@
 <section class="home-hero home-hero--fullbleed pt-0" data-hero>
   <div class="w-full">
     <div class="home-hero-shell w-full bg-transparent">
-      <div class="home-hero-slider-shell relative overflow-hidden bg-slate-950" data-hero-slider>
+      <div class="home-hero-shell relative overflow-hidden bg-slate-950" data-hero-slider>
         <div class="home-hero-slider-track">
           {% if slide_blocks.size > 0 %}
             {% for block in slide_blocks %}
@@ -150,7 +150,7 @@
 
                 <div class="pointer-events-none absolute inset-0 z-10">
                   <div class="container-shell relative h-full">
-                    <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
+                    <div class="container-shell home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
                       {% if block.settings.eyebrow != blank %}
                         <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ block.settings.eyebrow }}</p>
                       {% endif %}

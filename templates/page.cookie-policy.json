@@ -1,12 +1,9 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "show_title": true,
-        "intro_copy": "Review how cookies and similar technologies are used across the EZQuest storefront."
-      }
+    "policy": {
+      "type": "policy-page",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["policy"]
 }

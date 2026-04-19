@@ -137,7 +137,8 @@
   assign compatibility_url = '/pages/compatibility' | append: compare_group_query
 -%}
 
-<section class="compare-table-section">
+{% if structured_group != blank or section.blocks.size > 0 %}
+<section class="compare-table-section container-shell">
   {% if compare_count > 0 and ordered_handles != blank %}
 
     <div class="compare-table-header">
@@ -436,6 +437,7 @@
     </div>
   {% endif %}
 </section>
+{% endif %}
 
 {% schema %}
 {

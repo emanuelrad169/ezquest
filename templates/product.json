@@ -14,21 +14,12 @@
         "support_copy": "Compatibility, manuals, downloads, and help"
       }
     },
-    "story": {
-      "type": "product-story-carousel",
+    "faq": {
+      "type": "faq-accordion",
       "settings": {
-        "eyebrow": "Product story",
-        "heading": "Product highlights",
-        "copy": "See the product details that matter most for ports, power, displays, and everyday use.",
+        "heading": "FAQ",
+        "copy": "Answer the questions most likely to slow the decision.",
         "structured_source": "product"
-      }
-    },
-    "specs": {
-      "type": "product-spec-table",
-      "settings": {
-        "heading": "Specifications",
-        "copy": "Review the ports, charging support, display capability, and compatibility details before you order.",
-        "source_note": "Check the key specs here, then open compatibility or manuals if you need one last detail."
       }
     },
     "compare": {
@@ -40,28 +31,6 @@
         "columns_desktop": 3,
         "structured_source": "auto",
         "source_note": "Compare nearby models by ports, power, and display support before you go deeper into one product page."
-      }
-    },
-    "compatibility": {
-      "type": "compatibility-entry-list",
-      "settings": {
-        "eyebrow": "Compatibility",
-        "heading": "Buy with confidence",
-        "copy": "Check device, platform, and workflow compatibility before you order.",
-        "source_note": "",
-        "structured_source": "auto",
-        "entry_limit": 4,
-        "product_link_label": "View product",
-        "download_link_label": "Downloads",
-        "manual_link_label": "Manuals"
-      }
-    },
-    "faq": {
-      "type": "faq-accordion",
-      "settings": {
-        "heading": "FAQ",
-        "copy": "Answer the questions most likely to slow the decision.",
-        "structured_source": "product"
       }
     },
     "cta": {
@@ -79,5 +48,5 @@
       }
     }
   },
-  "order": ["main", "story", "specs", "compatibility", "faq", "compare", "cta"]
+  "order": ["main", "faq", "compare", "cta"]
 }

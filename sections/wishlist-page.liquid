@@ -1,16 +1,28 @@
 <section class="wishlist-section section-shell" aria-label="Your wishlist">
-  <div class="container-shell">
-    <div class="section-intro reveal-on-scroll">
+  <div class="page-width">
+    <div class="wishlist-header">
       <p class="section-kicker">Saved items</p>
-      <h1 class="section-heading">Your wishlist</h1>
+      <h1 class="wishlist-heading">Your wishlist</h1>
+      <p class="wishlist-subhead" id="wishlist-count" aria-live="polite"></p>
     </div>
+
     <div class="wishlist-grid" id="wishlist-grid">
       <div class="wishlist-empty" id="wishlist-empty" hidden>
-        <p class="wishlist-empty__message">
-          No items saved yet. Heart any product to save it here.
+        <div class="wishlist-empty__icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 42S6 32 6 18a10 10 0 0118-6 10 10 0 0118 6c0 14-18 24-18 24z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="wishlist-empty__heading">No saved items yet</h2>
+        <p class="wishlist-empty__body">
+          Heart any product to save it here for later.
         </p>
-        <a href="{{ routes.collections_url }}" class="btn btn--primary">Browse products</a>
+        <a href="{{ routes.collections_url }}" class="btn btn--primary">
+          Browse products
+        </a>
       </div>
+
+      <div class="wishlist-items collection-product-grid" id="wishlist-items"></div>
     </div>
   </div>
 </section>
@@ -19,6 +31,11 @@
 {
   "name": "Wishlist",
   "tag": "section",
-  "settings": []
+  "settings": [],
+  "presets": [
+    {
+      "name": "Wishlist"
+    }
+  ]
 }
 {% endschema %}
