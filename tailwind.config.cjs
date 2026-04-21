@@ -30,31 +30,31 @@ module.exports = {
     extend: {
       colors: {
         amber: {
-          50: "rgba(250, 204, 21, 0.12)",
-          100: "rgba(250, 204, 21, 0.18)",
-          200: "rgba(250, 204, 21, 0.32)",
-          300: "rgba(250, 204, 21, 0.56)",
-          400: "rgba(250, 204, 21, 0.96)",
-          500: "rgba(250, 204, 21, 0.96)",
-          600: "rgba(250, 204, 21, 0.96)",
-          700: "rgba(250, 204, 21, 0.96)",
-          800: "rgba(250, 204, 21, 0.96)",
-          900: "rgba(250, 204, 21, 0.96)"
+          50: "rgba(251, 206, 42, 0.12)",
+          100: "rgba(251, 206, 42, 0.18)",
+          200: "rgba(251, 206, 42, 0.32)",
+          300: "rgba(251, 206, 42, 0.56)",
+          400: "#FBCE2A",
+          500: "#FBCE2A",
+          600: "#FBCE2A",
+          700: "#FBCE2A",
+          800: "#FBCE2A",
+          900: "#FBCE2A"
         },
         yellow: {
-          50: "rgba(250, 204, 21, 0.12)",
-          100: "rgba(250, 204, 21, 0.18)",
-          200: "rgba(250, 204, 21, 0.32)",
-          300: "rgba(250, 204, 21, 0.56)",
-          400: "rgba(250, 204, 21, 0.96)",
-          500: "rgba(250, 204, 21, 0.96)",
-          600: "rgba(250, 204, 21, 0.96)",
-          700: "rgba(250, 204, 21, 0.96)",
-          800: "rgba(250, 204, 21, 0.96)",
-          900: "rgba(250, 204, 21, 0.96)"
+          50: "rgba(251, 206, 42, 0.12)",
+          100: "rgba(251, 206, 42, 0.18)",
+          200: "rgba(251, 206, 42, 0.32)",
+          300: "rgba(251, 206, 42, 0.56)",
+          400: "#FBCE2A",
+          500: "#FBCE2A",
+          600: "#FBCE2A",
+          700: "#FBCE2A",
+          800: "#FBCE2A",
+          900: "#FBCE2A"
         },
         brand: {
-          DEFAULT: "rgba(250, 204, 21, 0.96)",
+          DEFAULT: "#FBCE2A",
           soft: "#fef3c7"
         },
         ink: {
@@ -261,7 +261,7 @@ module.exports = {
       },
       backgroundImage: {
         surface: "linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%)",
-        "surface-glow": "radial-gradient(circle at top left, rgba(250, 204, 21, 0.16), transparent 28%), linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+        "surface-glow": "radial-gradient(circle at top left, rgba(251, 206, 42, 0.16), transparent 28%), linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         "surface-brand": "linear-gradient(180deg, #fffcf1 0%, #f8fafc 100%)"
       },
       gridTemplateColumns: {
