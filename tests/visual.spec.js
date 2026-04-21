@@ -104,9 +104,9 @@ test.describe('GROUP 2 — Functional tests', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await gotoStable(page, '/');
 
-    await page.locator('[data-mega-target="mega-collections"]').hover();
+    await page.locator('[data-mega-target="ez-mega-collections"]').hover();
 
-    const mega = page.locator('.ez-mega.is-open, #mega-collections').first();
+    const mega = page.locator('.ez-mega.is-open, #ez-mega-collections').first();
     await expect(mega).toBeVisible();
   });
 

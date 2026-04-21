@@ -22,34 +22,6 @@
         "body": "Review downloads by product and platform. Use the filter to narrow by product family."
       },
       "blocks": {
-        "fam_1": {
-          "type": "family",
-          "settings": {
-            "label": "Hubs & Adapters",
-            "handle": "hubs-adapters"
-          }
-        },
-        "fam_2": {
-          "type": "family",
-          "settings": {
-            "label": "Docking Stations",
-            "handle": "docking-stations"
-          }
-        },
-        "fam_3": {
-          "type": "family",
-          "settings": {
-            "label": "Chargers & Power",
-            "handle": "chargers-power"
-          }
-        },
-        "fam_4": {
-          "type": "family",
-          "settings": {
-            "label": "Accessories",
-            "handle": "accessories"
-          }
-        },
         "file_d1": {
           "type": "file",
           "settings": {
@@ -130,10 +102,6 @@
         }
       },
       "block_order": [
-        "fam_1",
-        "fam_2",
-        "fam_3",
-        "fam_4",
         "file_d1",
         "file_d2",
         "file_d3",
