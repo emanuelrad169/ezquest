@@ -11,6 +11,12 @@
     "truncatewords",
     "metafields",
     "ezquest",
-    "charg"
+    "charg",
+    "noopener",
+    "linecap",
+    "linejoin",
+    "viewBox",
+    "strokeWidth",
+    "FBCE2A"
   ]
 }

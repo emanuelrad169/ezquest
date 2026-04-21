@@ -1,11 +1,6 @@
-{%- liquid
-  assign shop_url = '/pages/help-me-choose'
-  assign collections_url = routes.collections_url
-  assign about_url = '/pages/about'
--%}
+{%- comment -%} mega-menu nav {%- endcomment -%}
 {%- comment -%}
   Static snippet references for Theme Check.
-  These helpers are retained for alternate mega-menu compositions and JS data wiring.
 {%- endcomment -%}
 {%- capture mega_menu_helper_references -%}
   {%- render 'mega-menu-data' -%}
@@ -16,60 +11,76 @@
 {% if mega_menu_helper_references == blank %}{% endif %}
 <div class="mega-menu" data-mega-menu>
   <ul class="mega-menu-nav-list" role="list">
+
     <li class="mega-menu-nav-item" data-mega-item="shop">
-      <a href="{{ shop_url }}" class="mega-menu-trigger"
-         data-mega-target="mega-setup"
-         aria-expanded="false" aria-haspopup="true" aria-controls="mega-setup">
+      <button
+        class="mega-menu-trigger"
+        type="button"
+        data-mega-target="ez-mega-setup"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="ez-mega-setup">
         <span>Shop by setup</span>
-      </a>
-    </li>
-    <li class="mega-menu-nav-item" data-mega-item="collections">
-      <a href="{{ collections_url }}" class="mega-menu-trigger"
-         data-mega-target="mega-collections"
-         aria-expanded="false" aria-haspopup="true" aria-controls="mega-collections">
-        <span>Shop by Collections</span>
-      </a>
-    </li>
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-compare" data-nav-submenu-trigger>
-        <span>Compare</span>
       </button>
-      <div id="nav-flyout-compare" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/compare" class="nav-submenu-link">Compare lineup</a>
-        <a href="/pages/help-me-choose" class="nav-submenu-link">Help me choose</a>
-        <a href="/pages/compatibility" class="nav-submenu-link">Compatibility</a>
-      </div>
     </li>
+
+    <li class="mega-menu-nav-item" data-mega-item="collections">
+      <button
+        class="mega-menu-trigger"
+        type="button"
+        data-mega-target="ez-mega-collections"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="ez-mega-collections">
+        <span>Shop by Collections</span>
+      </button>
+    </li>
+
     <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
       <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-support" data-nav-submenu-trigger>
         <span>Support</span>
       </button>
       <div id="nav-flyout-support" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/support" class="nav-submenu-link">Support hub</a>
+        <a href="/pages/support" class="nav-submenu-link">Support center</a>
+        <a href="/pages/faq" class="nav-submenu-link">FAQ</a>
         <a href="/pages/downloads" class="nav-submenu-link">Downloads</a>
         <a href="/pages/manuals" class="nav-submenu-link">Manuals</a>
         <a href="/pages/troubleshooting" class="nav-submenu-link">Troubleshooting</a>
-        <a href="/pages/faq" class="nav-submenu-link">FAQ</a>
-        <a href="/pages/contact" class="nav-submenu-link">Contact</a>
+        <a href="/pages/warranty" class="nav-submenu-link">Warranty</a>
+        <a href="/pages/contact" class="nav-submenu-link">Contact us</a>
       </div>
     </li>
+
     <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
       <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-resources" data-nav-submenu-trigger>
         <span>Resources</span>
       </button>
       <div id="nav-flyout-resources" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/blogs/resources" class="nav-submenu-link">Guides</a>
-        <a href="/pages/about" class="nav-submenu-link">About EZQuest</a>
-        <a href="/pages/our-story" class="nav-submenu-link">Our story</a>
-        <a href="/pages/warranty" class="nav-submenu-link">Warranty</a>
-        <a href="/pages/shipping-returns" class="nav-submenu-link">Shipping & returns</a>
+        <a href="/blogs/resources" class="nav-submenu-link">Guides &amp; blog</a>
+        <a href="/pages/compare" class="nav-submenu-link">Compare products</a>
+        <a href="/pages/compatibility" class="nav-submenu-link">Compatibility</a>
+        <a href="/pages/firmware" class="nav-submenu-link">Firmware updates</a>
       </div>
     </li>
+
     <li class="mega-menu-nav-item">
-      <a href="{{ about_url }}" class="mega-menu-trigger mega-menu-trigger--plain">
-        <span>About</span>
+      <a href="/pages/compare" class="mega-menu-trigger mega-menu-trigger--plain">
+        <span>Compare</span>
       </a>
     </li>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-about" data-nav-submenu-trigger>
+        <span>About</span>
+      </button>
+      <div id="nav-flyout-about" class="nav-submenu-panel" hidden data-nav-submenu-panel>
+        <a href="/pages/about" class="nav-submenu-link">About EZQuest</a>
+        <a href="/pages/our-story" class="nav-submenu-link">Our story</a>
+        <a href="/pages/where-to-buy" class="nav-submenu-link">Where to buy</a>
+        <a href="/pages/shipping-returns" class="nav-submenu-link">Shipping &amp; returns</a>
+      </div>
+    </li>
+
   </ul>
 
   <div class="mega-menu-backdrop" data-mega-backdrop hidden></div>
