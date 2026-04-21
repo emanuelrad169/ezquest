@@ -19,9 +19,73 @@
         "eyebrow": "Common issues",
         "heading": "Troubleshooting by symptom and product behavior",
         "copy": "Review the likely cause, try the most useful action, and move forward only if the symptom remains.",
+        "structured_source": "blocks",
         "link_label": "Get help now",
         "link_url": "/pages/contact"
-      }
+      },
+      "blocks": {
+        "i1": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "USB Hub",
+            "title": "Hub not recognized after plugging in",
+            "copy": "Check that the host USB-C port supports data, not just charging. Try a different port or a shorter cable. Reboot with the hub connected.",
+            "link_label": "Check compatibility",
+            "link_url": "/pages/compatibility"
+          }
+        },
+        "i2": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "Display",
+            "title": "External monitor shows no signal",
+            "copy": "Confirm your laptop supports DisplayPort Alt Mode over USB-C. Update display drivers and check the HDMI cable. Some hubs require power delivery to enable video output.",
+            "link_label": "Find the right hub",
+            "link_url": "/pages/help-me-choose"
+          }
+        },
+        "i3": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "Charging",
+            "title": "Laptop charges slowly through the hub",
+            "copy": "Verify the charger wattage meets your laptop's requirement. Enable power delivery pass-through and plug the charger directly into the hub PD port.",
+            "link_label": "View chargers",
+            "link_url": "/collections/chargers-power"
+          }
+        },
+        "i4": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "USB Ports",
+            "title": "USB-A devices not detected on hub",
+            "copy": "Try a different USB-A port on the hub. Test the device directly on the laptop to confirm it works. Install the latest driver from the Downloads page if prompted.",
+            "link_label": "Find downloads",
+            "link_url": "/pages/downloads"
+          }
+        },
+        "i5": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "Ethernet",
+            "title": "Gigabit Ethernet not connecting",
+            "copy": "Check the network cable and switch port. On macOS, open Network preferences and confirm the new adapter appears. Assign a manual IP if DHCP fails.",
+            "link_label": "Find manuals",
+            "link_url": "/pages/manuals"
+          }
+        },
+        "i6": {
+          "type": "issue",
+          "settings": {
+            "eyebrow": "Card Reader",
+            "title": "SD card not appearing on desktop",
+            "copy": "Re-seat the card. Check Disk Utility (macOS) or Disk Management (Windows) to see if the volume needs to be mounted. Try a different card to rule out card failure.",
+            "link_label": "Contact support",
+            "link_url": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"]
     },
     "support": {
       "type": "support-link-grid",

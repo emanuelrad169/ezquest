@@ -11,11 +11,100 @@
     "compare": {
       "type": "product-compare-table",
       "settings": {
-        "heading": "Choose the right EZQuest setup",
-        "copy": "Compare the ports, power, portability, and display support that separate each EZQuest option.",
-        "structured_source": "group_handle",
-        "comparison_group_handle": "ultimatepower-wall-chargers"
-      }
+        "heading": "Choose the right UltimatePower charger",
+        "body": "Compare wattage, port count, and travel weight before you buy."
+      },
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "gid://shopify/Product/8842025926854",
+            "is_recommended": false
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "gid://shopify/Product/8842025959622",
+            "is_recommended": true
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "product": "gid://shopify/Product/8842025992390",
+            "is_recommended": false
+          }
+        },
+        "p4": {
+          "type": "product",
+          "settings": {
+            "product": "gid://shopify/Product/8842026025158",
+            "is_recommended": false
+          }
+        },
+        "s1": {
+          "type": "spec",
+          "settings": {
+            "label": "Total wattage",
+            "value_1": "45W",
+            "value_2": "65W",
+            "value_3": "90W",
+            "value_4": "120W"
+          }
+        },
+        "s2": {
+          "type": "spec",
+          "settings": {
+            "label": "USB-C ports",
+            "value_1": "1",
+            "value_2": "2",
+            "value_3": "2",
+            "value_4": "3"
+          }
+        },
+        "s3": {
+          "type": "spec",
+          "settings": {
+            "label": "USB-A ports",
+            "value_1": "—",
+            "value_2": "1",
+            "value_3": "1",
+            "value_4": "1"
+          }
+        },
+        "s4": {
+          "type": "spec",
+          "settings": {
+            "label": "Technology",
+            "value_1": "GaN II",
+            "value_2": "GaN II",
+            "value_3": "GaN",
+            "value_4": "GaN"
+          }
+        },
+        "s5": {
+          "type": "spec",
+          "settings": {
+            "label": "Best for",
+            "value_1": "Travel / phone + tablet",
+            "value_2": "Laptop + device",
+            "value_3": "Laptop power user",
+            "value_4": "Desk / multi-device"
+          }
+        },
+        "s6": {
+          "type": "spec",
+          "settings": {
+            "label": "Warranty",
+            "value_1": "2 years limited",
+            "value_2": "2 years limited",
+            "value_3": "2 years limited",
+            "value_4": "2 years limited"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "s5", "s6"]
     },
     "cta": {
       "type": "support-cta-rail",
