@@ -2611,11 +2611,21 @@
       font-size: 0.96rem;
     }
 
-    .product-card-proof {
-      font-size: 0.78rem;
-      line-height: 1.45;
-      color: rgb(100 116 139);
-      text-wrap: pretty;
+    .product-card__stat-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: rgba(251, 206, 42, 0.12);
+      color: #7A5C00;
+      border: 1px solid rgba(251, 206, 42, 0.3);
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     .product-card-mobile-cta {
@@ -2636,7 +2646,6 @@
 
     .product-card-tile--featured-strip .product-card-featured-vendor,
     .product-card-tile--featured-strip .product-card-featured-swatches,
-    .product-card-tile--featured-strip .product-card-featured-spec-strip,
     .product-card-tile--featured-strip .product-card-featured-rating-badge {
       display: none;
     }
@@ -6148,80 +6157,6 @@
 
   .product-card-featured-swatch-count {
     @apply text-xs font-medium text-slate-400;
-  }
-
-  /* spec-strip: sits at the bottom of the card, outside the body */
-  .product-card-featured-spec-strip {
-    background: rgb(248, 249, 251);
-    border-top: 1px solid rgba(226, 232, 240, 0.75);
-    border-radius: 0 0 1.85rem 1.85rem;
-    overflow: hidden;
-  }
-
-  .product-card-featured-spec {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 0.6rem;
-    border-right: 1px solid rgba(226, 232, 240, 0.65);
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .product-card-featured-spec:last-child {
-    border-right: none;
-  }
-
-  .product-card-featured-spec-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    border: 1px solid rgba(203, 213, 225, 0.9);
-    background: white;
-    color: rgb(148, 163, 184);
-    flex-shrink: 0;
-  }
-
-  .product-card-featured-spec-icon svg {
-    width: 11px;
-    height: 11px;
-  }
-
-  .product-card-featured-spec-content {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .product-card-featured-spec-label {
-    display: block;
-    color: rgb(148, 163, 184);
-    font-size: 0.62rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: none;
-    margin-top: 0.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .product-card-featured-spec-value {
-    display: block;
-    font-weight: 500;
-    color: rgb(15, 23, 42);
-    font-size: 0.8rem;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .featured-products-progress-track {

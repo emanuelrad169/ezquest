@@ -16,7 +16,6 @@
     endcase
   endif
 
-  assign value_line = blank
   assign product_badge = blank
   assign product_badge_modifier = blank
   assign rating_value = blank
@@ -24,14 +23,8 @@
   assign swatch_values = blank
   assign swatch_limit = 4
   assign swatch_overflow = 0
-  assign structured_spec_rows = blank
-  assign has_structured_spec_rows = false
-  assign show_spec_strip = true
-  assign spec_limit = 3
   assign show_media_dots = false
   assign media_dot_count = 0
-  assign fallback_weight_value = blank
-  assign highlight_spec_value = blank
   assign show_swatches = true
   assign show_quick_add = false
   assign show_footer_quick_add = true
@@ -48,48 +41,19 @@
 
   case card_context
     when 'homepage'
-      assign show_spec_strip = false
       assign show_swatches = false
-      assign spec_limit = 0
     when 'collection'
-      assign show_spec_strip = true
       assign show_swatches = true
-      assign spec_limit = 3
     when 'search'
-      assign show_spec_strip = false
       assign show_swatches = false
-      assign spec_limit = 0
     when 'compare'
       assign show_swatches = false
-      assign show_spec_strip = false
       assign show_product_eyebrow = false
       assign show_footer_quick_add = false
     when 'featured'
-      assign show_spec_strip = true
       assign show_swatches = true
-      assign spec_limit = 3
       assign show_footer_quick_add = false
   endcase
-
-  if product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
-    assign value_line = product.metafields.ezquest.feature_highlights.value.first
-    assign highlight_spec_value = product.metafields.ezquest.feature_highlights.value.first
-  elsif product != blank and product.type != blank
-    assign normalized_type = product.type | downcase
-    if normalized_type contains 'dock'
-      assign value_line = 'Desk-ready connectivity'
-    elsif normalized_type contains 'hub'
-      assign value_line = 'Compact everyday connectivity'
-    elsif normalized_type contains 'charg' or normalized_type contains 'power'
-      assign value_line = 'Fast, reliable charging'
-    elsif normalized_type contains 'cable' or normalized_type contains 'accessor'
-      assign value_line = 'Refined everyday accessories'
-    else
-      assign value_line = 'Premium connectivity'
-    endif
-  else
-    assign value_line = 'Premium connectivity'
-  endif
 
   if product != blank
     assign product_tags_downcase = product.tags | join: ',' | downcase
@@ -118,19 +82,9 @@
       assign swatch_overflow = swatch_values.size | minus: swatch_limit
     endif
 
-    if product.metafields.ezquest.spec_rows != blank
-      assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
-      if structured_spec_rows.count > 0
-        assign has_structured_spec_rows = true
-      endif
-    endif
-
     assign selected_variant = product.selected_or_first_available_variant
     if selected_variant != blank and card_context != 'compare'
       assign show_quick_add = true
-      if selected_variant.weight > 0
-        assign fallback_weight_value = selected_variant.weight | weight_with_unit
-      endif
     endif
 
     if product.type != blank
@@ -242,6 +196,12 @@
           </div>
         </div>
 
+        {%- comment -%} Key stat pill — first highlight only {%- endcomment -%}
+        {%- assign first_highlight = product.metafields.ezquest.highlights.value | first -%}
+        {% if first_highlight != blank %}
+          <span class="product-card__stat-pill">{{ first_highlight }}</span>
+        {% endif %}
+
         {% if show_swatches and swatch_values != blank and swatch_values.size > 0 %}
           <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" aria-label="Available finishes">
             {% for swatch_value in swatch_values limit: swatch_limit %}
@@ -267,68 +227,6 @@
         </div>
       {% endif %}
     </div>
-
-    {% if show_spec_strip %}
-      {%- assign rendered_spec_cells = 0 -%}
-      {%- capture spec_cells_html -%}
-        {% if has_structured_spec_rows %}
-          {% for spec_row in structured_spec_rows %}
-            {% if rendered_spec_cells >= spec_limit %}{% break %}{% endif %}
-            {%- assign spec_label = spec_row.label.value | strip -%}
-            {%- assign spec_value = spec_row.spec_value.value | strip_html | strip -%}
-            {% if spec_label != blank and spec_value != blank %}
-              {%- assign spec_lower = spec_label | downcase -%}
-              {%- if spec_lower contains 'sku' or spec_lower contains 'barcode' or spec_lower contains 'upc' or spec_lower contains 'ean' or spec_lower contains 'part number' or spec_lower contains 'item number' or spec_lower contains 'asin' or spec_lower contains 'model number' -%}{%- continue -%}{%- endif -%}
-              {%- assign spec_icon_name = 'spark' -%}
-              {%- if spec_lower contains 'speed' or spec_lower contains 'transfer' -%}{%- assign spec_icon_name = 'bolt' -%}{%- endif -%}
-              {%- if spec_lower contains 'port' or spec_lower contains 'hub' -%}{%- assign spec_icon_name = 'layers' -%}{%- endif -%}
-              {%- if spec_lower contains 'type' or spec_lower contains 'connector' -%}{%- assign spec_icon_name = 'tag' -%}{%- endif -%}
-              {%- if spec_lower contains 'power' or spec_lower contains 'watt' or spec_lower contains 'charg' or spec_lower contains 'battery' -%}{%- assign spec_icon_name = 'bolt' -%}{%- endif -%}
-              {%- if spec_lower contains 'display' or spec_lower contains 'resolution' or spec_lower contains 'video' -%}{%- assign spec_icon_name = 'monitor' -%}{%- endif -%}
-              {%- if spec_lower contains 'weight' -%}{%- assign spec_icon_name = 'layers' -%}{%- endif -%}
-              {%- if spec_lower contains 'length' -%}{%- assign spec_icon_name = 'map' -%}{%- endif -%}
-              {%- if spec_lower contains 'driver' -%}{%- assign spec_icon_name = 'headphones' -%}{%- endif -%}
-              <div class="product-card-featured-spec">
-                <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: spec_icon_name %}</span>
-                <span class="product-card-featured-spec-content">
-                  <span class="product-card-featured-spec-value">{{ spec_value | truncatewords: 5 }}</span>
-                  <span class="product-card-featured-spec-label">{{ spec_label }}</span>
-                </span>
-              </div>
-              {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-
-
-        {% if rendered_spec_cells < spec_limit and fallback_weight_value != blank %}
-          <div class="product-card-featured-spec">
-            <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: 'layers' %}</span>
-            <span class="product-card-featured-spec-content">
-              <span class="product-card-featured-spec-value">{{ fallback_weight_value }}</span>
-              <span class="product-card-featured-spec-label">Weight</span>
-            </span>
-          </div>
-          {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
-        {% endif %}
-
-        {% if rendered_spec_cells < spec_limit and highlight_spec_value != blank and has_structured_spec_rows == false %}
-          <div class="product-card-featured-spec">
-            <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
-            <span class="product-card-featured-spec-content">
-              <span class="product-card-featured-spec-value">{{ highlight_spec_value | truncatewords: 5 }}</span>
-              <span class="product-card-featured-spec-label">Highlight</span>
-            </span>
-          </div>
-        {% endif %}
-      {%- endcapture -%}
-      {%- assign spec_cells_html = spec_cells_html | strip -%}
-      {% if spec_cells_html != blank %}
-        <div class="product-card-featured-spec-strip grid grid-cols-1" aria-label="Key details">
-          {{ spec_cells_html }}
-        </div>
-      {% endif %}
-    {% endif %}
   </article>
 {% else %}
 <article class="product-card product-card-tile product-card-tile--{{ card_context | handleize }} flex h-full flex-col">
@@ -378,7 +276,7 @@
     <div class="product-thumb-card product-card-image-wrapper">
       {% render 'owned-product-visual',
         product_handle: product.handle,
-        product_title: product.title | default: value_line,
+        product_title: product.title | default: 'EZQuest connectivity essential',
         variant: image_variant,
         kind: 'product',
         width: 900,
@@ -402,8 +300,10 @@
     </div>
   </div>
 
-  {% if value_line != blank %}
-    <p class="product-card-proof">{{ value_line | truncatewords: 7 }}</p>
+  {%- comment -%} Key stat pill — first highlight only {%- endcomment -%}
+  {%- assign first_highlight = product.metafields.ezquest.highlights.value | first -%}
+  {% if first_highlight != blank %}
+    <span class="product-card__stat-pill">{{ first_highlight }}</span>
   {% endif %}
 
   {% if product != blank %}
