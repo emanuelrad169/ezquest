@@ -14794,7 +14794,7 @@ select {
 }
 
 .lang-picker__trigger:hover {
-  border-color: #F59E0B;
+  border-color: #FBCE2A;
   background: rgba(245,158,11,0.04);
 }
 
@@ -14903,7 +14903,7 @@ select {
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #F59E0B;
+  color: #FBCE2A;
   margin: 0 0 1.25rem;
 }
 
@@ -14932,7 +14932,7 @@ select {
   gap: 10px;
   padding-bottom: 10px;
   margin-bottom: 8px;
-  border-bottom: 2px solid #F59E0B;
+  border-bottom: 2px solid #FBCE2A;
 }
 
 .mega-col__icon {
@@ -14975,7 +14975,7 @@ select {
   opacity: 0;
   transition: opacity .12s, transform .12s;
   transform: translateX(-4px);
-  color: #F59E0B;
+  color: #FBCE2A;
   flex-shrink: 0;
 }
 
@@ -15006,7 +15006,7 @@ select {
 .mega-menu-footer__link {
   font-size: 13px;
   font-weight: 500;
-  color: #F59E0B;
+  color: #FBCE2A;
   text-decoration: none;
   transition: opacity .15s;
 }
@@ -15034,7 +15034,7 @@ select {
 .setup-tab.is-active {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  border-left: 2px solid #F59E0B;
+  border-left: 2px solid #FBCE2A;
   padding-left: 8px;
 }
 
@@ -15054,7 +15054,7 @@ select {
 .setup-tab.is-active .setup-tab__icon,
 .setup-tab[aria-selected="true"] .setup-tab__icon {
   background: rgba(245,158,11,0.1);
-  color: #F59E0B;
+  color: #FBCE2A;
 }
 
 .setup-tab__label {
@@ -15073,7 +15073,7 @@ select {
 .mega-product-view {
   font-size: 12px;
   font-weight: 500;
-  color: #F59E0B;
+  color: #FBCE2A;
   text-decoration: none;
   white-space: nowrap;
   margin-left: auto;
@@ -15181,7 +15181,7 @@ select {
   background: #fff;
   color: #1d1d1f;
   font-weight: 500;
-  border-left-color: #F59E0B;
+  border-left-color: #FBCE2A;
   box-shadow: 0 1px 6px rgba(0,0,0,0.07);
 }
 
@@ -15200,7 +15200,7 @@ select {
 
 .ez-mega__tab.is-active .ez-mega__tab-icon {
   background: rgba(245,158,11,0.1);
-  color: #F59E0B;
+  color: #FBCE2A;
 }
 
 .ez-mega__tab-chevron {
@@ -15297,7 +15297,7 @@ select {
 
 .ez-mega__card-link {
   font-size: 11px;
-  color: #F59E0B;
+  color: #FBCE2A;
   font-weight: 500;
   opacity: 0;
   transform: translateX(-4px);
@@ -15322,7 +15322,7 @@ select {
 .ez-mega__footer-link {
   font-size: 13px;
   font-weight: 500;
-  color: #F59E0B;
+  color: #FBCE2A;
   text-decoration: none;
   transition: opacity .15s;
 }
