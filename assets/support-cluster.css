@@ -19,7 +19,7 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #F59E0B;
+  color: #FBCE2A;
   margin: 0 0 .75rem;
 }
 
@@ -80,7 +80,7 @@
 .support-nav__link.is-active {
   color: #1d1d1f;
   font-weight: 500;
-  border-bottom-color: #F59E0B;
+  border-bottom-color: #FBCE2A;
 }
 
 /* Page body wrapper */
@@ -113,9 +113,9 @@
 
 .filter-pill.is-active,
 .filter-pill:focus {
-  border-color: #F59E0B;
+  border-color: #FBCE2A;
   color: #1d1d1f;
-  background: rgba(245,158,11,.07);
+  background: rgba(251,206,42,.07);
   font-weight: 500;
 }
 
@@ -191,7 +191,7 @@
   gap: .375rem;
   padding: .45rem 1rem;
   border-radius: 100px;
-  background: #F59E0B;
+  background: #FBCE2A;
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -200,7 +200,7 @@
   white-space: nowrap;
 }
 
-.btn-download:hover { background: #d97706; }
+.btn-download:hover { background: #e8b620; }
 
 /* Product name pill */
 .product-pill {
@@ -226,7 +226,7 @@
   vertical-align: middle;
 }
 .status-dot--full    { background: #22c55e; }
-.status-dot--partial { background: #F59E0B; }
+.status-dot--partial { background: #FBCE2A; }
 .status-dot--no      { background: #ef4444; }
 
 /* Section label */
@@ -251,8 +251,8 @@
 }
 
 .info-card--amber {
-  background: rgba(245,158,11,.04);
-  border-color: rgba(245,158,11,.25);
+  background: rgba(251,206,42,.04);
+  border-color: rgba(251,206,42,.25);
 }
 
 .info-card--warning {
@@ -271,8 +271,8 @@
 }
 
 .info-card__icon--amber {
-  background: rgba(245,158,11,.1);
-  color: #F59E0B;
+  background: rgba(251,206,42,.1);
+  color: #FBCE2A;
 }
 
 .info-card__icon--warning {
