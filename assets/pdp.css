@@ -292,10 +292,9 @@
   color: #6e6e73 !important;
 }
 
-/* ATC: 52px tall / 16px / 500 */
+/* ATC: 16px / 500 */
 .main-product-section .product-primary-action {
-  min-height: 3.25rem; /* 52px */
-  font-size: 1rem;     /* 16px */
+  font-size: 1rem;  /* 16px */
   font-weight: 500;
 }
 

@@ -1,8 +1,28 @@
 {{ 'policy-page.css' | asset_url | stylesheet_tag }}
 
-{% assign doc_title = page.title %}
-{% assign doc_body  = page.content %}
-{% assign doc_handle = page.handle %}
+{%- liquid
+  if page != blank
+    assign doc_title  = page.title
+    assign doc_body   = page.content
+    assign doc_handle = page.handle
+  else
+    assign doc_handle = request.path | split: '/policies/' | last
+    case doc_handle
+      when 'privacy-policy'
+        assign doc_title = shop.privacy_policy.title
+        assign doc_body = shop.privacy_policy.body
+      when 'terms-of-service'
+        assign doc_title = shop.terms_of_service.title
+        assign doc_body = shop.terms_of_service.body
+      when 'refund-policy'
+        assign doc_title = shop.refund_policy.title
+        assign doc_body = shop.refund_policy.body
+      when 'shipping-policy'
+        assign doc_title = shop.shipping_policy.title
+        assign doc_body = shop.shipping_policy.body
+    endcase
+  endif
+-%}
 
 <div class="policy-page">
 

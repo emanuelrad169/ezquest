@@ -1,8 +1,6 @@
 {%- liquid
   assign account_url = routes.account_url | default: '/account'
   assign account_login_url = routes.account_login_url | default: '/account/login'
-  assign account_register_url = routes.account_register_url | default: '/account/register'
-  assign account_logout_url = routes.account_logout_url | default: '/account/logout'
   assign is_home_template = false
   if request.page_type == 'index'
     assign is_home_template = true
@@ -13,14 +11,14 @@
     <div class="site-header-shell grid w-full grid-cols-1 py-0">
       <div class="site-header-main-row flex w-full items-center gap-3 lg:gap-6">
         <a href="{{ routes.root_url }}" class="site-brandmark inline-flex shrink-0 items-center">
-          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-48 max-w-full lg:w-60" width="240" height="56">
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-32 lg:w-60" width="240" height="56">
         </a>
 
         <nav aria-label="Primary" class="site-header-nav hidden min-w-0 flex-1 justify-center lg:flex">
           {% render 'mega-menu', section: section %}
         </nav>
 
-        <div class="site-header-utility-cluster ml-auto flex shrink-0 items-center gap-1 lg:gap-1.5">
+        <div class="site-header-utility-cluster ml-auto flex items-center gap-1 lg:gap-1.5">
           <div class="site-header-actions flex items-center gap-1">
             <button
               type="button"
@@ -35,37 +33,187 @@
             <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
               {% render 'icon', name: 'search' %}
             </a>
-            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
-              <button
-                type="button"
-                class="site-header-icon-button"
-                aria-label="Account"
-                aria-expanded="false"
-                aria-controls="header-account-menu"
-                data-nav-submenu-trigger
-              >
-                {% render 'icon', name: 'user' %}
-              </button>
-              <div id="header-account-menu" class="nav-submenu-panel nav-submenu-panel--icon" hidden data-nav-submenu-panel>
-                {% if customer %}
-                  <a href="{{ account_url }}" class="nav-submenu-link">My account</a>
-                  <a href="{{ account_url }}#orders" class="nav-submenu-link">Orders</a>
-                  <a href="{{ account_logout_url }}" class="nav-submenu-link">Log out</a>
-                {% else %}
-                  <a href="{{ account_login_url }}" class="nav-submenu-link">Sign in</a>
-                  <a href="{{ account_register_url }}" class="nav-submenu-link">Create account</a>
-                {% endif %}
-              </div>
-            </div>
-            <a href="{{ account_url }}" class="site-header-icon-button lg:hidden" aria-label="Account">
-              {% render 'icon', name: 'user' %}
-            </a>
-            <a href="/pages/wishlist" class="site-header-icon-button" aria-label="Wishlist">
+            {% if customer %}
+              <a href="{{ account_url }}"
+                 class="site-header-icon-button"
+                 aria-label="{{ 'header.my_account' | t }}">
+                <svg width="20" height="20" viewBox="0 0 20 20"
+                     fill="none" aria-hidden="true">
+                  <circle cx="10" cy="7" r="3"
+                          stroke="currentColor" stroke-width="1.25"/>
+                  <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                        stroke="currentColor" stroke-width="1.25"
+                        stroke-linecap="round"/>
+                </svg>
+              </a>
+            {% else %}
+              <a href="{{ account_login_url }}"
+                 class="site-header-icon-button"
+                 aria-label="{{ 'header.sign_in' | t }}">
+                <svg width="20" height="20" viewBox="0 0 20 20"
+                     fill="none" aria-hidden="true">
+                  <circle cx="10" cy="7" r="3"
+                          stroke="currentColor" stroke-width="1.25"/>
+                  <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                        stroke="currentColor" stroke-width="1.25"
+                        stroke-linecap="round"/>
+                </svg>
+              </a>
+            {% endif %}
+            <a href="/pages/wishlist" class="site-header-icon-button" aria-label="{{ 'header.wishlist' | t }}">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
                 <path d="M10 16.5S2.5 12 2.5 6.5a4 4 0 017.5-2A4 4 0 0117.5 6.5c0 5.5-7.5 10-7.5 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
               </svg>
               <span class="site-header-wishlist-count" data-wishlist-count hidden>0</span>
             </a>
+
+            {% if localization.available_languages.size > 1 %}
+            <div class="lang-picker hidden lg:block" id="lang-picker">
+
+              <button class="lang-picker__trigger"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="lang-picker-dropdown"
+                      aria-label="{{ 'header.select_language' | t }}">
+                <span class="lang-picker__flag-wrap">
+                  {% case localization.language.iso_code %}
+                    {% when 'en' %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-label="English">
+                        <rect width="28" height="20" rx="2" fill="#012169"/>
+                        <path d="M0 0l28 20M28 0L0 20" stroke="#fff" stroke-width="4"/>
+                        <path d="M0 0l28 20M28 0L0 20" stroke="#C8102E" stroke-width="2.5"/>
+                        <path d="M14 0v20M0 10h28" stroke="#fff" stroke-width="7"/>
+                        <path d="M14 0v20M0 10h28" stroke="#C8102E" stroke-width="4"/>
+                      </svg>
+                    {% when 'es' %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-label="Español">
+                        <rect width="28" height="20" rx="2" fill="#AA151B"/>
+                        <rect y="5" width="28" height="10" fill="#F1BF00"/>
+                      </svg>
+                    {% when 'fr' %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-label="Français">
+                        <rect width="28" height="20" rx="2" fill="#ED2939"/>
+                        <rect width="19" height="20" fill="#fff"/>
+                        <rect width="10" height="20" fill="#002395"/>
+                        <rect width="28" height="20" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+                      </svg>
+                    {% when 'de' %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-label="Deutsch">
+                        <rect width="28" height="20" rx="2" fill="#FFCE00"/>
+                        <rect width="28" height="14" fill="#DD0000"/>
+                        <rect width="28" height="7" rx="2" fill="#000"/>
+                        <rect x="0" y="6" width="28" height="1" fill="#000"/>
+                      </svg>
+                    {% when 'ar' %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-label="العربية">
+                        <rect width="28" height="20" rx="2" fill="#006C35"/>
+                        <text x="14" y="13" text-anchor="middle" font-size="7" fill="#fff" font-weight="500">&#x644;&#x627; &#x625;&#x644;&#x647;</text>
+                        <rect x="3" y="14" width="22" height="1.5" fill="#fff"/>
+                      </svg>
+                    {% else %}
+                      <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="28" height="20" rx="2" fill="#f5f5f7"/>
+                        <text x="14" y="14" text-anchor="middle" font-size="9" font-weight="700" fill="#1d1d1f">{{ localization.language.iso_code | upcase | slice: 0, 2 }}</text>
+                      </svg>
+                  {% endcase %}
+                </span>
+                <span class="lang-picker__code">{{ localization.language.iso_code | upcase }}</span>
+                <svg class="lang-picker__chevron" width="10" height="6"
+                     viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="lang-picker__dropdown"
+                   id="lang-picker-dropdown"
+                   role="listbox"
+                   hidden>
+                {% form 'localization', class: 'lang-picker__form' %}
+                  {%- comment -%} Pass 1: EN always first {%- endcomment -%}
+                  {% for lang in localization.available_languages %}
+                    {% unless lang.iso_code == 'en' %}{% continue %}{% endunless %}
+                    <button
+                      class="lang-picker__option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+                      type="submit" name="locale_code" value="{{ lang.iso_code }}"
+                      role="option"
+                      aria-selected="{% if lang.iso_code == localization.language.iso_code %}true{% else %}false{% endif %}"
+                    >
+                      <span class="lang-picker__option-flag">
+                        <svg width="22" height="16" viewBox="0 0 28 20" aria-label="English">
+                          <rect width="28" height="20" rx="2" fill="#012169"/>
+                          <path d="M0 0l28 20M28 0L0 20" stroke="#fff" stroke-width="4"/>
+                          <path d="M0 0l28 20M28 0L0 20" stroke="#C8102E" stroke-width="2.5"/>
+                          <path d="M14 0v20M0 10h28" stroke="#fff" stroke-width="7"/>
+                          <path d="M14 0v20M0 10h28" stroke="#C8102E" stroke-width="4"/>
+                        </svg>
+                      </span>
+                      <span class="lang-picker__option-code">EN</span>
+                      {% if lang.iso_code == localization.language.iso_code %}
+                        <svg class="lang-picker__option-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <path d="M2.5 7l3 3 6-6" stroke="#F59E0B" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {% endif %}
+                    </button>
+                  {% endfor %}
+
+                  {%- comment -%} Pass 2: all other languages in Shopify order {%- endcomment -%}
+                  {% for lang in localization.available_languages %}
+                    {% if lang.iso_code == 'en' %}{% continue %}{% endif %}
+                    <button
+                      class="lang-picker__option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+                      type="submit" name="locale_code" value="{{ lang.iso_code }}"
+                      role="option"
+                      aria-selected="{% if lang.iso_code == localization.language.iso_code %}true{% else %}false{% endif %}"
+                    >
+                      <span class="lang-picker__option-flag">
+                        {% case lang.iso_code %}
+                          {% when 'es' %}
+                            <svg width="22" height="16" viewBox="0 0 28 20" aria-label="Español">
+                              <rect width="28" height="20" rx="2" fill="#AA151B"/>
+                              <rect y="5" width="28" height="10" fill="#F1BF00"/>
+                            </svg>
+                          {% when 'fr' %}
+                            <svg width="22" height="16" viewBox="0 0 28 20" aria-label="Français">
+                              <rect width="28" height="20" rx="2" fill="#ED2939"/>
+                              <rect width="19" height="20" fill="#fff"/>
+                              <rect width="10" height="20" fill="#002395"/>
+                              <rect width="28" height="20" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+                            </svg>
+                          {% when 'de' %}
+                            <svg width="22" height="16" viewBox="0 0 28 20" aria-label="Deutsch">
+                              <rect width="28" height="20" rx="2" fill="#FFCE00"/>
+                              <rect width="28" height="14" fill="#DD0000"/>
+                              <rect width="28" height="7" rx="2" fill="#000"/>
+                              <rect x="0" y="6" width="28" height="1" fill="#000"/>
+                            </svg>
+                          {% when 'ar' %}
+                            <svg width="22" height="16" viewBox="0 0 28 20" aria-label="العربية">
+                              <rect width="28" height="20" rx="2" fill="#006C35"/>
+                              <text x="14" y="13" text-anchor="middle" font-size="7" fill="#fff" font-weight="500">&#x644;&#x627; &#x625;&#x644;&#x647;</text>
+                              <rect x="3" y="14" width="22" height="1.5" fill="#fff"/>
+                            </svg>
+                          {% else %}
+                            <svg width="22" height="16" viewBox="0 0 28 20">
+                              <rect width="28" height="20" rx="2" fill="#f5f5f7"/>
+                            </svg>
+                        {% endcase %}
+                      </span>
+                      <span class="lang-picker__option-code">{{ lang.iso_code | upcase }}</span>
+                      {% if lang.iso_code == localization.language.iso_code %}
+                        <svg class="lang-picker__option-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <path d="M2.5 7l3 3 6-6" stroke="#F59E0B" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {% endif %}
+                    </button>
+                  {% endfor %}
+                {% endform %}
+              </div>
+
+            </div>
+            {% endif %}
+
             <button
               class="site-header-icon-button site-header-cart-button header-icon-btn"
               type="button"
@@ -110,4 +258,28 @@
     support_phone: section.settings.support_phone,
     support_phone_label: section.settings.support_phone_label
   %}
+
+{% if localization.available_languages.size > 1 %}
+<script>
+(function() {
+  var picker   = document.getElementById('lang-picker');
+  if (!picker) return;
+  var trigger  = picker.querySelector('.lang-picker__trigger');
+  var dropdown = document.getElementById('lang-picker-dropdown');
+
+  function open()  { trigger.setAttribute('aria-expanded', 'true');  dropdown.hidden = false; }
+  function close() { trigger.setAttribute('aria-expanded', 'false'); dropdown.hidden = true;  }
+
+  trigger.addEventListener('click', function() {
+    trigger.getAttribute('aria-expanded') === 'true' ? close() : open();
+  });
+  document.addEventListener('click', function(e) {
+    if (!picker.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { close(); trigger.focus(); }
+  });
+})();
+</script>
+{% endif %}
 </header>

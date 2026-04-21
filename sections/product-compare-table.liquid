@@ -1,476 +1,463 @@
-{%- liquid
-  assign structured_group = blank
-  assign compare_products = blank
-  assign section_heading = section.settings.heading | default: 'Compare products'
-  assign section_copy = section.settings.copy
-  assign section_note = ''
-  assign group_use_case = ''
-  assign group_handle = section.settings.comparison_group_handle | default: ''
+{% liquid
+  assign product_blocks = section.blocks | where: 'type', 'product'
+  assign spec_blocks = section.blocks | where: 'type', 'spec'
+  assign col_count = product_blocks.size
+%}
 
-  if section.settings.structured_source == 'group_handle' and section.settings.comparison_group_handle != blank
-    assign structured_group = metaobjects.ezquest_comparison_group[section.settings.comparison_group_handle]
-  elsif section.settings.structured_source != 'blocks' and product != blank and product.metafields.ezquest.compare_group != blank
-    assign structured_group = product.metafields.ezquest.compare_group.value
-  endif
+<section class="compare-page" aria-label="{{ section.settings.heading | escape }}">
+  <div class="compare-page__header">
+    {% if section.settings.kicker != blank %}
+      <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
 
-  if structured_group != blank
-    if structured_group.slug != blank and structured_group.slug.value != blank
-      assign group_handle = structured_group.slug.value
-    elsif structured_group.handle != blank
-      assign group_handle = structured_group.handle
-    endif
+    {% if section.settings.heading != blank %}
+      <h1 class="compare-page__heading">{{ section.settings.heading | escape }}</h1>
+    {% endif %}
 
-    if structured_group.heading != blank and structured_group.heading.value != blank
-      assign section_heading = structured_group.heading.value
-    elsif structured_group.title != blank and structured_group.title.value != blank
-      assign section_heading = structured_group.title.value
-    endif
+    {% if section.settings.body != blank %}
+      <p class="compare-page__body">{{ section.settings.body | escape }}</p>
+    {% endif %}
+  </div>
 
-    if structured_group.description != blank and structured_group.description.value != blank
-      assign section_copy = structured_group.description.value
-    endif
-
-    if structured_group.support_note != blank and structured_group.support_note.value != blank
-      assign section_note = structured_group.support_note.value
-    endif
-
-    if structured_group.use_case != blank and structured_group.use_case.value != blank
-      assign group_use_case = structured_group.use_case.value
-    elsif structured_group.group_type != blank and structured_group.group_type.value != blank
-      assign group_use_case = structured_group.group_type.value
-    endif
-
-    if structured_group.default_products != blank and structured_group.default_products.value.count > 0
-      assign compare_products = structured_group.default_products.value
-    elsif structured_group.products != blank and structured_group.products.value.count > 0
-      assign compare_products = structured_group.products.value
-    endif
-  endif
-
-  assign compare_handles_raw = ''
-  if compare_products != blank
-    for compare_product in compare_products limit: 4
-      if compare_product != blank
-        if compare_handles_raw != ''
-          assign compare_handles_raw = compare_handles_raw | append: '|'
-        endif
-        assign compare_handles_raw = compare_handles_raw | append: compare_product.handle
-      endif
-    endfor
-  endif
-
-  assign compare_count = 0
-  assign compare_handles = blank
-  if compare_handles_raw != ''
-    assign compare_handles = compare_handles_raw | split: '|'
-    assign compare_count = compare_handles.size
-  endif
-
-  assign recommended_handle = blank
-  assign recommended_priority = 9999
-  if compare_count > 0
-    for compare_handle in compare_handles
-      assign compare_product = all_products[compare_handle]
-      if compare_product != blank
-        assign current_priority = compare_product.metafields.ezquest.recommended_priority.value | default: compare_product.metafields.ezquest.recommended_priority | default: 9999 | plus: 0
-        if recommended_handle == blank or current_priority < recommended_priority
-          assign recommended_handle = compare_handle
-          assign recommended_priority = current_priority
-        endif
-      endif
-    endfor
-  endif
-
-  if recommended_handle == blank and compare_count > 0
-    assign recommended_handle = compare_handles[0]
-  endif
-
-  assign ordered_handles_raw = ''
-  if recommended_handle != blank
-    assign ordered_handles_raw = recommended_handle
-  endif
-  if compare_count > 0
-    for compare_handle in compare_handles
-      unless compare_handle == recommended_handle
-        if ordered_handles_raw != ''
-          assign ordered_handles_raw = ordered_handles_raw | append: '|'
-        endif
-        assign ordered_handles_raw = ordered_handles_raw | append: compare_handle
-      endunless
-    endfor
-  endif
-
-  assign ordered_handles = blank
-  if ordered_handles_raw != ''
-    assign ordered_handles = ordered_handles_raw | split: '|'
-  endif
-
-  assign compare_group_is_charger = false
-  if group_use_case != blank
-    assign group_use_case_downcase = group_use_case | downcase
-    if group_use_case_downcase contains 'charg'
-      assign compare_group_is_charger = true
-    endif
-  endif
-  if compare_group_is_charger == false and ordered_handles != blank
-    for compare_handle in ordered_handles
-      assign compare_product = all_products[compare_handle]
-      if compare_product != blank and compare_product.type != blank
-        assign compare_product_type_downcase = compare_product.type | downcase
-        if compare_product_type_downcase contains 'charger'
-          assign compare_group_is_charger = true
-          break
-        endif
-      endif
-    endfor
-  endif
-
-  capture compare_group_query
-    echo '?source=compare'
-    if group_handle != blank
-      echo '&group='
-      echo group_handle
-    endif
-  endcapture
-
-  assign support_url = '/pages/support' | append: compare_group_query
-  assign compatibility_url = '/pages/compatibility' | append: compare_group_query
--%}
-
-{% if structured_group != blank or section.blocks.size > 0 %}
-<section class="compare-table-section container-shell">
-  {% if compare_count > 0 and ordered_handles != blank %}
-
-    <div class="compare-table-header">
-      {% if group_use_case != blank %}
-        <p class="compare-table-header__kicker">{{ group_use_case }}</p>
-      {% endif %}
-      <h1 class="compare-table-header__title">{{ section_heading }}</h1>
-      {% if section_copy != blank %}
-        <p class="compare-table-header__copy">{{ section_copy }}</p>
-      {% endif %}
+  {% if col_count == 0 %}
+    <div class="compare-empty-state">
+      <p>Add products in the theme customizer to compare them.</p>
     </div>
-
+  {% else %}
     <div class="compare-scroll-wrap">
-      <div class="compare-sticky-grid compare-sticky-grid--{{ compare_count }}">
+      <div class="compare-table" style="--col-count: {{ col_count }}">
+        <div class="compare-row compare-row--header">
+          <div class="compare-label-cell compare-label-cell--header"></div>
 
-        <!-- Header row: product images, titles, prices, CTAs -->
-        <div class="compare-sticky-head" aria-hidden="false">
-          <div class="compare-sticky-head__label">
-            {% if section_note != blank %}
-              <p class="compare-table-note">{{ section_note }}</p>
-            {% endif %}
-          </div>
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% if compare_product != blank %}
-              <div class="compare-sticky-head__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">
-                {% if compare_handle == recommended_handle %}
-                  <span class="compare-recommended-badge">
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5 1l1.09 2.26L9 3.82 6.5 6.24l.59 3.03L5 7.77l-2.09 1.5.59-3.03L1 3.82l2.91-.56L5 1z"/></svg>
-                    Recommended
-                  </span>
+          {% for block in product_blocks %}
+            {% liquid
+              assign p = block.settings.product
+            %}
+
+            <div
+              class="compare-product-cell{% if block.settings.is_recommended %} compare-product-cell--recommended{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {% if p != blank %}
+                {% if block.settings.is_recommended %}
+                  <span class="compare-recommended-badge">Recommended</span>
                 {% endif %}
-                {% render 'product-browse-media',
-                  product: compare_product,
-                  context: 'compare',
-                  variant: 'compare',
-                  width: 240,
-                  height: 240,
-                  class: 'compare-head-image'
-                %}
-                <p class="compare-head-title">{{ compare_product.title }}</p>
-                <p class="compare-head-price">{{ compare_product.price | money }}</p>
-                <a href="{{ compare_product.url }}" class="compare-head-cta{% if compare_handle == recommended_handle %} compare-head-cta--recommended{% endif %}">View product</a>
-              </div>
-            {% endif %}
+
+                {% if p.featured_image != blank %}
+                  <img
+                    src="{{ p.featured_image | image_url: width: 200 }}"
+                    alt="{{ p.title | escape }}"
+                    class="compare-product-cell__img"
+                    width="120"
+                    height="120"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="compare-product-cell__img compare-product-cell__img--empty" aria-hidden="true"></div>
+                {% endif %}
+
+                <h2 class="compare-product-cell__title">{{ p.title | escape }}</h2>
+                <p class="compare-product-cell__price">{{ p.price | money }}</p>
+                <a href="{{ p.url | escape }}" class="compare-product-cell__link">
+                  View product &rarr;
+                </a>
+              {% else %}
+                <p class="compare-empty-product">Select a product in theme customizer</p>
+              {% endif %}
+            </div>
           {% endfor %}
         </div>
 
-        <!-- Detail spec rows -->
-        {% assign best_for_has_content = false %}
-        {% capture best_for_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.best_for.value | default: compare_product.metafields.ezquest.best_for | strip %}
-            {% if cell_value != blank %}{% assign best_for_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if best_for_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Best for</div>
-            {{ best_for_cells }}
-          </div>
-        {% endif %}
+        {% for spec in spec_blocks %}
+          <div
+            class="compare-row {% cycle 'compare-row--odd', 'compare-row--even' %}"
+            {{ spec.shopify_attributes }}
+          >
+            <div class="compare-label-cell">
+              {{ spec.settings.label | escape }}
+            </div>
 
-        {% assign difference_has_content = false %}
-        {% capture difference_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_short_reason.value | default: compare_product.metafields.ezquest.compare_short_reason | strip %}
-            {% if cell_value != blank %}{% assign difference_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if difference_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Key difference</div>
-            {{ difference_cells }}
-          </div>
-        {% endif %}
+            {% for product_block in product_blocks %}
+              {% liquid
+                assign col_index = forloop.index
+                assign value_key = 'value_' | append: col_index
+                assign val = spec.settings[value_key]
+              %}
 
-        {% assign role_has_content = false %}
-        {% capture role_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_role.value | default: compare_product.metafields.ezquest.compare_role | replace: '-', ' ' | strip %}
-            {% if cell_value != blank %}{% assign role_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value | capitalize }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if role_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">{% if compare_group_is_charger %}Travel vs desk{% else %}Usage role{% endif %}</div>
-            {{ role_cells }}
-          </div>
-        {% endif %}
-
-        {% assign ports_has_content = false %}
-        {% capture ports_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = '' %}
-            {% for row in compare_product.metafields.ezquest.spec_rows.value %}
-              {% assign row_label = row.label.value | downcase %}
-              {% if row_label contains 'ports' or row_label contains 'port count' or row_label contains 'data ports' %}
-                {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                {% break %}
-              {% elsif compare_group_is_charger and row_label contains 'output' %}
-                {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                {% break %}
-              {% endif %}
+              <div class="compare-spec-cell">
+                {% if val != blank %}
+                  {{ val | escape }}
+                {% else %}
+                  <span class="compare-spec-empty" aria-label="Not available">&mdash;</span>
+                {% endif %}
+              </div>
             {% endfor %}
-            {% if cell_value != blank %}{% assign ports_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if ports_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">{% if compare_group_is_charger %}Port config{% else %}Port count{% endif %}</div>
-            {{ ports_cells }}
           </div>
-        {% endif %}
-
-        {% assign power_has_content = false %}
-        {% capture power_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_charging_power.value | default: compare_product.metafields.ezquest.compare_charging_power | strip %}
-            {% if cell_value == blank %}
-              {% for row in compare_product.metafields.ezquest.spec_rows.value %}
-                {% assign row_label = row.label.value | downcase %}
-                {% if row_label contains 'power delivery' or row_label contains 'power' or row_label contains 'charging' %}
-                  {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-            {% if cell_value != blank %}{% assign power_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if power_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">{% if compare_group_is_charger %}Power output{% else %}Power delivery{% endif %}</div>
-            {{ power_cells }}
-          </div>
-        {% endif %}
-
-        {% assign portability_has_content = false %}
-        {% capture portability_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_portability.value | default: compare_product.metafields.ezquest.compare_portability | strip %}
-            {% if cell_value == blank %}
-              {% for row in compare_product.metafields.ezquest.spec_rows.value %}
-                {% assign row_label = row.label.value | downcase %}
-                {% if row_label contains 'dimension' or row_label contains 'size' or row_label contains 'weight' or row_label contains 'length' %}
-                  {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-            {% if cell_value != blank %}{% assign portability_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if portability_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">{% if compare_group_is_charger %}Size / portability{% else %}Portability{% endif %}</div>
-            {{ portability_cells }}
-          </div>
-        {% endif %}
-
-        {% assign form_factor_has_content = false %}
-        {% capture form_factor_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_form_factor.value | default: compare_product.metafields.ezquest.compare_form_factor | strip %}
-            {% if cell_value != blank %}{% assign form_factor_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if form_factor_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">{% if compare_group_is_charger %}Form factor{% else %}Cable style{% endif %}</div>
-            {{ form_factor_cells }}
-          </div>
-        {% endif %}
-
-        {% assign display_has_content = false %}
-        {% capture display_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = '' %}
-            {% for row in compare_product.metafields.ezquest.spec_rows.value %}
-              {% assign row_label = row.label.value | downcase %}
-              {% if row_label contains 'display support' or row_label contains 'video output' or row_label contains 'display' %}
-                {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-            {% if cell_value != blank %}{% assign display_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if display_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Display support</div>
-            {{ display_cells }}
-          </div>
-        {% endif %}
-
-        {% assign connector_has_content = false %}
-        {% capture connector_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compare_connector_type.value | default: compare_product.metafields.ezquest.compare_connector_type | strip %}
-            {% if cell_value == blank %}
-              {% for row in compare_product.metafields.ezquest.spec_rows.value %}
-                {% assign row_label = row.label.value | downcase %}
-                {% if row_label contains 'connector' or row_label contains 'connection type' or row_label contains 'host connection' %}
-                  {% assign cell_value = row.spec_value.value | strip_html | strip %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-            {% if cell_value != blank %}{% assign connector_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if connector_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Connector type</div>
-            {{ connector_cells }}
-          </div>
-        {% endif %}
-
-        {% assign compatibility_has_content = false %}
-        {% capture compatibility_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign cell_value = compare_product.metafields.ezquest.compatibility_summary | metafield_tag | strip_html | strip %}
-            {% if cell_value != blank %}{% assign compatibility_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if cell_value != blank %}{{ cell_value | truncatewords: 18 }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if compatibility_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Compatibility</div>
-            {{ compatibility_cells }}
-          </div>
-        {% endif %}
-
-        {% assign resources_has_content = false %}
-        {% capture resource_cells %}
-          {% for compare_handle in ordered_handles %}
-            {% assign compare_product = all_products[compare_handle] %}
-            {% assign manual_count = compare_product.metafields.ezquest.manuals.value.count | default: 0 %}
-            {% assign download_count = compare_product.metafields.ezquest.downloads.value.count | default: 0 %}
-            {% capture cell_value %}
-              {% if manual_count > 0 %}{{ manual_count }} manual{% if manual_count != 1 %}s{% endif %}{% endif %}
-              {% if manual_count > 0 and download_count > 0 %} / {% endif %}
-              {% if download_count > 0 %}{{ download_count }} download{% if download_count != 1 %}s{% endif %}{% endif %}
-            {% endcapture %}
-            {% assign normalized_value = cell_value | strip %}
-            {% if normalized_value != blank %}{% assign resources_has_content = true %}{% endif %}
-            <div class="compare-sticky-row__cell{% if compare_handle == recommended_handle %} is-recommended{% endif %}">{% if normalized_value != blank %}{{ normalized_value }}{% else %}&mdash;{% endif %}</div>
-          {% endfor %}
-        {% endcapture %}
-        {% if resources_has_content %}
-          <div class="compare-sticky-row">
-            <div class="compare-sticky-row__label">Manuals + downloads</div>
-            {{ resource_cells }}
-          </div>
-        {% endif %}
-
-      </div><!-- .compare-sticky-grid -->
-    </div><!-- .compare-scroll-wrap -->
-
-    <div class="compare-handoff-strip">
-      <div class="compare-handoff-copy">
-        <h3 class="compare-handoff-title">Keep this lineup in view</h3>
-        <p class="compare-handoff-text">Open compatibility or support without losing the products you are comparing.</p>
+        {% endfor %}
       </div>
-      <div class="compare-handoff-actions">
-        {% render 'button', label: 'Check compatibility', url: compatibility_url, style: 'secondary' %}
-        {% render 'button', label: 'Open support', url: support_url, style: 'tertiary' %}
-      </div>
-    </div>
-
-  {% else %}
-    <div class="compare-empty-state">
-      <h2 class="compare-empty-state-title">{{ section.settings.empty_state_heading | default: 'Compare lineup coming soon' }}</h2>
-      <p class="compare-empty-state-copy">{{ section.settings.empty_state_copy | default: 'Assign a comparison group in Shopify so this section can show the right 2–4 products, recommendation state, and handoff links.' }}</p>
-      <a href="/pages/help-me-choose" class="btn btn--primary mt-6 inline-flex">Help me choose instead</a>
     </div>
   {% endif %}
 </section>
-{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} .compare-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(64px, 8vw, 96px) clamp(1.25rem, 5vw, 5rem);
+  }
+
+  #shopify-section-{{ section.id }} .compare-page__header {
+    max-width: 640px;
+    margin: 0 auto clamp(2.5rem, 4vw, 4rem);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .compare-page__heading {
+    margin: 0;
+    color: #1d1d1f;
+    font-size: clamp(30px, 5vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .compare-page__body {
+    max-width: 54ch;
+    margin: 1rem auto 0;
+    color: #6e6e73;
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .compare-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 18px;
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .compare-table {
+    position: relative;
+    display: grid;
+    grid-template-columns: 180px repeat(var(--col-count, 3), minmax(220px, 1fr));
+    width: 100%;
+    min-width: calc(180px + (var(--col-count, 3) * 220px));
+  }
+
+  #shopify-section-{{ section.id }} .compare-row {
+    display: contents;
+  }
+
+  #shopify-section-{{ section.id }} .compare-row--header > .compare-label-cell,
+  #shopify-section-{{ section.id }} .compare-row--header > .compare-product-cell {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  #shopify-section-{{ section.id }} .compare-label-cell {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    color: #6e6e73;
+    background: #f5f5f7;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .compare-label-cell--header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    z-index: 4;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    background: #fff;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell--recommended {
+    box-shadow: inset 0 0 0 2px rgba(245, 158, 11, 0.35);
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__img {
+    width: 120px;
+    height: 120px;
+    padding: 8px;
+    border-radius: 12px;
+    background: #f5f5f7;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__img--empty {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__title {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: #1d1d1f;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__price {
+    margin: 0;
+    color: #F59E0B;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  #shopify-section-{{ section.id }} .compare-recommended-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 100px;
+    background: #F59E0B;
+    color: #412402;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__link {
+    margin-top: auto;
+    color: #F59E0B;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__link:hover {
+    color: #d97706;
+  }
+
+  #shopify-section-{{ section.id }} .compare-spec-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #1d1d1f;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .compare-row--odd .compare-spec-cell,
+  #shopify-section-{{ section.id }} .compare-row--odd .compare-label-cell {
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .compare-row--even .compare-spec-cell,
+  #shopify-section-{{ section.id }} .compare-row--even .compare-label-cell {
+    background: #fafafa;
+  }
+
+  #shopify-section-{{ section.id }} .compare-spec-empty {
+    color: #6e6e73;
+    font-size: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .compare-empty-state {
+    grid-column: 1 / -1;
+    padding: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 18px;
+    color: #6e6e73;
+    background: #f5f5f7;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .compare-empty-state p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .compare-empty-product {
+    margin: auto 0;
+    padding: 1rem 0;
+    color: #6e6e73;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .compare-page {
+      padding: clamp(48px, 12vw, 72px) 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .compare-table {
+      grid-template-columns: 120px repeat(var(--col-count, 3), minmax(180px, 1fr));
+      min-width: calc(120px + (var(--col-count, 3) * 180px));
+    }
+
+    #shopify-section-{{ section.id }} .compare-label-cell {
+      min-width: 120px;
+      padding: 0.75rem;
+      font-size: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .compare-product-cell {
+      padding: 1.25rem 0.75rem;
+    }
+
+    #shopify-section-{{ section.id }} .compare-product-cell__img {
+      width: 80px;
+      height: 80px;
+    }
+
+    #shopify-section-{{ section.id }} .compare-product-cell__price {
+      font-size: 15px;
+    }
+
+    #shopify-section-{{ section.id }} .compare-recommended-badge {
+      position: static;
+      order: -1;
+    }
+  }
+</style>
 
 {% schema %}
 {
-  "name": "Product compare table",
+  "name": "Product comparison",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare products" },
-    { "type": "textarea", "id": "copy", "label": "Subtitle copy" },
     {
-      "type": "range",
-      "id": "columns_desktop",
-      "label": "Desktop columns",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 3
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Compare models"
     },
     {
-      "type": "select",
-      "id": "structured_source",
-      "label": "Structured source",
-      "default": "auto",
-      "options": [
-        { "value": "auto", "label": "Auto" },
-        { "value": "group_handle", "label": "Comparison group handle" },
-        { "value": "blocks", "label": "Blocks only" }
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find the right EZQuest for your setup"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product column",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_recommended",
+          "label": "Show as recommended",
+          "default": false
+        }
       ]
     },
-    { "type": "text", "id": "comparison_group_handle", "label": "Comparison group handle" },
-    { "type": "text", "id": "empty_state_heading", "label": "Empty-state heading", "default": "EZQuest option" },
-    { "type": "textarea", "id": "empty_state_copy", "label": "Empty-state copy" }
+    {
+      "type": "spec",
+      "name": "Spec row",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "placeholder": "e.g. USB-C Ports"
+        },
+        {
+          "type": "text",
+          "id": "value_1",
+          "label": "Value — column 1"
+        },
+        {
+          "type": "text",
+          "id": "value_2",
+          "label": "Value — column 2"
+        },
+        {
+          "type": "text",
+          "id": "value_3",
+          "label": "Value — column 3"
+        },
+        {
+          "type": "text",
+          "id": "value_4",
+          "label": "Value — column 4"
+        }
+      ]
+    }
   ],
   "presets": [
-    { "name": "Product compare table" }
+    {
+      "name": "Product comparison",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Ports"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Display output"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Power delivery"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Compatibility"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Warranty"
+          }
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

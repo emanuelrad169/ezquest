@@ -88,8 +88,8 @@
                 <path d="M13 20l5 5 9-10" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <h3 class="contact-success__heading">Message sent</h3>
-            <p class="contact-success__body">We'll reply to {{ form.email }} within 1 business day.</p>
+            <h3 class="contact-success__heading">{{ 'contact.success' | t }}</h3>
+            <p class="contact-success__body">{{ 'contact.success_body' | t: email: form.email }}</p>
           </div>
 
         {% else %}
@@ -101,12 +101,12 @@
           <div class="contact-form__grid">
 
             <div class="contact-form__field">
-              <label class="contact-form__label" for="contact-name-{{ section.id }}">Full name</label>
+              <label class="contact-form__label" for="contact-name-{{ section.id }}">{{ 'contact.name' | t }}</label>
               <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="contact-form__input" required autocomplete="name" placeholder="Alex Johnson" value="{% if customer %}{{ customer.name }}{% endif %}">
             </div>
 
             <div class="contact-form__field">
-              <label class="contact-form__label" for="contact-email-{{ section.id }}">Email address</label>
+              <label class="contact-form__label" for="contact-email-{{ section.id }}">{{ 'contact.email' | t }}</label>
               <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
             </div>
 
@@ -125,14 +125,14 @@
             </div>
 
             <div class="contact-form__field contact-form__field--full">
-              <label class="contact-form__label" for="contact-message-{{ section.id }}">Message</label>
+              <label class="contact-form__label" for="contact-message-{{ section.id }}">{{ 'contact.message' | t }}</label>
               <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea" rows="5" required placeholder="Tell us what you need…"></textarea>
             </div>
 
           </div>
 
-          <button type="submit" class="btn btn--primary contact-form__submit">Send message</button>
-          <p class="contact-form__note">We read every message. Typical reply time: 1 business day.</p>
+          <button type="submit" class="btn btn--primary contact-form__submit">{{ 'contact.send_message' | t }}</button>
+          <p class="contact-form__note">{{ 'contact.note' | t }}</p>
 
         {% endif %}
 

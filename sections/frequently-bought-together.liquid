@@ -1,0 +1,300 @@
+{% liquid
+  assign valid_product_count = 0
+
+  for block in section.blocks
+    if block.type == 'product' and block.settings.product != blank
+      assign valid_product_count = valid_product_count | plus: 1
+    endif
+  endfor
+%}
+
+{% if valid_product_count > 0 %}
+  <section class="fbt-section section--grey" aria-label="Frequently bought together">
+    <div class="page-width">
+      <div class="fbt-header">
+        <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+        <h2 class="fbt-header__heading">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="fbt-layout">
+        <div class="fbt-products">
+          {% liquid
+            assign rendered_product_count = 0
+          %}
+
+          {% for block in section.blocks %}
+            {% liquid
+              assign fbt_product = block.settings.product
+              assign fbt_variant = fbt_product.selected_or_first_available_variant
+            %}
+
+            {% if block.type == 'product' and fbt_product != blank and fbt_variant != blank %}
+              {% liquid
+                assign rendered_product_count = rendered_product_count | plus: 1
+              %}
+
+              <div
+                class="fbt-item"
+                data-variant-id="{{ fbt_variant.id }}"
+                data-price="{{ fbt_product.price }}"
+                {{ block.shopify_attributes }}
+              >
+                {% if fbt_product.featured_image != blank %}
+                  <img
+                    class="fbt-item__img"
+                    src="{{ fbt_product.featured_image | image_url: width: 160 }}"
+                    alt="{{ fbt_product.title | escape }}"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                {% endif %}
+
+                <div class="fbt-item__body">
+                  <p class="fbt-item__title">{{ fbt_product.title | escape }}</p>
+                  <p class="fbt-item__price">{{ fbt_product.price | money }}</p>
+                </div>
+              </div>
+
+              {% if rendered_product_count < valid_product_count %}
+                <span class="fbt-plus" aria-hidden="true">+</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="fbt-summary">
+          <p class="fbt-summary__label">Total price</p>
+          <p class="fbt-summary__price" id="fbt-total"></p>
+          <div class="fbt-checkboxes" id="fbt-checkboxes"></div>
+          <button
+            type="button"
+            class="btn btn--primary fbt-add-btn"
+            id="fbt-add-all"
+            aria-label="Add selected items to cart"
+          >
+            Add all to cart
+          </button>
+          {% if section.settings.note != blank %}
+            <p class="fbt-summary__note">{{ section.settings.note | escape }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #shopify-section-{{ section.id }} .fbt-section {
+      padding: clamp(48px, 6vw, 72px) 0;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-header {
+      margin-bottom: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-header__heading {
+      margin: 0;
+      color: #1d1d1f;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-products {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-item {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 0.875rem;
+      min-width: 180px;
+      padding: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-item__img {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #f5f5f7;
+      object-fit: contain;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-item__title {
+      display: -webkit-box;
+      margin: 0 0 0.25rem;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      color: #1d1d1f;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-item__price {
+      margin: 0;
+      color: #6e6e73;
+      font-size: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-plus {
+      flex-shrink: 0;
+      color: #6e6e73;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: #f5f5f7;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-summary__label {
+      margin: 0;
+      color: #6e6e73;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-summary__price {
+      margin: 0;
+      color: #1d1d1f;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-checkboxes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      color: #3d3d3f;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: #F59E0B;
+      cursor: pointer;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-add-btn {
+      width: 100%;
+      min-height: 48px;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-add-btn.is-loading {
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-add-btn.is-added {
+      background: #15803d;
+      border-color: #15803d;
+      color: #fff;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-add-btn.is-error {
+      background: #991b1b;
+      border-color: #991b1b;
+      color: #fff;
+    }
+
+    #shopify-section-{{ section.id }} .fbt-summary__note {
+      margin: 0;
+      color: #6e6e73;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      #shopify-section-{{ section.id }} .fbt-layout {
+        grid-template-columns: 1fr;
+      }
+
+      #shopify-section-{{ section.id }} .fbt-summary {
+        order: -1;
+      }
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Bought together",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Complete the setup"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently bought together"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Ships together · Free over $100"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Frequently bought together"
+    }
+  ]
+}
+{% endschema %}

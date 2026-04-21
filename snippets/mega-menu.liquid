@@ -17,13 +17,17 @@
 <div class="mega-menu" data-mega-menu>
   <ul class="mega-menu-nav-list" role="list">
     <li class="mega-menu-nav-item" data-mega-item="shop">
-      <a href="{{ shop_url }}" class="mega-menu-trigger" data-mega-trigger="shop" aria-expanded="false" aria-controls="mega-menu-panel-shop">
+      <a href="{{ shop_url }}" class="mega-menu-trigger"
+         data-mega-target="mega-setup"
+         aria-expanded="false" aria-haspopup="true" aria-controls="mega-setup">
         <span>Shop by setup</span>
       </a>
     </li>
     <li class="mega-menu-nav-item" data-mega-item="collections">
-      <a href="{{ collections_url }}" class="mega-menu-trigger" data-mega-trigger="collections" aria-expanded="false" aria-controls="mega-menu-panel-collections">
-        <span>Browse product families</span>
+      <a href="{{ collections_url }}" class="mega-menu-trigger"
+         data-mega-target="mega-collections"
+         aria-expanded="false" aria-haspopup="true" aria-controls="mega-collections">
+        <span>Shop by Collections</span>
       </a>
     </li>
     <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
@@ -70,7 +74,7 @@
 
   <div class="mega-menu-backdrop" data-mega-backdrop hidden></div>
   <div class="mega-menu-panels" data-mega-panels>
-    {% render 'mega-menu-panel', group_handle: 'shop', section: section %}
-    {% render 'mega-menu-panel', group_handle: 'collections', section: section %}
+    {% render 'ez-mega-setup' %}
+    {% render 'ez-mega-collections' %}
   </div>
 </div>

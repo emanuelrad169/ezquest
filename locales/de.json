@@ -1,0 +1,108 @@
+{
+  "general": {
+    "continue_reading": "Weiterlesen",
+    "learn_more": "Mehr erfahren",
+    "shop_now": "Jetzt kaufen",
+    "contact_support": "Support kontaktieren",
+    "view_all": "Alle anzeigen",
+    "close": "Schließen",
+    "search": "Suchen",
+    "loading": "Laden"
+  },
+  "accessibility": {
+    "skip_to_content": "Zum Inhalt springen"
+  },
+  "header": {
+    "open_menu": "Menü öffnen",
+    "search": "Suchen",
+    "cart": "Warenkorb",
+    "my_account": "Mein Konto",
+    "sign_in": "Anmelden",
+    "wishlist": "Wunschliste",
+    "select_language": "Sprache auswählen"
+  },
+  "footer": {
+    "newsletter_placeholder": "E-Mail eingeben",
+    "newsletter_button": "Abonnieren",
+    "company": "Unternehmen",
+    "product_families": "Produktfamilien",
+    "legal": "Rechtliches",
+    "support": "Support"
+  },
+  "support": {
+    "search_label": "Support-Ressourcen suchen",
+    "downloads_title": "Downloads",
+    "manuals_title": "Handbücher",
+    "compatibility_title": "Kompatibilität",
+    "faq_title": "FAQ",
+    "troubleshooting_title": "Fehlerbehebung"
+  },
+  "product": {
+    "specifications": "Spezifikationen",
+    "compare": "Vergleichen",
+    "related": "Ähnliche Produkte",
+    "add_to_cart": "In den Warenkorb",
+    "adding": "Wird hinzugef\u00fcgt\u2026",
+    "sold_out": "Ausverkauft",
+    "in_stock": "Auf Lager",
+    "out_of_stock": "Nicht auf Lager",
+    "buy_on_amazon": "Bei Amazon kaufen",
+    "share": "Teilen",
+    "copy_link": "Link kopieren",
+    "quantity": "Menge",
+    "back_to_products": "Zurück zu Produkten",
+    "back_to": "Zurück zu {{ collection }}",
+    "save": "{{ amount }} sparen"
+  },
+  "social": {
+    "share_on_facebook": "Auf Facebook teilen",
+    "share_on_twitter": "Auf X / Twitter teilen",
+    "save_to_pinterest": "Auf Pinterest speichern",
+    "copy_link": "Link kopieren"
+  },
+  "trust": {
+    "warranty": "2 Jahre Garantie",
+    "no_drivers": "Keine Treiber",
+    "mac_windows": "Mac + Windows",
+    "free_shipping": "Kostenloser Versand"
+  },
+  "notify": {
+    "out_of_stock": "Dieser Artikel ist derzeit nicht vorrätig.",
+    "label": "E-Mail für Benachrichtigung bei Verfügbarkeit",
+    "email_placeholder": "E-Mail eingeben",
+    "submit": "Benachrichtigen",
+    "success": "Sie werden benachrichtigt, wenn dieser Artikel wieder verfügbar ist."
+  },
+  "cart": {
+    "title": "Dein Warenkorb",
+    "empty": "Dein Warenkorb ist leer",
+    "empty_body": "Füge Produkte hinzu, um sie hier zu sehen.",
+    "empty_cta": "Produkte ansehen",
+    "checkout": "Zur Kasse",
+    "continue_shopping": "Weiter einkaufen",
+    "close": "Warenkorb schließen",
+    "remove": "Entfernen",
+    "remove_item": "{{ product }} aus dem Warenkorb entfernen",
+    "subtotal": "Zwischensumme",
+    "tax_note": "Steuern und Versand werden beim Bezahlen berechnet",
+    "free_shipping_threshold": "Noch {{ amount }} bis zum kostenlosen Versand",
+    "free_shipping_unlocked": "Kostenloser Versand freigeschaltet",
+    "qty_decrease": "Menge von {{ product }} verringern",
+    "qty_increase": "Menge von {{ product }} erhöhen"
+  },
+  "wishlist": {
+    "title": "Deine Wunschliste",
+    "saved_items": "Gespeicherte Artikel",
+    "empty": "Noch keine gespeicherten Artikel",
+    "empty_body": "Markiere Produkte mit einem Herz, um sie hier zu speichern."
+  },
+  "contact": {
+    "send_message": "Nachricht senden",
+    "name": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "message": "Nachricht",
+    "success": "Nachricht gesendet",
+    "success_body": "Wir antworten {{ email }} innerhalb von 1 Werktag.",
+    "note": "Wir lesen jede Nachricht. Typische Antwortzeit: 1 Werktag."
+  }
+}

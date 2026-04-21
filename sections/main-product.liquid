@@ -47,7 +47,7 @@
       assign back_collection = collection
       assign back_collection_url = blank
       assign back_collection_title = blank
-      assign back_collection_label = 'Back to products'
+      assign back_collection_label = 'product.back_to_products' | t
 
       if back_collection == blank and product.collections != blank
         for candidate_collection in product.collections
@@ -62,7 +62,7 @@
       if back_collection != blank
         assign back_collection_url = back_collection.url
         assign back_collection_title = back_collection.title
-        assign back_collection_label = 'Back to ' | append: back_collection.title
+        assign back_collection_label = 'product.back_to' | t: collection: back_collection.title
       endif
 
       if product.metafields.ezquest.feature_highlights != blank
@@ -95,7 +95,9 @@
 
       if product.metafields.ezquest.spec_rows != blank
         assign product_spec_rows = product.metafields.ezquest.spec_rows.value
-        assign spec_count = product.metafields.ezquest.spec_rows.value.count
+        for spec_row in product_spec_rows
+          assign spec_count = spec_count | plus: 1
+        endfor
       endif
 
       if product.metafields.ezquest.manuals != blank
@@ -197,6 +199,9 @@
         assign mobile_proof_line = proof_fallback_line
       endif
 
+      assign t_in_stock = 'product.in_stock' | t
+      assign t_sold_out = 'product.sold_out' | t
+
       if product.has_only_default_variant == false and selected_variant != blank
         if product.options_with_values.first != blank
           assign selected_option_label = product.options_with_values.first.name
@@ -204,9 +209,9 @@
         assign selected_option_summary = selected_variant.options.first | default: selected_variant.title
         assign variant_reinforcement_text = 'Selected: ' | append: selected_variant.title
         if selected_variant.available
-          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · In stock'
+          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · ' | append: t_in_stock
         else
-          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · Sold out'
+          assign variant_reinforcement_text = variant_reinforcement_text | append: ' · ' | append: t_sold_out
         endif
       elsif selected_variant != blank
         assign selected_option_summary = selected_variant.title
@@ -234,7 +239,7 @@
     </div>
 
     <div class="mt-4 grid gap-8 lg:mt-6 lg:grid-cols-2 lg:items-start lg:gap-10 product-layout-grid">
-      <div class="space-y-5 motion-fade-up">
+      <div class="space-y-5 min-w-0">
         <div class="product-gallery-stage product-gallery-stage-shell">
           <div class="product-gallery-layout">
 
@@ -295,7 +300,7 @@
         </div>
       </div>
 
-      <div class="space-y-4 lg:space-y-5 buybox-sticky motion-fade-up reveal-tier-2">
+      <div class="space-y-4 lg:space-y-5 min-w-0 buybox-sticky motion-fade-up reveal-tier-2">
         <div class="product-buybox card-elevated p-5 lg:p-6">
           <div class="product-buybox-header space-y-4">
             <div class="product-buybox-topline flex flex-wrap items-center justify-between gap-3">
@@ -347,7 +352,7 @@
                   <select id="ProductVariant-{{ section.id }}" name="id" class="sr-only" data-product-variant-select>
                     {% for variant in product.variants %}
                       <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money | escape }}" data-variant-compare-price="{{ variant.compare_at_price | money | escape }}" data-variant-save-label="{% if variant.compare_at_price > variant.price %}Save {{ variant.compare_at_price | minus: variant.price | money | escape }}{% endif %}" data-variant-available="{% if variant.available %}true{% else %}false{% endif %}" data-variant-title="{{ variant.title | escape }}" data-variant-option-label="{{ variant.options.first | default: variant.title | escape }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
-                        {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+                        {{ variant.title }}{% unless variant.available %} - {{ 'product.sold_out' | t }}{% endunless %}
                       </option>
                     {% endfor %}
                   </select>
@@ -382,7 +387,7 @@
                         <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-amber-500 bg-amber-50 text-amber-900 ring-1 ring-amber-500/20{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
                           <span class="product-variant-chip-title leading-none">{{ variant.options.first | default: variant.title }}</span>
                           {% unless variant.available %}
-                            <span class="product-variant-chip-meta text-xs text-slate-400">Sold out</span>
+                            <span class="product-variant-chip-meta text-xs text-slate-400">{{ 'product.sold_out' | t }}</span>
                           {% endunless %}
                         </button>
                       {% endfor %}
@@ -418,14 +423,17 @@
               <div class="product-purchase-row">
                 {% if section.settings.show_quantity_selector %}
                   <div class="hidden lg:block product-buybox-quantity-shell min-w-28">
-                    <label class="mb-2 block text-sm font-medium text-slate-900" for="ProductQuantity-{{ section.id }}">Quantity</label>
+                    <label class="mb-2 block text-sm font-medium text-slate-900" for="ProductQuantity-{{ section.id }}">{{ 'product.quantity' | t }}</label>
                     <input id="ProductQuantity-{{ section.id }}" class="product-buybox-quantity-input min-h-12 w-28 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="number" name="quantity" value="1" min="1">
                   </div>
                 {% endif %}
 
                 <div class="product-primary-action-wrap w-full self-end" data-product-primary-action-wrap>
-                  <button class="button-primary product-primary-action" type="submit" name="add" data-product-primary-button{% unless product.available %} disabled="disabled"{% endunless %}>
-                    <span data-product-primary-button-label>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span>
+                  <button class="button-primary product-primary-action" type="submit" name="add" data-product-primary-button
+                    data-label-add="{{ 'product.add_to_cart' | t | escape }}"
+                    data-label-adding="{{ 'product.adding' | t | escape }}"
+                    {% unless product.available %} disabled="disabled"{% endunless %}>
+                    <span data-product-primary-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
                   </button>
                 </div>
                 <div class="product-wishlist-wrap">
@@ -450,21 +458,21 @@
                  class="pdp-amazon-btn"
                  target="_blank"
                  rel="noopener noreferrer"
-                 aria-label="Buy {{ product.title | escape }} on Amazon">
+                 aria-label="{{ 'product.buy_on_amazon' | t }} — {{ product.title | escape }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-amazon" viewBox="0 0 16 16">
   <path d="M10.813 11.968c.157.083.36.074.5-.05l.005.005a90 90 0 0 1 1.623-1.405c.173-.143.143-.372.006-.563l-.125-.17c-.345-.465-.673-.906-.673-1.791v-3.3l.001-.335c.008-1.265.014-2.421-.933-3.305C10.404.274 9.06 0 8.03 0 6.017 0 3.77.75 3.296 3.24c-.047.264.143.404.316.443l2.054.22c.19-.009.33-.196.366-.387.176-.857.896-1.271 1.703-1.271.435 0 .929.16 1.188.55.264.39.26.91.257 1.376v.432q-.3.033-.621.065c-1.113.114-2.397.246-3.36.67C3.873 5.91 2.94 7.08 2.94 8.798c0 2.2 1.387 3.298 3.168 3.298 1.506 0 2.328-.354 3.489-1.54l.167.246c.274.405.456.675 1.047 1.166ZM6.03 8.431C6.03 6.627 7.647 6.3 9.177 6.3v.57c.001.776.002 1.434-.396 2.133-.336.595-.87.961-1.465.961-.812 0-1.286-.619-1.286-1.533M.435 12.174c2.629 1.603 6.698 4.084 13.183.997.28-.116.475.078.199.431C13.538 13.96 11.312 16 7.57 16 3.832 16 .968 13.446.094 12.386c-.24-.275.036-.4.199-.299z"/>
   <path d="M13.828 11.943c.567-.07 1.468-.027 1.645.204.135.176-.004.966-.233 1.533-.23.563-.572.961-.762 1.115s-.333.094-.23-.137c.105-.23.684-1.663.455-1.963-.213-.278-1.177-.177-1.625-.13l-.09.009q-.142.013-.233.024c-.193.021-.245.027-.274-.032-.074-.209.779-.556 1.347-.623"/>
 </svg>
-                <span>Buy on Amazon</span>
+                <span>{{ 'product.buy_on_amazon' | t }}</span>
               </a>
             {% endif %}
 
             <div class="pdp-share-strip">
-              <span class="pdp-share-label">Share</span>
+              <span class="pdp-share-label">{{ 'product.share' | t }}</span>
               <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--fb"
                  target="_blank" rel="noopener"
-                 aria-label="Share on Facebook">
+                 aria-label="{{ 'social.share_on_facebook' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
                 </svg>
@@ -472,7 +480,7 @@
               <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--tw"
                  target="_blank" rel="noopener"
-                 aria-label="Share on X / Twitter">
+                 aria-label="{{ 'social.share_on_twitter' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
@@ -480,14 +488,14 @@
               <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url | url_encode }}&media={{ product.featured_image | image_url: width: 600 | url_encode }}&description={{ product.title | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--pin"
                  target="_blank" rel="noopener"
-                 aria-label="Save to Pinterest">
+                 aria-label="{{ 'social.save_to_pinterest' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
                 </svg>
               </a>
               <button class="pdp-share-btn pdp-share-btn--copy"
                       type="button"
-                      aria-label="Copy link"
+                      aria-label="{{ 'social.copy_link' | t }}"
                       onclick="navigator.clipboard.writeText('{{ shop.url | append: product.url }}');this.setAttribute('data-copied','true');setTimeout(()=>this.removeAttribute('data-copied'),2000)">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
@@ -500,22 +508,22 @@
 
           {% unless product.available %}
             <div class="notify-form" id="notify-form-{{ section.id }}" data-notify-form>
-              <p class="notify-form__message">This item is currently out of stock.</p>
+              <p class="notify-form__message">{{ 'notify.out_of_stock' | t }}</p>
               <div class="notify-form__input-row" data-notify-input-row>
                 <input
                   type="email"
                   class="notify-form__input"
                   data-notify-email
-                  placeholder="Enter your email"
-                  aria-label="Email address for restock notification"
+                  placeholder="{{ 'notify.email_placeholder' | t }}"
+                  aria-label="{{ 'notify.label' | t }}"
                   autocomplete="email"
                 >
                 <button class="btn btn--primary notify-form__submit" data-notify-submit type="button">
-                  Notify me
+                  {{ 'notify.submit' | t }}
                 </button>
               </div>
               <p class="notify-form__success" data-notify-success hidden role="status">
-                You will be notified when this item is back in stock.
+                {{ 'notify.success' | t }}
               </p>
             </div>
           {% endunless %}
@@ -543,20 +551,20 @@
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
               </svg>
-              <span class="pdp-trust-label">2-yr warranty</span>
+              <span class="pdp-trust-label">{{ 'trust.warranty' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span class="pdp-trust-label">No drivers</span>
+              <span class="pdp-trust-label">{{ 'trust.no_drivers' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="9" cy="9" r="6.5" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
                 <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
               </svg>
-              <span class="pdp-trust-label">Mac + Windows</span>
+              <span class="pdp-trust-label">{{ 'trust.mac_windows' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
@@ -564,7 +572,7 @@
                 <circle cx="4.5" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
                 <circle cx="13" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
               </svg>
-              <span class="pdp-trust-label">Free shipping</span>
+              <span class="pdp-trust-label">{{ 'trust.free_shipping' | t }}</span>
             </div>
           </div>
 
@@ -708,13 +716,13 @@
           <p class="product-sticky-atc-title">{{ product.title | truncate: 28 }}</p>
           <div class="product-sticky-atc-meta">
             <p class="product-sticky-atc-availability" data-sticky-atc-availability>
-              {% if product.available %}In stock{% else %}Sold out{% endif %}
+              {% if product.available %}{{ 'product.in_stock' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}
             </p>
             <p class="product-sticky-atc-price" data-sticky-atc-price>{{ product.selected_or_first_available_variant.price | money }}</p>
           </div>
         </div>
         <button class="button-primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
-          <span data-sticky-atc-button-label>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          <span data-sticky-atc-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
           <span class="product-primary-action-divider" aria-hidden="true" data-sticky-atc-button-divider>·</span>
           <span data-sticky-atc-button-price>{{ product.selected_or_first_available_variant.price | money }}</span>
         </button>
@@ -749,7 +757,6 @@
     {% endif %}
     <a href="#pdp-compat" class="pdp-tab" data-pdp-tab>Compatibility</a>
     <a href="#pdp-downloads" class="pdp-tab" data-pdp-tab>Downloads</a>
-    <a href="#pdp-faq" class="pdp-tab" data-pdp-tab>FAQ</a>
   </div>
 </div>
 
@@ -1036,6 +1043,9 @@
   var stickyButtonPrice = productRoot.querySelector('[data-sticky-atc-button-price]');
   var stickyButtonDivider = productRoot.querySelector('[data-sticky-atc-button-divider]');
 
+  var addLabel = primaryButton ? (primaryButton.getAttribute('data-label-add') || 'Add to cart') : 'Add to cart';
+  var addingLabel = primaryButton ? (primaryButton.getAttribute('data-label-adding') || 'Adding\u2026') : 'Adding\u2026';
+
   function setLoading(loading) {
     [primaryButton, stickyButton].forEach(function (btn) {
       if (!btn) return;
@@ -1043,10 +1053,10 @@
       btn.disabled = loading;
       btn.setAttribute('aria-busy', loading ? 'true' : 'false');
     });
-    if (primaryButtonLabel) primaryButtonLabel.textContent = loading ? 'Adding\u2026' : 'Add to cart';
+    if (primaryButtonLabel) primaryButtonLabel.textContent = loading ? addingLabel : addLabel;
     if (primaryButtonPrice) primaryButtonPrice.hidden = loading;
     if (primaryButtonDivider) primaryButtonDivider.hidden = loading;
-    if (stickyButtonLabel) stickyButtonLabel.textContent = loading ? 'Adding\u2026' : 'Add to cart';
+    if (stickyButtonLabel) stickyButtonLabel.textContent = loading ? addingLabel : addLabel;
     if (stickyButtonPrice) stickyButtonPrice.hidden = loading;
     if (stickyButtonDivider) stickyButtonDivider.hidden = loading;
   }

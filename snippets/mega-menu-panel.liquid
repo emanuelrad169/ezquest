@@ -9,8 +9,6 @@
   assign docks_collection = collections['docking-stations']
   assign power_collection = collections['chargers-power']
 
-  assign category_handles = 'hubs-adapters|docking-stations|chargers-power|accessories' | split: '|'
-  assign category_labels = 'Hubs & adapters|Docking stations|Chargers & power|Cables & accessories' | split: '|'
   assign sorted_use_case_keys = '' | split: ''
 
   if metaobjects.ezquest_use_case != blank
@@ -56,13 +54,38 @@
                   {% endif %}
                   <button
                     type="button"
-                    class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
+                    class="mega-menu-editorial-rail-item setup-tab{% if forloop.first %} is-active{% endif %}"
                     data-mega-stage-target="shop-{{ use_case.system.handle }}"
                     aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                   >
-                    <span class="mega-menu-rail-item-copy">
-                      <span class="mega-menu-rail-item-title">{{ use_case.title.value }}</span>
-                    </span>
+                    <div class="setup-tab__icon">
+                      {% case use_case.system.handle %}
+                        {% when 'balanced-everyday' %}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <rect x="1" y="3" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.25"/>
+                            <path d="M4 12v1.5M8 12v1.5M12 12v1.5M1 7h14" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                          </svg>
+                        {% when 'portable' %}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <rect x="3" y="5" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.25"/>
+                            <path d="M6 5V4a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.25"/>
+                          </svg>
+                        {% when 'desk-ready' %}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <rect x="2" y="4" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.25"/>
+                            <path d="M5 12v2M11 12v2M2 7h12" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                          </svg>
+                        {% when 'chargers-power' %}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M8 2v4l2.5 1L8 14v-4L5.5 9 8 2z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        {% else %}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <rect x="2" y="4" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.25"/>
+                          </svg>
+                      {% endcase %}
+                    </div>
+                    <span class="setup-tab__label">{{ use_case.title.value }}</span>
                   </button>
                 {% endfor %}
               {% endif %}
@@ -156,94 +179,109 @@
 
     {% when 'collections' %}
       <div class="mega-menu-panel-surface rounded-shell bg-white p-4 shadow-lift lg:p-5">
-        {% capture collection_taxonomy_markup %}
-          {% render 'collection-taxonomy-groups',
-            context: 'mega',
-            section: section,
-            eyebrow: 'Browse product families',
-            footer_href: routes.collections_url,
-            footer_label: 'Browse all product families'
-          %}
-        {% endcapture %}
-        {% if collection_taxonomy_markup != blank %}
-          {{ collection_taxonomy_markup }}
-        {% else %}
-          <div class="grid gap-5 lg:grid-cols-12" data-mega-stage-root>
-            <aside class="mega-menu-panel-aside flex flex-col gap-3 rounded-card-sm border border-slate-200 bg-slate-50 p-3 lg:col-span-3">
-              <p class="mega-menu-side-label">Browse product families</p>
+        <div class="mega-menu-inner">
 
-              <div class="grid gap-1" role="tablist" aria-label="Browse product families">
-                {% for category_handle in category_handles %}
-                  {% assign category_index = forloop.index0 %}
-                  {% assign category_collection = collections[category_handle] %}
-                  <button
-                    type="button"
-                    class="mega-menu-editorial-rail-item{% if forloop.first %} is-active{% endif %}"
-                    data-mega-stage-target="family-{{ category_handle }}"
-                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                  >
-                    <span class="mega-menu-rail-item-copy">
-                      <span class="mega-menu-rail-item-title">{{ category_labels[category_index] }}</span>
-                    </span>
-                  </button>
-                {% endfor %}
+          <p class="mega-menu-kicker">Shop by Collections</p>
+
+          <div class="mega-menu-grid">
+
+            {% comment %} ── Column 1: USB-C ── {% endcomment %}
+            <div class="mega-col">
+              <div class="mega-col__header">
+                <div class="mega-col__icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <rect x="2" y="5" width="14" height="9" rx="2.5" stroke="#F59E0B" stroke-width="1.25"/>
+                    <path d="M5.5 5V3.5M9 5V3.5M12.5 5V3.5" stroke="#F59E0B" stroke-width="1.25" stroke-linecap="round"/>
+                    <path d="M5.5 10h7" stroke="#F59E0B" stroke-width="1.25" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="mega-col__title">USB-C</span>
               </div>
-
-              <a href="{{ routes.collections_url }}" class="mega-menu-rail-link">Browse all product families</a>
-            </aside>
-
-            <div class="grid lg:col-span-9">
-              {% for category_handle in category_handles %}
-                {% assign category_index = forloop.index0 %}
-                {% assign category_collection = collections[category_handle] %}
-                {% if category_collection == blank %}
-                  {% continue %}
-                {% endif %}
-                {%- liquid
-                  assign category_best_for = 'All products'
-                  case category_handle
-                    when 'hubs-adapters'
-                      assign category_best_for = 'Daily carry'
-                    when 'docking-stations'
-                      assign category_best_for = 'Desk setups'
-                    when 'chargers-power'
-                      assign category_best_for = 'Charging'
-                    when 'accessories'
-                      assign category_best_for = 'Accessories'
-                  endcase
-                -%}
-                <section class="mega-menu-stage-panel{% if forloop.first %} is-active{% endif %} grid content-start gap-4 rounded-card-sm border border-slate-200 bg-white p-4 lg:p-5" data-mega-stage-panel="family-{{ category_handle }}"{% unless forloop.first %} hidden{% endunless %}>
-                  <div class="mega-menu-stage-head">
-                    <h2 class="mega-menu-stage-title">{{ category_labels[category_index] }}</h2>
-                  </div>
-                  <div class="grid gap-3 lg:grid-cols-2">
-                    {% for product in category_collection.products limit: 2 %}
-                      {%- liquid
-                        assign stage_card_class = ''
-                        assign stage_card_eyebrow = blank
-                        if forloop.first
-                          assign stage_card_class = 'mega-menu-stage-card--priority'
-                          assign stage_card_eyebrow = category_best_for
-                        endif
-                      -%}
-                      {% render 'mega-menu-stage-card',
-                        product: product,
-                        card_layout: 'showcase',
-                        card_class: stage_card_class,
-                        eyebrow: stage_card_eyebrow,
-                        show_descriptor: false,
-                        show_price: false
-                      %}
-                    {% endfor %}
-                  </div>
-                  <div class="flex justify-start pt-0.5">
-                    <a href="{{ category_collection.url | default: routes.collections_url }}" class="button-tertiary mega-menu-stage-view-all">View all {{ category_labels[category_index] | downcase }}</a>
-                  </div>
-                </section>
-              {% endfor %}
+              <nav class="mega-col__links">
+                <a href="{{ collections['hubs-adapters'].url }}" class="mega-col__link">
+                  <span>Hubs</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Cable" class="mega-col__link">
+                  <span>Cables</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Adapter" class="mega-col__link">
+                  <span>Adapters</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Card+Reader" class="mega-col__link">
+                  <span>Card Readers</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Enclosure" class="mega-col__link">
+                  <span>Enclosure</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </nav>
             </div>
+
+            {% comment %} ── Column 2: Cables & Adapters ── {% endcomment %}
+            <div class="mega-col">
+              <div class="mega-col__header">
+                <div class="mega-col__icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M3 9h12M3 9l3-3M3 9l3 3M15 9l-3-3M15 9l-3 3" stroke="#F59E0B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="mega-col__title">Cables &amp; Adapters</span>
+              </div>
+              <nav class="mega-col__links">
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=HDMI" class="mega-col__link">
+                  <span>HDMI</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=DisplayPort" class="mega-col__link">
+                  <span>DisplayPort</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Mini+DisplayPort" class="mega-col__link">
+                  <span>Mini DisplayPort</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['accessories'].url }}?filter.p.product_type=Audio" class="mega-col__link">
+                  <span>Audio</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </nav>
+            </div>
+
+            {% comment %} ── Column 3: Power ── {% endcomment %}
+            <div class="mega-col">
+              <div class="mega-col__header">
+                <div class="mega-col__icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M9 2v5l3 1-3 8v-5L6 10l3-8z" stroke="#F59E0B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="mega-col__title">Power</span>
+              </div>
+              <nav class="mega-col__links">
+                <a href="{{ collections['chargers-power'].url }}?filter.p.product_type=Wall+Charger" class="mega-col__link">
+                  <span>Wall Charger</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="{{ collections['chargers-power'].url }}?filter.p.product_type=Car+Charger" class="mega-col__link">
+                  <span>Car Charger</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </nav>
+            </div>
+
           </div>
-        {% endif %}
+
+          {% comment %} ── Footer strip ── {% endcomment %}
+          <div class="mega-menu-footer">
+            <span class="mega-menu-footer__text">Browse all product families</span>
+            <a href="{{ routes.collections_url }}" class="mega-menu-footer__link">View all →</a>
+          </div>
+
+        </div>
       </div>
 
     {% when 'compare' %}

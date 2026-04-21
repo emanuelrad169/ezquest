@@ -1,76 +1,349 @@
-<section class="site-announcement-bar relative z-50 border-0 text-black" aria-label="Store announcement">
-  <div class="site-announcement-inner container-shell">
-    <div class="flex min-h-announcement items-center gap-4 lg:gap-6">
-      <div class="hidden flex-1 items-center lg:flex">
-        {% if section.settings.support_phone != blank %}
-          <a
-            href="tel:{{ section.settings.support_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' | replace: '.', '' }}"
-            class="site-announcement-meta-item inline-flex items-center gap-1.5 text-body-micro font-medium text-black/90 no-underline transition-opacity hover:opacity-70"
-          >
-            <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-              {% render 'icon', name: 'support' %}
-            </span>
-            <span>{{ section.settings.support_phone_label | default: 'Support' }} {{ section.settings.support_phone }}</span>
+{% liquid
+  assign msg_blocks = section.blocks | where: 'type', 'message'
+%}
+
+<div
+  class="announcement-bar"
+  role="region"
+  aria-label="Announcements"
+  id="announcement-bar"
+  data-count="{{ msg_blocks.size }}"
+  data-interval="{{ section.settings.interval }}"
+>
+  <div
+    class="announcement-bar__track"
+    id="announcement-track"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    {% for block in msg_blocks %}
+      <div
+        class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
+        id="announcement-{{ forloop.index0 }}"
+        role="text"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.icon != blank %}
+          <span class="announcement-bar__icon" aria-hidden="true">
+            {{ block.settings.icon | escape }}
+          </span>
+        {% endif %}
+
+        {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link | escape }}" class="announcement-bar__link">
+            {{ block.settings.text | escape }}
           </a>
+        {% else %}
+          <span class="announcement-bar__text">
+            {{ block.settings.text | escape }}
+          </span>
         {% endif %}
       </div>
-
-      <p class="flex flex-1 items-center justify-start gap-2 whitespace-nowrap text-body-2xs font-medium tracking-subtle text-black/90 lg:justify-center lg:text-body-xs">
-        <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-          {% render 'icon', name: 'book-open' %}
-        </span>
-        <span>{{ section.settings.message }}</span>
-      </p>
-
-      <div class="ml-auto flex items-center justify-end gap-2 lg:flex-1">
-        {% if localization.available_languages.size > 1 %}
-          {% form 'localization', id: 'announcement-language-form', class: 'm-0 hidden lg:block' %}
-            <label class="sr-only" for="announcement-language-select">Language</label>
-            <div class="site-announcement-language-wrap inline-flex min-h-7 items-center gap-1.5 rounded-full bg-white/15 px-2">
-              <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-                {% render 'icon', name: 'layers' %}
-              </span>
-              <select id="announcement-language-select" name="locale_code" class="site-announcement-language-select border-0 bg-transparent pr-1 text-body-micro font-medium text-black/90 outline-none" onchange="this.form.submit()">
-                {% for language in localization.available_languages %}
-                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
-                    {{ language.endonym_name | capitalize }}
-                  </option>
-                {% endfor %}
-              </select>
-            </div>
-          {% endform %}
-        {% endif %}
-      </div>
-    </div>
+    {% endfor %}
   </div>
-</section>
+
+  {% if msg_blocks.size > 1 %}
+    <div class="announcement-bar__controls" aria-label="Announcement navigation">
+      <button
+        type="button"
+        class="announcement-bar__btn"
+        id="announcement-prev"
+        aria-label="Previous announcement"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="announcement-bar__counter" aria-label="Announcement 1 of {{ msg_blocks.size }}">
+        <span id="announcement-current">1</span>
+        <span aria-hidden="true">/</span>
+        <span>{{ msg_blocks.size }}</span>
+      </span>
+      <button
+        type="button"
+        class="announcement-bar__btn"
+        id="announcement-next"
+        aria-label="Next announcement"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .announcement-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 40px;
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__track {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__slide.is-exiting {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__text,
+  #shopify-section-{{ section.id }} .announcement-bar__link {
+    color: {{ section.settings.text_color }};
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__link {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__icon {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__controls {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.375rem;
+    padding-right: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+    color: {{ section.settings.text_color }};
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__btn:hover {
+    background: rgba(0, 0, 0, 0.16);
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar__counter {
+    min-width: 32px;
+    color: {{ section.settings.text_color }};
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 480px) {
+    #shopify-section-{{ section.id }} .announcement-bar__controls {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .announcement-bar__slide {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var bar = document.getElementById('announcement-bar');
+    if (!bar) return;
+    var count = parseInt(bar.dataset.count, 10);
+    if (count <= 1) return;
+
+    var interval = parseInt(bar.dataset.interval, 10) || 4000;
+    var current = 0;
+    var timer = null;
+
+    function getSlide(i) {
+      return document.getElementById('announcement-' + i);
+    }
+
+    function getCounter() {
+      return document.getElementById('announcement-current');
+    }
+
+    function goTo(next) {
+      var prev = current;
+      if (next === prev) return;
+
+      var prevSlide = getSlide(prev);
+      var nextSlide = getSlide(next);
+      if (!prevSlide || !nextSlide) return;
+
+      prevSlide.classList.add('is-exiting');
+      prevSlide.classList.remove('is-active');
+
+      setTimeout(function() {
+        prevSlide.classList.remove('is-exiting');
+      }, 400);
+
+      nextSlide.classList.add('is-active');
+
+      current = next;
+      var counter = getCounter();
+      if (counter) counter.textContent = next + 1;
+
+      var ariaLabel = bar.querySelector('.announcement-bar__counter');
+      if (ariaLabel) {
+        ariaLabel.setAttribute('aria-label', 'Announcement ' + (next + 1) + ' of ' + count);
+      }
+    }
+
+    function next() {
+      goTo((current + 1) % count);
+    }
+
+    function prev() {
+      goTo((current - 1 + count) % count);
+    }
+
+    function startTimer() {
+      timer = setInterval(next, interval);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    var prevBtn = document.getElementById('announcement-prev');
+    var nextBtn = document.getElementById('announcement-next');
+
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      stopTimer(); prev(); startTimer();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      stopTimer(); next(); startTimer();
+    });
+
+    bar.addEventListener('mouseenter', stopTimer);
+    bar.addEventListener('mouseleave', startTimer);
+
+    bar.addEventListener('focusin', stopTimer);
+    bar.addEventListener('focusout', startTimer);
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startTimer();
+    }
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Announcement bar",
+  "tag": "section",
   "settings": [
     {
-      "type": "text",
-      "id": "message",
-      "label": "Message",
-      "default": "Free shipping over $100"
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F59E0B"
     },
     {
-      "type": "text",
-      "id": "support_phone_label",
-      "label": "Support phone label",
-      "default": "Support"
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1d1d1f"
     },
     {
-      "type": "text",
-      "id": "support_phone",
-      "label": "Support phone number",
-      "default": "1-800-881-9305"
+      "type": "range",
+      "id": "interval",
+      "label": "Rotation interval (ms)",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "default": 4000
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping Over $100",
+          "placeholder": "Free Shipping Over $100"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or leave blank)"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Announcement bar"
+      "name": "Announcement bar",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "icon": "📦",
+            "text": "Free Shipping Over $100"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "icon": "📞",
+            "text": "Support 1-800-881-9305",
+            "link": "tel:18008819305"
+          }
+        }
+      ]
     }
   ]
 }

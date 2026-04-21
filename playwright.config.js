@@ -2,13 +2,15 @@ const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
-  snapshotDir: './tests/snapshots',
-  reporter: [['list'], ['html', { outputFolder: 'tests/report', open: 'never' }]],
+  retries: 1,
   use: {
-    headless: true,
+    baseURL: 'https://ezquest-4.myshopify.com',
     screenshot: 'only-on-failure',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
   ],
 });

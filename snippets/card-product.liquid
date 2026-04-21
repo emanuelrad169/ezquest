@@ -34,7 +34,6 @@
   assign highlight_spec_value = blank
   assign show_swatches = true
   assign show_quick_add = false
-  assign show_media_quick_add = true
   assign show_footer_quick_add = true
   assign selected_variant = blank
   assign quick_add_label = 'Add to cart'
@@ -52,29 +51,24 @@
       assign show_spec_strip = false
       assign show_swatches = false
       assign spec_limit = 0
-      assign show_media_quick_add = false
     when 'collection'
       assign show_spec_strip = true
       assign show_swatches = true
       assign spec_limit = 3
-      assign show_media_quick_add = false
     when 'search'
       assign show_spec_strip = false
       assign show_swatches = false
       assign spec_limit = 0
-      assign show_media_quick_add = false
     when 'compare'
       assign show_swatches = false
       assign show_spec_strip = false
       assign show_product_eyebrow = false
-      assign show_media_quick_add = false
       assign show_footer_quick_add = false
     when 'featured'
       assign show_spec_strip = true
       assign show_swatches = true
       assign spec_limit = 3
       assign show_footer_quick_add = false
-      assign show_media_quick_add = true
   endcase
 
   if product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
@@ -162,7 +156,7 @@
 
 {% if featured_card %}
   <article
-    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up relative flex h-full flex-col overflow-hidden text-slate-950 no-underline{% if featured %} is-featured{% endif %}"
+    class="product-card product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up relative flex h-full flex-col overflow-hidden text-slate-950 no-underline{% if featured %} is-featured{% endif %}"
     {% if card_index != blank %}data-card-index="{{ card_index }}"{% endif %}
   >
     <div class="product-card-featured-media-shell relative">
@@ -189,6 +183,31 @@
         {% endif %}
       </a>
 
+      {% if product != blank %}
+        {% unless product.has_only_default_variant %}
+          <a href="{{ product_card_url }}"
+             class="quick-add-btn quick-add-btn--options"
+             aria-label="View options for {{ product.title | escape }}">
+            View options
+          </a>
+        {% else %}
+          <button
+            type="button"
+            class="quick-add-btn quick-add-btn--atc"
+            data-quick-add-id="{{ product.selected_or_first_available_variant.id }}"
+            data-quick-add-title="{{ product.title | escape }}"
+            aria-label="Add {{ product.title | escape }} to cart">
+            <svg width="16" height="16" viewBox="0 0 16 16"
+                 fill="none" aria-hidden="true">
+              <path d="M8 2v12M2 8h12"
+                    stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round"/>
+            </svg>
+            <span>Add to cart</span>
+          </button>
+        {% endunless %}
+      {% endif %}
+
       <div class="product-card__wishlist">
         {% render 'wishlist-button',
           product_id: product.id,
@@ -198,13 +217,6 @@
           product_price: product.price
         %}
       </div>
-
-      {% if show_media_quick_add and show_quick_add %}
-        {% form 'product', product, class: 'product-card-featured-add-form product-card-featured-add-form--media' %}
-          <input type="hidden" name="id" value="{{ selected_variant.id }}">
-          {% render 'button', label: quick_add_label, tag: 'button', type: 'submit', style: 'primary', size: 'sm', class: 'product-card-featured-media-cta', attributes: quick_add_attributes %}
-        {% endform %}
-      {% endif %}
 
       {% if show_media_dots %}
         <div class="product-card-featured-indicators" aria-hidden="true">
@@ -319,7 +331,7 @@
     {% endif %}
   </article>
 {% else %}
-<article class="product-card-tile product-card-tile--{{ card_context | handleize }} flex h-full flex-col">
+<article class="product-card product-card-tile product-card-tile--{{ card_context | handleize }} flex h-full flex-col">
 
   {%- comment -%} ── Image wrapper ── {%- endcomment -%}
   {% if product != blank %}
@@ -334,14 +346,33 @@
           class: 'product-card-image aspect-card w-full object-contain'
         %}
       </a>
+      {% unless product.has_only_default_variant %}
+        <a href="{{ product_card_url }}"
+           class="quick-add-btn quick-add-btn--options"
+           aria-label="View options for {{ product.title | escape }}">
+          View options
+        </a>
+      {% else %}
+        <button
+          type="button"
+          class="quick-add-btn quick-add-btn--atc"
+          data-quick-add-id="{{ product.selected_or_first_available_variant.id }}"
+          data-quick-add-title="{{ product.title | escape }}"
+          aria-label="Add {{ product.title | escape }} to cart">
+          <svg width="16" height="16" viewBox="0 0 16 16"
+               fill="none" aria-hidden="true">
+            <path d="M8 2v12M2 8h12"
+                  stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round"/>
+          </svg>
+          <span>Add to cart</span>
+        </button>
+      {% endunless %}
       {% if product.available == false %}
         <span class="product-card-badge">Sold out</span>
       {% elsif product.compare_at_price_max > product.price %}
         <span class="product-card-badge product-card-badge--sale">Sale</span>
       {% endif %}
-      <div class="product-card-quick-action" aria-hidden="true">
-        <span class="product-card-quick-action-cta">View product</span>
-      </div>
     </div>
   {% else %}
     <div class="product-thumb-card product-card-image-wrapper">

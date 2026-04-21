@@ -1,0 +1,125 @@
+{% comment %}
+  Render at top of cart drawer items area:
+    {% render 'free-shipping-bar' %}
+
+  The snippet reads cart.total_price directly.
+  Threshold default is 10000 cents ($100.00).
+  To customise, pass threshold parameter:
+    {% render 'free-shipping-bar', threshold: 15000 %}
+{% endcomment %}
+
+{% liquid
+  assign shipping_threshold = threshold | default: 10000
+  assign cart_total = cart.total_price
+  assign remaining = shipping_threshold | minus: cart_total
+%}
+
+<div
+  class="shipping-bar"
+  id="shipping-bar"
+  data-threshold="{{ shipping_threshold }}"
+  aria-live="polite"
+  aria-label="Free shipping progress"
+>
+  {% if remaining <= 0 %}
+    <div class="shipping-bar__unlocked">
+      <svg
+        class="shipping-bar__icon"
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M2.5 7l3 3 6-6" stroke="#15803d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="shipping-bar__msg shipping-bar__msg--unlocked">
+        You've unlocked free shipping!
+      </span>
+    </div>
+  {% else %}
+    {% liquid
+      assign progress_pct = cart_total | times: 100 | divided_by: shipping_threshold
+      if progress_pct > 100
+        assign progress_pct = 100
+      endif
+      assign remaining_money = remaining | money
+    %}
+
+    <p class="shipping-bar__msg">
+      Add {{ remaining_money }} more for <strong>free shipping</strong>
+    </p>
+
+    <div
+      class="shipping-bar__track"
+      role="progressbar"
+      aria-valuenow="{{ progress_pct }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="{{ progress_pct }}% toward free shipping"
+    >
+      <div
+        class="shipping-bar__fill"
+        id="shipping-bar-fill"
+        style="width: {{ progress_pct }}%"
+      ></div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .shipping-bar {
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+
+  .shipping-bar__msg {
+    margin: 0 0 0.625rem;
+    color: #6e6e73;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .shipping-bar__msg strong {
+    color: #1d1d1f;
+    font-weight: 600;
+  }
+
+  .shipping-bar__track {
+    height: 4px;
+    overflow: hidden;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.07);
+  }
+
+  .shipping-bar__fill {
+    height: 100%;
+    min-width: 4px;
+    border-radius: 100px;
+    background: #F59E0B;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .shipping-bar__unlocked {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .shipping-bar__msg--unlocked {
+    margin: 0;
+    color: #15803d;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .shipping-bar__icon {
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shipping-bar__fill {
+      transition: none;
+    }
+  }
+</style>

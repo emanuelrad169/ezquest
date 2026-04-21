@@ -1,0 +1,253 @@
+<section class="email-signup section--dark" aria-labelledby="email-signup-heading">
+  <div class="email-signup__inner page-width">
+    <div class="email-signup__content">
+      {% if section.settings.kicker != blank %}
+        <p class="section-kicker email-signup__kicker">
+          {{ section.settings.kicker | escape }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="email-signup__heading" id="email-signup-heading">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <p class="email-signup__body">
+          {{ section.settings.body | escape }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="email-signup__form-wrap">
+      {% form 'customer', id: 'email-signup-form', class: 'email-signup__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        {% if form.posted_successfully? %}
+          <div class="email-signup__success" role="status">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="15" stroke="#F59E0B" stroke-width="1.5"/>
+              <path d="M10 16l4 4 8-8" stroke="#F59E0B" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="email-signup__success-msg">
+              {{ section.settings.success_message | escape }}
+            </p>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <p class="email-signup__error" role="alert">
+              {{ form.errors.translated_fields.email | escape }}
+              {{ form.errors.messages.email | escape }}
+            </p>
+          {% endif %}
+
+          <div class="email-signup__input-row">
+            <label for="email-signup-input" class="visually-hidden">
+              {{ section.settings.input_label | escape }}
+            </label>
+            <input
+              type="email"
+              id="email-signup-input"
+              name="contact[email]"
+              class="email-signup__input"
+              placeholder="{{ section.settings.placeholder | escape }}"
+              autocomplete="email"
+              required
+              aria-required="true"
+            >
+            <button type="submit" class="email-signup__submit btn btn--primary">
+              {{ section.settings.button_label | escape }}
+            </button>
+          </div>
+
+          {% if section.settings.disclaimer != blank %}
+            <p class="email-signup__disclaimer">
+              {{ section.settings.disclaimer | escape }}
+            </p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #shopify-section-{{ section.id }} .email-signup {
+    padding: clamp(64px, 8vw, 96px) clamp(1.25rem, 5vw, 5rem);
+    background: #0a0a0a;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__kicker {
+    color: #F59E0B;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__heading {
+    margin: 0.5rem 0 0.875rem;
+    color: #f5f5f7;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__body {
+    max-width: 44ch;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__input-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__input {
+    flex: 1;
+    height: 52px;
+    padding: 0 1.25rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.07);
+    color: #f5f5f7;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__input:focus {
+    border-color: #F59E0B;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__submit {
+    height: 52px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__disclaimer {
+    margin: 0.875rem 0 0;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__error {
+    margin: 0 0 0.875rem;
+    color: #fca5a5;
+    font-size: 13px;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  #shopify-section-{{ section.id }} .email-signup__success-msg {
+    margin: 0;
+    color: #f5f5f7;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .email-signup__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #shopify-section-{{ section.id }} .email-signup__input-row {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Email signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get new product news and exclusive deals"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "First access to launches, limited offers, and setup guides. No spam."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "input_label",
+      "label": "Input label",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "You're in. We'll be in touch."
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "We never share your email. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email signup"
+    }
+  ]
+}
+{% endschema %}

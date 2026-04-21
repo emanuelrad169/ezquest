@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      window.EZRoutes = {
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        locale: {{ request.locale.iso_code | json }}
+      };
+    </script>
     <meta name="theme-color" content="#f8f9f5">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -10,6 +18,11 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
+    {% if settings.favicon %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+    {% else %}
+      <link rel="icon" type="image/svg+xml" href="{{ 'ezquest-logo.svg' | asset_url }}">
+    {% endif %}
     <title>{% if page_title %}{{ page_title }}{% endif %}{% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} - Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
 
     <!-- Open Graph -->
@@ -62,7 +75,8 @@
     }
     </script>
 
-    {%- comment -%}v2026-04-15b{%- endcomment -%}
+    <style id="tidio-cls-fix">#tidio-chat-root{display:none!important}</style>
+    {%- comment -%}v2026-04-20{%- endcomment -%}
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
     {% if request.path contains '/policies/' %}
@@ -73,16 +87,41 @@
     <script src="{{ 'component-accordion.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="page-shell template-{{ template | split: '.' | first | handle }}{% if request.design_mode %} design-mode{% endif %}">
-    <a class="skip-link" href="#MainContent">Skip to content</a>
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
     {% sections 'header-group' %}
     <main id="MainContent" class="site-main" role="main">
       {{ content_for_layout }}
     </main>
     {% sections 'footer-group' %}
     {% render 'cart-drawer' %}
+    {% render 'cookie-consent' %}
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'reveal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'recently-viewed.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'notify.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'fbt.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'free-shipping-bar.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'cookie-consent.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'mega-menu.js' | asset_url }}" defer="defer"></script>
+    <script>
+    (function(){
+      var s = document.getElementById('tidio-cls-fix');
+      if (!s) return;
+      var done = false;
+      function show() {
+        if (done) return;
+        done = true;
+        s.remove();
+        ['scroll','click','touchstart','keydown'].forEach(function(e){
+          window.removeEventListener(e, show);
+        });
+      }
+      ['scroll','click','touchstart','keydown'].forEach(function(e){
+        window.addEventListener(e, show, { passive: true, once: true });
+      });
+    })();
+    </script>
   </body>
 </html>

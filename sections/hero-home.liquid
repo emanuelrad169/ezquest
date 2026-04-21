@@ -78,10 +78,12 @@
                 assign slide_fallback_scene = hero_slide_scenes[forloop.index0] | default: 'desk'
                 assign slide_image_loading = 'lazy'
                 assign slide_image_fetchpriority = 'auto'
+                assign slide_image_decoding = 'async'
 
                 if forloop.first
                   assign slide_image_loading = 'eager'
                   assign slide_image_fetchpriority = 'high'
+                  assign slide_image_decoding = 'sync'
                 endif
 
                 if slide_desktop_image == blank and slide_mobile_image == blank and flagship_hero_image != blank
@@ -108,10 +110,12 @@
                   {% if slide_desktop_image != blank or slide_mobile_image != blank %}
                     <picture class="home-hero-media-picture block h-full w-full">
                       {% if slide_mobile_image != blank %}
-                        <source media="(max-width: 767px)" srcset="{{ slide_mobile_image | image_url: width: 1800 }}">
+                        <source media="(max-width: 767px)"
+                                srcset="{{ slide_mobile_image | image_url: width: 400 }} 400w, {{ slide_mobile_image | image_url: width: 800 }} 800w, {{ slide_mobile_image | image_url: width: 1200 }} 1200w"
+                                sizes="100vw">
                       {% endif %}
                       {% if slide_desktop_image != blank %}
-                        {{ slide_desktop_image | image_url: width: 2400 | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                        {{ slide_desktop_image | image_url: width: 2400 | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, decoding: slide_image_decoding, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                       {% else %}
                         <img
                           src="{{ owned_hero_desktop_asset | asset_url }}"
@@ -196,10 +200,12 @@
                 {% if fallback_desktop_image != blank or fallback_mobile_image != blank %}
                   <picture class="home-hero-media-picture block h-full w-full">
                     {% if fallback_mobile_image != blank %}
-                      <source media="(max-width: 767px)" srcset="{{ fallback_mobile_image | image_url: width: 1800 }}">
+                      <source media="(max-width: 767px)"
+                              srcset="{{ fallback_mobile_image | image_url: width: 400 }} 400w, {{ fallback_mobile_image | image_url: width: 800 }} 800w, {{ fallback_mobile_image | image_url: width: 1200 }} 1200w"
+                              sizes="100vw">
                     {% endif %}
                     {% if fallback_desktop_image != blank %}
-                      {{ fallback_desktop_image | image_url: width: 2400 | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                      {{ fallback_desktop_image | image_url: width: 2400 | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, decoding: 'sync', class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                     {% else %}
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"
@@ -326,3 +332,4 @@
   ]
 }
 {% endschema %}
+

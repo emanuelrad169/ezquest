@@ -3,6 +3,7 @@
 /* openDrawer() / closeDrawer() are globals defined in theme.js                */
 
 (function () {
+  var EZRoutes = window.EZRoutes || { cart: '/cart', cartAdd: '/cart/add', cartChange: '/cart/change' };
   var DRAWER_ID = 'cart-drawer';
 
   /* ── Helpers ─────────────────────────────────────────────── */
@@ -38,7 +39,7 @@
   function refreshDrawerContents(callback) {
     setBodyLoading(true);
 
-    fetch('/cart?sections=cart-drawer-body,cart-drawer-footer')
+    fetch(EZRoutes.cart + '?sections=cart-drawer-body,cart-drawer-footer')
       .then(function (res) {
         if (!res.ok) throw new Error('sections fetch failed');
         return res.json();
@@ -61,7 +62,7 @@
         }
 
         // Update global cart count badges (header icon etc.)
-        return fetch('/cart.js');
+        return fetch(EZRoutes.cart + '.js');
       })
       .then(function (res) { return res.json(); })
       .then(function (cart) {
@@ -151,7 +152,7 @@
       return;
     }
 
-    fetch('/cart/change.js', {
+    fetch(EZRoutes.cartChange + '.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: key, quantity: newQty })

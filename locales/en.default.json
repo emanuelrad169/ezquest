@@ -4,16 +4,30 @@
     "learn_more": "Learn more",
     "shop_now": "Shop now",
     "contact_support": "Contact support",
-    "view_all": "View all"
+    "view_all": "View all",
+    "close": "Close",
+    "search": "Search",
+    "loading": "Loading"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
   },
   "header": {
     "open_menu": "Open menu",
     "search": "Search",
-    "cart": "Cart"
+    "cart": "Cart",
+    "my_account": "My account",
+    "sign_in": "Sign in",
+    "wishlist": "Wishlist",
+    "select_language": "Select language"
   },
   "footer": {
     "newsletter_placeholder": "Enter your email",
-    "newsletter_button": "Subscribe"
+    "newsletter_button": "Subscribe",
+    "company": "Company",
+    "product_families": "Product families",
+    "legal": "Legal",
+    "support": "Support"
   },
   "support": {
     "search_label": "Search support resources",
@@ -26,6 +40,69 @@
   "product": {
     "specifications": "Specifications",
     "compare": "Compare",
-    "related": "Related products"
+    "related": "Related products",
+    "add_to_cart": "Add to cart",
+    "adding": "Adding\u2026",
+    "sold_out": "Sold out",
+    "in_stock": "In stock",
+    "out_of_stock": "Out of stock",
+    "buy_on_amazon": "Buy on Amazon",
+    "share": "Share",
+    "copy_link": "Copy link",
+    "quantity": "Quantity",
+    "back_to_products": "Back to products",
+    "back_to": "Back to {{ collection }}",
+    "save": "Save {{ amount }}"
+  },
+  "social": {
+    "share_on_facebook": "Share on Facebook",
+    "share_on_twitter": "Share on X / Twitter",
+    "save_to_pinterest": "Save to Pinterest",
+    "copy_link": "Copy link"
+  },
+  "trust": {
+    "warranty": "2-yr warranty",
+    "no_drivers": "No drivers",
+    "mac_windows": "Mac + Windows",
+    "free_shipping": "Free shipping"
+  },
+  "notify": {
+    "out_of_stock": "This item is currently out of stock.",
+    "label": "Email address for restock notification",
+    "email_placeholder": "Enter your email",
+    "submit": "Notify me",
+    "success": "You will be notified when this item is back in stock."
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "empty_body": "Add products to your cart to see them here.",
+    "empty_cta": "Browse products",
+    "checkout": "Proceed to checkout",
+    "continue_shopping": "Continue shopping",
+    "close": "Close cart",
+    "remove": "Remove",
+    "remove_item": "Remove {{ product }} from cart",
+    "subtotal": "Subtotal",
+    "tax_note": "Taxes and shipping calculated at checkout",
+    "free_shipping_threshold": "Add {{ amount }} more for free shipping",
+    "free_shipping_unlocked": "Free shipping unlocked",
+    "qty_decrease": "Decrease quantity of {{ product }}",
+    "qty_increase": "Increase quantity of {{ product }}"
+  },
+  "wishlist": {
+    "title": "Your wishlist",
+    "saved_items": "Saved items",
+    "empty": "No saved items yet",
+    "empty_body": "Heart any product to save it here for later."
+  },
+  "contact": {
+    "send_message": "Send message",
+    "name": "Full name",
+    "email": "Email address",
+    "message": "Message",
+    "success": "Message sent",
+    "success_body": "We\u2019ll reply to {{ email }} within 1 business day.",
+    "note": "We read every message. Typical reply time: 1 business day."
   }
 }

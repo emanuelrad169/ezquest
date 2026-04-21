@@ -1,0 +1,108 @@
+{
+  "general": {
+    "continue_reading": "متابعة القراءة",
+    "learn_more": "معرفة المزيد",
+    "shop_now": "تسوق الآن",
+    "contact_support": "التواصل مع الدعم",
+    "view_all": "عرض الكل",
+    "close": "إغلاق",
+    "search": "بحث",
+    "loading": "جارٍ التحميل"
+  },
+  "accessibility": {
+    "skip_to_content": "تخطى إلى المحتوى"
+  },
+  "header": {
+    "open_menu": "فتح القائمة",
+    "search": "بحث",
+    "cart": "السلة",
+    "my_account": "حسابي",
+    "sign_in": "تسجيل الدخول",
+    "wishlist": "قائمة الرغبات",
+    "select_language": "اختر اللغة"
+  },
+  "footer": {
+    "newsletter_placeholder": "أدخل بريدك الإلكتروني",
+    "newsletter_button": "اشتراك",
+    "company": "الشركة",
+    "product_families": "عائلات المنتجات",
+    "legal": "قانوني",
+    "support": "الدعم"
+  },
+  "support": {
+    "search_label": "البحث في موارد الدعم",
+    "downloads_title": "التنزيلات",
+    "manuals_title": "الأدلة",
+    "compatibility_title": "التوافق",
+    "faq_title": "الأسئلة الشائعة",
+    "troubleshooting_title": "استكشاف الأخطاء"
+  },
+  "product": {
+    "specifications": "المواصفات",
+    "compare": "مقارنة",
+    "related": "منتجات ذات صلة",
+    "add_to_cart": "أضف إلى السلة",
+    "adding": "جارٍ الإضافة\u2026",
+    "sold_out": "نفذت الكمية",
+    "in_stock": "متوفر",
+    "out_of_stock": "غير متوفر",
+    "buy_on_amazon": "شراء من أمازون",
+    "share": "مشاركة",
+    "copy_link": "نسخ الرابط",
+    "quantity": "الكمية",
+    "back_to_products": "العودة إلى المنتجات",
+    "back_to": "العودة إلى {{ collection }}",
+    "save": "وفّر {{ amount }}"
+  },
+  "social": {
+    "share_on_facebook": "مشاركة على فيسبوك",
+    "share_on_twitter": "مشاركة على إكس / تويتر",
+    "save_to_pinterest": "حفظ على بينتريست",
+    "copy_link": "نسخ الرابط"
+  },
+  "trust": {
+    "warranty": "ضمان سنتين",
+    "no_drivers": "بدون برامج تشغيل",
+    "mac_windows": "ماك + ويندوز",
+    "free_shipping": "شحن مجاني"
+  },
+  "notify": {
+    "out_of_stock": "هذا المنتج غير متوفر حالياً.",
+    "label": "البريد الإلكتروني لإشعار إعادة التوفر",
+    "email_placeholder": "أدخل بريدك الإلكتروني",
+    "submit": "أخبرني",
+    "success": "ستتلقى إشعاراً عندما يصبح هذا المنتج متاحاً."
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "empty_body": "أضف منتجات لعرضها هنا.",
+    "empty_cta": "تصفح المنتجات",
+    "checkout": "إتمام الشراء",
+    "continue_shopping": "مواصلة التسوق",
+    "close": "إغلاق السلة",
+    "remove": "إزالة",
+    "remove_item": "إزالة {{ product }} من السلة",
+    "subtotal": "المجموع الفرعي",
+    "tax_note": "تُحسب الضرائب والشحن عند الدفع",
+    "free_shipping_threshold": "أضف {{ amount }} للحصول على شحن مجاني",
+    "free_shipping_unlocked": "تم فتح الشحن المجاني",
+    "qty_decrease": "تقليل كمية {{ product }}",
+    "qty_increase": "زيادة كمية {{ product }}"
+  },
+  "wishlist": {
+    "title": "قائمة رغباتك",
+    "saved_items": "العناصر المحفوظة",
+    "empty": "لا توجد عناصر محفوظة بعد",
+    "empty_body": "أضف قلباً لأي منتج لحفظه هنا."
+  },
+  "contact": {
+    "send_message": "إرسال رسالة",
+    "name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "message": "الرسالة",
+    "success": "تم إرسال الرسالة",
+    "success_body": "سنرد على {{ email }} خلال يوم عمل واحد.",
+    "note": "نقرأ كل رسالة. وقت الرد المعتاد: يوم عمل واحد."
+  }
+}

@@ -1,8 +1,8 @@
-<section class="wishlist-section section-shell" aria-label="Your wishlist">
+<section class="wishlist-section section-shell" aria-label="{{ 'wishlist.title' | t }}">
   <div class="page-width">
     <div class="wishlist-header">
-      <p class="section-kicker">Saved items</p>
-      <h1 class="wishlist-heading">Your wishlist</h1>
+      <p class="section-kicker">{{ 'wishlist.saved_items' | t }}</p>
+      <h1 class="wishlist-heading">{{ 'wishlist.title' | t }}</h1>
       <p class="wishlist-subhead" id="wishlist-count" aria-live="polite"></p>
     </div>
 
@@ -13,12 +13,12 @@
             <path d="M24 42S6 32 6 18a10 10 0 0118-6 10 10 0 0118 6c0 14-18 24-18 24z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h2 class="wishlist-empty__heading">No saved items yet</h2>
+        <h2 class="wishlist-empty__heading">{{ 'wishlist.empty' | t }}</h2>
         <p class="wishlist-empty__body">
-          Heart any product to save it here for later.
+          {{ 'wishlist.empty_body' | t }}
         </p>
         <a href="{{ routes.collections_url }}" class="btn btn--primary">
-          Browse products
+          {{ 'cart.empty_cta' | t }}
         </a>
       </div>
 

@@ -4,9 +4,10 @@
 {% assign remaining = free_shipping_threshold | minus: cart_dollars %}
 
 {% if remaining > 0 %}
+  {%- assign shipping_amount = remaining | round: 2 | prepend: '$' -%}
   <div class="cart-shipping-bar">
     <p class="cart-shipping-bar__label">
-      Add <strong>{{ remaining | round: 2 | prepend: '$' }}</strong> more for free shipping
+      {{ 'cart.free_shipping_threshold' | t: amount: shipping_amount }}
     </p>
     <div class="cart-shipping-bar__track"
          role="progressbar"
@@ -27,25 +28,25 @@
         <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.25"/>
         <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      Free shipping unlocked
+      {{ 'cart.free_shipping_unlocked' | t }}
     </p>
   </div>
 {% endif %}
 
 <div class="cart-drawer__subtotal">
-  <span class="cart-drawer__subtotal-label">Subtotal</span>
+  <span class="cart-drawer__subtotal-label">{{ 'cart.subtotal' | t }}</span>
   <span class="cart-drawer__subtotal-amount" id="cart-drawer-subtotal">{{ cart.total_price | money }}</span>
 </div>
 
-<p class="cart-drawer__tax-note">Taxes and shipping calculated at checkout</p>
+<p class="cart-drawer__tax-note">{{ 'cart.tax_note' | t }}</p>
 
 <a
   href="/checkout"
   class="btn btn--primary cart-drawer__checkout"
 >
-  Proceed to checkout
+  {{ 'cart.checkout' | t }}
 </a>
 
 <button class="cart-drawer__continue" data-cart-continue type="button">
-  Continue shopping
+  {{ 'cart.continue_shopping' | t }}
 </button>

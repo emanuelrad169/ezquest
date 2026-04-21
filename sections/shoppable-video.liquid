@@ -1,6 +1,35 @@
+{% liquid
+  assign youtube_url = section.settings.youtube_url | strip
+  assign youtube_id = ''
+
+  if youtube_url != blank
+    if youtube_url contains 'youtu.be/'
+      assign youtube_id = youtube_url | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first | split: '/' | first
+    elsif youtube_url contains 'watch?v='
+      assign youtube_id = youtube_url | split: 'watch?v=' | last | split: '&' | first
+    elsif youtube_url contains '/embed/'
+      assign youtube_id = youtube_url | split: '/embed/' | last | split: '?' | first | split: '&' | first
+    elsif youtube_url contains '/shorts/'
+      assign youtube_id = youtube_url | split: '/shorts/' | last | split: '?' | first | split: '&' | first
+    elsif youtube_url contains 'v='
+      assign youtube_id = youtube_url | split: 'v=' | last | split: '&' | first
+    endif
+  endif
+
+  assign has_native_video = false
+  if section.settings.video != blank
+    assign has_native_video = true
+  endif
+
+  assign has_youtube_video = false
+  if youtube_id != blank
+    assign has_youtube_video = true
+  endif
+%}
+
 <section class="shoppable-video section--dark" aria-label="{{ section.settings.heading | escape }}">
   <div class="shoppable-video__media">
-    {% if section.settings.video != blank %}
+    {% if has_native_video %}
       {{
         section.settings.video
         | video_tag:
@@ -8,29 +37,29 @@
           loop: true,
           muted: true,
           playsinline: true,
+          controls: false,
           class: 'shoppable-video__video'
       }}
-    {% elsif section.settings.video_url != blank %}
+    {% elsif has_youtube_video %}
       <iframe
-        src="{{ section.settings.video_url | escape }}"
+        src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}?autoplay=1&mute=1&loop=1&playlist={{ youtube_id | escape }}&playsinline=1&controls=0&modestbranding=1&rel=0"
         class="shoppable-video__iframe"
-        frameborder="0"
-        allow="autoplay; fullscreen"
-        allowfullscreen
         title="{{ section.settings.heading | escape }}"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
       ></iframe>
     {% else %}
       <div class="shoppable-video__placeholder">
-        <p>Upload a video in the theme customizer</p>
+        <p>Upload a video in theme customizer</p>
       </div>
     {% endif %}
-
-    <div class="shoppable-video__overlay" aria-hidden="true"></div>
   </div>
 
-  <div class="shoppable-video__content page-width">
+  <div class="shoppable-video__overlay" aria-hidden="true"></div>
+
+  <div class="shoppable-video__content">
     {% if section.settings.kicker != blank %}
-      <p class="section-kicker shoppable-video__kicker">{{ section.settings.kicker | escape }}</p>
+      <p class="shoppable-video__kicker">{{ section.settings.kicker | escape }}</p>
     {% endif %}
 
     <h2 class="shoppable-video__heading">{{ section.settings.heading | escape }}</h2>
@@ -40,46 +69,269 @@
     {% endif %}
 
     {% if section.settings.cta_label != blank %}
-      <a href="{{ section.settings.cta_url | default: '#' }}" class="btn btn--primary shoppable-video__cta">
+      <a href="{{ section.settings.cta_url | default: '#' | escape }}" class="shoppable-video__cta">
         {{ section.settings.cta_label | escape }}
       </a>
     {% endif %}
   </div>
 
   {% if section.blocks.size > 0 %}
-    <div class="shoppable-video__products" aria-hidden="true">
+    <div class="shoppable-video__tag-layer" aria-label="Tagged products">
       {% for block in section.blocks %}
-        {% if block.type == 'product' %}
-          {%- assign tagged_product = block.settings.product -%}
-          {% if tagged_product != blank %}
-            <a
-              href="{{ tagged_product.url }}"
-              class="shoppable-product-tag"
-              aria-label="{{ tagged_product.title | escape }}"
-              {{ block.shopify_attributes }}
-              style="--x: {{ block.settings.x_position }}%; --y: {{ block.settings.y_position }}%"
-            >
-              {% if tagged_product.featured_image %}
-                <img
-                  src="{{ tagged_product.featured_image | image_url: width: 80 }}"
-                  alt="{{ tagged_product.title | escape }}"
-                  class="shoppable-product-tag__image"
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                >
-              {% endif %}
-              <span class="shoppable-product-tag__info">
-                <span class="shoppable-product-tag__title">{{ tagged_product.title }}</span>
-                <span class="shoppable-product-tag__price">{{ tagged_product.price | money }}</span>
-              </span>
-            </a>
-          {% endif %}
+        {% liquid
+          assign tagged_product = block.settings.product
+        %}
+
+        {% if block.type == 'product' and tagged_product != blank %}
+          <a
+            href="{{ tagged_product.url | escape }}"
+            class="shoppable-product-tag shoppable-product-tag--{{ block.id }}"
+            aria-label="{{ tagged_product.title | escape }}"
+            {{ block.shopify_attributes }}
+          >
+            {% if tagged_product.featured_image != blank %}
+              <img
+                src="{{ tagged_product.featured_image | image_url: width: 80 }}"
+                alt="{{ tagged_product.title | escape }}"
+                class="shoppable-product-tag__img"
+                width="40"
+                height="40"
+                loading="lazy"
+              >
+            {% endif %}
+
+            <span class="shoppable-product-tag__info">
+              <span class="shoppable-product-tag__title">{{ tagged_product.title | truncate: 30 | escape }}</span>
+              <span class="shoppable-product-tag__price">{{ tagged_product.price | money }}</span>
+            </span>
+          </a>
         {% endif %}
       {% endfor %}
     </div>
   {% endif %}
 </section>
+
+<style>
+  #shopify-section-{{ section.id }} .shoppable-video {
+    position: relative;
+    min-height: 70vh;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__media video,
+  #shopify-section-{{ section.id }} .shoppable-video__media iframe,
+  #shopify-section-{{ section.id }} .shoppable-video__video,
+  #shopify-section-{{ section.id }} .shoppable-video__iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.2) 55%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(64px, 8vw, 112px) clamp(1.25rem, 5vw, 5rem);
+    max-width: 520px;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__kicker {
+    margin: 0 0 0.9rem;
+    color: rgba(250, 204, 21, 0.96);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__heading {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__body {
+    max-width: 44ch;
+    margin: 1rem 0 0;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 1.6rem;
+    padding: 0.75rem 1.35rem;
+    border-radius: 999px;
+    background: #fff;
+    color: #0a0a0a;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__cta:hover {
+    background: rgba(255, 255, 255, 0.88);
+    transform: translateY(-2px);
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__tag-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag {
+    position: absolute;
+    left: var(--x, 50%);
+    top: var(--y, 50%);
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 200px;
+    padding: 6px 12px 6px 6px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.95);
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag:hover {
+    transform: translate(-50%, -54%);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.95);
+    border-bottom: none;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag__img {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f7;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag__info {
+    display: grid;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag__title {
+    overflow: hidden;
+    color: #1d1d1f;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-product-tag__price {
+    color: #6e6e73;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  #shopify-section-{{ section.id }} .shoppable-video__placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: #2f3338;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  {% for block in section.blocks %}
+    {% if block.type == 'product' %}
+      #shopify-section-{{ section.id }} .shoppable-product-tag--{{ block.id }} {
+        --x: {{ block.settings.x_position }}%;
+        --y: {{ block.settings.y_position }}%;
+      }
+    {% endif %}
+  {% endfor %}
+
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .shoppable-video {
+      min-height: 56vh;
+    }
+
+    #shopify-section-{{ section.id }} .shoppable-video__content {
+      max-width: none;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .shoppable-video__tag-layer {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .shoppable-product-tag,
+    #shopify-section-{{ section.id }} .shoppable-video__cta {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!section) return;
+
+    section.querySelectorAll('video').forEach(function (video) {
+      video.pause();
+      video.removeAttribute('autoplay');
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -87,35 +339,59 @@
   "tag": "section",
   "class": "section-shoppable-video",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker" },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker"
+    },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "See it in action"
     },
-    { "type": "textarea", "id": "body", "label": "Body text" },
-    { "type": "video", "id": "video", "label": "Video file" },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
     {
       "type": "text",
-      "id": "video_url",
-      "label": "Video embed URL (YouTube/Vimeo — fallback)"
+      "id": "youtube_url",
+      "label": "YouTube URL"
     },
-    { "type": "text", "id": "cta_label", "label": "CTA label" },
-    { "type": "url", "id": "cta_url", "label": "CTA URL" }
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
   ],
   "blocks": [
     {
       "type": "product",
       "name": "Product tag",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product" },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
         {
           "type": "range",
           "id": "x_position",
           "label": "Horizontal position %",
           "min": 5,
-          "max": 95,
+          "max": 90,
           "step": 5,
           "default": 50
         },
@@ -124,7 +400,7 @@
           "id": "y_position",
           "label": "Vertical position %",
           "min": 5,
-          "max": 95,
+          "max": 85,
           "step": 5,
           "default": 50
         }
@@ -133,7 +409,9 @@
   ],
   "max_blocks": 6,
   "presets": [
-    { "name": "Shoppable video" }
+    {
+      "name": "Shoppable video"
+    }
   ]
 }
 {% endschema %}
