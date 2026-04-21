@@ -1,6 +1,13 @@
 {{ 'support-cluster.css' | asset_url | stylesheet_tag }}
 
-<section class="support-hero">
+{%- assign support_hero_image = section.settings.image -%}
+
+<section class="support-hero{% if support_hero_image != blank %} support-hero--has-image{% endif %}">
+  {% if support_hero_image != blank %}
+    <div class="support-hero__media" aria-hidden="true">
+      {{ support_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'support-hero__image' }}
+    </div>
+  {% endif %}
   <div class="support-hero__wrap">
     <p class="support-hero__kicker">Support Center</p>
     <h1 class="support-hero__heading">
@@ -93,6 +100,11 @@
 </div>
 
 <style>
+.support-hero{position:relative;overflow:hidden}
+.support-hero__media{position:absolute;inset:0;z-index:0}
+.support-hero__image{width:100%;height:100%;object-fit:cover}
+.support-hero--has-image .support-hero__wrap{position:relative;z-index:1}
+.support-hero--has-image:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(248,250,252,.96),rgba(248,250,252,.72) 45%,rgba(248,250,252,.18))}
 .shub-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.07);border-radius:16px;overflow:hidden;margin-bottom:3rem}
 @media(max-width:768px){.shub-stats{grid-template-columns:repeat(2,1fr)}}
 .shub-stat{background:#fff;padding:1.5rem;display:flex;flex-direction:column;gap:.375rem}
@@ -110,4 +122,15 @@
 .shub-card:hover .shub-card__arrow{color:#FBCE2A;transform:translateX(3px)}
 </style>
 
-{% schema %}{"name":"Support hub","tag":"section","settings":[],"presets":[{"name":"Support hub"}]}{% endschema %}
+{% schema %}
+{
+  "name": "Support hub",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image" }
+  ],
+  "presets": [
+    { "name": "Support hub" }
+  ]
+}
+{% endschema %}

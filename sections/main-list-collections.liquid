@@ -26,14 +26,27 @@
                 assign collection_card_title = collection_group_parts[0] | strip
                 assign collection_card_handle = collection_group_parts[1] | strip
                 assign collection_card_product = collection_group_parts[2] | strip
+                assign collection_card_image = blank
                 assign col = collections[collection_card_handle]
+
+                if collection_card_handle == 'hubs-adapters' and collection_card_title == 'Hubs'
+                  assign collection_card_image = section.settings.hubs_image
+                elsif collection_card_handle == 'chargers-power'
+                  assign collection_card_image = section.settings.chargers_image
+                elsif collection_card_title == 'Cables' or collection_card_title == 'HDMI' or collection_card_title == 'DisplayPort' or collection_card_title == 'Mini DisplayPort' or collection_card_title == 'Audio'
+                  assign collection_card_image = section.settings.cables_image
+                elsif collection_card_handle == 'accessories' or collection_card_title == 'Adapters' or collection_card_title == 'Card Readers' or collection_card_title == 'Enclosure'
+                  assign collection_card_image = section.settings.accessories_image
+                endif
               -%}
               {% if col == blank %}
                 {% continue %}
               {% endif %}
               <a href="{{ col.url }}" class="collection-card">
                 <div class="collection-card-media">
-                  {% if collection_card_product != blank %}
+                  {% if collection_card_image != blank %}
+                    {{ collection_card_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection_card_title, class: 'collection-card-image' }}
+                  {% elsif collection_card_product != blank %}
                     {% render 'owned-product-visual',
                       product_handle: collection_card_product,
                       product_title: collection_card_title,
@@ -83,6 +96,26 @@
       "id": "note",
       "label": "Header note",
       "default": "Start with the family built for your setup, then use compare or support only when you need more detail."
+    },
+    {
+      "type": "image_picker",
+      "id": "hubs_image",
+      "label": "Hubs card image"
+    },
+    {
+      "type": "image_picker",
+      "id": "chargers_image",
+      "label": "Chargers card image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cables_image",
+      "label": "Cables card image"
+    },
+    {
+      "type": "image_picker",
+      "id": "accessories_image",
+      "label": "Accessories card image"
     }
   ],
   "presets": [

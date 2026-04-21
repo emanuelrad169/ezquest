@@ -37,7 +37,11 @@
           </div>
         </div>
         <div class="home-confidence-feature-visual mt-auto overflow-hidden rounded-2xl border border-white/70 bg-white/75 p-3">
-          {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', class: 'home-confidence-feature-image' %}
+          {% if section.settings.support_image != blank %}
+            {{ section.settings.support_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-confidence-feature-image', alt: 'EZQuest ownership support' }}
+          {% else %}
+            {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', class: 'home-confidence-feature-image' %}
+          {% endif %}
         </div>
       </article>
 
@@ -90,7 +94,8 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support and service" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence should stay visible before and after checkout." },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and direct support easy to find so the EZQuest experience stays clear from first click onward." }
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and direct support easy to find so the EZQuest experience stays clear from first click onward." },
+    { "type": "image_picker", "id": "support_image", "label": "Featured support image" }
   ],
   "presets": [
     {

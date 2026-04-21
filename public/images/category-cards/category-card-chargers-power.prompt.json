@@ -1,0 +1,16 @@
+{
+  "id": "category-card-chargers-power",
+  "fileName": "category-card-chargers-power.png",
+  "assetType": "category-card",
+  "category": "Chargers & Power",
+  "targetWidth": 1200,
+  "targetHeight": 1200,
+  "generationSize": "1024x1024",
+  "imagePath": "public/images/category-cards/category-card-chargers-power.png",
+  "promptPath": "public/images/category-cards/category-card-chargers-power.prompt.md",
+  "template": "prompts/templates/promo-tile.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

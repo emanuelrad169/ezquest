@@ -6,7 +6,8 @@
         "kicker": "Compatibility",
         "heading": "Check compatibility with confidence",
         "subheading": "Check platform, device, and workflow compatibility before you buy or install.",
-        "light_mode": true
+        "light_mode": true,
+        "image": "shopify://shop_images/ezquest-support-compatibility-scenes.png"
       }
     },
     "nav_rail": {

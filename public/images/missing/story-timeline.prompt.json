@@ -1,0 +1,19 @@
+{
+  "id": "story-timeline",
+  "fileName": "story-timeline.png",
+  "assetType": "missing",
+  "category": "Our story timeline",
+  "targetWidth": 1440,
+  "targetHeight": 680,
+  "generationSize": "1536x1024",
+  "slot": "story_timeline",
+  "section": "pages/our-story",
+  "style": "product_photography",
+  "imagePath": "public/images/missing/story-timeline.png",
+  "promptPath": "public/images/missing/story-timeline.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "support-hero",
+  "fileName": "support-hero.png",
+  "assetType": "missing",
+  "category": "Support hero",
+  "targetWidth": 1440,
+  "targetHeight": 480,
+  "generationSize": "1536x1024",
+  "slot": "support_hero",
+  "section": "pages/support",
+  "style": "minimal_illustration",
+  "imagePath": "public/images/missing/support-hero.png",
+  "promptPath": "public/images/missing/support-hero.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

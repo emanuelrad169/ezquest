@@ -1,0 +1,19 @@
+{
+  "id": "about-values",
+  "fileName": "about-values.png",
+  "assetType": "missing",
+  "category": "About values",
+  "targetWidth": 1440,
+  "targetHeight": 680,
+  "generationSize": "1536x1024",
+  "slot": "about_values",
+  "section": "pages/about",
+  "style": "editorial",
+  "imagePath": "public/images/missing/about-values.png",
+  "promptPath": "public/images/missing/about-values.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

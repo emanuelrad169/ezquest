@@ -1,0 +1,16 @@
+{
+  "id": "lifestyle-charging-scene",
+  "fileName": "lifestyle-charging-scene.png",
+  "assetType": "lifestyle",
+  "category": "Chargers & Power",
+  "targetWidth": 1800,
+  "targetHeight": 1200,
+  "generationSize": "1536x1024",
+  "imagePath": "public/images/lifestyle/lifestyle-charging-scene.png",
+  "promptPath": "public/images/lifestyle/lifestyle-charging-scene.prompt.md",
+  "template": "prompts/templates/lifestyle-context.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

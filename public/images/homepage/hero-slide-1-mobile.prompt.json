@@ -1,0 +1,16 @@
+{
+  "id": "hero-slide-1-mobile",
+  "fileName": "hero-slide-1-mobile.png",
+  "assetType": "homepage",
+  "category": "USB-C Essentials",
+  "targetWidth": 1200,
+  "targetHeight": 1500,
+  "generationSize": "1024x1536",
+  "imagePath": "public/images/homepage/hero-slide-1-mobile.png",
+  "promptPath": "public/images/homepage/hero-slide-1-mobile.prompt.md",
+  "template": "prompts/templates/mobile-crop.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

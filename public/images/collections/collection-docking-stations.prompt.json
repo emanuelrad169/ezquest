@@ -1,0 +1,16 @@
+{
+  "id": "collection-docking-stations",
+  "fileName": "collection-docking-stations.png",
+  "assetType": "collection",
+  "category": "Docking Stations",
+  "targetWidth": 1800,
+  "targetHeight": 1200,
+  "generationSize": "1536x1024",
+  "imagePath": "public/images/collections/collection-docking-stations.png",
+  "promptPath": "public/images/collections/collection-docking-stations.prompt.md",
+  "template": "prompts/templates/collection-banner.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

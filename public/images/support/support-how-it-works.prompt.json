@@ -1,0 +1,16 @@
+{
+  "id": "support-how-it-works",
+  "fileName": "support-how-it-works.png",
+  "assetType": "support",
+  "category": "Hubs & Adapters",
+  "targetWidth": 1800,
+  "targetHeight": 1200,
+  "generationSize": "1536x1024",
+  "imagePath": "public/images/support/support-how-it-works.png",
+  "promptPath": "public/images/support/support-how-it-works.prompt.md",
+  "template": "prompts/templates/support-education.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

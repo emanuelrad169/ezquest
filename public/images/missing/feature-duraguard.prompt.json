@@ -1,0 +1,19 @@
+{
+  "id": "feature-duraguard",
+  "fileName": "feature-duraguard.png",
+  "assetType": "missing",
+  "category": "Homepage feature - DuraGuard",
+  "targetWidth": 1200,
+  "targetHeight": 800,
+  "generationSize": "1536x1024",
+  "slot": "feature_duraguard",
+  "section": "homepage/features",
+  "style": "product_detail",
+  "imagePath": "public/images/missing/feature-duraguard.png",
+  "promptPath": "public/images/missing/feature-duraguard.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

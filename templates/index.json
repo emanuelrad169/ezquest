@@ -22,8 +22,8 @@
             "primary_url": "/collections/hubs-adapters",
             "secondary_label": "Shop best-selling hub",
             "secondary_url": "/products/usb-c-multimedia-hub",
-            "image": "shopify://shop_images/slide-001.jpg",
-            "image_mobile": "shopify://shop_images/slide-001-m.jpg"
+            "image": "shopify://shop_images/ezquest-hero-slide-1-desktop.png",
+            "image_mobile": "shopify://shop_images/ezquest-hero-slide-1-mobile.png"
           }
         },
         "slide_2": {
@@ -35,7 +35,9 @@
             "primary_label": "See desk-ready docks",
             "primary_url": "/collections/docking-stations",
             "secondary_label": "Compare desk options",
-            "secondary_url": "/pages/compare"
+            "secondary_url": "/pages/compare",
+            "image": "shopify://shop_images/ezquest-hero-slide-2-desktop.png",
+            "image_mobile": "shopify://shop_images/ezquest-hero-slide-2-mobile.png"
           }
         },
         "slide_3": {
@@ -47,14 +49,31 @@
             "primary_label": "Shop chargers & power",
             "primary_url": "/collections/chargers-power",
             "secondary_label": "Find the right charger",
-            "secondary_url": "/pages/help-me-choose"
+            "secondary_url": "/pages/help-me-choose",
+            "image": "shopify://shop_images/ezquest-hero-slide-3-desktop.png",
+            "image_mobile": "shopify://shop_images/ezquest-hero-slide-3-mobile.png"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Travel-ready",
+            "heading": "Keep the right ports and power in your travel kit",
+            "copy": "Compact chargers, cables, and adapters for hotel desks, meetings, and carry-light days.",
+            "primary_label": "Shop travel-ready power",
+            "primary_url": "/collections/chargers-power",
+            "secondary_label": "Shop hubs & adapters",
+            "secondary_url": "/collections/hubs-adapters",
+            "image": "shopify://shop_images/ezquest-hero-slide-4-desktop.png",
+            "image_mobile": "shopify://shop_images/ezquest-hero-slide-4-mobile.png"
           }
         }
       },
       "block_order": [
         "slide_1",
         "slide_2",
-        "slide_3"
+        "slide_3",
+        "slide_4"
       ],
       "settings": {
         "eyebrow": "USB-C essentials",
@@ -74,7 +93,8 @@
           "settings": {
             "collection": "hubs-adapters",
             "title": "",
-            "link": ""
+            "link": "",
+            "image": "shopify://shop_images/ezquest-collection-hubs.png"
           }
         },
         "category_2": {
@@ -82,7 +102,8 @@
           "settings": {
             "collection": "docking-stations",
             "title": "",
-            "link": ""
+            "link": "",
+            "image": "shopify://shop_images/ezquest-collection-docking-stations.png"
           }
         },
         "category_3": {
@@ -90,7 +111,8 @@
           "settings": {
             "collection": "chargers-power",
             "title": "",
-            "link": ""
+            "link": "",
+            "image": "shopify://shop_images/ezquest-collection-chargers-power.png"
           }
         },
         "category_4": {
@@ -98,7 +120,8 @@
           "settings": {
             "collection": "accessories",
             "title": "",
-            "link": ""
+            "link": "",
+            "image": "shopify://shop_images/ezquest-collection-cables-accessories.png"
           }
         }
       },
@@ -123,7 +146,8 @@
             "card_style": "light",
             "stat": "8-in-1",
             "label": "Hub expansion",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-category-card-hubs.png"
           }
         },
         "f2": {
@@ -133,7 +157,8 @@
             "card_style": "blue",
             "stat": "",
             "label": "USB-C charging",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-category-card-chargers-power.png"
           }
         },
         "f3": {
@@ -143,7 +168,8 @@
             "card_style": "light",
             "stat": "4K 60Hz",
             "label": "Display support",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-category-card-cables-accessories.png"
           }
         },
         "f4": {
@@ -153,7 +179,8 @@
             "card_style": "light",
             "stat": "",
             "label": "Desk-ready docks",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-category-card-docking-stations.png"
           }
         },
         "f5": {
@@ -163,7 +190,8 @@
             "card_style": "light",
             "stat": "100W",
             "label": "Power delivery",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-lifestyle-charging-scene.png"
           }
         },
         "f6": {
@@ -173,7 +201,8 @@
             "card_style": "blue",
             "stat": "Travel-ready",
             "label": "Compact chargers and hubs",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-lifestyle-travel-setup.png"
           }
         },
         "f7": {
@@ -183,7 +212,41 @@
             "card_style": "light",
             "stat": "2.5GbE",
             "label": "Faster wired networking",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-lifestyle-clean-desk-setup.png"
+          }
+        },
+        "f10": {
+          "type": "feature",
+          "settings": {
+            "size": "wide",
+            "card_style": "light",
+            "stat": "Works with",
+            "label": "Mac, iPad, and Windows setups",
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-feature-compatibility.png"
+          }
+        },
+        "f8": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "DuraGuard",
+            "label": "Braided cable durability",
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-feature-duraguard.png"
+          }
+        },
+        "f9": {
+          "type": "feature",
+          "settings": {
+            "size": "normal",
+            "card_style": "light",
+            "stat": "2-year",
+            "label": "Warranty coverage",
+            "sublabel": "",
+            "image": "shopify://shop_images/ezquest-feature-warranty.png"
           }
         }
       },
@@ -194,7 +257,10 @@
         "f4",
         "f5",
         "f6",
-        "f7"
+        "f7",
+        "f10",
+        "f8",
+        "f9"
       ],
       "settings": {
         "eyebrow": "What EZQuest helps with",
@@ -210,7 +276,8 @@
         "subheading": "Desk-ready docks, travel hubs, and chargers built for modern devices.",
         "copy": "From compact travel hubs to desk-ready docks and multi-device chargers, EZQuest keeps modern-device setups cleaner and easier to manage.",
         "link_label": "",
-        "link_url": ""
+        "link_url": "",
+        "image": "shopify://shop_images/ezquest-feature-banner-background.png"
       }
     },
     "story": {
@@ -236,7 +303,8 @@
       "settings": {
         "eyebrow": "Support and service",
         "heading": "Clear help before and after checkout",
-        "copy": "Shipping, warranty, manuals, downloads, and direct support stay easy to find across the full EZQuest lineup."
+        "copy": "Shipping, warranty, manuals, downloads, and direct support stay easy to find across the full EZQuest lineup.",
+        "support_image": "shopify://shop_images/ezquest-confidence-support-visual.png"
       }
     },
     "cinematic_reveal": {
@@ -247,7 +315,8 @@
         "body_text": "EZQuest accessories are engineered for people who need the right connection, every time.",
         "cta_label": "Shop the range",
         "cta_url": "/collections/all",
-        "aria_label": "Brand statement"
+        "aria_label": "Brand statement",
+        "background_image": "shopify://shop_images/ezquest-cinematic-reveal-background.png"
       }
     },
     "testimonials": {

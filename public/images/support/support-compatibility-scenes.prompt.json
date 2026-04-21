@@ -1,0 +1,16 @@
+{
+  "id": "support-compatibility-scenes",
+  "fileName": "support-compatibility-scenes.png",
+  "assetType": "support",
+  "category": "Compatibility",
+  "targetWidth": 1800,
+  "targetHeight": 1200,
+  "generationSize": "1536x1024",
+  "imagePath": "public/images/support/support-compatibility-scenes.png",
+  "promptPath": "public/images/support/support-compatibility-scenes.prompt.md",
+  "template": "prompts/templates/support-education.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

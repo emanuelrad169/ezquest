@@ -6,7 +6,8 @@
         "kicker": "Downloads",
         "heading": "Find the right download fast",
         "subheading": "Drivers, utilities, and firmware files organized by product family.",
-        "light_mode": true
+        "light_mode": true,
+        "image": "shopify://shop_images/ezquest-downloads-hero.png"
       }
     },
     "nav_rail": {

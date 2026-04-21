@@ -8352,10 +8352,10 @@
   }
 
   /* scrim so text is readable over images */
-  .home-feature-bento-card:has(.home-feature-bento-media)::after {
+  .home-feature-bento-card:has(.home-feature-bento-img)::after {
     content: '';
     @apply absolute inset-0 z-[1];
-    background: #0F172A;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.26) 55%, rgba(15, 23, 42, 0.78) 100%);
     border-radius: inherit;
   }
 
@@ -8364,9 +8364,9 @@
   }
 
   /* when image present, force white text */
-  .home-feature-bento-card:has(.home-feature-bento-media) .home-feature-bento-stat,
-  .home-feature-bento-card:has(.home-feature-bento-media) .home-feature-bento-label,
-  .home-feature-bento-card:has(.home-feature-bento-media) .home-feature-bento-sublabel {
+  .home-feature-bento-card:has(.home-feature-bento-img) .home-feature-bento-stat,
+  .home-feature-bento-card:has(.home-feature-bento-img) .home-feature-bento-label,
+  .home-feature-bento-card:has(.home-feature-bento-img) .home-feature-bento-sublabel {
     color: #fff;
   }
 
@@ -10392,7 +10392,30 @@
 
 .cinematic-reveal-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+.cinematic-reveal-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cinematic-reveal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.56;
+}
+
+.cinematic-reveal-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.94) 28%, rgba(10, 10, 10, 0.58) 62%, rgba(10, 10, 10, 0.86) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.2), #0a0a0a);
 }
 
 /* ── Kicker ─────────────────────────────────────────────────────────────────── */
@@ -10467,6 +10490,7 @@
 .cinematic-reveal-ambient {
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
 }

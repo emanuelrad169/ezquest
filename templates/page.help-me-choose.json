@@ -5,7 +5,8 @@
       "settings": {
         "kicker": "Help me choose",
         "heading": "Find the right setup before you shop",
-        "subheading": "Start with the setup role, then move into the EZQuest family and product built for the way you work."
+        "subheading": "Start with the setup role, then move into the EZQuest family and product built for the way you work.",
+        "image": "shopify://shop_images/ezquest-support-multi-device-charging.png"
       }
     },
     "guide": {
@@ -93,7 +94,14 @@
           }
         }
       },
-      "block_order": ["guide_1", "guide_2", "guide_3", "guide_4", "guide_5", "guide_6"]
+      "block_order": [
+        "guide_1",
+        "guide_2",
+        "guide_3",
+        "guide_4",
+        "guide_5",
+        "guide_6"
+      ]
     },
     "cta": {
       "type": "support-cta-rail",
@@ -108,5 +116,9 @@
       }
     }
   },
-  "order": ["hero", "guide", "cta"]
+  "order": [
+    "hero",
+    "guide",
+    "cta"
+  ]
 }

@@ -1,46 +1,14 @@
 {
   "sections": {
-    "hero": {
-      "type": "page-hero",
-      "settings": {
-        "kicker": "Our story",
-        "heading": "30 years building what setups need",
-        "subheading": "Follow the EZQuest story through product thinking, practical design, and customer confidence."
-      }
-    },
     "story": {
-      "type": "product-story-grid",
+      "type": "our-story",
       "settings": {
-        "eyebrow": "Brand story",
-        "heading": "Tell the EZQuest story through product thinking, practical design, and support confidence",
-        "copy": "Shape the story through a few strong moments: what EZQuest builds, why it matters, and how ownership stays supported after purchase.",
-        "columns_desktop": "3"
-      }
-    },
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "show_title": false,
-        "intro_copy": "The longer narrative, brand milestones, and the ideas that shaped EZQuest hubs, docks, chargers, and accessories continue here.",
-        "side_eyebrow": "Explore next",
-        "side_heading": "From story to product",
-        "side_copy": "Browse the lineup or use Help me choose to find the right EZQuest product for your workflow.",
-        "side_link_label": "Browse collections",
-        "side_link_url": "/collections/all"
-      }
-    },
-    "cta": {
-      "type": "support-cta-rail",
-      "settings": {
-        "kicker": "Explore next",
-        "heading": "Build the right setup.",
-        "body": "Move from story into products, support, or where-to-buy guidance.",
-        "cta_label": "Browse collections",
-        "cta_url": "/collections/all",
-        "cta2_label": "Where to buy",
-        "cta2_url": "/pages/where-to-buy"
+        "hero_image": "shopify://shop_images/ezquest-story-hero.png",
+        "timeline_image": "shopify://shop_images/ezquest-story-timeline.png"
       }
     }
   },
-  "order": ["hero", "story", "main", "cta"]
+  "order": [
+    "story"
+  ]
 }

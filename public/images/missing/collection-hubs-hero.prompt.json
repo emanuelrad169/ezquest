@@ -1,0 +1,19 @@
+{
+  "id": "collection-hubs-hero",
+  "fileName": "collection-hubs-hero.png",
+  "assetType": "missing",
+  "category": "Collection hero - Hubs & Adapters",
+  "targetWidth": 1920,
+  "targetHeight": 600,
+  "generationSize": "1536x1024",
+  "slot": "collection_hero",
+  "section": "collections/hubs-adapters",
+  "style": "product_photography",
+  "imagePath": "public/images/missing/collection-hubs-hero.png",
+  "promptPath": "public/images/missing/collection-hubs-hero.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

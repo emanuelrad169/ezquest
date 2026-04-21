@@ -25,6 +25,8 @@
     <div class="article-featured-image-wrap">
       {% if article.image != blank %}
         {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-featured-image' }}
+      {% elsif section.settings.default_article_image != blank %}
+        {{ section.settings.default_article_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: article.title, class: 'article-featured-image' }}
       {% else %}
         {% render 'owned-editorial-visual', visual: 'guide', title: article.title, class: 'article-featured-image' %}
       {% endif %}
@@ -83,6 +85,8 @@
 {% schema %}
 {
   "name": "Main article",
-  "settings": []
+  "settings": [
+    { "type": "image_picker", "id": "default_article_image", "label": "Default article image" }
+  ]
 }
 {% endschema %}

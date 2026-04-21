@@ -5,7 +5,8 @@
       "settings": {
         "kicker": "Resources",
         "heading": "Product guidance, compatibility help, and downloads",
-        "subheading": "Use guides, compatibility help, manuals, and downloads to get more from your EZQuest product."
+        "subheading": "Use guides, compatibility help, manuals, and downloads to get more from your EZQuest product.",
+        "image": "shopify://shop_images/ezquest-blog-hero.png"
       }
     },
     "categories": {
@@ -68,7 +69,12 @@
           }
         }
       },
-      "block_order": ["cat_guides", "cat_compat", "cat_setup", "cat_downloads"]
+      "block_order": [
+        "cat_guides",
+        "cat_compat",
+        "cat_setup",
+        "cat_downloads"
+      ]
     },
     "featured": {
       "type": "resources-featured",
@@ -120,7 +126,12 @@
           }
         }
       },
-      "block_order": ["act_compare", "act_compat", "act_shop", "act_support"]
+      "block_order": [
+        "act_compare",
+        "act_compat",
+        "act_shop",
+        "act_support"
+      ]
     },
     "cta": {
       "type": "support-cta-rail",
@@ -135,5 +146,11 @@
       }
     }
   },
-  "order": ["hero", "categories", "featured", "actions", "cta"]
+  "order": [
+    "hero",
+    "categories",
+    "featured",
+    "actions",
+    "cta"
+  ]
 }

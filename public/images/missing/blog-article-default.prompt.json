@@ -1,0 +1,19 @@
+{
+  "id": "blog-article-default",
+  "fileName": "blog-article-default.png",
+  "assetType": "missing",
+  "category": "Default article featured image",
+  "targetWidth": 1440,
+  "targetHeight": 600,
+  "generationSize": "1536x1024",
+  "slot": "blog_article_default",
+  "section": "blogs/resources/articles",
+  "style": "editorial",
+  "imagePath": "public/images/missing/blog-article-default.png",
+  "promptPath": "public/images/missing/blog-article-default.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

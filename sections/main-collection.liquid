@@ -216,7 +216,9 @@
     <div class="collection-showcase-shell relative">
       <header class="collection-showcase relative min-h-96 overflow-hidden bg-slate-950">
         <div class="collection-showcase-media absolute inset-0">
-          {% if use_owned_collection_scene %}
+          {% if collection_visual != blank %}
+            {{ collection_visual | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-showcase-image' }}
+          {% elsif use_owned_collection_scene %}
             {% render 'owned-collection-visual',
               collection_handle: collection.handle,
               collection_title: collection.title,
@@ -226,8 +228,6 @@
               loading: 'eager',
               fetchpriority: 'high'
             %}
-          {% elsif collection_visual != blank %}
-            {{ collection_visual | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'collection-showcase-image' }}
           {% else %}
             {% render 'owned-collection-visual',
               collection_handle: collection.handle,

@@ -1,0 +1,149 @@
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+
+{% comment %} 1. HERO {% endcomment %}
+{% assign story_hero_image = section.settings.hero_image %}
+<section class="page-hero-dark{% if story_hero_image != blank %} page-hero-dark--has-image{% endif %}">
+  {% if story_hero_image != blank %}
+    <div class="page-hero-dark__media" aria-hidden="true">
+      {{ story_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'page-hero-dark__image' }}
+    </div>
+  {% endif %}
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,5vw,5rem);">
+    <p class="page-hero-dark__kicker">Est. 1994 · Lake Forest, California</p>
+    <h1 class="page-hero-dark__heading">
+      Built for people who connect everything.
+    </h1>
+    <p class="page-hero-dark__body">
+      Since 1994, EZQuest has made it simpler to connect the devices that matter most —
+      with products built to last and a team that stands behind every one.
+    </p>
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;">
+      <div>
+        <p style="font-size:36px;font-weight:500;letter-spacing:-.03em;color:#f5f5f7;margin:0 0 .25rem;">30+</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Years in business</p>
+      </div>
+      <div>
+        <p style="font-size:36px;font-weight:500;letter-spacing:-.03em;color:#f5f5f7;margin:0 0 .25rem;">100+</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Products made</p>
+      </div>
+      <div>
+        <p style="font-size:36px;font-weight:500;letter-spacing:-.03em;color:#f5f5f7;margin:0 0 .25rem;">2yr</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Warranty on every product</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.page-hero-dark{position:relative;overflow:hidden}
+.page-hero-dark__media{position:absolute;inset:0;z-index:0}
+.page-hero-dark__image{width:100%;height:100%;object-fit:cover}
+.page-hero-dark--has-image:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(6,12,24,.94),rgba(6,12,24,.74) 45%,rgba(6,12,24,.2))}
+.page-hero-dark--has-image > div:not(.page-hero-dark__media){position:relative;z-index:1}
+</style>
+
+{% comment %} 2. VALUE PILLARS {% endcomment %}
+<section class="page-section page-section--white">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
+    <div class="section-intro">
+      <p class="section-intro__kicker">What we stand for</p>
+      <h2 class="section-intro__heading">Three things we never compromise on.</h2>
+    </div>
+    <div class="three-col" style="padding:0;">
+      <div class="pillar-card">
+        <div class="pillar-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <p class="pillar-card__title">Built to last</p>
+        <p class="pillar-card__body">Every product is stress-tested beyond spec. Kevlar-reinforced cables, aircraft-grade aluminum housings, and the DuraGuard system — because accessories should outlast the devices they connect.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <p class="pillar-card__title">Works with everything</p>
+        <p class="pillar-card__body">Designed for the full ecosystem — Mac, Windows, iPad, and beyond. We test every product across hundreds of device and OS combinations before it ships.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+          </svg>
+        </div>
+        <p class="pillar-card__title">Real support</p>
+        <p class="pillar-card__body">Our team answers within 1 business day — by phone, email, or chat. And every product comes with a full 2-year limited warranty with no asterisks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 3. TIMELINE {% endcomment %}
+<section class="page-section page-section--grey">
+  <div style="max-width:800px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
+    <div style="margin-bottom:2.5rem;">
+      <p class="section-intro__kicker">Our journey</p>
+      <h2 class="section-intro__heading" style="text-align:left;">30 years of connectivity.</h2>
+    </div>
+    {% if section.settings.timeline_image != blank %}
+      <div style="overflow:hidden;border-radius:16px;background:#f5f5f7;margin-bottom:2.5rem;">
+        {{ section.settings.timeline_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: 'EZQuest product timeline', style: 'display:block;width:100%;height:auto;' }}
+      </div>
+    {% endif %}
+    <div class="timeline">
+      {% for block in section.blocks %}
+        {% if block.type == 'milestone' %}
+          <div class="timeline-item" {{ block.shopify_attributes }}>
+            <p class="timeline-item__year">{{ block.settings.year }}</p>
+            <div>
+              <p class="timeline-item__title">{{ block.settings.title }}</p>
+              <p class="timeline-item__body">{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 4. CTA {% endcomment %}
+<section class="page-cta-dark">
+  <h2 class="page-cta-dark__heading">Explore what we make.</h2>
+  <p class="page-cta-dark__body">Premium accessories for every desk, every device.</p>
+  <a href="{{ routes.collections_url }}" class="btn btn--primary" style="background:#FBCE2A;color:#1d1d1f;">Browse products</a>
+</section>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "image_picker", "id": "timeline_image", "label": "Timeline image" }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Timeline milestone",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Year" },
+        { "type": "text", "id": "title", "label": "Milestone title" },
+        { "type": "textarea", "id": "body", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Our Story",
+    "blocks": [
+      { "type": "milestone", "settings": { "year": "1994", "title": "EZQuest is founded", "body": "Started in Lake Forest, California with a focus on making connectivity simpler for Mac users." }},
+      { "type": "milestone", "settings": { "year": "2000", "title": "Expansion into cables and adapters", "body": "Launched the DuraGuard cable line — Kevlar-reinforced cables that outlast everything else on the market." }},
+      { "type": "milestone", "settings": { "year": "2012", "title": "USB-C era begins", "body": "Ahead of the industry, we began engineering USB-C hubs and adapters before most manufacturers recognized the shift." }},
+      { "type": "milestone", "settings": { "year": "2018", "title": "GaN charging technology", "body": "Introduced the UltimatePower GaN charger line — smaller, faster, and cooler than anything available at the time." }},
+      { "type": "milestone", "settings": { "year": "2024", "title": "Thunderbolt 5 and USB4 V2", "body": "First to market with full Thunderbolt 5 docking station support — 120Gbps bandwidth for the next generation of creative professionals." }}
+    ]
+  }]
+}
+{% endschema %}

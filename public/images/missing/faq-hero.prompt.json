@@ -1,0 +1,19 @@
+{
+  "id": "faq-hero",
+  "fileName": "faq-hero.png",
+  "assetType": "missing",
+  "category": "FAQ hero",
+  "targetWidth": 1440,
+  "targetHeight": 480,
+  "generationSize": "1536x1024",
+  "slot": "faq_hero",
+  "section": "pages/faq",
+  "style": "product_photography",
+  "imagePath": "public/images/missing/faq-hero.png",
+  "promptPath": "public/images/missing/faq-hero.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

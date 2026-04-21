@@ -1,0 +1,68 @@
+{
+  "styleReferences": [],
+  "assets": [
+    {
+      "id": "hubs-homepage-hero",
+      "assetType": "homepage-hero",
+      "category": "Hubs & Adapters",
+      "purpose": "Communicate a calm premium desk setup for USB-C connectivity and everyday expansion.",
+      "environment": "Very light gray wall with a clean light wood desk surface.",
+      "variants": ["desktop", "mobile"],
+      "productHierarchy": {
+        "hero": "Slim aluminum USB-C multimedia hub angled to show ports clearly.",
+        "supporting": [
+          "One compact USB-C adapter placed lower and smaller.",
+          "One softly coiled USB-C cable used as a subtle supporting object."
+        ]
+      },
+      "referenceImages": [
+        "public/ezq-products/usb-c-multimedia-8-in-1-hub-details"
+      ],
+      "extraDirection": "Keep the left side open for headline and CTA copy on desktop; keep the top open on mobile."
+    },
+    {
+      "id": "chargers-collection",
+      "assetType": "collection-image",
+      "category": "Chargers & Power",
+      "purpose": "Show the charger category as compact, powerful, and premium.",
+      "environment": "White wall and seamless very light gray surface.",
+      "variants": ["standard"],
+      "productHierarchy": {
+        "hero": "Compact GaN wall charger standing upright as the dominant object.",
+        "supporting": [
+          "One smaller charger behind it.",
+          "One USB-C cable connector placed quietly near the base."
+        ]
+      }
+    },
+    {
+      "id": "duraguard-cable-feature",
+      "assetType": "pdp-support-image",
+      "category": "Cables & Accessories",
+      "purpose": "Clarify durable braided cable texture and premium connector finish.",
+      "environment": "Very light gray wall with minimal surface.",
+      "variants": ["standard"],
+      "productHierarchy": {
+        "hero": "Close crop of braided USB-C cable and connector.",
+        "supporting": [
+          "A gentle cable curve leading out of frame."
+        ]
+      }
+    },
+    {
+      "id": "travel-power-promo",
+      "assetType": "campaign-promo",
+      "category": "Chargers & Power",
+      "purpose": "Promote travel-ready compact charging without using travel clutter.",
+      "environment": "White wall with clean light wood desk edge.",
+      "variants": ["desktop", "mobile"],
+      "productHierarchy": {
+        "hero": "Compact travel wall charger as the main object.",
+        "supporting": [
+          "One neatly placed USB-C cable connector."
+        ]
+      },
+      "extraDirection": "Suggest travel readiness through compact scale only; do not add luggage, passports, maps, or other props."
+    }
+  ]
+}

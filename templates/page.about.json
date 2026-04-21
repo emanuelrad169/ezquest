@@ -7,7 +7,8 @@
         "heading": "Connectivity built for real setups.",
         "subheading": "We make hubs, docks, cables, and chargers for people who need their gear to simply work.",
         "cta_label": "Browse the lineup",
-        "cta_url": "/collections/all"
+        "cta_url": "/collections/all",
+        "image": "shopify://shop_images/ezquest-about-hero.png"
       }
     },
     "brand_belief": {
@@ -18,22 +19,53 @@
         "body_text": "We design for the moment where your laptop's port count stops matching your workflow. One cable in, a clean desk, everything connected.",
         "cta_label": "Browse the lineup",
         "cta_url": "/collections/all",
-        "aria_label": "Product philosophy"
+        "aria_label": "Product philosophy",
+        "background_image": "shopify://shop_images/ezquest-about-brand-story.png"
       }
     },
     "features": {
       "type": "about-features",
       "settings": {
         "kicker": "What makes us different",
-        "heading": "Four things we care about above all else."
+        "heading": "Four things we care about above all else.",
+        "image": "shopify://shop_images/ezquest-about-values.png"
       },
       "blocks": {
-        "f1": { "type": "feature", "settings": { "title": "Built for real setups", "body": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand." } },
-        "f2": { "type": "feature", "settings": { "title": "Universal compatibility", "body": "Plug-and-play on Mac and Windows. No drivers, no configuration, no surprises." } },
-        "f3": { "type": "feature", "settings": { "title": "Portable and permanent", "body": "A hub for the bag. A dock for the desk. Products designed for both ends of the workflow spectrum." } },
-        "f4": { "type": "feature", "settings": { "title": "Support built in", "body": "Every product ships with clear documentation and connects to a full support system — not a FAQ dead end." } }
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "title": "Built for real setups",
+            "body": "Designed around the ports, power paths, and desk layouts that modern workflows actually demand."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "title": "Universal compatibility",
+            "body": "Plug-and-play on Mac and Windows. No drivers, no configuration, no surprises."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "title": "Portable and permanent",
+            "body": "A hub for the bag. A dock for the desk. Products designed for both ends of the workflow spectrum."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "title": "Support built in",
+            "body": "Every product ships with clear documentation and connects to a full support system — not a FAQ dead end."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"]
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ]
     },
     "promise": {
       "type": "about-promise",
@@ -41,12 +73,41 @@
         "aria_label": "Brand proof points"
       },
       "blocks": {
-        "s1": { "type": "stat", "settings": { "value": "20+",    "label": "Years designing connectivity products" } },
-        "s2": { "type": "stat", "settings": { "value": "100%",   "label": "Mac & Windows compatible, no drivers" } },
-        "s3": { "type": "stat", "settings": { "value": "2-Year", "label": "Warranty on every product" } },
-        "s4": { "type": "stat", "settings": { "value": "Zero",   "label": "Driver installs required" } }
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "value": "20+",
+            "label": "Years designing connectivity products"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "value": "100%",
+            "label": "Mac & Windows compatible, no drivers"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "value": "2-Year",
+            "label": "Warranty on every product"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "value": "Zero",
+            "label": "Driver installs required"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"]
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ]
     },
     "cta": {
       "type": "support-cta-rail",
@@ -61,5 +122,11 @@
       }
     }
   },
-  "order": ["hero", "brand_belief", "features", "promise", "cta"]
+  "order": [
+    "hero",
+    "brand_belief",
+    "features",
+    "promise",
+    "cta"
+  ]
 }

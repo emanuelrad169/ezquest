@@ -5,7 +5,8 @@
       "settings": {
         "kicker": "Where to buy",
         "heading": "Get EZQuest everywhere you shop",
-        "subheading": "Buy direct for the best price and clearest post-purchase support, or find EZQuest at a retailer near you."
+        "subheading": "Buy direct for the best price and clearest post-purchase support, or find EZQuest at a retailer near you.",
+        "image": "shopify://shop_images/ezquest-where-to-buy-hero.png"
       }
     },
     "channels": {
@@ -46,7 +47,11 @@
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3"]
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
     },
     "main": {
       "type": "main-page",
@@ -73,5 +78,10 @@
       }
     }
   },
-  "order": ["hero", "channels", "main", "cta"]
+  "order": [
+    "hero",
+    "channels",
+    "main",
+    "cta"
+  ]
 }

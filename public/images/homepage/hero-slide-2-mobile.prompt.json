@@ -1,0 +1,16 @@
+{
+  "id": "hero-slide-2-mobile",
+  "fileName": "hero-slide-2-mobile.png",
+  "assetType": "homepage",
+  "category": "Desk-ready Workspace",
+  "targetWidth": 1200,
+  "targetHeight": 1500,
+  "generationSize": "1024x1536",
+  "imagePath": "public/images/homepage/hero-slide-2-mobile.png",
+  "promptPath": "public/images/homepage/hero-slide-2-mobile.prompt.md",
+  "template": "prompts/templates/mobile-crop.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

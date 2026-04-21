@@ -1,0 +1,19 @@
+{
+  "id": "collection-cables-hero",
+  "fileName": "collection-cables-hero.png",
+  "assetType": "missing",
+  "category": "Collection hero - Cables",
+  "targetWidth": 1920,
+  "targetHeight": 600,
+  "generationSize": "1536x1024",
+  "slot": "collection_hero",
+  "section": "collections/cables",
+  "style": "product_photography",
+  "imagePath": "public/images/missing/collection-cables-hero.png",
+  "promptPath": "public/images/missing/collection-cables-hero.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

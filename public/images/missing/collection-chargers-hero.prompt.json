@@ -1,0 +1,19 @@
+{
+  "id": "collection-chargers-hero",
+  "fileName": "collection-chargers-hero.png",
+  "assetType": "missing",
+  "category": "Collection hero - Chargers & Power",
+  "targetWidth": 1920,
+  "targetHeight": 600,
+  "generationSize": "1536x1024",
+  "slot": "collection_hero",
+  "section": "collections/chargers-power",
+  "style": "product_photography",
+  "imagePath": "public/images/missing/collection-chargers-hero.png",
+  "promptPath": "public/images/missing/collection-chargers-hero.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

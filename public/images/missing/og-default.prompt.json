@@ -1,0 +1,19 @@
+{
+  "id": "og-default",
+  "fileName": "og-default.png",
+  "assetType": "missing",
+  "category": "Social sharing default image",
+  "targetWidth": 1200,
+  "targetHeight": 630,
+  "generationSize": "1536x1024",
+  "slot": "og_default",
+  "section": "global/share-image",
+  "style": "brand_social",
+  "imagePath": "public/images/missing/og-default.png",
+  "promptPath": "public/images/missing/og-default.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

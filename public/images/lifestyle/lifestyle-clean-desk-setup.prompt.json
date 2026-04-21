@@ -1,0 +1,16 @@
+{
+  "id": "lifestyle-clean-desk-setup",
+  "fileName": "lifestyle-clean-desk-setup.png",
+  "assetType": "lifestyle",
+  "category": "Docking Stations",
+  "targetWidth": 1800,
+  "targetHeight": 1200,
+  "generationSize": "1536x1024",
+  "imagePath": "public/images/lifestyle/lifestyle-clean-desk-setup.png",
+  "promptPath": "public/images/lifestyle/lifestyle-clean-desk-setup.prompt.md",
+  "template": "prompts/templates/lifestyle-context.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "resizedWith": "sips"
+}

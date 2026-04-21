@@ -1,0 +1,227 @@
+[
+  {
+    "image": "about-brand-story.png",
+    "slot": "about_brand_story",
+    "section": "pages/about",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-about-brand-story.png?v=1776761350",
+    "fileReference": "shopify://shop_images/ezquest-about-brand-story.png",
+    "wiredTo": "templates/page.about.json brand_belief.background_image",
+    "status": "wired"
+  },
+  {
+    "image": "about-hero.png",
+    "slot": "about_hero",
+    "section": "pages/about",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-about-hero.png?v=1776761353",
+    "fileReference": "shopify://shop_images/ezquest-about-hero.png",
+    "wiredTo": "templates/page.about.json hero.image",
+    "status": "wired"
+  },
+  {
+    "image": "about-values.png",
+    "slot": "about_values",
+    "section": "pages/about",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-about-values.png?v=1776761356",
+    "fileReference": "shopify://shop_images/ezquest-about-values.png",
+    "wiredTo": "templates/page.about.json features.image",
+    "status": "wired"
+  },
+  {
+    "image": "blog-article-default.png",
+    "slot": "blog_article_default",
+    "section": "blogs/resources/articles",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-blog-article-default.png?v=1776761360",
+    "fileReference": "shopify://shop_images/ezquest-blog-article-default.png",
+    "wiredTo": "templates/blog.json main.default_article_image",
+    "status": "wired"
+  },
+  {
+    "image": "blog-article-default.png",
+    "slot": "blog_article_default",
+    "section": "blogs/resources/articles",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-blog-article-default.png?v=1776761360",
+    "fileReference": "shopify://shop_images/ezquest-blog-article-default.png",
+    "wiredTo": "templates/article.json main.default_article_image",
+    "status": "wired"
+  },
+  {
+    "image": "blog-hero.png",
+    "slot": "blog_hero",
+    "section": "blogs/resources",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-blog-hero.png?v=1776761364",
+    "fileReference": "shopify://shop_images/ezquest-blog-hero.png",
+    "wiredTo": "templates/blog.json main.hero_image",
+    "status": "wired"
+  },
+  {
+    "image": "blog-hero.png",
+    "slot": "blog_hero",
+    "section": "blogs/resources",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-blog-hero.png?v=1776761364",
+    "fileReference": "shopify://shop_images/ezquest-blog-hero.png",
+    "wiredTo": "templates/blog.resources.json hero.image",
+    "status": "wired"
+  },
+  {
+    "image": "card-accessories-collections.png",
+    "slot": "collection_index_card",
+    "section": "list-collections/accessories",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-card-accessories-collections.png?v=1776761367",
+    "fileReference": "shopify://shop_images/ezquest-card-accessories-collections.png",
+    "wiredTo": "templates/list-collections.json main.accessories_image",
+    "status": "wired"
+  },
+  {
+    "image": "card-cables-collections.png",
+    "slot": "collection_index_card",
+    "section": "list-collections/cables",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-card-cables-collections.png?v=1776761370",
+    "fileReference": "shopify://shop_images/ezquest-card-cables-collections.png",
+    "wiredTo": "templates/list-collections.json main.cables_image",
+    "status": "wired"
+  },
+  {
+    "image": "card-chargers-collections.png",
+    "slot": "collection_index_card",
+    "section": "list-collections/chargers-power",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-card-chargers-collections.png?v=1776761373",
+    "fileReference": "shopify://shop_images/ezquest-card-chargers-collections.png",
+    "wiredTo": "templates/list-collections.json main.chargers_image",
+    "status": "wired"
+  },
+  {
+    "image": "card-hubs-collections.png",
+    "slot": "collection_index_card",
+    "section": "list-collections/hubs-adapters",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-card-hubs-collections.png?v=1776761375",
+    "fileReference": "shopify://shop_images/ezquest-card-hubs-collections.png",
+    "wiredTo": "templates/list-collections.json main.hubs_image",
+    "status": "wired"
+  },
+  {
+    "image": "collection-accessories-hero.png",
+    "slot": "collection_hero",
+    "section": "collections/accessories",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-accessories-hero.png?v=1776761378",
+    "fileReference": "shopify://shop_images/ezquest-collection-accessories-hero.png",
+    "wiredTo": "collection object via Admin API",
+    "status": "deferred"
+  },
+  {
+    "image": "collection-cables-hero.png",
+    "slot": "collection_hero",
+    "section": "collections/cables",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-cables-hero.png?v=1776761382",
+    "fileReference": "shopify://shop_images/ezquest-collection-cables-hero.png",
+    "wiredTo": "collection object via Admin API",
+    "status": "deferred"
+  },
+  {
+    "image": "collection-chargers-hero.png",
+    "slot": "collection_hero",
+    "section": "collections/chargers-power",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-chargers-hero.png?v=1776761384",
+    "fileReference": "shopify://shop_images/ezquest-collection-chargers-hero.png",
+    "wiredTo": "collection object via Admin API",
+    "status": "deferred"
+  },
+  {
+    "image": "collection-hubs-hero.png",
+    "slot": "collection_hero",
+    "section": "collections/hubs-adapters",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-hubs-hero.png?v=1776761387",
+    "fileReference": "shopify://shop_images/ezquest-collection-hubs-hero.png",
+    "wiredTo": "collection object via Admin API",
+    "status": "deferred"
+  },
+  {
+    "image": "downloads-hero.png",
+    "slot": "downloads_hero",
+    "section": "pages/downloads",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-downloads-hero.png?v=1776761390",
+    "fileReference": "shopify://shop_images/ezquest-downloads-hero.png",
+    "wiredTo": "templates/page.downloads.json hero.image",
+    "status": "wired"
+  },
+  {
+    "image": "faq-hero.png",
+    "slot": "faq_hero",
+    "section": "pages/faq",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-faq-hero.png?v=1776761393",
+    "fileReference": "shopify://shop_images/ezquest-faq-hero.png",
+    "wiredTo": "templates/page.faq.json hero.image",
+    "status": "wired"
+  },
+  {
+    "image": "feature-compatibility.png",
+    "slot": "feature_compatibility",
+    "section": "homepage/features",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-feature-compatibility.png?v=1776761396",
+    "fileReference": "shopify://shop_images/ezquest-feature-compatibility.png",
+    "wiredTo": "templates/index.json feature_bento.f10",
+    "status": "wired"
+  },
+  {
+    "image": "feature-duraguard.png",
+    "slot": "feature_duraguard",
+    "section": "homepage/features",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-feature-duraguard.png?v=1776761398",
+    "fileReference": "shopify://shop_images/ezquest-feature-duraguard.png",
+    "wiredTo": "templates/index.json feature_bento.f8",
+    "status": "wired"
+  },
+  {
+    "image": "feature-warranty.png",
+    "slot": "feature_warranty",
+    "section": "homepage/features",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-feature-warranty.png?v=1776761401",
+    "fileReference": "shopify://shop_images/ezquest-feature-warranty.png",
+    "wiredTo": "templates/index.json feature_bento.f9",
+    "status": "wired"
+  },
+  {
+    "image": "og-default.png",
+    "slot": "og_default",
+    "section": "global/share-image",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-og-default.png?v=1776761404",
+    "fileReference": "shopify://shop_images/ezquest-og-default.png",
+    "wiredTo": "config/settings_data.json current.share_image",
+    "status": "wired"
+  },
+  {
+    "image": "story-hero.png",
+    "slot": "story_hero",
+    "section": "pages/our-story",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-story-hero.png?v=1776761407",
+    "fileReference": "shopify://shop_images/ezquest-story-hero.png",
+    "wiredTo": "templates/page.our-story.json story.hero_image",
+    "status": "wired"
+  },
+  {
+    "image": "story-timeline.png",
+    "slot": "story_timeline",
+    "section": "pages/our-story",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-story-timeline.png?v=1776761410",
+    "fileReference": "shopify://shop_images/ezquest-story-timeline.png",
+    "wiredTo": "templates/page.our-story.json story.timeline_image",
+    "status": "wired"
+  },
+  {
+    "image": "support-hero.png",
+    "slot": "support_hero",
+    "section": "pages/support",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-support-hero.png?v=1776761413",
+    "fileReference": "shopify://shop_images/ezquest-support-hero.png",
+    "wiredTo": "templates/page.support.json hub.image",
+    "status": "wired"
+  },
+  {
+    "image": "where-to-buy-hero.png",
+    "slot": "where_to_buy_hero",
+    "section": "pages/where-to-buy",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-where-to-buy-hero.png?v=1776761416",
+    "fileReference": "shopify://shop_images/ezquest-where-to-buy-hero.png",
+    "wiredTo": "templates/page.where-to-buy.json hero.image",
+    "status": "wired"
+  }
+]

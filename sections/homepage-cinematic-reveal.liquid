@@ -6,6 +6,12 @@
   data-cinematic-reveal
   aria-label="{{ section.settings.aria_label | default: 'Brand statement' | escape }}"
 >
+  {% if section.settings.background_image != blank %}
+    <div class="cinematic-reveal-media" aria-hidden="true">
+      {{ section.settings.background_image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'cinematic-reveal-image', alt: '' }}
+    </div>
+  {% endif %}
+
   <div class="cinematic-reveal-inner container-shell">
 
     {% if section.settings.kicker != blank %}
@@ -73,6 +79,11 @@
 {
   "name": "Cinematic reveal",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
     {
       "type": "text",
       "id": "kicker",
