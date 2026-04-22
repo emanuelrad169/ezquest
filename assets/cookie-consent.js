@@ -27,6 +27,7 @@
 
     setConsent(value);
     banner.classList.remove('is-visible');
+    document.body.classList.remove('cookie-visible');
 
     var didHide = false;
 
@@ -43,6 +44,7 @@
 
   function showBanner() {
     banner.removeAttribute('hidden');
+    document.body.classList.add('cookie-visible');
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         banner.classList.add('is-visible');
