@@ -1,87 +1,185 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": {
-      "type": "page-hero",
-      "settings": {
-        "kicker": "Where to buy",
-        "heading": "Get EZQuest everywhere you shop",
-        "subheading": "Buy direct for the best price and clearest post-purchase support, or find EZQuest at a retailer near you.",
-        "image": "shopify://shop_images/ezquest-where-to-buy-hero.png"
-      }
-    },
-    "channels": {
-      "type": "info-card-grid",
-      "settings": {
-        "eyebrow": "Purchase channels",
-        "heading": "Choose the right channel for your purchase",
-        "copy": "Direct purchase gives you the best price, warranty registration, and direct support access.",
-        "columns_desktop": 3
-      },
+    "where-to-buy": {
+      "type": "where-to-buy",
       "blocks": {
-        "card_1": {
-          "type": "card",
+        "amazon": {
+          "type": "retailer",
           "settings": {
-            "eyebrow": "Recommended",
-            "title": "Buy direct from EZQuest.com",
-            "copy": "Best price, fastest support, and direct warranty registration. No middleman.",
-            "link_label": "Browse products",
-            "link_url": "/collections/all"
+            "category": "us_retailer",
+            "name": "Amazon",
+            "logo_asset": "BuyFrom-001.jpg",
+            "url": "https://www.amazon.com/stores/EZQuest/page/",
+            "region": ""
           }
         },
-        "card_2": {
-          "type": "card",
+        "walmart": {
+          "type": "retailer",
           "settings": {
-            "eyebrow": "Online retail",
-            "title": "Amazon and major online retailers",
-            "copy": "Available on Amazon and select online marketplaces with Prime shipping where supported."
+            "category": "us_retailer",
+            "name": "Walmart",
+            "logo_asset": "BuyFrom-002.jpg",
+            "url": "https://www.walmart.com/search?q=ezquest",
+            "region": ""
           }
         },
-        "card_3": {
-          "type": "card",
+        "bh": {
+          "type": "retailer",
           "settings": {
-            "eyebrow": "Need guidance first",
-            "title": "Not sure which product to buy?",
-            "copy": "Use Help me choose or open Support before completing your purchase.",
-            "link_label": "Help me choose",
-            "link_url": "/pages/help-me-choose"
+            "category": "us_retailer",
+            "name": "B&H Photo",
+            "logo_asset": "BuyFrom-003.jpg",
+            "url": "https://www.bhphotovideo.com/c/search?q=ezquest",
+            "region": ""
+          }
+        },
+        "microcenter": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "Micro Center",
+            "logo_asset": "BuyFrom-004.jpg",
+            "url": "https://www.microcenter.com/search/search_results.aspx?N=4294967288&query=ezquest",
+            "region": ""
+          }
+        },
+        "newegg": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "Newegg",
+            "logo_asset": "BuyFrom-005.jpg",
+            "url": "https://www.newegg.com/p/pl?d=ezquest",
+            "region": ""
+          }
+        },
+        "rakuten": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "Rakuten",
+            "logo_asset": "BuyFrom-006.jpg",
+            "url": "https://www.rakuten.com/",
+            "region": ""
+          }
+        },
+        "macranch": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "TheMacRanch",
+            "logo_asset": "BuyFrom-007.jpg",
+            "url": "https://www.themacranch.com/",
+            "region": ""
+          }
+        },
+        "dino": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "DI-NO Computers",
+            "logo_asset": "BuyFrom-008.jpg",
+            "url": "https://www.dinocomputers.com/",
+            "region": ""
+          }
+        },
+        "smalldog": {
+          "type": "retailer",
+          "settings": {
+            "category": "us_retailer",
+            "name": "Small Dog Electronics",
+            "logo_asset": "BuyFrom-009.jpg",
+            "url": "https://www.smalldog.com/",
+            "region": ""
+          }
+        },
+        "adkom": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_reseller",
+            "name": "Adkom",
+            "logo_asset": "BuyFrom-010.jpg",
+            "url": "https://www.adkom.com.lb/",
+            "region": "Lebanon"
+          }
+        },
+        "digits": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_reseller",
+            "name": "Digits",
+            "logo_asset": "BuyFrom-011.jpg",
+            "url": "https://www.digits.com.kw/",
+            "region": "Kuwait"
+          }
+        },
+        "macway": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_reseller",
+            "name": "Macway",
+            "logo_asset": "BuyFrom-012.jpg",
+            "url": "https://www.macway.com/",
+            "region": "France"
+          }
+        },
+        "imachines": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_reseller",
+            "name": "iMachines",
+            "logo_asset": "BuyFrom-013.jpg",
+            "url": "https://www.imachines.com/",
+            "region": "Bahrain & Saudi Arabia"
+          }
+        },
+        "quintec": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_distributor",
+            "name": "Quintec Distribución",
+            "logo_asset": "BuyFrom-014.jpg",
+            "url": "https://www.quintec.cl/",
+            "region": "Chile"
+          }
+        },
+        "icongroup": {
+          "type": "retailer",
+          "settings": {
+            "category": "intl_distributor",
+            "name": "iCongroup",
+            "logo_asset": "BuyFrom-015.jpg",
+            "url": "https://www.icongroup.co.il/",
+            "region": "Israel"
           }
         }
       },
       "block_order": [
-        "card_1",
-        "card_2",
-        "card_3"
-      ]
-    },
-    "main": {
-      "type": "main-page",
+        "amazon","walmart","bh","microcenter","newegg",
+        "rakuten","macranch","dino","smalldog",
+        "adkom","digits","macway","imachines",
+        "quintec","icongroup"
+      ],
       "settings": {
-        "show_title": false,
-        "intro_copy": "Reseller lists, territory notes, and fuller channel guidance continue below.",
-        "side_eyebrow": "Why buy direct",
-        "side_heading": "Best price, best support",
-        "side_copy": "Buying directly gives you the clearest path to warranty registration, support, and any order questions.",
-        "side_link_label": "Browse collections",
-        "side_link_url": "/collections/all"
-      }
-    },
-    "cta": {
-      "type": "support-cta-rail",
-      "settings": {
-        "kicker": "Still deciding",
-        "heading": "Not sure where to start?",
-        "body": "Move from purchase channels into products, support, or direct help without friction.",
-        "cta_label": "Browse collections",
-        "cta_url": "/collections/all",
-        "cta2_label": "Contact support",
-        "cta2_url": "/pages/contact"
+        "heading": "Where to buy",
+        "subheading": "EZQuest products are sold through these authorised retailers and distributors worldwide.",
+        "show_cta": true,
+        "cta_text": "Interested in carrying EZQuest products?",
+        "cta_label": "Become a reseller",
+        "cta_url": "/pages/contact"
       }
     }
   },
   "order": [
-    "hero",
-    "channels",
-    "main",
-    "cta"
+    "where-to-buy"
   ]
 }
