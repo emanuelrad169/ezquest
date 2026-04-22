@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "where-to-buy": {
@@ -18,7 +9,7 @@
             "category": "us_retailer",
             "name": "Amazon",
             "logo_asset": "BuyFrom-001.jpg",
-            "url": "https://www.amazon.com/stores/EZQuest/page/",
+            "url": "http://www.amazon.com/s/ref=nb_sb_noss_1/178-1999841-4512332?url=search-alias%3Daps&field-keywords=ezquest",
             "region": ""
           }
         },
@@ -28,7 +19,7 @@
             "category": "us_retailer",
             "name": "Walmart",
             "logo_asset": "BuyFrom-002.jpg",
-            "url": "https://www.walmart.com/search?q=ezquest",
+            "url": "http://www.walmart.com/search/?query=ezquest",
             "region": ""
           }
         },
@@ -38,7 +29,7 @@
             "category": "us_retailer",
             "name": "B&H Photo",
             "logo_asset": "BuyFrom-003.jpg",
-            "url": "https://www.bhphotovideo.com/c/search?q=ezquest",
+            "url": "https://www.bhphotovideo.com/c/buy/Shop-by-Brand-EZQuest/ci/4/phd/3976522092/N/4294255798",
             "region": ""
           }
         },
@@ -48,7 +39,7 @@
             "category": "us_retailer",
             "name": "Micro Center",
             "logo_asset": "BuyFrom-004.jpg",
-            "url": "https://www.microcenter.com/search/search_results.aspx?N=4294967288&query=ezquest",
+            "url": "http://www.microcenter.com/search/search_results.aspx?Ntt=EZQuest%20",
             "region": ""
           }
         },
@@ -58,7 +49,7 @@
             "category": "us_retailer",
             "name": "Newegg",
             "logo_asset": "BuyFrom-005.jpg",
-            "url": "https://www.newegg.com/p/pl?d=ezquest",
+            "url": "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=ezquest&N=-1&isNodeId=1",
             "region": ""
           }
         },
@@ -68,7 +59,7 @@
             "category": "us_retailer",
             "name": "Rakuten",
             "logo_asset": "BuyFrom-006.jpg",
-            "url": "https://www.rakuten.com/",
+            "url": "http://www.rakuten.com/sr/searchresults#qu=ezquest",
             "region": ""
           }
         },
@@ -78,7 +69,7 @@
             "category": "us_retailer",
             "name": "TheMacRanch",
             "logo_asset": "BuyFrom-007.jpg",
-            "url": "https://www.themacranch.com/",
+            "url": "http://www.macranch.com/",
             "region": ""
           }
         },
@@ -88,7 +79,7 @@
             "category": "us_retailer",
             "name": "DI-NO Computers",
             "logo_asset": "BuyFrom-008.jpg",
-            "url": "https://www.dinocomputers.com/",
+            "url": "http://www.di-no.com/",
             "region": ""
           }
         },
@@ -98,7 +89,7 @@
             "category": "us_retailer",
             "name": "Small Dog Electronics",
             "logo_asset": "BuyFrom-009.jpg",
-            "url": "https://www.smalldog.com/",
+            "url": "http://www.smalldog.com/mfg/?MfrName=Ezquest",
             "region": ""
           }
         },
@@ -108,7 +99,7 @@
             "category": "intl_reseller",
             "name": "Adkom",
             "logo_asset": "BuyFrom-010.jpg",
-            "url": "https://www.adkom.com.lb/",
+            "url": "http://www.adkomsal.com/",
             "region": "Lebanon"
           }
         },
@@ -118,7 +109,7 @@
             "category": "intl_reseller",
             "name": "Digits",
             "logo_asset": "BuyFrom-011.jpg",
-            "url": "https://www.digits.com.kw/",
+            "url": "http://digits.com.kw/store/",
             "region": "Kuwait"
           }
         },
@@ -128,7 +119,7 @@
             "category": "intl_reseller",
             "name": "Macway",
             "logo_asset": "BuyFrom-012.jpg",
-            "url": "https://www.macway.com/",
+            "url": "http://www.macway.com/fr/searches?keywords=ezquest",
             "region": "France"
           }
         },
@@ -138,7 +129,7 @@
             "category": "intl_reseller",
             "name": "iMachines",
             "logo_asset": "BuyFrom-013.jpg",
-            "url": "https://www.imachines.com/",
+            "url": "http://www.i-machines.com/",
             "region": "Bahrain & Saudi Arabia"
           }
         },
@@ -146,9 +137,9 @@
           "type": "retailer",
           "settings": {
             "category": "intl_distributor",
-            "name": "Quintec Distribución",
+            "name": "Quintec Distribuci\u00f3n",
             "logo_asset": "BuyFrom-014.jpg",
-            "url": "https://www.quintec.cl/",
+            "url": "http://www.quintecdistribucion.cl/catalogo.php?busqueda=ezquest",
             "region": "Chile"
           }
         },
@@ -158,16 +149,27 @@
             "category": "intl_distributor",
             "name": "iCongroup",
             "logo_asset": "BuyFrom-015.jpg",
-            "url": "https://www.icongroup.co.il/",
+            "url": "http://www.icongroup.co.il/",
             "region": "Israel"
           }
         }
       },
       "block_order": [
-        "amazon","walmart","bh","microcenter","newegg",
-        "rakuten","macranch","dino","smalldog",
-        "adkom","digits","macway","imachines",
-        "quintec","icongroup"
+        "amazon",
+        "walmart",
+        "bh",
+        "microcenter",
+        "newegg",
+        "rakuten",
+        "macranch",
+        "dino",
+        "smalldog",
+        "adkom",
+        "digits",
+        "macway",
+        "imachines",
+        "quintec",
+        "icongroup"
       ],
       "settings": {
         "heading": "Where to buy",
