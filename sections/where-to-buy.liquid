@@ -21,9 +21,11 @@
   color: #6e6e73; line-height: 1.65; max-width: 54ch;
 }
 .wtb-group {
-  max-width: 1280px; margin: 0 auto;
-  padding: clamp(40px,5vw,64px) clamp(1.25rem,5vw,5rem);
+  max-width: 100rem; margin: 0 auto;
+  padding: clamp(40px,5vw,64px) clamp(1.25rem,2vw,2rem);
 }
+@media (min-width: 640px)  { .wtb-group { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .wtb-group { padding-left: 2rem;   padding-right: 2rem;   } }
 .wtb-group + .wtb-group { padding-top: 0; }
 .wtb-group__heading {
   font-size: 11px; font-weight: 600;
@@ -34,34 +36,34 @@
 }
 .wtb-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
 }
 @media (max-width: 639px) {
-  .wtb-grid { grid-template-columns: repeat(2,1fr); }
+  .wtb-grid { grid-template-columns: repeat(2,1fr); gap: 0.875rem; }
 }
 .wtb-card {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 0.5rem; padding: 1.5rem 1rem;
+  gap: 0.75rem; padding: 2rem 1.5rem;
   background: #fff;
   border: 0.5px solid rgba(0,0,0,0.08);
-  border-radius: 16px; text-decoration: none;
-  min-height: 120px;
+  border-radius: 20px; text-decoration: none;
+  min-height: 160px;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
 }
 .wtb-card:hover {
   border-color: rgba(251,206,42,0.5);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
 .wtb-card__logo-wrap {
   display: flex; align-items: center;
   justify-content: center;
-  width: 100%; height: 56px;
+  width: 100%; height: 80px;
 }
 .wtb-card__logo {
-  max-width: 140px; max-height: 52px;
+  max-width: 180px; max-height: 72px;
   width: auto; height: auto; object-fit: contain;
 }
 .wtb-card__name-fallback {
@@ -115,7 +117,7 @@
   {% endfor %}
 
   {% if has_blocks %}
-    <section class="wtb-group page-width">
+    <section class="wtb-group container-shell">
       <h2 class="wtb-group__heading">{{ cat_label }}</h2>
       <div class="wtb-grid">
         {% for block in section.blocks %}
