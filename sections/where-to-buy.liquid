@@ -97,14 +97,60 @@
   color: #6e6e73; text-align: center;
 }
 .wtb-cta {
-  background: #0a0a0a;
-  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,5rem);
-  text-align: center; margin-top: 2rem;
+  position: relative;
+  background: #0f1114;
+  padding: clamp(56px,7vw,88px) clamp(1.25rem,2vw,2rem);
+  overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,0.07);
 }
-.wtb-cta__text {
-  font-size: clamp(18px,2.5vw,28px); font-weight: 500;
-  letter-spacing: -0.02em; color: #f5f5f7;
-  margin-bottom: 1.5rem;
+.wtb-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(251,206,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.wtb-cta__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 100rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.wtb-cta__copy { flex: 1; min-width: 260px; }
+.wtb-cta__kicker {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #FBCE2A; margin-bottom: 0.75rem;
+}
+.wtb-cta__heading {
+  font-size: clamp(22px,3vw,36px); font-weight: 500;
+  letter-spacing: -0.025em; color: #f5f5f7;
+  line-height: 1.15;
+}
+.wtb-cta__btn {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  height: 52px; padding: 0 2rem;
+  background: #FBCE2A; color: #1d1d1f;
+  border-radius: 100px; border: none;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.wtb-cta__btn:hover {
+  background: #ffd84d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(251,206,42,0.25);
+}
+.wtb-cta__btn svg { flex-shrink: 0; }
+@media (max-width: 639px) {
+  .wtb-cta__inner { flex-direction: column; align-items: flex-start; }
+  .wtb-cta__btn { width: 100%; justify-content: center; }
 }
 </style>
 
@@ -196,14 +242,19 @@
 {% comment %} ── CTA ──────────────────────────────── {% endcomment %}
 {% if section.settings.show_cta %}
   <section class="wtb-cta">
-    <div class="page-width">
-      <p class="wtb-cta__text">
-        {{ section.settings.cta_text
-           | default: 'Interested in carrying EZQuest products?' }}
-      </p>
+    <div class="wtb-cta__inner">
+      <div class="wtb-cta__copy">
+        <p class="wtb-cta__kicker">Partnership</p>
+        <p class="wtb-cta__heading">
+          {{ section.settings.cta_text | default: 'Interested in carrying EZQuest products?' }}
+        </p>
+      </div>
       <a href="{{ section.settings.cta_url | default: '/pages/contact' }}"
-         class="btn btn--primary">
+         class="wtb-cta__btn">
         {{ section.settings.cta_label | default: 'Become a reseller' }}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </a>
     </div>
   </section>
