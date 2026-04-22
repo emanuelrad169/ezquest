@@ -1,5 +1,90 @@
 {% comment %} sections/where-to-buy.liquid {% endcomment %}
 
+<style>
+.wtb-hero {
+  background: linear-gradient(135deg,#f5f5f7 0%,#fff 100%);
+  padding: clamp(48px,6vw,80px) clamp(1.25rem,5vw,5rem);
+  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+}
+.wtb-hero__kicker {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #FBCE2A; margin-bottom: 1rem;
+}
+.wtb-hero__heading {
+  font-size: clamp(32px,5vw,56px);
+  font-weight: 500; letter-spacing: -0.03em;
+  color: #1d1d1f; margin-bottom: 0.875rem;
+}
+.wtb-hero__body {
+  font-size: clamp(15px,1.5vw,17px);
+  color: #6e6e73; line-height: 1.65; max-width: 54ch;
+}
+.wtb-group {
+  max-width: 1280px; margin: 0 auto;
+  padding: clamp(40px,5vw,64px) clamp(1.25rem,5vw,5rem);
+}
+.wtb-group + .wtb-group { padding-top: 0; }
+.wtb-group__heading {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #6e6e73; margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.wtb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 639px) {
+  .wtb-grid { grid-template-columns: repeat(2,1fr); }
+}
+.wtb-card {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.5rem; padding: 1.5rem 1rem;
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 16px; text-decoration: none;
+  min-height: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.wtb-card:hover {
+  border-color: rgba(251,206,42,0.5);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transform: translateY(-2px);
+}
+.wtb-card__logo-wrap {
+  display: flex; align-items: center;
+  justify-content: center;
+  width: 100%; height: 56px;
+}
+.wtb-card__logo {
+  max-width: 140px; max-height: 52px;
+  width: auto; height: auto; object-fit: contain;
+}
+.wtb-card__name-fallback {
+  font-size: 13px; font-weight: 500;
+  color: #1d1d1f; text-align: center;
+}
+.wtb-card__region {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: #6e6e73; text-align: center;
+}
+.wtb-cta {
+  background: #0a0a0a;
+  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,5rem);
+  text-align: center; margin-top: 2rem;
+}
+.wtb-cta__text {
+  font-size: clamp(18px,2.5vw,28px); font-weight: 500;
+  letter-spacing: -0.02em; color: #f5f5f7;
+  margin-bottom: 1.5rem;
+}
+</style>
+
 {% comment %} ── Hero ─────────────────────────────── {% endcomment %}
 <section class="wtb-hero">
   <div class="page-width">
@@ -44,29 +129,28 @@
               {{ block.shopify_attributes }}>
 
               <div class="wtb-card__logo-wrap">
-                {% if block.settings.logo != blank %}
-                  <img
-                    src="{{ block.settings.logo | image_url: width: 320 }}"
-                    alt="{{ block.settings.name | escape }}"
-                    class="wtb-card__logo"
-                    width="160"
-                    height="64"
-                    loading="lazy"
-                    decoding="async">
-                {% elsif block.settings.logo_asset != blank %}
+                {%- if block.settings.logo != blank -%}
+                  {{- block.settings.logo | image_url: width: 320
+                      | image_tag:
+                          class: 'wtb-card__logo',
+                          alt: block.settings.name,
+                          loading: 'lazy',
+                          width: 160,
+                          height: 60 -}}
+                {%- elsif block.settings.logo_asset != blank -%}
                   <img
                     src="{{ block.settings.logo_asset | asset_url }}"
                     alt="{{ block.settings.name | escape }}"
                     class="wtb-card__logo"
                     width="160"
-                    height="64"
+                    height="60"
                     loading="lazy"
                     decoding="async">
-                {% else %}
+                {%- else -%}
                   <span class="wtb-card__name-fallback">
                     {{ block.settings.name }}
                   </span>
-                {% endif %}
+                {%- endif -%}
               </div>
 
               {% if block.settings.region != blank %}
