@@ -1,0 +1,20 @@
+{
+  "id": "promo-duraguard-cables",
+  "fileName": "promo-duraguard-cables.jpg",
+  "assetType": "campaign",
+  "category": "Collection promo banner",
+  "targetWidth": 1200,
+  "targetHeight": 628,
+  "generationSize": "1536x1024",
+  "slot": "collection_promo_tile",
+  "section": "collections/chargers-power",
+  "style": "overlay_safe_product_detail",
+  "imagePath": "public/images/promo-banners/promo-duraguard-cables.jpg",
+  "promptPath": "public/images/promo-banners/promo-duraguard-cables.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "outputFormat": "jpeg",
+  "resizedWith": "sips"
+}

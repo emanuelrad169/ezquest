@@ -8,14 +8,19 @@ const path = require("path");
 const { loadAdminEnv } = require("./shopify-admin/lib/env");
 const { createAdminClient } = require("./shopify-admin/lib/admin-client");
 
-const IMAGE_DIRS = [
+const DEFAULT_IMAGE_DIRS = [
   "public/images/homepage",
   "public/images/collections",
   "public/images/category-cards",
   "public/images/lifestyle",
   "public/images/support",
-  "public/images/missing"
+  "public/images/missing",
+  "public/images/promo-banners"
 ];
+
+const IMAGE_DIRS = process.env.EZQ_IMAGE_DIRS
+  ? process.env.EZQ_IMAGE_DIRS.split(path.delimiter).filter(Boolean)
+  : DEFAULT_IMAGE_DIRS;
 
 const MIME_TYPES = {
   ".png": "image/png",

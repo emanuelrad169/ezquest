@@ -99,8 +99,9 @@ async function main() {
     const prompt = renderPrompt(template, asset, brandRules);
 
     await fs.mkdir(path.dirname(output.imagePath), { recursive: true });
+    const outputFormat = getOpenAIOutputFormat(output.imagePath);
     await fs.writeFile(output.promptPath, prompt);
-    await fs.writeFile(output.metaPath, JSON.stringify(buildMetadata(asset, output, args), null, 2) + "\n");
+    await fs.writeFile(output.metaPath, JSON.stringify(buildMetadata(asset, output, args, outputFormat), null, 2) + "\n");
     prepared += 1;
 
     if (!shouldGenerate) {
@@ -114,13 +115,14 @@ async function main() {
       continue;
     }
 
-    const rawPath = output.imagePath.replace(/\.png$/i, ".openai-raw.png");
+    const rawPath = `${stripImageExtension(output.imagePath)}.openai-raw.${getFileExtensionForFormat(outputFormat)}`;
     await generateOpenAIImage({
       prompt,
       imagePath: rawPath,
       size: asset.generationSize,
       model: args.model,
-      quality: args.quality
+      quality: args.quality,
+      outputFormat
     });
 
     if (args.noResize) {
@@ -235,8 +237,8 @@ function validateAssets(assets) {
       throw new Error(`Asset ${label} has unsupported assetType "${asset.assetType}".`);
     }
 
-    if (!asset.fileName.endsWith(".png")) {
-      throw new Error(`Asset ${label} must use a .png fileName.`);
+    if (!isSupportedImageFile(asset.fileName)) {
+      throw new Error(`Asset ${label} must use a .png, .jpg, .jpeg, or .webp fileName.`);
     }
 
     if (!Number.isInteger(asset.targetWidth) || !Number.isInteger(asset.targetHeight)) {
@@ -253,7 +255,7 @@ function getOutputPaths(asset, args = {}) {
   const imagePath = args.output
     ? path.join(path.resolve(ROOT, args.output), asset.fileName)
     : path.join(OUTPUT_ROOT, FOLDERS[asset.assetType], asset.fileName);
-  const sidecarBase = imagePath.replace(/\.png$/i, "");
+  const sidecarBase = stripImageExtension(imagePath);
 
   return {
     imagePath,
@@ -325,7 +327,7 @@ function formatList(items) {
   return items.filter(Boolean).map((item) => `- ${item}`).join("\n");
 }
 
-function buildMetadata(asset, output, args) {
+function buildMetadata(asset, output, args, outputFormat) {
   return {
     id: asset.id,
     fileName: asset.fileName,
@@ -343,11 +345,12 @@ function buildMetadata(asset, output, args) {
     provider: args.generate ? "openai-images-api" : "dry-run",
     model: args.generate ? args.model : null,
     quality: args.generate ? args.quality : null,
+    outputFormat,
     resizedWith: args.noResize ? null : "sips"
   };
 }
 
-async function generateOpenAIImage({ prompt, imagePath, size, model, quality }) {
+async function generateOpenAIImage({ prompt, imagePath, size, model, quality, outputFormat }) {
   const response = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
     headers: {
@@ -359,7 +362,7 @@ async function generateOpenAIImage({ prompt, imagePath, size, model, quality }) 
       prompt,
       size,
       quality,
-      output_format: "png",
+      output_format: outputFormat,
       background: "opaque",
       n: 1
     })
@@ -391,7 +394,7 @@ async function generateOpenAIImage({ prompt, imagePath, size, model, quality }) 
 async function cropAndResizeWithSips({ rawPath, outputPath, generationSize, targetWidth, targetHeight }) {
   const dimensions = parseSize(generationSize);
   const crop = getCenteredCrop(dimensions.width, dimensions.height, targetWidth, targetHeight);
-  const cropPath = outputPath.replace(/\.png$/i, ".crop.png");
+  const cropPath = `${stripImageExtension(outputPath)}.crop.png`;
 
   if (crop.width !== dimensions.width || crop.height !== dimensions.height) {
     runSips(["--cropToHeightWidth", String(crop.height), String(crop.width), rawPath, "--out", cropPath]);
@@ -454,6 +457,25 @@ function getApiKey() {
   return process.env.OPENAI_API_KEY || process.env.IMAGE_API_KEY;
 }
 
+function isSupportedImageFile(fileName) {
+  return /\.(png|jpe?g|webp)$/i.test(fileName);
+}
+
+function stripImageExtension(filePath) {
+  return filePath.replace(/\.(png|jpe?g|webp)$/i, "");
+}
+
+function getOpenAIOutputFormat(filePath) {
+  const extension = path.extname(filePath).toLowerCase();
+  if (extension === ".jpg" || extension === ".jpeg") return "jpeg";
+  if (extension === ".webp") return "webp";
+  return "png";
+}
+
+function getFileExtensionForFormat(outputFormat) {
+  return outputFormat === "jpeg" ? "jpg" : outputFormat;
+}
+
 function reduceRatio(width, height) {
   const divisor = gcd(width, height);
   return `${width / divisor}:${height / divisor}`;
@@ -491,7 +513,7 @@ Options:
   --dry-run          Write prompt sidecars only. This is the default.
   --validate         Validate manifest fields without writing files.
   --generate         Call the OpenAI Images API and write PNG files.
-  --force            Replace existing PNG files.
+  --force            Replace existing image files.
   --no-resize        Keep OpenAI native dimensions instead of using sips for final crops.
   --model <model>    Defaults to OPENAI_IMAGE_MODEL or gpt-image-1.5.
   --quality <value>  Defaults to OPENAI_IMAGE_QUALITY or high.

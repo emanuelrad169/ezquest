@@ -1,0 +1,20 @@
+{
+  "id": "promo-travel-kit",
+  "fileName": "promo-travel-kit.jpg",
+  "assetType": "campaign",
+  "category": "Collection promo banner",
+  "targetWidth": 1200,
+  "targetHeight": 628,
+  "generationSize": "1536x1024",
+  "slot": "collection_promo_tile",
+  "section": "collections/accessories",
+  "style": "overlay_safe_lifestyle",
+  "imagePath": "public/images/promo-banners/promo-travel-kit.jpg",
+  "promptPath": "public/images/promo-banners/promo-travel-kit.prompt.md",
+  "template": "prompts/templates/missing-image.md",
+  "provider": "openai-images-api",
+  "model": "gpt-image-1.5",
+  "quality": "high",
+  "outputFormat": "jpeg",
+  "resizedWith": "sips"
+}

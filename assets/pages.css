@@ -266,7 +266,7 @@
 .return-step__body { font-size: 13px; color: #6e6e73; line-height: 1.6; }
 
 /* Inline FAQ (for shipping page etc.) */
-.page-faq { max-width: 720px; }
+.page-faq { max-width: 100%; }
 .page-faq-item { border-bottom: 1px solid rgba(0,0,0,.08); }
 .page-faq-item:first-child { border-top: 1px solid rgba(0,0,0,.08); }
 .page-faq-trigger {

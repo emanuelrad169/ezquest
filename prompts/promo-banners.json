@@ -1,0 +1,201 @@
+{
+  "assets": [
+    {
+      "id": "promo-ready-for-desk",
+      "name": "promo-ready-for-desk",
+      "title": "Ready for a full desk?",
+      "slot": "collection_promo_tile",
+      "section": "collections/hubs-adapters",
+      "collection": "hubs-adapters",
+      "fileName": "promo-ready-for-desk.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Promote docking stations inside the hubs and adapters collection grid.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_lifestyle",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. One hero docking station scene centered slightly right, with quiet edge space for dark overlay copy. Keep the subject clear, premium, and not crowded.",
+      "environment": "Clean minimal desk setup with white or very light gray wall background and a light wood or white desk surface.",
+      "productHierarchy": {
+        "hero": "One sleek USB-C docking station connecting a laptop to a clean desk display setup.",
+        "supporting": [
+          "A laptop partly visible as context",
+          "One or two tidy cables only where needed"
+        ]
+      },
+      "extraDirection": "Premium USB-C docking station on a clean minimal desk setup. MacBook Pro connected to dual monitors, Ethernet cable, and peripherals through one sleek hub. Clean white desk surface, warm ambient light, professional workspace aesthetic. No text. No people. Premium product photography style.",
+      "negativeConstraints": [
+        "No visible brand text on screens.",
+        "No messy workstation.",
+        "No keyboard close-up.",
+        "No equal-weight product catalog layout."
+      ]
+    },
+    {
+      "id": "promo-power-up",
+      "name": "promo-power-up",
+      "title": "Power everything",
+      "slot": "collection_promo_tile",
+      "section": "collections/docking-stations",
+      "collection": "docking-stations",
+      "fileName": "promo-power-up.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Promote chargers and power products inside the docking stations collection grid.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_lifestyle",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. Compact charger is the hero object with two connected devices as supporting context. Leave calm overlay-safe negative space.",
+      "environment": "Minimal light desk, soft white background, warm studio-natural lighting.",
+      "productHierarchy": {
+        "hero": "Compact GaN wall charger powering multiple devices.",
+        "supporting": [
+          "Laptop or tablet edge",
+          "One phone and one clean USB-C cable"
+        ]
+      },
+      "extraDirection": "GaN wall charger charging a MacBook Pro, iPad, and iPhone simultaneously. Clean minimal desk, white background, warm studio lighting. Multiple devices powered from one compact charger. No text. Premium product photography.",
+      "negativeConstraints": [
+        "No tangled cables.",
+        "No power strip clutter.",
+        "No screen UI text."
+      ]
+    },
+    {
+      "id": "promo-duraguard-cables",
+      "name": "promo-duraguard-cables",
+      "title": "Cables built to last",
+      "slot": "collection_promo_tile",
+      "section": "collections/chargers-power",
+      "collection": "chargers-power",
+      "fileName": "promo-duraguard-cables.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Promote cables and accessories inside the chargers and power collection grid.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_product_detail",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. One braided USB-C cable connector is the hero, with one supporting coil. Keep the image simple and overlay-safe.",
+      "environment": "Clean dark graphite or light gray surface with controlled premium studio lighting.",
+      "productHierarchy": {
+        "hero": "DuraGuard braided USB-C cable connector with visible weave texture.",
+        "supporting": [
+          "A single quiet cable coil"
+        ]
+      },
+      "extraDirection": "DuraGuard braided USB-C cables arranged artfully on a refined graphite surface. Coiled and straight cable details, Kevlar weave texture visible in macro detail. Premium product photography, subtle moody aesthetic, silver connectors. No text.",
+      "negativeConstraints": [
+        "No harsh dramatic shadows.",
+        "No cable pile.",
+        "No hands."
+      ]
+    },
+    {
+      "id": "promo-travel-kit",
+      "name": "promo-travel-kit",
+      "title": "Built for travel",
+      "slot": "collection_promo_tile",
+      "section": "collections/accessories",
+      "collection": "accessories",
+      "fileName": "promo-travel-kit.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Promote hubs and adapters inside the accessories collection grid.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_lifestyle",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. Compact travel hub is the hero object with a charger and one cable as supporting objects. Keep edges calm for overlay copy.",
+      "environment": "Minimal travel pouch context on a clean light hotel desk or pale wood surface.",
+      "productHierarchy": {
+        "hero": "Compact USB-C travel hub.",
+        "supporting": [
+          "One compact charger",
+          "One neatly coiled USB-C cable"
+        ]
+      },
+      "extraDirection": "Compact USB-C travel hub, GaN charger, and coiled cable arranged in an open minimalist travel pouch on a hotel desk. Clean lifestyle photography, warm neutral tones, professional traveler aesthetic. No text.",
+      "negativeConstraints": [
+        "No passport.",
+        "No sunglasses.",
+        "No cluttered luggage scene."
+      ]
+    },
+    {
+      "id": "promo-compatibility",
+      "name": "promo-compatibility",
+      "title": "Works with everything",
+      "slot": "collection_promo_tile_reserve",
+      "section": "collections/all",
+      "collection": "all",
+      "fileName": "promo-compatibility.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Reserve promo image for compatibility messaging across collection grids.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_lifestyle",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. One hub is the hero object, devices are supporting context only. Keep the scene minimal and overlay-safe.",
+      "environment": "Clean minimal desk with white or light gray background.",
+      "productHierarchy": {
+        "hero": "One USB-C hub as central connector.",
+        "supporting": [
+          "Laptop",
+          "Tablet or phone as quiet compatibility context"
+        ]
+      },
+      "extraDirection": "MacBook Pro, Windows laptop, iPad Pro, and iPhone connected through modern USB-C accessories on a clean minimal desk. Multiple devices, one hub, clean workspace. Premium lifestyle photography, light background. No text.",
+      "negativeConstraints": [
+        "No visible operating system logos.",
+        "No crowded device pile.",
+        "No people."
+      ]
+    },
+    {
+      "id": "promo-gan-chargers",
+      "name": "promo-gan-chargers",
+      "title": "GaN technology",
+      "slot": "collection_promo_tile_reserve",
+      "section": "collections/chargers-power",
+      "collection": "chargers-power",
+      "fileName": "promo-gan-chargers.jpg",
+      "assetType": "campaign",
+      "template": "missing-image.md",
+      "category": "Collection promo banner",
+      "purpose": "Reserve promo image for GaN charger technology messaging.",
+      "targetWidth": 1200,
+      "targetHeight": 628,
+      "generationSize": "1536x1024",
+      "style": "overlay_safe_product_photography",
+      "allowDarkBackground": true,
+      "composition": "Wide promotional tile. One compact charger is the hero, two smaller chargers are supporting objects. Keep a clear hierarchy and overlay-safe edges.",
+      "environment": "White or very light gray studio surface with soft natural shadows.",
+      "productHierarchy": {
+        "hero": "Compact high-output GaN wall charger.",
+        "supporting": [
+          "Two smaller chargers as scale references"
+        ]
+      },
+      "extraDirection": "Three different GaN wall chargers arranged with clear hierarchy on a white surface. Size comparison showing compact form factor. Studio product photography, clean white background, minimal shadows. No text.",
+      "negativeConstraints": [
+        "No printed wattage labels.",
+        "No catalog grid.",
+        "No outlet wall plate."
+      ]
+    }
+  ]
+}

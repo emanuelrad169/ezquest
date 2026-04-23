@@ -1,0 +1,38 @@
+[
+  {
+    "file": "templates/collection.json",
+    "section": "main",
+    "setting": "promo_ready_for_desk_image",
+    "image": "promo-ready-for-desk.jpg",
+    "fileReference": "shopify://shop_images/ezquest-promo-ready-for-desk.jpg",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-ready-for-desk.jpg?v=1776771590",
+    "status": "wired"
+  },
+  {
+    "file": "templates/collection.json",
+    "section": "main",
+    "setting": "promo_power_up_image",
+    "image": "promo-power-up.jpg",
+    "fileReference": "shopify://shop_images/ezquest-promo-power-up.jpg",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-power-up.jpg?v=1776771587",
+    "status": "wired"
+  },
+  {
+    "file": "templates/collection.json",
+    "section": "main",
+    "setting": "promo_duraguard_cables_image",
+    "image": "promo-duraguard-cables.jpg",
+    "fileReference": "shopify://shop_images/ezquest-promo-duraguard-cables.jpg",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-duraguard-cables.jpg?v=1776771584",
+    "status": "wired"
+  },
+  {
+    "file": "templates/collection.json",
+    "section": "main",
+    "setting": "promo_travel_kit_image",
+    "image": "promo-travel-kit.jpg",
+    "fileReference": "shopify://shop_images/ezquest-promo-travel-kit.jpg",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-travel-kit.jpg?v=1776771593",
+    "status": "wired"
+  }
+]
