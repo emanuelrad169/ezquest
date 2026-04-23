@@ -1,26 +1,97 @@
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
+<style>
+/* ── Shipping hero stat strip ─────────────────────── */
+.sr-hero-stats {
+  display: flex; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem;
+}
+.sr-hero-stat__value {
+  font-size: 28px; font-weight: 500;
+  letter-spacing: -.02em; color: #f5f5f7;
+}
+.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+/* ── Shipping & returns light CTA ─────────────────── */
+.sr-cta {
+  position: relative;
+  background: #f5f5f7;
+  padding: clamp(56px,7vw,88px) clamp(1.25rem,2vw,2rem);
+  overflow: hidden;
+  border-top: 0.5px solid rgba(0,0,0,0.07);
+}
+.sr-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(251,206,42,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sr-cta__inner {
+  position: relative; z-index: 1;
+  max-width: 100rem; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem; flex-wrap: wrap;
+}
+@media (min-width: 640px)  { .sr-cta__inner { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .sr-cta__inner { padding: 0 2rem;   } }
+.sr-cta__copy { flex: 1; min-width: 260px; }
+.sr-cta__kicker {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #7A5C00; margin-bottom: 0.75rem;
+}
+.sr-cta__heading {
+  font-size: clamp(22px,3vw,36px); font-weight: 500;
+  letter-spacing: -0.025em; color: #1d1d1f; line-height: 1.15;
+}
+.sr-cta__sub {
+  font-size: 15px; color: #6e6e73; margin-top: 0.5rem; line-height: 1.5;
+}
+.sr-cta__btn {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  height: 52px; padding: 0 2rem;
+  background: #FBCE2A; color: #1d1d1f;
+  border-radius: 100px; border: none;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.sr-cta__btn:hover {
+  background: #ffd84d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(251,206,42,0.25);
+}
+@media (max-width: 639px) {
+  .sr-cta__inner { flex-direction: column; align-items: flex-start; }
+  .sr-cta__btn { width: 100%; justify-content: center; }
+}
+</style>
+
 {% comment %} 1. HERO {% endcomment %}
-<section class="page-hero-light">
-  <div style="max-width:1280px;margin:0 auto;">
-    <p class="page-hero-light__kicker">Shipping &amp; returns</p>
-    <h1 class="page-hero-light__heading">Fast shipping. Easy returns.</h1>
-    <p class="page-hero-light__body">
+{%- assign hero_image = section.settings.hero_image -%}
+<section
+  class="page-hero{% if hero_image != blank %} page-hero--has-image{% endif %}"
+  {% if hero_image != blank %}style="--hero-bg: url('{{ hero_image | image_url: width: 1800 }}')"{% endif %}>
+  <div class="page-hero__inner container-shell">
+    <p class="page-hero__kicker">Shipping &amp; returns</p>
+    <h1 class="page-hero__heading">Fast shipping.<br>Easy returns.</h1>
+    <p class="page-hero__subheading">
       Free shipping on all US orders over $100.
       30-day hassle-free returns. 2-year warranty on everything.
     </p>
-    <div class="page-hero-light__meta">
+    <div class="sr-hero-stats">
       <div>
-        <p class="page-hero-light__stat-value">Free</p>
-        <p class="page-hero-light__stat-label">shipping over $100 in the US</p>
+        <p class="sr-hero-stat__value">Free</p>
+        <p class="sr-hero-stat__label">shipping over $100 in the US</p>
       </div>
       <div>
-        <p class="page-hero-light__stat-value">30</p>
-        <p class="page-hero-light__stat-label">day return window</p>
+        <p class="sr-hero-stat__value">30</p>
+        <p class="sr-hero-stat__label">day return window</p>
       </div>
       <div>
-        <p class="page-hero-light__stat-value">2yr</p>
-        <p class="page-hero-light__stat-label">warranty on all products</p>
+        <p class="sr-hero-stat__value">2yr</p>
+        <p class="sr-hero-stat__label">warranty on all products</p>
       </div>
     </div>
   </div>
@@ -109,8 +180,8 @@
 </section>
 
 {% comment %} 4. QUICK FAQ {% endcomment %}
-<section class="page-section page-section--grey">
-  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(1.25rem,5vw,5rem);">
+<section class="page-section page-section--white" style="border-top:0.5px solid rgba(0,0,0,0.07);">
+  <div class="container-shell" style="padding-top:clamp(48px,6vw,72px);padding-bottom:clamp(48px,6vw,72px);">
     <div style="margin-bottom:2rem;">
       <p class="section-intro__kicker">Common questions</p>
       <h2 class="section-intro__heading" style="text-align:left;">Shipping &amp; returns FAQ</h2>
@@ -148,10 +219,20 @@
 </section>
 
 {% comment %} 5. CTA {% endcomment %}
-<section class="page-cta-dark">
-  <h2 class="page-cta-dark__heading">Questions? We're here.</h2>
-  <p class="page-cta-dark__body">Our team responds within 1 business day.</p>
-  <a href="/pages/contact" class="btn btn--primary" style="background:#FBCE2A;color:#1d1d1f;">Contact support</a>
+<section class="sr-cta">
+  <div class="sr-cta__inner">
+    <div class="sr-cta__copy">
+      <p class="sr-cta__kicker">Support</p>
+      <p class="sr-cta__heading">Questions? We're here.</p>
+      <p class="sr-cta__sub">Our team responds within 1 business day.</p>
+    </div>
+    <a href="/pages/contact" class="sr-cta__btn">
+      Contact support
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
 </section>
 
 <script>
@@ -174,5 +255,15 @@
 </script>
 
 {% schema %}
-{ "name": "Shipping & returns", "tag": "section" }
+{
+  "name": "Shipping & returns",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    }
+  ]
+}
 {% endschema %}
