@@ -72,11 +72,19 @@
 
   /* ── Open / close — two independent panels ── */
   function initTriggers() {
-    var triggers  = document.querySelectorAll('[data-mega-target]');
-    var closeTimer = null;
+    var triggers = document.querySelectorAll('[data-mega-target]');
+
+    var OPEN_DELAY  = 200;
+    var CLOSE_DELAY = 350;
+    var openTimer   = null;
+    var closeTimer  = null;
+
+    function clearTimers() {
+      clearTimeout(openTimer);
+      clearTimeout(closeTimer);
+    }
 
     function openPanel(targetId) {
-      // Close all panels + reset all triggers
       document.querySelectorAll('.ez-mega').forEach(function(panel) {
         panel.classList.remove('is-open');
         panel.setAttribute('aria-hidden', 'true');
@@ -87,7 +95,6 @@
         btn.classList.remove('is-active');
       });
 
-      // Open target
       var panel = document.getElementById(targetId);
       if (!panel) return;
       panel.hidden = false;
@@ -101,6 +108,9 @@
         trigger.setAttribute('aria-expanded', 'true');
         trigger.classList.add('is-active');
       }
+
+      initSpotlight(panel);
+      initTabs(panel);
     }
 
     function closeAll() {
@@ -118,17 +128,33 @@
       });
     }
 
-    // Trigger hover / click
+    function scheduleOpen(targetId) {
+      clearTimers();
+      openTimer = setTimeout(function() { openPanel(targetId); }, OPEN_DELAY);
+    }
+
+    function scheduleClose() {
+      clearTimers();
+      closeTimer = setTimeout(closeAll, CLOSE_DELAY);
+    }
+
+    // Trigger: hover opens with delay, click is instant
     triggers.forEach(function(trigger) {
       trigger.addEventListener('mouseenter', function() {
-        clearTimeout(closeTimer);
-        openPanel(this.dataset.megaTarget);
+        scheduleOpen(this.dataset.megaTarget);
+      });
+
+      trigger.addEventListener('mouseleave', function(e) {
+        var panel = document.getElementById(this.dataset.megaTarget);
+        if (panel && panel.contains(e.relatedTarget)) return;
+        scheduleClose();
       });
 
       trigger.addEventListener('click', function() {
         var targetId = this.dataset.megaTarget;
         var panel    = document.getElementById(targetId);
         var isOpen   = panel && panel.classList.contains('is-open');
+        clearTimers();
         if (isOpen) {
           closeAll();
         } else {
@@ -137,31 +163,33 @@
       });
     });
 
-    // Close when mouse leaves header (with 150ms delay)
-    var header = document.querySelector('.site-header');
-    if (header) {
-      header.addEventListener('mouseleave', function() {
-        closeTimer = setTimeout(closeAll, 150);
+    // Panel: keep open while cursor is inside
+    document.querySelectorAll('.ez-mega').forEach(function(panel) {
+      panel.addEventListener('mouseenter', function() {
+        clearTimers();
       });
-      header.addEventListener('mouseenter', function() {
-        clearTimeout(closeTimer);
+      panel.addEventListener('mouseleave', function(e) {
+        var isTrigger = e.relatedTarget &&
+          e.relatedTarget.closest('[data-mega-target]');
+        if (isTrigger) return;
+        scheduleClose();
       });
-    }
+    });
 
-    // Close on Escape
+    // Escape: instant close
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        clearTimeout(closeTimer);
+        clearTimers();
         closeAll();
         var expanded = document.querySelector('[data-mega-target][aria-expanded="true"]');
         if (expanded) expanded.focus();
       }
     });
 
-    // Close on outside click
+    // Outside click: instant close
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.site-header')) {
-        clearTimeout(closeTimer);
+        clearTimers();
         closeAll();
       }
     });
@@ -169,13 +197,23 @@
 
   /* ── Simple flyout submenus (Support, Resources, About) ── */
   function initSubmenus() {
+    var SUB_OPEN_DELAY  = 150;
+    var SUB_CLOSE_DELAY = 250;
+
     document.querySelectorAll('[data-nav-submenu]').forEach(function(item) {
-      var trigger = item.querySelector('[data-nav-submenu-trigger]');
-      var panel   = item.querySelector('[data-nav-submenu-panel]');
+      var trigger   = item.querySelector('[data-nav-submenu-trigger]');
+      var panel     = item.querySelector('[data-nav-submenu-panel]');
       if (!trigger || !panel) return;
 
+      var openTimer  = null;
+      var closeTimer = null;
+
+      function clearTimers() {
+        clearTimeout(openTimer);
+        clearTimeout(closeTimer);
+      }
+
       function open() {
-        // Close other submenus
         document.querySelectorAll('[data-nav-submenu-panel]').forEach(function(p) {
           if (p !== panel) {
             p.hidden = true;
@@ -194,11 +232,22 @@
       }
 
       trigger.addEventListener('click', function() {
+        clearTimers();
         panel.hidden ? open() : close();
       });
 
+      trigger.addEventListener('mouseenter', function() {
+        clearTimers();
+        openTimer = setTimeout(open, SUB_OPEN_DELAY);
+      });
+
+      item.addEventListener('mouseenter', function() {
+        clearTimers();
+      });
+
       item.addEventListener('mouseleave', function() {
-        close();
+        clearTimers();
+        closeTimer = setTimeout(close, SUB_CLOSE_DELAY);
       });
     });
 
