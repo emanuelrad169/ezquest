@@ -8,7 +8,8 @@
       {{ story_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'page-hero-dark__image' }}
     </div>
   {% endif %}
-  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,5vw,5rem);">
+  <div class="container-shell" style="padding-top:clamp(80px,10vw,140px);padding-bottom:clamp(80px,10vw,140px);">
+    <div style="max-width:680px;">
     <p class="page-hero-dark__kicker">Est. 1994 · Lake Forest, California</p>
     <h1 class="page-hero-dark__heading">
       Built for people who connect everything.
@@ -31,6 +32,7 @@
         <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Warranty on every product</p>
       </div>
     </div>
+    </div><!-- /max-width:680px -->
   </div>
 </section>
 
