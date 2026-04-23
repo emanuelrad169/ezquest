@@ -30,7 +30,7 @@
 /* Page hero — dark/cinematic */
 .page-hero-dark {
   background: #0a0a0a;
-  padding: clamp(80px,10vw,128px) clamp(1.25rem,5vw,5rem);
+  padding: clamp(48px,5vw,72px) 0;
 }
 .page-hero-dark__kicker {
   color: #FBCE2A; font-size: 11px; font-weight: 500;
