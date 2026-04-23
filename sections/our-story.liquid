@@ -42,6 +42,20 @@
 .page-hero-dark--has-image > div:not(.page-hero-dark__media){position:relative;z-index:1}
 .story-timeline-media{overflow:hidden;border-radius:16px;background:#f5f5f7;margin-bottom:2.5rem}
 .story-timeline-image{display:block;width:100%;height:auto}
+
+/* ── Our Story CTA ── */
+.story-cta{position:relative;background:#f5f5f7;padding:clamp(56px,7vw,88px) clamp(1.25rem,2vw,2rem);overflow:hidden;border-top:0.5px solid rgba(0,0,0,0.07)}
+.story-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(251,206,42,0.18) 0%,transparent 70%);pointer-events:none}
+.story-cta__inner{position:relative;z-index:1;max-width:100rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap}
+@media(min-width:640px){.story-cta__inner{padding:0 1.5rem}}
+@media(min-width:1024px){.story-cta__inner{padding:0 2rem}}
+.story-cta__copy{flex:1;min-width:260px}
+.story-cta__kicker{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#7A5C00;margin-bottom:0.75rem}
+.story-cta__heading{font-size:clamp(22px,3vw,36px);font-weight:500;letter-spacing:-0.025em;color:#1d1d1f;line-height:1.15}
+.story-cta__sub{font-size:15px;color:#6e6e73;margin-top:0.5rem;line-height:1.5}
+.story-cta__btn{flex-shrink:0;display:inline-flex;align-items:center;gap:0.5rem;height:52px;padding:0 2rem;background:#FBCE2A;color:#1d1d1f;border-radius:100px;border:none;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background 0.15s,transform 0.15s,box-shadow 0.15s}
+.story-cta__btn:hover{background:#ffd84d;transform:translateY(-1px);box-shadow:0 6px 24px rgba(251,206,42,0.25)}
+@media(max-width:639px){.story-cta__inner{flex-direction:column;align-items:flex-start}.story-cta__btn{width:100%;justify-content:center}}
 </style>
 
 {% comment %} 2. VALUE PILLARS {% endcomment %}
@@ -112,10 +126,20 @@
 </section>
 
 {% comment %} 4. CTA {% endcomment %}
-<section class="page-cta-dark">
-  <h2 class="page-cta-dark__heading">Explore what we make.</h2>
-  <p class="page-cta-dark__body">Premium accessories for every desk, every device.</p>
-  <a href="{{ routes.collections_url }}" class="btn btn--primary" style="background:#FBCE2A;color:#1d1d1f;">Browse products</a>
+<section class="story-cta">
+  <div class="story-cta__inner">
+    <div class="story-cta__copy">
+      <p class="story-cta__kicker">Our products</p>
+      <p class="story-cta__heading">Explore what we make.</p>
+      <p class="story-cta__sub">Premium accessories for every desk, every device.</p>
+    </div>
+    <a href="{{ routes.collections_url }}" class="story-cta__btn">
+      Browse products
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
 </section>
 
 {% schema %}
