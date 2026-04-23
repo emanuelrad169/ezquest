@@ -70,25 +70,45 @@
     });
   }
 
-  /* ── Open / close — two independent panels ── */
+  /* ── Open / close ── */
   function initTriggers() {
-    var triggers = document.querySelectorAll('[data-mega-target]');
-
-    var OPEN_DELAY  = 200;
-    var CLOSE_DELAY = 350;
+    var triggers    = document.querySelectorAll('[data-mega-target]');
+    var OPEN_DELAY  = 300;
+    var CLOSE_DELAY = 500;
     var openTimer   = null;
     var closeTimer  = null;
+    var closeToken  = 0;   // bumped on every open/close to invalidate stale transitionend handlers
+    var curX = 0, curY = 0;
 
-    function clearTimers() {
-      clearTimeout(openTimer);
-      clearTimeout(closeTimer);
+    document.addEventListener('mousemove', function(e) {
+      curX = e.clientX;
+      curY = e.clientY;
+    });
+
+    function inRect(el, extraBottom) {
+      if (!el) return false;
+      var r = el.getBoundingClientRect();
+      return curX >= r.left && curX <= r.right &&
+             curY >= r.top  && curY <= r.bottom + (extraBottom || 0);
+    }
+
+    // "Safe zone" = inside the header bar (+ 20px below to bridge the gap to the panel)
+    // or inside the open panel itself.
+    function inMenuZone() {
+      var header = document.querySelector('.site-header');
+      var panel  = document.querySelector('.ez-mega.is-open');
+      return inRect(header, 20) || inRect(panel);
     }
 
     function openPanel(targetId) {
-      document.querySelectorAll('.ez-mega').forEach(function(panel) {
-        panel.classList.remove('is-open');
-        panel.setAttribute('aria-hidden', 'true');
-        panel.hidden = true;
+      clearTimeout(openTimer);  openTimer  = null;
+      clearTimeout(closeTimer); closeTimer = null;
+      closeToken++;
+
+      document.querySelectorAll('.ez-mega').forEach(function(p) {
+        p.classList.remove('is-open');
+        p.setAttribute('aria-hidden', 'true');
+        p.hidden = true;
       });
       document.querySelectorAll('[data-mega-target]').forEach(function(btn) {
         btn.setAttribute('aria-expanded', 'false');
@@ -103,23 +123,24 @@
         panel.classList.add('is-open');
       });
 
-      var trigger = document.querySelector('[data-mega-target="' + targetId + '"]');
-      if (trigger) {
-        trigger.setAttribute('aria-expanded', 'true');
-        trigger.classList.add('is-active');
+      var trig = document.querySelector('[data-mega-target="' + targetId + '"]');
+      if (trig) {
+        trig.setAttribute('aria-expanded', 'true');
+        trig.classList.add('is-active');
       }
-
-      initSpotlight(panel);
-      initTabs(panel);
     }
 
     function closeAll() {
-      document.querySelectorAll('.ez-mega').forEach(function(panel) {
-        panel.classList.remove('is-open');
-        panel.setAttribute('aria-hidden', 'true');
-        panel.addEventListener('transitionend', function handler() {
-          panel.hidden = true;
-          panel.removeEventListener('transitionend', handler);
+      clearTimeout(openTimer);  openTimer  = null;
+      clearTimeout(closeTimer); closeTimer = null;
+      var token = ++closeToken;
+
+      document.querySelectorAll('.ez-mega').forEach(function(p) {
+        p.classList.remove('is-open');
+        p.setAttribute('aria-hidden', 'true');
+        p.addEventListener('transitionend', function handler() {
+          p.removeEventListener('transitionend', handler);
+          if (closeToken === token) p.hidden = true;
         });
       });
       document.querySelectorAll('[data-mega-target]').forEach(function(btn) {
@@ -128,68 +149,74 @@
       });
     }
 
-    function scheduleOpen(targetId) {
-      clearTimers();
-      openTimer = setTimeout(function() { openPanel(targetId); }, OPEN_DELAY);
-    }
-
-    function scheduleClose() {
-      clearTimers();
-      closeTimer = setTimeout(closeAll, CLOSE_DELAY);
-    }
-
-    // Trigger: hover opens with delay, click is instant
-    triggers.forEach(function(trigger) {
-      trigger.addEventListener('mouseenter', function() {
-        scheduleOpen(this.dataset.megaTarget);
+    triggers.forEach(function(trig) {
+      // Hover: open after delay (instant if another panel is already open)
+      trig.addEventListener('mouseenter', function() {
+        clearTimeout(openTimer); openTimer = null;
+        clearTimeout(closeTimer); closeTimer = null;
+        var tid   = this.dataset.megaTarget;
+        var delay = document.querySelector('.ez-mega.is-open') ? 0 : OPEN_DELAY;
+        openTimer = setTimeout(function() {
+          openTimer = null;
+          if (inMenuZone()) openPanel(tid);
+        }, delay);
       });
 
-      trigger.addEventListener('mouseleave', function(e) {
+      // Leaving trigger: schedule close but DO NOT cancel the open timer —
+      // if open fires first it will cancel close; if close fires first and cursor
+      // has left the menu zone, panel closes correctly.
+      trig.addEventListener('mouseleave', function(e) {
         var panel = document.getElementById(this.dataset.megaTarget);
-        if (panel && panel.contains(e.relatedTarget)) return;
-        scheduleClose();
+        if (panel && e.relatedTarget && panel.contains(e.relatedTarget)) return;
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(function() {
+          closeTimer = null;
+          if (!inMenuZone()) closeAll();
+        }, CLOSE_DELAY);
       });
 
-      trigger.addEventListener('click', function() {
-        var targetId = this.dataset.megaTarget;
-        var panel    = document.getElementById(targetId);
-        var isOpen   = panel && panel.classList.contains('is-open');
-        clearTimers();
-        if (isOpen) {
-          closeAll();
-        } else {
-          openPanel(targetId);
-        }
+      // Click: instant toggle
+      trig.addEventListener('click', function() {
+        clearTimeout(openTimer);  openTimer  = null;
+        clearTimeout(closeTimer); closeTimer = null;
+        var tid = this.dataset.megaTarget;
+        var p   = document.getElementById(tid);
+        p && p.classList.contains('is-open') ? closeAll() : openPanel(tid);
       });
     });
 
     // Panel: keep open while cursor is inside
     document.querySelectorAll('.ez-mega').forEach(function(panel) {
       panel.addEventListener('mouseenter', function() {
-        clearTimers();
+        clearTimeout(closeTimer); closeTimer = null;
       });
       panel.addEventListener('mouseleave', function(e) {
-        var isTrigger = e.relatedTarget &&
+        var goingToTrigger = e.relatedTarget &&
           e.relatedTarget.closest('[data-mega-target]');
-        if (isTrigger) return;
-        scheduleClose();
+        if (goingToTrigger) { clearTimeout(closeTimer); closeTimer = null; return; }
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(function() {
+          closeTimer = null;
+          if (!inMenuZone()) closeAll();
+        }, CLOSE_DELAY);
       });
     });
 
     // Escape: instant close
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        clearTimers();
-        closeAll();
-        var expanded = document.querySelector('[data-mega-target][aria-expanded="true"]');
-        if (expanded) expanded.focus();
-      }
+      if (e.key !== 'Escape') return;
+      clearTimeout(openTimer);  openTimer  = null;
+      clearTimeout(closeTimer); closeTimer = null;
+      closeAll();
+      var expanded = document.querySelector('[data-mega-target][aria-expanded="true"]');
+      if (expanded) expanded.focus();
     });
 
     // Outside click: instant close
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.site-header')) {
-        clearTimers();
+        clearTimeout(openTimer);  openTimer  = null;
+        clearTimeout(closeTimer); closeTimer = null;
         closeAll();
       }
     });
