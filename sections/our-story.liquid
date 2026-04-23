@@ -43,6 +43,13 @@
 .story-timeline-media{overflow:hidden;border-radius:16px;background:#f5f5f7;margin-bottom:2.5rem}
 .story-timeline-image{display:block;width:100%;height:auto}
 
+/* ── Milestone cards ── */
+.milestone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+.milestone-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.milestone-card__year{font-size:36px;font-weight:500;letter-spacing:-.03em;color:#FBCE2A;line-height:1;margin-bottom:.25rem}
+.milestone-card__title{font-size:15px;font-weight:500;color:#1d1d1f;line-height:1.35}
+.milestone-card__body{font-size:13px;color:#6e6e73;line-height:1.65}
+
 /* ── Our Story CTA ── */
 .story-cta{position:relative;background:#f5f5f7;padding:clamp(56px,7vw,88px) clamp(1.25rem,2vw,2rem);overflow:hidden;border-top:0.5px solid rgba(0,0,0,0.07)}
 .story-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(251,206,42,0.18) 0%,transparent 70%);pointer-events:none}
@@ -60,10 +67,10 @@
 
 {% comment %} 2. VALUE PILLARS {% endcomment %}
 <section class="page-section page-section--white">
-  <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
-    <div class="section-intro">
-      <p class="section-intro__kicker">What we stand for</p>
-      <h2 class="section-intro__heading">Three things we never compromise on.</h2>
+  <div class="container-shell" style="padding-top:clamp(64px,8vw,96px);padding-bottom:clamp(64px,8vw,96px);">
+    <div style="margin-bottom:clamp(2rem,4vw,3.5rem);">
+      <p class="section-intro__kicker" style="text-align:left;">What we stand for</p>
+      <h2 class="section-intro__heading" style="text-align:left;margin:0;">Three things we never compromise on.</h2>
     </div>
     <div class="three-col" style="padding:0;">
       <div class="pillar-card">
@@ -99,25 +106,23 @@
 
 {% comment %} 3. TIMELINE {% endcomment %}
 <section class="page-section page-section--grey">
-  <div style="max-width:800px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
-    <div style="margin-bottom:2.5rem;">
-      <p class="section-intro__kicker">Our journey</p>
-      <h2 class="section-intro__heading" style="text-align:left;">30 years of connectivity.</h2>
+  <div class="container-shell" style="padding-top:clamp(64px,8vw,96px);padding-bottom:clamp(64px,8vw,96px);">
+    <div style="margin-bottom:clamp(2rem,4vw,3.5rem);">
+      <p class="section-intro__kicker" style="text-align:left;">Our journey</p>
+      <h2 class="section-intro__heading" style="text-align:left;margin:0;">30 years of connectivity.</h2>
     </div>
     {% if section.settings.timeline_image != blank %}
       <div class="story-timeline-media">
         {{ section.settings.timeline_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: 'EZQuest product timeline', class: 'story-timeline-image' }}
       </div>
     {% endif %}
-    <div class="timeline">
+    <div class="milestone-grid">
       {% for block in section.blocks %}
         {% if block.type == 'milestone' %}
-          <div class="timeline-item" {{ block.shopify_attributes }}>
-            <p class="timeline-item__year">{{ block.settings.year }}</p>
-            <div>
-              <p class="timeline-item__title">{{ block.settings.title }}</p>
-              <p class="timeline-item__body">{{ block.settings.body }}</p>
-            </div>
+          <div class="milestone-card" {{ block.shopify_attributes }}>
+            <p class="milestone-card__year">{{ block.settings.year }}</p>
+            <p class="milestone-card__title">{{ block.settings.title }}</p>
+            <p class="milestone-card__body">{{ block.settings.body }}</p>
           </div>
         {% endif %}
       {% endfor %}
