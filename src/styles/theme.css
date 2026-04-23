@@ -11525,8 +11525,8 @@
   min-height: 44vh;
   display: flex;
   align-items: flex-end;
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-  padding-top: clamp(6.25rem, 12vw, 10rem);
+  padding-bottom: clamp(2.5rem, 4vw, 4rem);
+  padding-top: clamp(5rem, 7vw, 7rem);
   background: #0f1114;
   overflow: hidden;
 }
