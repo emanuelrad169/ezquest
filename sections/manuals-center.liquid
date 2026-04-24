@@ -37,10 +37,10 @@
             <tr {{ block.shopify_attributes }}>
               <td>
                 {% if p != blank and p.featured_image %}
-                  <img src="{{ p.featured_image | image_url: width: 48 }}" alt="{{ p.title | escape }}" width="40" height="40" style="border-radius:8px;object-fit:contain;background:#f5f5f7;display:block">
+                  <img src="{{ p.featured_image | image_url: width: 48 }}" alt="{{ p.title | escape }}" width="40" height="40" style="border-radius:8px;object-fit:contain;background:var(--ez-light);display:block">
                 {% else %}
-                  <div style="width:40px;height:40px;border-radius:8px;background:#f5f5f7;display:flex;align-items:center;justify-content:center">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="2" stroke="#6e6e73" stroke-width="1.25"/><path d="M5 5h6M5 8h6M5 11h3" stroke="#6e6e73" stroke-width="1.25" stroke-linecap="round"/></svg>
+                  <div style="width:40px;height:40px;border-radius:8px;background:var(--ez-light);display:flex;align-items:center;justify-content:center">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="2" stroke="var(--ez-grey)" stroke-width="1.25"/><path d="M5 5h6M5 8h6M5 11h3" stroke="var(--ez-grey)" stroke-width="1.25" stroke-linecap="round"/></svg>
                   </div>
                 {% endif %}
               </td>
@@ -48,9 +48,9 @@
                 {{ block.settings.product_name | default: p.title | default: 'EZQuest Product' }}
               </td>
               <td data-label="Manual">{{ block.settings.manual_title }}</td>
-              <td data-label="Pages" style="color:#6e6e73">{{ block.settings.page_count | default: '—' }}</td>
-              <td data-label="Language" style="color:#6e6e73">{{ block.settings.language | default: 'English' }}</td>
-              <td data-label="Updated" style="color:#6e6e73;font-size:13px">{{ block.settings.updated | default: '2025' }}</td>
+              <td data-label="Pages" style="color:var(--ez-grey)">{{ block.settings.page_count | default: '—' }}</td>
+              <td data-label="Language" style="color:var(--ez-grey)">{{ block.settings.language | default: 'English' }}</td>
+              <td data-label="Updated" style="color:var(--ez-grey);font-size:13px">{{ block.settings.updated | default: '2025' }}</td>
               <td>
                 {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
                   <a href="{{ block.settings.file_url }}" class="btn-download" download>
@@ -58,7 +58,7 @@
                     PDF
                   </a>
                 {% else %}
-                  <span style="font-size:13px;color:#6e6e73">Uploading</span>
+                  <span style="font-size:13px;color:var(--ez-grey)">Uploading</span>
                 {% endif %}
               </td>
             </tr>

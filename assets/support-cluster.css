@@ -4,7 +4,7 @@
 
 /* Page hero — light variant (all support pages) */
 .support-hero {
-  background: #f5f5f7;
+  background: var(--ez-light);
   padding: clamp(48px,6vw,80px) clamp(1.25rem,5vw,5rem)
            clamp(32px,4vw,48px);
 }
@@ -19,7 +19,7 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #FBCE2A;
+  color: var(--ez-amber);
   margin: 0 0 .75rem;
 }
 
@@ -28,14 +28,14 @@
   font-weight: 500;
   letter-spacing: -.035em;
   line-height: 1.08;
-  color: #1d1d1f;
+  color: var(--ez-black);
   margin: 0 0 .875rem;
   max-width: 18ch;
 }
 
 .support-hero__sub {
   font-size: clamp(15px,1.5vw,17px);
-  color: #6e6e73;
+  color: var(--ez-grey);
   line-height: 1.6;
   max-width: 52ch;
   margin: 0;
@@ -69,18 +69,18 @@
   padding: .875rem 1rem;
   font-size: 13px;
   font-weight: 400;
-  color: #6e6e73;
+  color: var(--ez-grey);
   white-space: nowrap;
   border-bottom: 2px solid transparent;
   text-decoration: none;
   transition: color .15s, border-color .15s;
 }
 
-.support-nav__link:hover { color: #1d1d1f; }
+.support-nav__link:hover { color: var(--ez-black); }
 .support-nav__link.is-active {
-  color: #1d1d1f;
+  color: var(--ez-black);
   font-weight: 500;
-  border-bottom-color: #FBCE2A;
+  border-bottom-color: var(--ez-amber);
 }
 
 /* Page body wrapper */
@@ -105,7 +105,7 @@
   background: none;
   font-size: 13px;
   font-weight: 400;
-  color: #6e6e73;
+  color: var(--ez-grey);
   cursor: pointer;
   transition: all .2s;
   font-family: inherit;
@@ -113,8 +113,8 @@
 
 .filter-pill.is-active,
 .filter-pill:focus {
-  border-color: #FBCE2A;
-  color: #1d1d1f;
+  border-color: var(--ez-amber);
+  color: var(--ez-black);
   background: rgba(251,206,42,.07);
   font-weight: 500;
 }
@@ -139,8 +139,8 @@
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: #6e6e73;
-  background: #f5f5f7;
+  color: var(--ez-grey);
+  background: var(--ez-light);
   border-bottom: 1px solid rgba(0,0,0,.07);
 }
 
@@ -155,7 +155,7 @@
 .data-table td {
   padding: 1rem 1.25rem;
   vertical-align: middle;
-  color: #1d1d1f;
+  color: var(--ez-black);
 }
 
 /* File type badge */
@@ -191,7 +191,7 @@
   gap: .375rem;
   padding: .45rem 1rem;
   border-radius: 100px;
-  background: #FBCE2A;
+  background: var(--ez-amber);
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -208,7 +208,7 @@
   padding: .2rem .75rem;
   border-radius: 100px;
   background: rgba(0,0,0,.04);
-  color: #6e6e73;
+  color: var(--ez-grey);
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
@@ -226,7 +226,7 @@
   vertical-align: middle;
 }
 .status-dot--full    { background: #22c55e; }
-.status-dot--partial { background: #FBCE2A; }
+.status-dot--partial { background: var(--ez-amber); }
 .status-dot--no      { background: #ef4444; }
 
 /* Section label */
@@ -235,7 +235,7 @@
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #6e6e73;
+  color: var(--ez-grey);
   margin-bottom: 1.5rem;
 }
 
@@ -272,7 +272,7 @@
 
 .info-card__icon--amber {
   background: rgba(251,206,42,.1);
-  color: #FBCE2A;
+  color: var(--ez-amber);
 }
 
 .info-card__icon--warning {
@@ -283,14 +283,14 @@
 .info-card__title {
   font-size: 15px;
   font-weight: 500;
-  color: #1d1d1f;
+  color: var(--ez-black);
   margin: 0 0 .25rem;
   letter-spacing: -.01em;
 }
 
 .info-card__body {
   font-size: 14px;
-  color: #6e6e73;
+  color: var(--ez-grey);
   line-height: 1.6;
   margin: 0;
 }
@@ -301,25 +301,25 @@
   padding: 4rem 2rem;
   border: 1px solid rgba(0,0,0,.07);
   border-radius: 16px;
-  background: #f5f5f7;
+  background: var(--ez-light);
 }
 
 .empty-state__heading {
   font-size: 18px;
   font-weight: 500;
-  color: #1d1d1f;
+  color: var(--ez-black);
   margin: 0 0 .5rem;
 }
 
 .empty-state__body {
   font-size: 14px;
-  color: #6e6e73;
+  color: var(--ez-grey);
   margin: 0 0 1.5rem;
 }
 
 /* CTA strip */
 .support-cta-strip {
-  background: #0a0a0a;
+  background: var(--ez-dark);
   border-radius: 20px;
   padding: clamp(2rem,4vw,3rem);
   display: flex;
@@ -334,7 +334,7 @@
   font-size: clamp(20px,3vw,32px);
   font-weight: 500;
   letter-spacing: -.025em;
-  color: #f5f5f7;
+  color: var(--ez-light);
   margin: 0 0 .375rem;
 }
 
@@ -360,7 +360,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .06em;
-    color: #6e6e73;
+    color: var(--ez-grey);
     margin-right: .375rem;
   }
 }

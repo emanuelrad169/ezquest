@@ -27,8 +27,8 @@
         {% if form.posted_successfully? %}
           <div class="email-signup__success" role="status">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <circle cx="16" cy="16" r="15" stroke="#FBCE2A" stroke-width="1.5"/>
-              <path d="M10 16l4 4 8-8" stroke="#FBCE2A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="16" r="15" stroke="var(--ez-amber)" stroke-width="1.5"/>
+              <path d="M10 16l4 4 8-8" stroke="var(--ez-amber)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <p class="email-signup__success-msg">
               {{ section.settings.success_message | escape }}
@@ -75,7 +75,7 @@
 <style>
   #shopify-section-{{ section.id }} .email-signup {
     padding: clamp(64px, 8vw, 96px) clamp(1.25rem, 5vw, 5rem);
-    background: #0a0a0a;
+    background: var(--ez-dark);
   }
 
   #shopify-section-{{ section.id }} .email-signup__inner {
@@ -88,12 +88,12 @@
   }
 
   #shopify-section-{{ section.id }} .email-signup__kicker {
-    color: #FBCE2A;
+    color: var(--ez-amber);
   }
 
   #shopify-section-{{ section.id }} .email-signup__heading {
     margin: 0.5rem 0 0.875rem;
-    color: #f5f5f7;
+    color: var(--ez-light);
     font-size: clamp(24px, 4vw, 40px);
     font-weight: 500;
     letter-spacing: -0.03em;
@@ -120,7 +120,7 @@
     border: 1.5px solid rgba(255, 255, 255, 0.15);
     border-radius: 100px;
     background: rgba(255, 255, 255, 0.07);
-    color: #f5f5f7;
+    color: var(--ez-light);
     font-family: inherit;
     font-size: 15px;
     outline: none;
@@ -132,7 +132,7 @@
   }
 
   #shopify-section-{{ section.id }} .email-signup__input:focus {
-    border-color: #FBCE2A;
+    border-color: var(--ez-amber);
   }
 
   #shopify-section-{{ section.id }} .email-signup__submit {
@@ -163,7 +163,7 @@
 
   #shopify-section-{{ section.id }} .email-signup__success-msg {
     margin: 0;
-    color: #f5f5f7;
+    color: var(--ez-light);
     font-size: 18px;
     font-weight: 500;
   }

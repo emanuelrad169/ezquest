@@ -49,9 +49,9 @@
                 {% assign ext = block.settings.file_url | split: '.' | last | upcase %}
                 <span class="file-badge file-badge--{{ ext | downcase }}">{{ ext }}</span>
               </td>
-              <td data-label="Size" style="color:#6e6e73">{{ block.settings.file_size }}</td>
-              <td data-label="Version" style="color:#6e6e73">{{ block.settings.version | default: '—' }}</td>
-              <td data-label="Compatible" style="color:#6e6e73;font-size:13px">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
+              <td data-label="Size" style="color:var(--ez-grey)">{{ block.settings.file_size }}</td>
+              <td data-label="Version" style="color:var(--ez-grey)">{{ block.settings.version | default: '—' }}</td>
+              <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
               <td>
                 {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
                   <a href="{{ block.settings.file_url }}" class="btn-download" download aria-label="Download {{ block.settings.file_title }}">
@@ -59,7 +59,7 @@
                     Download
                   </a>
                 {% else %}
-                  <span style="font-size:13px;color:#6e6e73">Coming soon</span>
+                  <span style="font-size:13px;color:var(--ez-grey)">Coming soon</span>
                 {% endif %}
               </td>
             </tr>
