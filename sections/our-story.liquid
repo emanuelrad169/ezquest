@@ -36,37 +36,6 @@
   </div>
 </section>
 
-<style>
-.page-hero-dark{position:relative;overflow:hidden}
-.page-hero-dark__media{position:absolute;inset:0;z-index:0}
-.page-hero-dark__image{width:100%;height:100%;object-fit:cover}
-.page-hero-dark--has-image:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(6,12,24,.94),rgba(6,12,24,.74) 45%,rgba(6,12,24,.2))}
-.page-hero-dark--has-image > div:not(.page-hero-dark__media){position:relative;z-index:1}
-.story-timeline-media{overflow:hidden;border-radius:16px;background:var(--ez-light);margin-bottom:2.5rem}
-.story-timeline-image{display:block;width:100%;height:auto}
-
-/* ── Milestone cards ── */
-.milestone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
-.milestone-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.5rem}
-.milestone-card__year{font-size:36px;font-weight:500;letter-spacing:-.03em;color:var(--ez-amber);line-height:1;margin-bottom:.25rem}
-.milestone-card__title{font-size:15px;font-weight:500;color:var(--ez-black);line-height:1.35}
-.milestone-card__body{font-size:13px;color:var(--ez-grey);line-height:1.65}
-
-/* ── Our Story CTA ── */
-.story-cta{position:relative;background:var(--ez-light);padding:clamp(56px,7vw,88px) clamp(1.25rem,2vw,2rem);overflow:hidden;border-top:0.5px solid rgba(0,0,0,0.07)}
-.story-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(251,206,42,0.18) 0%,transparent 70%);pointer-events:none}
-.story-cta__inner{position:relative;z-index:1;max-width:100rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap}
-@media(min-width:640px){.story-cta__inner{padding:0 1.5rem}}
-@media(min-width:1024px){.story-cta__inner{padding:0 2rem}}
-.story-cta__copy{flex:1;min-width:260px}
-.story-cta__kicker{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ez-amber-dark);margin-bottom:0.75rem}
-.story-cta__heading{font-size:clamp(22px,3vw,36px);font-weight:500;letter-spacing:-0.025em;color:var(--ez-black);line-height:1.15}
-.story-cta__sub{font-size:15px;color:var(--ez-grey);margin-top:0.5rem;line-height:1.5}
-.story-cta__btn{flex-shrink:0;display:inline-flex;align-items:center;gap:0.5rem;height:52px;padding:0 2rem;background:var(--ez-amber);color:var(--ez-black);border-radius:100px;border:none;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background 0.15s,transform 0.15s,box-shadow 0.15s}
-.story-cta__btn:hover{background:var(--ez-amber-hover);transform:translateY(-1px);box-shadow:0 6px 24px rgba(251,206,42,0.25)}
-@media(max-width:639px){.story-cta__inner{flex-direction:column;align-items:flex-start}.story-cta__btn{width:100%;justify-content:center}}
-</style>
-
 {% comment %} 2. VALUE PILLARS {% endcomment %}
 <section class="page-section page-section--white">
   <div class="container-shell">

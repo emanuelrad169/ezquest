@@ -29,9 +29,19 @@
 
 /* Page hero — dark/cinematic */
 .page-hero-dark {
+  position: relative;
+  overflow: hidden;
   background: var(--ez-dark);
   padding: clamp(48px,5vw,72px) 0;
 }
+.page-hero-dark__media { position: absolute; inset: 0; z-index: 0; }
+.page-hero-dark__image { width: 100%; height: 100%; object-fit: cover; }
+.page-hero-dark--has-image::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(90deg, rgba(6,12,24,.94), rgba(6,12,24,.74) 45%, rgba(6,12,24,.2));
+}
+.page-hero-dark--has-image > div:not(.page-hero-dark__media) { position: relative; z-index: 1; }
 .page-hero-dark__kicker {
   color: var(--ez-amber); font-size: 11px; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem;
@@ -45,6 +55,15 @@
   font-size: clamp(15px,1.5vw,18px); color: rgba(255,255,255,0.55);
   line-height: 1.65; max-width: 48ch; margin-bottom: 2.5rem;
 }
+
+/* Our Story — timeline & milestones */
+.story-timeline-media { overflow: hidden; border-radius: 16px; background: var(--ez-light); margin-bottom: 2.5rem; }
+.story-timeline-image { display: block; width: 100%; height: auto; }
+.milestone-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 1.25rem; }
+.milestone-card { background: #fff; border: 1px solid rgba(0,0,0,.07); border-radius: 18px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+.milestone-card__year { font-size: 36px; font-weight: 500; letter-spacing: -.03em; color: var(--ez-amber); line-height: 1; margin-bottom: .25rem; }
+.milestone-card__title { font-size: 15px; font-weight: 500; color: var(--ez-black); line-height: 1.35; }
+.milestone-card__body { font-size: 13px; color: var(--ez-grey); line-height: 1.65; }
 
 /* Two-col layout */
 .two-col {

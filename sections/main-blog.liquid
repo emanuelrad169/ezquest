@@ -20,14 +20,6 @@
 </section>
 
 {% comment %} 2. CATEGORY FILTER {% endcomment %}
-<style>
-.page-hero-dark{position:relative;overflow:hidden}
-.page-hero-dark__media{position:absolute;inset:0;z-index:0}
-.page-hero-dark__image{width:100%;height:100%;object-fit:cover}
-.page-hero-dark--has-image:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(6,12,24,.92),rgba(6,12,24,.7) 45%,rgba(6,12,24,.18))}
-.page-hero-dark--has-image > div:not(.page-hero-dark__media){position:relative;z-index:1}
-</style>
-
 {% if blog.articles_count > 0 %}
 <div style="background:#fff;border-bottom:1px solid #e5e5ea;">
   <div style="max-width:1280px;margin:0 auto;padding:.875rem clamp(1.25rem,5vw,5rem);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
