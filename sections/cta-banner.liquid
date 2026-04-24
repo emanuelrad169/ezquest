@@ -1,46 +1,28 @@
-<section class="section-shell home-cta-section">
-  <div class="container-shell">
-    {%- liquid
-      assign section_heading = section.settings.heading | default: 'Take the next step with confidence'
-      assign section_copy = section.settings.copy | default: 'Move into products, support, or setup guidance without losing the path you were already on.'
-      assign banner_class = 'cta-surface-dark'
-      assign copy_class = 'text-slate-200'
-      assign kicker_class = 'text-slate-300'
-      assign heading_class = 'text-white'
-
-      if section.settings.style == 'light'
-        assign banner_class = 'cta-surface-light'
-        assign copy_class = 'text-slate-600'
-        assign kicker_class = ''
-        assign heading_class = 'text-slate-950'
-      endif
-    -%}
-
-    <div class="home-cta-shell {{ banner_class }}">
-      <div class="home-cta-grid">
-        <div class="max-w-3xl">
-          {% if section.settings.eyebrow != blank %}
-            <p class="section-kicker {{ kicker_class }}">{{ section.settings.eyebrow }}</p>
-          {% endif %}
-          <h2 class="section-heading mt-4 {{ heading_class }}">{{ section_heading }}</h2>
-          <p class="mt-4 max-w-2xl text-base leading-7 {{ copy_class }}">{{ section_copy }}</p>
-        </div>
-
-        <div class="home-cta-aside">
-          <div class="home-cta-note">
-            <p class="section-kicker {{ kicker_class }}">Why it feels easier</p>
-            <p class="mt-3 text-sm leading-7 {{ copy_class }}">Compare models, confirm compatibility, and keep support within reach without leaving the storefront.</p>
-          </div>
-          <div class="action-cluster lg:justify-end">
-            {% if section.settings.link_label != blank %}
-              {% render 'button', label: section.settings.link_label, url: section.settings.link_url, style: section.settings.button_style %}
-            {% endif %}
-            {% if section.settings.secondary_label != blank and section.settings.secondary_url != blank %}
-              {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url, style: 'secondary' %}
-            {% endif %}
-          </div>
-        </div>
-      </div>
+<section class="page-cta">
+  <div class="page-cta__inner">
+    <div class="page-cta__copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="page-cta__kicker">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <p class="page-cta__heading">{{ section.settings.heading | default: 'Take the next step.' | escape }}</p>
+      {% if section.settings.copy != blank %}
+        <p class="page-cta__sub">{{ section.settings.copy | escape }}</p>
+      {% endif %}
+    </div>
+    <div class="page-cta__actions">
+      {% if section.settings.link_label != blank %}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="page-cta__btn">
+          {{ section.settings.link_label | escape }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+      {% if section.settings.secondary_label != blank and section.settings.secondary_url != blank %}
+        <a href="{{ section.settings.secondary_url }}" class="page-cta__btn" style="background:transparent;border:1.5px solid rgba(0,0,0,0.15);color:#1d1d1f;box-shadow:none;">
+          {{ section.settings.secondary_label | escape }}
+        </a>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -49,33 +31,13 @@
 {
   "name": "CTA banner",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Next step" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Take the next step with confidence" },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Move into products, support, or setup guidance without losing the path you were already on." },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Learn more" },
-    { "type": "url", "id": "link_url", "label": "Link" },
-    { "type": "text", "id": "secondary_label", "label": "Secondary link label" },
-    { "type": "url", "id": "secondary_url", "label": "Secondary link URL" },
-    {
-      "type": "select",
-      "id": "style",
-      "label": "Style",
-      "default": "dark",
-      "options": [
-        { "value": "dark", "label": "Dark" },
-        { "value": "light", "label": "Light" }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "default": "primary",
-      "options": [
-        { "value": "primary", "label": "Primary" },
-        { "value": "secondary", "label": "Secondary" }
-      ]
-    }
+    { "type": "text",     "id": "eyebrow",         "label": "Kicker",           "default": "Next step" },
+    { "type": "text",     "id": "heading",          "label": "Heading",          "default": "Take the next step." },
+    { "type": "textarea", "id": "copy",             "label": "Subheading" },
+    { "type": "text",     "id": "link_label",       "label": "Button label",     "default": "Learn more" },
+    { "type": "url",      "id": "link_url",         "label": "Button URL" },
+    { "type": "text",     "id": "secondary_label",  "label": "Secondary button label" },
+    { "type": "url",      "id": "secondary_url",    "label": "Secondary button URL" }
   ],
   "presets": [
     { "name": "CTA banner" }

@@ -286,18 +286,60 @@
 .page-faq-item.is-open .page-faq-body { max-height: 400px; }
 .page-faq-content { padding: 0 0 1.1rem; font-size: 14px; color: #6e6e73; line-height: 1.7; }
 
-/* Dark CTA banner */
-.page-cta-dark {
-  background: #0a0a0a;
-  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,5rem);
-  text-align: center;
+/* ── Shared page CTA rail (light, used site-wide) ── */
+.page-cta {
+  position: relative;
+  background: #f5f5f7;
+  padding: clamp(44px,5vw,72px) clamp(1.25rem,2vw,2rem);
+  overflow: hidden;
+  border-top: 0.5px solid rgba(0,0,0,0.07);
 }
-.page-cta-dark__heading {
-  font-size: clamp(24px,4vw,40px); font-weight: 500;
-  letter-spacing: -.025em; color: #f5f5f7; margin-bottom: .875rem;
+.page-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(251,206,42,0.18) 0%, transparent 70%);
+  pointer-events: none;
 }
-.page-cta-dark__body {
-  font-size: 16px; color: rgba(255,255,255,.55); margin-bottom: 2rem;
+.page-cta__inner {
+  position: relative; z-index: 1;
+  max-width: 100rem; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem; flex-wrap: wrap;
+  padding: 0 clamp(1.25rem,2vw,2rem);
+}
+.page-cta__copy { flex: 1; min-width: 260px; }
+.page-cta__kicker {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #7A5C00; margin-bottom: 0.75rem;
+}
+.page-cta__heading {
+  font-size: clamp(22px,3vw,36px); font-weight: 500;
+  letter-spacing: -0.025em; color: #1d1d1f; line-height: 1.15;
+}
+.page-cta__sub {
+  font-size: 15px; color: #6e6e73; margin-top: 0.5rem; line-height: 1.5;
+}
+.page-cta__btn {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  height: 52px; padding: 0 2rem;
+  background: #FBCE2A; color: #1d1d1f;
+  border-radius: 100px; border: none;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.page-cta__btn:hover {
+  background: #ffd84d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(251,206,42,0.25);
+}
+.page-cta__actions { display: flex; gap: 1rem; flex-wrap: wrap; flex-shrink: 0; }
+@media (max-width: 639px) {
+  .page-cta__inner { flex-direction: column; align-items: flex-start; }
+  .page-cta__btn  { width: 100%; justify-content: center; }
 }
 
 /* Free shipping highlight strip */
