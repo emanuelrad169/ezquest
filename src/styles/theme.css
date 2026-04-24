@@ -15803,3 +15803,60 @@ body.cookie-visible {
     transition: none;
   }
 }
+
+/* ── Free shipping bar (cart drawer) ──────────────── */
+
+.shipping-bar {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.shipping-bar__msg {
+  margin: 0 0 0.625rem;
+  color: var(--ez-grey);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.shipping-bar__msg strong {
+  color: var(--ez-black);
+  font-weight: 600;
+}
+
+.shipping-bar__track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.shipping-bar__fill {
+  height: 100%;
+  min-width: 4px;
+  border-radius: 100px;
+  background: var(--ez-amber);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.shipping-bar__unlocked {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shipping-bar__msg--unlocked {
+  margin: 0;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.shipping-bar__icon {
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipping-bar__fill {
+    transition: none;
+  }
+}
