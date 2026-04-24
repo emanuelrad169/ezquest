@@ -101,9 +101,22 @@
 
 <style>
   #shopify-section-{{ section.id }} .compare-page {
-    max-width: 1280px;
     margin: 0 auto;
-    padding: clamp(64px, 8vw, 96px) clamp(1.25rem, 5vw, 5rem);
+    padding: clamp(44px, 5vw, 64px) 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .compare-page {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .compare-page {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   #shopify-section-{{ section.id }} .compare-page__header {
@@ -307,7 +320,8 @@
 
   @media (max-width: 767px) {
     #shopify-section-{{ section.id }} .compare-page {
-      padding: clamp(48px, 12vw, 72px) 1rem;
+      padding-top: clamp(36px, 10vw, 56px);
+      padding-bottom: clamp(36px, 10vw, 56px);
     }
 
     #shopify-section-{{ section.id }} .compare-table {
