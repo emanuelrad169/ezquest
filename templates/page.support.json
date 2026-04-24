@@ -5,9 +5,22 @@
       "settings": {
         "image": "shopify://shop_images/ezquest-support-hero.png"
       }
+    },
+    "cta": {
+      "type": "support-cta-rail",
+      "settings": {
+        "kicker": "Still need help?",
+        "heading": "Our team responds within 1 business day.",
+        "body": "Every message is read by a real person. No bots, no ticket queues.",
+        "cta_label": "Contact support",
+        "cta_url": "/pages/contact",
+        "cta2_label": "Browse resources",
+        "cta2_url": "/blogs/resources"
+      }
     }
   },
   "order": [
-    "hub"
+    "hub",
+    "cta"
   ]
 }

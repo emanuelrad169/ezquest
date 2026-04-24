@@ -1,3 +1,5 @@
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+
 <article class="section-shell main-article-section">
   {%- liquid
     assign words = article.content | strip_html | split: ' '
