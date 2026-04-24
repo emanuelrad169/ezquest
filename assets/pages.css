@@ -358,142 +358,114 @@
 /* ── Where to Buy ─────────────────────────────── */
 
 .wtb-hero {
-  background: linear-gradient(135deg, var(--ez-light) 0%, #fff 100%);
-  padding: clamp(44px,5vw,72px) clamp(1.25rem,3vw,2.5rem);
-  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+  position: relative;
+  background: #0f1114;
+  padding: clamp(48px,5vw,72px) clamp(1.25rem,3vw,2.5rem) clamp(44px,5vw,64px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+  min-height: 40vh;
+  display: flex;
+  align-items: flex-end;
 }
 
-.wtb-hero__kicker {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ez-amber);
-  margin-bottom: 1rem;
+.wtb-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--wtb-bg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
 }
 
-.wtb-hero__heading {
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  color: var(--ez-black);
-  margin-bottom: 1rem;
-}
-
-.wtb-hero__body {
-  font-size: clamp(15px, 1.5vw, 18px);
-  color: var(--ez-grey);
-  line-height: 1.65;
-  max-width: 52ch;
-}
-
-/* Section group */
-.wtb-group {
-  padding: clamp(40px,5vw,60px) clamp(1.25rem,3vw,2rem);
-  max-width: 1280px;
+.wtb-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100rem;
   margin: 0 auto;
 }
 
-.wtb-group + .wtb-group {
-  padding-top: 0;
+.wtb-hero__kicker {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ez-amber); margin-bottom: 1rem;
 }
 
+.wtb-hero__heading {
+  font-size: clamp(32px,5vw,56px);
+  font-weight: 500; letter-spacing: -0.03em;
+  color: var(--ez-light); margin-bottom: 0.875rem;
+}
+
+.wtb-hero__body {
+  font-size: clamp(15px,1.5vw,17px);
+  color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 54ch;
+}
+
+.wtb-group {
+  max-width: 100rem; margin: 0 auto;
+  padding: clamp(40px,5vw,64px) clamp(1.25rem,2vw,2rem);
+}
+
+@media (min-width: 640px)  { .wtb-group { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .wtb-group { padding-left: 2rem;   padding-right: 2rem;   } }
+
+.wtb-group + .wtb-group { padding-top: 0; }
+
 .wtb-group__heading {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ez-grey);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.875rem;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ez-grey); margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   border-bottom: 0.5px solid rgba(0,0,0,0.08);
 }
 
-/* Card grid */
 .wtb-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 @media (max-width: 639px) {
-  .wtb-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .wtb-grid { grid-template-columns: repeat(2,1fr); gap: 1rem; }
 }
 
-/* Card */
 .wtb-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  padding: 1.5rem 1.25rem;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem; padding: 2.5rem 2rem;
   background: #fff;
   border: 0.5px solid rgba(0,0,0,0.08);
-  border-radius: 16px;
-  text-decoration: none;
+  border-radius: 20px; text-decoration: none;
+  min-height: 200px;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-  min-height: 120px;
 }
 
 .wtb-card:hover {
-  border-color: rgba(251,206,42,0.4);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border-color: rgba(251,206,42,0.5);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
 
 .wtb-card__logo-wrap {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 64px;
+  width: 100%; height: 100px;
 }
 
 .wtb-card__logo {
-  max-width: 140px;
-  max-height: 56px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: none;
-  transition: filter 0.2s;
-}
-
-.wtb-card:hover .wtb-card__logo {
-  filter: none;
+  max-width: 220px; max-height: 90px;
+  width: auto; height: auto; object-fit: contain;
 }
 
 .wtb-card__name-fallback {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ez-black);
-  text-align: center;
+  font-size: 13px; font-weight: 500;
+  color: var(--ez-black); text-align: center;
 }
 
 .wtb-card__region {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ez-grey);
-  text-align: center;
-}
-
-/* CTA */
-.wtb-cta {
-  background: var(--ez-dark);
-  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,5rem);
-  text-align: center;
-}
-
-.wtb-cta__text {
-  font-size: clamp(18px, 2.5vw, 28px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--ez-light);
-  margin-bottom: 1.5rem;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ez-grey); text-align: center;
 }
