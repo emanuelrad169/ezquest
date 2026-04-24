@@ -41,6 +41,16 @@
   margin: 0;
 }
 
+.support-hero { position: relative; overflow: hidden; }
+.support-hero__media { position: absolute; inset: 0; z-index: 0; }
+.support-hero__image { width: 100%; height: 100%; object-fit: cover; }
+.support-hero--has-image .support-hero__wrap { position: relative; z-index: 1; }
+.support-hero--has-image::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(90deg, rgba(248,250,252,.96), rgba(248,250,252,.72) 45%, rgba(248,250,252,.18));
+}
+
 /* Support nav rail */
 .support-nav {
   background: #fff;
@@ -364,3 +374,107 @@
     margin-right: .375rem;
   }
 }
+
+/* ── Support Hub ───────────────────────────────── */
+
+.shub-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(0,0,0,.07); border: 1px solid rgba(0,0,0,.07); border-radius: 16px; overflow: hidden; margin-bottom: 3rem; }
+@media(max-width:768px) { .shub-stats { grid-template-columns: repeat(2,1fr); } }
+.shub-stat { background: #fff; padding: 1.5rem; display: flex; flex-direction: column; gap: .375rem; }
+.shub-stat__number { font-size: clamp(24px,3vw,36px); font-weight: 500; letter-spacing: -.03em; color: var(--ez-black); line-height: 1; }
+.shub-stat__label { font-size: 13px; color: var(--ez-grey); line-height: 1.4; max-width: 18ch; }
+.shub-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(0,0,0,.07); border: 1px solid rgba(0,0,0,.07); border-radius: 16px; overflow: hidden; }
+@media(max-width:900px) { .shub-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:540px) { .shub-grid { grid-template-columns: 1fr; } }
+.shub-card { background: #fff; padding: 1.5rem; text-decoration: none; display: grid; grid-template-columns: 36px 1fr 16px; align-items: center; gap: 1rem; transition: background .15s; }
+.shub-card:hover { background: var(--ez-light); }
+.shub-card__icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(251,206,42,.08); color: var(--ez-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.shub-card__title { font-size: 15px; font-weight: 500; color: var(--ez-black); margin: 0 0 .2rem; letter-spacing: -.01em; }
+.shub-card__desc { font-size: 13px; color: var(--ez-grey); margin: 0; line-height: 1.45; }
+.shub-card__arrow { color: rgba(0,0,0,.2); transition: color .15s, transform .15s; }
+.shub-card:hover .shub-card__arrow { color: var(--ez-amber); transform: translateX(3px); }
+
+/* ── Warranty Page ─────────────────────────────── */
+
+.warranty-layout { display: grid; grid-template-columns: 1fr 360px; gap: clamp(2rem,5vw,5rem); align-items: start; }
+@media(max-width:900px) { .warranty-layout { grid-template-columns: 1fr; } }
+.warranty-stat-row { display: flex; gap: 2rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,.07); flex-wrap: wrap; }
+.warranty-stat { display: flex; flex-direction: column; gap: .125rem; }
+.warranty-stat__number { font-size: clamp(40px,6vw,64px); font-weight: 500; letter-spacing: -.04em; color: var(--ez-black); line-height: 1; }
+.warranty-stat__unit { font-size: 14px; color: var(--ez-amber); font-weight: 500; margin-bottom: .125rem; }
+.warranty-stat__label { font-size: 12px; color: var(--ez-grey); }
+.warranty-section { margin-bottom: 2.5rem; }
+.warranty-section__heading { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ez-grey); margin: 0 0 1rem; }
+.warranty-list { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+.warranty-list li { font-size: 15px; line-height: 1.5; padding-left: 1.75rem; position: relative; color: var(--ez-black); }
+.warranty-list--covered li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: 700; font-size: 13px; top: .1rem; }
+.warranty-list--excluded li::before { content: '×'; position: absolute; left: 0; color: #ef4444; font-weight: 500; font-size: 16px; top: -.05rem; }
+.warranty-steps { padding: 0; margin: 0; list-style: none; counter-reset: ws; display: flex; flex-direction: column; gap: .875rem; }
+.warranty-steps li { counter-increment: ws; display: flex; gap: 1rem; font-size: 15px; line-height: 1.5; align-items: flex-start; color: var(--ez-black); }
+.warranty-steps li::before { content: counter(ws); width: 26px; height: 26px; border-radius: 50%; background: var(--ez-light); color: var(--ez-black); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+.warranty-claim-card { border: 1.5px solid rgba(251,206,42,.2); border-radius: 18px; padding: 2rem; background: rgba(251,206,42,.03); }
+.warranty-claim-card__icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(251,206,42,.08); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.warranty-claim-card__heading { font-size: 20px; font-weight: 500; letter-spacing: -.02em; color: var(--ez-black); margin: 0 0 .625rem; }
+.warranty-claim-card__body { font-size: 14px; color: var(--ez-grey); line-height: 1.65; margin: 0 0 1.5rem; }
+.warranty-claim-card__note { font-size: 12px; color: var(--ez-grey); text-align: center; margin: .875rem 0 0; }
+
+/* ── User Guides Center ────────────────────────── */
+
+.guide-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+@media(max-width:900px) { .guide-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:560px) { .guide-grid { grid-template-columns: 1fr; } }
+.guide-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; overflow: hidden; background: #fff; text-decoration: none; display: flex; flex-direction: column; transition: border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1); }
+.guide-card:hover { border-color: rgba(251,206,42,.3); transform: translateY(-2px); }
+.guide-card__image-wrap { position: relative; background: var(--ez-light); aspect-ratio: 16/9; overflow: hidden; }
+.guide-card__image { width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
+.guide-card__image-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--ez-light) 0%, #e5e5e7 100%); }
+.guide-card__type-pill { position: absolute; top: .75rem; left: .75rem; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: rgba(251,206,42,.1); color: var(--ez-amber); border: 1px solid rgba(251,206,42,.25); padding: .2rem .625rem; border-radius: 100px; }
+.guide-card__body { padding: 1.25rem; flex: 1; }
+.guide-card__meta { display: flex; align-items: center; gap: .625rem; margin-bottom: .75rem; }
+.guide-card__steps { font-size: 12px; color: var(--ez-grey); font-weight: 500; }
+.guide-card__difficulty { font-size: 11px; font-weight: 600; padding: .15rem .5rem; border-radius: 100px; text-transform: uppercase; letter-spacing: .05em; }
+.guide-card__difficulty--easy { background: rgba(21,128,61,.07); color: #15803d; }
+.guide-card__difficulty--medium { background: rgba(251,206,42,.07); color: var(--ez-amber); }
+.guide-card__difficulty--advanced { background: rgba(239,68,68,.07); color: #b91c1c; }
+.guide-card__title { font-size: 15px; font-weight: 500; color: var(--ez-black); letter-spacing: -.01em; line-height: 1.35; margin: 0 0 .375rem; }
+.guide-card__desc { font-size: 13px; color: var(--ez-grey); line-height: 1.55; margin: 0; }
+.guide-card__footer { padding: .875rem 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
+.guide-card__cta { display: inline-flex; align-items: center; gap: .375rem; font-size: 13px; font-weight: 500; color: var(--ez-amber); transition: gap .15s; }
+.guide-card:hover .guide-card__cta { gap: .625rem; }
+
+/* ── Firmware Center ───────────────────────────── */
+
+.fw-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 1.75rem; margin-bottom: 1rem; background: #fff; transition: border-color .2s; }
+.fw-card:hover { border-color: rgba(251,206,42,.3); }
+.fw-card__header { margin-bottom: 1.25rem; }
+.fw-card__meta { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
+.fw-card__version { font-size: clamp(20px,3vw,28px); font-weight: 500; letter-spacing: -.03em; color: var(--ez-black); font-variant-numeric: tabular-nums; }
+.fw-card__latest-badge { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: rgba(21,128,61,.08); color: #15803d; border: 1px solid rgba(21,128,61,.2); padding: .2rem .625rem; border-radius: 100px; }
+.fw-card__product { font-size: 16px; font-weight: 500; color: var(--ez-black); margin: 0 0 .25rem; letter-spacing: -.01em; }
+.fw-card__date { font-size: 13px; color: var(--ez-grey); margin: 0; }
+.fw-card__actions { display: flex; gap: .75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
+.fw-changelog { border-top: 1px solid rgba(0,0,0,.06); padding-top: .875rem; margin-top: .875rem; }
+.fw-changelog__trigger { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; color: var(--ez-grey); cursor: pointer; list-style: none; padding-bottom: .5rem; transition: color .15s; }
+.fw-changelog__trigger:hover { color: var(--ez-black); }
+.fw-changelog__trigger::-webkit-details-marker { display: none; }
+.fw-changelog[open] .fw-changelog__icon { transform: rotate(180deg); }
+.fw-changelog__icon { transition: transform .2s; flex-shrink: 0; }
+.fw-changelog__body { font-size: 14px; color: var(--ez-grey); line-height: 1.7; padding: .75rem 0 .5rem; }
+.fw-changelog__body ul { padding-left: 1.25rem; margin: 0; }
+.fw-changelog__body li { margin-bottom: .375rem; }
+
+/* ── Troubleshooting Guide ─────────────────────── */
+
+.ts-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+@media(max-width:768px) { .ts-grid { grid-template-columns: 1fr; } }
+.ts-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 1.75rem; background: #fff; display: flex; flex-direction: column; gap: 0; transition: border-color .2s; }
+.ts-card:hover { border-color: rgba(251,206,42,.25); }
+.ts-card__header { display: flex; gap: .875rem; align-items: flex-start; margin-bottom: 1.25rem; }
+.ts-card__icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(251,206,42,.08); color: var(--ez-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .125rem; }
+.ts-card__problem { font-size: 15px; font-weight: 500; color: var(--ez-black); letter-spacing: -.01em; line-height: 1.35; margin: 0 0 .375rem; }
+.ts-steps { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .625rem; counter-reset: step; }
+.ts-step { display: flex; gap: .875rem; align-items: flex-start; font-size: 14px; color: #3d3d3f; line-height: 1.55; counter-increment: step; }
+.ts-step::before { content: counter(step); width: 22px; height: 22px; border-radius: 50%; background: rgba(251,206,42,.1); color: var(--ez-amber); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .15rem; }
+.ts-escalation { border-top: 1px solid rgba(0,0,0,.06); padding-top: 1rem; margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.ts-escalation__text { font-size: 13px; color: var(--ez-grey); line-height: 1.5; margin: 0; flex: 1; }
+.ts-escalation__link { font-size: 13px; font-weight: 500; color: var(--ez-amber); text-decoration: none; white-space: nowrap; transition: opacity .15s; }
+.ts-escalation__link:hover { opacity: .7; }
