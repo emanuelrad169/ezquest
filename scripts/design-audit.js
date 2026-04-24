@@ -32,7 +32,7 @@ async function auditPage(page, path, name) {
     const body = doc.body;
 
     const heroSelectors = [
-      '.page-hero-light', '.page-hero-dark', '.wtb-hero',
+      '.page-hero', '.page-hero-light', '.page-hero-dark', '.wtb-hero',
       '.support-hero', '.article-hero', '.article-header', '[class*="hero"]',
     ];
     const hasHero = heroSelectors.some(s => !!doc.querySelector(s));
