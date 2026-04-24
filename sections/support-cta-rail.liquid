@@ -1,7 +1,7 @@
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
 <section class="page-cta" aria-label="{{ section.settings.heading | default: 'Support resources' | escape }}">
-  <div class="page-cta__inner">
+  <div class="page-cta__inner container-shell">
     <div class="page-cta__copy">
       {% if section.settings.kicker != blank %}
         <p class="page-cta__kicker">{{ section.settings.kicker | escape }}</p>
