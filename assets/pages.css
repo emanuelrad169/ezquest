@@ -60,7 +60,7 @@
 /* Three-col grid */
 .three-col {
   display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 1rem; max-width: 1280px; margin: 0 auto;
+  gap: 1rem; margin: 0 auto;
   padding: 0 clamp(1.25rem,3vw,2rem);
 }
 @media(max-width:1023px){ .three-col { grid-template-columns: repeat(2,1fr); } }
@@ -290,7 +290,7 @@
 .page-cta {
   position: relative;
   background: #f5f5f7;
-  padding: clamp(44px,5vw,72px) clamp(1.25rem,2vw,2rem);
+  padding: clamp(44px,5vw,72px) 0;
   overflow: hidden;
   border-top: 0.5px solid rgba(0,0,0,0.07);
 }
@@ -302,12 +302,14 @@
 }
 .page-cta__inner {
   position: relative; z-index: 1;
-  max-width: 100rem; margin: 0 auto;
+  width: 100%; max-width: 100rem; margin: 0 auto;
   display: flex; align-items: center;
   justify-content: space-between;
   gap: 2.5rem; flex-wrap: wrap;
-  padding: 0 clamp(1.25rem,2vw,2rem);
+  padding: 0 1.25rem;
 }
+@media (min-width: 640px)  { .page-cta__inner { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .page-cta__inner { padding: 0 2rem; } }
 .page-cta__copy { flex: 1; min-width: 260px; }
 .page-cta__kicker {
   font-size: 11px; font-weight: 600;
@@ -347,6 +349,8 @@
   border-top: 1px solid rgba(251,206,42,.2);
   border-bottom: 1px solid rgba(251,206,42,.2);
   display: flex; align-items: center; gap: 1rem;
+  padding: 0.75rem clamp(1.25rem,3vw,2rem);
+  margin-top: 1rem;
 }
 .free-shipping-strip svg { flex-shrink: 0; }
 .free-shipping-strip p { font-size: 14px; font-weight: 500; color: #1d1d1f; }
