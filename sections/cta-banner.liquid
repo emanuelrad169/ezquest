@@ -21,7 +21,7 @@
         </a>
       {% endif %}
       {% if section.settings.secondary_label != blank and section.settings.secondary_url != blank %}
-        <a href="{{ section.settings.secondary_url }}" class="page-cta__btn" style="background:transparent;border:1.5px solid rgba(0,0,0,0.15);color:var(--ez-black);box-shadow:none;">
+        <a href="{{ section.settings.secondary_url }}" class="page-cta__btn page-cta__btn--ghost">
           {{ section.settings.secondary_label | escape }}
         </a>
       {% endif %}

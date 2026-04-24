@@ -158,7 +158,11 @@
                       {% if block.settings.eyebrow != blank %}
                         <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ block.settings.eyebrow }}</p>
                       {% endif %}
-                      <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ slide_heading }}</h1>
+                      {% if forloop.first %}
+                        <h1 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ slide_heading }}</h1>
+                      {% else %}
+                        <h2 class="display-heading home-hero-copy-heading mt-5 max-w-prose text-display-3xl text-white md:max-w-copy-row lg:mt-6 lg:text-display-4xl xl:mt-7 xl:max-w-hero xl:text-display-5xl" data-hero-heading>{{ slide_heading }}</h2>
+                      {% endif %}
                       <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ slide_copy }}</p>
 
                       <div class="home-hero-actions mt-6 flex flex-wrap items-center gap-4 lg:mt-8" data-hero-actions>
