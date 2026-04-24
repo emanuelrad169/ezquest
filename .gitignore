@@ -8,3 +8,12 @@ dist/
 scripts/image-upload-report.json
 scripts/missing-images.json
 scripts/qa-results.json
+
+# Generated images (in Shopify CDN — no need to track locally)
+public/images/
+
+# Archived one-time scripts (reference only)
+scripts/archive/
+
+# Archived prompt manifests
+prompts/archive/
