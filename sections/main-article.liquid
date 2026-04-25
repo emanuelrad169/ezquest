@@ -1,94 +1,206 @@
+{% comment %} sections/main-article.liquid {% endcomment %}
 {{ 'pages.css' | asset_url | stylesheet_tag }}
+{%- assign words = article.content | strip_html | split: ' ' -%}
+{%- assign read_time = words.size | divided_by: 200 | at_least: 1 -%}
 
-<article class="section-shell main-article-section">
-  {%- liquid
-    assign words = article.content | strip_html | split: ' '
-    assign read_time = words.size | divided_by: 200 | plus: 1
-  -%}
-  <div class="container-shell">
-    {% render 'breadcrumbs' %}
+{% comment %} ── BREADCRUMB ─────────────────────── {% endcomment %}
+<nav class="article-breadcrumb" aria-label="Breadcrumb">
+  <div class="article-breadcrumb__inner container-shell">
+    <ol class="article-breadcrumb__list">
+      <li>
+        <a href="{{ routes.root_url }}">Home</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li>
+        <a href="{{ blog.url }}">{{ blog.title }}</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li aria-current="page">
+        {{ article.title | truncate: 48 }}
+      </li>
+    </ol>
+  </div>
+</nav>
 
-    <div class="article-header">
-      <p class="article-header__category">{{ article.blog.title | default: 'Article' }}</p>
-      <h1 class="article-header__title">{{ article.title }}</h1>
-      <div class="article-header__meta">
-        <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
-        <span class="article-header__meta-divider" aria-hidden="true"></span>
-        <span>{{ read_time }} min read</span>
-        {% if article.tags.size > 0 %}
-          <span class="article-header__meta-divider" aria-hidden="true"></span>
-          {% for tag in article.tags limit: 2 %}
-            <span>{{ tag }}</span>
-          {% endfor %}
-        {% endif %}
+{% comment %} ── ARTICLE HEADER ─────────────────── {% endcomment %}
+<header class="article-header container-shell">
+  {% if article.tags.size > 0 %}
+    <p class="article-header__kicker">
+      {{ article.tags.first | upcase }}
+    </p>
+  {% endif %}
+  <h1 class="article-header__title">
+    {{ article.title }}
+  </h1>
+  <div class="article-header__meta">
+    <span class="article-header__author">
+      {{ article.author }}
+    </span>
+    <span class="article-header__sep" aria-hidden="true">·</span>
+    <time class="article-header__date"
+          datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+      {{ article.published_at | date: '%B %d, %Y' }}
+    </time>
+    <span class="article-header__sep" aria-hidden="true">·</span>
+    <span class="article-header__read">
+      {{ read_time }} min read
+    </span>
+  </div>
+</header>
+
+{% comment %} ── FEATURED IMAGE ─────────────────── {% endcomment %}
+{% if article.image %}
+  <div class="article-hero-img container-shell">
+    <img
+      src="{{ article.image | image_url: width: 1200 }}"
+      alt="{{ article.image.alt | default: article.title | escape }}"
+      width="1200"
+      height="630"
+      loading="eager"
+      decoding="async">
+  </div>
+{% endif %}
+
+{% comment %} ── ARTICLE BODY ───────────────────── {% endcomment %}
+<div class="article-body container-shell">
+  <div class="article-body__content rte">
+    {{ article.content }}
+  </div>
+
+  {% comment %} Article tags {% endcomment %}
+  {% if article.tags.size > 0 %}
+    <div class="article-tags">
+      <span class="article-tags__label">Topics:</span>
+      {% for tag in article.tags %}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+           class="article-tag-pill">
+          {{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% comment %} Author card {% endcomment %}
+  <div class="article-author-card">
+    <div class="article-author-card__avatar"
+         aria-hidden="true">
+      {{ article.author | slice: 0 | upcase }}
+    </div>
+    <div class="article-author-card__info">
+      <p class="article-author-card__name">
+        {{ article.author }}
+      </p>
+      <p class="article-author-card__role">
+        EZQuest Team · Lake Forest, California
+      </p>
+    </div>
+    <time class="article-author-card__date">
+      {{ article.published_at | date: '%B %Y' }}
+    </time>
+  </div>
+</div>
+
+{% comment %} ── RELATED ARTICLES ───────────────── {% endcomment %}
+{% if blog.articles.size > 1 %}
+  <section class="article-related">
+    <div class="article-related__inner container-shell">
+      <div class="article-related__header">
+        <h2 class="article-related__heading">
+          Keep reading
+        </h2>
+        <a href="{{ blog.url }}"
+           class="article-related__view-all">
+          View all articles →
+        </a>
       </div>
-    </div>
-
-    <div class="article-featured-image-wrap">
-      {% if article.image != blank %}
-        {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-featured-image' }}
-      {% elsif section.settings.default_article_image != blank %}
-        {{ section.settings.default_article_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: article.title, class: 'article-featured-image' }}
-      {% else %}
-        {% render 'owned-editorial-visual', visual: 'guide', title: article.title, class: 'article-featured-image' %}
-      {% endif %}
-    </div>
-
-    <div class="article-body richtext-content">
-      {{ article.content }}
-    </div>
-
-    <div class="article-footer">
-      <div class="article-tags">
-        {% for tag in article.tags %}
-          <a href="{{ article.blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+      <div class="article-related__grid">
+        {%- assign related_count = 0 -%}
+        {% for related in blog.articles %}
+          {% if related.id != article.id and related_count < 3 %}
+            {%- assign related_count = related_count | plus: 1 -%}
+            {% assign rwords = related.content
+               | strip_html | split: ' ' %}
+            {% assign rread = rwords.size
+               | divided_by: 200 | at_least: 1 %}
+            <a href="{{ related.url }}"
+               class="blog-card">
+              <div class="blog-card__img-wrap">
+                {% if related.image %}
+                  <img
+                    src="{{ related.image | image_url: width: 600 }}"
+                    alt="{{ related.image.alt
+                            | default: related.title | escape }}"
+                    class="blog-card__img"
+                    width="600"
+                    height="338"
+                    loading="lazy"
+                    decoding="async">
+                {% else %}
+                  <div class="blog-card__img-fallback"
+                       aria-hidden="true">
+                    <svg width="32" height="32"
+                         viewBox="0 0 32 32" fill="none">
+                      <rect x="4" y="6" width="24" height="20"
+                            rx="3" stroke="currentColor"
+                            stroke-width="1.5"/>
+                      <path d="M4 21l6-6 5 5 4-4 8 5"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="blog-card__body">
+                {% if related.tags.size > 0 %}
+                  <span class="blog-card__tag">
+                    {{ related.tags.first | upcase }}
+                  </span>
+                {% endif %}
+                <h3 class="blog-card__title">
+                  {{ related.title | escape }}
+                </h3>
+                {% if related.excerpt != blank %}
+                  <p class="blog-card__excerpt">
+                    {{ related.excerpt | strip_html
+                       | truncate: 90 }}
+                  </p>
+                {% endif %}
+                <div class="blog-card__meta">
+                  <time datetime="{{ related.published_at
+                                     | date: '%Y-%m-%d' }}">
+                    {{ related.published_at | date: '%b %d, %Y' }}
+                  </time>
+                  <span>·</span>
+                  <span>{{ rread }} min</span>
+                </div>
+              </div>
+            </a>
+          {% endif %}
         {% endfor %}
       </div>
-      <div class="article-continuation-links">
-        <span class="article-continuation-label">Continue:</span>
-        <a href="/pages/support" class="support-inline-link">Support center</a>
-        <a href="/pages/manuals" class="support-inline-link">Manuals</a>
-        <a href="/pages/downloads" class="support-inline-link">Downloads</a>
-        <a href="/pages/compatibility" class="support-inline-link">Compatibility</a>
-      </div>
     </div>
-  </div>
-</article>
+  </section>
+{% endif %}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ article.title | json }},
-  "description": {{ article.excerpt | default: article.content | strip_html | truncate: 200 | json }},
-  "url": {{ canonical_url | json }},
-  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
-  "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
-  "author": {
-    "@type": "Person",
-    "name": {{ article.author | json }}
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ settings.share_image | image_url: width: 400 }}"
-    }
-  }{% if article.image %},
-  "image": {
-    "@type": "ImageObject",
-    "url": "{{ article.image | image_url: width: 1200 }}",
-    "width": 1200
-  }{% endif %}
-}
-</script>
+{% comment %} ── BOTTOM CTA ─────────────────────── {% endcomment %}
+<section class="page-cta-dark">
+  <h2 class="page-cta-dark__heading">
+    Questions about a product?
+  </h2>
+  <p class="page-cta-dark__body">
+    Move from reading into support, compatibility help,
+    or product discovery without losing the thread.
+  </p>
+  <div class="page-cta-dark__actions">
+    <a href="/pages/support" class="page-cta-dark__btn">
+      Open support center
+    </a>
+    <a href="{{ routes.collections_url }}" class="page-cta-dark__btn page-cta-dark__btn--ghost">
+      Browse products
+    </a>
+  </div>
+</section>
 
 {% schema %}
-{
-  "name": "Main article",
-  "settings": [
-    { "type": "image_picker", "id": "default_article_image", "label": "Default article image" }
-  ]
-}
+{ "name": "Article", "tag": "section" }
 {% endschema %}

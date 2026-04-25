@@ -1,168 +1,261 @@
-{{ 'pages.css' | asset_url | stylesheet_tag }}
+{% comment %} sections/main-blog.liquid {% endcomment %}
+{% paginate blog.articles by 9 %}
 
-{% comment %} 1. HERO {% endcomment %}
-{% assign blog_hero_image = section.settings.hero_image %}
-<section class="page-hero-dark{% if blog_hero_image != blank %} page-hero-dark--has-image{% endif %}">
-  {% if blog_hero_image != blank %}
-    <div class="page-hero-dark__media" aria-hidden="true">
-      {{ blog_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'page-hero-dark__image' }}
-    </div>
-  {% endif %}
-  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,5vw,5rem);">
-    <p class="page-hero-dark__kicker">{{ blog.title }}</p>
-    <h1 class="page-hero-dark__heading">Guides, tips &amp; setup help.</h1>
-    <p class="page-hero-dark__body">Setup guides, compatibility advice, and buying guidance — everything you need to choose the right EZQuest product and get the most from it.</p>
-    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;">
-      <span style="font-size:13px;color:rgba(255,255,255,.45);">{{ blog.articles_count }} articles</span>
-      <a href="/pages/support" style="font-size:13px;color:var(--ez-amber);text-decoration:none;">Support center →</a>
-    </div>
-  </div>
-</section>
-
-{% comment %} 2. CATEGORY FILTER {% endcomment %}
-{% if blog.articles_count > 0 %}
-<div style="background:var(--color-bg);border-bottom:1px solid var(--color-border);">
-  <div style="max-width:1280px;margin:0 auto;padding:.875rem clamp(1.25rem,5vw,5rem);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
-    <a href="{{ blog.url }}" class="filter-pill{% unless current_tags %} is-active{% endunless %}" style="text-decoration:none;">All</a>
-    {% for tag in blog.all_tags %}
-      <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="filter-pill{% if current_tags contains tag %} is-active{% endif %}" style="text-decoration:none;">{{ tag }}</a>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-{% comment %} 3. FEATURED ARTICLE {% endcomment %}
-{% assign featured = blog.articles.first %}
-{% if featured != blank %}
-<section class="page-section page-section--white" style="padding-top:clamp(40px,5vw,56px);padding-bottom:0;">
-  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,5vw,5rem) clamp(40px,5vw,56px);">
-    <p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin-bottom:1.25rem;">Featured</p>
-    <a href="{{ featured.url }}" class="article-featured" style="text-decoration:none;">
-      <div class="article-featured__img-wrap">
-        {% if featured.image != blank %}
-          {{ featured.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: featured.title, class: 'article-featured__img' }}
-        {% elsif section.settings.default_article_image != blank %}
-          {{ section.settings.default_article_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: featured.title, class: 'article-featured__img' }}
-        {% else %}
-          <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--ez-black) 0%,var(--ez-dark) 100%);display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" aria-hidden="true"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          </div>
-        {% endif %}
-      </div>
-      <div class="article-featured__body">
-        {% if featured.tags.first %}
-          <p class="article-card__tag">{{ featured.tags.first }}</p>
-        {% else %}
-          <p class="article-card__tag">{{ featured.blog.title }}</p>
-        {% endif %}
-        <h2 class="article-featured__title">{{ featured.title }}</h2>
-        <p class="article-featured__excerpt">{{ featured.excerpt_or_content | strip_html | truncatewords: 32 }}</p>
-        <div class="article-featured__cta">
-          <span>{{ featured.published_at | date: '%B %d, %Y' }}</span>
-          <span style="color:var(--ez-amber);font-weight:500;">Read article →</span>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
-{% endif %}
-
-{% comment %} 4. ARTICLE GRID {% endcomment %}
-<section class="page-section page-section--white">
-  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,56px) clamp(1.25rem,5vw,5rem);">
-    {% if blog.articles_count > 1 %}
-      {% paginate blog.articles by 9 %}
-      <p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin-bottom:1.5rem;">
-        {% if current_tags %}{{ current_tags | join: ' · ' }}{% else %}All articles{% endif %}
+{% comment %} ── HERO ────────────────────────────── {% endcomment %}
+<section class="blog-hero">
+  <div class="blog-hero__inner container-shell">
+    <div class="blog-hero__content">
+      <p class="blog-hero__kicker">
+        {{ section.settings.kicker | default: 'Resources' }}
       </p>
-      <div class="article-grid">
-        {% for article in blog.articles %}
-          {% unless forloop.first and current_tags == blank %}
-            <a href="{{ article.url }}" class="article-card" style="text-decoration:none;">
-              <div class="article-card__img-wrap">
-                {% if article.image != blank %}
-                  {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title, class: 'article-card__img' }}
-                {% elsif section.settings.default_article_image != blank %}
-                  {{ section.settings.default_article_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title, class: 'article-card__img' }}
-                {% else %}
-                  <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--ez-light) 0%,var(--color-border) 100%);display:flex;align-items:center;justify-content:center;">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.5" aria-hidden="true"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                  </div>
-                {% endif %}
-              </div>
-              <div class="article-card__body">
-                {% if article.tags.first %}
-                  <p class="article-card__tag">{{ article.tags.first }}</p>
-                {% else %}
-                  <p class="article-card__tag">{{ article.blog.title }}</p>
-                {% endif %}
-                <h3 class="article-card__title">{{ article.title }}</h3>
-                <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 18 }}</p>
-                <p class="article-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
-              </div>
-            </a>
-          {% endunless %}
-        {% endfor %}
+      <h1 class="blog-hero__heading">
+        {{ section.settings.heading
+           | default: 'Guides, tips & setup help.' }}
+      </h1>
+      <p class="blog-hero__body">
+        {{ section.settings.body
+           | default: 'Setup guides, compatibility advice, and buying guidance — everything you need to choose the right EZQuest product.' }}
+      </p>
+      <div class="blog-hero__meta">
+        <span class="blog-hero__count">
+          {{ blog.articles_count }}
+          {% if blog.articles_count == 1 %}article{% else %}articles{% endif %}
+        </span>
+        <span class="blog-hero__dot">·</span>
+        <a href="/pages/support" class="blog-hero__link">
+          Support center →
+        </a>
       </div>
-
-      {% comment %} Pagination {% endcomment %}
-      {% if paginate.pages > 1 %}
-        <div style="display:flex;justify-content:center;align-items:center;gap:.75rem;margin-top:3rem;flex-wrap:wrap;">
-          {% if paginate.previous %}
-            <a href="{{ paginate.previous.url }}" style="padding:.625rem 1.25rem;border-radius:8px;font-size:13px;font-weight:500;color:var(--ez-black);background:var(--ez-light);text-decoration:none;">← Previous</a>
-          {% endif %}
-          {% for part in paginate.parts %}
-            {% if part.is_link %}
-              <a href="{{ part.url }}" style="padding:.625rem 1rem;border-radius:8px;font-size:13px;font-weight:500;color:var(--ez-black);background:var(--ez-light);text-decoration:none;">{{ part.title }}</a>
-            {% elsif part.title == paginate.current_page %}
-              <span style="padding:.625rem 1rem;border-radius:8px;font-size:13px;font-weight:600;color:var(--color-text-inverse);background:var(--ez-black);">{{ part.title }}</span>
-            {% else %}
-              <span style="padding:.625rem 1rem;font-size:13px;color:var(--ez-grey);">{{ part.title }}</span>
-            {% endif %}
-          {% endfor %}
-          {% if paginate.next %}
-            <a href="{{ paginate.next.url }}" style="padding:.625rem 1.25rem;border-radius:8px;font-size:13px;font-weight:500;color:var(--ez-black);background:var(--ez-light);text-decoration:none;">Next →</a>
-          {% endif %}
-        </div>
-      {% endif %}
-      {% endpaginate %}
-
-    {% else %}
-      <div style="text-align:center;padding:3rem 0;">
-        <p style="font-size:15px;color:var(--ez-grey);line-height:1.6;">Setup guides, compatibility explainers, and buying articles will appear here as the EZQuest resource center grows.</p>
+    </div>
+    {% if section.settings.hero_image %}
+      <div class="blog-hero__img-wrap" aria-hidden="true">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 900 }}"
+          alt=""
+          class="blog-hero__img"
+          width="900"
+          height="675"
+          loading="eager"
+          decoding="async">
       </div>
     {% endif %}
   </div>
 </section>
 
-{% comment %} 5. CTA {% endcomment %}
-<section class="page-cta">
-  <div class="page-cta__inner container-shell">
-    <div class="page-cta__copy">
-      <p class="page-cta__kicker">Resources</p>
-      <p class="page-cta__heading">Need help choosing?</p>
-      <p class="page-cta__sub">Answer a few quick questions and we'll find the right product for your setup.</p>
-    </div>
-    <div class="page-cta__actions">
-      <a href="/pages/help-me-choose" class="page-cta__btn">
-        Help me choose
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+{% comment %} ── FILTER CHIPS ─────────────────────── {% endcomment %}
+{% if blog.all_tags.size > 0 %}
+  <div class="blog-filter-bar">
+    <div class="blog-filter-bar__inner container-shell">
+      <a href="{{ blog.url }}"
+         class="blog-filter-chip{% unless current_tags %} is-active{% endunless %}">
+        All
       </a>
-      <a href="/pages/support" class="page-cta__btn page-cta__btn--ghost">
-        Support center
-      </a>
+      {% for tag in blog.all_tags %}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+           class="blog-filter-chip{% if current_tags contains tag %} is-active{% endif %}">
+          {{ tag }}
+        </a>
+      {% endfor %}
     </div>
+  </div>
+{% endif %}
+
+{% comment %} ── FEATURED ARTICLE (page 1 only) ───── {% endcomment %}
+{% if paginate.current_page == 1 and blog.articles.size > 0 %}
+  {% assign featured = blog.articles.first %}
+  {% assign fwords = featured.content | strip_html | split: ' ' %}
+  {% assign fread = fwords.size | divided_by: 200 | at_least: 1 %}
+  <div class="blog-featured container-shell">
+    <a href="{{ featured.url }}" class="blog-featured__card">
+      <div class="blog-featured__img-wrap">
+        {% if featured.image %}
+          <img
+            src="{{ featured.image | image_url: width: 1000 }}"
+            alt="{{ featured.image.alt | default: featured.title | escape }}"
+            class="blog-featured__img"
+            width="1000"
+            height="750"
+            loading="eager">
+        {% else %}
+          <div class="blog-featured__img-fallback">
+            <svg width="48" height="48" viewBox="0 0 48 48"
+                 fill="none" aria-hidden="true">
+              <rect x="6" y="10" width="36" height="28" rx="4"
+                    stroke="currentColor" stroke-width="2"/>
+              <path d="M6 32l10-10 8 8 6-6 12 8"
+                    stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+      <div class="blog-featured__body">
+        {% if featured.tags.size > 0 %}
+          <span class="blog-featured__tag">
+            {{ featured.tags.first | upcase }}
+          </span>
+        {% endif %}
+        <h2 class="blog-featured__title">
+          {{ featured.title }}
+        </h2>
+        {% if featured.excerpt != blank %}
+          <p class="blog-featured__excerpt">
+            {{ featured.excerpt | strip_html | truncate: 180 }}
+          </p>
+        {% endif %}
+        <div class="blog-featured__footer">
+          <time class="blog-featured__date"
+                datetime="{{ featured.published_at | date: '%Y-%m-%d' }}">
+            {{ featured.published_at | date: '%B %d, %Y' }}
+          </time>
+          <span class="blog-featured__dot">·</span>
+          <span class="blog-featured__read">{{ fread }} min read</span>
+          <span class="blog-featured__cta">
+            Read article
+            <svg width="14" height="14" viewBox="0 0 14 14"
+                 fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4"
+                    stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+{% endif %}
+
+{% comment %} ── ARTICLE GRID ─────────────────────── {% endcomment %}
+{% assign article_offset = 0 %}
+{% if paginate.current_page == 1 %}
+  {% assign article_offset = 1 %}
+{% endif %}
+
+{% if blog.articles.size > 1 or paginate.current_page > 1 %}
+  <section class="blog-grid-section container-shell">
+    <div class="blog-grid-section__header">
+      <h2 class="blog-grid-section__label">
+        {% if current_tags %}
+          {{ current_tags | join: ', ' }}
+        {% else %}
+          All articles
+        {% endif %}
+      </h2>
+    </div>
+    <div class="blog-grid">
+      {% for article in blog.articles offset: article_offset %}
+        {% assign words = article.content | strip_html | split: ' ' %}
+        {% assign read_time = words.size | divided_by: 200 | at_least: 1 %}
+        <a href="{{ article.url }}" class="blog-card"
+           aria-label="{{ article.title | escape }}">
+          <div class="blog-card__img-wrap">
+            {% if article.image %}
+              <img
+                src="{{ article.image | image_url: width: 700 }}"
+                alt="{{ article.image.alt | default: article.title | escape }}"
+                class="blog-card__img"
+                width="700"
+                height="394"
+                loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+                decoding="async">
+            {% else %}
+              <div class="blog-card__img-fallback" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32"
+                     fill="none">
+                  <rect x="4" y="6" width="24" height="20" rx="3"
+                        stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 21l6-6 5 5 4-4 8 5"
+                        stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="blog-card__body">
+            {% if article.tags.size > 0 %}
+              <span class="blog-card__tag">
+                {{ article.tags.first | upcase }}
+              </span>
+            {% endif %}
+            <h3 class="blog-card__title">
+              {{ article.title | escape }}
+            </h3>
+            {% if article.excerpt != blank %}
+              <p class="blog-card__excerpt">
+                {{ article.excerpt | strip_html | truncate: 100 }}
+              </p>
+            {% endif %}
+            <div class="blog-card__meta">
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                {{ article.published_at | date: '%b %d, %Y' }}
+              </time>
+              <span>·</span>
+              <span>{{ read_time }} min</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% comment %} Pagination {% endcomment %}
+    {% if paginate.pages > 1 %}
+      <div class="blog-pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}"
+             class="blog-pagination__btn">
+            ← Previous
+          </a>
+        {% endif %}
+        <span class="blog-pagination__info">
+          Page {{ paginate.current_page }} of {{ paginate.pages }}
+        </span>
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}"
+             class="blog-pagination__btn blog-pagination__btn--primary">
+            Next →
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </section>
+{% endif %}
+
+{% comment %} ── BOTTOM CTA ───────────────────────── {% endcomment %}
+<section class="page-cta-dark">
+  <h2 class="page-cta-dark__heading">
+    Looking for product support?
+  </h2>
+  <p class="page-cta-dark__body">
+    Find manuals, firmware, compatibility guides,
+    and answers for every EZQuest product.
+  </p>
+  <div class="page-cta-dark__actions">
+    <a href="/pages/help-me-choose" class="page-cta-dark__btn">
+      Help me choose →
+    </a>
+    <a href="/pages/support" class="page-cta-dark__btn page-cta-dark__btn--ghost">
+      Support center
+    </a>
   </div>
 </section>
 
+{% endpaginate %}
+
 {% schema %}
 {
-  "name": "Main blog",
+  "name": "Blog posts",
+  "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "hero_image", "label": "Blog hero image" },
-    { "type": "image_picker", "id": "default_article_image", "label": "Default article image" }
+    { "type": "text", "id": "kicker",
+      "label": "Kicker label", "default": "Resources" },
+    { "type": "text", "id": "heading",
+      "label": "Heading",
+      "default": "Guides, tips & setup help." },
+    { "type": "textarea", "id": "body",
+      "label": "Subheading",
+      "default": "Setup guides, compatibility advice, and buying guidance — everything you need to choose the right EZQuest product." },
+    { "type": "image_picker", "id": "hero_image",
+      "label": "Hero image (optional)" }
   ]
 }
 {% endschema %}

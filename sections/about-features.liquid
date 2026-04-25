@@ -18,7 +18,7 @@
     {% if section.blocks.size > 0 %}
       <div class="about-features-grid reveal-stagger" role="list">
         {% for block in section.blocks %}
-          <div class="about-feature-card" role="listitem" {{ block.shopify_attributes }}>
+          <div class="about-feature-card pillar-card" role="listitem" {{ block.shopify_attributes }}>
             <p class="about-feature-number" aria-hidden="true">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</p>
             <h3 class="about-feature-title">{{ block.settings.title | escape }}</h3>
             <p class="about-feature-body">{{ block.settings.body | escape }}</p>

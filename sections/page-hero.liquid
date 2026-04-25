@@ -1,8 +1,9 @@
 {%- liquid
   assign hero_image = section.settings.image
 -%}
+{{ 'pages.css' | asset_url | stylesheet_tag }}
 <section
-  class="page-hero{% if hero_image != blank %} page-hero--has-image{% endif %}{% if section.settings.light_mode %} page-hero--light{% endif %}"
+  class="page-hero{% if hero_image != blank %} page-hero--has-image{% endif %}{% if section.settings.light_mode %} page-hero--light{% endif %}{% if page.handle == 'about' %} page-hero-dark{% endif %}"
   {% if hero_image != blank %}style="--hero-bg: url({{ hero_image | image_url: width: 1800 }})"{% endif %}
   aria-label="{{ section.settings.heading | escape }}"
 >
@@ -24,6 +25,22 @@
             {{ section.settings.cta2_label | escape }}
           </a>
         {% endif %}
+      </div>
+    {% endif %}
+    {% if page.handle == 'about' %}
+      <div style="display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;">
+        <div>
+          <p style="font-size:36px;font-weight:500;letter-spacing:-0.03em;color:var(--ez-light);">30+</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);">Years in business</p>
+        </div>
+        <div>
+          <p style="font-size:36px;font-weight:500;letter-spacing:-0.03em;color:var(--ez-light);">100+</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);">Products made</p>
+        </div>
+        <div>
+          <p style="font-size:36px;font-weight:500;letter-spacing:-0.03em;color:var(--ez-light);">2yr</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);">Warranty on every product</p>
+        </div>
       </div>
     {% endif %}
   </div>

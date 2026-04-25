@@ -1,0 +1,159 @@
+{% comment %} sections/about.liquid {% endcomment %}
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+
+{% comment %} 1. DARK HERO {% endcomment %}
+<section class="page-hero-dark">
+  <div style="max-width:1280px;margin:0 auto;
+              padding:0 clamp(1.25rem,5vw,5rem);">
+    <p class="page-hero-dark__kicker">
+      {{ section.settings.kicker | default: 'Est. 1994 · Lake Forest, California' }}
+    </p>
+    <h1 class="page-hero-dark__heading">
+      {{ section.settings.heading | default: 'Built for people who connect everything.' }}
+    </h1>
+    <p class="page-hero-dark__body">
+      {{ section.settings.body | default: 'Since 1994, EZQuest has made it simpler to connect the devices that matter most — with products built to last and a team that stands behind every one.' }}
+    </p>
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;">
+      <div>
+        <p style="font-size:36px;font-weight:500;
+                  letter-spacing:-0.03em;color:var(--ez-light);">
+          {{ section.settings.stat1_value | default: '30+' }}
+        </p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
+          {{ section.settings.stat1_label | default: 'Years in business' }}
+        </p>
+      </div>
+      <div>
+        <p style="font-size:36px;font-weight:500;
+                  letter-spacing:-0.03em;color:var(--ez-light);">
+          {{ section.settings.stat2_value | default: '100+' }}
+        </p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
+          {{ section.settings.stat2_label | default: 'Products made' }}
+        </p>
+      </div>
+      <div>
+        <p style="font-size:36px;font-weight:500;
+                  letter-spacing:-0.03em;color:var(--ez-light);">
+          {{ section.settings.stat3_value | default: '2yr' }}
+        </p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
+          {{ section.settings.stat3_label | default: 'Warranty on every product' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 2. THREE PILLARS {% endcomment %}
+<section class="page-section page-section--white">
+  <div style="max-width:1280px;margin:0 auto;
+              padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
+    <div class="section-intro">
+      <p class="section-intro__kicker">What we stand for</p>
+      <h2 class="section-intro__heading">
+        Three things we never compromise on.
+      </h2>
+    </div>
+    <div class="three-col" style="padding:0;">
+      {% for block in section.blocks %}
+        {% if block.type == 'pillar' %}
+          <div class="pillar-card" {{ block.shopify_attributes }}>
+            <div class="pillar-card__icon">
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round"
+                   aria-hidden="true">
+                <path d="{{ block.settings.icon_path }}"/>
+              </svg>
+            </div>
+            <p class="pillar-card__title">{{ block.settings.title }}</p>
+            <p class="pillar-card__body">{{ block.settings.body }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %} 3. CTA {% endcomment %}
+<section class="page-cta-dark">
+  <h2 class="page-cta-dark__heading">
+    {{ section.settings.cta_heading | default: 'Explore what we make.' }}
+  </h2>
+  <p class="page-cta-dark__body">
+    {{ section.settings.cta_body | default: 'Premium accessories for every desk, every device.' }}
+  </p>
+  <div class="page-cta-dark__actions">
+    <a href="{{ section.settings.cta_url | default: routes.collections_url }}"
+       class="page-cta-dark__btn">
+      {{ section.settings.cta_label | default: 'Browse products' }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About EZQuest",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Est. 1994 · Lake Forest, California" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for people who connect everything." },
+    { "type": "textarea", "id": "body", "label": "Body text" },
+    { "type": "text", "id": "stat1_value", "label": "Stat 1 value", "default": "30+" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Years in business" },
+    { "type": "text", "id": "stat2_value", "label": "Stat 2 value", "default": "100+" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Products made" },
+    { "type": "text", "id": "stat3_value", "label": "Stat 3 value", "default": "2yr" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Warranty on every product" },
+    { "type": "header", "content": "CTA section" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Explore what we make." },
+    { "type": "textarea", "id": "cta_body", "label": "CTA body" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Browse products" },
+    { "type": "url", "id": "cta_url", "label": "Button URL" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Value pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "icon_path", "label": "SVG path" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About EZQuest",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Built to last",
+            "body": "Every product is stress-tested beyond spec. Kevlar-reinforced cables, aircraft-grade aluminum housings, and the DuraGuard system — because accessories should outlast the devices they connect.",
+            "icon_path": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Works with everything",
+            "body": "Designed for the full ecosystem — Mac, Windows, iPad, and beyond. We test every product across hundreds of device and OS combinations before it ships.",
+            "icon_path": "M13 10V3L4 14h7v7l9-11h-7z"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Real support",
+            "body": "Our team answers within 1 business day — by phone, email, or chat. Every product comes with a full 2-year limited warranty with no asterisks.",
+            "icon_path": "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

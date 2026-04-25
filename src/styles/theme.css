@@ -13099,7 +13099,7 @@ select {
 
 /* ── FIX 2: Article layout — editorial Apple standard ─────────────────────── */
 .article-header {
-  max-width: 680px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: clamp(48px, 6vw, 80px) var(--page-gutter) clamp(32px, 4vw, 48px);
   text-align: center;
@@ -13143,7 +13143,7 @@ select {
 }
 
 .article-featured-image-wrap {
-  max-width: calc(var(--page-width, 1280px) - 4rem);
+  max-width: calc(var(--page-width, 1200px) - 4rem);
   margin: 0 auto clamp(32px, 4vw, 48px);
 }
 
@@ -13156,7 +13156,7 @@ select {
 }
 
 .article-body {
-  max-width: 680px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--page-gutter) clamp(64px, 8vw, 96px);
   font-size: 17px;
