@@ -7,7 +7,7 @@
   'use strict';
 
   var STORAGE_KEY = 'ez_recently_viewed';
-  var MAX_STORED = 8;
+  var MAX_STORED = 12;
 
   function canUseStorage() {
     try {

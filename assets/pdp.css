@@ -381,7 +381,7 @@
 
 /* ── Constrain section containers on PDP ── */
 .template-product .container-shell {
-  max-width: var(--page-max-width, 80rem);
+  max-width: var(--page-max-width, 100rem);
 }
 
 /* Full-viewport-width breakout — removes the max-width cap */
