@@ -19,39 +19,6 @@
   padding: 0;
 }
 
-/* ── Dark top banner (Support, About) ─────────────── */
-.nav-dd__banner {
-  background: var(--ez-dark, #0a0a0a);
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px 8px 0 0;
-}
-.nav-dd__banner-icon {
-  width: 34px; height: 34px;
-  border-radius: 8px;
-  background: rgba(254, 211, 0, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.nav-dd__banner-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ez-amber, #FED300);
-  margin-bottom: 2px;
-}
-.nav-dd__banner-title {
-  font-size: 12px;
-  font-weight: 500;
-  color: #f5f5f7;
-  line-height: 1.3;
-}
-
 /* ── Icon link list ─────────────────────────────── */
 .nav-dd__links {
   list-style: none;
@@ -296,45 +263,6 @@
   transition: text-decoration-color 0.12s;
 }
 .nav-dd__compare-help:hover { text-decoration-color: var(--ez-black, #1d1d1f); }
-
-/* ── Brand card (About) ─────────────────────────── */
-.nav-dd__brand {
-  background: var(--ez-dark, #0a0a0a);
-  padding: 12px 14px 14px;
-}
-.nav-dd__brand-logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: #f5f5f7;
-  letter-spacing: -0.03em;
-  margin-bottom: 2px;
-}
-.nav-dd__brand-tagline {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 12px;
-}
-.nav-dd__brand-stats {
-  display: flex;
-  gap: 14px;
-}
-.nav-dd__brand-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.nav-dd__brand-num {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ez-amber, #FED300);
-  line-height: 1;
-}
-.nav-dd__brand-lbl {
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
 
 /* ── Mobile: full width, no two-col ────────────── */
 @media (max-width: 768px) {
