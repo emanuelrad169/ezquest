@@ -5,13 +5,12 @@
 /* Page hero — light variant (all support pages) */
 .support-hero {
   background: var(--ez-light);
-  padding: clamp(48px,6vw,80px) clamp(1.25rem,4vw,2rem)
+  padding: clamp(48px,6vw,80px) 0
            clamp(32px,4vw,48px);
 }
 
 .support-hero__wrap {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .support-hero__kicker {
@@ -60,13 +59,10 @@
 .support-nav__list {
   display: flex;
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
-  max-width: 1280px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding-left: clamp(1.25rem,4vw,2rem);
-  padding-right: clamp(1.25rem,4vw,2rem);
 }
 
 .support-nav__list::-webkit-scrollbar { display: none; }
@@ -92,9 +88,30 @@
 
 /* Page body wrapper */
 .support-body {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: clamp(48px,6vw,80px) clamp(1.25rem,4vw,2rem);
+  padding-top: clamp(48px,6vw,80px);
+  padding-bottom: clamp(48px,6vw,80px);
+}
+
+.support-body--hub {
+  padding-top: clamp(28px,4vw,44px);
+}
+
+.support-body__content {
+  padding-top: 0;
+}
+
+.support-nav--contained {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.support-hub-nav {
+  background: #fff;
+  margin-top: 0;
+}
+
+.support-hub__topic-label {
+  margin-top: 3rem;
 }
 
 /* Filter pill row */
@@ -433,9 +450,6 @@
 @media(max-width:768px) { .ts-grid { grid-template-columns: 1fr; } }
 .ts-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 1.75rem; background: #fff; display: flex; flex-direction: column; gap: 0; transition: border-color .2s; }
 .ts-card:hover { border-color: rgba(254, 211, 0,.25); }
-.ts-card__header { display: flex; gap: .875rem; align-items: flex-start; margin-bottom: 1.25rem; }
-.ts-card__icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(254, 211, 0,.08); color: var(--ez-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .125rem; }
-.ts-card__problem { font-size: 15px; font-weight: 500; color: var(--ez-black); letter-spacing: -.01em; line-height: 1.35; margin: 0 0 .375rem; }
 .ts-steps { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .625rem; counter-reset: step; }
 .ts-step { display: flex; gap: .875rem; align-items: flex-start; font-size: 14px; color: #3d3d3f; line-height: 1.55; counter-increment: step; }
 .ts-step::before { content: counter(step); width: 22px; height: 22px; border-radius: 50%; background: rgba(254, 211, 0,.1); color: var(--ez-black); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .15rem; }
