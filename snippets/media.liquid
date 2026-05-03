@@ -10,28 +10,44 @@
   assign img_class = ratio_class | append: ' w-full ' | append: object_fit
   assign media_alt = media.alt | default: ''
   assign image_alt = image.alt | default: ''
+  assign media_height_1200 = 1200
+  assign media_height_800 = 800
+  assign media_height_200 = 200
+  if media != blank and media.preview_image.aspect_ratio > 0
+    assign media_height_1200 = 1200 | divided_by: media.preview_image.aspect_ratio | round
+    assign media_height_800 = 800 | divided_by: media.preview_image.aspect_ratio | round
+    assign media_height_200 = 200 | divided_by: media.preview_image.aspect_ratio | round
+  endif
+  assign image_height_1200 = 1200
+  assign image_height_800 = 800
+  assign image_height_200 = 200
+  if image != blank and image.aspect_ratio > 0
+    assign image_height_1200 = 1200 | divided_by: image.aspect_ratio | round
+    assign image_height_800 = 800 | divided_by: image.aspect_ratio | round
+    assign image_height_200 = 200 | divided_by: image.aspect_ratio | round
+  endif
 -%}
 <div class="overflow-hidden {{ wrapper_class }}">
   {% if media != blank %}
     {% case media.media_type %}
       {% when 'image' %}
         {% if img_max_width == 1200 %}
-          {{ media.preview_image | image_url: width: 1200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
+          {{ media.preview_image | image_url: width: 1200, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 1200, height: media_height_1200, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
         {% elsif img_max_width == 200 %}
-          {{ media.preview_image | image_url: width: 200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '100, 200', sizes: '80px', alt: media_alt, class: img_class }}
+          {{ media.preview_image | image_url: width: 200, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 200, height: media_height_200, widths: '100, 200', sizes: '80px', alt: media_alt, class: img_class }}
         {% else %}
-          {{ media.preview_image | image_url: width: 800 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
+          {{ media.preview_image | image_url: width: 800, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 800, height: media_height_800, widths: '400, 800, 1200', sizes: img_sizes, alt: media_alt, class: img_class }}
         {% endif %}
       {% else %}
         {{ media | media_tag: class: img_class, image_size: '1600x' }}
     {% endcase %}
   {% elsif image != blank %}
     {% if img_max_width == 1200 %}
-      {{ image | image_url: width: 1200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
+      {{ image | image_url: width: 1200, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 1200, height: image_height_1200, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
     {% elsif img_max_width == 200 %}
-      {{ image | image_url: width: 200 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '100, 200', sizes: '80px', alt: image_alt, class: img_class }}
+      {{ image | image_url: width: 200, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 200, height: image_height_200, widths: '100, 200', sizes: '80px', alt: image_alt, class: img_class }}
     {% else %}
-      {{ image | image_url: width: 800 | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
+      {{ image | image_url: width: 800, format: 'pjpg' | image_tag: loading: img_loading, fetchpriority: img_fetchpriority, decoding: img_decoding, width: 800, height: image_height_800, widths: '400, 800, 1200', sizes: img_sizes, alt: image_alt, class: img_class }}
     {% endif %}
   {% else %}
     {% render 'placeholder-visual', kind: 'product', text: 'EZQuest Media', width: 1600, height: 1200, class: img_class %}

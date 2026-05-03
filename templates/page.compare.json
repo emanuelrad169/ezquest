@@ -18,28 +18,28 @@
         "p1": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025926854",
+            "product": "45w-gan-usb-c-pd-wall-charger",
             "is_recommended": false
           }
         },
         "p2": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025959622",
+            "product": "65w-gan-usb-c-pd-wall-charger",
             "is_recommended": true
           }
         },
         "p3": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025992390",
+            "product": "ultimatepower-90w-gan-usb-c-pd-wall-charger",
             "is_recommended": false
           }
         },
         "p4": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842026025158",
+            "product": "ultimatepower-120w-gan-usb-c-pd-wall-charger",
             "is_recommended": false
           }
         },

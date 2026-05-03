@@ -118,16 +118,19 @@
     #shopify-section-{{ section.id }} .blog-grid__view-all {
       flex-shrink: 0;
       margin-bottom: 0.2rem;
-      color: var(--ez-amber);
+      color: var(--ez-black);
       font-size: 14px;
       font-weight: 500;
-      text-decoration: none;
+      text-decoration: underline;
+      text-decoration-color: var(--ez-amber);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
       white-space: nowrap;
-      transition: opacity 0.15s ease;
+      transition: text-decoration-color 0.15s ease;
     }
 
     #shopify-section-{{ section.id }} .blog-grid__view-all:hover {
-      opacity: 0.7;
+      text-decoration-color: var(--ez-black);
     }
 
     #shopify-section-{{ section.id }} .blog-grid__grid {
@@ -148,7 +151,7 @@
     }
 
     #shopify-section-{{ section.id }} .article-card:hover {
-      border-color: rgba(245, 158, 11, 0.25);
+      border-color: rgba(254, 211, 0, 0.25);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
     }
 
@@ -188,7 +191,7 @@
 
     #shopify-section-{{ section.id }} .article-card__tag {
       margin: 0;
-      color: var(--ez-amber);
+      color: var(--ez-grey);
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.1em;

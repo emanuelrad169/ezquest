@@ -18,24 +18,46 @@
             <h2 class="type-heading text-heading-lg">Search products or support</h2>
           </div>
 
-          <form action="{{ routes.search_url }}" method="get" class="search-mega-form grid min-h-14 flex-1 items-center gap-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 px-4" role="search">
-            <label class="sr-only" for="site-header-search-input">Search EZQuest</label>
-            <span class="search-mega-form-icon inline-flex h-10 w-10 items-center justify-center text-slate-700">{% render 'icon', name: 'search' %}</span>
-            <input
-              id="site-header-search-input"
-              type="search"
-              name="q"
-              value="{{ search.terms | escape }}"
-              placeholder="Search products, manuals, compatibility, or setup help"
-              class="search-mega-input min-w-0 flex-1 bg-transparent text-body-lg text-slate-950 outline-none"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              enterkeyhint="search"
-            >
-            <input type="hidden" name="type" value="product,page,article">
-            {% render 'button', label: 'Search', tag: 'button', type: 'submit', style: 'primary', size: 'sm', class: 'search-mega-submit' %}
-          </form>
+          <div class="search-panel" data-search-panel>
+            <form action="{{ routes.search_url }}" method="get" class="search-mega-form grid min-h-14 flex-1 items-center gap-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 px-4" role="search">
+              <label class="sr-only" for="site-header-search-input">Search EZQuest</label>
+              <span class="search-mega-form-icon inline-flex h-10 w-10 items-center justify-center text-slate-700">{% render 'icon', name: 'search' %}</span>
+              <input
+                id="site-header-search-input"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder="Search products, manuals, compatibility, or setup help"
+                class="search-mega-input min-w-0 flex-1 bg-transparent text-body-lg text-slate-950 outline-none"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+                enterkeyhint="search"
+                data-search-input
+                aria-label="Search products"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls="search-results"
+              >
+              <button type="button" class="search-panel__clear search-mega-clear" data-search-clear aria-label="Clear search" hidden>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M3 3l8 8M11 3L3 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <input type="hidden" name="type" value="product,page,article">
+              {% render 'button', label: 'Search', tag: 'button', type: 'submit', style: 'primary', size: 'sm', class: 'search-mega-submit' %}
+            </form>
+
+            <div
+              class="search-results"
+              id="search-results"
+              data-search-results
+              role="listbox"
+              aria-label="Search results"
+              hidden
+            ></div>
+          </div>
         </div>
 
         <button type="button" class="button-icon search-mega-close xl:col-span-1 xl:justify-self-end" data-search-mega-close aria-label="Close search">
@@ -74,7 +96,7 @@
             <h2 class="text-heading-base font-medium tracking-title text-slate-950">Quick starts</h2>
           </div>
 
-          <div class="search-mega-results" aria-live="polite" aria-busy="false" data-search-results>
+          <div class="search-mega-results" aria-live="polite" aria-busy="false" data-search-suggestions>
             <div class="search-mega-products grid gap-4 xl:grid-cols-2" data-search-products>
               {% if hub_product != blank %}
                 {% render 'mega-menu-stage-card',

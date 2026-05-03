@@ -59,7 +59,7 @@
                     Download
                   </a>
                 {% else %}
-                  <span style="font-size:13px;color:var(--ez-grey)">Coming soon</span>
+                  <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
                 {% endif %}
               </td>
             </tr>
@@ -81,17 +81,17 @@
     </table>
   </div>
 
-  <div class="support-cta-strip">
-    <div>
-      <p class="support-cta-strip__heading">Can't find what you need?</p>
-      <p class="support-cta-strip__body">Tell us the product and file type — we'll send it directly.</p>
-    </div>
-    <div class="support-cta-strip__actions">
-      <a href="/pages/contact" class="btn btn--primary">Request a file</a>
-    </div>
-  </div>
 
 </div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'Downloads',
+  heading: 'Can't find what you need?',
+  subhead: 'Tell us the product and file type — we'll send it directly.',
+  primary_label: 'Request a file',
+  primary_url: '/pages/contact'
+-%}
 
 <script>
 (function(){

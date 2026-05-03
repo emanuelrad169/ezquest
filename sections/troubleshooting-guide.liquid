@@ -1,174 +1,243 @@
 {{ 'support-cluster.css' | asset_url | stylesheet_tag }}
+{%- assign chargers_collection = collections['chargers-power'] -%}
 
-<section class="support-hero">
-  <div class="support-hero__wrap">
-    <p class="support-hero__kicker">Troubleshooting</p>
-    <h1 class="support-hero__heading">
-      Fix it in minutes
-    </h1>
-    <p class="support-hero__sub">
-      Step-by-step solutions for the most common EZQuest
-      product issues — written and tested by our team.
-    </p>
+{% comment %} ── HERO ─────────────────────────────────────── {% endcomment %}
+<section class="ts-hero">
+  <div class="ts-hero__inner">
+    <p class="ts-hero__kicker">Troubleshooting</p>
+    <h1 class="ts-hero__heading">Fix it by symptom</h1>
+    <p class="ts-hero__sub">Start with the symptom you see. Take the shortest recovery step. Escalate to support only if the issue stays.</p>
   </div>
 </section>
 
 {% render 'support-nav', current: 'troubleshooting' %}
 
-<div class="support-body">
+{% comment %} ── ISSUE GRID ───────────────────────────────── {% endcomment %}
+<div class="ts-body">
 
-  <div class="ts-grid">
-
-    {% assign ts_items = shop.metaobjects.ezquest_troubleshooting_item.values %}
-
-    {% if ts_items.size > 0 %}
-
-      {% for item in ts_items %}
-        <div class="ts-card">
-          <div class="ts-card__header">
-            <div class="ts-card__icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/>
-                <path d="M9 5.5v4M9 11.5v.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <p class="ts-card__problem">{{ item.problem.value }}</p>
-              {% if item.product_family.value != blank %}
-                <span class="product-pill">{{ item.product_family.value }}</span>
-              {% endif %}
-            </div>
-          </div>
-
-          {% if item.steps.value != blank %}
-            <ol class="ts-steps">
-              {% assign step_list = item.steps.value | newline_to_br | split: '<br />' %}
-              {% for step in step_list %}
-                {% unless step == blank %}
-                  <li class="ts-step">{{ step | strip_html }}</li>
-                {% endunless %}
-              {% endfor %}
-            </ol>
-          {% endif %}
-
-          <div class="ts-escalation">
-            {% if item.escalation_text.value != blank %}
-              <p class="ts-escalation__text">{{ item.escalation_text.value }}</p>
-            {% else %}
-              <p class="ts-escalation__text">Still not resolved? Our team can help directly.</p>
-            {% endif %}
-            <a href="/pages/contact" class="ts-escalation__link">Contact support →</a>
-          </div>
-        </div>
-      {% endfor %}
-
-    {% else %}
+  <div class="ts-category">
+    <p class="ts-category__label">USB Hub</p>
+    <div class="ts-grid">
 
       <div class="ts-card">
-        <div class="ts-card__header">
-          <div class="ts-card__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/><path d="M9 5.5v4M9 11.5v.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <p class="ts-card__problem">Hub not recognized by laptop</p>
-            <span class="product-pill">Hubs &amp; Adapters</span>
-          </div>
-        </div>
-        <ol class="ts-steps">
-          <li class="ts-step">Make sure the USB-C cable is fully seated on both ends.</li>
-          <li class="ts-step">Try a different USB-C port on your laptop.</li>
-          <li class="ts-step">Disconnect all peripherals from the hub, then reconnect one at a time.</li>
-          <li class="ts-step">Test with a different USB-C cable if available.</li>
-          <li class="ts-step">On Windows: open Device Manager and look for unknown devices under Universal Serial Bus controllers.</li>
-        </ol>
-        <div class="ts-escalation">
-          <p class="ts-escalation__text">If the hub still doesn't appear, it may need replacement.</p>
-          <a href="/pages/contact" class="ts-escalation__link">Contact support →</a>
+        <span class="ts-card__num" aria-hidden="true">01</span>
+        <p class="ts-card__title">Hub not recognized after plugging in</p>
+        <p class="ts-card__copy">Check that the host USB-C port supports data, not just charging. Try a different port or a shorter cable rated for USB 3.0+. Reboot the computer with the hub connected.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/compatibility" class="ts-card__cta">Check compatibility →</a>
         </div>
       </div>
 
       <div class="ts-card">
-        <div class="ts-card__header">
-          <div class="ts-card__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/><path d="M9 5.5v4M9 11.5v.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <p class="ts-card__problem">No display output via HDMI</p>
-            <span class="product-pill">Hubs &amp; Adapters</span>
-          </div>
-        </div>
-        <ol class="ts-steps">
-          <li class="ts-step">Ensure the display is powered on and set to the correct input source.</li>
-          <li class="ts-step">Swap to a known-working HDMI cable.</li>
-          <li class="ts-step">Connect the hub to your laptop without any other devices attached, then test the display alone.</li>
-          <li class="ts-step">Check your laptop's display settings — macOS: System Settings → Displays; Windows: Settings → Display.</li>
-          <li class="ts-step">Confirm your laptop supports video output over USB-C (not all USB-C ports carry DisplayPort signal).</li>
-        </ol>
-        <div class="ts-escalation">
-          <p class="ts-escalation__text">Contact us with your laptop model and OS version for further diagnosis.</p>
-          <a href="/pages/contact" class="ts-escalation__link">Contact support →</a>
+        <span class="ts-card__num" aria-hidden="true">02</span>
+        <p class="ts-card__title">Hub works intermittently or disconnects</p>
+        <p class="ts-card__copy">Intermittency is most often cable-related. Swap to a known-good USB-C cable and avoid extension cables. Connect the hub directly to the laptop — avoid docking chains.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/manuals" class="ts-card__cta">View setup guide →</a>
         </div>
       </div>
 
       <div class="ts-card">
-        <div class="ts-card__header">
-          <div class="ts-card__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/><path d="M9 5.5v4M9 11.5v.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <p class="ts-card__problem">Ethernet not showing up</p>
-            <span class="product-pill">Hubs &amp; Adapters</span>
-          </div>
-        </div>
-        <ol class="ts-steps">
-          <li class="ts-step">On macOS: go to System Settings → Network and look for a new Ethernet interface.</li>
-          <li class="ts-step">On Windows 10: download and install the Realtek driver from the Downloads page. Restart after install.</li>
-          <li class="ts-step">Try a different Ethernet cable and a different wall port or switch.</li>
-          <li class="ts-step">Check that the hub is receiving power — some hubs require host power-delivery to activate the Ethernet chip.</li>
-        </ol>
-        <div class="ts-escalation">
-          <p class="ts-escalation__text">Still not appearing after a driver install and restart?</p>
-          <a href="/pages/contact" class="ts-escalation__link">Contact support →</a>
+        <span class="ts-card__num" aria-hidden="true">03</span>
+        <p class="ts-card__title">All hub ports stop working after a while</p>
+        <p class="ts-card__copy">This is typically a thermal or power event. Disconnect all peripherals, wait 10 seconds, and reconnect. Make sure the hub is ventilated and not stacked on other devices.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/contact" class="ts-card__cta">Open a support ticket →</a>
         </div>
       </div>
 
       <div class="ts-card">
-        <div class="ts-card__header">
-          <div class="ts-card__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/><path d="M9 5.5v4M9 11.5v.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <p class="ts-card__problem">Charger not delivering expected wattage</p>
-            <span class="product-pill">Chargers &amp; Power</span>
-          </div>
-        </div>
-        <ol class="ts-steps">
-          <li class="ts-step">Use a USB-C cable rated for the wattage you need — not all USB-C cables carry full power.</li>
-          <li class="ts-step">Connect your device directly to the charger's primary USB-C port (usually labeled or marked first).</li>
-          <li class="ts-step">Check your device's battery settings — some devices cap charging speed when battery exceeds 80%.</li>
-          <li class="ts-step">Disconnect other devices from the charger — shared ports divide available wattage.</li>
-        </ol>
-        <div class="ts-escalation">
-          <p class="ts-escalation__text">If wattage is consistently below spec, the unit may be defective.</p>
-          <a href="/pages/contact" class="ts-escalation__link">Contact support →</a>
+        <span class="ts-card__num" aria-hidden="true">04</span>
+        <p class="ts-card__title">Hub recognized on one laptop but not another</p>
+        <p class="ts-card__copy">Not all USB-C ports carry the same capabilities — charging-only ports won't enumerate a hub. Confirm the port on the second laptop supports USB 3.1 or DisplayPort Alt Mode.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/compatibility" class="ts-card__cta">Check port compatibility →</a>
         </div>
       </div>
 
-    {% endif %}
-
+    </div>
   </div>
 
-  <div class="support-cta-strip">
-    <div>
-      <p class="support-cta-strip__heading">Issue not listed here?</p>
-      <p class="support-cta-strip__body">Describe what's happening and we'll diagnose it for you.</p>
+  <div class="ts-category">
+    <p class="ts-category__label">Display</p>
+    <div class="ts-grid">
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">05</span>
+        <p class="ts-card__title">External monitor shows no signal</p>
+        <p class="ts-card__copy">Confirm your laptop port supports DisplayPort Alt Mode — not all USB-C ports carry video. Set the display to the correct HDMI input, try a different HDMI cable, and update display drivers.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/help-me-choose" class="ts-card__cta">Find the right hub →</a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">06</span>
+        <p class="ts-card__title">Display flickers or cuts out randomly</p>
+        <p class="ts-card__copy">Reseat the HDMI cable at both ends. Replace the cable if it's over 2m. On macOS, go to System Settings → Displays and disable "Automatically adjust brightness." Update macOS if a recent update is pending.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/downloads" class="ts-card__cta">Check for driver updates →</a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">07</span>
+        <p class="ts-card__title">Resolution is lower than expected on external screen</p>
+        <p class="ts-card__copy">Open display settings and manually set the resolution — macOS and Windows don't always default to native. 4K output requires a USB-C port that supports 4K Alt Mode and a hub rated for it.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/compatibility" class="ts-card__cta">Check 4K compatibility →</a>
+        </div>
+      </div>
+
     </div>
-    <div class="support-cta-strip__actions">
-      <a href="/pages/contact" class="btn btn--primary">Submit a ticket</a>
-      <a href="/pages/contact" class="btn btn--secondary" style="color:var(--ez-light);border-color:rgba(255,255,255,.2)">Quick message</a>
+  </div>
+
+  <div class="ts-category">
+    <p class="ts-category__label">Charging</p>
+    <div class="ts-grid">
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">08</span>
+        <p class="ts-card__title">Laptop charges slowly through the hub</p>
+        <p class="ts-card__copy">Verify the charger wattage meets your laptop's requirement. The hub PD pass-through deducts a small overhead (typically 5–15W). Use the PD-labeled port on the hub and connect the charger directly to it.</p>
+        <div class="ts-card__foot">
+          <a href="{{ chargers_collection.url | default: routes.collections_url }}" class="ts-card__cta">View GaN chargers →</a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">09</span>
+        <p class="ts-card__title">Charger not reaching expected wattage</p>
+        <p class="ts-card__copy">Use a USB-C cable rated for the full wattage — not all USB-C cables carry high power. Connect your device to the charger's primary port (highest-rated). Disconnect other devices sharing the charger.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/contact" class="ts-card__cta">Report a defect →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ts-category">
+    <p class="ts-category__label">USB Ports &amp; Ethernet</p>
+    <div class="ts-grid">
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">10</span>
+        <p class="ts-card__title">USB-A devices not detected on hub</p>
+        <p class="ts-card__copy">Try a different USB-A port on the hub. Test the device directly on the laptop to confirm it works independently. Install the latest driver from the Downloads page if prompted by Windows.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/downloads" class="ts-card__cta">Find downloads →</a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">11</span>
+        <p class="ts-card__title">Gigabit Ethernet not connecting</p>
+        <p class="ts-card__copy">On macOS: System Settings → Network — look for a new Ethernet interface. On Windows: download the Realtek driver from the Downloads page and restart. Check the network cable and wall port.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/manuals" class="ts-card__cta">Find manuals →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ts-category">
+    <p class="ts-category__label">Card Reader &amp; Storage</p>
+    <div class="ts-grid">
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">12</span>
+        <p class="ts-card__title">SD card not appearing on desktop</p>
+        <p class="ts-card__copy">Re-seat the card firmly. On macOS, open Disk Utility and check if the volume needs to be mounted. On Windows, check Disk Management. Try a different card to rule out card failure.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/contact" class="ts-card__cta">Contact support →</a>
+        </div>
+      </div>
+
+      <div class="ts-card">
+        <span class="ts-card__num" aria-hidden="true">13</span>
+        <p class="ts-card__title">USB drive transfer speeds are slower than expected</p>
+        <p class="ts-card__copy">Transfer speed is limited by the slowest link — the drive, cable, or hub port. Confirm the hub USB-A port is USB 3.2 (not USB 2.0) and the drive is formatted for maximum performance.</p>
+        <div class="ts-card__foot">
+          <a href="/pages/compatibility" class="ts-card__cta">Check specs →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
 </div>
 
-{% schema %}{"name":"Troubleshooting","tag":"section","settings":[],"presets":[{"name":"Troubleshooting"}]}{% endschema %}
+{% comment %} ── WHERE TO GO FROM HERE ──────────────────── {% endcomment %}
+<section class="ts-resources">
+  <div class="ts-resources__inner">
+    <p class="ts-resources__kicker">Next step</p>
+    <h2 class="ts-resources__heading">Where to go from here</h2>
+    <p class="ts-resources__sub">If the fix above didn't resolve it, the next path is a file, a guide, or a direct conversation.</p>
+    <div class="ts-resource-grid">
+
+      <a href="/pages/downloads" class="ts-resource-card">
+        <div class="ts-resource-card__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 3v9M6 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 14v1a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ts-resource-card__body">
+          <p class="ts-resource-card__type">Files</p>
+          <p class="ts-resource-card__title">Downloads &amp; Drivers</p>
+          <p class="ts-resource-card__desc">Driver installs, firmware, and software tools for Windows and macOS.</p>
+        </div>
+        <span class="ts-resource-card__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="/pages/manuals" class="ts-resource-card">
+        <div class="ts-resource-card__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 3h10a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ts-resource-card__body">
+          <p class="ts-resource-card__type">Guides</p>
+          <p class="ts-resource-card__title">Product Manuals</p>
+          <p class="ts-resource-card__desc">Setup guides, quick-start cards, and full product documentation.</p>
+        </div>
+        <span class="ts-resource-card__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="/pages/contact" class="ts-resource-card">
+        <div class="ts-resource-card__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3 7l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ts-resource-card__body">
+          <p class="ts-resource-card__type">Direct help</p>
+          <p class="ts-resource-card__title">Get Help Now</p>
+          <p class="ts-resource-card__desc">Submit one request with the product, symptom, and what you've tried. We'll reply fast.</p>
+        </div>
+        <span class="ts-resource-card__arrow" aria-hidden="true">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+{% comment %} ── DARK CTA ─────────────────────────────────── {% endcomment %}
+<section class="wtb-cta">
+  <div class="page-cta__inner container-shell">
+    <div class="page-cta__copy">
+      <p class="page-cta__kicker">Support</p>
+      <p class="wtb-cta__text">Still need help?</p>
+    </div>
+    <a href="/pages/contact" class="btn btn--primary">
+      Submit a request
+      {%- render 'icon', name: 'arrow-right', size: 16 -%}
+    </a>
+  </div>
+</section>
+
+{% schema %}{"name":"Troubleshooting guide","tag":"section","settings":[],"presets":[{"name":"Troubleshooting guide"}]}{% endschema %}

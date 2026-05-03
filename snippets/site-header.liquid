@@ -34,18 +34,26 @@
               {% render 'icon', name: 'search' %}
             </a>
             {% if customer %}
-              <a href="{{ account_url }}"
-                 class="site-header-icon-button"
-                 aria-label="{{ 'header.my_account' | t }}">
-                <svg width="20" height="20" viewBox="0 0 20 20"
-                     fill="none" aria-hidden="true">
-                  <circle cx="10" cy="7" r="3"
-                          stroke="currentColor" stroke-width="1.25"/>
-                  <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
-                        stroke="currentColor" stroke-width="1.25"
-                        stroke-linecap="round"/>
-                </svg>
-              </a>
+              <div class="site-header-account-wrap">
+                <a href="{{ account_url }}"
+                   class="site-header-icon-button"
+                   aria-label="{{ 'header.my_account' | t }}"
+                   aria-haspopup="true">
+                  <svg width="20" height="20" viewBox="0 0 20 20"
+                       fill="none" aria-hidden="true">
+                    <circle cx="10" cy="7" r="3"
+                            stroke="currentColor" stroke-width="1.25"/>
+                    <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                          stroke="currentColor" stroke-width="1.25"
+                          stroke-linecap="round"/>
+                  </svg>
+                </a>
+                <div class="site-header-account-menu" role="menu">
+                  <a href="{{ account_url }}" class="site-header-account-menu__item" role="menuitem">My account</a>
+                  <a href="{{ account_url }}/orders" class="site-header-account-menu__item" role="menuitem">My orders</a>
+                  <a href="{{ routes.account_logout_url }}" class="site-header-account-menu__item site-header-account-menu__item--signout" role="menuitem">Sign out</a>
+                </div>
+              </div>
             {% else %}
               <a href="{{ account_login_url }}"
                  class="site-header-icon-button"
@@ -237,6 +245,7 @@
             <button
               class="site-header-icon-button lg:hidden"
               type="button"
+              aria-label="{{ 'header.open_menu' | t }}"
               aria-controls="mobile-nav-drawer"
               aria-expanded="false"
               data-drawer-open="mobile-nav-drawer"

@@ -1,5 +1,5 @@
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
-<section class="section-shell main-product-section" id="pdp-overview" data-product-root>
+<section class="section-shell main-product-section" id="pdp-overview" data-product-root data-product-id="{{ product.id }}" data-product-price="{{ product.selected_or_first_available_variant.price | money }}">
   <div class="container-shell">
     <div class="hidden lg:block">
       {% render 'breadcrumbs' %}
@@ -17,8 +17,10 @@
       assign review_rating_count = blank
       assign display_rating_value = blank
       assign display_rating_count = blank
-      assign show_urgency = false
-      assign urgency_qty = 0
+      assign jm_widget = product.metafields.judgeme.widget
+      assign jm = blank
+      assign jm_average = blank
+      assign jm_count = 0
       assign selected_variant = product.selected_or_first_available_variant
       assign product_form_id = 'ProductForm-' | append: section.id
       assign mobile_proof_line = blank
@@ -113,19 +115,21 @@
         assign review_rating_count = product.metafields.reviews.rating_count.value | default: blank
       endif
 
-      if review_rating_value != blank
+      if jm_widget != blank
+        assign jm = jm_widget.value
+        assign jm_average = jm.average
+        assign jm_count = jm.count | default: 0
+      endif
+
+      if jm_count > 0 and jm_average != blank
+        assign display_rating_value = jm_average | round: 1
+        assign display_rating_count = jm_count
+      elsif review_rating_value != blank
         assign display_rating_value = review_rating_value
         assign display_rating_count = review_rating_count
       elsif section.settings.fallback_rating != blank
         assign display_rating_value = section.settings.fallback_rating
         assign display_rating_count = section.settings.fallback_rating_count
-      endif
-
-      if selected_variant != blank and selected_variant.inventory_management == 'shopify' and selected_variant.inventory_policy == 'deny'
-        if selected_variant.inventory_quantity > 0 and selected_variant.inventory_quantity <= 10
-          assign show_urgency = true
-          assign urgency_qty = selected_variant.inventory_quantity
-        endif
       endif
 
       if product.handle != blank
@@ -239,13 +243,28 @@
     </div>
 
     <div class="mt-4 grid gap-8 lg:mt-6 lg:grid-cols-2 lg:items-start lg:gap-10 product-layout-grid">
-      <div class="space-y-5 min-w-0">
+      <div class="space-y-5 min-w-0 pdp-col-left">
         <div class="product-gallery-stage product-gallery-stage-shell">
           <div class="product-gallery-layout">
 
             <div class="product-gallery-main-shell">
 
-              <div class="product-gallery-main">
+              <div
+                class="product-gallery-main pdp-gallery-main"
+                data-zoom-trigger
+                data-pdp-main-image
+                aria-label="Open product image zoom"
+                role="button"
+                tabindex="0"
+              >
+                <span class="pdp-zoom-hint" aria-hidden="true" data-zoom-hint>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    <path d="M4.5 6h3M6 4.5v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                  <span data-zoom-hint-text>Zoom</span>
+                </span>
                 {% if lead_media != blank %}
                   {% render 'media', media: lead_media, aspect_ratio: 'aspect-card', class: 'hero-media-frame', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', decoding: 'sync', max_width: 1200, sizes: '(max-width: 1023px) 100vw, 600px' %}
                 {% elsif product.featured_image != blank %}
@@ -262,15 +281,15 @@
 
             <div class="product-gallery-grid product-gallery-grid--rail">
               {% if lead_media != blank %}
-                <button type="button" class="product-thumb-card" aria-current="true">
+                <button type="button" class="product-thumb-card" data-pdp-thumb aria-current="true">
                   {% render 'media', media: lead_media, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', max_width: 200, widths: '100, 200', sizes: '80px' %}
                 </button>
               {% elsif product.featured_image != blank %}
-                <button type="button" class="product-thumb-card" aria-current="true">
+                <button type="button" class="product-thumb-card" data-pdp-thumb aria-current="true">
                   {% render 'media', image: product.featured_image, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', loading: 'eager', fetchpriority: 'high', max_width: 200, widths: '100, 200', sizes: '80px' %}
                 </button>
               {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
-                <button type="button" class="product-thumb-card" aria-current="true">
+                <button type="button" class="product-thumb-card" data-pdp-thumb aria-current="true">
                   {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'hero', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
               {% endif %}
@@ -278,19 +297,19 @@
               {% if product.media.size > 1 %}
                 {% for media_item in product.media limit: 6 %}
                   {% unless lead_media != blank and media_item.id == lead_media.id %}
-                    <button type="button" class="product-thumb-card">
+                    <button type="button" class="product-thumb-card" data-pdp-thumb>
                       {% render 'media', media: media_item, aspect_ratio: 'aspect-square', class: 'bg-white p-1 shadow-none', object_fit: 'object-contain', max_width: 200, widths: '100, 200', sizes: '80px' %}
                     </button>
                   {% endunless %}
                 {% endfor %}
               {% elsif use_owned_product_gallery and lead_media == blank and product.featured_image == blank %}
-                <button type="button" class="product-thumb-card">
+                <button type="button" class="product-thumb-card" data-pdp-thumb>
                   {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'setup', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
-                <button type="button" class="product-thumb-card">
+                <button type="button" class="product-thumb-card" data-pdp-thumb>
                   {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'ports', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
-                <button type="button" class="product-thumb-card">
+                <button type="button" class="product-thumb-card" data-pdp-thumb>
                   {% render 'owned-product-visual', product_handle: product.handle, product_title: product.title, variant: 'scale', width: 320, height: 320, class: 'aspect-square w-full object-cover' %}
                 </button>
               {% endif %}
@@ -298,9 +317,45 @@
 
           </div>
         </div>
+
+        <div class="pdp-zoom-pane" aria-hidden="true" data-zoom-pane>
+          <div class="pdp-zoom-pane__crop" data-zoom-crop
+               style="background-image:url('{{ product.featured_image | image_url: width: 2400 }}')">
+          </div>
+        </div>
+
+        <div
+          id="pdp-zoom-modal"
+          class="pdp-zoom-modal"
+          hidden
+          role="dialog"
+          aria-label="Product image zoom"
+          aria-modal="true"
+        >
+          <button type="button" class="pdp-zoom-modal__close" aria-label="Close zoom">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="pdp-zoom-modal__inner">
+            <div class="pdp-zoom-modal__img-wrap" data-zoom-wrap>
+              <img
+                class="pdp-zoom-modal__img"
+                id="pdp-zoom-img"
+                alt=""
+                width="2000"
+                height="2000"
+                draggable="false"
+              >
+            </div>
+          </div>
+          <div class="pdp-zoom-modal__hint" aria-live="polite">
+            Drag to pan · Scroll to zoom · Esc to close
+          </div>
+        </div>
       </div>
 
-      <div class="space-y-4 lg:space-y-5 min-w-0 buybox-sticky motion-fade-up reveal-tier-2">
+      <div class="space-y-4 lg:space-y-5 min-w-0 buybox-sticky motion-fade-up reveal-tier-2 pdp-buy-box">
         <div class="product-buybox card-elevated p-5 lg:p-6">
           <div class="product-buybox-header space-y-4">
             <div class="product-buybox-topline flex flex-wrap items-center justify-between gap-3">
@@ -315,9 +370,46 @@
             <div class="product-buybox-headline-row flex flex-col gap-3">
               <div class="product-buybox-lead space-y-2.5">
                 <h1 class="section-heading product-buybox-title max-w-none text-2xl leading-tight tracking-tight lg:text-2xl">{{ product.title }}</h1>
+                {% comment %} Judge.me star rating — auto-shows after app install {% endcomment %}
+                {% if jm_widget != blank and jm_count > 0 and jm_average != blank %}
+                  <div class="pdp-rating" id="pdp-rating-{{ product.id }}">
+                    <div class="pdp-rating__inner mb-3 flex flex-wrap items-center gap-2">
+                      <div class="pdp-stars inline-flex items-center gap-0.5" aria-label="{{ jm_average | round: 1 }} out of 5 stars">
+                        {%- assign full_stars = jm_average | floor -%}
+                        {%- assign remainder = jm_average | minus: full_stars -%}
+                        {%- assign half_star_index = full_stars | plus: 1 -%}
+                        {%- for i in (1..5) -%}
+                          {%- if i <= full_stars -%}
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--ez-amber)" aria-hidden="true" focusable="false">
+                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z"/>
+                            </svg>
+                          {%- elsif remainder >= 0.5 and i == half_star_index -%}
+                            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+                              <defs>
+                                <clipPath id="half-star-{{ product.id }}-{{ forloop.index }}">
+                                  <rect x="0" y="0" width="7" height="14"/>
+                                </clipPath>
+                              </defs>
+                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="var(--ez-light)"/>
+                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="var(--ez-amber)" clip-path="url(#half-star-{{ product.id }}-{{ forloop.index }})"/>
+                            </svg>
+                          {%- else -%}
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--ez-light)" aria-hidden="true" focusable="false">
+                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z"/>
+                            </svg>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                      <span class="pdp-rating__summary text-sm text-slate-600">
+                        {{ jm_average | round: 1 }} ({{ jm_count }} {{ jm_count | pluralize: 'review', 'reviews' }})
+                      </span>
+                      <a href="#judgeme_product_widget" class="pdp-rating__link text-sm font-medium text-slate-950 underline underline-offset-2">Read reviews</a>
+                    </div>
+                  </div>
+                {% endif %}
                 {% if display_rating_value != blank %}
                   <div class="product-buybox-review-row flex flex-wrap items-center gap-2 text-sm text-slate-600" aria-label="Rated {{ display_rating_value }} out of 5{% if display_rating_count != blank %} from {{ display_rating_count }} reviews{% endif %}">
-                    <span class="product-buybox-stars tracking-wide text-amber-500/90" aria-hidden="true">★★★★★</span>
+                    <span class="product-buybox-stars tracking-wide text-slate-700" aria-hidden="true">★★★★★</span>
                     <span class="product-buybox-review-value font-medium text-slate-900">{{ display_rating_value }}</span>
                     {% if display_rating_count != blank %}
                       <span class="product-buybox-review-count text-slate-500">{{ display_rating_count }} reviews</span>
@@ -328,6 +420,38 @@
 
               <div class="product-buybox-price" data-product-price-block>
                 {% render 'price', product: product, variant: product.selected_or_first_available_variant %}
+              </div>
+
+              {% comment %} ── Stock counter ─────────────────── {% endcomment %}
+              {%- assign stock_counter_hidden = true -%}
+              {%- assign stock_counter_class = 'stock-counter--ok' -%}
+              {%- assign stock_counter_text = 'In stock · ships within 1-2 days' -%}
+              {%- if selected_variant.inventory_management == 'shopify' and selected_variant.inventory_policy == 'deny' -%}
+                {%- assign stock = selected_variant.inventory_quantity -%}
+                {%- if stock > 0 -%}
+                  {%- assign stock_counter_hidden = false -%}
+                  {%- if stock <= 3 -%}
+                    {%- assign stock_counter_class = 'stock-counter--critical' -%}
+                    {%- capture stock_counter_text -%}Only {{ stock }} left — order soon{%- endcapture -%}
+                  {%- elsif stock <= 5 -%}
+                    {%- assign stock_counter_class = 'stock-counter--low' -%}
+                    {%- capture stock_counter_text -%}Only {{ stock }} left in stock{%- endcapture -%}
+                  {%- elsif stock <= 10 -%}
+                    {%- assign stock_counter_class = 'stock-counter--low' -%}
+                    {%- capture stock_counter_text -%}{{ stock }} left in stock{%- endcapture -%}
+                  {%- else -%}
+                    {%- assign stock_counter_class = 'stock-counter--ok' -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endif -%}
+              <div
+                class="stock-counter {{ stock_counter_class }}{% if stock_counter_hidden %} stock-counter--hidden{% endif %}"
+                id="stock-counter"
+                data-inventory="{{ stock | default: 0 }}"
+                aria-live="polite"
+              >
+                <span class="stock-counter__dot" aria-hidden="true"></span>
+                <span class="stock-counter__text">{{ stock_counter_text }}</span>
               </div>
             </div>
 
@@ -351,7 +475,7 @@
                   </div>
                   <select id="ProductVariant-{{ section.id }}" name="id" class="sr-only" data-product-variant-select>
                     {% for variant in product.variants %}
-                      <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money | escape }}" data-variant-compare-price="{{ variant.compare_at_price | money | escape }}" data-variant-save-label="{% if variant.compare_at_price > variant.price %}Save {{ variant.compare_at_price | minus: variant.price | money | escape }}{% endif %}" data-variant-available="{% if variant.available %}true{% else %}false{% endif %}" data-variant-title="{{ variant.title | escape }}" data-variant-option-label="{{ variant.options.first | default: variant.title | escape }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
+                      <option value="{{ variant.id }}" data-variant-price="{{ variant.price | money | escape }}" data-variant-compare-price="{{ variant.compare_at_price | money | escape }}" data-variant-save-label="{% if variant.compare_at_price > variant.price %}Save {{ variant.compare_at_price | minus: variant.price | money | escape }}{% endif %}" data-variant-available="{% if variant.available %}true{% else %}false{% endif %}" data-variant-title="{{ variant.title | escape }}" data-variant-option-label="{{ variant.options.first | default: variant.title | escape }}" data-variant-inventory-quantity="{{ variant.inventory_quantity }}" data-variant-inventory-management="{{ variant.inventory_management }}" data-variant-inventory-policy="{{ variant.inventory_policy }}" {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %}>
                         {{ variant.title }}{% unless variant.available %} - {{ 'product.sold_out' | t }}{% endunless %}
                       </option>
                     {% endfor %}
@@ -375,7 +499,7 @@
                           {% unless variant.available %} data-unavailable="true"{% endunless %}
                         >
                           {% if variant.featured_image != blank %}
-                            <img src="{{ variant.featured_image | image_url: width: 80 }}" alt="{{ variant.options.first }}" width="40" height="40" loading="lazy">
+                            <img src="{{ variant.featured_image | image_url: width: 80, format: 'pjpg' }}" alt="{{ variant.options.first }}" width="40" height="40" loading="lazy">
                           {% endif %}
                           <span class="sr-only">{{ variant.options.first | default: variant.title }}</span>
                         </button>
@@ -384,7 +508,7 @@
                   {% else %}
                     <div class="product-variant-chip-row flex flex-wrap gap-2" role="list">
                       {% for variant in product.variants %}
-                        <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-amber-500 bg-amber-50 text-amber-900 ring-1 ring-amber-500/20{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
+                        <button type="button" class="product-variant-chip inline-flex min-h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-px hover:border-slate-300 hover:text-slate-950 focus-visible:-translate-y-px focus-visible:border-slate-300 focus-visible:text-slate-950{% if variant == product.selected_or_first_available_variant %} is-active border-slate-950 bg-slate-50 text-slate-950 ring-1 ring-slate-950/10{% endif %}{% unless variant.available %} opacity-60{% endunless %}" data-product-variant-chip data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}"{% unless variant.available %} data-unavailable="true"{% endunless %}>
                           <span class="product-variant-chip-title leading-none">{{ variant.options.first | default: variant.title }}</span>
                           {% unless variant.available %}
                             <span class="product-variant-chip-meta text-xs text-slate-400">{{ 'product.sold_out' | t }}</span>
@@ -414,12 +538,6 @@
                 </details>
               {% endif %}
 
-              {% if show_urgency %}
-                <p class="product-urgency-line" role="status">
-                  Hurry, only {{ urgency_qty }} item{% if urgency_qty != 1 %}s{% endif %} left in stock!
-                </p>
-              {% endif %}
-
               <div class="product-purchase-row">
                 {% if section.settings.show_quantity_selector %}
                   <div class="hidden lg:block product-buybox-quantity-shell min-w-28">
@@ -427,9 +545,8 @@
                     <input id="ProductQuantity-{{ section.id }}" class="product-buybox-quantity-input min-h-12 w-28 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900" type="number" name="quantity" value="1" min="1">
                   </div>
                 {% endif %}
-
-                <div class="product-primary-action-wrap w-full self-end" data-product-primary-action-wrap>
-                  <button class="button-primary product-primary-action" type="submit" name="add" data-product-primary-button
+                <div class="product-primary-action-wrap" data-product-primary-action-wrap>
+                  <button class="btn btn--primary btn--block product-primary-action" type="submit" name="add" data-product-primary-button
                     data-label-add="{{ 'product.add_to_cart' | t | escape }}"
                     data-label-adding="{{ 'product.adding' | t | escape }}"
                     {% unless product.available %} disabled="disabled"{% endunless %}>
@@ -471,7 +588,7 @@
               <span class="pdp-share-label">{{ 'product.share' | t }}</span>
               <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--fb"
-                 target="_blank" rel="noopener"
+                 target="_blank" rel="noopener noreferrer"
                  aria-label="{{ 'social.share_on_facebook' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
@@ -479,7 +596,7 @@
               </a>
               <a href="https://twitter.com/intent/tweet?url={{ shop.url | append: product.url | url_encode }}&text={{ product.title | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--tw"
-                 target="_blank" rel="noopener"
+                 target="_blank" rel="noopener noreferrer"
                  aria-label="{{ 'social.share_on_twitter' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -487,7 +604,7 @@
               </a>
               <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url | url_encode }}&media={{ product.featured_image | image_url: width: 600 | url_encode }}&description={{ product.title | url_encode }}"
                  class="pdp-share-btn pdp-share-btn--pin"
-                 target="_blank" rel="noopener"
+                 target="_blank" rel="noopener noreferrer"
                  aria-label="{{ 'social.save_to_pinterest' | t }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
@@ -507,25 +624,7 @@
           </div>
 
           {% unless product.available %}
-            <div class="notify-form" id="notify-form-{{ section.id }}" data-notify-form>
-              <p class="notify-form__message">{{ 'notify.out_of_stock' | t }}</p>
-              <div class="notify-form__input-row" data-notify-input-row>
-                <input
-                  type="email"
-                  class="notify-form__input"
-                  data-notify-email
-                  placeholder="{{ 'notify.email_placeholder' | t }}"
-                  aria-label="{{ 'notify.label' | t }}"
-                  autocomplete="email"
-                >
-                <button class="btn btn--primary notify-form__submit" data-notify-submit type="button">
-                  {{ 'notify.submit' | t }}
-                </button>
-              </div>
-              <p class="notify-form__success" data-notify-success hidden role="status">
-                {{ 'notify.success' | t }}
-              </p>
-            </div>
+            {% render 'notify-me-form', product: product %}
           {% endunless %}
 
           {% if section.settings.show_pickup_availability %}
@@ -549,28 +648,28 @@
           <div class="pdp-trust-strip" role="list" aria-label="Purchase confidence">
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
+                <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.warranty' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.no_drivers' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <circle cx="9" cy="9" r="6.5" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
-                <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
+                <circle cx="9" cy="9" r="6.5" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
+                <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.mac_windows' | t }}</span>
             </div>
             <div class="pdp-trust-item" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M1.5 4.5h10v7.5H1.5V4.5zM11.5 7.5H15l1.5 3v1.5h-5V7.5z" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="4.5" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
-                <circle cx="13" cy="13" r="1.25" stroke="rgba(250, 204, 21, 0.96)" stroke-width="1.25"/>
+                <path d="M1.5 4.5h10v7.5H1.5V4.5zM11.5 7.5H15l1.5 3v1.5h-5V7.5z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="4.5" cy="13" r="1.25" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
+                <circle cx="13" cy="13" r="1.25" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.free_shipping' | t }}</span>
             </div>
@@ -709,7 +808,7 @@
 
   </div>
 
-  <div class="product-sticky-atc" hidden data-sticky-atc>
+  <div class="product-sticky-atc" aria-hidden="true" data-sticky-atc>
     <div class="product-sticky-atc-shell">
       <div class="product-sticky-atc-main">
         <div class="product-sticky-atc-copy">
@@ -721,15 +820,12 @@
             <p class="product-sticky-atc-price" data-sticky-atc-price>{{ product.selected_or_first_available_variant.price | money }}</p>
           </div>
         </div>
-        <button class="button-primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
+        <button class="btn btn--primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
           <span data-sticky-atc-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
           <span class="product-primary-action-divider" aria-hidden="true" data-sticky-atc-button-divider>·</span>
           <span data-sticky-atc-button-price>{{ product.selected_or_first_available_variant.price | money }}</span>
         </button>
       </div>
-      {% if sticky_trust_line != blank %}
-        <p class="product-sticky-atc-trust">{{ sticky_trust_line }}</p>
-      {% endif %}
     </div>
   </div>
 </section>
@@ -757,6 +853,9 @@
     {% endif %}
     <a href="#pdp-compat" class="pdp-tab" data-pdp-tab>Compatibility</a>
     <a href="#pdp-downloads" class="pdp-tab" data-pdp-tab>Downloads</a>
+    {% if settings.reviews_app != 'none' %}
+      <a href="#pdp-reviews" class="pdp-tab" data-pdp-tab>Reviews</a>
+    {% endif %}
   </div>
 </div>
 
@@ -825,7 +924,7 @@
 ──────────────────────────────────────────────────────────────{% endcomment %}
 {% if spec_count > 0 %}
 <section class="section-shell pdp-section pdp-section--specs" id="pdp-specs">
-  <div class="container-shell max-w-5xl">
+  <div class="container-shell">
     {%- liquid
       assign pdp_specs_heading = 'Specifications'
       assign pdp_specs_copy = 'Review the ports, charging support, display path, and host details before you order.'
@@ -890,14 +989,29 @@
     <h2 class="section-heading mt-4">{{ product.title | split: '—' | first | strip }}</h2>
     <div class="pdp-highlight-grid mt-8">
       <div class="pdp-highlight-card">
+        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <rect x="6" y="11" width="20" height="10" rx="5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75"/>
+          <circle cx="12" cy="16" r="1.75" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
+          <circle cx="20" cy="16" r="1.75" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
+          <path d="M16 21v5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M16 5v6" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round"/>
+          <circle cx="16" cy="4" r="1.5" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
+        </svg>
         <span class="pdp-highlight-num" aria-hidden="true">01</span>
         <p class="pdp-highlight-copy">{{ pdp_hl_one }}</p>
       </div>
       <div class="pdp-highlight-card">
+        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <path d="M18 4L9 17h9l-4 11 10-14h-9L18 4z" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <span class="pdp-highlight-num" aria-hidden="true">02</span>
         <p class="pdp-highlight-copy">{{ pdp_hl_two }}</p>
       </div>
       <div class="pdp-highlight-card">
+        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="16" cy="16" r="11" stroke="var(--ez-amber,#FED300)" stroke-width="1.75"/>
+          <path d="M10.5 16.5l4 4 7-8.5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <span class="pdp-highlight-num" aria-hidden="true">03</span>
         <p class="pdp-highlight-copy">{{ pdp_hl_three }}</p>
       </div>
@@ -912,7 +1026,7 @@
   Driver callout always renders.
 ──────────────────────────────────────────────────────────────{% endcomment %}
 <section class="section-shell pdp-section pdp-section--compat" id="pdp-compat">
-  <div class="container-shell">
+  <div class="container-shell container-wild">
     <div class="section-intro">
       <div class="max-w-2xl">
         <p class="section-kicker">Compatibility</p>
@@ -992,6 +1106,65 @@
   </div>
 </section>
 
+{% if settings.reviews_app != 'none' %}
+<section class="section-shell pdp-section pdp-section--reviews" id="pdp-reviews">
+  <div class="container-shell">
+    <p class="section-kicker">Customer reviews</p>
+    <h2 class="section-heading mt-4">What people are saying</h2>
+    <div class="pdp-reviews-body mt-8">
+      {% if settings.reviews_app == 'judgeme' %}
+        <div data-judgeme-deferred>
+          <button type="button" class="button-secondary" data-judgeme-load>Load reviews</button>
+          <template data-judgeme-template>
+            {% render 'judgeme_widgets', widget_type: 'JudgeMe::ReviewsWidget', jm_style: '', product: product %}
+          </template>
+        </div>
+      {% else %}
+        {% if display_rating_value != blank %}
+          <div class="pdp-reviews-native">
+            <p class="pdp-reviews-native__score">{{ display_rating_value }} / 5</p>
+            {% if display_rating_count != blank %}
+              <p class="pdp-reviews-native__count mt-1 text-sm text-slate-500">Based on {{ display_rating_count }} reviews</p>
+            {% endif %}
+          </div>
+        {% else %}
+          <p class="text-sm text-slate-500">No reviews yet.</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% comment %} Judge.me review widget — renders after install {% endcomment %}
+<div
+  id="judgeme_product_widget"
+  class="jdgm-widget jdgm-review-widget pdp-judgeme-widget"
+  data-id="{{ product.id }}"
+>
+  {% comment %}
+    Judge.me injects into this div automatically after install.
+    The data-id attribute links the widget to this product.
+  {% endcomment %}
+  <span class="sr-only">Judge.me product reviews</span>
+</div>
+
+{% if settings.reviews_app == 'judgeme' %}
+  <script>
+    document.addEventListener('click', function(event) {
+      var trigger = event.target.closest('[data-judgeme-load]');
+      if (!trigger) return;
+      var shell = trigger.closest('[data-judgeme-deferred]');
+      var template = shell && shell.querySelector('[data-judgeme-template]');
+      if (!shell || !template) return;
+      shell.innerHTML = template.innerHTML;
+      if (window.jdgm && typeof window.jdgm.refreshWidgets === 'function') {
+        window.jdgm.refreshWidgets();
+      }
+    });
+  </script>
+{% endif %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -1024,6 +1197,96 @@
   }
   {%- endif -%}
 }
+</script>
+
+{% comment %}
+AggregateRating schema — activates when Judge.me is installed.
+Judge.me exposes product ratings via product.metafields.judgeme.
+No changes needed after Judge.me install — this auto-activates.
+{% endcomment %}
+{%- if jm_widget != blank and jm_count > 0 and jm_average != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "{{ shop.url }}{{ product.url }}#product",
+  "name": {{ product.title | json }},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ jm_average | round: 1 }}",
+    "reviewCount": {{ jm_count }},
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+{%- endif -%}
+
+<script>
+(function () {
+  var productRoot = document.querySelector('[data-product-root]');
+  if (!productRoot) return;
+
+  var counter = productRoot.querySelector('#stock-counter');
+  var variantSelect = productRoot.querySelector('[data-product-variant-select]');
+  if (!counter) return;
+
+  function syncCounterFromVariant(variant) {
+    if (!variant) return;
+
+    var qty = Number(variant.inventory_quantity || 0);
+    var managed = variant.inventory_management === 'shopify';
+    var deny = variant.inventory_policy === 'deny';
+    var text = counter.querySelector('.stock-counter__text');
+
+    if (!managed || !deny || qty <= 0) {
+      counter.classList.add('stock-counter--hidden');
+      counter.dataset.inventory = '0';
+      return;
+    }
+
+    counter.classList.remove('stock-counter--hidden');
+    counter.dataset.inventory = String(qty);
+
+    if (qty <= 3) {
+      counter.className = 'stock-counter stock-counter--critical';
+      if (text) text.textContent = 'Only ' + qty + ' left — order soon';
+    } else if (qty <= 5) {
+      counter.className = 'stock-counter stock-counter--low';
+      if (text) text.textContent = 'Only ' + qty + ' left in stock';
+    } else if (qty <= 10) {
+      counter.className = 'stock-counter stock-counter--low';
+      if (text) text.textContent = qty + ' left in stock';
+    } else {
+      counter.className = 'stock-counter stock-counter--ok';
+      if (text) text.textContent = 'In stock · ships within 1-2 days';
+    }
+  }
+
+  function variantFromOption(option) {
+    if (!option) return null;
+
+    return {
+      id: option.value,
+      inventory_quantity: Number(option.dataset.variantInventoryQuantity || 0),
+      inventory_management: option.dataset.variantInventoryManagement || '',
+      inventory_policy: option.dataset.variantInventoryPolicy || ''
+    };
+  }
+
+  if (variantSelect) {
+    variantSelect.addEventListener('change', function () {
+      var option = variantSelect.options[variantSelect.selectedIndex];
+      syncCounterFromVariant(variantFromOption(option));
+    });
+  }
+
+  document.addEventListener('variant:change', function (event) {
+    var variant = event.detail && event.detail.variant;
+    if (!variant) return;
+    syncCounterFromVariant(variant);
+  });
+})();
 </script>
 
 <script>
@@ -1069,7 +1332,7 @@
 
     setLoading(true);
 
-    fetch('/cart/add.js', {
+    fetch((window.EZRoutes && window.EZRoutes.cartAdd ? window.EZRoutes.cartAdd : '/cart/add') + '.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
       body: JSON.stringify({
@@ -1088,7 +1351,7 @@
           window.refreshAndOpenCartDrawer();
           setTimeout(function () { setLoading(false); }, 350);
         } else {
-          window.location.href = '/cart';
+          window.location.href = window.EZRoutes && window.EZRoutes.cart ? window.EZRoutes.cart : '/cart';
         }
       }, 700);
     })
@@ -1096,6 +1359,24 @@
       setLoading(false);
     });
   });
+})();
+</script>
+
+<script>
+(function () {
+  var stickyBar = document.querySelector('[data-sticky-atc]');
+  var mainAtc = document.querySelector('[data-product-primary-button]');
+  if (!stickyBar || !mainAtc || !window.IntersectionObserver) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var visible = !entry.isIntersecting;
+      stickyBar.classList.toggle('is-visible', visible);
+      stickyBar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
+
+  observer.observe(mainAtc);
 })();
 </script>
 
@@ -1148,6 +1429,8 @@
   setActive(0);
 })();
 </script>
+
+<script src="{{ 'pdp-zoom.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

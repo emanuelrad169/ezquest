@@ -3,7 +3,7 @@
   id="recently-viewed"
   aria-label="Recently viewed products"
   data-max="{{ section.settings.max_products }}"
-  style="display:none"
+  hidden
 >
   <div class="recently-viewed__inner page-width">
     <div class="recently-viewed__header">
@@ -43,7 +43,7 @@
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.07);
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.07);
+    background: #fff;
   }
 
   #shopify-section-{{ section.id }} .rv-card {

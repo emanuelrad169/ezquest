@@ -23,9 +23,14 @@
   elsif product != blank and product.images.size > 0
     assign resolved_image = product.images.first
   endif
+
+  assign resolved_height = resolved_width
+  if resolved_image != blank and resolved_image.aspect_ratio > 0
+    assign resolved_height = resolved_width | divided_by: resolved_image.aspect_ratio | round
+  endif
 -%}
 {% if resolved_image != blank %}
-  {{ resolved_image | image_url: width: resolved_width | image_tag: loading: resolved_loading, fetchpriority: resolved_fetchpriority, class: resolved_class, alt: resolved_alt, widths: '480, 720, 900, 1200', sizes: '(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 50vw' }}
+  {{ resolved_image | image_url: width: resolved_width, format: 'pjpg' | image_tag: loading: resolved_loading, fetchpriority: resolved_fetchpriority, class: resolved_class, alt: resolved_alt, width: resolved_width, height: resolved_height, widths: '480, 720, 900, 1200', sizes: '(min-width: 1280px) 24vw, (min-width: 768px) 33vw, 50vw' }}
 {% else %}
   {% render 'owned-product-visual',
     product: product,

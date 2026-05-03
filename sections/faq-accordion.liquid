@@ -176,6 +176,52 @@
 })();
 </script>
 
+{% comment %} FAQPage structured data for AI Overviews {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign schema_item_count = 0 -%}
+    {%- if use_global_faqs -%}
+      {%- for faq_key in sorted_global_faq_keys -%}
+        {%- if faq_key == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign faq_handle = faq_key | split: '::' | last -%}
+        {%- assign faq_item = metaobjects.ezquest_faq_item[faq_handle] -%}
+        {%- if faq_item.question.value != blank and faq_item.answer.value != blank -%}
+          {%- if schema_item_count > 0 -%},{%- endif -%}
+          {
+            "@type": "Question",
+            "name": {{ faq_item.question.value | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ faq_item.answer.value | strip_html | json }}
+            }
+          }
+          {%- assign schema_item_count = schema_item_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+      {%- for block in faq_blocks -%}
+        {%- if block.settings.question != blank and block.settings.answer != blank -%}
+          {%- if schema_item_count > 0 -%},{%- endif -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.answer | strip_html | json }}
+            }
+          }
+          {%- assign schema_item_count = schema_item_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  ]
+}
+</script>
+
 {% schema %}
 {
   "name": "FAQ accordion",
@@ -210,4 +256,3 @@
   ]
 }
 {% endschema %}
-

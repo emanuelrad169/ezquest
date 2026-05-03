@@ -83,17 +83,17 @@
     </div>
   {% endif %}
 
-  <div class="support-cta-strip">
-    <div>
-      <p class="support-cta-strip__heading">Need help with an update?</p>
-      <p class="support-cta-strip__body">Our team can walk you through the process.</p>
-    </div>
-    <div class="support-cta-strip__actions">
-      <a href="/pages/contact" class="btn btn--primary">Get help</a>
-    </div>
-  </div>
 
 </div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'Firmware',
+  heading: 'Need help with an update?',
+  subhead: 'Our team can walk you through the process.',
+  primary_label: 'Get help',
+  primary_url: '/pages/contact'
+-%}
 
 {% schema %}
 {

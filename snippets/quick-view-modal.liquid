@@ -1,0 +1,13 @@
+{% comment %} snippets/quick-view-modal.liquid — render once before </body> {% endcomment %}
+<div id="quick-view-modal" class="qv-modal" role="dialog" aria-modal="true" aria-label="Quick view" hidden>
+  <div class="qv-modal__backdrop" id="qv-backdrop"></div>
+  <div class="qv-modal__panel">
+    <button type="button" class="qv-modal__close" aria-label="Close" id="qv-close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div id="qv-body" class="qv-modal__content"></div>
+  </div>
+</div>
+<script src="{{ 'quick-view.js' | asset_url }}" defer></script>

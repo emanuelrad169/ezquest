@@ -16,8 +16,7 @@
     endcase
   endif
 
-  assign product_badge = blank
-  assign product_badge_modifier = blank
+  assign product_badge_codes = ''
   assign rating_value = blank
   assign rating_count = blank
   assign swatch_values = blank
@@ -34,9 +33,16 @@
   assign product_eyebrow = blank
   assign show_product_eyebrow = true
   assign product_card_url = product.url | default: '#'
+  assign card_image_loading = 'lazy'
+  assign card_image_fetchpriority = 'auto'
 
   if product != blank and collection != blank and card_context == 'collection'
     assign product_card_url = product.url | within: collection
+  endif
+
+  if card_index != blank and card_index < 4
+    assign card_image_loading = 'eager'
+    assign card_image_fetchpriority = 'high'
   endif
 
   case card_context
@@ -57,12 +63,51 @@
 
   if product != blank
     assign product_tags_downcase = product.tags | join: ',' | downcase
+    assign product_tags_normalized = product_tags_downcase | replace: ' ', '-' | replace: '_', '-'
+    assign product_title_downcase = product.title | downcase
+    assign now_seconds = 'now' | date: '%s' | plus: 0
+    assign published_seconds = product.published_at | date: '%s' | plus: 0
+    assign product_age_seconds = now_seconds | minus: published_seconds
+    assign product_days_old = product_age_seconds | divided_by: 86400
+
+    unless product.available
+      assign product_badge_codes = product_badge_codes | append: 'soldout,'
+    endunless
+
     if product.compare_at_price_max > product.price
-      assign product_badge = 'Sale'
-      assign product_badge_modifier = 'sale'
-    elsif product_tags_downcase contains 'new'
-      assign product_badge = 'New'
-      assign product_badge_modifier = 'new'
+      assign product_badge_codes = product_badge_codes | append: 'sale,'
+    endif
+
+    if product_tags_normalized contains 'best-seller' or product_tags_normalized contains 'bestseller'
+      assign product_badge_codes = product_badge_codes | append: 'bestseller,'
+    endif
+
+    if product_days_old < 60 or product_tags_normalized contains 'new'
+      assign product_badge_codes = product_badge_codes | append: 'new,'
+    endif
+
+    if product_tags_normalized contains 'usb4' or product_tags_normalized contains 'usb-4' or product_title_downcase contains 'usb4' or product_title_downcase contains 'usb 4'
+      assign product_badge_codes = product_badge_codes | append: 'usb4,'
+    endif
+
+    if product_tags_normalized contains 'thunderbolt' or product_title_downcase contains 'thunderbolt'
+      assign product_badge_codes = product_badge_codes | append: 'thunderbolt,'
+    endif
+
+    if product_tags_normalized contains 'gan' or product_title_downcase contains 'gan'
+      assign product_badge_codes = product_badge_codes | append: 'gan,'
+    endif
+
+    if product_tags_normalized contains 'duraguard' or product_title_downcase contains 'duraguard'
+      assign product_badge_codes = product_badge_codes | append: 'duraguard,'
+    endif
+
+    if product_tags_normalized contains 'dual-display' or product_title_downcase contains 'dual display' or product_title_downcase contains 'dual-display'
+      assign product_badge_codes = product_badge_codes | append: 'dual-display,'
+    endif
+
+    if product_tags_normalized contains '100w' or product_tags_normalized contains '120w' or product_title_downcase contains '100w' or product_title_downcase contains '120w'
+      assign product_badge_codes = product_badge_codes | append: 'highwatt,'
     endif
 
     if product.metafields.reviews.rating != blank and product.metafields.reviews.rating.value != blank
@@ -115,16 +160,68 @@
   >
     <div class="product-card-featured-media-shell relative">
       <a href="{{ product_card_url }}" class="product-card-featured-media product-card-featured-media-link relative flex min-h-56 items-center justify-center overflow-hidden border-b border-slate-200/70 bg-white no-underline" aria-label="View {{ product.title | default: 'product' }}">
-        {% render 'product-browse-media',
-          product: product,
-          context: card_context,
-          variant: image_variant,
-          width: 1200,
-          height: 900,
-          class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
-        %}
-        {% if product_badge != blank %}
-          <span class="product-card-featured-badge{% if product_badge_modifier != blank %} product-card-featured-badge--{{ product_badge_modifier }}{% endif %}">{{ product_badge }}</span>
+        {% assign second_image = product.images[1] %}
+        <div class="card-img-wrap aspect-card w-full{% if second_image != blank %} has-rollover{% endif %}">
+          {% render 'product-browse-media',
+            product: product,
+            context: card_context,
+            variant: image_variant,
+            width: 1200,
+            height: 900,
+            loading: card_image_loading,
+            fetchpriority: card_image_fetchpriority,
+            class: 'card-img card-img--primary product-card-image product-card-featured-image aspect-card w-full object-contain'
+          %}
+          {% if second_image != blank %}
+            <img
+              class="card-img card-img--secondary product-card-image product-card-featured-image"
+              src="{{ second_image | image_url: width: 600, format: 'pjpg' }}"
+              srcset="
+                {{ second_image | image_url: width: 400, format: 'pjpg' }} 400w,
+                {{ second_image | image_url: width: 600, format: 'pjpg' }} 600w,
+                {{ second_image | image_url: width: 800, format: 'pjpg' }} 800w
+              "
+              sizes="(max-width: 639px) calc(50vw - 1.5rem), (max-width: 1023px) calc(33vw - 1.5rem), calc(25vw - 1.5rem)"
+              alt="{{ second_image.alt | default: product.title | escape }} — alternate view"
+              width="{{ second_image.width }}"
+              height="{{ second_image.height }}"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            >
+          {% endif %}
+        </div>
+        {% if product_badge_codes != blank %}
+          {% assign product_badge_list = product_badge_codes | split: ',' %}
+          <div class="product-badges" aria-label="Product features">
+            {% for badge in product_badge_list limit: 3 %}
+              {% unless badge == blank %}
+                {% case badge %}
+                  {% when 'soldout' %}
+                    <span class="product-badge product-badge--soldout">Sold out</span>
+                  {% when 'sale' %}
+                    {% assign discount_pct = product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max %}
+                    <span class="product-badge product-badge--sale">-{{ discount_pct }}%</span>
+                  {% when 'bestseller' %}
+                    <span class="product-badge product-badge--best">Best seller</span>
+                  {% when 'new' %}
+                    <span class="product-badge product-badge--new">New</span>
+                  {% when 'usb4' %}
+                    <span class="product-badge product-badge--tech">USB4</span>
+                  {% when 'thunderbolt' %}
+                    <span class="product-badge product-badge--tech">Thunderbolt</span>
+                  {% when 'gan' %}
+                    <span class="product-badge product-badge--tech">GaN</span>
+                  {% when 'duraguard' %}
+                    <span class="product-badge product-badge--tech">DuraGuard</span>
+                  {% when 'dual-display' %}
+                    <span class="product-badge product-badge--tech">Dual 4K</span>
+                  {% when 'highwatt' %}
+                    <span class="product-badge product-badge--tech">100W+</span>
+                {% endcase %}
+              {% endunless %}
+            {% endfor %}
+          </div>
         {% endif %}
         {% if rating_value != blank %}
           <span class="product-card-featured-rating-badge" aria-label="Rated {{ rating_value }} out of 5{% if rating_count != blank %} from {{ rating_count }} reviews{% endif %}">
@@ -132,8 +229,6 @@
             {{ rating_value }}
             {% if rating_count != blank %}<span class="rating-count">({{ rating_count }})</span>{% endif %}
           </span>
-        {% elsif settings.reviews_app == 'judgeme' %}
-          {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
         {% endif %}
       </a>
 
@@ -203,7 +298,7 @@
         {% endif %}
 
         {% if show_swatches and swatch_values != blank and swatch_values.size > 0 %}
-          <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" aria-label="Available finishes">
+          <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" role="img" aria-label="Available finishes">
             {% for swatch_value in swatch_values limit: swatch_limit %}
               <span
                 class="product-card-featured-swatch product-card-featured-swatch--{{ swatch_value | handleize }}"
@@ -235,15 +330,80 @@
   {% if product != blank %}
     <div class="product-thumb-card product-card-image-wrapper relative overflow-hidden">
       <a href="{{ product_card_url }}" class="product-card-image-link" aria-label="{{ product.title }}">
-        {% render 'product-browse-media',
-          product: product,
-          context: card_context,
-          variant: image_variant,
-          width: 900,
-          height: 675,
-          class: 'product-card-image aspect-card w-full object-contain'
-        %}
+        {% assign second_image = product.images[1] %}
+        <div class="card-img-wrap aspect-card w-full{% if second_image != blank %} has-rollover{% endif %}">
+          {% render 'product-browse-media',
+            product: product,
+            context: card_context,
+            variant: image_variant,
+            width: 900,
+            height: 675,
+            loading: card_image_loading,
+            fetchpriority: card_image_fetchpriority,
+            class: 'card-img card-img--primary product-card-image aspect-card w-full object-contain'
+          %}
+          {% if second_image != blank %}
+            <img
+              class="card-img card-img--secondary product-card-image"
+              src="{{ second_image | image_url: width: 600, format: 'pjpg' }}"
+              srcset="
+                {{ second_image | image_url: width: 400, format: 'pjpg' }} 400w,
+                {{ second_image | image_url: width: 600, format: 'pjpg' }} 600w,
+                {{ second_image | image_url: width: 800, format: 'pjpg' }} 800w
+              "
+              sizes="(max-width: 639px) calc(50vw - 1.5rem), (max-width: 1023px) calc(33vw - 1.5rem), calc(25vw - 1.5rem)"
+              alt="{{ second_image.alt | default: product.title | escape }} — alternate view"
+              width="{{ second_image.width }}"
+              height="{{ second_image.height }}"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            >
+          {% endif %}
+        </div>
       </a>
+      {% if product_badge_codes != blank %}
+        {% assign product_badge_list = product_badge_codes | split: ',' %}
+        <div class="product-badges" aria-label="Product features">
+          {% for badge in product_badge_list limit: 3 %}
+            {% unless badge == blank %}
+              {% case badge %}
+                {% when 'soldout' %}
+                  <span class="product-badge product-badge--soldout">Sold out</span>
+                {% when 'sale' %}
+                  {% assign discount_pct = product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max %}
+                  <span class="product-badge product-badge--sale">-{{ discount_pct }}%</span>
+                {% when 'bestseller' %}
+                  <span class="product-badge product-badge--best">Best seller</span>
+                {% when 'new' %}
+                  <span class="product-badge product-badge--new">New</span>
+                {% when 'usb4' %}
+                  <span class="product-badge product-badge--tech">USB4</span>
+                {% when 'thunderbolt' %}
+                  <span class="product-badge product-badge--tech">Thunderbolt</span>
+                {% when 'gan' %}
+                  <span class="product-badge product-badge--tech">GaN</span>
+                {% when 'duraguard' %}
+                  <span class="product-badge product-badge--tech">DuraGuard</span>
+                {% when 'dual-display' %}
+                  <span class="product-badge product-badge--tech">Dual 4K</span>
+                {% when 'highwatt' %}
+                  <span class="product-badge product-badge--tech">100W+</span>
+              {% endcase %}
+            {% endunless %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <button type="button"
+              class="qv-trigger"
+              data-quick-view="{{ product.handle }}"
+              aria-label="Quick view {{ product.title | escape }}">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <circle cx="6" cy="6" r="2.5" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M1 6s2-4 5-4 5 4 5 4-2 4-5 4-5-4-5-4z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+        </svg>
+        Quick view
+      </button>
       {% unless product.has_only_default_variant %}
         <a href="{{ product_card_url }}"
            class="quick-add-btn quick-add-btn--options"
@@ -266,11 +426,6 @@
           <span>Add to cart</span>
         </button>
       {% endunless %}
-      {% if product.available == false %}
-        <span class="product-card-badge">Sold out</span>
-      {% elsif product.compare_at_price_max > product.price %}
-        <span class="product-card-badge product-card-badge--sale">Sale</span>
-      {% endif %}
     </div>
   {% else %}
     <div class="product-thumb-card product-card-image-wrapper">

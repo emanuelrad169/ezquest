@@ -1,0 +1,71 @@
+{{ 'compatibility.css' | asset_url | stylesheet_tag }}
+<meta name="compat-devices-url" content="{{ 'compatibility-devices.json' | asset_url }}">
+
+<div class="compat-page">
+
+  <!-- A. Page header -->
+  <div class="compat-header">
+    <div class="container-shell reveal-on-scroll">
+      <p class="compat-header__kicker">Compatibility checker</p>
+      <h1 class="compat-header__heading">Will it work with your setup?</h1>
+      <p class="section-copy compat-header__sub">Tell us what you're using. We'll show you exactly what fits — and what to skip.</p>
+    </div>
+  </div>
+
+  <!-- B. Sticky search block -->
+  <div class="compat-search-wrap" data-compat-search-wrap>
+    <div class="container-shell">
+      <div class="compat-search-card" data-compat-search-card>
+        <p class="compat-search-label">Search your device</p>
+        <div class="compat-search-input-wrap" data-compat-input-wrap>
+          <span class="compat-search-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input
+            type="search"
+            id="compat-input"
+            placeholder="MacBook Pro M3, Dell XPS 15, iPad Pro M4…"
+            autocomplete="off"
+            data-compat-input
+            aria-label="Search devices"
+            aria-autocomplete="list"
+            aria-controls="compat-dropdown"
+          >
+          <ul class="compat-dropdown" id="compat-dropdown" role="listbox" hidden data-compat-dropdown></ul>
+        </div>
+        <div class="compat-platforms">
+          <span class="compat-platforms-label">Or browse by platform:</span>
+          <div class="compat-platform-chips">
+            <button class="btn btn--secondary btn--sm compat-chip" data-platform="mac" type="button">
+              <svg width="14" height="14" viewBox="0 0 814 1000" fill="currentColor" aria-hidden="true"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.3 137.4-316.8 273-316.8 69.2 0 126.7 45.5 170.5 45.5 43.9 0 112.6-48.3 192.6-48.3zm-174.5-77.7c-31.5-42.8-87.1-75.7-144.7-75.7-6.4 0-12.8.6-18.6 1.3C443.4 126 390.5 185 390.5 246.4c0 8.3 1.3 17.3 2.6 26.3 2.6 0 5.8.6 9 .6 50.6 0 101.9-35.2 133.4-77.1z"/></svg>
+              Mac
+            </button>
+            <button class="btn btn--secondary btn--sm compat-chip" data-platform="windows" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+              Windows
+            </button>
+            <button class="btn btn--secondary btn--sm compat-chip" data-platform="chromeos" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+              ChromeOS
+            </button>
+            <button class="btn btn--secondary btn--sm compat-chip" data-platform="ipad" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              iPad / iPhone
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ 'compatibility.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Compatibility search",
+  "tag": "section",
+  "class": "compat-search-section"
+}
+{% endschema %}

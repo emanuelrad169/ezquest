@@ -1,0 +1,583 @@
+{
+  "date": "2026-04-26",
+  "total": 23,
+  "clean": 23,
+  "issues": [],
+  "details": [
+    {
+      "path": "/blogs/resources",
+      "name": "Blog listing",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Guides, tips & setup help."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/blogs/resources/add-multiple-displays-to-macbook-neo-with-ezquest-usb-4-dual-display-8-in-1-hub-pro-series",
+      "name": "Article 1",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Add Multiple Displays to MacBook Neo with EZQuest USB 4 Dual"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": true,
+      "hasRTE": true,
+      "hasRelated": true
+    },
+    {
+      "path": "/blogs/resources/ezquest-announces-new-line-of-pro-series-usb-c-hubs",
+      "name": "Article 2",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "EZQuest Announces New Line of Pro Series USB-C Hubs"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": true,
+      "hasRTE": true,
+      "hasRelated": true
+    },
+    {
+      "path": "/blogs/resources/unclutter-your-desk-with-help-from-ezquest",
+      "name": "Article 3",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Unclutter Your Desk With Help From EZQuest"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": true,
+      "hasRTE": true,
+      "hasRelated": true
+    },
+    {
+      "path": "/collections",
+      "name": "Collections index",
+      "hasHero": true,
+      "hasCTA": false,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Find the right EZQuest product"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/collections/hubs-adapters",
+      "name": "Collection: Hubs",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Hubs & Adapters"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/collections/chargers-power",
+      "name": "Collection: Chargers",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Chargers & Power"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/collections/accessories",
+      "name": "Collection: Accessories",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Cables & Accessories"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/our-story",
+      "name": "Our Story",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Built for people who connect everything."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/about",
+      "name": "About",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Built for people who connect everything."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/shipping-returns",
+      "name": "Shipping & Returns",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Fast shipping.Easy returns."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/help-me-choose",
+      "name": "Help me choose",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Find the right setup before you shop"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/where-to-buy",
+      "name": "Where to buy",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Where to buy"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/compare",
+      "name": "Compare",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Find the right setup, side by side"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/compatibility",
+      "name": "Compatibility",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Check compatibility with confidence"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/support",
+      "name": "Support hub",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "How can we help?"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/faq",
+      "name": "FAQ",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Common questions, answered."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/downloads",
+      "name": "Downloads",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Find the right download fast"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/warranty",
+      "name": "Warranty",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Warranty guidance that keeps the next step clear"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": true,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/contact",
+      "name": "Contact",
+      "hasHero": true,
+      "hasCTA": false,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "Get help now"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/",
+      "name": "Homepage",
+      "hasHero": true,
+      "hasCTA": false,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "USB-C hubs, docks, chargers, and cables for modern devices"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/products/4-port-usb-3-hub-adapter-with-usb-c-pd-3",
+      "name": "PDP",
+      "hasHero": true,
+      "hasCTA": true,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "4-Port USB 3.0 Hub Adapter with USB-C PD 3.0"
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    },
+    {
+      "path": "/pages/404-error",
+      "name": "404",
+      "hasHero": true,
+      "hasCTA": false,
+      "hasPageWidth": true,
+      "h1Count": 1,
+      "h1Text": [
+        "This page isn't connected."
+      ],
+      "brokenImgs": [
+        "ify.com/cdn/shop/files/X40024-4-1.jpg?v=1775918956&width=200",
+        "y.com/cdn/shop/files/X49910-view1.jpg?v=1775864964&width=200",
+        "y.com/cdn/shop/files/X40100-view1.jpg?v=1775921193&width=200",
+        "dn/shop/files/X48910-X48920-view1.jpg?v=1775921172&width=200",
+        "om/cdn/shop/files/H30005_View1-72.jpg?v=1775864959&width=200"
+      ],
+      "hardcodedColors": [],
+      "hasPlaceholder": false,
+      "hasFooter": true,
+      "hasNav": true,
+      "hasArticleHeader": false,
+      "hasRTE": false,
+      "hasRelated": false
+    }
+  ]
+}

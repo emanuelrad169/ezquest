@@ -1,0 +1,118 @@
+<script type="application/json" id="compat-products-data">
+[
+  {%- for product in collections.all.products limit: 100 -%}
+  {
+    "id": {{ product.id | json }},
+    "handle": {{ product.handle | json }},
+    "title": {{ product.title | json }},
+    "url": {{ product.url | json }},
+    "price": {{ product.price_min | money_without_trailing_zeros | json }},
+    "image": {{ product.featured_image | image_url: width: 400 | json }},
+    "image_alt": {{ product.featured_image.alt | default: product.title | json }},
+    "available": {{ product.available | json }},
+    "compat_full": {{ product.metafields.custom.compatibility_full.value | default: '[]' | json }},
+    "compat_partial": {{ product.metafields.custom.compatibility_partial.value | default: '[]' | json }},
+    "compat_none": {{ product.metafields.custom.compatibility_unsupported.value | default: '[]' | json }},
+    "compat_alt": {{ product.metafields.custom.compatibility_alternative.value | default: '' | json }}
+  }{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+]
+</script>
+
+<!-- Empty state: shown until device is selected -->
+<div class="compat-empty container-shell" data-compat-empty>
+  <div class="compat-empty__icon" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  <p class="compat-empty__heading">Find your perfect match</p>
+  <p class="compat-empty__prompt">Search your device above or start with a popular pick below.</p>
+  <div class="compat-popular">
+    <span class="compat-popular-label">Popular:</span>
+    <button class="compat-popular-chip" data-device-id="mbp-m3-14" type="button">MacBook Pro M3</button>
+    <button class="compat-popular-chip" data-device-id="dell-xps-15-2024" type="button">Dell XPS 15</button>
+    <button class="compat-popular-chip" data-device-id="ipad-pro-m4-13" type="button">iPad Pro M4</button>
+  </div>
+</div>
+
+<!-- Results: hidden until device selected -->
+<div class="compat-results container-shell" data-compat-results hidden>
+
+  <!-- Header strip -->
+  <div class="compat-results-header">
+    <p class="compat-results-device" data-compat-results-device>Showing results for …</p>
+    <button class="btn btn--link compat-results-reset" data-compat-reset type="button">Change device</button>
+  </div>
+
+  <!-- Fully compatible group -->
+  <div class="compat-group compat-group--full" data-compat-group="full" hidden>
+    <div class="compat-group-header">
+      <span class="compat-group-icon compat-group-icon--yes" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <div>
+        <p class="compat-group-title">Fully compatible</p>
+        <p class="compat-group-sub">Works out of the box. Plug and play.</p>
+      </div>
+    </div>
+    <div class="compat-group-grid" data-compat-grid="full"></div>
+  </div>
+
+  <!-- Compatible with notes group -->
+  <div class="compat-group compat-group--partial" data-compat-group="partial" hidden>
+    <div class="compat-group-header">
+      <span class="compat-group-icon compat-group-icon--warn" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      <div>
+        <p class="compat-group-title">Compatible with notes</p>
+        <p class="compat-group-sub">Works, but has limitations or requirements.</p>
+      </div>
+    </div>
+    <div class="compat-group-grid" data-compat-grid="partial"></div>
+  </div>
+
+  <!-- Not recommended group -->
+  <div class="compat-group compat-group--none" data-compat-group="none" hidden>
+    <div class="compat-group-header">
+      <span class="compat-group-icon compat-group-icon--no" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </span>
+      <div>
+        <p class="compat-group-title">Not recommended</p>
+        <p class="compat-group-sub">Won't work well with your setup. Here's what to use instead.</p>
+      </div>
+    </div>
+    <div class="compat-group-grid" data-compat-grid="none"></div>
+  </div>
+
+  <!-- No results state -->
+  <div class="compat-no-results" data-compat-no-results hidden>
+    <p>We haven't tested this device yet. Help us add it:</p>
+    <a href="/pages/contact" class="btn btn--primary">Submit a device</a>
+  </div>
+
+</div>
+
+<!-- Fallback footer (always visible) -->
+<div class="compat-fallback" data-compat-fallback>
+  <div class="compat-fallback-inner container-shell">
+    <div class="compat-fallback-card">
+      <p class="compat-fallback-card__title">Don't see your device?</p>
+      <p class="compat-fallback-card__body">Submit it for our team to test. We add new devices monthly.</p>
+      <a href="/pages/contact" class="compat-fallback-card__link">Submit a device →</a>
+    </div>
+    <div class="compat-fallback-card">
+      <p class="compat-fallback-card__title">Need a human answer?</p>
+      <p class="compat-fallback-card__body">Open a support ticket and we'll respond within 1 business day.</p>
+      <a href="/pages/contact" class="compat-fallback-card__link">Open a ticket →</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Compatibility results",
+  "tag": "section",
+  "class": "compat-results-section"
+}
+{% endschema %}

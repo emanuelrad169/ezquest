@@ -9,75 +9,292 @@
   {%- render 'mega-menu-featured', href: '/pages/compare', title: 'Compare' -%}
 {%- endcapture -%}
 {% if mega_menu_helper_references == blank %}{% endif %}
+{{- 'nav-dropdowns.css' | asset_url | stylesheet_tag -}}
 <div class="mega-menu" data-mega-menu>
   <ul class="mega-menu-nav-list" role="list">
 
-    <li class="mega-menu-nav-item" data-mega-item="shop">
-      <button
-        class="mega-menu-trigger"
-        type="button"
-        data-mega-target="ez-mega-setup"
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-controls="ez-mega-setup">
-        <span>Shop by setup</span>
-      </button>
-    </li>
-
-    <li class="mega-menu-nav-item" data-mega-item="collections">
-      <button
-        class="mega-menu-trigger"
-        type="button"
-        data-mega-target="ez-mega-collections"
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-controls="ez-mega-collections">
-        <span>Shop by Collections</span>
-      </button>
-    </li>
-
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-support" data-nav-submenu-trigger>
-        <span>Support</span>
-      </button>
-      <div id="nav-flyout-support" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/support" class="nav-submenu-link">Support center</a>
-        <a href="/pages/faq" class="nav-submenu-link">FAQ</a>
-        <a href="/pages/downloads" class="nav-submenu-link">Downloads</a>
-        <a href="/pages/manuals" class="nav-submenu-link">Manuals</a>
-        <a href="/pages/troubleshooting" class="nav-submenu-link">Troubleshooting</a>
-        <a href="/pages/warranty" class="nav-submenu-link">Warranty</a>
-        <a href="/pages/contact" class="nav-submenu-link">Contact us</a>
-      </div>
-    </li>
-
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-resources" data-nav-submenu-trigger>
-        <span>Resources</span>
-      </button>
-      <div id="nav-flyout-resources" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/blogs/resources" class="nav-submenu-link">Guides &amp; blog</a>
-        <a href="/pages/compare" class="nav-submenu-link">Compare products</a>
-        <a href="/pages/compatibility" class="nav-submenu-link">Compatibility</a>
-        <a href="/pages/firmware" class="nav-submenu-link">Firmware updates</a>
-      </div>
-    </li>
-
     <li class="mega-menu-nav-item">
-      <a href="/pages/compare" class="mega-menu-trigger mega-menu-trigger--plain">
-        <span>Compare</span>
+      <a
+        href="/collections"
+        class="mega-menu-trigger"
+        data-nav-trigger="nav-panel-shop"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="nav-panel-shop">
+        <span>Shop</span>
       </a>
     </li>
 
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-about" data-nav-submenu-trigger>
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-support" data-nav-trigger="nav-panel-support">
+        <span>Support</span>
+      </button>
+      <div id="nav-panel-support" class="nav-submenu-panel nav-panel" role="region" aria-label="Support menu" hidden>
+        <ul class="nav-dd__links" role="list">
+          <li>
+            <a href="/pages/support" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--blue" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 6h7M3.5 8.5h4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Support center</span>
+                <span class="nav-dd__link-sub">All help in one place</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/faq" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--amber" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4.5c-.83 0-1.5.67-1.5 1.5 0 .5.24.95.6 1.24L7 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="10" r=".6" fill="currentColor"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">FAQ</span>
+                <span class="nav-dd__link-sub">Common questions answered</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/downloads" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--green" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 7l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Downloads</span>
+                <span class="nav-dd__link-sub">Drivers &amp; software</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/manuals" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--purple" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2.5" y="1.5" width="9" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Manuals</span>
+                <span class="nav-dd__link-sub">PDF user guides</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/troubleshooting" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--teal" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10l4-4 2.5 2.5L12 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Troubleshooting</span>
+                <span class="nav-dd__link-sub">Fix common issues fast</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/warranty" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--amber" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1.3 3.5H12l-2.8 2.1 1 3.4L7 8.7 3.8 10.5l1-3.4L2 5h3.7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Warranty</span>
+                <span class="nav-dd__link-sub">2-year coverage on all products</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/contact" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--gray" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="3.5" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 3.5l5 4.5 5-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Contact us</span>
+                <span class="nav-dd__link-sub">Phone · Email · Live chat</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-resources" data-nav-trigger="nav-panel-resources">
+        <span>Resources</span>
+      </button>
+      <div id="nav-panel-resources" class="nav-submenu-panel nav-panel" role="region" aria-label="Resources menu" hidden>
+        {%- assign res_blog = blogs['resources'] -%}
+        {%- assign featured_article = res_blog.articles.first -%}
+        <div class="nav-dd__two-col">
+          <div class="nav-dd__col nav-dd__col--border">
+            <p class="nav-dd__col-head">Resources</p>
+            <ul class="nav-dd__links" role="list">
+              <li>
+                <a href="/blogs/resources" class="nav-dd__link">
+                  <span class="nav-dd__icon nav-dd__icon--blue" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 6h7M3.5 8.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </span>
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">All articles</span>
+                    <span class="nav-dd__link-sub">Guides, tips &amp; news</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/compatibility" class="nav-dd__link">
+                  <span class="nav-dd__icon nav-dd__icon--green" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">Compatibility</span>
+                    <span class="nav-dd__link-sub">Device compatibility checker</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/help-me-choose" class="nav-dd__link">
+                  <span class="nav-dd__icon nav-dd__icon--amber" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4.5c-.83 0-1.5.67-1.5 1.5 0 .8.6 1.3 1.5 1.3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="10.5" r=".6" fill="currentColor"/></svg>
+                  </span>
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">Help me choose</span>
+                    <span class="nav-dd__link-sub">Find the right product</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/compare" class="nav-dd__link">
+                  <span class="nav-dd__icon nav-dd__icon--purple" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="5" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="3" width="5" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+                  </span>
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">Compare products</span>
+                    <span class="nav-dd__link-sub">Side-by-side comparison</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-dd__col">
+            <p class="nav-dd__col-head">Featured</p>
+            {% if featured_article %}
+              <a href="{{ featured_article.url }}" class="nav-dd__article">
+                <div class="nav-dd__article-img">
+                  {% if featured_article.image %}
+                    <img src="{{ featured_article.image | image_url: width: 400 }}"
+                         alt="{{ featured_article.image.alt | default: featured_article.title | escape }}"
+                         width="400" height="200" loading="lazy" decoding="async">
+                  {% else %}
+                    <div class="nav-dd__article-img-fallback" aria-hidden="true">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" opacity="0.2"><rect x="4" y="6" width="24" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 20l7-7 5 5 4-4 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="nav-dd__article-body">
+                  {% if featured_article.tags.size > 0 %}
+                    <span class="nav-dd__article-tag">{{ featured_article.tags.first }}</span>
+                  {% endif %}
+                  <span class="nav-dd__article-title">{{ featured_article.title | truncate: 56 }}</span>
+                  <span class="nav-dd__article-cta">Read article →</span>
+                </div>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-compare" data-nav-trigger="nav-panel-compare">
+        <span>Compare</span>
+      </button>
+      <div id="nav-panel-compare" class="nav-submenu-panel nav-panel" role="region" aria-label="Compare menu" hidden>
+        {%- assign compare_products = collections['hubs-adapters'].products -%}
+        <div class="nav-dd__compare-head">
+          <p class="nav-dd__col-head">Compare products</p>
+        </div>
+        <div class="nav-dd__compare-preview" aria-hidden="true">
+          {%- for p in compare_products limit: 3 -%}
+            <div class="nav-dd__compare-card">
+              <div class="nav-dd__compare-img">
+                {%- if p.featured_image -%}
+                  <img src="{{ p.featured_image | image_url: width: 120 }}"
+                       alt="{{ p.featured_image.alt | default: p.title | escape }}"
+                       width="60" height="60" loading="lazy" decoding="async">
+                {%- endif -%}
+              </div>
+              <span class="nav-dd__compare-name">{{ p.title | truncate: 22 }}</span>
+            </div>
+            {%- unless forloop.last -%}
+              <span class="nav-dd__compare-vs" aria-hidden="true">VS</span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+        <ul class="nav-dd__links" role="list" style="padding-top:2px">
+          <li>
+            <a href="/pages/compare" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--blue" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="5" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="3" width="5" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Open compare tool</span>
+                <span class="nav-dd__link-sub">Compare up to 3 products</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-dd__compare-footer">
+          <span class="nav-dd__compare-badge">Free tool</span>
+          <a href="/pages/help-me-choose" class="nav-dd__compare-help">Not sure? Help me choose →</a>
+        </div>
+      </div>
+    </li>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-about" data-nav-trigger="nav-panel-about">
         <span>About</span>
       </button>
-      <div id="nav-flyout-about" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/about" class="nav-submenu-link">About EZQuest</a>
-        <a href="/pages/our-story" class="nav-submenu-link">Our story</a>
-        <a href="/pages/where-to-buy" class="nav-submenu-link">Where to buy</a>
-        <a href="/pages/shipping-returns" class="nav-submenu-link">Shipping &amp; returns</a>
+      <div id="nav-panel-about" class="nav-submenu-panel nav-panel" role="region" aria-label="About menu" hidden>
+        <ul class="nav-dd__links" role="list">
+          <li>
+            <a href="/pages/our-story" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--purple" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 12c0-3 2-4.5 5-4.5s5 1.5 5 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Our story</span>
+                <span class="nav-dd__link-sub">30 years of innovation</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/about" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--blue" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="4" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">About EZQuest</span>
+                <span class="nav-dd__link-sub">Company &amp; mission</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/where-to-buy" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--green" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5h10l-1 6H3L2 5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5 5V4a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Where to buy</span>
+                <span class="nav-dd__link-sub">Retailers &amp; resellers</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/shipping-returns" class="nav-dd__link">
+              <span class="nav-dd__icon nav-dd__icon--gray" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="4" width="9" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M10 6l2 1.5L10 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 7.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Shipping &amp; returns</span>
+                <span class="nav-dd__link-sub">Policies &amp; timelines</span>
+              </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </li>
 
@@ -85,7 +302,6 @@
 
   <div class="mega-menu-backdrop" data-mega-backdrop hidden></div>
   <div class="mega-menu-panels" data-mega-panels>
-    {% render 'ez-mega-setup' %}
-    {% render 'ez-mega-collections' %}
+    {% render 'ez-mega-shop', section: section %}
   </div>
 </div>

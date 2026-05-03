@@ -6,7 +6,7 @@
       <a href="{{ item.url }}" class="cart-drawer-item__image-link" tabindex="-1" aria-hidden="true">
         {% if item.image %}
           <img
-            src="{{ item.image | image_url: width: 120 }}"
+            src="{{ item.image | image_url: width: 120, format: 'pjpg' }}"
             alt="{{ item.image.alt | escape }}"
             width="80"
             height="80"

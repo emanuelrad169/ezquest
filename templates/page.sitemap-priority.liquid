@@ -1,0 +1,53 @@
+{% layout none %}<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ shop.url }}</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  {% paginate collections.all.products by 250 %}
+    {% for product in collections.all.products %}
+      <url>
+        <loc>{{ shop.url }}{{ product.url }}</loc>
+        <lastmod>{{ "now" | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+      </url>
+    {% endfor %}
+  {% endpaginate %}
+  {% assign priority_collections = 'hubs-adapters,docking-stations,chargers-power,accessories' | split: ',' %}
+  {% for collection_handle in priority_collections %}
+    {% assign priority_collection = collections[collection_handle] %}
+    {% if priority_collection != blank %}
+      <url>
+        <loc>{{ shop.url }}{{ priority_collection.url }}</loc>
+        <lastmod>{{ "now" | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endif %}
+  {% endfor %}
+  {% assign resources_blog = blogs.resources %}
+  {% if resources_blog != blank %}
+    <url>
+      <loc>{{ shop.url }}{{ resources_blog.url }}</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    {% for sitemap_article in resources_blog.articles limit: 50 %}
+      <url>
+        <loc>{{ shop.url }}{{ sitemap_article.url }}</loc>
+        <lastmod>{{ sitemap_article.published_at | date: '%Y-%m-%d' }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+      </url>
+    {% endfor %}
+  {% endif %}
+  {% assign support_paths = '/pages/support,/pages/faq,/pages/downloads,/pages/manuals,/pages/firmware,/pages/user-guides,/pages/compatibility,/pages/troubleshooting,/pages/warranty,/pages/contact,/pages/ticket-submission,/pages/help-me-choose,/pages/compare,/pages/where-to-buy' | split: ',' %}
+  {% for support_path in support_paths %}
+    <url>
+      <loc>{{ shop.url }}{{ support_path }}</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+    </url>
+  {% endfor %}
+</urlset>

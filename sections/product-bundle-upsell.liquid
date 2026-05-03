@@ -1,0 +1,88 @@
+{% liquid
+  assign related_collection = product.collections.first
+  assign shown_count = 0
+%}
+
+<section class="section-shell product-bundle-upsell" aria-label="Bundle and save">
+  <div class="container-shell">
+    <div class="product-bundle-upsell__panel">
+      <div class="product-bundle-upsell__copy">
+        <p class="section-kicker">{{ section.settings.eyebrow | default: 'Bundle' }}</p>
+        <h2 class="product-bundle-upsell__heading">{{ section.settings.heading | default: 'Buy together and save 10%' }}</h2>
+        <p class="product-bundle-upsell__body">{{ section.settings.copy | default: 'Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings.' }}</p>
+      </div>
+
+      <div class="product-bundle-upsell__items" role="list">
+        <a href="{{ product.url }}" class="product-bundle-upsell__item" role="listitem">
+          {% if product.featured_image %}
+            {%- liquid
+              assign bundle_main_height = 240
+              if product.featured_image.aspect_ratio > 0
+                assign bundle_main_height = 240 | divided_by: product.featured_image.aspect_ratio | round
+              endif
+            -%}
+            {{ product.featured_image | image_url: width: 240, format: 'pjpg' | image_tag: loading: 'lazy', width: 240, height: bundle_main_height, class: 'product-bundle-upsell__image', alt: product.title }}
+          {% endif %}
+          <span class="product-bundle-upsell__title">{{ product.title }}</span>
+          <span class="product-bundle-upsell__price">{{ product.price | money }}</span>
+        </a>
+
+        {% if related_collection != blank %}
+          {% for bundled_product in related_collection.products limit: 5 %}
+            {% if bundled_product.id != product.id and shown_count < 2 %}
+              {% assign shown_count = shown_count | plus: 1 %}
+              <a href="{{ bundled_product.url }}" class="product-bundle-upsell__item" role="listitem">
+                {% if bundled_product.featured_image %}
+                  {%- liquid
+                    assign bundle_related_height = 240
+                    if bundled_product.featured_image.aspect_ratio > 0
+                      assign bundle_related_height = 240 | divided_by: bundled_product.featured_image.aspect_ratio | round
+                    endif
+                  -%}
+                  {{ bundled_product.featured_image | image_url: width: 240, format: 'pjpg' | image_tag: loading: 'lazy', width: 240, height: bundle_related_height, class: 'product-bundle-upsell__image', alt: bundled_product.title }}
+                {% endif %}
+                <span class="product-bundle-upsell__title">{{ bundled_product.title }}</span>
+                <span class="product-bundle-upsell__price">{{ bundled_product.price | money }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <a href="{{ product.url }}" class="product-bundle-upsell__cta">
+        Configure bundle
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product bundle upsell",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Bundle"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Buy together and save 10%"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product bundle upsell"
+    }
+  ]
+}
+{% endschema %}

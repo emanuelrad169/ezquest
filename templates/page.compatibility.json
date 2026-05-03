@@ -1,97 +1,13 @@
 {
   "sections": {
-    "hero": {
-      "type": "page-hero",
-      "settings": {
-        "kicker": "Compatibility",
-        "heading": "Check compatibility with confidence",
-        "subheading": "Check platform, device, and workflow compatibility before you buy or install.",
-        "light_mode": true,
-        "image": "shopify://shop_images/ezquest-support-compatibility-scenes.png"
-      }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
+    "search": {
+      "type": "compatibility-search",
       "settings": {}
     },
-    "entries": {
-      "type": "compatibility-entry-list",
-      "settings": {
-        "eyebrow": "Compatibility matrix",
-        "heading": "Check compatibility by platform, device, and workflow",
-        "copy": "Use the filters below to narrow the exact setup you are checking.",
-        "structured_source": "global",
-        "limit_to_source_product": true,
-        "entry_limit": 12,
-        "source_note": "Start with platform, then device, then workflow. Once the match is clear, open manuals, downloads, or support."
-      }
-    },
-    "support": {
-      "type": "support-link-grid",
-      "settings": {
-        "eyebrow": "After compatibility",
-        "heading": "Open the next resource",
-        "copy": "Once compatibility is confirmed, open the guide, file, or support path you need.",
-        "columns_desktop": 3,
-        "link_label": "Get help now",
-        "link_url": "/pages/contact"
-      },
-      "blocks": {
-        "support_1": {
-          "type": "card",
-          "settings": {
-            "title": "Downloads",
-            "copy": "Continue to drivers or utilities tied to supported products.",
-            "meta": "Files and tools",
-            "link_label": "Find downloads",
-            "link_url": "/pages/downloads"
-          }
-        },
-        "support_2": {
-          "type": "card",
-          "settings": {
-            "title": "Manuals",
-            "copy": "Continue to setup guides or documentation tied to supported products.",
-            "meta": "Setup guides",
-            "link_label": "Find manuals",
-            "link_url": "/pages/manuals"
-          }
-        },
-        "support_3": {
-          "type": "card",
-          "settings": {
-            "title": "Get help now",
-            "copy": "Start a support request when compatibility still depends on one specific product or deployment detail.",
-            "meta": "Direct help",
-            "link_label": "Start support request",
-            "link_url": "/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "support_1",
-        "support_2",
-        "support_3"
-      ]
-    },
-    "cta": {
-      "type": "support-cta-rail",
-      "settings": {
-        "kicker": "Support",
-        "heading": "Need help confirming compatibility?",
-        "body": "Open support if you need a direct answer about a device, port, or workflow combination.",
-        "cta_label": "Contact support",
-        "cta_url": "/pages/contact",
-        "cta2_label": "Help me choose",
-        "cta2_url": "/pages/help-me-choose"
-      }
+    "results": {
+      "type": "compatibility-results",
+      "settings": {}
     }
   },
-  "order": [
-    "hero",
-    "nav_rail",
-    "entries",
-    "support",
-    "cta"
-  ]
+  "order": ["search", "results"]
 }

@@ -91,7 +91,7 @@
           >
             {% if tagged_product.featured_image != blank %}
               <img
-                src="{{ tagged_product.featured_image | image_url: width: 80 }}"
+                src="{{ tagged_product.featured_image | image_url: width: 80, format: 'pjpg' }}"
                 alt="{{ tagged_product.title | escape }}"
                 class="shoppable-product-tag__img"
                 width="40"
@@ -157,7 +157,7 @@
 
   #shopify-section-{{ section.id }} .shoppable-video__kicker {
     margin: 0 0 0.9rem;
-    color: rgba(250, 204, 21, 0.96);
+    color: rgba(254, 211, 0, 0.96);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -332,6 +332,56 @@
     });
   })();
 </script>
+
+{% comment %} VideoObject structured data {% endcomment %}
+{%- liquid
+  assign schema_video_url = youtube_url
+  assign schema_video_thumb = blank
+  assign schema_video_title = section.settings.heading | default: product.title | default: shop.name
+  assign schema_video_desc = section.settings.body | default: product.description | default: schema_video_title | strip_html | truncate: 300
+
+  if youtube_id != blank
+    assign schema_video_thumb = 'https://img.youtube.com/vi/' | append: youtube_id | append: '/maxresdefault.jpg'
+  elsif section.settings.video != blank and section.settings.video.preview_image != blank
+    assign schema_video_thumb = section.settings.video.preview_image | image_url: width: 1280
+  elsif product.featured_image != blank
+    assign schema_video_thumb = product.featured_image | image_url: width: 1280
+  endif
+
+  if schema_video_url == blank and section.settings.video != blank
+    assign schema_video_source = section.settings.video.sources | where: 'format', 'mp4' | first
+    if schema_video_source == blank
+      assign schema_video_source = section.settings.video.sources | first
+    endif
+    assign schema_video_url = schema_video_source.url
+  endif
+-%}
+
+{%- if schema_video_url != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": {{ schema_video_title | json }},
+    "description": {{ schema_video_desc | json }},
+    {%- if schema_video_thumb != blank %}
+    "thumbnailUrl": {{ schema_video_thumb | json }},
+    {%- endif %}
+    "uploadDate": "{{ 'now' | date: '%Y-%m-%d' }}",
+    "contentUrl": {{ schema_video_url | json }},
+    "publisher": {
+      "@type": "Organization",
+      "name": "EZQuest",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ 'ezquest-logo.svg' | asset_url }}"
+      }
+    }{%- if youtube_id != blank -%},
+    "embedUrl": "https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}"
+    {%- endif %}
+  }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {

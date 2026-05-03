@@ -40,6 +40,10 @@
 
 <p class="cart-drawer__tax-note">{{ 'cart.tax_note' | t }}</p>
 
+{% render 'cart-gift-message', id: 'cart-drawer-gift-message' %}
+
+{% render 'cart-trust-strip' %}
+
 <a
   href="/checkout"
   class="btn btn--primary cart-drawer__checkout"

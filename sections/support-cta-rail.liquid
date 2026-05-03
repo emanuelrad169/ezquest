@@ -1,40 +1,30 @@
-{{ 'pages.css' | asset_url | stylesheet_tag }}
-
-<section class="page-cta" aria-label="{{ section.settings.heading | default: 'Support resources' | escape }}">
-  <div class="page-cta__inner container-shell">
-    <div class="page-cta__copy">
-      {% if section.settings.kicker != blank %}
-        <p class="page-cta__kicker">{{ section.settings.kicker | escape }}</p>
-      {% endif %}
-      {% if section.settings.heading != blank %}
-        <p class="page-cta__heading">{{ section.settings.heading | escape }}</p>
-      {% endif %}
-      {% if section.settings.body != blank %}
-        <p class="page-cta__sub">{{ section.settings.body | escape }}</p>
-      {% endif %}
-    </div>
-    {% if section.settings.cta_label != blank %}
-      <div class="page-cta__actions">
-        <a href="{{ section.settings.cta_url | default: '#' }}" class="page-cta__btn">
-          {{ section.settings.cta_label | escape }}
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        {% if section.settings.cta2_label != blank %}
-          <a href="{{ section.settings.cta2_url | default: '#' }}" class="page-cta__btn page-cta__btn--ghost">
-            {{ section.settings.cta2_label | escape }}
-          </a>
-        {% endif %}
-      </div>
-    {% endif %}
-  </div>
-</section>
+{% render 'page-cta',
+  kicker: section.settings.kicker,
+  heading: section.settings.heading,
+  subhead: section.settings.body,
+  primary_label: section.settings.cta_label,
+  primary_url: section.settings.cta_url,
+  secondary_label: section.settings.cta2_label,
+  secondary_url: section.settings.cta2_url,
+  variant: section.settings.variant,
+  aria_label: section.settings.heading
+%}
 
 {% schema %}
 {
   "name": "Support CTA rail",
   "settings": [
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Style",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "dark",  "label": "Dark" },
+        { "value": "amber", "label": "Amber" }
+      ],
+      "default": "light"
+    },
     { "type": "text",     "id": "kicker",     "label": "Kicker",     "default": "Support" },
     { "type": "text",     "id": "heading",    "label": "Heading" },
     { "type": "textarea", "id": "body",       "label": "Subheading" },

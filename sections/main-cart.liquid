@@ -24,7 +24,13 @@
 
               <a href="{{ item.url }}" class="cart-item-media" tabindex="-1" aria-hidden="true">
                 {% if item.image != blank %}
-                  {{ item.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: item.product.title, class: 'cart-item-image' }}
+                  {%- liquid
+                    assign cart_item_height = 300
+                    if item.image.aspect_ratio > 0
+                      assign cart_item_height = 300 | divided_by: item.image.aspect_ratio | round
+                    endif
+                  -%}
+                  {{ item.image | image_url: width: 300, format: 'pjpg' | image_tag: loading: 'lazy', width: 300, height: cart_item_height, alt: item.product.title, class: 'cart-item-image' }}
                 {% endif %}
               </a>
 

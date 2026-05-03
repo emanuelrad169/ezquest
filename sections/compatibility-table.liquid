@@ -60,7 +60,7 @@
               <td data-label="Product">
                 {% assign p = entry.product.value %}
                 {% if p != blank %}
-                  <a href="{{ p.url }}" style="color:var(--ez-amber);text-decoration:none;font-weight:500">{{ p.title | truncate: 40 }}</a>
+                  <a href="{{ p.url }}" style="color:var(--ez-black);text-decoration:underline;text-decoration-color:var(--ez-amber);text-decoration-thickness:1.5px;text-underline-offset:3px;font-weight:500">{{ p.title | truncate: 40 }}</a>
                 {% else %}
                   <span class="product-pill">EZQuest Hub</span>
                 {% endif %}
@@ -125,17 +125,17 @@
 
   {% endif %}
 
-  <div class="support-cta-strip">
-    <div>
-      <p class="support-cta-strip__heading">Don't see your device?</p>
-      <p class="support-cta-strip__body">Send us your device details and we'll verify compatibility for you.</p>
-    </div>
-    <div class="support-cta-strip__actions">
-      <a href="/pages/contact" class="btn btn--primary">Ask about compatibility</a>
-    </div>
-  </div>
 
 </div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'Compatibility',
+  heading: 'Don't see your device?',
+  subhead: 'Send us your device details and we'll verify compatibility for you.',
+  primary_label: 'Ask about compatibility',
+  primary_url: '/pages/contact'
+-%}
 
 <style>
 .compat-search-row{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}

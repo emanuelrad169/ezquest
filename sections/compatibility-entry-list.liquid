@@ -2,6 +2,8 @@
   assign compat_has_content = false
   if product != blank and product.metafields.ezquest.compatibility_entries != blank and product.metafields.ezquest.compatibility_entries.value.count > 0
     assign compat_has_content = true
+  elsif request.page_type == 'page' and page != blank and page.handle == 'compatibility' and section.settings.structured_source == 'global'
+    assign compat_has_content = true
   elsif section.blocks.size > 0
     assign compat_has_content = true
   endif

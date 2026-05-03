@@ -1,14 +1,20 @@
-<section class="section-shell">
+<section class="section-shell" {% if search.performed %}data-site-search-results="{{ search.results_count }}"{% endif %}>
   <div class="container-shell">
     <div class="editorial-shell">
       <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
         <div class="max-w-3xl">
           <p class="section-kicker">Search</p>
-          <h1 class="section-heading mt-5">Find products, resources, and support faster</h1>
+          <h1 class="section-heading mt-5">
+            {% if search.performed %}
+              {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for “{{ search.terms | escape }}”
+            {% else %}
+              Find products, resources, and support faster
+            {% endif %}
+          </h1>
           {% if search.performed %}
-            <p class="section-copy mt-5">Showing results for “{{ search.terms }}” across products, manuals, downloads, support pages, and resources.</p>
+            <p class="section-copy mt-5">Search across products, manuals, downloads, support pages, and resources from one focused grid.</p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
-              <span class="product-meta-pill">{{ search.results_count }} results</span>
+              <span class="product-meta-pill">{{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }}</span>
               <span class="product-meta-pill">Unified discovery</span>
             </div>
           {% else %}
@@ -21,10 +27,19 @@
       </div>
     </div>
 
+    {% if search.performed and search.results_count > 0 %}
+      <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm font-medium text-slate-600">
+          {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for “{{ search.terms | escape }}”
+        </p>
+        <a href="{{ routes.search_url }}" class="site-meta-link">Reset search</a>
+      </div>
+    {% endif %}
+
     <div class="search-grid-shell">
       {% for item in search.results %}
         {% if item.object_type == 'product' %}
-          {% render 'card-product', product: item, card_style: 'featured-strip', card_context: 'search', card_index: forloop.index0 %}
+          {% render 'card-product', product: item, card_style: 'featured-strip', card_context: 'collection', card_index: forloop.index0 %}
         {% else %}
           <div class="search-result-card search-result-card--{{ item.object_type | default: 'result' }}">
             <p class="section-kicker">
@@ -47,7 +62,7 @@
         <div class="search-empty-shell">
           {% if search.performed %}
             <p class="section-kicker">No results yet</p>
-            <h2 class="mt-4 text-2xl font-medium tracking-tight text-slate-950">No matches for “{{ search.terms }}”</h2>
+            <h2 class="mt-4 text-2xl font-medium tracking-tight text-slate-950">No matches for “{{ search.terms | escape }}”</h2>
             <p class="mt-3 text-sm leading-7 text-slate-600">Try a product name, connection type, compatibility keyword, or support topic. If nothing matches yet, browse the product families, compare the core lineup, or open support.</p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
               <a href="{{ routes.collections_url }}" class="button-secondary">Shop by Collections</a>

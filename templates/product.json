@@ -46,7 +46,23 @@
         "style": "light",
         "button_style": "secondary"
       }
+    },
+    "bundle": {
+      "type": "product-bundle-upsell",
+      "settings": {
+        "eyebrow": "Bundle",
+        "heading": "Buy together and save 10%",
+        "copy": "Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings."
+      }
+    },
+    "recently_viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "kicker": "Continue browsing",
+        "heading": "Recently viewed",
+        "max_products": 8
+      }
     }
   },
-  "order": ["main", "faq", "compare", "cta"]
+  "order": ["main", "faq", "compare", "bundle", "cta", "recently_viewed"]
 }

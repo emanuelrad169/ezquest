@@ -1,0 +1,128 @@
+<section class="section-shell cart-page-section">
+  <div class="container-shell">
+
+    <div class="cart-page-header">
+      <p class="section-kicker">Your bag</p>
+      <h1 class="cart-page-title">
+        {% if cart.item_count == 0 %}
+          Your cart is empty
+        {% elsif cart.item_count == 1 %}
+          Cart (1 item)
+        {% else %}
+          Cart ({{ cart.item_count }} items)
+        {% endif %}
+      </h1>
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" id="cart-page-form">
+        <div class="cart-page-layout">
+          <div class="cart-page-items">
+            {% for item in cart.items %}
+              <article class="cart-item">
+                <a href="{{ item.url }}" class="cart-item-media" tabindex="-1" aria-hidden="true">
+                  {% if item.image != blank %}
+                    {%- liquid
+                      assign cart_item_height = 360
+                      if item.image.aspect_ratio > 0
+                        assign cart_item_height = 360 | divided_by: item.image.aspect_ratio | round
+                      endif
+                    -%}
+                    {{ item.image | image_url: width: 360, format: 'pjpg' | image_tag: loading: 'lazy', width: 360, height: cart_item_height, alt: item.product.title, class: 'cart-item-image' }}
+                  {% endif %}
+                </a>
+
+                <div class="cart-item-body">
+                  <div class="cart-item-meta">
+                    <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                    {% unless item.variant.title == 'Default Title' %}
+                      <p class="cart-item-variant">{{ item.variant.title }}</p>
+                    {% endunless %}
+                    <p class="cart-item-price">{{ item.final_line_price | money }}</p>
+                  </div>
+
+                  <div class="cart-item-controls">
+                    <div class="cart-item-qty-group" role="group" aria-label="Quantity for {{ item.product.title | escape }}">
+                      <a
+                        href="{{ routes.cart_change_url }}?id={{ item.key | url_encode }}&quantity={{ item.quantity | minus: 1 }}"
+                        class="cart-item-qty-btn"
+                        aria-label="Decrease quantity of {{ item.product.title | escape }}"
+                        {% if item.quantity <= 1 %}aria-disabled="true"{% endif %}
+                      >-</a>
+                      <label class="sr-only" for="cart-page-qty-{{ forloop.index }}">Quantity for {{ item.product.title }}</label>
+                      <input
+                        id="cart-page-qty-{{ forloop.index }}"
+                        class="cart-item-qty-display"
+                        type="number"
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        inputmode="numeric"
+                      >
+                      <a
+                        href="{{ routes.cart_change_url }}?id={{ item.key | url_encode }}&quantity={{ item.quantity | plus: 1 }}"
+                        class="cart-item-qty-btn"
+                        aria-label="Increase quantity of {{ item.product.title | escape }}"
+                      >+</a>
+                    </div>
+
+                    <a href="{{ routes.cart_change_url }}?id={{ item.key | url_encode }}&quantity=0" class="cart-item-remove">Remove</a>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+
+          <aside class="cart-page-summary" aria-label="Order summary">
+            <div class="cart-summary-panel">
+              <h2 class="cart-summary-heading">Order summary</h2>
+
+              {% render 'free-shipping-bar' %}
+
+              {% if cart.total_discount > 0 %}
+                <div class="cart-summary-row">
+                  <span>Savings</span>
+                  <span class="cart-summary-savings">-{{ cart.total_discount | money }}</span>
+                </div>
+              {% endif %}
+
+              <div class="cart-summary-row cart-summary-total">
+                <span>Subtotal</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+
+              <p class="cart-summary-note">Taxes and shipping calculated at checkout.</p>
+
+              {% render 'cart-gift-message', id: 'cart-page-gift-message', form_id: 'cart-page-form' %}
+
+              {% render 'checkout-trust-strip' %}
+
+              <button type="submit" name="checkout" class="cart-checkout-btn">Proceed to checkout</button>
+              <button type="submit" class="button-secondary w-full">Update cart</button>
+
+              <div class="cart-continue-btn">
+                {% render 'button', label: 'Continue shopping', url: routes.collections_url, style: 'secondary' %}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </form>
+    {% else %}
+      <div class="cart-empty-state">
+        <p class="cart-empty-body">You haven't added anything yet. Browse the product families to find the right hub, dock, charger, or accessory for your setup.</p>
+        <div class="cart-empty-actions">
+          {% render 'button', label: 'Browse all products', url: routes.collections_url, style: 'primary' %}
+          <a href="/pages/help-me-choose" class="site-meta-link">Not sure? Get setup guidance</a>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": []
+}
+{% endschema %}

@@ -1,13 +1,17 @@
 {% comment %} sections/main-blog.liquid {% endcomment %}
 {% paginate blog.articles by 9 %}
 
+<nav class="sr-only" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="{{ routes.root_url }}">Home</a></li>
+    <li aria-current="page">{{ blog.title | default: 'Resources' }}</li>
+  </ol>
+</nav>
+
 {% comment %} ── HERO ────────────────────────────── {% endcomment %}
 <section class="blog-hero">
   <div class="blog-hero__inner container-shell">
-    <div class="blog-hero__content">
-      <p class="blog-hero__kicker">
-        {{ section.settings.kicker | default: 'Resources' }}
-      </p>
+    <div class="blog-hero__content" data-animate>
       <h1 class="blog-hero__heading">
         {{ section.settings.heading
            | default: 'Guides, tips & setup help.' }}
@@ -30,7 +34,7 @@
     {% if section.settings.hero_image %}
       <div class="blog-hero__img-wrap" aria-hidden="true">
         <img
-          src="{{ section.settings.hero_image | image_url: width: 900 }}"
+          src="{{ section.settings.hero_image | image_url: width: 900, format: 'pjpg' }}"
           alt=""
           class="blog-hero__img"
           width="900"
@@ -66,11 +70,11 @@
   {% assign fwords = featured.content | strip_html | split: ' ' %}
   {% assign fread = fwords.size | divided_by: 200 | at_least: 1 %}
   <div class="blog-featured container-shell">
-    <a href="{{ featured.url }}" class="blog-featured__card">
+    <a href="{{ featured.url }}" class="blog-featured__card" data-animate>
       <div class="blog-featured__img-wrap">
         {% if featured.image %}
           <img
-            src="{{ featured.image | image_url: width: 1000 }}"
+            src="{{ featured.image | image_url: width: 1000, format: 'pjpg' }}"
             alt="{{ featured.image.alt | default: featured.title | escape }}"
             class="blog-featured__img"
             width="1000"
@@ -133,7 +137,7 @@
 
 {% if blog.articles.size > 1 or paginate.current_page > 1 %}
   <section class="blog-grid-section container-shell">
-    <div class="blog-grid-section__header">
+    <div class="blog-grid-section__header" data-animate>
       <h2 class="blog-grid-section__label">
         {% if current_tags %}
           {{ current_tags | join: ', ' }}
@@ -151,12 +155,12 @@
           <div class="blog-card__img-wrap">
             {% if article.image %}
               <img
-                src="{{ article.image | image_url: width: 700 }}"
+                src="{{ article.image | image_url: width: 700, format: 'pjpg' }}"
                 alt="{{ article.image.alt | default: article.title | escape }}"
                 class="blog-card__img"
                 width="700"
                 height="394"
-                loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+                loading="lazy"
                 decoding="async">
             {% else %}
               <div class="blog-card__img-fallback" aria-hidden="true">
@@ -220,24 +224,16 @@
   </section>
 {% endif %}
 
-{% comment %} ── BOTTOM CTA ───────────────────────── {% endcomment %}
-<section class="page-cta-dark">
-  <h2 class="page-cta-dark__heading">
-    Looking for product support?
-  </h2>
-  <p class="page-cta-dark__body">
-    Find manuals, firmware, compatibility guides,
-    and answers for every EZQuest product.
-  </p>
-  <div class="page-cta-dark__actions">
-    <a href="/pages/help-me-choose" class="page-cta-dark__btn">
-      Help me choose →
-    </a>
-    <a href="/pages/support" class="page-cta-dark__btn page-cta-dark__btn--ghost">
-      Support center
-    </a>
-  </div>
-</section>
+{%- render 'page-cta',
+  variant: 'light',
+  kicker: 'Not sure which to choose',
+  heading: 'Still deciding? We can help narrow it down.',
+  subhead: 'Use compatibility check or open support to get a direct answer before you buy.',
+  primary_label: 'Help me choose',
+  primary_url: '/pages/help-me-choose',
+  secondary_label: 'Check compatibility',
+  secondary_url: '/pages/compatibility'
+-%}
 
 {% endpaginate %}
 

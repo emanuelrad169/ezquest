@@ -60,7 +60,7 @@
 
 .pdp-tab.is-active {
   color: rgb(15 23 42);
-  border-bottom-color: rgba(250, 204, 21, 0.96);
+  border-bottom-color: var(--ez-amber);
 }
 
 /* Hide until JS fires to prevent flash of incorrect active state */
@@ -73,6 +73,11 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+/* Force main image to square */
+.pdp-gallery-main .aspect-card {
+  aspect-ratio: 1 / 1;
 }
 
 /* Horizontal thumb strip below main image */
@@ -91,8 +96,8 @@
 
 .product-thumb-card {
   flex-shrink: 0;
-  width: 72px;
-  height: 72px;
+  width: 90px;
+  height: 90px;
   border-radius: 10px;
   border: 1.5px solid rgba(226, 232, 240, 0.8);
   background: #fff;
@@ -102,18 +107,145 @@
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.product-thumb-card:hover { border-color: rgba(250, 204, 21, 0.5); }
+.product-thumb-card:hover { border-color: rgba(254, 211, 0, 0.5); }
 
 .product-thumb-card[aria-current="true"],
 .product-thumb-card.is-active {
-  border-color: rgba(250, 204, 21, 0.96);
-  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.14);
+  border-color: var(--ez-amber);
+  box-shadow: 0 0 0 3px rgba(254, 211, 0, 0.14);
 }
 
-/* ── Bug 4: Sticky ATC — hidden on desktop ── */
+/* ── Sticky ATC bar ── */
+
+.product-sticky-atc {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  padding: 0 1rem calc(env(safe-area-inset-bottom) + 0.75rem);
+  opacity: 0;
+  transform: translateY(calc(100% + 1rem));
+  pointer-events: none;
+  transition: opacity 0.15s ease-out, transform 0.25s ease-out;
+}
+
+.product-sticky-atc.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.product-sticky-atc-shell {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 1rem;
+  padding: 0.65rem 0.75rem;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.product-sticky-atc-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.product-sticky-atc-copy {
+  min-width: 0;
+  display: grid;
+  flex: 1 1 auto;
+  gap: 0.1rem;
+}
+
+.product-sticky-atc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.product-sticky-atc-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(2 6 23);
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.product-sticky-atc-price {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(15 23 42);
+}
+
+.product-sticky-atc-variant,
+.product-sticky-atc-availability {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(100 116 139);
+}
+
+.product-sticky-atc-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.product-sticky-atc-availability::before {
+  content: '';
+  width: 0.38rem;
+  height: 0.38rem;
+  flex: 0 0 auto;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.9), rgba(22, 163, 74, 0.72));
+}
+
+.product-sticky-atc-availability.is-unavailable::before {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.92), rgba(100, 116, 139, 0.8));
+}
+
+.product-sticky-atc-button {
+  flex: 0 0 auto;
+  min-height: 2.9rem;
+}
 
 @media (min-width: 1024px) {
-  .product-sticky-atc { display: none !important; }
+  .product-sticky-atc {
+    left: 50%;
+    right: auto;
+    bottom: 1rem;
+    width: min(calc(100vw - 3rem), 58rem);
+    transform: translate(-50%, calc(100% + 2rem));
+    padding: 0;
+  }
+
+  .product-sticky-atc.is-visible {
+    transform: translate(-50%, 0);
+  }
+
+  .product-sticky-atc-shell {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.95rem 1rem;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+  }
+
+  .product-sticky-atc-main { gap: 1rem; }
+  .product-sticky-atc-copy { gap: 0.22rem; }
+  .product-sticky-atc-title { font-size: 1rem; }
+  .product-sticky-atc-meta { gap: 0.65rem; }
+
+  .product-sticky-atc-button {
+    min-width: 14rem;
+    min-height: 3.35rem;
+  }
 }
 
 /* ── Bug 3: Trust strip ── */
@@ -147,14 +279,12 @@
   font-weight: 500;
 }
 
-/* ── Amazon + ATC row ── */
-
-/* Override the Tailwind grid to flex so Amazon button slots in */
+/* ── Purchase row: qty + ATC + wishlist inline ── */
 .product-purchase-row {
   display: flex !important;
-  flex-wrap: nowrap;
-  gap: 8px;
-  align-items: stretch;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .product-primary-action-wrap {
@@ -181,8 +311,8 @@
   padding: 0 1.125rem;
   height: 40px;
   border-radius: 100px;
-  background: rgba(250, 204, 21, 0.96);
-  color: #232F3E;
+  background: var(--ez-amber);
+  color: var(--ez-black);
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
@@ -249,6 +379,16 @@
   max-width: 44ch;
 }
 
+/* ── Constrain section containers on PDP ── */
+.template-product .container-shell {
+  max-width: var(--page-max-width, 80rem);
+}
+
+/* Full-viewport-width breakout — removes the max-width cap */
+.template-product .container-shell.container-wild {
+  max-width: none;
+}
+
 /* ── Section-level below-fold typography ── */
 
 .template-product .section-shell {
@@ -292,10 +432,12 @@
   color: var(--ez-grey) !important;
 }
 
-/* ATC: 16px / 500 */
+/* ATC: full-width, bold, 52px min-height */
 .main-product-section .product-primary-action {
-  font-size: 1rem;  /* 16px */
-  font-weight: 500;
+  width: 100%;
+  min-height: 52px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 /* Trust badge text: 12px */
@@ -410,7 +552,7 @@
   color: rgb(15 23 42);
 }
 
-.pdp-section--highlights .section-kicker { color: var(--ez-grey); }
+.pdp-section--highlights .section-kicker { color: rgb(51 65 85); }
 .pdp-section--highlights .section-heading { color: rgb(15 23 42); }
 
 .pdp-highlight-grid {
@@ -437,11 +579,15 @@
 
 .pdp-highlight-card:hover { background: rgb(248 250 252); }
 
+.pdp-highlight-icon {
+  flex-shrink: 0;
+}
+
 .pdp-highlight-num {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: rgba(250, 204, 21, 0.96);
+  color: var(--ez-grey);
 }
 
 .pdp-highlight-copy {
@@ -449,6 +595,15 @@
   font-weight: 500;
   color: rgb(15 23 42);
   line-height: 1.45;
+}
+
+.pdp-rating__link {
+  text-decoration-color: var(--ez-amber);
+  text-decoration-thickness: 1.5px;
+}
+
+.pdp-rating__link:hover {
+  text-decoration-color: var(--ez-black);
 }
 
 /* ── Zone 6: Compatibility ── */
@@ -597,8 +752,236 @@
   font-weight: 600;
   color: rgb(15 23 42);
   text-decoration: none;
-  border-bottom: 1.5px solid rgba(250, 204, 21, 0.96);
+  border-bottom: 1.5px solid var(--ez-amber);
   padding-bottom: 0.1rem;
 }
 
 .pdp-download-fallback-link svg { width: 1rem; height: 1rem; }
+
+.notify-form__error {
+  font-size: 14px;
+  color: var(--color-error, #dc2626);
+  font-weight: 500;
+  padding: 0.75rem 0;
+}
+
+/* ── PDP Image Zoom ─────────────────────── */
+.pdp-gallery-main {
+  position: relative;
+  cursor: zoom-in;
+}
+
+.pdp-gallery-main:focus-visible {
+  outline: 2px solid var(--ez-amber);
+  outline-offset: 3px;
+}
+
+.pdp-zoom-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pdp-gallery-main:hover .pdp-zoom-hint,
+.pdp-gallery-main:focus-visible .pdp-zoom-hint {
+  opacity: 1;
+}
+
+.pdp-zoom-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.pdp-zoom-modal[hidden] {
+  display: none;
+}
+
+.pdp-zoom-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.pdp-zoom-modal__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pdp-zoom-modal__inner {
+  display: flex;
+  width: 90vw;
+  height: 85vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pdp-zoom-modal__img-wrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pdp-zoom-modal__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: zoom-in;
+  transform-origin: center center;
+  transition: transform 0.1s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+
+.pdp-zoom-modal__hint {
+  position: absolute;
+  bottom: 20px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 768px) {
+  .pdp-zoom-hint,
+  .pdp-zoom-modal__hint {
+    display: none;
+  }
+}
+
+/* ── Stock counter ───────────────────────── */
+.stock-counter {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 8px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stock-counter[hidden],
+.stock-counter--hidden {
+  display: none;
+}
+
+.stock-counter__dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.stock-counter--critical .stock-counter__dot {
+  background: #e24b4a;
+  box-shadow: 0 0 0 3px rgba(226, 75, 74, 0.2);
+}
+
+.stock-counter--critical .stock-counter__text {
+  color: #a32d2d;
+}
+
+.stock-counter--low .stock-counter__dot {
+  background: #ba7517;
+}
+
+.stock-counter--low .stock-counter__text {
+  color: #633806;
+}
+
+.stock-counter--ok .stock-counter__dot {
+  background: #639922;
+}
+
+.stock-counter--ok .stock-counter__text {
+  color: #27500a;
+}
+
+/* ── Hover zoom — desktop side-panel ── */
+
+.pdp-col-left {
+  position: relative;
+  overflow: visible;
+}
+
+.pdp-zoom-pane {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 2.5rem); /* matches lg:gap-10 */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #fafafa;
+  border-radius: 16px;
+  border: 1px solid var(--ez-border, #e5e5e5);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+  display: none; /* desktop-only; enabled below */
+}
+
+.pdp-zoom-pane.is-active {
+  opacity: 1;
+}
+
+.pdp-zoom-pane__crop {
+  width: 100%;
+  height: 100%;
+  background-size: 250%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transition: background-position 0.05s linear;
+}
+
+/* Buy-box fades while zoom panel is visible */
+.pdp-buy-box {
+  position: relative;
+  top: auto; /* neutralize top offset inherited from .buybox-sticky */
+  z-index: 10;
+  transition: opacity 0.2s ease;
+}
+
+.pdp-buy-box.is-zoom-active {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main image gets a zoom-in cursor on desktop hover */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .pdp-zoom-pane { display: block; }
+  .pdp-gallery-main { cursor: crosshair; }
+  .pdp-gallery-main img { cursor: crosshair; }
+}

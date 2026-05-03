@@ -13,40 +13,94 @@
       var btn = form.querySelector('[data-notify-submit]');
       var input = form.querySelector('[data-notify-email]');
       var success = form.querySelector('[data-notify-success]');
-      var inputRow = form.querySelector('[data-notify-input-row]');
+      var error = form.querySelector('[data-notify-error]');
+      var inputRow = form.querySelector('[data-notify-fields]') || form.querySelector('[data-notify-input-row]');
+      var productInput = form.querySelector('[data-notify-product]');
+      var variantInput = form.querySelector('[data-notify-variant]');
       if (!btn || !input) return;
 
-      btn.addEventListener('click', function () {
+      form.addEventListener('submit', submitNotifyRequest);
+      btn.addEventListener('click', submitNotifyRequest);
+
+      function submitNotifyRequest(event) {
+        event.preventDefault();
+
         var email = input.value.trim();
         if (!email || !email.includes('@')) {
-          input.style.borderColor = 'var(--color-error, #cf222e)';
+          if (error) {
+            error.textContent = 'Please enter a valid email address.';
+            error.hidden = false;
+          }
           input.focus();
           return;
         }
 
+        var productTitle = form.dataset.productTitle || (productInput ? productInput.value : document.title);
+        var productHandle = form.dataset.productHandle || '';
+        var productUrl = form.dataset.productUrl || window.location.href;
+        var variantTitle = variantInput ? variantInput.value : '';
+
         btn.disabled = true;
-        btn.textContent = 'Submitting\u2026';
+        btn.textContent = 'Sending...';
+        if (error) error.hidden = true;
 
         var formData = new FormData();
-        formData.append('form_type', 'contact');
+        formData.append('form_type', 'customer');
         formData.append('utf8', '\u2713');
         formData.append('contact[email]', email);
-        formData.append('contact[body]', 'Back-in-stock notification request for: ' + window.location.href);
+        formData.append('contact[tags]', 'back-in-stock,notify-me');
+        formData.append(
+          'contact[body]',
+          'Back in stock request\n\n' +
+            'Product: ' + productTitle + '\n' +
+            'Variant: ' + variantTitle + '\n' +
+            'URL: ' + productUrl + '\n' +
+            'Handle: ' + productHandle + '\n' +
+            'Customer email: ' + email
+        );
 
-        fetch('/contact', {
+        if (window.klaviyo && typeof window.klaviyo.push === 'function') {
+          window.klaviyo.push(['identify', { '$email': email }]);
+          window.klaviyo.push(['track', 'Back in stock request', {
+            product: productTitle,
+            variant: variantTitle,
+            url: productUrl
+          }]);
+        }
+
+        var root = window.EZRoutes && window.EZRoutes.root ? window.EZRoutes.root : '/';
+        var contactUrl = root.replace(/\/?$/, '/') + 'contact';
+
+        fetch(contactUrl, {
           method: 'POST',
           body: formData,
           headers: { 'Accept': 'application/json' }
         })
-          .then(function () {
-            if (success) success.hidden = false;
+          .then(function (response) {
+            if (!response.ok) throw new Error('Server error: ' + response.status);
+
+            window.dispatchEvent(new CustomEvent('ez:notify-me-submit', {
+              detail: {
+                product: productTitle,
+                variant: variantTitle,
+                url: productUrl
+              }
+            }));
             if (inputRow) inputRow.hidden = true;
+            if (success) {
+              success.textContent = 'Got it. We will email you at ' + email + ' when it is back in stock.';
+              success.hidden = false;
+            }
           })
           .catch(function () {
+            if (error) {
+              error.textContent = 'Something went wrong. Please try again or contact us at support@ezq.com';
+              error.hidden = false;
+            }
             btn.disabled = false;
             btn.textContent = 'Notify me';
           });
-      });
+      }
     });
 
     /* Respond to variant change events from the PDP JS.

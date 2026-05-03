@@ -9,6 +9,7 @@
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Still need help?",
         "heading": "Our team responds within 1 business day.",
         "body": "Every message is read by a real person. No bots, no ticket queues.",

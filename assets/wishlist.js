@@ -2,6 +2,14 @@
   'use strict';
 
   var STORAGE_KEY = 'ez_wishlist';
+  var CHANNEL_NAME = 'ez_wishlist_sync';
+  var channel = null;
+
+  try {
+    if ('BroadcastChannel' in window) channel = new BroadcastChannel(CHANNEL_NAME);
+  } catch (e) {
+    channel = null;
+  }
 
   function getWishlist() {
     try {
@@ -13,7 +21,19 @@
 
   function saveWishlist(items) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    broadcastWishlist(items);
+    refreshWishlistUi();
+  }
+
+  function broadcastWishlist(items) {
+    if (!channel) return;
+    channel.postMessage({ type: 'wishlist:update', items: items });
+  }
+
+  function refreshWishlistUi() {
     updateWishlistCount();
+    updateButtons();
+    renderWishlistPage();
   }
 
   function isWishlisted(id) {
@@ -110,9 +130,6 @@
         var i = current.findIndex(function (x) { return String(x.id) === String(this.dataset.removeId); }, this);
         if (i > -1) current.splice(i, 1);
         saveWishlist(current);
-        renderWishlistPage();
-        updateButtons();
-        updateWishlistCount();
       });
 
       items.appendChild(card);
@@ -163,10 +180,19 @@
 
   /* Init */
   document.addEventListener('DOMContentLoaded', function () {
-    updateButtons();
-    updateWishlistCount();
-    renderWishlistPage();
+    refreshWishlistUi();
   });
+
+  window.addEventListener('storage', function (event) {
+    if (event.key === STORAGE_KEY) refreshWishlistUi();
+  });
+
+  if (channel) {
+    channel.addEventListener('message', function (event) {
+      if (!event.data || event.data.type !== 'wishlist:update') return;
+      refreshWishlistUi();
+    });
+  }
 
   window.EZWishlist = { getWishlist: getWishlist, isWishlisted: isWishlisted, updateButtons: updateButtons };
 })();

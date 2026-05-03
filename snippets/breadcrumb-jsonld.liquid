@@ -1,0 +1,88 @@
+{% unless request.page_type == 'index' %}
+  {%- liquid
+    assign crumb2_name = blank
+    assign crumb2_url = blank
+    assign crumb3_name = blank
+    assign crumb3_url = blank
+
+    case request.page_type
+      when 'product'
+        assign product_collection = product.collections.first
+        if collection != blank
+          assign product_collection = collection
+        endif
+        if product_collection != blank
+          assign crumb2_name = product_collection.title
+          assign crumb2_url = shop.url | append: product_collection.url
+          assign crumb3_name = product.title
+          assign crumb3_url = shop.url | append: product.url
+        else
+          assign crumb2_name = product.title
+          assign crumb2_url = shop.url | append: product.url
+        endif
+      when 'collection'
+        assign crumb2_name = 'Collections'
+        assign crumb2_url = shop.url | append: routes.collections_url
+        assign crumb3_name = collection.title
+        assign crumb3_url = shop.url | append: collection.url
+      when 'article'
+        assign crumb2_name = blog.title | default: 'Resources'
+        assign crumb2_url = shop.url | append: blog.url
+        assign crumb3_name = article.title
+        assign crumb3_url = shop.url | append: article.url
+      when 'blog'
+        assign crumb2_name = blog.title | default: 'Resources'
+        assign crumb2_url = shop.url | append: request.path
+      when 'page'
+        assign support_handles = 'faq,downloads,manuals,firmware,user-guides,compatibility,troubleshooting,warranty,contact,ticket-submission' | split: ','
+        if support_handles contains page.handle
+          assign crumb2_name = 'Support'
+          assign crumb2_url = shop.url | append: '/pages/support'
+          unless page.handle == 'support'
+            assign crumb3_name = page.title
+            assign crumb3_url = shop.url | append: page.url
+          endunless
+        else
+          assign crumb2_name = page.title
+          assign crumb2_url = shop.url | append: page.url
+        endif
+      when 'search'
+        assign crumb2_name = 'Search'
+        assign crumb2_url = shop.url | append: routes.search_url
+      when 'cart'
+        assign crumb2_name = 'Cart'
+        assign crumb2_url = shop.url | append: routes.cart_url
+      when '404'
+        assign crumb2_name = 'Page not found'
+        assign crumb2_url = shop.url | append: request.path
+    endcase
+  -%}
+  {% if crumb2_name != blank %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ shop.url | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ crumb2_name | json }},
+          "item": {{ crumb2_url | json }}
+        }{% if crumb3_name != blank %},
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ crumb3_name | json }},
+          "item": {{ crumb3_url | json }}
+        }{% endif %}
+      ]
+    }
+    </script>
+  {% endif %}
+{% endunless %}

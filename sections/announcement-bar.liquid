@@ -1,5 +1,9 @@
 {% liquid
   assign msg_blocks = section.blocks | where: 'type', 'message'
+  assign announcement_count = msg_blocks.size | default: 0
+  if announcement_count == 0
+    assign announcement_count = 3
+  endif
 %}
 
 <div
@@ -7,7 +11,7 @@
   role="region"
   aria-label="Announcements"
   id="announcement-bar"
-  data-count="{{ msg_blocks.size }}"
+  data-count="{{ announcement_count }}"
   data-interval="{{ section.settings.interval }}"
 >
   <div
@@ -16,33 +20,46 @@
     aria-live="polite"
     aria-atomic="true"
   >
-    {% for block in msg_blocks %}
+    {% if msg_blocks.size > 0 %}
+      {% for block in msg_blocks %}
+        <div
+          class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
+          id="announcement-{{ forloop.index0 }}"
+          role="text"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.icon != blank %}
+            <span class="announcement-bar__icon" aria-hidden="true">
+              {{ block.settings.icon | escape }}
+            </span>
+          {% endif %}
+
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link | escape }}" class="announcement-bar__link">
+              {{ block.settings.text | escape }}
+            </a>
+          {% else %}
+            <span class="announcement-bar__text">
+              {{ block.settings.text | escape }}
+            </span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      {% assign fallback_messages = 'Free shipping over $100|2-year warranty|30-day returns' | split: '|' %}
+      {% for fallback_message in fallback_messages %}
       <div
         class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
         id="announcement-{{ forloop.index0 }}"
         role="text"
-        {{ block.shopify_attributes }}
       >
-        {% if block.settings.icon != blank %}
-          <span class="announcement-bar__icon" aria-hidden="true">
-            {{ block.settings.icon | escape }}
-          </span>
-        {% endif %}
-
-        {% if block.settings.link != blank %}
-          <a href="{{ block.settings.link | escape }}" class="announcement-bar__link">
-            {{ block.settings.text | escape }}
-          </a>
-        {% else %}
-          <span class="announcement-bar__text">
-            {{ block.settings.text | escape }}
-          </span>
-        {% endif %}
+        <span class="announcement-bar__text">{{ fallback_message | escape }}</span>
       </div>
-    {% endfor %}
+      {% endfor %}
+    {% endif %}
   </div>
 
-  {% if msg_blocks.size > 1 %}
+  {% if announcement_count > 1 %}
     <div class="announcement-bar__controls" aria-label="Announcement navigation">
       <button
         type="button"
@@ -54,10 +71,10 @@
           <path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
-      <span class="announcement-bar__counter" aria-label="Announcement 1 of {{ msg_blocks.size }}">
+      <span class="announcement-bar__counter" aria-label="Announcement 1 of {{ announcement_count }}">
         <span id="announcement-current">1</span>
         <span aria-hidden="true">/</span>
-        <span>{{ msg_blocks.size }}</span>
+        <span>{{ announcement_count }}</span>
       </span>
       <button
         type="button"
@@ -121,7 +138,7 @@
 
   #shopify-section-{{ section.id }} .announcement-bar__text,
   #shopify-section-{{ section.id }} .announcement-bar__link {
-    color: {{ section.settings.text_color }};
+    color: var(--ez-black);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -280,13 +297,13 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "var(--ez-amber)"
+      "default": "#FED300"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "default": "var(--ez-black)"
+      "default": "#0f172a"
     },
     {
       "type": "range",
@@ -331,16 +348,19 @@
         {
           "type": "message",
           "settings": {
-            "icon": "📦",
-            "text": "Free Shipping Over $100"
+            "text": "Free shipping over $100"
           }
         },
         {
           "type": "message",
           "settings": {
-            "icon": "📞",
-            "text": "Support 1-800-881-9305",
-            "link": "tel:18008819305"
+            "text": "2-year warranty"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "30-day returns"
           }
         }
       ]

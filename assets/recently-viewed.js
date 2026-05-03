@@ -7,7 +7,7 @@
   'use strict';
 
   var STORAGE_KEY = 'ez_recently_viewed';
-  var MAX_STORED = 12;
+  var MAX_STORED = 8;
 
   function canUseStorage() {
     try {
@@ -134,7 +134,7 @@
     }).slice(0, maxProducts);
 
     if (!products.length) {
-      section.style.display = 'none';
+      section.hidden = true;
       grid.innerHTML = '';
       return;
     }
@@ -144,7 +144,7 @@
       grid.appendChild(createProductCard(item));
     });
 
-    section.style.display = '';
+    section.hidden = false;
   }
 
   document.addEventListener('DOMContentLoaded', function () {

@@ -4,21 +4,29 @@
   assign button_style = style | default: 'primary'
   assign button_tag = tag | default: 'a'
   assign button_type = type | default: 'button'
-  assign button_class = 'button-primary'
+  assign button_class = 'btn btn--primary'
 
   case button_style
+    when 'primary'
+      assign button_class = 'btn btn--primary'
+    when 'primary-on-dark'
+      assign button_class = 'btn btn--primary-on-dark'
     when 'secondary'
-      assign button_class = 'button-secondary'
+      assign button_class = 'btn btn--secondary'
+    when 'secondary-on-dark'
+      assign button_class = 'btn btn--secondary-on-dark'
     when 'tertiary'
-      assign button_class = 'button-tertiary'
+      assign button_class = 'btn btn--link'
+    when 'link'
+      assign button_class = 'btn btn--link'
     when 'icon'
       assign button_class = 'button-icon'
   endcase
 
   if size == 'sm'
-    assign button_class = button_class | append: ' button-sm'
+    assign button_class = button_class | append: ' btn--sm'
   elsif size == 'lg'
-    assign button_class = button_class | append: ' button-lg'
+    assign button_class = button_class | append: ' btn--lg'
   endif
 
   if class != blank

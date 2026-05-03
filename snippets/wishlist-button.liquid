@@ -10,7 +10,7 @@
   data-wishlist-id="{{ wb_id }}"
   data-wishlist-title="{{ wb_title | escape }}"
   data-wishlist-url="{{ wb_url }}"
-  data-wishlist-image="{{ wb_image | image_url: width: 300 }}"
+  data-wishlist-image="{{ wb_image | image_url: width: 300, format: 'pjpg' }}"
   data-wishlist-price="{{ wb_price | money }}"
   aria-label="Add {{ wb_title | escape }} to wishlist"
   aria-pressed="false"

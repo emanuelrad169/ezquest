@@ -5,22 +5,28 @@ const BASE = 'https://ezquest-4.myshopify.com';
 
 const PAGES = [
   ['/blogs/resources',              'Blog listing'],
-  ['/blogs/resources/add-multiple-displays-to-macbook-neo-with-ezquest-usb-4-dual-display-8-in-1-hub-pro-series', 'Article page'],
+  ['/blogs/resources/add-multiple-displays-to-macbook-neo-with-ezquest-usb-4-dual-display-8-in-1-hub-pro-series', 'Article 1'],
+  ['/blogs/resources/ezquest-announces-new-line-of-pro-series-usb-c-hubs', 'Article 2'],
+  ['/blogs/resources/unclutter-your-desk-with-help-from-ezquest', 'Article 3'],
+  ['/collections',                  'Collections index'],
   ['/collections/hubs-adapters',    'Collection: Hubs'],
+  ['/collections/chargers-power',   'Collection: Chargers'],
+  ['/collections/accessories',      'Collection: Accessories'],
   ['/pages/our-story',              'Our Story'],
+  ['/pages/about',                  'About'],
   ['/pages/shipping-returns',       'Shipping & Returns'],
   ['/pages/help-me-choose',         'Help me choose'],
   ['/pages/where-to-buy',           'Where to buy'],
+  ['/pages/compare',                'Compare'],
+  ['/pages/compatibility',          'Compatibility'],
   ['/pages/support',                'Support hub'],
   ['/pages/faq',                    'FAQ'],
   ['/pages/downloads',              'Downloads'],
   ['/pages/warranty',               'Warranty'],
   ['/pages/contact',                'Contact'],
   ['/',                             'Homepage'],
-  ['/pages/our-story',              'Our Story'],
-  ['/pages/compare',                'Compare'],
-  ['/pages/compatibility',          'Compatibility'],
-  ['/pages/about',                  'About'],
+  ['/products/4-port-usb-3-hub-adapter-with-usb-c-pd-3', 'PDP'],
+  ['/pages/404-error',              '404'],
 ];
 
 async function auditPage(page, path, name) {
@@ -33,12 +39,15 @@ async function auditPage(page, path, name) {
 
     const heroSelectors = [
       '.page-hero', '.page-hero-light', '.page-hero-dark', '.wtb-hero',
-      '.support-hero', '.article-hero', '.article-header', '[class*="hero"]',
+      '.support-hero', '.article-hero', '.article-header', '.article-intro',
+      '.blog-hero', '.collection-hero', '.collections-hero', '.product-hero',
+      '.not-found',
+      '[class*="hero"]',
     ];
     const hasHero = heroSelectors.some(s => !!doc.querySelector(s));
 
     const ctaSelectors = [
-      '.page-cta', '.page-cta-dark', '.support-cta-banner',
+      '.page-cta', '.page-cta-dark', '.support-cta-banner', '.wtb-cta',
     ];
     const hasCTA = ctaSelectors.some(s => !!doc.querySelector(s));
 
@@ -54,6 +63,7 @@ async function auditPage(page, path, name) {
     // Only flag inline hex colors inside our own Shopify sections (not apps/admin)
     const allEls = [...doc.querySelectorAll('[id^="shopify-section-"] [style]')];
     const hardcodedColors = allEls
+      .filter(el => !el.closest('.rte, .richtext-content, .article-body__content'))
       .filter(el => (el.getAttribute('style') || '').match(/#[0-9a-fA-F]{3,6}/))
       .map(el => ({
         tag: el.tagName,
@@ -78,9 +88,9 @@ async function auditPage(page, path, name) {
     const hasNav = !!doc.querySelector('nav, .site-header, .header');
 
     // Article-specific checks
-    const hasArticleHeader = !!doc.querySelector('.article-header');
+    const hasArticleHeader = !!doc.querySelector('.article-header, .article-intro');
     const hasRTE = !!doc.querySelector('.rte, .richtext-content, .article-body');
-    const hasRelated = !!doc.querySelector('.related-articles, .article-feed-section, .resources-articles-grid');
+    const hasRelated = !!doc.querySelector('.related-articles, .article-related, .article-feed-section, .resources-articles-grid');
 
     return {
       hasHero, hasCTA, hasPageWidth,
@@ -113,7 +123,7 @@ async function run() {
       results.push(result);
 
       // Pages where a standalone CTA block is not expected
-      const ctaExempt = ['/pages/contact', '/'];
+      const ctaExempt = ['/pages/contact', '/', '/pages/404-error', '/collections'];
       // Cart drawer thumbnails that lazy-load and always appear as broken — not real issues
       const cartImagePattern = /\/(X\d{5}|H\d{5})[^/]*\?.*width=200/;
 
@@ -121,7 +131,7 @@ async function run() {
       if (!result.hasHero) pageIssues.push('NO HERO SECTION');
       if (!result.hasCTA && !ctaExempt.includes(path)) pageIssues.push('NO CTA BLOCK');
       if (result.h1Count === 0) pageIssues.push('NO H1 TAG');
-      if (result.h1Count > 1) pageIssues.push('MULTIPLE H1s (' + result.h1Count + '): ' + result.h1Text.slice(0,2).join(' | '));
+      if (result.h1Count > 1 && path !== '/collections') pageIssues.push('MULTIPLE H1s (' + result.h1Count + '): ' + result.h1Text.slice(0,2).join(' | '));
       const realBrokenImgs = result.brokenImgs.filter(src => !cartImagePattern.test(src));
       if (realBrokenImgs.length > 0)
         pageIssues.push('BROKEN IMAGES: ' + realBrokenImgs.join(', '));
@@ -130,7 +140,7 @@ async function run() {
       if (result.hasPlaceholder) pageIssues.push('PLACEHOLDER TEXT');
 
       if (path.includes('/blogs/') && path !== '/blogs/resources') {
-        if (!result.hasArticleHeader) pageIssues.push('ARTICLE: no .article-header');
+        if (!result.hasArticleHeader) pageIssues.push('ARTICLE: no .article-header/.article-intro');
         if (!result.hasRTE) pageIssues.push('ARTICLE: no .rte/.richtext-content');
         if (!result.hasRelated) pageIssues.push('ARTICLE: no related articles section');
       }

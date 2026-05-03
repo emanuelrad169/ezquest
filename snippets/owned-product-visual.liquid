@@ -193,9 +193,14 @@
       endcase
     endif
   endif
+
+  assign resolved_height = resolved_width
+  if resolved_image != blank and resolved_image.aspect_ratio > 0
+    assign resolved_height = resolved_width | divided_by: resolved_image.aspect_ratio | round
+  endif
 -%}
 {% if resolved_image != blank %}
-  {{ resolved_image | image_url: width: resolved_width | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
+  {{ resolved_image | image_url: width: resolved_width, format: 'pjpg' | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, width: resolved_width, height: resolved_height, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
 {% else %}
   <div class="product-visual-placeholder {{ resolved_class }}"
        role="img"

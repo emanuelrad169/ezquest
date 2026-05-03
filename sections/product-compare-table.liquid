@@ -17,6 +17,19 @@
     {% if section.settings.body != blank %}
       <p class="compare-page__body">{{ section.settings.body | escape }}</p>
     {% endif %}
+
+    {% if col_count > 0 %}
+      <div class="compare-share">
+        <span class="compare-share__label">Share this comparison:</span>
+        <button type="button" class="compare-share__button" data-compare-share>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+            <path d="M9 1H13V5M13 1L6 8M5 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Copy link</span>
+        </button>
+        <p class="compare-share__status" data-compare-share-status aria-live="polite"></p>
+      </div>
+    {% endif %}
   </div>
 
   {% if col_count == 0 %}
@@ -25,17 +38,25 @@
     </div>
   {% else %}
     <div class="compare-scroll-wrap">
-      <div class="compare-table" style="--col-count: {{ col_count }}">
+      <div class="compare-table" style="--col-count: {{ col_count }}" data-compare-table>
         <div class="compare-row compare-row--header">
           <div class="compare-label-cell compare-label-cell--header"></div>
 
           {% for block in product_blocks %}
             {% liquid
               assign p = block.settings.product
+              assign product_id = ''
+              if p != blank
+                assign product_id = p.id
+              endif
             %}
 
             <div
               class="compare-product-cell{% if block.settings.is_recommended %} compare-product-cell--recommended{% endif %}"
+              {% if product_id != blank %}
+                data-compare-product-id="{{ product_id }}"
+                data-compare-product-handle="{{ p.handle | escape }}"
+              {% endif %}
               {{ block.shopify_attributes }}
             >
               {% if p != blank %}
@@ -45,7 +66,7 @@
 
                 {% if p.featured_image != blank %}
                   <img
-                    src="{{ p.featured_image | image_url: width: 200 }}"
+                    src="{{ p.featured_image | image_url: width: 200, format: 'pjpg' }}"
                     alt="{{ p.title | escape }}"
                     class="compare-product-cell__img"
                     width="120"
@@ -61,6 +82,14 @@
                 <a href="{{ p.url | escape }}" class="compare-product-cell__link">
                   View product &rarr;
                 </a>
+                <button
+                  type="button"
+                  class="compare-product-cell__remove"
+                  data-compare-remove="{{ product_id }}"
+                  aria-label="Remove {{ p.title | escape }} from comparison"
+                >
+                  Remove
+                </button>
               {% else %}
                 <p class="compare-empty-product">Select a product in theme customizer</p>
               {% endif %}
@@ -82,9 +111,17 @@
                 assign col_index = forloop.index
                 assign value_key = 'value_' | append: col_index
                 assign val = spec.settings[value_key]
+                assign spec_product = product_block.settings.product
+                assign spec_product_id = ''
+                if spec_product != blank
+                  assign spec_product_id = spec_product.id
+                endif
               %}
 
-              <div class="compare-spec-cell">
+              <div
+                class="compare-spec-cell"
+                {% if spec_product_id != blank %}data-compare-spec-product-id="{{ spec_product_id }}"{% endif %}
+              >
                 {% if val != blank %}
                   {{ val | escape }}
                 {% else %}
@@ -101,8 +138,9 @@
 
 <style>
   #shopify-section-{{ section.id }} .compare-page {
+    max-width: 80rem;
     margin: 0 auto;
-    padding: clamp(44px, 5vw, 64px) 1.25rem;
+    padding: clamp(44px, 5vw, 64px) 1rem;
   }
 
   @media (min-width: 640px) {
@@ -120,7 +158,6 @@
   }
 
   #shopify-section-{{ section.id }} .compare-page__header {
-    max-width: 640px;
     margin: 0 auto clamp(2.5rem, 4vw, 4rem);
     text-align: center;
   }
@@ -140,6 +177,59 @@
     color: var(--ez-grey);
     font-size: clamp(15px, 1.6vw, 18px);
     line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .compare-share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+  }
+
+  #shopify-section-{{ section.id }} .compare-share__label {
+    color: var(--ez-grey);
+    font-size: 13px;
+  }
+
+  #shopify-section-{{ section.id }} .compare-share__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 40px;
+    padding: 0.625rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ez-black);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .compare-share__button:hover {
+    border-color: rgba(254, 211, 0, 0.45);
+  }
+
+  #shopify-section-{{ section.id }} .compare-share__status {
+    min-height: 1.25rem;
+    margin: 0;
+    color: var(--ez-grey);
+    font-size: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .compare-share__status.is-success {
+    color: var(--ez-green, #15803d);
+  }
+
+  .compare-share__fallback-input {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
   }
 
   #shopify-section-{{ section.id }} .compare-scroll-wrap {
@@ -204,7 +294,7 @@
   }
 
   #shopify-section-{{ section.id }} .compare-product-cell--recommended {
-    box-shadow: inset 0 0 0 2px rgba(245, 158, 11, 0.35);
+    box-shadow: inset 0 0 0 2px rgba(254, 211, 0, 0.35);
   }
 
   #shopify-section-{{ section.id }} .compare-product-cell__img {
@@ -234,7 +324,7 @@
 
   #shopify-section-{{ section.id }} .compare-product-cell__price {
     margin: 0;
-    color: var(--ez-amber);
+    color: var(--ez-black);
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -257,14 +347,30 @@
 
   #shopify-section-{{ section.id }} .compare-product-cell__link {
     margin-top: auto;
-    color: var(--ez-amber);
+    color: var(--ez-black);
     font-size: 12px;
     font-weight: 500;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: var(--ez-amber);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
   }
 
   #shopify-section-{{ section.id }} .compare-product-cell__link:hover {
-    color: #d97706;
+    text-decoration-color: var(--ez-black);
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__remove {
+    margin-top: 0.125rem;
+    color: var(--ez-grey);
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #shopify-section-{{ section.id }} .compare-product-cell__remove:hover {
+    color: var(--ez-black);
   }
 
   #shopify-section-{{ section.id }} .compare-spec-cell {
@@ -354,6 +460,21 @@
     }
   }
 </style>
+
+{% if request.page_type == 'page' and page.handle == 'compare' %}
+  <script>
+    document.addEventListener('compare:updated', function(e) {
+      var ids = e.detail && e.detail.ids ? e.detail.ids : [];
+      var count = ids.length;
+      if (count > 0) {
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) {
+          ogTitle.content = 'Compare ' + count + ' EZQuest products - ezquest.com';
+        }
+      }
+    });
+  </script>
+{% endif %}
 
 {% schema %}
 {

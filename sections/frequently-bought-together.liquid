@@ -42,7 +42,7 @@
                 {% if fbt_product.featured_image != blank %}
                   <img
                     class="fbt-item__img"
-                    src="{{ fbt_product.featured_image | image_url: width: 160 }}"
+                    src="{{ fbt_product.featured_image | image_url: width: 160, format: 'pjpg' }}"
                     alt="{{ fbt_product.title | escape }}"
                     width="64"
                     height="64"

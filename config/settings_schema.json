@@ -75,6 +75,13 @@
     "name": "Integrations",
     "settings": [
       {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "GA4 Measurement ID",
+        "info": "Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX). Leave blank to disable.",
+        "placeholder": "G-XXXXXXXXXX"
+      },
+      {
         "type": "select",
         "id": "reviews_app",
         "label": "Reviews app",

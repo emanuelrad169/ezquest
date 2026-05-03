@@ -17,3 +17,6 @@ scripts/archive/
 
 # Archived prompt manifests
 prompts/archive/
+
+# Live Shopify theme exports are large local safety backups
+backups/

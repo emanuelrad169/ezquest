@@ -10,7 +10,16 @@
   function formatMoney(cents) {
     var amount = parseInt(cents, 10);
     if (!Number.isFinite(amount)) amount = 0;
-    return '$' + (amount / 100).toFixed(2);
+    amount = amount / 100;
+    try {
+      return new Intl.NumberFormat((window.EZMoney && window.EZMoney.locale) || document.documentElement.lang || 'en', {
+        style: 'currency',
+        currency: (window.EZMoney && window.EZMoney.currency) || (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || 'USD',
+        maximumFractionDigits: amount % 1 === 0 ? 0 : 2
+      }).format(amount);
+    } catch (e) {
+      return '$' + amount.toFixed(2);
+    }
   }
 
   function getSelectedCheckboxes(container) {

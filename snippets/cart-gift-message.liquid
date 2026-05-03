@@ -1,0 +1,61 @@
+{% comment %} Optional Shopify order note field for gift messages. {% endcomment %}
+{%- assign gift_id = id | default: 'cart-gift-message' -%}
+{%- assign gift_body_id = gift_id | append: '-body' -%}
+{%- assign gift_count_id = gift_id | append: '-count' -%}
+{%- assign gift_form_id = form_id | default: '' -%}
+{%- assign gift_is_open = false -%}
+{%- if cart.note != blank -%}
+  {%- assign gift_is_open = true -%}
+{%- endif -%}
+
+<div class="cart-gift-wrap" data-cart-gift>
+  <label class="cart-gift__toggle">
+    <input
+      type="checkbox"
+      class="cart-gift__checkbox"
+      data-cart-gift-toggle
+      aria-expanded="{% if gift_is_open %}true{% else %}false{% endif %}"
+      aria-controls="{{ gift_body_id }}"
+      {% if gift_is_open %}checked{% endif %}
+    >
+    <span class="cart-gift__icon" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 7H2v7h12V7zM8 7V3M6 3a2 2 0 0 0 2 2 2 2 0 0 0 2-2"/>
+        <path d="M1 7h14"/>
+      </svg>
+    </span>
+    <span class="cart-gift__label">Add a gift message</span>
+    <span class="cart-gift__chevron" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </label>
+
+  <div
+    class="cart-gift__body"
+    id="{{ gift_body_id }}"
+    data-cart-gift-body
+    aria-hidden="{% if gift_is_open %}false{% else %}true{% endif %}"
+  >
+    <textarea
+      name="note"
+      class="cart-gift__textarea"
+      maxlength="500"
+      placeholder="Write your message here... (max 500 characters)"
+      aria-label="Gift message"
+      rows="3"
+      data-cart-gift-textarea
+      {% if gift_form_id != blank %}form="{{ gift_form_id }}"{% endif %}
+    >{{ cart.note | escape }}</textarea>
+    <div class="cart-gift__footer">
+      <span class="cart-gift__counter">
+        <span id="{{ gift_count_id }}" data-cart-gift-count>{{ cart.note | size }}</span>/500
+      </span>
+      <button type="button" class="cart-gift__save btn btn--secondary" data-cart-gift-save>
+        Save message
+      </button>
+    </div>
+    <p class="cart-gift__status" data-cart-gift-status aria-live="polite"></p>
+  </div>
+</div>

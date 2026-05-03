@@ -16,9 +16,21 @@
         Go home
       </a>
       <a href="{{ routes.collections_url }}" class="btn btn--secondary not-found__btn-secondary">
-        Browse products
+        Browse all products
       </a>
     </div>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
+      <label for="not-found-search" class="sr-only">Search products and support</label>
+      <input
+        id="not-found-search"
+        type="search"
+        name="q"
+        placeholder="Search hubs, chargers, cables, support"
+        class="min-h-12 flex-1 rounded-full border border-white/20 bg-white px-5 text-sm font-medium text-slate-950 placeholder:text-slate-500"
+      >
+      <button type="submit" class="btn btn--primary not-found__btn-primary">Search</button>
+    </form>
 
     <div class="not-found__families">
       <p class="not-found__families-label">Or browse by family:</p>
@@ -33,6 +45,27 @@
 
   </div>
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ shop.url | append: routes.root_url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Page not found",
+      "item": {{ shop.url | append: request.path | json }}
+    }
+  ]
+}
+</script>
 
 {% schema %}
 {

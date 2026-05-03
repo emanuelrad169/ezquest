@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 const PDP_PATH = '/products/4-port-usb-3-hub-adapter-with-usb-c-pd-3';
+const MAX_VISUAL_DIFF_RATIO = 0.02;
 
 const screenshotPages = [
   { name: 'homepage', path: '/' },
@@ -13,6 +14,10 @@ const screenshotPages = [
   { name: '404', path: '/404' },
   { name: 'policy', path: '/policies/privacy-policy' },
   { name: 'wishlist', path: '/pages/wishlist' },
+  { name: 'resources-blog', path: '/blogs/resources' },
+  { name: 'resources-article-macbook-displays', path: '/blogs/resources/add-multiple-displays-to-macbook-neo-with-ezquest-usb-4-dual-display-8-in-1-hub-pro-series' },
+  { name: 'resources-article-pro-series-hubs', path: '/blogs/resources/ezquest-announces-new-line-of-pro-series-usb-c-hubs' },
+  { name: 'resources-article-unclutter-desk', path: '/blogs/resources/unclutter-your-desk-with-help-from-ezquest' },
 ];
 
 const viewports = [
@@ -55,7 +60,7 @@ test.describe('GROUP 1 — Visual regression', () => {
 
         await expect(page).toHaveScreenshot(`${pageInfo.name}-${viewport.name}.png`, {
           fullPage: true,
-          maxDiffPixelRatio: 0.02,
+          maxDiffPixelRatio: MAX_VISUAL_DIFF_RATIO,
         });
       });
     }

@@ -98,6 +98,11 @@
                 if slide_desktop_image == blank and slide_mobile_image == blank
                   assign uses_owned_hero_asset = true
                 endif
+
+                assign slide_desktop_height = 1500
+                if slide_desktop_image != blank and slide_desktop_image.aspect_ratio > 0
+                  assign slide_desktop_height = 2400 | divided_by: slide_desktop_image.aspect_ratio | round
+                endif
               -%}
               <article
                 class="home-hero-slide relative block h-full min-h-hero xl:min-h-feature-lg{% if forloop.first %} is-active{% endif %}"
@@ -111,16 +116,16 @@
                     <picture class="home-hero-media-picture block h-full w-full">
                       {% if slide_mobile_image != blank %}
                         <source media="(max-width: 767px)"
-                                srcset="{{ slide_mobile_image | image_url: width: 400 }} 400w, {{ slide_mobile_image | image_url: width: 800 }} 800w, {{ slide_mobile_image | image_url: width: 1200 }} 1200w"
+                                srcset="{{ slide_mobile_image | image_url: width: 400, format: 'pjpg' }} 400w, {{ slide_mobile_image | image_url: width: 800, format: 'pjpg' }} 800w, {{ slide_mobile_image | image_url: width: 1200, format: 'pjpg' }} 1200w"
                                 sizes="100vw">
                       {% endif %}
                       {% if slide_desktop_image != blank %}
-                        {{ slide_desktop_image | image_url: width: 2400 | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, decoding: slide_image_decoding, class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                        {{ slide_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, decoding: slide_image_decoding, width: 2400, height: slide_desktop_height, class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                       {% else %}
                         <img
                           src="{{ owned_hero_desktop_asset | asset_url }}"
                           alt="{{ slide_heading | escape }}"
-                          class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
+                          class="home-hero-media-image h-full w-full origin-center object-cover"
                           loading="{{ slide_image_loading }}"
                           fetchpriority="{{ slide_image_fetchpriority }}"
                           width="3600"
@@ -141,7 +146,7 @@
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"
                         alt="{{ slide_heading | escape }}"
-                        class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
+                        class="home-hero-media-image h-full w-full origin-center object-cover"
                         loading="{{ slide_image_loading }}"
                         fetchpriority="{{ slide_image_fetchpriority }}"
                         width="3600"
@@ -154,7 +159,7 @@
 
                 <div class="pointer-events-none absolute inset-0 z-10">
                   <div class="container-shell relative h-full">
-                    <div class="container-shell home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
+                    <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-4 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start sm:left-6 lg:left-8">
                       {% if block.settings.eyebrow != blank %}
                         <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ block.settings.eyebrow }}</p>
                       {% endif %}
@@ -167,10 +172,10 @@
 
                       <div class="home-hero-actions mt-6 flex flex-wrap items-center gap-4 lg:mt-8" data-hero-actions>
                         {% if slide_primary_label != blank %}
-                          {% render 'button', label: slide_primary_label, url: block.settings.primary_url | default: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
+                          {% render 'button', label: slide_primary_label, url: block.settings.primary_url | default: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary-on-dark' %}
                         {% endif %}
                         {% if slide_secondary_label != blank %}
-                          {% render 'button', label: slide_secondary_label, url: block.settings.secondary_url | default: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link min-h-11' %}
+                          {% render 'button', label: slide_secondary_label, url: block.settings.secondary_url | default: section.settings.secondary_url | default: '/pages/compare', style: 'secondary-on-dark', size: 'sm' %}
                         {% endif %}
                       </div>
                     </div>
@@ -198,6 +203,10 @@
               if fallback_desktop_image == blank and fallback_mobile_image == blank
                 assign uses_owned_hero_asset = true
               endif
+              assign fallback_desktop_height = 1500
+              if fallback_desktop_image != blank and fallback_desktop_image.aspect_ratio > 0
+                assign fallback_desktop_height = 2400 | divided_by: fallback_desktop_image.aspect_ratio | round
+              endif
             -%}
             <article class="home-hero-slide relative block h-full min-h-hero xl:min-h-feature-lg is-active" data-hero-slide aria-hidden="false">
               <div class="home-hero-media-panel absolute inset-0 overflow-hidden{% if uses_owned_hero_asset %} home-hero-media-panel--owned{% endif %}" data-hero-media>
@@ -205,16 +214,16 @@
                   <picture class="home-hero-media-picture block h-full w-full">
                     {% if fallback_mobile_image != blank %}
                       <source media="(max-width: 767px)"
-                              srcset="{{ fallback_mobile_image | image_url: width: 400 }} 400w, {{ fallback_mobile_image | image_url: width: 800 }} 800w, {{ fallback_mobile_image | image_url: width: 1200 }} 1200w"
+                              srcset="{{ fallback_mobile_image | image_url: width: 400, format: 'pjpg' }} 400w, {{ fallback_mobile_image | image_url: width: 800, format: 'pjpg' }} 800w, {{ fallback_mobile_image | image_url: width: 1200, format: 'pjpg' }} 1200w"
                               sizes="100vw">
                     {% endif %}
                     {% if fallback_desktop_image != blank %}
-                      {{ fallback_desktop_image | image_url: width: 2400 | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, decoding: 'sync', class: 'home-hero-media-image h-full w-full origin-center scale-105 object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                      {{ fallback_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, decoding: 'sync', width: 2400, height: fallback_desktop_height, class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                     {% else %}
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"
                         alt="{{ hero_heading | escape }}"
-                        class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
+                        class="home-hero-media-image h-full w-full origin-center object-cover"
                         loading="{{ fallback_image_loading }}"
                         fetchpriority="{{ fallback_image_fetchpriority }}"
                         width="3600"
@@ -235,7 +244,7 @@
                     <img
                       src="{{ owned_hero_desktop_asset | asset_url }}"
                       alt="{{ hero_heading | escape }}"
-                      class="home-hero-media-image h-full w-full origin-center scale-105 object-cover"
+                      class="home-hero-media-image h-full w-full origin-center object-cover"
                       loading="{{ fallback_image_loading }}"
                       fetchpriority="{{ fallback_image_fetchpriority }}"
                       width="3600"
@@ -248,7 +257,7 @@
 
               <div class="pointer-events-none absolute inset-0 z-10">
                 <div class="container-shell relative h-full">
-                  <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-0 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start">
+                  <div class="home-hero-copy-panel pointer-events-auto absolute top-1/2 left-4 z-10 flex max-w-2xl -translate-y-1/2 flex-col items-start sm:left-6 lg:left-8">
                     {% if section.settings.eyebrow != blank %}
                       <p class="home-hero-copy-kicker inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/45" data-hero-kicker>{{ section.settings.eyebrow }}</p>
                     {% endif %}
@@ -256,10 +265,10 @@
                     <p class="home-hero-copy-text mt-4 max-w-copy text-body-sm text-white/80 md:max-w-copy-row md:text-body lg:mt-5 lg:max-w-copy-md lg:text-body-lg xl:max-w-prose" data-hero-copy>{{ hero_copy }}</p>
                     <div class="home-hero-actions mt-6 flex flex-wrap items-center gap-4 lg:mt-8" data-hero-actions>
                       {% if section.settings.primary_label != blank %}
-                        {% render 'button', label: section.settings.primary_label, url: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary', class: 'button-context-hero-primary' %}
+                        {% render 'button', label: section.settings.primary_label, url: section.settings.primary_url | default: '/pages/help-me-choose', style: 'primary-on-dark' %}
                       {% endif %}
                       {% if section.settings.secondary_label != blank %}
-                        {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url | default: '/pages/compare', style: 'secondary', size: 'sm', class: 'button-context-hero-secondary home-hero-secondary-link min-h-11' %}
+                        {% render 'button', label: section.settings.secondary_label, url: section.settings.secondary_url | default: '/pages/compare', style: 'secondary-on-dark', size: 'sm' %}
                       {% endif %}
                     </div>
                   </div>
@@ -295,6 +304,121 @@
     </div>
   </div>
 </section>
+
+{% comment %} ── Marquee strip ─────────────────────── {% endcomment %}
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-content">
+      <span class="marquee-item">2-year warranty</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Ships within 24 hours</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Works with Mac &amp; Windows</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">30-day returns</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">DuraGuard braided cables</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">No drivers needed</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Free shipping over $100</span>
+      <span class="marquee-dot">·</span>
+    </span>
+    <span class="marquee-content" aria-hidden="true">
+      <span class="marquee-item">2-year warranty</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Ships within 24 hours</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Works with Mac &amp; Windows</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">30-day returns</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">DuraGuard braided cables</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">No drivers needed</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Free shipping over $100</span>
+      <span class="marquee-dot">·</span>
+    </span>
+    <span class="marquee-content" aria-hidden="true">
+      <span class="marquee-item">2-year warranty</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Ships within 24 hours</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Works with Mac &amp; Windows</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">30-day returns</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">DuraGuard braided cables</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">No drivers needed</span>
+      <span class="marquee-dot">·</span>
+      <span class="marquee-item">Free shipping over $100</span>
+      <span class="marquee-dot">·</span>
+    </span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var section = document.querySelector('[data-hero]');
+  if (!section) return;
+  var slides = Array.from(section.querySelectorAll('[data-hero-slide]'));
+  var dots   = Array.from(section.querySelectorAll('[data-hero-dot]'));
+  if (slides.length <= 1) return;
+
+  var currentIndex = 0;
+  var totalSlides  = slides.length;
+
+  function goToSlide(index) {
+    slides[currentIndex].classList.remove('is-active');
+    slides[currentIndex].setAttribute('hidden', '');
+    slides[currentIndex].setAttribute('aria-hidden', 'true');
+
+    currentIndex = index;
+
+    slides[currentIndex].classList.add('is-active');
+    slides[currentIndex].removeAttribute('hidden');
+    slides[currentIndex].setAttribute('aria-hidden', 'false');
+
+    dots.forEach(function (dot, i) {
+      dot.classList.remove('is-active', 'is-done');
+      dot.setAttribute('aria-selected', 'false');
+      if (i < currentIndex) dot.classList.add('is-done');
+      if (i === currentIndex) {
+        dot.classList.add('is-active');
+        dot.setAttribute('aria-selected', 'true');
+      }
+    });
+  }
+
+  var autoplayTimer;
+  var AUTOPLAY_DELAY = 5000;
+
+  function startAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(function () {
+      goToSlide((currentIndex + 1) % totalSlides);
+    }, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayTimer);
+  }
+
+  section.addEventListener('mouseenter', stopAutoplay);
+  section.addEventListener('mouseleave', startAutoplay);
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      goToSlide(i);
+      startAutoplay();
+    });
+  });
+
+  startAutoplay();
+})();
+</script>
 
 {% schema %}
 {
@@ -336,4 +460,3 @@
   ]
 }
 {% endschema %}
-

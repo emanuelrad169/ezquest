@@ -9,7 +9,7 @@
     </div>
   {% endif %}
   <div class="container-shell">
-    <div style="max-width:680px;">
+    <div class="story-hero-copy" data-animate>
     <p class="page-hero-dark__kicker">Est. 1994 · Lake Forest, California</p>
     <h1 class="page-hero-dark__heading">
       Built for people who connect everything.
@@ -18,7 +18,7 @@
       Since 1994, EZQuest has made it simpler to connect the devices that matter most —
       with products built to last and a team that stands behind every one.
     </p>
-    <div style="display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <div class="story-stat-grid">
       <div>
         <p style="font-size:36px;font-weight:500;letter-spacing:-.03em;color:var(--ez-light);margin:0 0 .25rem;">30+</p>
         <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Years in business</p>
@@ -32,19 +32,19 @@
         <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0;">Warranty on every product</p>
       </div>
     </div>
-    </div><!-- /max-width:680px -->
+    </div>
   </div>
 </section>
 
 {% comment %} 2. VALUE PILLARS {% endcomment %}
 <section class="page-section page-section--white">
   <div class="container-shell">
-    <div style="margin-bottom:clamp(2rem,4vw,3.5rem);">
-      <p class="section-intro__kicker" style="text-align:left;">What we stand for</p>
-      <h2 class="section-intro__heading" style="text-align:left;margin:0;">Three things we never compromise on.</h2>
+    <div class="story-section-intro">
+      <p class="section-intro__kicker story-section-intro__kicker">What we stand for</p>
+      <h2 class="section-intro__heading story-section-intro__heading">Three things we never compromise on.</h2>
     </div>
-    <div class="three-col" style="padding:0;">
-      <div class="pillar-card">
+    <div class="three-col story-three-col">
+      <div class="pillar-card" data-animate>
         <div class="pillar-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
             <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
@@ -53,7 +53,7 @@
         <p class="pillar-card__title">Built to last</p>
         <p class="pillar-card__body">Every product is stress-tested beyond spec. Kevlar-reinforced cables, aircraft-grade aluminum housings, and the DuraGuard system — because accessories should outlast the devices they connect.</p>
       </div>
-      <div class="pillar-card">
+      <div class="pillar-card" data-animate>
         <div class="pillar-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
             <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -62,7 +62,7 @@
         <p class="pillar-card__title">Works with everything</p>
         <p class="pillar-card__body">Designed for the full ecosystem — Mac, Windows, iPad, and beyond. We test every product across hundreds of device and OS combinations before it ships.</p>
       </div>
-      <div class="pillar-card">
+      <div class="pillar-card" data-animate>
         <div class="pillar-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
             <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
@@ -78,9 +78,9 @@
 {% comment %} 3. TIMELINE {% endcomment %}
 <section class="page-section page-section--grey">
   <div class="container-shell">
-    <div style="margin-bottom:clamp(2rem,4vw,3.5rem);">
-      <p class="section-intro__kicker" style="text-align:left;">Our journey</p>
-      <h2 class="section-intro__heading" style="text-align:left;margin:0;">30 years of connectivity.</h2>
+    <div class="story-section-intro">
+      <p class="section-intro__kicker story-section-intro__kicker">Our journey</p>
+      <h2 class="section-intro__heading story-section-intro__heading">30 years of connectivity.</h2>
     </div>
     {% if section.settings.timeline_image != blank %}
       <div class="story-timeline-media">
@@ -90,7 +90,7 @@
     <div class="milestone-grid">
       {% for block in section.blocks %}
         {% if block.type == 'milestone' %}
-          <div class="milestone-card" {{ block.shopify_attributes }}>
+          <div class="milestone-card" data-animate {{ block.shopify_attributes }}>
             <p class="milestone-card__year">{{ block.settings.year }}</p>
             <p class="milestone-card__title">{{ block.settings.title }}</p>
             <p class="milestone-card__body">{{ block.settings.body }}</p>
@@ -101,22 +101,14 @@
   </div>
 </section>
 
-{% comment %} 4. CTA {% endcomment %}
-<section class="page-cta">
-  <div class="page-cta__inner container-shell">
-    <div class="page-cta__copy">
-      <p class="page-cta__kicker">Our products</p>
-      <p class="page-cta__heading">Explore what we make.</p>
-      <p class="page-cta__sub">Premium accessories for every desk, every device.</p>
-    </div>
-    <a href="{{ routes.collections_url }}" class="page-cta__btn">
-      Browse products
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-</section>
+{%- render 'page-cta',
+  variant: 'light',
+  kicker: 'Our products',
+  heading: 'Explore what we make.',
+  subhead: 'Premium accessories for every desk, every device.',
+  primary_label: 'Browse products',
+  primary_url: routes.collections_url
+-%}
 
 {% schema %}
 {

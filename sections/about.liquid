@@ -3,8 +3,7 @@
 
 {% comment %} 1. DARK HERO {% endcomment %}
 <section class="page-hero-dark">
-  <div style="max-width:1280px;margin:0 auto;
-              padding:0 clamp(1.25rem,5vw,5rem);">
+  <div class="container-shell">
     <p class="page-hero-dark__kicker">
       {{ section.settings.kicker | default: 'Est. 1994 · Lake Forest, California' }}
     </p>
@@ -14,7 +13,7 @@
     <p class="page-hero-dark__body">
       {{ section.settings.body | default: 'Since 1994, EZQuest has made it simpler to connect the devices that matter most — with products built to last and a team that stands behind every one.' }}
     </p>
-    <div style="display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <div class="story-stat-grid">
       <div>
         <p style="font-size:36px;font-weight:500;
                   letter-spacing:-0.03em;color:var(--ez-light);">
@@ -48,15 +47,14 @@
 
 {% comment %} 2. THREE PILLARS {% endcomment %}
 <section class="page-section page-section--white">
-  <div style="max-width:1280px;margin:0 auto;
-              padding:clamp(64px,8vw,96px) clamp(1.25rem,5vw,5rem);">
+  <div class="container-shell about-pillars-shell">
     <div class="section-intro">
       <p class="section-intro__kicker">What we stand for</p>
       <h2 class="section-intro__heading">
         Three things we never compromise on.
       </h2>
     </div>
-    <div class="three-col" style="padding:0;">
+    <div class="three-col story-three-col">
       {% for block in section.blocks %}
         {% if block.type == 'pillar' %}
           <div class="pillar-card" {{ block.shopify_attributes }}>
@@ -77,21 +75,13 @@
   </div>
 </section>
 
-{% comment %} 3. CTA {% endcomment %}
-<section class="page-cta-dark">
-  <h2 class="page-cta-dark__heading">
-    {{ section.settings.cta_heading | default: 'Explore what we make.' }}
-  </h2>
-  <p class="page-cta-dark__body">
-    {{ section.settings.cta_body | default: 'Premium accessories for every desk, every device.' }}
-  </p>
-  <div class="page-cta-dark__actions">
-    <a href="{{ section.settings.cta_url | default: routes.collections_url }}"
-       class="page-cta-dark__btn">
-      {{ section.settings.cta_label | default: 'Browse products' }}
-    </a>
-  </div>
-</section>
+{%- render 'page-cta',
+  variant: 'light',
+  heading: section.settings.cta_heading | default: 'Explore what we make.',
+  subhead: section.settings.cta_body | default: 'Premium accessories for every desk, every device.',
+  primary_label: section.settings.cta_label | default: 'Browse products',
+  primary_url: section.settings.cta_url | default: routes.collections_url
+-%}
 
 {% schema %}
 {

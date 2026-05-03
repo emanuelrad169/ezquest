@@ -30,7 +30,7 @@
         >
           <div class="guide-card__image-wrap">
             {% if p != blank and p.featured_image %}
-              <img src="{{ p.featured_image | image_url: width: 320 }}" alt="{{ p.title | escape }}" class="guide-card__image" loading="lazy" width="320" height="200">
+              <img src="{{ p.featured_image | image_url: width: 320, format: 'pjpg' }}" alt="{{ p.title | escape }}" class="guide-card__image" loading="lazy" width="320" height="200">
             {% else %}
               <div class="guide-card__image-placeholder"></div>
             {% endif %}
@@ -55,7 +55,7 @@
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             {% else %}
-              <span style="font-size:13px;color:var(--ez-grey)">Coming soon</span>
+              <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
             {% endif %}
           </div>
         </a>
@@ -71,17 +71,17 @@
     {% endif %}
   </div>
 
-  <div class="support-cta-strip">
-    <div>
-      <p class="support-cta-strip__heading">Need a walkthrough?</p>
-      <p class="support-cta-strip__body">Our support team can guide you through setup in real time.</p>
-    </div>
-    <div class="support-cta-strip__actions">
-      <a href="/pages/contact" class="btn btn--primary">Contact support</a>
-    </div>
-  </div>
 
 </div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'User guides',
+  heading: 'Need a walkthrough?',
+  subhead: 'Our support team can guide you through setup in real time.',
+  primary_label: 'Contact support',
+  primary_url: '/pages/contact'
+-%}
 
 {% schema %}
 {
