@@ -881,7 +881,7 @@
       {%- else -%}
         {%- assign yt_id = yt_raw | split: 'v=' | last | split: '&' | first -%}
       {%- endif -%}
-      <div class="pdp-video-wrap mt-8">
+      <div class="pdp-video-wrap mt-8 w-full">
         <div class="pdp-video-frame">
           <iframe
             src="https://www.youtube-nocookie.com/embed/{{ yt_id }}"
