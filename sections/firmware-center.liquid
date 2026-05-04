@@ -33,7 +33,7 @@
   {% for block in section.blocks %}
     {% if block.type == 'firmware_entry' %}
       <div class="fw-card" {{ block.shopify_attributes }}>
-        <div class="fw-card__header">
+        <div class="fw-card__header mb-5">
           <div class="fw-card__meta">
             <span class="fw-card__version">{{ block.settings.version }}</span>
             {% if block.settings.is_latest %}
