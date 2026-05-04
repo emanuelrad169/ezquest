@@ -246,7 +246,6 @@
   margin-right: .375rem;
   vertical-align: middle;
 }
-.status-dot--no      { background: var(--ez-error-dot); }
 
 /* Section label */
 .section-label {
