@@ -1649,3 +1649,54 @@
   a { color: #000; text-decoration: underline; }
   .article-body, .pdp-spec-table, .product-buybox { max-width: 100%; }
 }
+
+/* ============================================ */
+/* Home hero — trust-strip marquee              */
+/* Component: sections/hero-home.liquid         */
+/* ============================================ */
+.marquee-strip {
+  overflow: hidden;
+  background: var(--ez-light);
+  border-top: 1px solid var(--ez-border);
+  border-bottom: 1px solid var(--ez-border);
+  padding: 14px 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-grey);
+  letter-spacing: 0.01em;
+}
+
+.marquee-dot {
+  font-size: 14px;
+  color: var(--ez-grey);
+  opacity: 0.5;
+}
+
+/* translateX(-33.333%) matches the three-.marquee-content structure in hero-home.liquid.
+   If the number of copies ever changes, this percentage must be updated to match: -1/N * 100%. */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
