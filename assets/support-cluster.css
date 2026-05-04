@@ -79,7 +79,6 @@
   transition: color .15s, border-color .15s;
 }
 
-.support-nav__link:hover { color: var(--ez-black); }
 .support-nav__link.is-active {
   color: var(--ez-black);
   font-weight: 500;
