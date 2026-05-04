@@ -408,28 +408,27 @@
 
 /* ── Right column typography ── */
 
-/* Title: clamp(22px → 38px) — !important needed to beat the
-   !important rule already set in theme.css for .product-buybox-title */
+/* Title: clamp(22px → 38px) — higher specificity (0,2,0) beats theme.css (0,1,0) */
 .main-product-section .product-buybox-title {
-  font-size: clamp(1.375rem, 3vw, 2.375rem) !important;
-  line-height: 1.12 !important;
+  font-size: clamp(1.375rem, 3vw, 2.375rem);
+  line-height: 1.12;
   letter-spacing: -0.01em;
 }
 
 /* Price: 28px / 500 */
 .main-product-section .price-amount {
-  font-size: 1.75rem !important;
-  font-weight: 500 !important;
+  font-size: 1.75rem;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.1;
 }
 
 /* Compare-at: 18px / line-through / var(--ez-grey) */
 .main-product-section [data-price-compare] {
-  font-size: 1.125rem !important;
-  font-weight: 400 !important;
+  font-size: 1.125rem;
+  font-weight: 400;
   text-decoration: line-through;
-  color: var(--ez-grey) !important;
+  color: var(--ez-grey);
 }
 
 /* ATC: full-width, bold, 52px min-height */
