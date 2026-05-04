@@ -11,6 +11,7 @@
     --ez-amber-bg: rgba(254, 211, 0, 0.12);
     --ez-black: #1d1d1f;
     --ez-dark: #0a0a0a;
+    --ez-slate: #0F172A;
     --ez-grey: #6e6e73;
     --ez-light: #f5f5f7;
     --ez-white: #ffffff;
@@ -16415,9 +16416,9 @@ select {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 clamp(1.25rem,5vw,5rem);
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width:1023px) {
@@ -16459,6 +16460,7 @@ select {
   border: none;
   border-top: 1px solid rgba(255,255,255,0.07);
   margin: clamp(2rem,4vw,3rem) 0 0;
+  padding: 0;
 }
 
 .site-footer__bottom {
@@ -16467,9 +16469,10 @@ select {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.5rem;
-  padding: 1.5rem clamp(1.25rem,5vw,5rem);
-  max-width: 1280px;
-  margin: 0 auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  max-width: none;
+  margin: 0;
 }
 
 .site-footer__brand {
