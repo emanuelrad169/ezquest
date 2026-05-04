@@ -281,7 +281,7 @@
 
 /* ── Purchase row: qty + ATC + wishlist inline ── */
 .product-purchase-row {
-  display: flex !important;
+  display: flex;
   flex-direction: row;
   align-items: flex-end;
   gap: 10px;
