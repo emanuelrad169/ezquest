@@ -301,6 +301,12 @@ module.exports = {
       },
       backdropBlur: {
         hairline: "1px"
+      },
+      transitionTimingFunction: {
+        overshoot: "cubic-bezier(.34,1.56,.64,1)"
+      },
+      screens: {
+        "lg-mid": "900px"
       }
     }
   },
