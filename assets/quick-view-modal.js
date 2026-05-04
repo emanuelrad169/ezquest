@@ -56,7 +56,7 @@
       (product.vendor ? '<p class="qv-modal__vendor">' + product.vendor + '</p>' : '') +
       '<p class="qv-modal__title">' + product.title + '</p>' +
       '<p class="qv-modal__price">' + money(v.price) + compareHtml + '</p>' +
-      '<button class="qv-modal__atc" data-qv-atc data-variant-id="' + v.id + '"' + (available ? '' : ' disabled') + '>' +
+      '<button class="qv-modal__atc disabled:opacity-50 disabled:cursor-default" data-qv-atc data-variant-id="' + v.id + '"' + (available ? '' : ' disabled') + '>' +
         (available ? 'Add to cart' : 'Sold out') +
       '</button>' +
       '<a href="' + localizedPath('/products/' + product.handle) + '" class="qv-modal__view-link">View full details →</a>' +
