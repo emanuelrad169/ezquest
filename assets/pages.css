@@ -886,7 +886,7 @@
   font-size: 18px; font-weight: 700;
   flex-shrink: 0;
 }
-.article-author-card__info { flex: 1; }
+
 .article-author-card__name {
   font-size: 14px; font-weight: 500;
   color: var(--ez-black); margin-bottom: 2px;
