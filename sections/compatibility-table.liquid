@@ -72,7 +72,7 @@
                   {% when 'full' %}
                     <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot status-dot--full bg-[var(--ez-success-dot)]" aria-hidden="true"></span>Full</span>
                   {% when 'partial' %}
-                    <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial" aria-hidden="true"></span>Partial</span>
+                    <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial bg-[var(--ez-amber)]" aria-hidden="true"></span>Partial</span>
                   {% else %}
                     <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no" aria-hidden="true"></span>No</span>
                 {% endcase %}
@@ -111,7 +111,7 @@
                 {% if cols[4] == 'full' %}
                   <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot status-dot--full bg-[var(--ez-success-dot)]"></span>Full</span>
                 {% elsif cols[4] == 'partial' %}
-                  <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial"></span>Partial</span>
+                  <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial bg-[var(--ez-amber)]"></span>Partial</span>
                 {% else %}
                   <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no"></span>No</span>
                 {% endif %}
