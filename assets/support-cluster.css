@@ -239,7 +239,6 @@
 }
 
 /* Status indicators */
-.status-no      { color: var(--ez-error-text);   font-weight: 500; }
 .status-dot {
   display: inline-block;
   width: 8px; height: 8px;

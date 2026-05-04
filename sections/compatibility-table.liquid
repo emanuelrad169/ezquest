@@ -74,7 +74,7 @@
                   {% when 'partial' %}
                     <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial" aria-hidden="true"></span>Partial</span>
                   {% else %}
-                    <span class="status-no"><span class="status-dot status-dot--no" aria-hidden="true"></span>No</span>
+                    <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no" aria-hidden="true"></span>No</span>
                 {% endcase %}
               </td>
               <td data-label="Notes" style="font-size:13px;color:var(--ez-grey);max-width:200px">{{ entry.notes.value | default: '—' }}</td>
@@ -113,7 +113,7 @@
                 {% elsif cols[4] == 'partial' %}
                   <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial"></span>Partial</span>
                 {% else %}
-                  <span class="status-no"><span class="status-dot status-dot--no"></span>No</span>
+                  <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no"></span>No</span>
                 {% endif %}
               </td>
               <td data-label="Notes" style="font-size:13px;color:var(--ez-grey)">{{ cols[5] }}</td>
