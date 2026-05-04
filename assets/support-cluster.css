@@ -403,7 +403,6 @@
 @media(max-width:900px) { .guide-grid { grid-template-columns: repeat(2,1fr); } }
 @media(max-width:560px) { .guide-grid { grid-template-columns: 1fr; } }
 .guide-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; overflow: hidden; background: #fff; text-decoration: none; display: flex; flex-direction: column; transition: border-color .2s, transform .25s cubic-bezier(.34,1.56,.64,1); }
-.guide-card:hover { border-color: rgba(254, 211, 0,.3); transform: translateY(-2px); }
 .guide-card__image-wrap { position: relative; background: var(--ez-light); aspect-ratio: 16/9; overflow: hidden; }
 .guide-card__image { width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
 .guide-card__image-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--ez-light) 0%, #e5e5e7 100%); }
@@ -419,7 +418,6 @@
 .guide-card__desc { font-size: 13px; color: var(--ez-grey); line-height: 1.55; margin: 0; }
 .guide-card__footer { padding: .875rem 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
 .guide-card__cta { display: inline-flex; align-items: center; gap: .375rem; font-size: 13px; font-weight: 500; color: var(--ez-black); text-decoration: underline; text-decoration-color: var(--ez-amber); text-decoration-thickness: 1.5px; text-underline-offset: 3px; transition: gap .15s, text-decoration-color .15s; }
-.guide-card:hover .guide-card__cta { gap: .625rem; }
 
 /* ── Firmware Center ───────────────────────────── */
 
