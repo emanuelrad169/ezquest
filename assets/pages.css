@@ -589,7 +589,7 @@
   margin-top: auto; padding-top: 1rem;
   border-top: 0.5px solid rgba(0,0,0,0.06);
 }
-.blog-featured__dot { opacity: 0.4; }
+
 .blog-featured__cta {
   margin-left: auto; font-size: 13px;
   font-weight: 500; color: var(--ez-black);
