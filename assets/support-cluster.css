@@ -255,10 +255,6 @@
 }
 
 
-.info-card--warning {
-  background: rgba(239,68,68,.03);
-  border-color: rgba(239,68,68,.2);
-}
 
 .info-card__icon {
   width: 36px;
