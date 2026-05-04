@@ -195,12 +195,12 @@
 
 .file-badge--pdf {
   background: rgba(220,38,38,.07);
-  color: #b91c1c;
+  color: var(--ez-error-text);
 }
 
 .file-badge--zip {
   background: rgba(37,99,235,.07);
-  color: #1d4ed8;
+  color: var(--ez-info-text);
 }
 
 .file-badge--exe {
@@ -239,9 +239,9 @@
 }
 
 /* Status indicators */
-.status-full    { color: #15803d; font-weight: 500; }
-.status-partial { color: #92400e; font-weight: 500; }
-.status-no      { color: #b91c1c; font-weight: 500; }
+.status-full    { color: var(--ez-success-text); font-weight: 500; }
+.status-partial { color: var(--ez-warning-text); font-weight: 500; }
+.status-no      { color: var(--ez-error-text);   font-weight: 500; }
 .status-dot {
   display: inline-block;
   width: 8px; height: 8px;
@@ -249,9 +249,9 @@
   margin-right: .375rem;
   vertical-align: middle;
 }
-.status-dot--full    { background: #22c55e; }
+.status-dot--full    { background: var(--ez-success-dot); }
 .status-dot--partial { background: var(--ez-amber); }
-.status-dot--no      { background: #ef4444; }
+.status-dot--no      { background: var(--ez-error-dot); }
 
 /* Section label */
 .section-label {
@@ -388,8 +388,8 @@
 .warranty-section__heading { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ez-grey); margin: 0 0 1rem; }
 .warranty-list { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: .625rem; }
 .warranty-list li { font-size: 15px; line-height: 1.5; padding-left: 1.75rem; position: relative; color: var(--ez-black); }
-.warranty-list--covered li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: 700; font-size: 13px; top: .1rem; }
-.warranty-list--excluded li::before { content: '×'; position: absolute; left: 0; color: #ef4444; font-weight: 500; font-size: 16px; top: -.05rem; }
+.warranty-list--covered li::before { content: '✓'; position: absolute; left: 0; color: var(--ez-success-dot); font-weight: 700; font-size: 13px; top: .1rem; }
+.warranty-list--excluded li::before { content: '×'; position: absolute; left: 0; color: var(--ez-error-dot); font-weight: 500; font-size: 16px; top: -.05rem; }
 .warranty-steps { padding: 0; margin: 0; list-style: none; counter-reset: ws; display: flex; flex-direction: column; gap: .875rem; }
 .warranty-steps li { counter-increment: ws; display: flex; gap: 1rem; font-size: 15px; line-height: 1.5; align-items: flex-start; color: var(--ez-black); }
 .warranty-steps li::before { content: counter(ws); width: 26px; height: 26px; border-radius: 50%; background: var(--ez-light); color: var(--ez-black); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
@@ -414,9 +414,9 @@
 .guide-card__meta { display: flex; align-items: center; gap: .625rem; margin-bottom: .75rem; }
 .guide-card__steps { font-size: 12px; color: var(--ez-grey); font-weight: 500; }
 .guide-card__difficulty { font-size: 11px; font-weight: 600; padding: .15rem .5rem; border-radius: 100px; text-transform: uppercase; letter-spacing: .05em; }
-.guide-card__difficulty--easy { background: rgba(21,128,61,.07); color: #15803d; }
+.guide-card__difficulty--easy { background: rgba(21,128,61,.07); color: var(--ez-success-text); }
 .guide-card__difficulty--medium { background: rgba(254, 211, 0,.07); color: var(--ez-black); }
-.guide-card__difficulty--advanced { background: rgba(239,68,68,.07); color: #b91c1c; }
+.guide-card__difficulty--advanced { background: rgba(239,68,68,.07); color: var(--ez-error-text); }
 .guide-card__title { font-size: 15px; font-weight: 500; color: var(--ez-black); letter-spacing: -.01em; line-height: 1.35; margin: 0 0 .375rem; }
 .guide-card__desc { font-size: 13px; color: var(--ez-grey); line-height: 1.55; margin: 0; }
 .guide-card__footer { padding: .875rem 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
@@ -430,7 +430,7 @@
 .fw-card__header { margin-bottom: 1.25rem; }
 .fw-card__meta { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
 .fw-card__version { font-size: clamp(20px,3vw,28px); font-weight: 500; letter-spacing: -.03em; color: var(--ez-black); font-variant-numeric: tabular-nums; }
-.fw-card__latest-badge { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: rgba(21,128,61,.08); color: #15803d; border: 1px solid rgba(21,128,61,.2); padding: .2rem .625rem; border-radius: 100px; }
+.fw-card__latest-badge { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: rgba(21,128,61,.08); color: var(--ez-success-text); border: 1px solid rgba(21,128,61,.2); padding: .2rem .625rem; border-radius: 100px; }
 .fw-card__product { font-size: 16px; font-weight: 500; color: var(--ez-black); margin: 0 0 .25rem; letter-spacing: -.01em; }
 .fw-card__date { font-size: 13px; color: var(--ez-grey); margin: 0; }
 .fw-card__actions { display: flex; gap: .75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
