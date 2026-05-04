@@ -8,7 +8,7 @@
       {{ support_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'support-hero__image' }}
     </div>
   {% endif %}
-  <div class="support-hero__wrap" data-animate>
+  <div class="support-hero__wrap container-shell" data-animate>
     <p class="support-hero__kicker">Support Center</p>
     <h1 class="support-hero__heading">
       How can we help?
@@ -20,10 +20,15 @@
   </div>
 </section>
 
-{% render 'support-nav', current: 'support' %}
+<div class="support-hub-nav">
+  <div class="container-shell">
+    {% render 'support-nav', current: 'support', contained: true %}
+  </div>
+</div>
 
-<div class="support-body">
-
+<div class="support-body support-body--hub">
+  <div class="container-shell">
+    <div class="support-body__content">
   <div class="shub-stats">
     <div class="shub-stat">
       <span class="shub-stat__number">2 yr</span>
@@ -43,14 +48,14 @@
     </div>
   </div>
 
-  <p class="section-label" style="margin-top:3rem">Browse by topic</p>
+  <p class="section-label support-hub__topic-label">Browse by topic</p>
 
   <div class="shub-grid">
     {% assign support_links = 'Downloads,Get drivers utilities and setup files,/pages/downloads,download|Manuals,Full product documentation and specs,/pages/manuals,manual|Firmware,Update your device software,/pages/firmware,firmware|User Guides,Step-by-step setup and usage,/pages/user-guides,guide|Compatibility,Check devices ports and systems,/pages/compatibility,compat|Troubleshooting,Fix common issues step by step,/pages/troubleshooting,trouble|Warranty,Coverage terms and claim process,/pages/warranty,warranty|FAQ,Quick answers to common questions,/pages/faq,faq|Contact,Reach the EZQuest team directly,/pages/contact,contact' | split: '|' %}
 
     {% for link_data in support_links %}
       {% assign parts = link_data | split: ',' %}
-      <a href="{{ parts[2] }}" class="shub-card" data-animate>
+      <a href="{{ parts[2] }}" class="shub-card group hover:bg-[var(--ez-light)]" data-animate>
         <div class="shub-card__icon" aria-hidden="true">
           {% case parts[3] %}
             {% when 'download' %}
@@ -77,7 +82,7 @@
           <p class="shub-card__title">{{ parts[0] }}</p>
           <p class="shub-card__desc">{{ parts[1] }}</p>
         </div>
-        <svg class="shub-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <svg class="shub-card__arrow group-hover:text-[var(--ez-amber)] group-hover:translate-x-[3px]" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
@@ -85,6 +90,8 @@
   </div>
 
 
+    </div>
+  </div>
 </div>
 
 {% schema %}

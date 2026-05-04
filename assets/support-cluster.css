@@ -368,12 +368,10 @@
 @media(max-width:900px) { .shub-grid { grid-template-columns: repeat(2,1fr); } }
 @media(max-width:540px) { .shub-grid { grid-template-columns: 1fr; } }
 .shub-card { background: #fff; padding: 1.5rem; text-decoration: none; display: grid; grid-template-columns: 36px 1fr 16px; align-items: center; gap: 1rem; transition: background .15s; }
-.shub-card:hover { background: var(--ez-light); }
 .shub-card__icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(254, 211, 0,.08); color: var(--ez-amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .shub-card__title { font-size: 15px; font-weight: 500; color: var(--ez-black); margin: 0 0 .2rem; letter-spacing: -.01em; }
 .shub-card__desc { font-size: 13px; color: var(--ez-grey); margin: 0; line-height: 1.45; }
 .shub-card__arrow { color: rgba(0,0,0,.2); transition: color .15s, transform .15s; }
-.shub-card:hover .shub-card__arrow { color: var(--ez-amber); transform: translateX(3px); }
 
 /* ── Warranty Page ─────────────────────────────── */
 
