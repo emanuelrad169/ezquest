@@ -13601,7 +13601,6 @@ details.js-filter .facets__list {
 
 .collection-filter-toggle,
 .collection-filter-btn {
-  display: none;
   align-items: center;
   gap: 8px;
   height: 40px;

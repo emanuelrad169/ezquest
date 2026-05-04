@@ -1457,12 +1457,6 @@
   background: rgba(0, 0, 0, 0.02);
 }
 
-/* Override theme.css display:none on .collection-filter-toggle at ≥1024px */
-.collection-subnav .collection-filter-toggle,
-.collection-subnav .collection-filter-btn {
-  display: inline-flex !important;
-}
-
 .collection-subnav__sort-form {
   display: inline-flex;
   align-items: center;
