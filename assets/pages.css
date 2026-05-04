@@ -131,7 +131,7 @@
 /* Section wrapper */
 .page-section { padding: clamp(44px,5vw,64px) 0; }
 .page-section--grey { background: var(--ez-light); }
-.page-section--white { background: #fff; }
+
 .page-section--dark { background: var(--ez-dark); }
 
 /* Section intro */
