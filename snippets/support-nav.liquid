@@ -1,14 +1,17 @@
-<nav class="support-nav" aria-label="Support navigation">
-  <ul class="support-nav__list">
-    <li><a href="/pages/support" class="support-nav__link{% if current == 'support' %} is-active{% endif %}">Support home</a></li>
-    <li><a href="/pages/downloads" class="support-nav__link{% if current == 'downloads' %} is-active{% endif %}">Downloads</a></li>
-    <li><a href="/pages/manuals" class="support-nav__link{% if current == 'manuals' %} is-active{% endif %}">Manuals</a></li>
-    <li><a href="/pages/firmware" class="support-nav__link{% if current == 'firmware' %} is-active{% endif %}">Firmware</a></li>
-    <li><a href="/pages/user-guides" class="support-nav__link{% if current == 'user-guides' %} is-active{% endif %}">User guides</a></li>
-    <li><a href="/pages/compatibility" class="support-nav__link{% if current == 'compatibility' %} is-active{% endif %}">Compatibility</a></li>
-    <li><a href="/pages/troubleshooting" class="support-nav__link{% if current == 'troubleshooting' %} is-active{% endif %}">Troubleshooting</a></li>
-    <li><a href="/pages/warranty" class="support-nav__link{% if current == 'warranty' %} is-active{% endif %}">Warranty</a></li>
-    <li><a href="/pages/faq" class="support-nav__link{% if current == 'faq' %} is-active{% endif %}">FAQ</a></li>
-    <li><a href="/pages/contact" class="support-nav__link{% if current == 'contact' %} is-active{% endif %}">Contact</a></li>
-  </ul>
+{%- assign nav_contained = contained | default: false -%}
+<nav class="support-nav{% if nav_contained %} support-nav--contained w-full mb-0{% endif %}" aria-label="Support navigation">
+  {% unless nav_contained %}<div class="container-shell">{% endunless %}
+    <ul class="support-nav__list">
+      <li><a href="/pages/support" class="support-nav__link{% if current == 'support' %} is-active{% endif %}">Support home</a></li>
+      <li><a href="/pages/downloads" class="support-nav__link{% if current == 'downloads' %} is-active{% endif %}">Downloads</a></li>
+      <li><a href="/pages/manuals" class="support-nav__link{% if current == 'manuals' %} is-active{% endif %}">Manuals</a></li>
+      <li><a href="/pages/firmware" class="support-nav__link{% if current == 'firmware' %} is-active{% endif %}">Firmware</a></li>
+      <li><a href="/pages/user-guides" class="support-nav__link{% if current == 'user-guides' %} is-active{% endif %}">User guides</a></li>
+      <li><a href="/pages/compatibility" class="support-nav__link{% if current == 'compatibility' %} is-active{% endif %}">Compatibility</a></li>
+      <li><a href="/pages/troubleshooting" class="support-nav__link{% if current == 'troubleshooting' %} is-active{% endif %}">Troubleshooting</a></li>
+      <li><a href="/pages/warranty" class="support-nav__link{% if current == 'warranty' %} is-active{% endif %}">Warranty</a></li>
+      <li><a href="/pages/faq" class="support-nav__link{% if current == 'faq' %} is-active{% endif %}">FAQ</a></li>
+      <li><a href="/pages/contact" class="support-nav__link{% if current == 'contact' %} is-active{% endif %}">Contact</a></li>
+    </ul>
+  {% unless nav_contained %}</div>{% endunless %}
 </nav>
