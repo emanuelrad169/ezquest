@@ -16,6 +16,15 @@
     --ez-light: #f5f5f7;
     --ez-white: #ffffff;
     --ez-border: rgba(0,0,0,0.07);
+    /* Status / semantic colors */
+    --ez-success-text: #15803d;
+    --ez-success-dot:  #22c55e;
+    --ez-warning-text: #92400e;
+    --ez-warning-dot:  #f59e0b;
+    --ez-error-text:   #b91c1c;
+    --ez-error-dot:    #ef4444;
+    --ez-info-text:    #1d4ed8;
+    --ez-info-dot:     #3b82f6;
     --ez-radius-sm: 8px;
     --ez-radius-md: 14px;
     --ez-radius-lg: 20px;
