@@ -53,7 +53,7 @@
         <tbody>
           {% for entry in entries %}
             {% assign status = entry.status.value | default: 'full' %}
-            <tr data-os="{{ entry.os.value }}"
+            <tr class="last:border-b-0 hover:bg-black/[1.8%]" data-os="{{ entry.os.value }}"
                 data-search="{{ entry.device_brand.value | downcase }} {{ entry.device_model.value | downcase }} {{ entry.port_type.value | downcase }}">
               <td data-label="Brand" style="font-weight:500">{{ entry.device_brand.value }}</td>
               <td data-label="Model" style="color:var(--ez-grey)">{{ entry.device_model.value }}</td>
@@ -102,7 +102,7 @@
           {% assign compat_rows = 'Apple,MacBook Pro 14-inch (M1–M4),Thunderbolt / USB-C,macOS,full,All ports functional. No drivers required.|Apple,MacBook Air 13-inch (M1–M3),USB-C,macOS,full,Full compatibility.|Apple,iPad Pro (USB-C models),USB-C,iPadOS,partial,Display output limited to one screen on iPad.|Dell,XPS 13 / XPS 15,USB-C,Windows 11,full,Ethernet may require one-time driver install.|Microsoft,Surface Pro 9,USB-C,Windows 11,full,Use USB-C port only.|HP,Spectre x360,USB-C / Thunderbolt 4,Windows 11,full,Full compatibility.' | split: '|' %}
           {% for row in compat_rows %}
             {% assign cols = row | split: ',' %}
-            <tr data-os="{{ cols[3] }}" data-search="{{ cols[0] | downcase }} {{ cols[1] | downcase }} {{ cols[2] | downcase }}">
+            <tr class="last:border-b-0 hover:bg-black/[1.8%]" data-os="{{ cols[3] }}" data-search="{{ cols[0] | downcase }} {{ cols[1] | downcase }} {{ cols[2] | downcase }}">
               <td data-label="Device" style="font-weight:500">{{ cols[0] }}</td>
               <td data-label="Model" style="color:var(--ez-grey)">{{ cols[1] }}</td>
               <td data-label="Port" style="color:var(--ez-grey)">{{ cols[2] }}</td>

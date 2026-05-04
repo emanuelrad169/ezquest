@@ -159,8 +159,6 @@
   transition: background .12s;
 }
 
-.data-table tbody tr:last-child { border-bottom: none; }
-.data-table tbody tr:hover { background: rgba(0,0,0,.018); }
 
 .data-table td {
   padding: 1rem 1.25rem;
