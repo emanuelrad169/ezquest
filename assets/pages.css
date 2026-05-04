@@ -1434,8 +1434,8 @@
   margin: 0 12px;
 }
 
-.collection-subnav__btn {
-  display: inline-flex !important;
+.collection-subnav .collection-subnav__btn {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   height: 36px;
@@ -1452,7 +1452,7 @@
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s;
 }
-.collection-subnav__btn:hover {
+.collection-subnav .collection-subnav__btn:hover {
   border-color: rgba(0, 0, 0, 0.3);
   background: rgba(0, 0, 0, 0.02);
 }
