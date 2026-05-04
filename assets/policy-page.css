@@ -52,68 +52,6 @@
   max-width: 720px;
 }
 
-.shopify-policy__body .rte h2,
-.shopify-policy__body h2 {
-  font-size: clamp(18px,2.5vw,24px);
-  font-weight: 500;
-  letter-spacing: -.02em;
-  color: var(--ez-black);
-  margin: 2.5rem 0 .875rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(0,0,0,.07);
-}
-
-.shopify-policy__body .rte h2:first-child,
-.shopify-policy__body h2:first-child {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-}
-
-.shopify-policy__body .rte h3,
-.shopify-policy__body h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ez-black);
-  margin: 1.75rem 0 .5rem;
-}
-
-.shopify-policy__body .rte p,
-.shopify-policy__body p {
-  font-size: 15px;
-  color: #3d3d3f;
-  line-height: 1.75;
-  margin: 0 0 1.125rem;
-}
-
-.shopify-policy__body .rte a,
-.shopify-policy__body a {
-  color: #F59E0B;
-  text-underline-offset: 2px;
-}
-
-.shopify-policy__body .rte ul,
-.shopify-policy__body .rte ol,
-.shopify-policy__body ul,
-.shopify-policy__body ol {
-  padding-left: 1.5rem;
-  margin: 0 0 1.125rem;
-}
-
-.shopify-policy__body .rte li,
-.shopify-policy__body li {
-  font-size: 15px;
-  color: #3d3d3f;
-  line-height: 1.75;
-  margin-bottom: .375rem;
-}
-
-.shopify-policy__body .rte strong,
-.shopify-policy__body strong {
-  font-weight: 600;
-  color: var(--ez-black);
-}
-
 .policy-hero {
   background: var(--ez-light);
   padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,2rem)
@@ -159,9 +97,11 @@
   .policy-sidebar { order: -1; }
 }
 
-/* Prose */
+/* Prose — shared rules for custom pages (.policy-prose) and native Shopify policy routes (.shopify-policy__body) */
 .policy-prose { max-width: 720px; }
 
+.shopify-policy__body h2,
+.shopify-policy__body .rte h2,
 .policy-prose h2 {
   font-size: clamp(18px,2.5vw,24px);
   font-weight: 500;
@@ -172,12 +112,16 @@
   border-top: 1px solid rgba(0,0,0,.07);
 }
 
+.shopify-policy__body h2:first-child,
+.shopify-policy__body .rte h2:first-child,
 .policy-prose h2:first-child {
   margin-top: 0;
   padding-top: 0;
   border-top: none;
 }
 
+.shopify-policy__body h3,
+.shopify-policy__body .rte h3,
 .policy-prose h3 {
   font-size: 16px;
   font-weight: 600;
@@ -185,6 +129,8 @@
   margin: 1.75rem 0 .5rem;
 }
 
+.shopify-policy__body p,
+.shopify-policy__body .rte p,
 .policy-prose p {
   font-size: 15px;
   color: #3d3d3f;
@@ -192,17 +138,26 @@
   margin: 0 0 1.125rem;
 }
 
+.shopify-policy__body a,
+.shopify-policy__body .rte a,
 .policy-prose a {
   color: #F59E0B;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.policy-prose ul, .policy-prose ol {
+.shopify-policy__body ul,
+.shopify-policy__body ol,
+.shopify-policy__body .rte ul,
+.shopify-policy__body .rte ol,
+.policy-prose ul,
+.policy-prose ol {
   padding-left: 1.5rem;
   margin: 0 0 1.125rem;
 }
 
+.shopify-policy__body li,
+.shopify-policy__body .rte li,
 .policy-prose li {
   font-size: 15px;
   color: #3d3d3f;
@@ -210,6 +165,8 @@
   margin-bottom: .375rem;
 }
 
+.shopify-policy__body strong,
+.shopify-policy__body .rte strong,
 .policy-prose strong {
   font-weight: 600;
   color: var(--ez-black);
