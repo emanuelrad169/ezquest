@@ -92,9 +92,6 @@
   padding-bottom: clamp(48px,6vw,80px);
 }
 
-.support-body--hub {
-  padding-top: clamp(28px,4vw,44px);
-}
 
 .support-body__content {
   padding-top: 0;
