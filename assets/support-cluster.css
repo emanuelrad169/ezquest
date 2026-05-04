@@ -239,7 +239,6 @@
 }
 
 /* Status indicators */
-.status-partial { color: var(--ez-warning-text); font-weight: 500; }
 .status-no      { color: var(--ez-error-text);   font-weight: 500; }
 .status-dot {
   display: inline-block;
