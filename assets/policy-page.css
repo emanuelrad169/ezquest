@@ -20,7 +20,7 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #F59E0B;
+  color: var(--ez-amber);
   margin-bottom: .625rem;
 }
 
@@ -63,7 +63,7 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #F59E0B;
+  color: var(--ez-amber);
   margin: 0 0 .625rem;
 }
 
@@ -141,7 +141,7 @@
 .shopify-policy__body a,
 .shopify-policy__body .rte a,
 .policy-prose a {
-  color: #F59E0B;
+  color: var(--ez-amber);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -216,7 +216,7 @@
 .policy-sidebar__link:last-child { border-bottom: none; }
 .policy-sidebar__link:hover { color: var(--ez-black); }
 .policy-sidebar__link.is-active {
-  color: #F59E0B;
+  color: var(--ez-amber);
   font-weight: 500;
 }
 

@@ -1536,7 +1536,7 @@
   color: #0f172a;
   text-decoration: none;
 }
-.sitemap-group__list a:hover { text-decoration: underline; color: #f5a300; }
+.sitemap-group__list a:hover { text-decoration: underline; color: var(--ez-amber); }
 
 /* ── Collection promo tile (col-span-full, horizontal split) ─────── */
 .collection-promo-tile {
