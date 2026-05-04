@@ -2,66 +2,6 @@
 
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
-{% style %}
-.wtb-hero {
-  background: linear-gradient(135deg,var(--ez-light) 0%,#fff 100%);
-  padding: clamp(56px,7vw,88px) 0;
-  border-bottom: 0.5px solid rgba(0,0,0,0.06);
-}
-.wtb-hero .page-width {
-  max-width:1280px;margin:0 auto;
-  padding:0 clamp(1.25rem,5vw,5rem);
-}
-.wtb-hero__kicker {
-  font-size:11px;font-weight:600;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--ez-grey);margin-bottom:1rem;
-}
-.wtb-hero__heading {
-  font-size:clamp(32px,5vw,56px);font-weight:500;
-  letter-spacing:-0.03em;color:var(--ez-black);margin-bottom:0.875rem;
-}
-.wtb-hero__body {
-  font-size:clamp(15px,1.5vw,17px);color:var(--ez-grey);
-  line-height:1.65;max-width:52ch;
-}
-.wtb-group {
-  max-width:1280px;margin:0 auto;
-  padding:clamp(40px,5vw,60px) clamp(1.25rem,5vw,5rem);
-}
-.wtb-group + .wtb-group { padding-top:0; }
-.wtb-group__heading {
-  font-size:11px;font-weight:600;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--ez-grey);
-  margin-bottom:1.25rem;padding-bottom:0.875rem;
-  border-bottom:0.5px solid rgba(0,0,0,0.07);
-}
-.wtb-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:1rem;
-}
-@media(max-width:639px){ .wtb-grid{grid-template-columns:repeat(2,1fr);} }
-.wtb-card {
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:0.5rem;padding:1.5rem 1rem;
-  background:#fff;border:0.5px solid rgba(0,0,0,0.08);
-  border-radius:16px;text-decoration:none;min-height:120px;
-  transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;
-}
-.wtb-card:hover {
-  border-color:rgba(254, 211, 0,0.45);
-  box-shadow:0 4px 20px rgba(0,0,0,0.07);
-  transform:translateY(-2px);
-}
-.wtb-card__logo-wrap {
-  display:flex;align-items:center;justify-content:center;
-  width:100%;height:56px;
-}
-.wtb-card__logo { max-width:140px;max-height:52px;object-fit:contain; }
-.wtb-card__name-fallback { font-size:13px;font-weight:500;color:var(--ez-black);text-align:center; }
-.wtb-card__region { font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ez-grey); }
-{% endstyle %}
-
 {% comment %} ── Hero ─────────────────────────────── {% endcomment %}
 <section class="wtb-hero">
   <div class="wtb-hero__inner page-width">
