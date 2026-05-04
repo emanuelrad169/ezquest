@@ -160,7 +160,7 @@
   margin-top: 2.5rem;
 }
 .story-section-intro { margin-bottom: clamp(2rem,4vw,3.5rem); }
-.story-section-intro__kicker { text-align: left; }
+
 .story-section-intro__heading { text-align: left; margin: 0; }
 .story-three-col { padding: 0; }
 .about-pillars-shell { padding-top: clamp(64px,8vw,96px); padding-bottom: clamp(64px,8vw,96px); }
