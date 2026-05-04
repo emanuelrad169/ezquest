@@ -476,7 +476,7 @@
   color: var(--ez-amber); text-decoration: none;
   transition: opacity 0.15s;
 }
-.blog-hero__link:hover { opacity: 0.75; }
+
 .blog-hero__img-wrap {
   border-radius: 16px; overflow: hidden;
   aspect-ratio: 4/3;
