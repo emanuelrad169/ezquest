@@ -646,26 +646,26 @@
           {% endif %}
 
           <div class="pdp-trust-strip" role="list" aria-label="Purchase confidence">
-            <div class="pdp-trust-item" role="listitem">
+            <div class="pdp-trust-item last:border-r-0" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.warranty' | t }}</span>
             </div>
-            <div class="pdp-trust-item" role="listitem">
+            <div class="pdp-trust-item last:border-r-0" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.no_drivers' | t }}</span>
             </div>
-            <div class="pdp-trust-item" role="listitem">
+            <div class="pdp-trust-item last:border-r-0" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="9" cy="9" r="6.5" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
                 <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
               </svg>
               <span class="pdp-trust-label">{{ 'trust.mac_windows' | t }}</span>
             </div>
-            <div class="pdp-trust-item" role="listitem">
+            <div class="pdp-trust-item last:border-r-0" role="listitem">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
                 <path d="M1.5 4.5h10v7.5H1.5V4.5zM11.5 7.5H15l1.5 3v1.5h-5V7.5z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                 <circle cx="4.5" cy="13" r="1.25" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
@@ -1027,15 +1027,15 @@
 ──────────────────────────────────────────────────────────────{% endcomment %}
 <section class="section-shell pdp-section pdp-section--compat" id="pdp-compat">
   <div class="container-shell container-wild">
-    <div class="">
+    <div class="container-shell">
       <div class="max-w-7xl">
         <p class="section-kicker">Compatibility</p>
         <h2 class="section-heading mt-4">Works with your setup</h2>
-        <p class="section-copy mt-4">{% if compatibility_summary_text != blank %}{{ compatibility_summary_text }}{% else %}Compatible with Mac, Windows, iPad, and most USB-C host devices.{% endif %}</p>
+        <p class="mt-4">{% if compatibility_summary_text != blank %}{{ compatibility_summary_text }}{% else %}Compatible with Mac, Windows, iPad, and most USB-C host devices.{% endif %}</p>
       </div>
     </div>
 
-    <div class="pdp-os-chips mt-6" role="list" aria-label="Compatible platforms">
+    <div class="container-shell pdp-os-chips mt-10" role="list" aria-label="Compatible platforms">
       <span class="pdp-os-chip" role="listitem">macOS</span>
       <span class="pdp-os-chip" role="listitem">Windows</span>
       <span class="pdp-os-chip" role="listitem">iPadOS</span>
@@ -1045,7 +1045,7 @@
     {% if product != blank and product.metafields.ezquest.compatibility_entries != blank %}
       {%- assign compat_entries = product.metafields.ezquest.compatibility_entries.value -%}
       {% if compat_entries.size > 0 %}
-        <div class="pdp-compat-table mt-8">
+        <div class="pdp-compat-table mt-8 container-shell">
           {% for entry in compat_entries limit: 10 %}
             {%- assign entry_status = entry.status.value | default: 'Compatible' -%}
             <div class="pdp-compat-row">
@@ -1057,7 +1057,7 @@
       {% endif %}
     {% endif %}
 
-    <div class="pdp-driver-callout mt-6">
+    <div class="container-shell pdp-driver-callout mt-6">
       <span class="pdp-driver-icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
       <span>No drivers required — plug in and use immediately on supported hosts.</span>
     </div>
