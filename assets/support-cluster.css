@@ -254,10 +254,6 @@
   background: #fff;
 }
 
-.info-card--amber {
-  background: rgba(254, 211, 0,.04);
-  border-color: rgba(254, 211, 0,.25);
-}
 
 .info-card--warning {
   background: rgba(239,68,68,.03);
