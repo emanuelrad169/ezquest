@@ -448,7 +448,7 @@
 
 .ts-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
 @media(max-width:768px) { .ts-grid { grid-template-columns: 1fr; } }
-.ts-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 1.75rem; background: #fff; display: flex; flex-direction: column; gap: 0; transition: border-color .2s; }
+.ts-card { border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 1.75rem; background: #fff; position: relative; display: flex; flex-direction: column; gap: 0; transition: border-color .2s; }
 .ts-card:hover { border-color: rgba(254, 211, 0,.25); }
 .ts-steps { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .625rem; counter-reset: step; }
 .ts-step { display: flex; gap: .875rem; align-items: flex-start; font-size: 14px; color: #3d3d3f; line-height: 1.55; counter-increment: step; }
@@ -517,7 +517,6 @@
 }
 
 /* Card — step number top-right variant */
-.ts-card { position: relative; }
 .ts-card__num {
   position: absolute;
   top: 1.25rem;
