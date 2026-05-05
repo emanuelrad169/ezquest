@@ -509,7 +509,6 @@
   text-underline-offset: 3px;
   transition: text-decoration-color .15s;
 }
-.ts-card__cta:hover { text-decoration-color: var(--ez-black); }
 
 /* "Where to go from here" section */
 .ts-resources {
