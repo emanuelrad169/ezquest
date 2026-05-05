@@ -50,7 +50,7 @@
     {% for link_data in support_links %}
       {% assign parts = link_data | split: ',' %}
       <a href="{{ parts[2] }}" class="shub-card group bg-white p-6 no-underline grid [grid-template-columns:36px_1fr_16px] items-center gap-4 transition-[background] duration-150 hover:bg-[var(--ez-light)]" data-animate>
-        <div class="shub-card__icon" aria-hidden="true">
+        <div class="shub-card__icon w-9 h-9 rounded-[10px] bg-[var(--ez-amber-08)] text-[var(--ez-amber)] flex items-center justify-center shrink-0" aria-hidden="true">
           {% case parts[3] %}
             {% when 'download' %}
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v9m0 0l-3-3m3 3l3-3M4 14v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
