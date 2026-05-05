@@ -38,13 +38,6 @@
 }
 
 /* Filter pill row */
-.filter-pills {
-  display: flex;
-  gap: .5rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
 .filter-pill {
   padding: .4rem 1rem;
   border-radius: 100px;
