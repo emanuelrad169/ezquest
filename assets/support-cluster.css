@@ -331,7 +331,6 @@
 
 
 .contact-form__input::placeholder{color:var(--ez-grey);opacity:.6}
-.contact-form__submit{width:100%;margin-top:1.25rem;min-height:52px;font-size:16px;border-radius:100px}
 .contact-form__note{font-size:12px;color:var(--ez-grey);text-align:center;margin:.875rem 0 0;line-height:1.5}
 
 .contact-success__icon{margin:0 auto 1.25rem;width:56px;height:56px;border-radius:50%;background:rgba(254, 211, 0, .08);display:flex;align-items:center;justify-content:center}
