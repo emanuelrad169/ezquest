@@ -102,17 +102,17 @@
 
             <div class="contact-form__field">
               <label class="contact-form__label" for="contact-name-{{ section.id }}">{{ 'contact.name' | t }}</label>
-              <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="contact-form__input" required autocomplete="name" placeholder="Alex Johnson" value="{% if customer %}{{ customer.name }}{% endif %}">
+              <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="contact-form__input focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]" required autocomplete="name" placeholder="Alex Johnson" value="{% if customer %}{{ customer.name }}{% endif %}">
             </div>
 
             <div class="contact-form__field">
               <label class="contact-form__label" for="contact-email-{{ section.id }}">{{ 'contact.email' | t }}</label>
-              <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
+              <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
             </div>
 
             <div class="contact-form__field contact-form__field--full col-span-full">
               <label class="contact-form__label" for="contact-subject-{{ section.id }}">What is this about?</label>
-              <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="contact-form__input">
+              <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="contact-form__input focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]">
                 <option value="" disabled selected>Select a topic</option>
                 <option>Product question</option>
                 <option>Order support</option>
@@ -126,7 +126,7 @@
 
             <div class="contact-form__field contact-form__field--full col-span-full">
               <label class="contact-form__label" for="contact-message-{{ section.id }}">{{ 'contact.message' | t }}</label>
-              <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea resize-y min-h-[120px]" rows="5" required placeholder="Tell us what you need…"></textarea>
+              <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)] resize-y min-h-[120px]" rows="5" required placeholder="Tell us what you need…"></textarea>
             </div>
 
           </div>
