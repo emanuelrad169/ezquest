@@ -120,17 +120,6 @@
 /* Section label */
 
 /* Info card */
-.info-card {
-  border-radius: 14px;
-  padding: 1.5rem;
-  display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
-  border: 1.5px solid rgba(0,0,0,.07);
-  background: #fff;
-}
-
-
 
 .info-card__icon {
   width: 36px;
