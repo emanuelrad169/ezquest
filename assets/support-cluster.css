@@ -4,13 +4,6 @@
 
 /* Page hero — light variant (all support pages) */
 
-.support-hero__sub {
-  font-size: clamp(15px,1.5vw,17px);
-  color: var(--ez-grey);
-  line-height: 1.6;
-  max-width: 52ch;
-  margin: 0;
-}
 
 .support-hero--has-image .support-hero__wrap { position: relative; z-index: 1; }
 .support-hero--has-image::after {
