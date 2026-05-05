@@ -9,9 +9,6 @@
            clamp(32px,4vw,48px);
 }
 
-.support-hero__wrap {
-  width: 100%;
-}
 
 .support-hero__kicker {
   font-size: 11px;
