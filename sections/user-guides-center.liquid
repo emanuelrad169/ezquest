@@ -32,7 +32,7 @@
             {% else %}
               <div class="guide-card__image-placeholder w-full h-full bg-[linear-gradient(135deg,var(--ez-light)_0%,#e5e5e7_100%)]"></div>
             {% endif %}
-            <span class="guide-card__type-pill">{{ block.settings.guide_type | default: 'Setup guide' }}</span>
+            <span class="guide-card__type-pill absolute top-3 left-3 text-[11px] font-semibold tracking-[.05em] uppercase bg-[var(--ez-amber-10)] text-[var(--ez-grey)] border border-[var(--ez-amber-25)] py-[.2rem] px-[.625rem] rounded-full">{{ block.settings.guide_type | default: 'Setup guide' }}</span>
           </div>
 
           <div class="guide-card__body p-5 flex-1">
