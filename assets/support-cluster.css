@@ -169,7 +169,6 @@
 
 /* ── User Guides Center ────────────────────────── */
 
-.guide-card__meta { display: flex; align-items: center; gap: .625rem; margin-bottom: .75rem; }
 .guide-card__difficulty { font-size: 11px; font-weight: 600; padding: .15rem .5rem; border-radius: 100px; text-transform: uppercase; letter-spacing: .05em; }
 .guide-card__difficulty--easy { background: rgba(21,128,61,.07); color: var(--ez-success-text); }
 .guide-card__difficulty--medium { background: rgba(254, 211, 0,.07); color: var(--ez-black); }
