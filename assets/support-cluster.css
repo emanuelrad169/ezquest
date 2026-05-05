@@ -185,12 +185,6 @@
 
 /* "Where to go from here" section */
 
-.ts-resource-card__desc {
-  font-size: 13px;
-  color: var(--ez-grey);
-  line-height: 1.55;
-  margin: 0;
-}
 .ts-resource-card__arrow {
   font-size: 16px;
   color: rgba(0,0,0,.2);
