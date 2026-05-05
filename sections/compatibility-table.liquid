@@ -68,11 +68,11 @@
               <td data-label="Status">
                 {% case status %}
                   {% when 'full' %}
-                    <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot status-dot--full bg-[var(--ez-success-dot)]" aria-hidden="true"></span>Full</span>
+                    <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--full bg-[var(--ez-success-dot)]" aria-hidden="true"></span>Full</span>
                   {% when 'partial' %}
-                    <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial bg-[var(--ez-amber)]" aria-hidden="true"></span>Partial</span>
+                    <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--partial bg-[var(--ez-amber)]" aria-hidden="true"></span>Partial</span>
                   {% else %}
-                    <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no bg-[var(--ez-error-dot)]" aria-hidden="true"></span>No</span>
+                    <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--no bg-[var(--ez-error-dot)]" aria-hidden="true"></span>No</span>
                 {% endcase %}
               </td>
               <td data-label="Notes" style="font-size:13px;color:var(--ez-grey);max-width:200px">{{ entry.notes.value | default: '—' }}</td>
@@ -107,11 +107,11 @@
               <td data-label="OS" style="color:var(--ez-grey)">{{ cols[3] }}</td>
               <td data-label="Status">
                 {% if cols[4] == 'full' %}
-                  <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot status-dot--full bg-[var(--ez-success-dot)]"></span>Full</span>
+                  <span class="status-full text-[var(--ez-success-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--full bg-[var(--ez-success-dot)]"></span>Full</span>
                 {% elsif cols[4] == 'partial' %}
-                  <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot status-dot--partial bg-[var(--ez-amber)]"></span>Partial</span>
+                  <span class="status-partial text-[var(--ez-warning-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--partial bg-[var(--ez-amber)]"></span>Partial</span>
                 {% else %}
-                  <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot status-dot--no bg-[var(--ez-error-dot)]"></span>No</span>
+                  <span class="status-no text-[var(--ez-error-text)] font-medium"><span class="status-dot inline-block w-2 h-2 rounded-full mr-1.5 align-middle status-dot--no bg-[var(--ez-error-dot)]"></span>No</span>
                 {% endif %}
               </td>
               <td data-label="Notes" style="font-size:13px;color:var(--ez-grey)">{{ cols[5] }}</td>
