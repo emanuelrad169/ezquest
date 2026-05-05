@@ -208,10 +208,7 @@
 @media(max-width:900px) { .warranty-layout { grid-template-columns: 1fr; } }
 .warranty-stat-row { display: flex; gap: 2rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,.07); flex-wrap: wrap; }
 .warranty-stat { display: flex; flex-direction: column; gap: .125rem; }
-.warranty-stat__number { font-size: clamp(40px,6vw,64px); font-weight: 500; letter-spacing: -.04em; color: var(--ez-black); line-height: 1; }
-.warranty-stat__unit { font-size: 14px; color: var(--ez-grey); font-weight: 500; margin-bottom: .125rem; }
 
-.warranty-section__heading { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ez-grey); margin: 0 0 1rem; }
 .warranty-list { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: .625rem; }
 .warranty-list li { font-size: 15px; line-height: 1.5; padding-left: 1.75rem; position: relative; color: var(--ez-black); }
 .warranty-list--covered li::before { content: '✓'; position: absolute; left: 0; color: var(--ez-success-dot); font-weight: 700; font-size: 13px; top: .1rem; }
