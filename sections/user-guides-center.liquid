@@ -13,8 +13,6 @@
   </div>
 </section>
 
-{% render 'support-nav', current: 'user-guides' %}
-
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
   <div class="guide-grid">
@@ -63,7 +61,7 @@
     {% endfor %}
 
     {% if section.blocks.size == 0 %}
-      <div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]" style="grid-column:1/-1">
         <p class="empty-state__heading">Guides are being written</p>
         <p class="empty-state__body">We're preparing step-by-step guides for every product.</p>
         <a href="/pages/contact" class="btn btn--primary">Ask a question</a>
