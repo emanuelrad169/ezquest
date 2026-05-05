@@ -3,15 +3,6 @@
    ═══════════════════════════════════════════════ */
 
 /* Page hero — light variant (all support pages) */
-.support-hero__heading {
-  font-size: clamp(28px,4.5vw,52px);
-  font-weight: 500;
-  letter-spacing: -.035em;
-  line-height: 1.08;
-  color: var(--ez-black);
-  margin: 0 0 .875rem;
-  max-width: 18ch;
-}
 
 .support-hero__sub {
   font-size: clamp(15px,1.5vw,17px);
