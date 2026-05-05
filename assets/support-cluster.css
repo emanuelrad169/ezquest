@@ -63,14 +63,6 @@
 
 
 /* Page body wrapper */
-.support-body {
-  padding-top: clamp(48px,6vw,80px);
-  padding-bottom: clamp(48px,6vw,80px);
-}
-
-
-
-
 .support-hub-nav {
   background: #fff;
   margin-top: 0;
