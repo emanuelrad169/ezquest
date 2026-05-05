@@ -201,12 +201,6 @@
 
 /* Empty state */
 
-.empty-state__heading {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--ez-black);
-  margin: 0 0 .5rem;
-}
 
 .empty-state__body {
   font-size: 14px;
