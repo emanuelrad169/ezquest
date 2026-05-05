@@ -149,8 +149,6 @@
 
 /* ── Warranty Page ─────────────────────────────── */
 
-.warranty-layout { display: grid; grid-template-columns: 1fr 360px; gap: clamp(2rem,5vw,5rem); align-items: start; }
-@media(max-width:900px) { .warranty-layout { grid-template-columns: 1fr; } }
 .warranty-stat-row { display: flex; gap: 2rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,.07); flex-wrap: wrap; }
 .warranty-stat { display: flex; flex-direction: column; gap: .125rem; }
 
