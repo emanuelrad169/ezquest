@@ -185,12 +185,6 @@
 
 /* "Where to go from here" section */
 
-.ts-resource-card__arrow {
-  font-size: 16px;
-  color: rgba(0,0,0,.2);
-  transition: color .15s, transform .15s;
-  margin-top: .125rem;
-}
 
 
 /* ============================================ */
