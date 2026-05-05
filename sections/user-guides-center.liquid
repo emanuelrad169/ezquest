@@ -38,7 +38,7 @@
           <div class="guide-card__body p-5 flex-1">
             <div class="guide-card__meta flex items-center gap-[.625rem] mb-3">
               <span class="guide-card__steps text-xs text-[var(--ez-grey)] font-medium">{{ block.settings.step_count | default: '5' }} steps</span>
-              <span class="guide-card__difficulty guide-card__difficulty--{{ block.settings.difficulty | default: 'easy' | downcase }}">
+              <span class="guide-card__difficulty text-[11px] font-semibold py-[.15rem] px-2 rounded-full uppercase tracking-[.05em] {%- case block.settings.difficulty | default: 'Easy' -%}{%- when 'Medium' -%} bg-[rgba(254,211,0,.07)] text-[var(--ez-black)]{%- when 'Advanced' -%} bg-[rgba(239,68,68,.07)] text-[var(--ez-error-text)]{%- else -%} bg-[rgba(21,128,61,.07)] text-[var(--ez-success-text)]{%- endcase -%}">
                 {{ block.settings.difficulty | default: 'Easy' }}
               </span>
             </div>
