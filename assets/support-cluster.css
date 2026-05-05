@@ -122,20 +122,6 @@
 /* Info card */
 
 
-.info-card__title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ez-black);
-  margin: 0 0 .25rem;
-  letter-spacing: -.01em;
-}
-
-.info-card__body {
-  font-size: 14px;
-  color: var(--ez-grey);
-  line-height: 1.6;
-  margin: 0;
-}
 
 /* Empty state */
 
