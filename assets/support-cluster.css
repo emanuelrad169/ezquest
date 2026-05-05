@@ -408,10 +408,6 @@
 .ts-steps { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .625rem; counter-reset: step; }
 .ts-step { display: flex; gap: .875rem; align-items: flex-start; font-size: 14px; color: #3d3d3f; line-height: 1.55; counter-increment: step; }
 .ts-step::before { content: counter(step); width: 22px; height: 22px; border-radius: 50%; background: rgba(254, 211, 0,.1); color: var(--ez-black); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .15rem; }
-.ts-escalation { border-top: 1px solid rgba(0,0,0,.06); padding-top: 1rem; margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.ts-escalation__text { font-size: 13px; color: var(--ez-grey); line-height: 1.5; margin: 0; flex: 1; }
-.ts-escalation__link { font-size: 13px; font-weight: 500; color: var(--ez-black); text-decoration: underline; text-decoration-color: var(--ez-amber); text-decoration-thickness: 1.5px; text-underline-offset: 3px; white-space: nowrap; transition: text-decoration-color .15s; }
-.ts-escalation__link:hover { text-decoration-color: var(--ez-black); }
 
 /* ── Troubleshooting Guide v2 (redesigned) ──── */
 
