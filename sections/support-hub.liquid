@@ -44,7 +44,7 @@
 
   <p class="section-label text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-6 support-hub__topic-label mt-12">Browse by topic</p>
 
-  <div class="shub-grid">
+  <div class="shub-grid grid grid-cols-3 gap-px bg-black/[7%] border border-black/[7%] rounded-2xl overflow-hidden max-[900px]:grid-cols-2 max-[540px]:grid-cols-1">
     {% assign support_links = 'Downloads,Get drivers utilities and setup files,/pages/downloads,download|Manuals,Full product documentation and specs,/pages/manuals,manual|Firmware,Update your device software,/pages/firmware,firmware|User Guides,Step-by-step setup and usage,/pages/user-guides,guide|Compatibility,Check devices ports and systems,/pages/compatibility,compat|Troubleshooting,Fix common issues step by step,/pages/troubleshooting,trouble|Warranty,Coverage terms and claim process,/pages/warranty,warranty|FAQ,Quick answers to common questions,/pages/faq,faq|Contact,Reach the EZQuest team directly,/pages/contact,contact' | split: '|' %}
 
     {% for link_data in support_links %}
