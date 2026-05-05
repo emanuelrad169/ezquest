@@ -172,7 +172,6 @@
 
 /* ── Firmware Center ───────────────────────────── */
 
-.fw-card__meta { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
 .fw-card__version { font-size: clamp(20px,3vw,28px); font-weight: 500; letter-spacing: -.03em; color: var(--ez-black); font-variant-numeric: tabular-nums; }
 .fw-card__latest-badge { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: rgba(21,128,61,.08); color: var(--ez-success-text); border: 1px solid rgba(21,128,61,.2); padding: .2rem .625rem; border-radius: 100px; }
 .fw-card__product { font-size: 16px; font-weight: 500; color: var(--ez-black); margin: 0 0 .25rem; letter-spacing: -.01em; }
