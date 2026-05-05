@@ -348,28 +348,7 @@
   margin: 0 auto;
   padding: 0 clamp(1.25rem,5vw,2rem);
 }
-.ts-resources__kicker {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--ez-grey);
-  margin: 0 0 .75rem;
-}
-.ts-resources__heading {
-  font-size: clamp(22px,3.5vw,38px);
-  font-weight: 500;
-  letter-spacing: -.03em;
-  color: var(--ez-black);
-  margin: 0 0 .75rem;
-}
-.ts-resources__sub {
-  font-size: 15px;
-  color: var(--ez-grey);
-  line-height: 1.6;
-  max-width: 52ch;
-  margin: 0 0 2.5rem;
-}
+
 .ts-resource-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
