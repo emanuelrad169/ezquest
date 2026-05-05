@@ -33,7 +33,7 @@
       <div class="fw-card border border-black/[7%] rounded-2xl p-7 mb-4 bg-white transition-[border-color] duration-200 hover:border-[var(--ez-amber-30)]" {{ block.shopify_attributes }}>
         <div class="fw-card__header mb-5">
           <div class="fw-card__meta flex items-center gap-3 mb-2">
-            <span class="fw-card__version">{{ block.settings.version }}</span>
+            <span class="fw-card__version text-[clamp(20px,3vw,28px)] font-medium tracking-[-0.03em] text-[var(--ez-black)] [font-variant-numeric:tabular-nums]">{{ block.settings.version }}</span>
             {% if block.settings.is_latest %}
               <span class="fw-card__latest-badge">Latest</span>
             {% endif %}
