@@ -332,6 +332,5 @@
 
 .contact-form__input::placeholder{color:var(--ez-grey);opacity:.6}
 
-.contact-success__heading{font-size:22px;font-weight:500;margin:0 0 .5rem;letter-spacing:-.02em;color:var(--ez-black)}
 
 .contact-errors{padding:1rem 1.25rem;border:1.5px solid rgba(220,38,38,.25);border-radius:10px;background:rgba(220,38,38,.04);color:#9a1c1f;font-size:14px;margin-bottom:1.25rem}
