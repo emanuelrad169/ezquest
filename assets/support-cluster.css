@@ -67,11 +67,6 @@
 }
 
 /* File/data table */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
 
 .data-table thead th {
   padding: .875rem 1.25rem;
