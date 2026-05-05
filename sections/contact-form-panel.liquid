@@ -74,7 +74,7 @@
     </div>
 
     <div class="contact-form-card relative rounded-[20px] border-[1.5px] border-black/[8%] p-[clamp(1.75rem,3vw,2.5rem)] bg-white overflow-hidden transition-[border-color,box-shadow] duration-[250ms] hover:border-[var(--ez-amber-25)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]" id="contact-card-{{ section.id }}">
-      <div class="contact-form-card__spotlight" aria-hidden="true"></div>
+      <div class="contact-form-card__spotlight absolute inset-0 pointer-events-none z-0 rounded-[inherit]" aria-hidden="true"></div>
 
       {% form 'contact', id: 'contact-form-{{ section.id }}', class: 'contact-form relative z-[1]' %}
 

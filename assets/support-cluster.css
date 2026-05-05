@@ -329,7 +329,6 @@
 /* Extracted from contact-form-panel.liquid     */
 /* ============================================ */
 
-.contact-form-card__spotlight{position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit}
 
 .contact-form__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.125rem}
 @media(max-width:580px){.contact-form__grid{grid-template-columns:1fr}}
