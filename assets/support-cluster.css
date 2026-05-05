@@ -178,14 +178,6 @@
 
 /* Hero */
 /* Page body */
-.ts-body {
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,2rem);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(3rem,5vw,5rem);
-}
 
 /* Category group */
 
