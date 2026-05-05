@@ -38,11 +38,6 @@
 }
 
 /* Support nav rail */
-.support-nav {
-  background: #fff;
-  border-bottom: 1px solid rgba(0,0,0,.07);
-}
-
 .support-nav__list {
   display: flex;
   list-style: none;

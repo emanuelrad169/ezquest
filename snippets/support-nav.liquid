@@ -1,5 +1,5 @@
 {%- assign nav_contained = contained | default: false -%}
-<nav class="support-nav{% if nav_contained %} support-nav--contained w-full mb-0{% endif %}" aria-label="Support navigation">
+<nav class="support-nav bg-white border-b border-black/[7%]{% if nav_contained %} support-nav--contained w-full mb-0{% endif %}" aria-label="Support navigation">
   {% unless nav_contained %}<div class="container-shell">{% endunless %}
     <ul class="support-nav__list">
       <li><a href="/pages/support" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'support' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Support home</a></li>
