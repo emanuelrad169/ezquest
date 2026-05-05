@@ -49,7 +49,7 @@
 
     {% for link_data in support_links %}
       {% assign parts = link_data | split: ',' %}
-      <a href="{{ parts[2] }}" class="shub-card group hover:bg-[var(--ez-light)]" data-animate>
+      <a href="{{ parts[2] }}" class="shub-card group bg-white p-6 no-underline grid [grid-template-columns:36px_1fr_16px] items-center gap-4 transition-[background] duration-150 hover:bg-[var(--ez-light)]" data-animate>
         <div class="shub-card__icon" aria-hidden="true">
           {% case parts[3] %}
             {% when 'download' %}
