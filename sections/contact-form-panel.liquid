@@ -93,7 +93,7 @@
         {% else %}
 
           {% if form.errors %}
-            <div class="contact-errors" role="alert">{{ form.errors | default_errors }}</div>
+            <div class="contact-errors py-4 px-5 border-[1.5px] border-[rgba(220,38,38,.25)] rounded-[10px] bg-[rgba(220,38,38,.04)] text-[#9a1c1f] text-sm mb-5" role="alert">{{ form.errors | default_errors }}</div>
           {% endif %}
 
           <div class="contact-form__grid grid grid-cols-2 gap-[1.125rem] max-[580px]:grid-cols-1">
