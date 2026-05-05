@@ -185,13 +185,6 @@
 
 /* "Where to go from here" section */
 
-.ts-resource-card__title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ez-black);
-  letter-spacing: -.01em;
-  margin: 0 0 .375rem;
-}
 .ts-resource-card__desc {
   font-size: 13px;
   color: var(--ez-grey);
