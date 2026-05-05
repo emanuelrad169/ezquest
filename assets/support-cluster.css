@@ -619,7 +619,6 @@
 .contact-form-card{position:relative;border-radius:20px;border:1.5px solid rgba(0,0,0,.08);padding:clamp(1.75rem,3vw,2.5rem);background:#fff;overflow:hidden;transition:border-color .25s,box-shadow .3s}
 .contact-form-card__spotlight{position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit}
 
-.contact-form{position:relative;z-index:1}
 .contact-form__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.125rem}
 @media(max-width:580px){.contact-form__grid{grid-template-columns:1fr}}
 .contact-form__field{display:flex;flex-direction:column;gap:.375rem}
