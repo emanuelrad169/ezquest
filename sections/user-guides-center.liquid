@@ -39,7 +39,7 @@
 
           <div class="guide-card__body p-5 flex-1">
             <div class="guide-card__meta">
-              <span class="guide-card__steps">{{ block.settings.step_count | default: '5' }} steps</span>
+              <span class="guide-card__steps text-xs text-[var(--ez-grey)] font-medium">{{ block.settings.step_count | default: '5' }} steps</span>
               <span class="guide-card__difficulty guide-card__difficulty--{{ block.settings.difficulty | default: 'easy' | downcase }}">
                 {{ block.settings.difficulty | default: 'Easy' }}
               </span>
