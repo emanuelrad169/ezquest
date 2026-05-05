@@ -5,7 +5,7 @@
 <section class="support-hero relative overflow-hidden{% if support_hero_image != blank %} support-hero--has-image{% endif %}">
   {% if support_hero_image != blank %}
     <div class="support-hero__media absolute inset-0 z-0" aria-hidden="true">
-      {{ support_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'support-hero__image' }}
+      {{ support_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'support-hero__image w-full h-full object-cover' }}
     </div>
   {% endif %}
   <div class="support-hero__wrap container-shell" data-animate>
