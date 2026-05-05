@@ -190,3 +190,98 @@ These issues were observed during inventory. **Not Batch 7 work — recorded for
 ### Commit
 
 `chore(css): batch-7 pass-0 setup — opacity tokens, custom easing, lg-mid breakpoint`
+
+---
+
+## Pass 1 — T-Rules Migration
+
+**Scope**: All 1-3 property rules in `assets/support-cluster.css` where all properties are directly utility-mappable. Two-phase (Phase A: add utilities to markup; Phase B: delete CSS rule). One commit per CSS rule.
+
+**Lines removed**: ~75 lines (625 remaining, down from ~700 before pass).
+
+**Commits**: 43 commits.
+
+---
+
+### Step 0 — Group-Hover Resolution
+
+All three parent elements confirmed absent of `group` class; no JS conflicts found. Option (a) applied to all three.
+
+| Selector deleted | Markup file | Decision |
+|---|---|---|
+| `.shub-card:hover { background: var(--ez-light); }` | `sections/support-hub.liquid` | `group hover:bg-[var(--ez-light)]` on `<a>` |
+| `.shub-card:hover .shub-card__arrow { ... }` | `sections/support-hub.liquid` | `group-hover:text-[var(--ez-amber)] group-hover:translate-x-[3px]` on `<svg>` |
+| `.ts-resource-card:hover { border-color; box-shadow }` | `sections/troubleshooting-guide.liquid` (×3) | `hover:border-[var(--ez-amber-35)] hover:shadow-[0_8px_28px_rgba(0,0,0,0.06)]` on `<a>` |
+| `.ts-resource-card:hover .ts-resource-card__arrow { ... }` | Same | `group-hover:text-[var(--ez-amber)] group-hover:translate-x-[3px]` on `<span>` |
+| `.guide-card:hover { border-color; transform }` | `sections/user-guides-center.liquid` | `hover:border-[var(--ez-amber-30)] hover:-translate-y-0.5` on `<a>` |
+| `.guide-card:hover .guide-card__cta { gap }` | Same | `group-hover:gap-2.5` on `<span>` |
+
+---
+
+### Group B — Status Indicators (6 commits)
+
+| CSS rule deleted | Utility | Markup file |
+|---|---|---|
+| `.status-full { color: var(--ez-success-text); font-weight: 500; }` | `text-[var(--ez-success-text)] font-medium` | `sections/compatibility-table.liquid` ×2 |
+| `.status-partial { color: var(--ez-warning-text); font-weight: 500; }` | `text-[var(--ez-warning-text)] font-medium` | Same ×2 |
+| `.status-no { color: var(--ez-error-text); font-weight: 500; }` | `text-[var(--ez-error-text)] font-medium` | Same ×2 |
+| `.status-dot--full { background: var(--ez-success-dot); }` | `bg-[var(--ez-success-dot)]` | Same ×2 |
+| `.status-dot--partial { background: var(--ez-amber); }` | `bg-[var(--ez-amber)]` | Same ×2 |
+| `.status-dot--no { background: var(--ez-error-dot); }` | `bg-[var(--ez-error-dot)]` | Same ×2 |
+
+---
+
+### Additional T-Rules (34 commits)
+
+| CSS rule deleted | Utility | Markup file(s) |
+|---|---|---|
+| `.support-hero { position: relative; overflow: hidden; }` | `relative overflow-hidden` | 8 section files |
+| `.support-hero__wrap { width: 100%; }` | `w-full` | 8 section files |
+| `.support-hero__media { position: absolute; inset: 0; z-index: 0; }` | `absolute inset-0 z-0` | `support-hub.liquid` |
+| `.support-hero__image { width: 100%; height: 100%; object-fit: cover; }` | `w-full h-full object-cover` | `support-hub.liquid` (image_tag class) |
+| `.support-hero--has-image .support-hero__wrap { ... }` | **K-rule** | Conditional descendant — kept |
+| `.support-nav__link:hover { color: var(--ez-black); }` | `hover:text-[var(--ez-black)]` | `snippets/support-nav.liquid` ×10 |
+| `.support-nav__link.is-active { color; font-weight; border-bottom-color }` | `text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]` | `snippets/support-nav.liquid` ×10 (inside conditional) |
+| `.support-body--hub { padding-top: clamp(28px,4vw,44px); }` | `pt-[clamp(28px,4vw,44px)]` | `support-hub.liquid` |
+| `.support-body__content { padding-top: 0; }` | `pt-0` | `support-hub.liquid` |
+| `.support-nav--contained { width: 100%; margin-bottom: 0; }` | `w-full mb-0` | `snippets/support-nav.liquid` (conditional) |
+| `.support-hub__topic-label { margin-top: 3rem; }` | `mt-12` | `support-hub.liquid` |
+| `.btn-download:hover { background: #FED300; }` | `hover:bg-[var(--ez-amber)]` | `download-center.liquid`, `firmware-center.liquid` ×2, `manuals-center.liquid` |
+| `.info-card--amber { background; border-color; }` | `bg-[var(--ez-amber-04)] border-[var(--ez-amber-25)]` | `warranty-page.liquid`, `firmware-center.liquid` |
+| `.info-card--warning { background; border-color; }` | **Dead rule** — no markup usage, deleted | — |
+| `.data-table tbody tr:last-child { border-bottom: none; }` | `last:border-b-0` | `compatibility-table.liquid` ×2 loops |
+| `.data-table tbody tr:hover { background: rgba(0,0,0,.018); }` | `hover:bg-black/[1.8%]` | Same |
+| `.ts-card:hover { border-color: rgba(254,211,0,.25); }` | `hover:border-[var(--ez-amber-25)]` | `troubleshooting-guide.liquid` ×13 |
+| `.ts-card__cta:hover { text-decoration-color: var(--ez-black); }` | `hover:decoration-[var(--ez-black)]` | Same ×13 |
+| `.ts-escalation { ... }` | **Dead rule** — entire block unused in markup, deleted | — |
+| `.ts-escalation__text { ... }` | Same | — |
+| `.ts-escalation__link { ... }` | Same | — |
+| `.ts-escalation__link:hover { ... }` | Same | — |
+| `.ts-resource-card__body { flex: 1; }` | `flex-1` | `troubleshooting-guide.liquid` ×3 |
+| `.fw-card:hover { border-color: rgba(254,211,0,.3); }` | `hover:border-[var(--ez-amber-30)]` | `firmware-center.liquid` |
+| `.fw-card__header { margin-bottom: 1.25rem; }` | `mb-5` | `firmware-center.liquid` |
+| `.fw-card__date { font-size: 13px; color: var(--ez-grey); margin: 0; }` | `text-[13px] text-[var(--ez-grey)] m-0` | `firmware-center.liquid` |
+| `.fw-changelog__trigger:hover { color: var(--ez-black); }` | `hover:text-[var(--ez-black)]` | `firmware-center.liquid` |
+| `.fw-changelog__icon { transition: transform .2s; flex-shrink: 0; }` | `transition-transform duration-200 shrink-0` | `firmware-center.liquid` |
+| `.warranty-stat__label { font-size: 12px; color: var(--ez-grey); }` | `text-xs text-[var(--ez-grey)]` | `warranty-page.liquid` ×3 |
+| `.guide-card__body { padding: 1.25rem; flex: 1; }` | `p-5 flex-1` | `user-guides-center.liquid` |
+| `.guide-card__steps { font-size: 12px; color: var(--ez-grey); font-weight: 500; }` | `text-xs text-[var(--ez-grey)] font-medium` | `user-guides-center.liquid` |
+| `.contact-channel__link:hover { color; text-decoration-color; }` | `hover:text-[var(--ez-black)] hover:decoration-[var(--ez-black)]` | `contact-form-panel.liquid` |
+| `.contact-link-pill:hover { border-color; color; background; }` | `hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]` | `contact-form-panel.liquid` ×5 |
+| `.contact-form-card:hover { border-color; box-shadow; }` | `hover:border-[var(--ez-amber-25)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]` | `contact-form-panel.liquid` |
+| `.contact-form { position: relative; z-index: 1; }` | `relative z-[1]` | `contact-form-panel.liquid` (Liquid `form` tag) |
+| `.contact-form__field--full { grid-column: 1/-1; }` | `col-span-full` | `contact-form-panel.liquid` ×2 |
+| `.contact-form__textarea { resize: vertical; min-height: 120px; }` | `resize-y min-h-[120px]` | `contact-form-panel.liquid` |
+| `.contact-form__input:focus { border-color; box-shadow; }` | `focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]` | `contact-form-panel.liquid` ×4 inputs |
+| `.contact-success { text-align: center; padding: 3rem 1.5rem; }` | `text-center py-12 px-6` | `contact-form-panel.liquid` |
+
+---
+
+### Deferred from Pass 1
+
+| Rule | Reason |
+|---|---|
+| **Group C — file badges** (`.file-badge--pdf`, `--zip`, `--exe`) | Dynamic class generation `file-badge--{{ ext | downcase }}` — migration requires `{% case %}` markup restructuring. Defer to dedicated markup refactor pass. |
+| **Group A — bg-white extractions** | M-rules with background as one property of many. Extract `bg-white` in Pass 2 property-extraction phase. |
+| `.shub-card__arrow { color: rgba(0,0,0,.2); transition: color .15s, transform .15s; }` | 2-property but `transition` is complex (2 targets, `.15s` linear — doesn't map cleanly to Tailwind's `transition duration-150` which uses ease-in-out). Defer to Pass 2. |
+| All M-rules (4+ properties) | `.support-nav`, `.support-nav__link`, `.support-body`, `.support-hub-nav`, `.filter-pills`, `.filter-pill`, `.data-table*`, `.file-badge`, `.btn-download`, `.product-pill`, `.status-dot`, `.section-label`, `.info-card*`, `.empty-state*`, `.shub-stats`, `.shub-stat`, `.shub-grid`, `.shub-card`, `.warranty-*`, `.guide-card*`, `.fw-card*`, `.ts-card*`, `.ts-steps`, `.ts-step`, `.ts-hero*`, `.ts-grid*`, `.contact-*` base rules | Pass 2. |
