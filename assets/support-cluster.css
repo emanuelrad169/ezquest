@@ -175,7 +175,6 @@
 
 .fw-changelog__trigger::-webkit-details-marker { display: none; }
 .fw-changelog[open] .fw-changelog__icon { transform: rotate(180deg); }
-.fw-changelog__body { font-size: 14px; color: var(--ez-grey); line-height: 1.7; padding: .75rem 0 .5rem; }
 .fw-changelog__body ul { padding-left: 1.25rem; margin: 0; }
 .fw-changelog__body li { margin-bottom: .375rem; }
 
