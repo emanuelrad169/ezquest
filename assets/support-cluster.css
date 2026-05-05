@@ -184,10 +184,6 @@
 /* Card — step number top-right variant */
 
 /* "Where to go from here" section */
-.ts-resources {
-  background: var(--ez-light);
-  padding: clamp(52px,6vw,80px) 0;
-}
 .ts-resources__inner {
   max-width: 80rem;
   margin: 0 auto;
