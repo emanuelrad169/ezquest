@@ -15,7 +15,7 @@
 
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
-  <div class="guide-grid">
+  <div class="guide-grid grid grid-cols-3 gap-4 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
     {% for block in section.blocks %}
       {% if block.type == 'guide' %}
         {% assign p = block.settings.product %}
