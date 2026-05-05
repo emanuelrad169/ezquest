@@ -182,11 +182,6 @@
 /* Category group */
 
 /* Card — step number top-right variant */
-.ts-card__foot {
-  border-top: 1px solid rgba(0,0,0,.06);
-  padding-top: .875rem;
-  margin-top: 1.25rem;
-}
 .ts-card__cta {
   font-size: 13px;
   font-weight: 500;
