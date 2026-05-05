@@ -96,7 +96,7 @@
             <div class="contact-errors" role="alert">{{ form.errors | default_errors }}</div>
           {% endif %}
 
-          <div class="contact-form__grid">
+          <div class="contact-form__grid grid grid-cols-2 gap-[1.125rem] max-[580px]:grid-cols-1">
 
             <div class="contact-form__field">
               <label class="contact-form__label" for="contact-name-{{ section.id }}">{{ 'contact.name' | t }}</label>
