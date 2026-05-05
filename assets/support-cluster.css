@@ -381,7 +381,6 @@
 .fw-card__version { font-size: clamp(20px,3vw,28px); font-weight: 500; letter-spacing: -.03em; color: var(--ez-black); font-variant-numeric: tabular-nums; }
 .fw-card__latest-badge { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: rgba(21,128,61,.08); color: var(--ez-success-text); border: 1px solid rgba(21,128,61,.2); padding: .2rem .625rem; border-radius: 100px; }
 .fw-card__product { font-size: 16px; font-weight: 500; color: var(--ez-black); margin: 0 0 .25rem; letter-spacing: -.01em; }
-.fw-card__date { font-size: 13px; color: var(--ez-grey); margin: 0; }
 .fw-card__actions { display: flex; gap: .75rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,.06); }
 .fw-changelog { border-top: 1px solid rgba(0,0,0,.06); padding-top: .875rem; margin-top: .875rem; }
 .fw-changelog__trigger { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; color: var(--ez-grey); cursor: pointer; list-style: none; padding-bottom: .5rem; transition: color .15s; }
