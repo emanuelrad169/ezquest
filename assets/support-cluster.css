@@ -40,7 +40,6 @@
   margin: 0;
 }
 
-.support-hero__media { position: absolute; inset: 0; z-index: 0; }
 .support-hero__image { width: 100%; height: 100%; object-fit: cover; }
 .support-hero--has-image .support-hero__wrap { position: relative; z-index: 1; }
 .support-hero--has-image::after {
