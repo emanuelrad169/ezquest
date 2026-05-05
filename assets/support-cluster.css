@@ -202,12 +202,6 @@
 /* Empty state */
 
 
-.empty-state__body {
-  font-size: 14px;
-  color: var(--ez-grey);
-  margin: 0 0 1.5rem;
-}
-
 
 @media (max-width: 640px) {
   .data-table thead { display: none; }
