@@ -182,15 +182,6 @@
 /* Category group */
 
 /* Card — step number top-right variant */
-.ts-card__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ez-black);
-  letter-spacing: -.015em;
-  line-height: 1.35;
-  margin: 0 0 .75rem;
-  padding-right: 2.5rem;
-}
 .ts-card__copy {
   font-size: 14px;
   color: var(--ez-grey);
