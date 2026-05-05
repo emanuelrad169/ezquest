@@ -13,8 +13,6 @@
   </div>
 </section>
 
-{% render 'support-nav', current: 'firmware' %}
-
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
   <div class="info-card info-card--amber bg-[var(--ez-amber-04)] border-[var(--ez-amber-25)]" style="margin-bottom:2rem">
@@ -45,7 +43,7 @@
         </div>
 
         {% if block.settings.changelog != blank %}
-          <details class="fw-changelog">
+          <details class="fw-changelog border-t border-black/[6%] pt-3.5 mt-3.5">
             <summary class="fw-changelog__trigger hover:text-[var(--ez-black)]">
               What's changed in this version
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="fw-changelog__icon transition-transform duration-200 shrink-0" aria-hidden="true"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
