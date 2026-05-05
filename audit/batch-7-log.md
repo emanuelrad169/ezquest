@@ -285,3 +285,117 @@ All three parent elements confirmed absent of `group` class; no JS conflicts fou
 | **Group A — bg-white extractions** | M-rules with background as one property of many. Extract `bg-white` in Pass 2 property-extraction phase. |
 | `.shub-card__arrow { color: rgba(0,0,0,.2); transition: color .15s, transform .15s; }` | 2-property but `transition` is complex (2 targets, `.15s` linear — doesn't map cleanly to Tailwind's `transition duration-150` which uses ease-in-out). Defer to Pass 2. |
 | All M-rules (4+ properties) | `.support-nav`, `.support-nav__link`, `.support-body`, `.support-hub-nav`, `.filter-pills`, `.filter-pill`, `.data-table*`, `.file-badge`, `.btn-download`, `.product-pill`, `.status-dot`, `.section-label`, `.info-card*`, `.empty-state*`, `.shub-stats`, `.shub-stat`, `.shub-grid`, `.shub-card`, `.warranty-*`, `.guide-card*`, `.fw-card*`, `.ts-card*`, `.ts-steps`, `.ts-step`, `.ts-hero*`, `.ts-grid*`, `.contact-*` base rules | Pass 2. |
+
+---
+
+## Pass 2 — M-Rule Migration (4+ properties → Tailwind utilities)
+
+**Scope**: All M-rules (4+ CSS properties) across `assets/support-cluster.css`. One commit per CSS rule.
+
+**Approach**: Phase A (add utilities to Liquid markup) + Phase B (delete CSS rule) combined in each commit.
+
+**Files modified**: `sections/support-hub.liquid`, `sections/user-guides-center.liquid`, `sections/firmware-center.liquid`, `sections/warranty-page.liquid`, `sections/troubleshooting-guide.liquid`, `sections/contact-form-panel.liquid`, `sections/download-center.liquid`, `sections/manuals-center.liquid`, `sections/compatibility-table.liquid`, `assets/support-cluster.css`
+
+### Rules Migrated
+
+| Rule | File | Commit |
+|---|---|---|
+| `.shub-stat` + `__number` + `__label` | support-hub | `61e2b47` |
+| `.shub-grid` + `@media` blocks | support-hub | `478f655` |
+| `.shub-card` | support-hub | `7e388a7` |
+| `.shub-card__icon` | support-hub | `3eb7406` |
+| `.shub-card__title` + `__desc` | support-hub | `5055d50` |
+| `.guide-grid` + `@media` | user-guides-center | `b0979be` |
+| `.guide-card` | user-guides-center | `7174ebe` |
+| `.guide-card__image-wrap` | user-guides-center | `3714e24` |
+| `.guide-card__image` | user-guides-center | `dba23ad` |
+| `.guide-card__image-placeholder` | user-guides-center | `b8bf67c` |
+| `.guide-card__type-pill` | user-guides-center | `e1aac3d` |
+| `.guide-card__meta` | user-guides-center | `0b7dce4` |
+| `.guide-card__difficulty` + variants | user-guides-center | `39ca423` |
+| `.guide-card__title` | user-guides-center | `aeaa596` |
+| `.guide-card__desc` | user-guides-center | `1792c9b` |
+| `.guide-card__footer` | user-guides-center | `22be030` |
+| `.guide-card__cta` | user-guides-center | `5706b0e` |
+| `.fw-card` | firmware-center | `f456122` |
+| `.fw-card__meta` | firmware-center | `358f58c` |
+| `.fw-card__version` | firmware-center | `981f142` |
+| `.fw-card__latest-badge` | firmware-center | `0901b8f` |
+| `.fw-card__product` | firmware-center | `4daf2b7` |
+| `.fw-card__actions` | firmware-center | `30ae923` |
+| `.fw-changelog__trigger` | firmware-center | `79e217f` |
+| `.fw-changelog__body` | firmware-center | `d6f548a` |
+| `.contact-layout` + `@media` | contact-form-panel | `bbf69bf` |
+| `.contact-channels` | contact-form-panel | `d46a30e` |
+| `.contact-channel__icon` | contact-form-panel | `8bac4b1` |
+| `.contact-channel__label` | contact-form-panel | `88c1515` |
+| `.contact-channel__value` | contact-form-panel | `85400b9` |
+| `.contact-channel__link` | contact-form-panel | `eeb9094` |
+| `.contact-support-links__label` | contact-form-panel | `ef5c286` |
+| `.contact-link-pill` | contact-form-panel | `70a70f9` |
+| `.contact-form-card` | contact-form-panel | `9a07c6f` |
+| `.contact-form-card__spotlight` | contact-form-panel | `fab49e4` |
+| `.contact-form__grid` + `@media` | contact-form-panel | `726960d` |
+| `.contact-form__field` | contact-form-panel | `11e746c` |
+| `.contact-form__label` | contact-form-panel | `56bdc9c` |
+| `.contact-form__input` | contact-form-panel | `3b34ccf` |
+| `.contact-form__submit` | contact-form-panel | `865ed95` |
+| `.contact-form__note` | contact-form-panel | `d7d34df` |
+| `.contact-success__icon` | contact-form-panel | `f7eccae` |
+| `.contact-success__heading` | contact-form-panel | `82b515a` |
+| `.contact-errors` | contact-form-panel | `f46d3e7` |
+| `.warranty-layout` + `@media` | warranty-page | `db944a3` |
+| `.warranty-stat-row` | warranty-page | `602c4f6` |
+| `.warranty-stat` | warranty-page | `6ccb38f` |
+| `.warranty-list` | warranty-page | `80e143c` |
+| `.warranty-claim-card` | warranty-page | `7fced3c` |
+| `.warranty-claim-card__icon` | warranty-page | `521576f` |
+| `.warranty-claim-card__heading` | warranty-page | `e82d91e` |
+| `.warranty-claim-card__body` | warranty-page | `643a3c4` |
+| `.warranty-claim-card__note` | warranty-page | `7ee4150` |
+| `.ts-grid` + `@media` | troubleshooting-guide | `9649a2b` |
+| `.ts-card` | troubleshooting-guide | `b1c7680` |
+| `.ts-hero` | troubleshooting-guide | `b679abd` |
+| `.ts-hero__inner` | troubleshooting-guide | `7e25ce7` |
+| `.ts-body` | troubleshooting-guide | `089db85` |
+| `.ts-card__num` | troubleshooting-guide | `bb5c261` |
+| `.ts-card__title` | troubleshooting-guide | `7482db0` |
+| `.ts-card__copy` | troubleshooting-guide | `e67e99a` |
+| `.ts-card__foot` | troubleshooting-guide | `577aaad` |
+| `.ts-card__cta` | troubleshooting-guide | `489183f` |
+| `.ts-resources` | troubleshooting-guide | `0a61594` |
+| `.ts-resources__inner` | troubleshooting-guide | `13aafb2` |
+| `.ts-resource-grid` + `@media` | troubleshooting-guide | `3ad315c` |
+| `.ts-resource-card` | troubleshooting-guide | `933f771` |
+| `.ts-resource-card__icon` | troubleshooting-guide | `d92a58d` |
+| `.ts-resource-card__type` | troubleshooting-guide | `65bf74d` |
+| `.ts-resource-card__title` | troubleshooting-guide | `2414ede` |
+| `.ts-resource-card__desc` | troubleshooting-guide | `55bad6d` |
+| `.ts-resource-card__arrow` | troubleshooting-guide | `9c2ccbe` |
+| `.file-badge` + variants | download-center | `a68e8b5` |
+| `.btn-download` | download-center, firmware-center, manuals-center | `c4803da` |
+| `.product-pill` | download-center, compatibility-table | `6bbe8a2` |
+
+### K-Rules Retained (permanent CSS — cannot be expressed as Tailwind utilities)
+
+| Rule | Reason |
+|---|---|
+| `.support-hero--has-image .support-hero__wrap` | Conditional descendant: scoped to modifier class |
+| `.support-hero--has-image::after` | Pseudo-element with `content:` |
+| `.filter-pill` + `.filter-pill.is-active, .filter-pill:focus` | JS-toggled `.is-active` class — no Tailwind variant equivalent; whole group kept together |
+| `.data-table thead th` / `tbody tr` / `td` | Descendant selectors on loop-generated table elements |
+| `@media (max-width: 640px) .data-table td:before` | Responsive block with `content: attr(data-label)` pseudo-element |
+| `.warranty-list li` | Descendant selector paired with K-rule `::before` |
+| `.warranty-list--covered li::before` / `--excluded li::before` | Pseudo-elements with `content:` |
+| `.warranty-steps` | Contains `counter-reset: ws` |
+| `.warranty-steps li` + `li::before` | Counter increment + `content: counter(ws)` |
+| `.fw-changelog__trigger::-webkit-details-marker` | Vendor pseudo-element |
+| `.fw-changelog[open] .fw-changelog__icon` | `[open]` attribute selector |
+| `.fw-changelog__body ul` / `li` | Descendant selectors on richtext-rendered HTML |
+| `.ts-steps` | Contains `counter-reset: step` |
+| `.ts-step` + `::before` | Counter increment + `content: counter(step)` |
+| `.contact-form__input::placeholder` | Pseudo-element |
+
+### Final CSS Size
+
+`assets/support-cluster.css` reduced from ~625 lines to ~150 lines. All remaining rules are K-rules.
