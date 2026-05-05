@@ -2,7 +2,7 @@
 
 {%- assign support_hero_image = section.settings.image -%}
 
-<section class="support-hero{% if support_hero_image != blank %} support-hero--has-image{% endif %}">
+<section class="support-hero relative overflow-hidden{% if support_hero_image != blank %} support-hero--has-image{% endif %}">
   {% if support_hero_image != blank %}
     <div class="support-hero__media" aria-hidden="true">
       {{ support_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'support-hero__image' }}
