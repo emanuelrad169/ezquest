@@ -28,7 +28,7 @@
         >
           <div class="guide-card__image-wrap relative bg-[var(--ez-light)] aspect-[16/9] overflow-hidden">
             {% if p != blank and p.featured_image %}
-              <img src="{{ p.featured_image | image_url: width: 320, format: 'pjpg' }}" alt="{{ p.title | escape }}" class="guide-card__image" loading="lazy" width="320" height="200">
+              <img src="{{ p.featured_image | image_url: width: 320, format: 'pjpg' }}" alt="{{ p.title | escape }}" class="guide-card__image w-full h-full object-contain p-4" loading="lazy" width="320" height="200">
             {% else %}
               <div class="guide-card__image-placeholder"></div>
             {% endif %}

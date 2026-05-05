@@ -169,7 +169,6 @@
 
 /* ── User Guides Center ────────────────────────── */
 
-.guide-card__image { width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
 .guide-card__image-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--ez-light) 0%, #e5e5e7 100%); }
 .guide-card__type-pill { position: absolute; top: .75rem; left: .75rem; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: rgba(254, 211, 0,.1); color: var(--ez-grey); border: 1px solid rgba(254, 211, 0,.25); padding: .2rem .625rem; border-radius: 100px; }
 .guide-card__meta { display: flex; align-items: center; gap: .625rem; margin-bottom: .75rem; }
