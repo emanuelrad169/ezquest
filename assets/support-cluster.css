@@ -182,16 +182,6 @@
 /* Category group */
 
 /* Card — step number top-right variant */
-.ts-card__cta {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ez-black);
-  text-decoration: underline;
-  text-decoration-color: var(--ez-amber);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 3px;
-  transition: text-decoration-color .15s;
-}
 
 /* "Where to go from here" section */
 .ts-resources {
