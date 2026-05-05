@@ -54,13 +54,13 @@
 
         <div class="fw-card__actions flex gap-3 flex-wrap pt-5 border-t border-black/[6%]">
           {% if block.settings.mac_url != blank and block.settings.mac_url != '#' %}
-            <a href="{{ block.settings.mac_url }}" class="btn-download hover:bg-[var(--ez-amber)]" download>
+            <a href="{{ block.settings.mac_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               macOS
             </a>
           {% endif %}
           {% if block.settings.win_url != blank and block.settings.win_url != '#' %}
-            <a href="{{ block.settings.win_url }}" class="btn-download hover:bg-[var(--ez-amber)]" download style="background:var(--ez-black)">
+            <a href="{{ block.settings.win_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-black)] text-[var(--ez-light)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)] hover:text-[var(--ez-black)]" download>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Windows
             </a>
