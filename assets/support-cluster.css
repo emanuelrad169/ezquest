@@ -623,7 +623,6 @@
 .contact-form__grid{display:grid;grid-template-columns:1fr 1fr;gap:1.125rem}
 @media(max-width:580px){.contact-form__grid{grid-template-columns:1fr}}
 .contact-form__field{display:flex;flex-direction:column;gap:.375rem}
-.contact-form__field--full{grid-column:1/-1}
 .contact-form__label{font-size:13px;font-weight:500;color:var(--ez-black)}
 .contact-form__input{padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.12);border-radius:10px;font-size:15px;color:var(--ez-black);background:#fff;width:100%;transition:border-color .2s,box-shadow .2s;outline:none;appearance:none;-webkit-appearance:none;font-family:inherit}
 .contact-form__input::placeholder{color:var(--ez-grey);opacity:.6}

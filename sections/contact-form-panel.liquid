@@ -110,7 +110,7 @@
               <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
             </div>
 
-            <div class="contact-form__field contact-form__field--full">
+            <div class="contact-form__field contact-form__field--full col-span-full">
               <label class="contact-form__label" for="contact-subject-{{ section.id }}">What is this about?</label>
               <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="contact-form__input">
                 <option value="" disabled selected>Select a topic</option>
@@ -124,7 +124,7 @@
               </select>
             </div>
 
-            <div class="contact-form__field contact-form__field--full">
+            <div class="contact-form__field contact-form__field--full col-span-full">
               <label class="contact-form__label" for="contact-message-{{ section.id }}">{{ 'contact.message' | t }}</label>
               <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea" rows="5" required placeholder="Tell us what you need…"></textarea>
             </div>
