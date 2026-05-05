@@ -121,25 +121,6 @@
 
 /* Info card */
 
-.info-card__icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.info-card__icon--amber {
-  background: rgba(254, 211, 0,.1);
-  color: var(--ez-amber);
-}
-
-.info-card__icon--warning {
-  background: rgba(239,68,68,.08);
-  color: #dc2626;
-}
 
 .info-card__title {
   font-size: 15px;
