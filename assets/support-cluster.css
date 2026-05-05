@@ -328,8 +328,6 @@
 /* ============================================ */
 /* Extracted from contact-form-panel.liquid     */
 /* ============================================ */
-.contact-layout{display:grid;grid-template-columns:minmax(320px,440px) minmax(0,1fr);gap:clamp(3rem,6vw,6rem);align-items:start}
-@media(max-width:900px){.contact-layout{grid-template-columns:1fr}}
 .contact-channels{display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2.5rem}
 .contact-channel__icon{width:36px;height:36px;border-radius:10px;background:rgba(254, 211, 0, .08);border:1px solid rgba(254, 211, 0, .18);color:var(--ez-amber);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .contact-channel__label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin:0 0 .2rem}
