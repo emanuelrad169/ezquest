@@ -60,7 +60,7 @@
                 {% if p != blank %}
                   <a href="{{ p.url }}" style="color:var(--ez-black);text-decoration:underline;text-decoration-color:var(--ez-amber);text-decoration-thickness:1.5px;text-underline-offset:3px;font-weight:500">{{ p.title | truncate: 40 }}</a>
                 {% else %}
-                  <span class="product-pill">EZQuest Hub</span>
+                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">EZQuest Hub</span>
                 {% endif %}
               </td>
               <td data-label="Port" style="color:var(--ez-grey)">{{ entry.port_type.value }}</td>

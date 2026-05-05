@@ -40,7 +40,7 @@
           {% if block.type == 'file' %}
             <tr data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
               <td data-label="Product">
-                <span class="product-pill">{{ block.settings.product_name }}</span>
+                <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ block.settings.product_name }}</span>
               </td>
               <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
               <td data-label="Type">

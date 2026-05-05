@@ -66,16 +66,6 @@
 
 
 /* Product name pill */
-.product-pill {
-  display: inline-block;
-  padding: .2rem .75rem;
-  border-radius: 100px;
-  background: rgba(0,0,0,.04);
-  color: var(--ez-grey);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-}
 
 /* Status indicators */
 
