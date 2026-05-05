@@ -328,7 +328,6 @@
 /* ============================================ */
 /* Extracted from contact-form-panel.liquid     */
 /* ============================================ */
-.contact-support-links__label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin:0 0 .875rem}
 .contact-link-pill{padding:.375rem .875rem;border-radius:100px;border:1.5px solid rgba(0,0,0,.1);font-size:13px;color:var(--ez-grey);text-decoration:none;transition:all .2s}
 
 .contact-form-card{position:relative;border-radius:20px;border:1.5px solid rgba(0,0,0,.08);padding:clamp(1.75rem,3vw,2.5rem);background:#fff;overflow:hidden;transition:border-color .25s,box-shadow .3s}
