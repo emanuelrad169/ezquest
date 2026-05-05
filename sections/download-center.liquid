@@ -45,7 +45,7 @@
               <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
               <td data-label="Type">
                 {% assign ext = block.settings.file_url | split: '.' | last | upcase %}
-                <span class="file-badge file-badge--{{ ext | downcase }}">{{ ext }}</span>
+                <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase {%- case ext | downcase -%}{%- when 'zip' -%} bg-[rgba(37,99,235,.07)] text-[var(--ez-info-text)]{%- when 'exe' -%} bg-[rgba(124,58,237,.07)] text-[#6d28d9]{%- else -%} bg-[rgba(220,38,38,.07)] text-[var(--ez-error-text)]{%- endcase -%}">{{ ext }}</span>
               </td>
               <td data-label="Size" style="color:var(--ez-grey)">{{ block.settings.file_size }}</td>
               <td data-label="Version" style="color:var(--ez-grey)">{{ block.settings.version | default: '—' }}</td>
