@@ -283,31 +283,6 @@
   margin: 0 auto;
   padding: 0 clamp(1.25rem,5vw,2rem);
 }
-.ts-hero__kicker {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--ez-grey);
-  margin: 0 0 .875rem;
-}
-.ts-hero__heading {
-  font-size: clamp(32px,5vw,60px);
-  font-weight: 500;
-  letter-spacing: -.04em;
-  line-height: 1.05;
-  color: var(--ez-black);
-  margin: 0 0 1rem;
-  max-width: 18ch;
-}
-.ts-hero__sub {
-  font-size: clamp(15px,1.5vw,17px);
-  color: var(--ez-grey);
-  line-height: 1.65;
-  max-width: 54ch;
-  margin: 0;
-}
-
 /* Page body */
 .ts-body {
   max-width: 80rem;
@@ -319,14 +294,6 @@
 }
 
 /* Category group */
-.ts-category__label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ez-grey);
-  margin: 0 0 1.25rem;
-}
 
 /* Card — step number top-right variant */
 .ts-card__num {
