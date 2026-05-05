@@ -37,33 +37,6 @@
   background: linear-gradient(90deg, rgba(248,250,252,.96), rgba(248,250,252,.72) 45%, rgba(248,250,252,.18));
 }
 
-/* Support nav rail */
-.support-nav__list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.support-nav__list::-webkit-scrollbar { display: none; }
-
-.support-nav__link {
-  display: block;
-  padding: .875rem 1rem;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--ez-grey);
-  white-space: nowrap;
-  border-bottom: 2px solid transparent;
-  text-decoration: none;
-  transition: color .15s, border-color .15s;
-}
-
-
-/* Page body wrapper */
-
 /* Filter pill row */
 .filter-pills {
   display: flex;
@@ -94,12 +67,6 @@
 }
 
 /* File/data table */
-.data-table-wrap {
-  border: 1px solid rgba(0,0,0,.07);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
 .data-table {
   width: 100%;
   border-collapse: collapse;

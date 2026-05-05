@@ -13,8 +13,6 @@
   </div>
 </section>
 
-{% render 'support-nav', current: 'downloads' %}
-
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
   <div class="filter-pills" id="dl-filters">
@@ -24,7 +22,7 @@
     <button class="filter-pill" data-filter="utility" type="button">Utilities</button>
   </div>
 
-  <div class="data-table-wrap">
+  <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
     <table class="data-table" id="dl-table">
       <thead>
         <tr>

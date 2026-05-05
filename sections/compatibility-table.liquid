@@ -13,8 +13,6 @@
   </div>
 </section>
 
-{% render 'support-nav', current: 'compatibility' %}
-
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
   <div class="compat-search-row">
@@ -37,7 +35,7 @@
 
   {% if entries.size > 0 %}
 
-    <div class="data-table-wrap">
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
       <table class="data-table" id="compat-table">
         <thead>
           <tr>
@@ -86,7 +84,7 @@
 
   {% else %}
 
-    <div class="data-table-wrap">
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
       <table class="data-table" id="compat-table">
         <thead>
           <tr>
