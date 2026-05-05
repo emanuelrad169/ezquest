@@ -177,11 +177,6 @@
 /* ── Troubleshooting Guide v2 (redesigned) ──── */
 
 /* Hero */
-.ts-hero {
-  background: linear-gradient(135deg, var(--ez-light) 0%, #ffffff 100%);
-  border-bottom: 1px solid rgba(0,0,0,.06);
-  padding: clamp(52px,6vw,84px) 0 clamp(36px,4vw,52px);
-}
 .ts-hero__inner {
   max-width: 80rem;
   margin: 0 auto;
