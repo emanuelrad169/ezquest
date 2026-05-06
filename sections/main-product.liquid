@@ -779,7 +779,8 @@
 
 {%- liquid
   assign show_features_tab = false
-  if section.settings.youtube_url != blank
+  assign metafield_video_url = product.metafields.custom.product_video_url | strip
+  if section.settings.youtube_url != blank or metafield_video_url != blank
     assign show_features_tab = true
   endif
   for block in section.blocks
@@ -821,25 +822,10 @@
       </div>
     </div>
 
-    {% if section.settings.youtube_url != blank %}
-      {%- assign yt_raw = section.settings.youtube_url -%}
-      {%- if yt_raw contains 'youtu.be/' -%}
-        {%- assign yt_id = yt_raw | split: 'youtu.be/' | last | split: '?' | first -%}
-      {%- else -%}
-        {%- assign yt_id = yt_raw | split: 'v=' | last | split: '&' | first -%}
-      {%- endif -%}
-      <div class="pdp-video-wrap mt-8 w-full">
-        <div class="pdp-video-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/{{ yt_id }}"
-            title="{{ product.title | escape }} — product video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-    {% endif %}
+    {%- assign _feature_video_url = section.settings.youtube_url | strip | default: metafield_video_url -%}
+    {%- if _feature_video_url != blank -%}
+      {%- render 'product-video-embed', url: _feature_video_url, title: product.title -%}
+    {%- endif -%}
 
     {%- assign feature_block_count = 0 -%}
     {% for block in section.blocks %}
