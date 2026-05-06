@@ -24,8 +24,7 @@
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
     <link rel="dns-prefetch" href="https://code.tidio.co">
-    <link rel="dns-prefetch" href="https://cdn.judge.me">
-    {% if settings.ga4_measurement_id != blank %}
+{% if settings.ga4_measurement_id != blank %}
       <link rel="preconnect" href="https://www.googletagmanager.com">
       <link rel="dns-prefetch" href="https://www.google-analytics.com">
     {% endif %}
@@ -113,7 +112,7 @@
         "publisher": {
           "@type": "Organization",
           "name": "EZQuest",
-          "url": "https://{{ shop.domain }}"
+          "url": {{ shop.url | json }}
         },
         "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
         "dateModified": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
@@ -207,16 +206,6 @@
     <script>
     (function(){
       var s = document.getElementById('tidio-cls-fix');
-      function removeJudgeMePlaceholderLinks() {
-        document.querySelectorAll('.jdgm-random-link[href="#"]').forEach(function(link) {
-          link.remove();
-        });
-      }
-      removeJudgeMePlaceholderLinks();
-      new MutationObserver(removeJudgeMePlaceholderLinks).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
       if (!s) return;
       var done = false;
       function show() {

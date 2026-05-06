@@ -17,10 +17,8 @@
       assign review_rating_count = blank
       assign display_rating_value = blank
       assign display_rating_count = blank
-      assign jm_widget = product.metafields.judgeme.widget
-      assign jm = blank
-      assign jm_average = blank
-      assign jm_count = 0
+      assign amazon_rating = product.metafields.custom.amazon_rating
+      assign amazon_count  = product.metafields.custom.amazon_review_count | default: 0
       assign selected_variant = product.selected_or_first_available_variant
       assign product_form_id = 'ProductForm-' | append: section.id
       assign mobile_proof_line = blank
@@ -115,15 +113,9 @@
         assign review_rating_count = product.metafields.reviews.rating_count.value | default: blank
       endif
 
-      if jm_widget != blank
-        assign jm = jm_widget.value
-        assign jm_average = jm.average
-        assign jm_count = jm.count | default: 0
-      endif
-
-      if jm_count > 0 and jm_average != blank
-        assign display_rating_value = jm_average | round: 1
-        assign display_rating_count = jm_count
+      if amazon_rating != blank and amazon_count > 0
+        assign display_rating_value = amazon_rating | round: 1
+        assign display_rating_count = amazon_count
       elsif review_rating_value != blank
         assign display_rating_value = review_rating_value
         assign display_rating_count = review_rating_count
@@ -165,10 +157,10 @@
         assign ownership_copy = support_summary_text
       endif
 
-      if review_rating_value != blank
-        assign mobile_proof_line = review_rating_value | append: ' / 5 rated'
-        if review_rating_count != blank
-          assign mobile_proof_line = mobile_proof_line | append: ' · ' | append: review_rating_count | append: ' reviews'
+      if display_rating_value != blank
+        assign mobile_proof_line = display_rating_value | append: ' / 5 on Amazon'
+        if display_rating_count != blank
+          assign mobile_proof_line = mobile_proof_line | append: ' · ' | append: display_rating_count | append: ' reviews'
         endif
       endif
 
@@ -370,52 +362,7 @@
             <div class="product-buybox-headline-row flex flex-col gap-3">
               <div class="product-buybox-lead space-y-2.5">
                 <h1 class="section-heading product-buybox-title max-w-none text-2xl leading-tight tracking-tight lg:text-2xl">{{ product.title }}</h1>
-                {% comment %} Judge.me star rating — auto-shows after app install {% endcomment %}
-                {% if jm_widget != blank and jm_count > 0 and jm_average != blank %}
-                  <div class="pdp-rating" id="pdp-rating-{{ product.id }}">
-                    <div class="pdp-rating__inner mb-3 flex flex-wrap items-center gap-2">
-                      <div class="pdp-stars inline-flex items-center gap-0.5" aria-label="{{ jm_average | round: 1 }} out of 5 stars">
-                        {%- assign full_stars = jm_average | floor -%}
-                        {%- assign remainder = jm_average | minus: full_stars -%}
-                        {%- assign half_star_index = full_stars | plus: 1 -%}
-                        {%- for i in (1..5) -%}
-                          {%- if i <= full_stars -%}
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--ez-amber)" aria-hidden="true" focusable="false">
-                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z"/>
-                            </svg>
-                          {%- elsif remainder >= 0.5 and i == half_star_index -%}
-                            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
-                              <defs>
-                                <clipPath id="half-star-{{ product.id }}-{{ forloop.index }}">
-                                  <rect x="0" y="0" width="7" height="14"/>
-                                </clipPath>
-                              </defs>
-                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="var(--ez-light)"/>
-                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="var(--ez-amber)" clip-path="url(#half-star-{{ product.id }}-{{ forloop.index }})"/>
-                            </svg>
-                          {%- else -%}
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--ez-light)" aria-hidden="true" focusable="false">
-                              <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z"/>
-                            </svg>
-                          {%- endif -%}
-                        {%- endfor -%}
-                      </div>
-                      <span class="pdp-rating__summary text-sm text-slate-600">
-                        {{ jm_average | round: 1 }} ({{ jm_count }} {{ jm_count | pluralize: 'review', 'reviews' }})
-                      </span>
-                      <a href="#judgeme_product_widget" class="pdp-rating__link text-sm font-medium text-slate-950 underline underline-offset-2">Read reviews</a>
-                    </div>
-                  </div>
-                {% endif %}
-                {% if display_rating_value != blank %}
-                  <div class="product-buybox-review-row flex flex-wrap items-center gap-2 text-sm text-slate-600" aria-label="Rated {{ display_rating_value }} out of 5{% if display_rating_count != blank %} from {{ display_rating_count }} reviews{% endif %}">
-                    <span class="product-buybox-stars tracking-wide text-slate-700" aria-hidden="true">★★★★★</span>
-                    <span class="product-buybox-review-value font-medium text-slate-900">{{ display_rating_value }}</span>
-                    {% if display_rating_count != blank %}
-                      <span class="product-buybox-review-count text-slate-500">{{ display_rating_count }} reviews</span>
-                    {% endif %}
-                  </div>
-                {% endif %}
+                {% render 'amazon-reviews-widget', product: product %}
               </div>
 
               <div class="product-buybox-price" data-product-price-block>
@@ -1106,64 +1053,23 @@
   </div>
 </section>
 
-{% if settings.reviews_app != 'none' %}
+{%- assign amazon_asin = product.metafields.custom.amazon_asin -%}
+{%- if amazon_asin != blank and display_rating_value != blank -%}
 <section class="section-shell pdp-section pdp-section--reviews" id="pdp-reviews">
   <div class="container-shell">
     <p class="section-kicker">Customer reviews</p>
-    <h2 class="section-heading mt-4">What people are saying</h2>
+    <h2 class="section-heading mt-4">What customers are saying</h2>
     <div class="pdp-reviews-body mt-8">
-      {% if settings.reviews_app == 'judgeme' %}
-        <div data-judgeme-deferred>
-          <button type="button" class="button-secondary" data-judgeme-load>Load reviews</button>
-          <template data-judgeme-template>
-            {% render 'judgeme_widgets', widget_type: 'JudgeMe::ReviewsWidget', jm_style: '', product: product %}
-          </template>
-        </div>
-      {% else %}
-        {% if display_rating_value != blank %}
-          <div class="pdp-reviews-native">
-            <p class="pdp-reviews-native__score">{{ display_rating_value }} / 5</p>
-            {% if display_rating_count != blank %}
-              <p class="pdp-reviews-native__count mt-1 text-sm text-slate-500">Based on {{ display_rating_count }} reviews</p>
-            {% endif %}
-          </div>
-        {% else %}
-          <p class="text-sm text-slate-500">No reviews yet.</p>
-        {% endif %}
-      {% endif %}
+      <div class="pdp-amazon-reviews-callout flex flex-col gap-4 max-w-[480px]">
+        {% render 'amazon-reviews-widget', product: product %}
+        <p class="text-sm text-slate-500 m-0">
+          Reviews are hosted on Amazon. Click to read verified customer feedback.
+        </p>
+      </div>
     </div>
   </div>
 </section>
-{% endif %}
-
-{% comment %} Judge.me review widget — renders after install {% endcomment %}
-<div
-  id="judgeme_product_widget"
-  class="jdgm-widget jdgm-review-widget pdp-judgeme-widget"
-  data-id="{{ product.id }}"
->
-  {% comment %}
-    Judge.me injects into this div automatically after install.
-    The data-id attribute links the widget to this product.
-  {% endcomment %}
-  <span class="sr-only">Judge.me product reviews</span>
-</div>
-
-{% if settings.reviews_app == 'judgeme' %}
-  <script>
-    document.addEventListener('click', function(event) {
-      var trigger = event.target.closest('[data-judgeme-load]');
-      if (!trigger) return;
-      var shell = trigger.closest('[data-judgeme-deferred]');
-      var template = shell && shell.querySelector('[data-judgeme-template]');
-      if (!shell || !template) return;
-      shell.innerHTML = template.innerHTML;
-      if (window.jdgm && typeof window.jdgm.refreshWidgets === 'function') {
-        window.jdgm.refreshWidgets();
-      }
-    });
-  </script>
-{% endif %}
+{%- endif -%}
 
 <script type="application/ld+json">
 {
@@ -1193,34 +1099,13 @@
   ,"aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": {{ display_rating_value }},
-    "reviewCount": {{ display_rating_count | default: 1 }}
+    "reviewCount": {{ display_rating_count | default: 1 }},
+    "bestRating": "5",
+    "worstRating": "1"
   }
   {%- endif -%}
 }
 </script>
-
-{% comment %}
-AggregateRating schema — activates when Judge.me is installed.
-Judge.me exposes product ratings via product.metafields.judgeme.
-No changes needed after Judge.me install — this auto-activates.
-{% endcomment %}
-{%- if jm_widget != blank and jm_count > 0 and jm_average != blank -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": "{{ shop.url }}{{ product.url }}#product",
-  "name": {{ product.title | json }},
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ jm_average | round: 1 }}",
-    "reviewCount": {{ jm_count }},
-    "bestRating": "5",
-    "worstRating": "1"
-  }
-}
-</script>
-{%- endif -%}
 
 <script>
 (function () {

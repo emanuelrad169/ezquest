@@ -107,3 +107,57 @@ No — each entry belongs to one metaobject type (e.g. `ezquest_download`). If a
 
 **The filter pill for my new category isn't showing.**
 Make sure the Type field (e.g. `download_type`) is filled in on at least one entry. Blank type fields are excluded from filter pill generation.
+
+---
+
+## How to update Amazon ratings
+
+Product pages show Amazon star ratings, review counts, and a link to the Amazon listing. These come from product metafields — not from a live Amazon API.
+
+### Metafields per product
+
+| Metafield | Key | What to enter |
+| --------- | --- | ------------- |
+| Amazon ASIN | `custom.amazon_asin` | The product's ASIN (e.g. `B08R63NWGQ`) |
+| Star rating | `custom.amazon_rating` | Average rating, one decimal (e.g. `4.6`) |
+| Review count | `custom.amazon_review_count` | Number of reviews (e.g. `127`) |
+| Seller ID | `custom.amazon_seller_id` | EZQuest's Amazon seller ID — pre-filled as `A34WE8HAFZHTZW`, leave as-is |
+
+### Entering values manually (one product at a time)
+
+1. Admin → Products → select the product
+2. Scroll to **Metafields** at the bottom of the product page
+3. Fill in `amazon_asin`, `amazon_rating`, `amazon_review_count`
+4. Save
+
+The widget appears on the PDP immediately. If `amazon_asin` is blank, the widget is hidden entirely.
+
+### Bulk update via CSV (recommended for initial setup)
+
+1. Fill in `scripts/migration/data/inputs/amazon-reviews-template.csv` with one row per product:
+
+   ```csv
+   handle,asin,rating,count
+   magnetic-usb-c-m-2-nvme-ssd-enclosure,B08R63NWGQ,4.6,127
+   usb-c-multimedia-hub-adapter-13-ports,B09ABCD1234,4.4,89
+   ```
+
+2. Dry-run to verify:
+
+   ```sh
+   node scripts/migration/data/seed-amazon-reviews.js scripts/migration/data/inputs/amazon-reviews-template.csv
+   ```
+
+3. Apply:
+
+   ```sh
+   node scripts/migration/data/seed-amazon-reviews.js scripts/migration/data/inputs/amazon-reviews-template.csv --apply --confirm-production
+   ```
+
+### How often to update
+
+Amazon ratings drift slowly. Checking monthly and updating the CSV quarterly is sufficient for most products. The rating displayed is what you entered — it does not sync automatically.
+
+### Products not on Amazon
+
+Leave all three metafields blank. The widget renders nothing and the product page looks normal.

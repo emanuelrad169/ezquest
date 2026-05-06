@@ -110,9 +110,9 @@
       assign product_badge_codes = product_badge_codes | append: 'highwatt,'
     endif
 
-    if product.metafields.reviews.rating != blank and product.metafields.reviews.rating.value != blank
-      assign rating_value = product.metafields.reviews.rating.value.rating
-      assign rating_count = product.metafields.reviews.rating_count.value | default: blank
+    if product.metafields.custom.amazon_rating != blank and product.metafields.custom.amazon_review_count > 0
+      assign rating_value = product.metafields.custom.amazon_rating
+      assign rating_count = product.metafields.custom.amazon_review_count
     endif
 
     for option in product.options_with_values

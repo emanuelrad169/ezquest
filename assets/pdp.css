@@ -1566,3 +1566,46 @@
     order: -1;
   }
 }
+
+/* ── Amazon reviews widget ─────────────────────────────── */
+.amazon-reviews-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: var(--ez-grey);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.amazon-reviews-widget:hover {
+  color: #111;
+}
+
+.amazon-reviews-widget__stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.amazon-reviews-widget__star.star--filled {
+  color: #FFA41C;
+}
+
+.amazon-reviews-widget__star.star--empty {
+  color: #d5d5d5;
+}
+
+.amazon-reviews-widget__rating {
+  font-weight: 600;
+  color: #111;
+}
+
+.amazon-reviews-widget__separator {
+  color: #d5d5d5;
+}
+
+.amazon-reviews-widget__icon {
+  opacity: 0.45;
+  flex-shrink: 0;
+}
