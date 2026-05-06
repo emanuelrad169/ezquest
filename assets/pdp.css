@@ -278,17 +278,22 @@
   font-weight: 500;
 }
 
-/* ── Purchase row: qty + ATC + wishlist inline ── */
+/* ── Purchase row: qty above, ATC full-width below ── */
 .product-purchase-row {
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Stepper and wishlist stay at natural width — don't stretch */
+.product-buybox-quantity-shell,
+.product-wishlist-wrap {
+  align-self: flex-start;
 }
 
 .product-primary-action-wrap {
-  flex: 1;
-  min-width: 0;
+  flex: none; /* not needed in column layout; prevent height-stretching */
 }
 
 /* ── Action row (Amazon + Share) ──────────────────────────── */
