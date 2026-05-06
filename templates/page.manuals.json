@@ -9,13 +9,11 @@
         "light_mode": true
       }
     },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
-    },
     "downloads": {
       "type": "download-center",
       "settings": {
+        "resource_kind": "manuals",
+        "structured_source": "global",
         "kicker": "Manuals",
         "heading": "Manuals by product family",
         "body": "Find the setup guide or quick-start document for your EZQuest product."
@@ -142,7 +140,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]

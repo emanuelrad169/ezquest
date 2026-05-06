@@ -9,13 +9,11 @@
         "light_mode": true
       }
     },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
-    },
     "downloads": {
       "type": "download-center",
       "settings": {
+        "resource_kind": "firmware",
+        "structured_source": "global",
         "kicker": "Firmware",
         "heading": "Firmware releases by product and platform",
         "body": "Review firmware updates by product, platform, and release guidance before you install."
@@ -53,7 +51,7 @@
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
-            "file_title": "Firmware Update \u2014 Windows",
+            "file_title": "Firmware Update — Windows",
             "file_type": "ZIP",
             "file_size": "8.4 MB",
             "version": "1.2.1",
@@ -66,7 +64,7 @@
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
-            "file_title": "Firmware Update \u2014 macOS",
+            "file_title": "Firmware Update — macOS",
             "file_type": "ZIP",
             "file_size": "8.1 MB",
             "version": "1.2.1",
@@ -128,7 +126,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]

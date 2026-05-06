@@ -1,90 +1,204 @@
 {{ 'support-cluster.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign resource_kind     = section.settings.resource_kind | default: 'downloads'
+  assign structured_source = section.settings.structured_source | default: 'blocks'
+
+  case resource_kind
+    when 'downloads'
+      assign mo_type     = 'ezquest_download'
+      assign type_field  = 'download_type'
+      assign hero_kicker = 'Downloads'
+      assign hero_head   = 'Drivers, utilities &<br>setup files'
+      assign hero_sub    = 'All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.'
+    when 'manuals'
+      assign mo_type     = 'ezquest_manual'
+      assign type_field  = 'manual_type'
+      assign hero_kicker = 'Manuals'
+      assign hero_head   = 'Setup guides &<br>documentation'
+      assign hero_sub    = 'Product manuals and quick-start guides, organized by product family.'
+    when 'firmware'
+      assign mo_type     = 'ezquest_firmware'
+      assign type_field  = 'firmware_type'
+      assign hero_kicker = 'Firmware'
+      assign hero_head   = 'Firmware updates<br>by product'
+      assign hero_sub    = 'Confirm the product and version before installing. Update only the firmware that matches your exact setup.'
+    when 'guides'
+      assign mo_type     = 'ezquest_user_guide'
+      assign type_field  = 'guide_type'
+      assign hero_kicker = 'User guides'
+      assign hero_head   = 'Setup guides &<br>best practices'
+      assign hero_sub    = 'Step-by-step guides for getting the most from your EZQuest products.'
+  endcase
+
+  if structured_source == 'global'
+    assign mo_entries = shop.metaobjects[mo_type].values
+  endif
+-%}
+
 <section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
   <div class="support-hero__wrap w-full">
-    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">Downloads</p>
+    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">{{ hero_kicker }}</p>
     <h2 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
-      Drivers, utilities &amp;<br>setup files
+      {{ hero_head }}
     </h2>
     <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
-      All files verified and maintained by EZQuest.
-      Updated when firmware or OS compatibility changes.
+      {{ hero_sub }}
     </p>
   </div>
 </section>
 
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
-  <div class="filter-pills flex gap-2 flex-wrap mb-8" id="dl-filters">
-    <button class="filter-pill is-active" data-filter="all" type="button">All files</button>
-    <button class="filter-pill" data-filter="quickstart" type="button">Quick Start</button>
-    <button class="filter-pill" data-filter="driver" type="button">Drivers</button>
-    <button class="filter-pill" data-filter="utility" type="button">Utilities</button>
-  </div>
+  {%- if structured_source == 'global' -%}
 
-  <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
-    <table class="data-table w-full border-collapse text-sm" id="dl-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>File name</th>
-          <th>Type</th>
-          <th>Size</th>
-          <th>Version</th>
-          <th>Compatible with</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for block in section.blocks %}
-          {% if block.type == 'file' %}
-            <tr data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
-              <td data-label="Product">
-                <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ block.settings.product_name }}</span>
+    {%- comment -%} Build unique filter values from type field across all entries {%- endcomment -%}
+    {%- assign raw_types = '' -%}
+    {%- for entry in mo_entries -%}
+      {%- assign t = entry[type_field].value -%}
+      {%- if t != blank -%}
+        {%- assign raw_types = raw_types | append: t | append: '||' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign filter_types = raw_types | split: '||' | uniq | compact -%}
+
+    <div class="filter-pills flex gap-2 flex-wrap mb-8" id="dl-filters">
+      <button class="filter-pill is-active" data-filter="all" type="button">All</button>
+      {%- for type_label in filter_types -%}
+        <button class="filter-pill" data-filter="{{ type_label | handleize }}" type="button">{{ type_label }}</button>
+      {%- endfor -%}
+    </div>
+
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
+      <table class="data-table w-full border-collapse text-sm" id="dl-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>File name</th>
+            <th>Type</th>
+            <th>Version</th>
+            <th>Compatible with</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- if mo_entries.size > 0 -%}
+            {%- for entry in mo_entries -%}
+              {%- assign type_val    = entry[type_field].value -%}
+              {%- assign file_url    = entry.file.value.url | default: entry.external_url.value -%}
+              {%- assign product_ref = entry.products.value | map: 'title' | first -%}
+              {%- assign platforms   = entry.platforms.value | join: ' · ' -%}
+              {%- if platforms == blank -%}{%- assign platforms = 'Mac · Windows' -%}{%- endif -%}
+              <tr data-category="{{ type_val | handleize }}">
+                <td data-label="Product">
+                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ product_ref | default: '—' }}</span>
+                </td>
+                <td data-label="File" style="font-weight:500">{{ entry.title.value }}</td>
+                <td data-label="Type">
+                  <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase bg-black/[4%] text-[var(--ez-grey)]">{{ type_val | default: '—' }}</span>
+                </td>
+                <td data-label="Version" style="color:var(--ez-grey)">{{ entry.version.value | default: '—' }}</td>
+                <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ platforms }}</td>
+                <td>
+                  {%- if file_url != blank -%}
+                    <a href="{{ file_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download aria-label="Download {{ entry.title.value }}">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Download
+                    </a>
+                  {%- else -%}
+                    <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
+                  {%- endif -%}
+                </td>
+              </tr>
+            {%- endfor -%}
+          {%- else -%}
+            <tr>
+              <td colspan="6">
+                <div class="empty-state text-center py-16 px-8">
+                  <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Files are being uploaded</p>
+                  <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct file access.</p>
+                  <a href="/pages/contact" class="btn btn--primary">Request a file</a>
+                </div>
               </td>
-              <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
-              <td data-label="Type">
-                {% assign ext = block.settings.file_url | split: '.' | last | upcase %}
-                <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase {%- case ext | downcase -%}{%- when 'zip' -%} bg-[rgba(37,99,235,.07)] text-[var(--ez-info-text)]{%- when 'exe' -%} bg-[rgba(124,58,237,.07)] text-[#6d28d9]{%- else -%} bg-[rgba(220,38,38,.07)] text-[var(--ez-error-text)]{%- endcase -%}">{{ ext }}</span>
-              </td>
-              <td data-label="Size" style="color:var(--ez-grey)">{{ block.settings.file_size }}</td>
-              <td data-label="Version" style="color:var(--ez-grey)">{{ block.settings.version | default: '—' }}</td>
-              <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
-              <td>
-                {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
-                  <a href="{{ block.settings.file_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download aria-label="Download {{ block.settings.file_title }}">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Download
-                  </a>
-                {% else %}
-                  <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
-                {% endif %}
+            </tr>
+          {%- endif -%}
+        </tbody>
+      </table>
+    </div>
+
+  {%- else -%}
+
+    <div class="filter-pills flex gap-2 flex-wrap mb-8" id="dl-filters">
+      <button class="filter-pill is-active" data-filter="all" type="button">All files</button>
+      <button class="filter-pill" data-filter="quickstart" type="button">Quick Start</button>
+      <button class="filter-pill" data-filter="driver" type="button">Drivers</button>
+      <button class="filter-pill" data-filter="utility" type="button">Utilities</button>
+    </div>
+
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
+      <table class="data-table w-full border-collapse text-sm" id="dl-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>File name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Version</th>
+            <th>Compatible with</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for block in section.blocks %}
+            {% if block.type == 'file' %}
+              <tr data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
+                <td data-label="Product">
+                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ block.settings.product_name }}</span>
+                </td>
+                <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
+                <td data-label="Type">
+                  {% assign ext = block.settings.file_url | split: '.' | last | upcase %}
+                  <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase {%- case ext | downcase -%}{%- when 'zip' -%} bg-[rgba(37,99,235,.07)] text-[var(--ez-info-text)]{%- when 'exe' -%} bg-[rgba(124,58,237,.07)] text-[#6d28d9]{%- else -%} bg-[rgba(220,38,38,.07)] text-[var(--ez-error-text)]{%- endcase -%}">{{ ext }}</span>
+                </td>
+                <td data-label="Size" style="color:var(--ez-grey)">{{ block.settings.file_size }}</td>
+                <td data-label="Version" style="color:var(--ez-grey)">{{ block.settings.version | default: '—' }}</td>
+                <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
+                <td>
+                  {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
+                    <a href="{{ block.settings.file_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download aria-label="Download {{ block.settings.file_title }}">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Download
+                    </a>
+                  {% else %}
+                    <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+
+          {% if section.blocks.size == 0 %}
+            <tr>
+              <td colspan="7">
+                <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]">
+                  <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Files are being uploaded</p>
+                  <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct file access.</p>
+                  <a href="/pages/contact" class="btn btn--primary">Request a file</a>
+                </div>
               </td>
             </tr>
           {% endif %}
-        {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-        {% if section.blocks.size == 0 %}
-          <tr>
-            <td colspan="7">
-              <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]">
-                <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Files are being uploaded</p>
-                <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct file access.</p>
-                <a href="/pages/contact" class="btn btn--primary">Request a file</a>
-              </div>
-            </td>
-          </tr>
-        {% endif %}
-      </tbody>
-    </table>
-  </div>
-
+  {%- endif -%}
 
 </div>
 
 {%- render 'page-cta',
   variant: 'dark',
-  kicker: 'Downloads',
+  kicker: hero_kicker,
   heading: 'Can't find what you need?',
   subhead: 'Tell us the product and file type — we'll send it directly.',
   primary_label: 'Request a file',
@@ -110,7 +224,41 @@
 {
   "name": "Downloads",
   "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "resource_kind",
+      "label": "Resource type",
+      "info": "Determines which metaobject type to query and the hero text when using CMS source.",
+      "options": [
+        {"value": "downloads", "label": "Downloads"},
+        {"value": "manuals",   "label": "Manuals"},
+        {"value": "firmware",  "label": "Firmware"},
+        {"value": "guides",    "label": "User guides"}
+      ],
+      "default": "downloads"
+    },
+    {
+      "type": "select",
+      "id": "structured_source",
+      "label": "Content source",
+      "info": "CMS pulls from metaobjects. Blocks uses the section blocks below (manual entry).",
+      "options": [
+        {"value": "blocks", "label": "Blocks (manual)"},
+        {"value": "global", "label": "CMS (metaobjects)"}
+      ],
+      "default": "blocks"
+    }
+  ],
   "blocks": [
+    {
+      "type": "family",
+      "name": "Product family",
+      "settings": [
+        {"type":"text","id":"label","label":"Family label"},
+        {"type":"text","id":"handle","label":"Family handle"}
+      ]
+    },
     {
       "type": "file",
       "name": "File",

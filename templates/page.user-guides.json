@@ -9,13 +9,11 @@
         "light_mode": true
       }
     },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
-    },
     "downloads": {
       "type": "download-center",
       "settings": {
+        "resource_kind": "guides",
+        "structured_source": "global",
         "kicker": "User guides",
         "heading": "User guides by product family",
         "body": "Find the guide that matches your product, setup role, and workflow."
@@ -142,7 +140,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]

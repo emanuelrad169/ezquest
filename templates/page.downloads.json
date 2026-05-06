@@ -10,13 +10,11 @@
         "image": "shopify://shop_images/ezquest-downloads-hero.png"
       }
     },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
-    },
     "downloads": {
       "type": "download-center",
       "settings": {
+        "resource_kind": "downloads",
+        "structured_source": "global",
         "kicker": "Downloads",
         "heading": "Downloads by product and platform",
         "body": "Review downloads by product and platform. Use the filter to narrow by product family."
@@ -125,7 +123,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]
