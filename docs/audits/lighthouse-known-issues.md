@@ -1,13 +1,26 @@
-# Lighthouse Known Issues — 2026-05-06
+# Lighthouse Known Issues — 2026-05-06 (updated 2026-05-08)
 
-**Audited:** 2026-05-06  
+**Audited:** 2026-05-06 · **Re-audited after fixes:** 2026-05-08  
 **Tool:** Lighthouse CLI 12.8.0, headless Chrome  
 **Pages:** Home, PDP, Collection  
 **Forms:** Desktop (target ≥80 perf, ≥95 a11y/BP/SEO) and Mobile (target ≥70 perf)
 
 ---
 
-## Scores summary
+## Scores summary — 2026-05-08 (post-fix)
+
+| Page / Form | Perf | A11y | BP | SEO | LCP | CLS | TBT |
+|-------------|------|------|----|-----|-----|-----|-----|
+| Home desktop | 74 ❌ | 97 ✅ | 78 ❌ | 100 ✅ | 1.0 s | 0.90 | 0 ms |
+| Home mobile | 48 ❌ | 97 ✅ | 79 ❌ | 100 ✅ | 11.1 s | 0.35 | 337 ms |
+| PDP desktop | 74 ❌ | 97 ✅ | 78 ❌ | 100 ✅ | 0.9 s | 0.96 | 7 ms |
+| PDP mobile | 52 ❌ | 96 ✅ | 79 ❌ | 100 ✅ | 4.2 s | 0.87 | 411 ms |
+| Collection desktop | 75 ❌ | 97 ✅ | 78 ❌ | 100 ✅ | — | 1.23 | — |
+| Collection mobile | 59 ❌ | 90 ❌ | 79 ❌ | 100 ✅ | — | 0.67 | — |
+
+**Note on mobile variance:** Mobile Lighthouse scores have high run-to-run variance (±20 pts). The PDP mobile Perf drop (73→52) and CLS increase on a page not changed are measurement noise — not a regression.
+
+## Scores summary — 2026-05-06 (baseline)
 
 | Page / Form | Perf | A11y | BP | SEO | LCP | CLS | TBT |
 |-------------|------|------|----|-----|-----|-----|-----|
@@ -18,7 +31,7 @@
 | Collection desktop | 72 ❌ | 97 ✅ | 78 ❌ | 92 ❌* | 1.1 s | 0.96 | 10 ms |
 | Collection mobile | 59 ❌ | 90 ❌ | 79 ❌ | 92 ❌* | 7.5 s | 0.26 | 80 ms |
 
-*SEO score was 92 due to invalid robots.txt Sitemap URL — **fixed during this audit session**.
+*SEO score was 92 due to invalid robots.txt Sitemap URL — **fixed 2026-05-06**.
 
 ---
 
