@@ -1057,28 +1057,30 @@
 </section>
 {%- endif -%}
 
+{%- assign _jsonld_nl = '
+' -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "Product",
-  "name": "{{ product.title | escape }}",
-  "description": "{{ product.description | strip_html | strip | escape | truncate: 200 }}",
-  "url": "{{ shop.url }}{{ product.url }}",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | split: _jsonld_nl | join: ' ' | strip | truncate: 200 | json }},
+  "url": {{ shop.url | append: product.url | json }},
   "brand": {
     "@type": "Brand",
-    "name": "{{ product.vendor | default: shop.name | escape }}"
+    "name": {{ product.vendor | default: shop.name | json }}
   },
-  "image": "{{ product.featured_image | image_url: width: 1200 }}",
-  "sku": "{{ product.selected_or_first_available_variant.sku | escape }}",
+  "image": {{ product.featured_image | image_url: width: 1200 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
   "offers": {
     "@type": "Offer",
-    "url": "{{ shop.url }}{{ product.url }}",
-    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
     "price": {{ product.price | divided_by: 100.0 }},
     "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "seller": {
       "@type": "Organization",
-      "name": "{{ shop.name | escape }}"
+      "name": {{ shop.name | json }}
     }
   }
   {%- if display_rating_value != blank -%}

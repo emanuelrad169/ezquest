@@ -267,9 +267,34 @@ async function upsertEntry(entry, dryRun, log) {
   return { id: result.metaobject.id };
 }
 
+// ─── Count query ──────────────────────────────────────────────────────────────
+
+const COUNT_QUERY = `
+  query GetMetaobjects($type: String!) {
+    metaobjects(type: $type, first: 250) {
+      nodes { id handle }
+    }
+  }
+`;
+
+async function countByType(type) {
+  const data = await gql(COUNT_QUERY, { type });
+  return data.metaobjects.nodes.length;
+}
+
 // ─── Main ──────────────────────────────────────────────────────────────────────
 
 (async () => {
+  if (process.argv.includes('--list-counts')) {
+    const types = [...new Set(SEEDS.map(s => s.type))];
+    console.log('Metaobject counts in store:\n');
+    for (const t of types) {
+      const n = await countByType(t);
+      console.log(`  ${t.padEnd(30)} ${n}`);
+    }
+    return;
+  }
+
   const { dryRun, log } = runGuards(STORE, 'seed-metaobjects');
 
   let ok = 0, errors = 0;
