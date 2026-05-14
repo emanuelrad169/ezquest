@@ -273,24 +273,25 @@
 }
 
 /* ══════════════════════════════════════════════════
-   Shop mega menu — vertical-stack redesign
-   Header · Tiles · Subcats · Featured strip
+   Shop mega-menu — full-viewport panel, centered content
    ══════════════════════════════════════════════════ */
 
-/* Panel: narrow to 1024px, clean overflow */
 #nav-panel-shop {
-  max-width: 1024px;
   overflow: hidden;
   padding: 0;
 }
 
-/* Shell: column stack, no min-height */
+/* Shell: column stack, constrained to page-max-width and centered */
 .ez-mega__shell--shop {
   flex-direction: column;
   padding: 0;
   gap: 0;
   align-items: stretch;
   min-height: auto;
+  max-width: var(--page-max-width, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 /* ── Header row ─────────────────────────────────── */

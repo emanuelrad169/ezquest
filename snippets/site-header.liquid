@@ -1,12 +1,8 @@
 {%- liquid
   assign account_url = routes.account_url | default: '/account'
   assign account_login_url = routes.account_login_url | default: '/account/login'
-  assign is_home_template = false
-  if request.page_type == 'index'
-    assign is_home_template = true
-  endif
 -%}
-<header class="site-header{% if is_home_template %} site-header--hero-overlay{% endif %}" role="banner"{% if is_home_template %} data-header-scroll-threshold="28"{% else %} data-header-scroll-threshold="8"{% endif %}>
+<header class="site-header site-header--hero-overlay" role="banner" data-header-scroll-threshold="28">
   <div class="site-header-inner container-shell">
     <div class="site-header-shell grid w-full grid-cols-1 py-0">
       <div class="site-header-main-row flex w-full items-center gap-3 lg:gap-6">

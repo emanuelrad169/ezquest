@@ -18,9 +18,22 @@
         "cta2_label": "Browse resources",
         "cta2_url": "/blogs/resources"
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 360,
+        "heading": "How can we help?",
+        "subheading": "Find answers, download files, and get in touch.",
+        "kicker": "Support Center",
+        "background_image": "shopify://shop_images/ezquest-support-hero.png"
+      }
     }
   },
   "order": [
+    "page_hero",
     "hub",
     "cta"
   ]

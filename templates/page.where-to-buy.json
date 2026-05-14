@@ -137,7 +137,7 @@
           "type": "retailer",
           "settings": {
             "category": "intl_distributor",
-            "name": "Quintec Distribuci\u00f3n",
+            "name": "Quintec Distribución",
             "logo_asset": "BuyFrom-014.jpg",
             "url": "http://www.quintecdistribucion.cl/catalogo.php?busqueda=ezquest",
             "region": "Chile"
@@ -179,9 +179,21 @@
         "cta_label": "Become a reseller",
         "cta_url": "/pages/contact"
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Where To Buy"
+      }
     }
   },
   "order": [
+    "page_hero",
     "where-to-buy"
   ]
 }

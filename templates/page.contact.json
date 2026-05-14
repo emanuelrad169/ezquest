@@ -3,15 +3,14 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Support request",
-        "heading": "Get help now",
-        "subheading": "Choose the reason for your request, share the key details once, and we will take the next step with you.",
-        "light_mode": true
+        "kicker": "Contact",
+        "heading": "",
+        "subheading": "Pick the reason that matches your need, then send one support request with the right context.",
+        "light_mode": true,
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "details": {
       "type": "info-card-grid",
@@ -68,7 +67,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "details",
     "form"
   ]

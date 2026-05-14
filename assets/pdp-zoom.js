@@ -227,29 +227,31 @@
   }
 }());
 
-// ── Desktop side-panel hover zoom ──────────────────────────────────────────
+// ── Desktop circular lens hover zoom ──────────────────────────────────────
 (function () {
-  // Only on devices with a real mouse
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   if (window.innerWidth < 1024) return;
 
-  var mainFrame = document.querySelector('[data-pdp-main-image]');
-  var zoomPane  = document.querySelector('[data-zoom-pane]');
-  var zoomCrop  = document.querySelector('[data-zoom-crop]');
-  var buyBox    = document.querySelector('.pdp-buy-box');
-  var hintText  = document.querySelector('[data-zoom-hint-text]');
+  var container = document.querySelector('[data-zoom-container]');
+  if (!container) return;
 
-  if (!mainFrame || !zoomPane || !zoomCrop) return;
+  // Inject lens element
+  var lens = document.createElement('div');
+  lens.className = 'pdp-zoom-lens';
+  lens.setAttribute('aria-hidden', 'true');
+  container.appendChild(lens);
 
-  // Update hint label
-  if (hintText) hintText.textContent = 'Hover to zoom';
+  var LENS_SIZE = 280; // px — must match --lens-size in pdp.css
+  var ZOOM_PX   = 1800; // background-size: higher = more zoom
 
   var rafId = null;
-  var lastX = 0, lastY = 0;
+  var pendingEvent = null;
   var isActive = false;
+  var hintText = document.querySelector('[data-zoom-hint-text]');
+  if (hintText) hintText.textContent = 'Hover to zoom';
 
-  function getMainImg() {
-    return mainFrame.querySelector('img');
+  function getImg() {
+    return container.querySelector('img');
   }
 
   function highResSrc(img) {
@@ -257,63 +259,80 @@
     if (!src) return '';
     try {
       var url = new URL(src, window.location.origin);
-      url.searchParams.set('width', '2400');
+      url.searchParams.set('width', '2000');
       return url.toString();
     } catch (e) {
-      return src.replace(/(\?|&)(width=\d+)/, '$1width=2400')
-                .replace(/^([^?]*)$/, '$1?width=2400');
+      return src;
     }
   }
 
-  function updateCrop() {
-    rafId = null;
-    var img = getMainImg();
-    if (!img) return;
-    var rect = img.getBoundingClientRect();
-    var xPct = Math.max(0, Math.min(100, ((lastX - rect.left)  / rect.width)  * 100));
-    var yPct = Math.max(0, Math.min(100, ((lastY - rect.top)   / rect.height) * 100));
-    zoomCrop.style.backgroundPosition = xPct + '% ' + yPct + '%';
+  function setLensImage(img) {
+    var src = highResSrc(img);
+    lens.style.backgroundImage = "url('" + src + "')";
+    lens.style.backgroundSize = ZOOM_PX + 'px ' + ZOOM_PX + 'px';
+    var preload = new Image();
+    preload.src = src;
   }
 
-  mainFrame.addEventListener('mouseenter', function () {
-    var img = getMainImg();
+  function updateLens(e) {
+    rafId = null;
+    var img = getImg();
+    if (!img || !isActive) return;
+
+    var imgRect = img.getBoundingClientRect();
+    var cRect   = container.getBoundingClientRect();
+
+    var x = e.clientX - imgRect.left;
+    var y = e.clientY - imgRect.top;
+
+    if (x < 0 || y < 0 || x > imgRect.width || y > imgRect.height) {
+      lens.classList.remove('is-active');
+      return;
+    }
+    lens.classList.add('is-active');
+
+    // Lens position relative to container, centered on cursor, clamped to image bounds
+    var originX = imgRect.left - cRect.left;
+    var originY = imgRect.top  - cRect.top;
+    var lensX = originX + Math.max(0, Math.min(imgRect.width  - LENS_SIZE, x - LENS_SIZE / 2));
+    var lensY = originY + Math.max(0, Math.min(imgRect.height - LENS_SIZE, y - LENS_SIZE / 2));
+
+    lens.style.left = lensX + 'px';
+    lens.style.top  = lensY + 'px';
+
+    // Background-position: shift the high-res image so the area under the cursor shows
+    var ratioX = ZOOM_PX / imgRect.width;
+    var ratioY = ZOOM_PX / imgRect.height;
+    var bgX = -(x * ratioX) + LENS_SIZE / 2;
+    var bgY = -(y * ratioY) + LENS_SIZE / 2;
+    lens.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+  }
+
+  container.addEventListener('mouseenter', function () {
+    var img = getImg();
     if (!img) return;
     isActive = true;
-    zoomCrop.style.backgroundImage = "url('" + highResSrc(img) + "')";
-    zoomPane.classList.add('is-active');
-    zoomPane.setAttribute('aria-hidden', 'false');
-    if (buyBox) buyBox.classList.add('is-zoom-active');
+    setLensImage(img);
   });
 
-  mainFrame.addEventListener('mouseleave', function () {
+  container.addEventListener('mouseleave', function () {
     isActive = false;
-    zoomPane.classList.remove('is-active');
-    zoomPane.setAttribute('aria-hidden', 'true');
-    if (buyBox) buyBox.classList.remove('is-zoom-active');
+    lens.classList.remove('is-active');
   });
 
-  mainFrame.addEventListener('mousemove', function (e) {
-    lastX = e.clientX;
-    lastY = e.clientY;
-    if (rafId == null) rafId = requestAnimationFrame(updateCrop);
+  container.addEventListener('mousemove', function (e) {
+    pendingEvent = e;
+    if (rafId == null) {
+      rafId = requestAnimationFrame(function () { updateLens(pendingEvent); });
+    }
   });
 
-  // On desktop suppress mouse-initiated clicks to lightbox (keyboard clicks still work)
-  mainFrame.addEventListener('click', function (e) {
-    if (e.detail > 0) e.stopImmediatePropagation();
-  }, true);
-
-  // After thumb switch (animateMainImage fires at 140ms), update zoom bg
+  // After thumb switch, update the lens background to the new image
   document.addEventListener('click', function (e) {
     if (!e.target.closest('[data-pdp-thumb]')) return;
     setTimeout(function () {
-      var img = getMainImg();
-      if (!img) return;
-      var src = highResSrc(img);
-      // Preload regardless; if currently hovering, swap bg immediately
-      var preload = new Image();
-      preload.src = src;
-      if (isActive) zoomCrop.style.backgroundImage = "url('" + src + "')";
+      var img = getImg();
+      if (img) setLensImage(img);
     }, 180);
   });
 }());

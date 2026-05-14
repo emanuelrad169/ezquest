@@ -3,7 +3,21 @@
     "wishlist": {
       "type": "wishlist-page",
       "settings": {}
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Wishlist"
+      }
     }
   },
-  "order": ["wishlist"]
+  "order": [
+    "page_hero",
+    "wishlist"
+  ]
 }

@@ -1,0 +1,6 @@
+Scanned 60 products
+Found 0 potential issues across 0 products
+HIGH priority (>3 matches): 0 products
+MEDIUM priority (2-3 matches): 0 products
+LOW priority (1 match): 0 products
+Output: /Applications/MAMP/htdocs/EZQuest/docs/migration/audit-descriptions-2026-05-06-prioritized.csv

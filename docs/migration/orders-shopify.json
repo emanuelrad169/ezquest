@@ -1,0 +1,5306 @@
+[
+  {
+    "_meta": {
+      "legacyId": "ORD-10001",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 196.47,
+      "reportedTotal": 196.47
+    },
+    "email": "mark.flores46@me.com",
+    "created_at": "2024-05-06T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10001.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10001"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114937542,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112152262,
+        "quantity": 1,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114806470,
+        "quantity": 3,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Mark",
+      "last_name": "Flores",
+      "address1": "8052 Main St",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "35553",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Mark",
+      "last_name": "Flores",
+      "address1": "8052 Main St",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "35553",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "14.55",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "196.47",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10002",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 421.11,
+      "reportedTotal": 421.11
+    },
+    "email": "anthony.taylor@hotmail.com",
+    "created_at": "2023-09-06T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10002.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10002"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112938694,
+        "quantity": 3,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155748550,
+        "quantity": 1,
+        "price": "79.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114347718,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155748550,
+        "quantity": 1,
+        "price": "79.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "4462 Cedar Ln",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "96081",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "4462 Cedar Ln",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "96081",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "31.19",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "421.11",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10003",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 30.22,
+      "reportedTotal": 30.22
+    },
+    "email": "richard.white@gmail.com",
+    "created_at": "2023-08-17T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10003.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10003"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156043462,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Richard",
+      "last_name": "White",
+      "address1": "8419 Valley Dr",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "69951",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Richard",
+      "last_name": "White",
+      "address1": "8419 Valley Dr",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "69951",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "2.24",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "30.22",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10004",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 45.33,
+      "reportedTotal": 45.33
+    },
+    "email": "amanda.green@comcast.net",
+    "created_at": "2023-06-28T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10004.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10004"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114806470,
+        "quantity": 1,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114806470,
+        "quantity": 1,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "9934 Pine St",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "45858",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "9934 Pine St",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "45858",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.36",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "45.33",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10006",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 21.59,
+      "reportedTotal": 21.59
+    },
+    "email": "betty.jackson@live.com",
+    "created_at": "2025-12-21T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10006.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10006"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156043462,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Betty",
+      "last_name": "Jackson",
+      "address1": "9093 Forest Ave",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "19185",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Betty",
+      "last_name": "Jackson",
+      "address1": "9093 Forest Ave",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "19185",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "1.6",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "21.59",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10007",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 30.22,
+      "reportedTotal": 30.22
+    },
+    "email": "william.roberts48@hotmail.com",
+    "created_at": "2026-01-25T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10007.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10007"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115035846,
+        "quantity": 1,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "7420 Cedar Ln",
+      "address2": "",
+      "city": "San Antonio",
+      "province": "TX",
+      "zip": "28810",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "7420 Cedar Ln",
+      "address2": "",
+      "city": "San Antonio",
+      "province": "TX",
+      "zip": "28810",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "2.24",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "30.22",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10008",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 259.11,
+      "reportedTotal": 259.11
+    },
+    "email": "lisa.hill@yahoo.com",
+    "created_at": "2025-11-18T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10008.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10008"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114937542,
+        "quantity": 2,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114839238,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155945158,
+        "quantity": 3,
+        "price": "29.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112381638,
+        "quantity": 1,
+        "price": "89.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Lisa",
+      "last_name": "Hill",
+      "address1": "8581 Sunset Blvd",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "48229",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Lisa",
+      "last_name": "Hill",
+      "address1": "8581 Sunset Blvd",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "48229",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "19.19",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "259.11",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10009",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 49.91,
+      "reportedTotal": 49.91
+    },
+    "email": "william.roberts48@hotmail.com",
+    "created_at": "2025-09-26T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10009.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10009"
+      },
+      {
+        "name": "discount_code",
+        "value": "WELCOME10"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115068614,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "4310 Stone Ave",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "91797",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "4310 Stone Ave",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "91797",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.7",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "49.91",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10010",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 205.16,
+      "reportedTotal": 205.16
+    },
+    "email": "amanda.gomez45@live.com",
+    "created_at": "2023-12-07T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10010.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10010"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115068614,
+        "quantity": 2,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155748550,
+        "quantity": 2,
+        "price": "79.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Amanda",
+      "last_name": "Gomez",
+      "address1": "395 Stone Ave",
+      "address2": "",
+      "city": "Chicago",
+      "province": "IL",
+      "zip": "64187",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Amanda",
+      "last_name": "Gomez",
+      "address1": "395 Stone Ave",
+      "address2": "",
+      "city": "Chicago",
+      "province": "IL",
+      "zip": "64187",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "15.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "205.16",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10011",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 96.06,
+      "reportedTotal": 96.06
+    },
+    "email": "amanda.green@comcast.net",
+    "created_at": "2023-09-27T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10011. Customer note: Please gift wrap",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10011"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114806470,
+        "quantity": 2,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115068614,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "1228 Hill Rd",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "47686",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "1228 Hill Rd",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "47686",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "7.12",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "96.06",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10012",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 94.98,
+      "reportedTotal": 94.98
+    },
+    "email": "emily.green@comcast.net",
+    "created_at": "2024-07-08T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10012.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10012"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156829894,
+        "quantity": 1,
+        "price": "16.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114839238,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115068614,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "2919 Lincoln Ave",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "38132",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "2919 Lincoln Ave",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "38132",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "7.04",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "94.98",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10013",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 43.18,
+      "reportedTotal": 43.18
+    },
+    "email": "melissa.thomas@yahoo.com",
+    "created_at": "2025-09-20T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10013.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10013"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156534982,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "2539 Main St",
+      "address2": "",
+      "city": "San Jose",
+      "province": "CA",
+      "zip": "42020",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "2539 Main St",
+      "address2": "",
+      "city": "San Jose",
+      "province": "CA",
+      "zip": "42020",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "43.18",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10014",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 159.8,
+      "reportedTotal": 159.8
+    },
+    "email": "melissa.thomas@yahoo.com",
+    "created_at": "2024-06-13T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10014.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10014"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114937542,
+        "quantity": 1,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112938694,
+        "quantity": 2,
+        "price": "59.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "7691 Maple Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "97411",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "7691 Maple Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "97411",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "11.84",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "159.8",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10015",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 334.74,
+      "reportedTotal": 334.74
+    },
+    "email": "karen.wilson@me.com",
+    "created_at": "2025-03-17T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10015.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10015"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45707264426182,
+        "quantity": 1,
+        "price": "44.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111890118,
+        "quantity": 2,
+        "price": "35.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112381638,
+        "quantity": 2,
+        "price": "89.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Karen",
+      "last_name": "Wilson",
+      "address1": "9990 Park Ave",
+      "address2": "",
+      "city": "San Jose",
+      "province": "CA",
+      "zip": "53485",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Karen",
+      "last_name": "Wilson",
+      "address1": "9990 Park Ave",
+      "address2": "",
+      "city": "San Jose",
+      "province": "CA",
+      "zip": "53485",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "24.8",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "334.74",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10016",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 299.07,
+      "reportedTotal": 299.07
+    },
+    "email": "donna.jones@comcast.net",
+    "created_at": "2024-03-15T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10016.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10016"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156797126,
+        "quantity": 1,
+        "price": "49.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115003078,
+        "quantity": 2,
+        "price": "16.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114347718,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112152262,
+        "quantity": 2,
+        "price": "69.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Donna",
+      "last_name": "Jones",
+      "address1": "3240 Forest Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "20398",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Donna",
+      "last_name": "Jones",
+      "address1": "3240 Forest Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "20398",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "22.15",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "299.07",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10017",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 328.26,
+      "reportedTotal": 328.26
+    },
+    "email": "thomas.evans@hotmail.com",
+    "created_at": "2023-09-17T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10017.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10017"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112938694,
+        "quantity": 1,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 3,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156829894,
+        "quantity": 2,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Thomas",
+      "last_name": "Evans",
+      "address1": "5291 Ridge Rd",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "71363",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Thomas",
+      "last_name": "Evans",
+      "address1": "5291 Ridge Rd",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "71363",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "24.32",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "328.26",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10018",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 226.76,
+      "reportedTotal": 226.76
+    },
+    "email": "george.flores@icloud.com",
+    "created_at": "2023-05-07T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10018.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10018"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156534982,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112381638,
+        "quantity": 2,
+        "price": "89.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "9742 Lincoln Ave",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "79152",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "9742 Lincoln Ave",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "79152",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "16.8",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "226.76",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10019",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 97.15,
+      "reportedTotal": 97.15
+    },
+    "email": "brian.edwards@comcast.net",
+    "created_at": "2023-05-13T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10019.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10019"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114380486,
+        "quantity": 2,
+        "price": "22.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114806470,
+        "quantity": 2,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Brian",
+      "last_name": "Edwards",
+      "address1": "8894 Hill Rd",
+      "address2": "",
+      "city": "San Antonio",
+      "province": "TX",
+      "zip": "38007",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Brian",
+      "last_name": "Edwards",
+      "address1": "8894 Hill Rd",
+      "address2": "",
+      "city": "San Antonio",
+      "province": "TX",
+      "zip": "38007",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "7.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "97.15",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10020",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 66.91,
+      "reportedTotal": 66.91
+    },
+    "email": "mark.flores46@me.com",
+    "created_at": "2023-09-06T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10020.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10020"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156731590,
+        "quantity": 1,
+        "price": "12.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155683014,
+        "quantity": 3,
+        "price": "11.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Mark",
+      "last_name": "Flores",
+      "address1": "2660 Hill Rd",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "94457",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Mark",
+      "last_name": "Flores",
+      "address1": "2660 Hill Rd",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "94457",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "4.96",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "66.91",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10021",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 138.18,
+      "reportedTotal": 138.18
+    },
+    "email": "nancy.edwards@gmail.com",
+    "created_at": "2023-06-27T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10021.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10021"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708155945158,
+        "quantity": 2,
+        "price": "29.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156534982,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "9275 Stone Ave",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "66640",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "9275 Stone Ave",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "66640",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "10.24",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "138.18",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10022",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 63.68,
+      "reportedTotal": 63.68
+    },
+    "email": "jessica.collins@me.com",
+    "created_at": "2024-10-26T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10022.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10022"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115003078,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Jessica",
+      "last_name": "Collins",
+      "address1": "8029 Pine St",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "64177",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Jessica",
+      "last_name": "Collins",
+      "address1": "8029 Pine St",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "64177",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "4.72",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "63.68",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10023",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 52.46,
+      "reportedTotal": 52.46
+    },
+    "email": "ronald.campbell@comcast.net",
+    "created_at": "2025-05-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10023.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10023"
+      },
+      {
+        "name": "discount_code",
+        "value": "SAVE10"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115035846,
+        "quantity": 3,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Campbell",
+      "address1": "7233 River Rd",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "19466",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Campbell",
+      "address1": "7233 River Rd",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "19466",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.89",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "52.46",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10025",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 155.42,
+      "reportedTotal": 155.42
+    },
+    "email": "lisa.edwards@aol.com",
+    "created_at": "2025-09-20T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10025.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10025"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114937542,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114347718,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115003078,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "LISA",
+      "last_name": "Edwards",
+      "address1": "290 River Rd",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "32288",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "LISA",
+      "last_name": "Edwards",
+      "address1": "290 River Rd",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "32288",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "11.51",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "155.42",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10026",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 308.79,
+      "reportedTotal": 308.79
+    },
+    "email": "nancy.wilson@gmail.com",
+    "created_at": "2024-09-23T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10026.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10026"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114806470,
+        "quantity": 1,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112971462,
+        "quantity": 1,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112938694,
+        "quantity": 2,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114413254,
+        "quantity": 3,
+        "price": "25.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Nancy",
+      "last_name": "Wilson",
+      "address1": "2610 Hill Rd",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "17301",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Nancy",
+      "last_name": "Wilson",
+      "address1": "2610 Hill Rd",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "17301",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "22.87",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "308.79",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10028",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 605.76,
+      "reportedTotal": 605.76
+    },
+    "email": "william.roberts48@hotmail.com",
+    "created_at": "2026-04-09T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10028.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10028"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112971462,
+        "quantity": 3,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112938694,
+        "quantity": 2,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112152262,
+        "quantity": 3,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156829894,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3735 Maple Dr",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "25147",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3735 Maple Dr",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "25147",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "44.87",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "605.76",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10029",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 97.17,
+      "reportedTotal": 97.17
+    },
+    "email": "edward.nelson49@me.com",
+    "created_at": "2023-06-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10029.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10029"
+      },
+      {
+        "name": "discount_code",
+        "value": "WELCOME10"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156797126,
+        "quantity": 2,
+        "price": "49.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Edward",
+      "last_name": "Nelson",
+      "address1": "5034 Lake Dr",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "59982",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Edward",
+      "last_name": "Nelson",
+      "address1": "5034 Lake Dr",
+      "address2": "",
+      "city": "Austin",
+      "province": "TX",
+      "zip": "59982",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "7.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "97.17",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10030",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 278.54,
+      "reportedTotal": 278.54
+    },
+    "email": "amanda.green@comcast.net",
+    "created_at": "2024-08-08T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10030.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10030"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114904774,
+        "quantity": 3,
+        "price": "12.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156764358,
+        "quantity": 2,
+        "price": "15.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155748550,
+        "quantity": 2,
+        "price": "79.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115003078,
+        "quantity": 1,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "7710 Cherry St",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "37169",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Amanda",
+      "last_name": "Green",
+      "address1": "7710 Cherry St",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "37169",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "20.63",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "278.54",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10032",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 89.59,
+      "reportedTotal": 89.59
+    },
+    "email": "jessica.collins@me.com",
+    "created_at": "2025-05-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10032.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10032"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114839238,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114937542,
+        "quantity": 2,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Jessica",
+      "last_name": "Collins",
+      "address1": "1367 Oak Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "75849",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Jessica",
+      "last_name": "Collins",
+      "address1": "1367 Oak Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "75849",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "6.64",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "89.59",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10033",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 73.42,
+      "reportedTotal": 73.42
+    },
+    "email": "ronald.garcia@mac.com",
+    "created_at": "2023-08-05T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10033.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10033"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112938694,
+        "quantity": 1,
+        "price": "59.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Garcia",
+      "address1": "4840 Sunset Blvd",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "82951",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Garcia",
+      "address1": "4840 Sunset Blvd",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "82951",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "5.44",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "73.42",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10034",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 203,
+      "reportedTotal": 203
+    },
+    "email": "betty.jackson@live.com",
+    "created_at": "2024-12-13T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10034.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10034"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112381638,
+        "quantity": 1,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45707264426182,
+        "quantity": 2,
+        "price": "44.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Betty",
+      "last_name": "Jackson",
+      "address1": "7936 Pine St",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "91797",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Betty",
+      "last_name": "Jackson",
+      "address1": "7936 Pine St",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "91797",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "15.04",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "203",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10035",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 127.4,
+      "reportedTotal": 127.4
+    },
+    "email": "lisa.edwards@aol.com",
+    "created_at": "2025-09-17T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10035.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10035"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669111857350,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "LISA",
+      "last_name": "Edwards",
+      "address1": "288 Meadow Ln",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "75174",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "LISA",
+      "last_name": "Edwards",
+      "address1": "288 Meadow Ln",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "75174",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "9.44",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "127.4",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10036",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 203.99,
+      "reportedTotal": 203.99
+    },
+    "email": "ronald.evans@me.com",
+    "created_at": "2023-12-19T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10036.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10036"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114839238,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114904774,
+        "quantity": 3,
+        "price": "12.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156829894,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156731590,
+        "quantity": 3,
+        "price": "12.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "2719 Main St",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "73365",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "2719 Main St",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "73365",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "15.11",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "203.99",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10038",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 45.34,
+      "reportedTotal": 45.34
+    },
+    "email": "joseph.jones@aol.com",
+    "created_at": "2023-12-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10038.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10038"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669111857350,
+        "quantity": 1,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Joseph",
+      "last_name": "Jones",
+      "address1": "201 Ridge Rd",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "62707",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Joseph",
+      "last_name": "Jones",
+      "address1": "201 Ridge Rd",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "62707",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.36",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "45.34",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10040",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 16.19,
+      "reportedTotal": 16.19
+    },
+    "email": "melissa.thomas@yahoo.com",
+    "created_at": "2024-06-11T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10040. Customer note: Please gift wrap",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10040"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156600518,
+        "quantity": 1,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "2735 Sunset Blvd",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "88119",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Melissa",
+      "last_name": "Thomas",
+      "address1": "2735 Sunset Blvd",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "88119",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "1.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "16.19",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10041",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 210.5,
+      "reportedTotal": 210.5
+    },
+    "email": "karen.wilson@me.com",
+    "created_at": "2023-05-27T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10041.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10041"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156764358,
+        "quantity": 1,
+        "price": "15.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115068614,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111890118,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156534982,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Karen",
+      "last_name": "Wilson",
+      "address1": "6067 Washington Blvd",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "38023",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Karen",
+      "last_name": "Wilson",
+      "address1": "6067 Washington Blvd",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "38023",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "15.59",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "210.5",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10045",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 288.3,
+      "reportedTotal": 288.3
+    },
+    "email": "sandra.jones@gmail.com",
+    "created_at": "2026-02-01T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10045.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10045"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112185030,
+        "quantity": 3,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156534982,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115003078,
+        "quantity": 1,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Sandra",
+      "last_name": "Jones",
+      "address1": "3223 Washington Blvd",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "31637",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Sandra",
+      "last_name": "Jones",
+      "address1": "3223 Washington Blvd",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "31637",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "21.36",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "288.3",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10046",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 80.3,
+      "reportedTotal": 80.3
+    },
+    "email": "sandra.jones@gmail.com",
+    "created_at": "2025-10-21T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10046.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10046"
+      },
+      {
+        "name": "discount_code",
+        "value": "NEWCUST15"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114806470,
+        "quantity": 2,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156534982,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Sandra",
+      "last_name": "Jones",
+      "address1": "6525 Elm St",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "20900",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Sandra",
+      "last_name": "Jones",
+      "address1": "6525 Elm St",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "20900",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "5.95",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "80.3",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10047",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 318.51,
+      "reportedTotal": 318.51
+    },
+    "email": "susan.morris@live.com",
+    "created_at": "2025-04-11T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10047.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10047"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114937542,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114839238,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112381638,
+        "quantity": 1,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112971462,
+        "quantity": 2,
+        "price": "59.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Susan",
+      "last_name": "Morris",
+      "address1": "6553 Pine St",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "79085",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Susan",
+      "last_name": "Morris",
+      "address1": "6553 Pine St",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "79085",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "23.59",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "318.51",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10049",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 53.99,
+      "reportedTotal": 53.99
+    },
+    "email": "amanda.gomez45@live.com",
+    "created_at": "2023-08-26T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10049.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10049"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156797126,
+        "quantity": 1,
+        "price": "49.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Amanda",
+      "last_name": "Gomez",
+      "address1": "8422 Valley Dr",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "19533",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Amanda",
+      "last_name": "Gomez",
+      "address1": "8422 Valley Dr",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "19533",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "4",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "53.99",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10050",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 428.66,
+      "reportedTotal": 428.66
+    },
+    "email": "ronald.evans@me.com",
+    "created_at": "2025-02-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10050.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10050"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156600518,
+        "quantity": 3,
+        "price": "14.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112348870,
+        "quantity": 3,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111857350,
+        "quantity": 2,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "6674 Washington Blvd",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "41998",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "6674 Washington Blvd",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "41998",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "31.75",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "428.66",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10051",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 226.77,
+      "reportedTotal": 226.77
+    },
+    "email": "william.roberts48@hotmail.com",
+    "created_at": "2024-05-26T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10051.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10051"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112152262,
+        "quantity": 3,
+        "price": "69.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3977 Willow Way",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "71578",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3977 Willow Way",
+      "address2": "",
+      "city": "Indianapolis",
+      "province": "IN",
+      "zip": "71578",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "16.8",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "226.77",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10052",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 397.34,
+      "reportedTotal": 397.34
+    },
+    "email": "george.flores@icloud.com",
+    "created_at": "2026-02-18T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10052.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10052"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114904774,
+        "quantity": 2,
+        "price": "12.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114904774,
+        "quantity": 2,
+        "price": "12.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155748550,
+        "quantity": 3,
+        "price": "79.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 1,
+        "price": "69.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "5551 Meadow Ln",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "16186",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "5551 Meadow Ln",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "16186",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "29.43",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "397.34",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10053",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 156.57,
+      "reportedTotal": 156.57
+    },
+    "email": "matthew.jones@yahoo.com",
+    "created_at": "2024-09-17T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10053.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10053"
+      },
+      {
+        "name": "discount_code",
+        "value": "HOLIDAY30"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112971462,
+        "quantity": 3,
+        "price": "59.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Matthew",
+      "last_name": "Jones",
+      "address1": "7470 Maple Dr",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "12254",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Matthew",
+      "last_name": "Jones",
+      "address1": "7470 Maple Dr",
+      "address2": "",
+      "city": "Seattle",
+      "province": "WA",
+      "zip": "12254",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "11.6",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "156.57",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10054",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 352,
+      "reportedTotal": 352
+    },
+    "email": "george.flores@icloud.com",
+    "created_at": "2023-05-18T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10054.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10054"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112348870,
+        "quantity": 3,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156764358,
+        "quantity": 3,
+        "price": "15.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "7193 Valley Dr",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "78773",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "7193 Valley Dr",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "78773",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "26.07",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "352",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10055",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 166.27,
+      "reportedTotal": 166.27
+    },
+    "email": "nancy.edwards@gmail.com",
+    "created_at": "2026-03-14T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10055.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10055"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669111857350,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111890118,
+        "quantity": 1,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "9432 Park Ave",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "26518",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "9432 Park Ave",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "26518",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "12.32",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "166.27",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10056",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 32.39,
+      "reportedTotal": 32.39
+    },
+    "email": "thomas.evans@hotmail.com",
+    "created_at": "2025-12-12T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10056.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10056"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708155945158,
+        "quantity": 1,
+        "price": "29.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Thomas",
+      "last_name": "Evans",
+      "address1": "9909 Valley Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "74541",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Thomas",
+      "last_name": "Evans",
+      "address1": "9909 Valley Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "74541",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "2.4",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "32.39",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10058",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 86.36,
+      "reportedTotal": 86.36
+    },
+    "email": "mark.jackson@aol.com",
+    "created_at": "2023-08-20T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10058.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10058"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156534982,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114839238,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Mark",
+      "last_name": "Jackson",
+      "address1": "5940 Maple Dr",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "74272",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Mark",
+      "last_name": "Jackson",
+      "address1": "5940 Maple Dr",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "74272",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "6.4",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "86.36",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10059",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 208.6,
+      "reportedTotal": 208.6
+    },
+    "email": "william.roberts48@hotmail.com",
+    "created_at": "2023-06-10T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10059.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10059"
+      },
+      {
+        "name": "discount_code",
+        "value": "FALL15"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112381638,
+        "quantity": 2,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114806470,
+        "quantity": 3,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3051 Willow Way",
+      "address2": "",
+      "city": "Philadelphia",
+      "province": "PA",
+      "zip": "21259",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "William",
+      "last_name": "Roberts",
+      "address1": "3051 Willow Way",
+      "address2": "",
+      "city": "Philadelphia",
+      "province": "PA",
+      "zip": "21259",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "15.45",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "208.6",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10063",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 128.47,
+      "reportedTotal": 128.47
+    },
+    "email": "ashley.garcia@gmail.com",
+    "created_at": "2024-02-13T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10063.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10063"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114347718,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155945158,
+        "quantity": 1,
+        "price": "29.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111857350,
+        "quantity": 1,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ashley",
+      "last_name": "Garcia",
+      "address1": "6856 Lincoln Ave",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "16189",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ashley",
+      "last_name": "Garcia",
+      "address1": "6856 Lincoln Ave",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "16189",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "9.52",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "128.47",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10064",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 151.18,
+      "reportedTotal": 151.18
+    },
+    "email": "matthew.jones@yahoo.com",
+    "created_at": "2025-04-05T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10064.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10064"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112152262,
+        "quantity": 2,
+        "price": "69.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Matthew",
+      "last_name": "Jones",
+      "address1": "6745 Valley Dr",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "21069",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Matthew",
+      "last_name": "Jones",
+      "address1": "6745 Valley Dr",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "21069",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "11.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "151.18",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10065",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 190,
+      "reportedTotal": 190
+    },
+    "email": "ronald.campbell@comcast.net",
+    "created_at": "2025-10-26T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10065. Customer note: Please gift wrap",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10065"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114839238,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111890118,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114347718,
+        "quantity": 1,
+        "price": "19.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Campbell",
+      "address1": "903 Cedar Ln",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "86481",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Campbell",
+      "address1": "903 Cedar Ln",
+      "address2": "",
+      "city": "Fort Worth",
+      "province": "TX",
+      "zip": "86481",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "14.07",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "190",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10067",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 201.87,
+      "reportedTotal": 201.87
+    },
+    "email": "ashley.brown@yahoo.com",
+    "created_at": "2025-07-02T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10067.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10067"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112938694,
+        "quantity": 1,
+        "price": "59.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156829894,
+        "quantity": 2,
+        "price": "16.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114380486,
+        "quantity": 3,
+        "price": "22.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115035846,
+        "quantity": 1,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ashley",
+      "last_name": "Brown",
+      "address1": "9009 Valley Dr",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "20223",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ashley",
+      "last_name": "Brown",
+      "address1": "9009 Valley Dr",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "20223",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "14.95",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "201.87",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10068",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 275.11,
+      "reportedTotal": 275.11
+    },
+    "email": "emily.green@comcast.net",
+    "created_at": "2023-07-06T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10068.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10068"
+      },
+      {
+        "name": "discount_code",
+        "value": "HOLIDAY30"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156764358,
+        "quantity": 3,
+        "price": "15.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 2,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156797126,
+        "quantity": 2,
+        "price": "49.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "4791 Stone Ave",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "28845",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "4791 Stone Ave",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "28845",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "20.38",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "275.11",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10069",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 190,
+      "reportedTotal": 190
+    },
+    "email": "lisa.roberts47@outlook.com",
+    "created_at": "2026-03-30T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10069. Customer note: Please gift wrap",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10069"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156764358,
+        "quantity": 2,
+        "price": "15.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114380486,
+        "quantity": 1,
+        "price": "22.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 1,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156829894,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Lisa",
+      "last_name": "Roberts",
+      "address1": "2585 Valley Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "53466",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Lisa",
+      "last_name": "Roberts",
+      "address1": "2585 Valley Dr",
+      "address2": "",
+      "city": "Los Angeles",
+      "province": "CA",
+      "zip": "53466",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "14.07",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "190",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10070",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 97.18,
+      "reportedTotal": 97.18
+    },
+    "email": "lisa.hill@yahoo.com",
+    "created_at": "2025-10-04T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10070.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10070"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708155748550,
+        "quantity": 1,
+        "price": "79.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Lisa",
+      "last_name": "Hill",
+      "address1": "9201 Main St",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "24992",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Lisa",
+      "last_name": "Hill",
+      "address1": "9201 Main St",
+      "address2": "",
+      "city": "Columbus",
+      "province": "OH",
+      "zip": "24992",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "7.2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "97.18",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10072",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 247.24,
+      "reportedTotal": 247.24
+    },
+    "email": "sarah.adams@comcast.net",
+    "created_at": "2023-05-12T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10072.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10072"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156043462,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 2,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114380486,
+        "quantity": 1,
+        "price": "22.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Sarah",
+      "last_name": "Adams",
+      "address1": "8861 Maple Dr",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "88596",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Sarah",
+      "last_name": "Adams",
+      "address1": "8861 Maple Dr",
+      "address2": "",
+      "city": "Dallas",
+      "province": "TX",
+      "zip": "88596",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "18.31",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "247.24",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10073",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 170.69,
+      "reportedTotal": 170.69
+    },
+    "email": "emily.green@comcast.net",
+    "created_at": "2026-01-31T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10073.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10073"
+      },
+      {
+        "name": "discount_code",
+        "value": "SAVE10"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112348870,
+        "quantity": 1,
+        "price": "89.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156534982,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114806470,
+        "quantity": 2,
+        "price": "17.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "9295 Maple Dr",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "84513",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Emily",
+      "last_name": "Green",
+      "address1": "9295 Maple Dr",
+      "address2": "",
+      "city": "Charlotte",
+      "province": "NC",
+      "zip": "84513",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "12.64",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "170.69",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10074",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 42.09,
+      "reportedTotal": 42.09
+    },
+    "email": "george.flores@icloud.com",
+    "created_at": "2025-01-20T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10074.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10074"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156731590,
+        "quantity": 3,
+        "price": "12.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "141 Pine St",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "53708",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "George",
+      "last_name": "Flores",
+      "address1": "141 Pine St",
+      "address2": "",
+      "city": "Nashville",
+      "province": "TN",
+      "zip": "53708",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "3.12",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "42.09",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10076",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 163.03,
+      "reportedTotal": 163.03
+    },
+    "email": "nancy.edwards@gmail.com",
+    "created_at": "2025-10-24T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10076.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10076"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156829894,
+        "quantity": 3,
+        "price": "16.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708155945158,
+        "quantity": 1,
+        "price": "29.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112185030,
+        "quantity": 1,
+        "price": "69.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "4404 Ridge Rd",
+      "address2": "",
+      "city": "San Francisco",
+      "province": "CA",
+      "zip": "81641",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "4404 Ridge Rd",
+      "address2": "",
+      "city": "San Francisco",
+      "province": "CA",
+      "zip": "81641",
+      "country": "US"
+    },
+    "shipping_lines": [],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "12.08",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "163.03",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10077",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 224.55,
+      "reportedTotal": 224.55
+    },
+    "email": "ashley.davis@aol.com",
+    "created_at": "2024-06-15T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10077.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10077"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669114839238,
+        "quantity": 2,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114839238,
+        "quantity": 3,
+        "price": "19.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45708156797126,
+        "quantity": 2,
+        "price": "49.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ashley",
+      "last_name": "Davis",
+      "address1": "4901 Lake Dr",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "28515",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ashley",
+      "last_name": "Davis",
+      "address1": "4901 Lake Dr",
+      "address2": "",
+      "city": "Jacksonville",
+      "province": "FL",
+      "zip": "28515",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "7.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "16.63",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "224.55",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10078",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 136.05,
+      "reportedTotal": 136.05
+    },
+    "email": "susan.morris@live.com",
+    "created_at": "2025-08-23T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10078.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10078"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669112971462,
+        "quantity": 2,
+        "price": "59.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Susan",
+      "last_name": "Morris",
+      "address1": "8048 Maple Dr",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "81049",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Susan",
+      "last_name": "Morris",
+      "address1": "8048 Maple Dr",
+      "address2": "",
+      "city": "Houston",
+      "province": "TX",
+      "zip": "81049",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "10.08",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "136.05",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10079",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 91.77,
+      "reportedTotal": 91.77
+    },
+    "email": "ronald.evans@me.com",
+    "created_at": "2025-06-12T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10079.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10079"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669111857350,
+        "quantity": 2,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "2490 Valley Dr",
+      "address2": "",
+      "city": "Phoenix",
+      "province": "AZ",
+      "zip": "81759",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Ronald",
+      "last_name": "Evans",
+      "address1": "2490 Valley Dr",
+      "address2": "",
+      "city": "Phoenix",
+      "province": "AZ",
+      "zip": "81759",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "6.8",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "91.77",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10080",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 26.98,
+      "reportedTotal": 26.98
+    },
+    "email": "anthony.taylor@hotmail.com",
+    "created_at": "2023-08-23T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10080.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10080"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708156600518,
+        "quantity": 1,
+        "price": "14.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "5789 Cherry St",
+      "address2": "",
+      "city": "San Francisco",
+      "province": "CA",
+      "zip": "98011",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "5789 Cherry St",
+      "address2": "",
+      "city": "San Francisco",
+      "province": "CA",
+      "zip": "98011",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "2",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "26.98",
+        "gateway": "paypal"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10081",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 244,
+      "reportedTotal": 244
+    },
+    "email": "nancy.edwards@gmail.com",
+    "created_at": "2024-06-25T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10081. Customer note: Please gift wrap",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10081"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669111890118,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669111890118,
+        "quantity": 3,
+        "price": "35.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "5863 Pine St",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "89857",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "address1": "5863 Pine St",
+      "address2": "",
+      "city": "Denver",
+      "province": "CO",
+      "zip": "89857",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "9.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "18.07",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "244",
+        "gateway": "amex"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10082",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 24.39,
+      "reportedTotal": 24.39
+    },
+    "email": "joshua.rivera@me.com",
+    "created_at": "2024-11-15T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10082.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10082"
+      },
+      {
+        "name": "discount_code",
+        "value": "HOLIDAY30"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45708155683014,
+        "quantity": 1,
+        "price": "11.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Joshua",
+      "last_name": "Rivera",
+      "address1": "447 Lincoln Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "54464",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Joshua",
+      "last_name": "Rivera",
+      "address1": "447 Lincoln Ave",
+      "address2": "",
+      "city": "San Diego",
+      "province": "CA",
+      "zip": "54464",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "12.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "1.81",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "24.39",
+        "gateway": "credit_card"
+      }
+    ]
+  },
+  {
+    "_meta": {
+      "legacyId": "ORD-10083",
+      "unmappedSkus": [],
+      "reconciled": true,
+      "calcTotal": 263.41,
+      "reportedTotal": 263.41
+    },
+    "email": "anthony.taylor@hotmail.com",
+    "created_at": "2026-04-28T00:00:00.000Z",
+    "financial_status": "paid",
+    "fulfillment_status": "fulfilled",
+    "send_receipt": false,
+    "send_fulfillment_receipt": false,
+    "inventory_behavior": "bypass",
+    "tags": "migrated, legacy-shopsite",
+    "note": "Migrated from ezq.com on 2026-05-06. Legacy order #ORD-10083.",
+    "note_attributes": [
+      {
+        "name": "legacy_order_id",
+        "value": "ORD-10083"
+      }
+    ],
+    "line_items": [
+      {
+        "variant_id": 45669115035846,
+        "quantity": 2,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669115035846,
+        "quantity": 3,
+        "price": "17.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669112152262,
+        "quantity": 1,
+        "price": "69.99",
+        "requires_shipping": true
+      },
+      {
+        "variant_id": 45669114413254,
+        "quantity": 3,
+        "price": "25.99",
+        "requires_shipping": true
+      }
+    ],
+    "billing_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "1267 Main St",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "18529",
+      "country": "US"
+    },
+    "shipping_address": {
+      "first_name": "Anthony",
+      "last_name": "Taylor",
+      "address1": "1267 Main St",
+      "address2": "",
+      "city": "New York",
+      "province": "NY",
+      "zip": "18529",
+      "country": "US"
+    },
+    "shipping_lines": [
+      {
+        "title": "Legacy shipping",
+        "price": "5.99",
+        "code": "LEGACY"
+      }
+    ],
+    "tax_lines": [
+      {
+        "title": "Tax",
+        "price": "19.51",
+        "rate": 0
+      }
+    ],
+    "transactions": [
+      {
+        "kind": "sale",
+        "status": "success",
+        "amount": "263.41",
+        "gateway": "credit_card"
+      }
+    ]
+  }
+]

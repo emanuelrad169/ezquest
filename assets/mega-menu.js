@@ -39,6 +39,12 @@
     }, CLOSE_DELAY);
   }
 
+  const overlayHeader = document.querySelector('.site-header--hero-overlay');
+
+  function setMenuOpen(open) {
+    if (overlayHeader) overlayHeader.classList.toggle('is-menu-open', open);
+  }
+
   function _open(trigger, panel) {
     panel.removeAttribute('hidden');
     panel.offsetHeight; // force reflow so CSS transition fires
@@ -47,6 +53,7 @@
     trigger.classList.add('is-active');
     activePanel   = panel;
     activeTrigger = trigger;
+    setMenuOpen(true);
 
     // Clamp to viewport right edge (skip full-width Shop mega panel)
     if (!panel.classList.contains('ez-mega')) {
@@ -80,8 +87,8 @@
       trigger.setAttribute('aria-expanded', 'false');
       trigger.classList.remove('is-active');
     }
-    if (activePanel   === panel)   activePanel   = null;
-    if (activeTrigger === trigger) activeTrigger = null;
+    if (activePanel   === panel)   { activePanel   = null; setMenuOpen(false); }
+    if (activeTrigger === trigger)   activeTrigger = null;
   }
 
   function closeAll(instant) {

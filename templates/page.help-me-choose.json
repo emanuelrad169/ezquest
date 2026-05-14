@@ -3,10 +3,13 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Help me choose",
-        "heading": "Find the right setup before you shop",
-        "subheading": "Start with the setup role, then move into the EZQuest family and product built for the way you work.",
-        "image": "shopify://shop_images/ezquest-support-multi-device-charging.png"
+        "kicker": "Help Me Choose",
+        "heading": "",
+        "subheading": "",
+        "image": "shopify://shop_images/ezquest-support-multi-device-charging.png",
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
     },
     "guide": {

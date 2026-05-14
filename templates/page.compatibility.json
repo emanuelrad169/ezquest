@@ -7,7 +7,22 @@
     "results": {
       "type": "compatibility-results",
       "settings": {}
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Compatibility"
+      }
     }
   },
-  "order": ["search", "results"]
+  "order": [
+    "page_hero",
+    "search",
+    "results"
+  ]
 }

@@ -4,15 +4,14 @@
       "type": "page-hero",
       "settings": {
         "kicker": "FAQ",
-        "heading": "Common questions, answered.",
-        "subheading": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly.",
+        "heading": "Frequently asked questions",
+        "subheading": "Quick answers to common product questions.",
         "light_mode": true,
-        "image": "shopify://shop_images/ezquest-faq-hero.png"
+        "image": "shopify://shop_images/ezquest-faq-hero.png",
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "faq": {
       "type": "faq-accordion",
@@ -266,7 +265,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "faq",
     "cta"
   ]

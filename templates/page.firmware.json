@@ -4,9 +4,12 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Firmware",
-        "heading": "Firmware updates by product and version",
-        "subheading": "Confirm the product and version first, then update only the firmware that matches your exact setup.",
-        "light_mode": true
+        "heading": "",
+        "subheading": "",
+        "light_mode": true,
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
     },
     "downloads": {

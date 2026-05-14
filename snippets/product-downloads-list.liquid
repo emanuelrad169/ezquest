@@ -1,0 +1,40 @@
+{% comment %}
+  Renders the per-product download list from ezquest_download metaobjects.
+  Usage: {% render 'product-downloads-list', product: product %}
+  Filters by iterating dl.products.value (array of Product drops) and comparing
+  .id to the current product.id — GID string comparison does not work here
+  because .value returns objects, not strings.
+{% endcomment %}
+
+{%- assign all_downloads = shop.metaobjects.ezquest_download.values -%}
+
+{%- capture dl_list_html -%}
+  {%- for dl in all_downloads -%}
+    {%- assign dl_has_product = false -%}
+    {%- for ref in dl.products.value -%}
+      {%- if ref.id == product.id -%}
+        {%- assign dl_has_product = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if dl_has_product -%}
+      {%- assign file_url = dl.file.value.url | default: dl.external_url.value -%}
+      {%- if file_url != blank -%}
+        <li class="pdp-dl-item">
+          <a href="{{ file_url }}" target="_blank" rel="noopener" download>
+            <span class="pdp-dl-item__name">{{ dl.title.value }}</span>
+            {%- assign ext = file_url | split: '.' | last | upcase -%}
+            {%- if ext == 'PDF' or ext == 'ZIP' or ext == 'EXE' or ext == 'DMG' -%}
+              <span class="pill pill--{{ ext | downcase }}">{{ ext }}</span>
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if dl_list_html != blank -%}
+  <ul class="pdp-dl-list">{{ dl_list_html }}</ul>
+{%- else -%}
+  <p class="pdp-dl-empty">No downloads available for this product yet. Visit the <a href="/pages/downloads" class="site-meta-link">downloads page</a> for all support files.</p>
+{%- endif -%}

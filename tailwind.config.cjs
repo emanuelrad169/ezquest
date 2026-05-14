@@ -70,7 +70,26 @@ module.exports = {
         border: {
           DEFAULT: "#e2e8f0",
           strong: "#cbd5e1"
-        }
+        },
+        /* Token-aliased utilities — generated from src/styles/tokens.css */
+        'ez-brand':   { yellow: 'var(--ez-brand-yellow)', dark: 'var(--ez-brand-dark)' },
+        'ez-text':    {
+          primary:   'var(--ez-text-primary)',
+          secondary: 'var(--ez-text-secondary)',
+          tertiary:  'var(--ez-text-tertiary)',
+          link:      'var(--ez-text-link)',
+        },
+        'ez-surface': {
+          DEFAULT: 'var(--ez-surface-default)',
+          soft:    'var(--ez-surface-soft)',
+          subtle:  'var(--ez-surface-subtle)',
+          dark:    'var(--ez-surface-dark)',
+        },
+        'ez-border': {
+          DEFAULT: 'var(--ez-border-default)',
+          strong:  'var(--ez-border-strong)',
+          subtle:  'var(--ez-border-subtle)',
+        },
       },
       fontSize: {
         "caption-xs": ["0.65rem", { lineHeight: "1rem", letterSpacing: "0.18em" }],
@@ -257,7 +276,10 @@ module.exports = {
       boxShadow: {
         soft: "0 12px 36px rgba(15, 23, 42, 0.04)",
         medium: "0 18px 50px rgba(15, 23, 42, 0.05)",
-        lift: "0 24px 70px rgba(15, 23, 42, 0.12)"
+        lift: "0 24px 70px rgba(15, 23, 42, 0.12)",
+        xs:    'var(--shadow-xs)',
+        xl:    'var(--shadow-xl)',
+        focus: 'var(--shadow-focus)',
       },
       backgroundImage: {
         surface: "linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%)",

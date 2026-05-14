@@ -1,7 +1,8 @@
 <footer class="site-footer" role="contentinfo">
+  <div class="container-shell">
 
-  {% comment %} TOP: 4-col link grid {% endcomment %}
-  <div class="site-footer__grid">
+    {% comment %} TOP: 4-col link grid {% endcomment %}
+    <div class="site-footer__grid">
 
     <div class="footer-col">
       <p class="footer-col__heading">Products</p>
@@ -50,12 +51,12 @@
       </ul>
     </div>
 
-  </div>
+    </div>
 
-  <div class="site-footer__divider"></div>
+    <div class="site-footer__divider"></div>
 
-  {% comment %} BOTTOM: logo + social + copyright {% endcomment %}
-  <div class="site-footer__bottom">
+    {% comment %} BOTTOM: logo + social + copyright {% endcomment %}
+    <div class="site-footer__bottom">
 
     <div class="site-footer__brand">
       <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
@@ -102,6 +103,7 @@
       &copy; {{ 'now' | date: '%Y' }} EZQuest Corporation. All rights reserved.
     </p>
 
+    </div>
   </div>
 
 </footer>

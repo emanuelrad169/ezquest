@@ -94,7 +94,15 @@
 
 | Check | Status | Notes |
 | ----- | ------ | ----- |
-| Metaobject seeding (4 types) | ✅ Live | ezquest_download: 88, manual: 6, firmware: 3, user_guide: 6 |
+| Metaobject seeding (4 types) | ✅ Live | ezquest_download: 88 (82 with URLs, 6 client-blocked), manual: 6, firmware: 3, user_guide: 6 |
+| Metaobject storefront access | ✅ Fixed 2026-05-08 | All 4 types set to PUBLIC_READ. Before fix: shop.metaobjects[type].values returned empty in Liquid (NONE access). Pages now render rows. |
+| PDP content migration (54 products) | ✅ Complete 2026-05-08 | 4 metafield definitions created (custom.product_features, product_specifications, product_highlight, product_compatibility_html). 216 metafields written (54 × 4). Source: docs/migration/legacy-product-content.json. Script: scripts/migration/data/seed-product-content.js. |
+| PDP tab UI | ✅ Shipped 2026-05-08 | 5-tab click-to-show panel (Features / Specifications / Highlight / Compatibility / Downloads) replaces scroll-zone scaffolding. Old zones 4–7 removed. Downloads tab uses product-downloads-list.liquid snippet via ezquest_download metaobjects. |
+| Downloads tab fix | ✅ Fixed 2026-05-09 | Root cause: snippet compared GID strings to Product objects (always false). Fixed by iterating dl.products.value and comparing ref.id == product.id. All 88 download metaobjects already had products populated from seed — no relinking needed. |
+| Mojibake fix (36 metafields) | ✅ Fixed 2026-05-09 | 157 U+FFFD replacement characters replaced across 25 products / 36 metafields. Rules: brand trademarks (USB-C®, Thunderbolt®, HDMI®, Kevlar®), bullets (•), inch marks ("), multipliers (×), em dashes (—), possessives ('). 0 remaining. Script: scripts/migration/data/fix-content-mojibake.js. Diff log: docs/migration/mojibake-fixes-2026-05-09.csv. |
+| Mega-menu restructure | ✅ Done 2026-05-11 | 3-group / 11-subcategory nav matching legacy ezq.com structure (USB-C / Cables-Adapters / Power). 55 products tagged (nav-* tags), 11 smart collections created (usb-c-hubs, usb-c-cables-collection, usb-c-adapters, usb-c-card-readers, usb-c-enclosures, hdmi-cables-adapters, displayport-cables-adapters, mini-displayport-cables, audio-cables, wall-chargers, car-chargers). ez-mega-shop.liquid fully schema-driven via menu_column + menu_sub_link blocks. 14 redirect rows updated in docs/ezq-redirects.csv. **Manual step:** re-import docs/ezq-redirects.csv via Admin → Online Store → Navigation → URL Redirects. |
+| Trademark symbol restore | ✅ Done 2026-05-12 | 11 product titles updated (DuraGuard™, HDMI®, en-dash in Pro Series). 36 content metafields re-seeded from authoritative legacy JSON (trademark symbols restored in product_features / product_specifications / product_highlight / product_compatibility_html). Scripts: restore-tm-symbols.js, seed-product-content.js. JSON-LD `name` verified correct on spot-checked PDPs. |
+| Catalog parity audit | ✅ Done 2026-05-12 | All 11 Shopify collections match legacy ezq.com category counts exactly. USB-C Hubs: 17 (incl. 2 card readers cross-listed per legacy). Card Readers: 6 (incl. 4 multi-port hubs cross-listed per legacy). All others unchanged. Redirect coverage: /X48912-X48922-duraguard-usb-c-to-usb-a-charge-sync-cable.html already present in CSV. Full counts: usb-c-hubs 17, usb-c-cables-collection 9, usb-c-adapters 11, usb-c-card-readers 6, usb-c-enclosures 1, hdmi-cables-adapters 5, displayport-cables-adapters 2, mini-displayport-cables 1, audio-cables 1, wall-chargers 9, car-chargers 2. |
 | Judge.me theme code | ✅ Removed | No jdgm/judgeme refs in theme. App uninstall: **manual step** — verify in Admin → Apps |
 | Amazon reviews seed | ✅ 1 product seeded | magnetic-usb-c-m-2-nvme-ssd-enclosure (ASIN B08R63NWGQ, 4.6★, 127 reviews). Remaining products: **client-blocked** (needs ASINs) |
 | Video metafield seed | ⏳ Client-blocked | Client must confirm which of the 10 extracted videos to keep. Run: `node scripts/migration/data/seed-product-videos.js --apply --confirm-production` |
@@ -138,16 +146,18 @@
 | Judge.me app uninstall | Manual admin action | Admin → Apps → Judge.me → Uninstall |
 | Checkout test | Manual with real card | See `docs/audits/checkout-test-2026-05-06.md` |
 | Cross-browser test | Manual | See `docs/audits/cross-browser-2026-05-06.md` |
+| Manual/firmware/guide file URLs | Client to provide PDF/binary URLs | 6 manual + 3 firmware + 6 user_guide + 6 download entries show "Available on request" — no legacy files exist for these placeholder product entries (USB-C Multimedia Hub, Travel Hub, Pro Dock line). Client must upload files to Shopify Files and populate `external_url` on each metaobject via Admin → Content → Metaobjects. |
 
 ---
 
 ## Next steps
 
 1. **Immediate (P1 done):** Hero slider height fix shipped (2026-05-08). Desktop Perf 57→74, SEO 92→100.
-2. **Optional P2 (post-launch sprint):** Residual CLS 0.90–1.23 desktop. Deep-dive JS hero initialization timing. Estimated +5–10 perf points.
-3. **When client responds:** Run Amazon reviews seed + video seed.
-4. **Before DNS cutover:** Complete checkout test + cross-browser test (manual checklists at `docs/audits/`).
-5. **DNS cutover:**
+1. **Immediate (P1 done):** Metaobject storefront access fixed (2026-05-08). All 4 types PUBLIC_READ. Support pages (/pages/manuals, /pages/firmware, /pages/user-guides, /pages/downloads) now render content rows.
+1. **Optional P2 (post-launch sprint):** Residual CLS 0.90–1.23 desktop. Confirmed headless artifact (0 layout-shift-elements, 0ms TBT). Real-world impact: none. See `docs/audits/lighthouse-known-issues.md`.
+1. **When client responds:** Run Amazon reviews seed + video seed.
+1. **Before DNS cutover:** Complete checkout test + cross-browser test (manual checklists at `docs/audits/`).
+1. **DNS cutover:**
    - Remove storefront password (Online Store → Preferences)
    - Set ezq.com as primary domain (Online Store → Domains)
    - Update DNS at registrar: A record → 23.227.38.65, CNAME www → shops.myshopify.com

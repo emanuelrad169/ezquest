@@ -1,51 +1,7 @@
 {% comment %} sections/about.liquid {% endcomment %}
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
-{% comment %} 1. DARK HERO {% endcomment %}
-<section class="page-hero-dark">
-  <div class="container-shell">
-    <p class="page-hero-dark__kicker">
-      {{ section.settings.kicker | default: 'Est. 1994 · Lake Forest, California' }}
-    </p>
-    <h1 class="page-hero-dark__heading">
-      {{ section.settings.heading | default: 'Built for people who connect everything.' }}
-    </h1>
-    <p class="page-hero-dark__body">
-      {{ section.settings.body | default: 'Since 1994, EZQuest has made it simpler to connect the devices that matter most — with products built to last and a team that stands behind every one.' }}
-    </p>
-    <div class="story-stat-grid">
-      <div>
-        <p style="font-size:36px;font-weight:500;
-                  letter-spacing:-0.03em;color:var(--ez-light);">
-          {{ section.settings.stat1_value | default: '30+' }}
-        </p>
-        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
-          {{ section.settings.stat1_label | default: 'Years in business' }}
-        </p>
-      </div>
-      <div>
-        <p style="font-size:36px;font-weight:500;
-                  letter-spacing:-0.03em;color:var(--ez-light);">
-          {{ section.settings.stat2_value | default: '100+' }}
-        </p>
-        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
-          {{ section.settings.stat2_label | default: 'Products made' }}
-        </p>
-      </div>
-      <div>
-        <p style="font-size:36px;font-weight:500;
-                  letter-spacing:-0.03em;color:var(--ez-light);">
-          {{ section.settings.stat3_value | default: '2yr' }}
-        </p>
-        <p style="font-size:13px;color:rgba(255,255,255,0.45);">
-          {{ section.settings.stat3_label | default: 'Warranty on every product' }}
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% comment %} 2. THREE PILLARS {% endcomment %}
+{% comment %} THREE PILLARS {% endcomment %}
 <section class="page-section page-section--white bg-white">
   <div class="container-shell about-pillars-shell">
     <div class="section-intro">

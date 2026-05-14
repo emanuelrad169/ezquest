@@ -1,19 +1,6 @@
 <section class="section-shell cart-page-section">
   <div class="container-shell">
 
-    <div class="cart-page-header">
-      <p class="section-kicker">Your bag</p>
-      <h1 class="cart-page-title">
-        {% if cart.item_count == 0 %}
-          Your cart is empty
-        {% elsif cart.item_count == 1 %}
-          Cart (1 item)
-        {% else %}
-          Cart ({{ cart.item_count }} items)
-        {% endif %}
-      </h1>
-    </div>
-
     {% if cart.item_count > 0 %}
       <form action="{{ routes.cart_url }}" method="post" id="cart-page-form">
         <div class="cart-page-layout">

@@ -245,6 +245,7 @@
                 class="product-gallery-main pdp-gallery-main"
                 data-zoom-trigger
                 data-pdp-main-image
+                data-zoom-container
                 aria-label="Open product image zoom"
                 role="button"
                 tabindex="0"
@@ -310,11 +311,6 @@
           </div>
         </div>
 
-        <div class="pdp-zoom-pane" aria-hidden="true" data-zoom-pane>
-          <div class="pdp-zoom-pane__crop" data-zoom-crop
-               style="background-image:url('{{ product.featured_image | image_url: width: 2400 }}')">
-          </div>
-        </div>
 
         <div
           id="pdp-zoom-modal"
@@ -361,7 +357,6 @@
 
             <div class="product-buybox-headline-row flex flex-col gap-3">
               <div class="product-buybox-lead space-y-2.5">
-                <h1 class="section-heading product-buybox-title max-w-none text-2xl leading-tight tracking-tight lg:text-2xl">{{ product.title }}</h1>
                 {% render 'amazon-reviews-widget', product: product %}
               </div>
 
@@ -404,11 +399,6 @@
 
             <div class="product-buybox-price-row flex flex-col gap-2">
               <p class="product-buybox-setup-statement text-sm leading-relaxed text-slate-700">{{ setup_statement }}</p>
-              {% if product_positioning_text != blank %}
-                <p class="pdp-subtitle">{{ product_positioning_text | truncate: 90 }}</p>
-              {% else %}
-                <p class="pdp-subtitle">{{ role_decision_note }}</p>
-              {% endif %}
             </div>
           </div>
 
@@ -790,22 +780,6 @@
     endif
   endfor
 -%}
-<div class="pdp-tab-strip" data-pdp-tab-strip>
-  <div class="pdp-tab-strip-inner">
-    <a href="#pdp-overview" class="pdp-tab" data-pdp-tab>Overview</a>
-    {% if show_features_tab %}
-      <a href="#pdp-features" class="pdp-tab" data-pdp-tab>Features</a>
-    {% endif %}
-    {% if product != blank and product.metafields.ezquest.spec_rows != blank %}
-      <a href="#pdp-specs" class="pdp-tab" data-pdp-tab>Specs</a>
-    {% endif %}
-    <a href="#pdp-compat" class="pdp-tab" data-pdp-tab>Compatibility</a>
-    <a href="#pdp-downloads" class="pdp-tab" data-pdp-tab>Downloads</a>
-    {% if settings.reviews_app != 'none' %}
-      <a href="#pdp-reviews" class="pdp-tab" data-pdp-tab>Reviews</a>
-    {% endif %}
-  </div>
-</div>
 
 {% comment %}──────────────────────────────────────────────────────────────
   ZONE 3 — FEATURES
@@ -852,190 +826,117 @@
 {% endif %}
 
 {% comment %}──────────────────────────────────────────────────────────────
-  ZONE 4 — SPECIFICATIONS
-  Guard: requires spec_rows metafield with at least one row.
-──────────────────────────────────────────────────────────────{% endcomment %}
-{% if spec_count > 0 %}
-<section class="section-shell pdp-section pdp-section--specs" id="pdp-specs">
-  <div class="container-shell">
-    {%- liquid
-      assign pdp_specs_heading = 'Specifications'
-      assign pdp_specs_copy = 'Review the ports, charging support, display path, and host details before you order.'
-      case product.handle
-        when 'usb-c-travel-hub'
-          assign pdp_specs_heading = 'Specifications for mobile setups'
-          assign pdp_specs_copy = 'Review the core ports, charging path, and display support that matter when the setup needs to stay light and mobile.'
-        when 'usb-c-pro-dock'
-          assign pdp_specs_heading = 'Specifications for desk setups'
-          assign pdp_specs_copy = 'Review the broader connectivity, display support, charging path, and host details that matter before you commit to a permanent desk setup.'
-        when 'usb-c-multimedia-hub'
-          assign pdp_specs_heading = 'Specifications for everyday desks'
-          assign pdp_specs_copy = 'Review the ports, charging support, display path, and host details that make this a strong everyday choice.'
-      endcase
-    -%}
-    <div class="grid gap-8 lg:grid-cols-article-aside lg:items-start">
-      <div class="product-technical-intro">
-        <p class="section-kicker">Technical sheet</p>
-        <h2 class="section-heading mt-4">{{ pdp_specs_heading }}</h2>
-        <p class="section-copy mt-4">{{ pdp_specs_copy }}</p>
-      </div>
-      <div class="pdp-spec-table">
-        <div class="pdp-spec-table-head">
-          <p class="section-kicker">Technical profile</p>
-        </div>
-        <div class="pdp-spec-table-body">
-          {% for row in product_spec_rows %}
-            <div class="pdp-spec-row{% if forloop.first %} pdp-spec-row--first{% endif %}">
-              <span class="pdp-spec-label">{{ row.label.value }}</span>
-              <span class="pdp-spec-value">{{ row.spec_value.value }}</span>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{% endif %}
-
-{% comment %}──────────────────────────────────────────────────────────────
-  ZONE 5 — HIGHLIGHTS
-  No guard — always renders with hardcoded fallback copy.
-  Shows product metafield highlights when available.
+  ZONE 4 — CONTENT TABS
+  Driven by custom metafields seeded from legacy ezq.com extract.
+  Tabs render only when the metafield has content — products without
+  legacy content (placeholder products) show 0 tabs (correct).
 ──────────────────────────────────────────────────────────────{% endcomment %}
 {%- liquid
-  assign pdp_hl_one = 'Clean connectivity for every device on the desk'
-  assign pdp_hl_two = 'Ports, power, and display support — one adapter'
-  assign pdp_hl_three = 'Mac and Windows ready, no drivers needed'
-  if has_structured_highlights
-    assign pdp_hl_one = structured_highlights[0] | strip
-    if structured_highlights.size > 1
-      assign pdp_hl_two = structured_highlights[1] | strip
-    endif
-    if structured_highlights.size > 2
-      assign pdp_hl_three = structured_highlights[2] | strip
-    endif
+  assign features_html      = product.metafields.custom.product_features.value
+  assign specs_html         = product.metafields.custom.product_specifications.value
+  assign highlight_html     = product.metafields.custom.product_highlight.value
+  assign compat_html        = product.metafields.custom.product_compatibility_html.value
+  assign has_features       = false
+  assign has_specs          = false
+  assign has_highlight      = false
+  assign has_compat         = false
+  if features_html and features_html != ''
+    assign has_features = true
+  endif
+  if specs_html and specs_html != ''
+    assign has_specs = true
+  endif
+  if highlight_html and highlight_html != ''
+    assign has_highlight = true
+  endif
+  if compat_html and compat_html != ''
+    assign has_compat = true
+  endif
+  assign first_tab = ''
+  if has_features
+    assign first_tab = 'features'
+  elsif has_specs
+    assign first_tab = 'specs'
+  elsif has_highlight
+    assign first_tab = 'highlight'
+  elsif has_compat
+    assign first_tab = 'compat'
+  else
+    assign first_tab = 'downloads'
   endif
 -%}
-<section class="section-shell pdp-section pdp-section--highlights" id="pdp-highlights">
+
+{%- assign tab_count = 0 -%}
+{%- if has_features -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
+{%- if has_specs -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
+{%- if has_highlight -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
+{%- if has_compat -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
+{%- assign tab_count = tab_count | plus: 1 -%}
+
+<section class="section-shell pdp-section pdp-content-tabs-section" id="pdp-content-tabs" data-pdp-tabs>
   <div class="container-shell">
-    <p class="section-kicker">Why it stands out</p>
-    <h2 class="section-heading mt-4">{{ product.title | split: '—' | first | strip }}</h2>
-    <div class="pdp-highlight-grid mt-8">
-      <div class="pdp-highlight-card">
-        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <rect x="6" y="11" width="20" height="10" rx="5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75"/>
-          <circle cx="12" cy="16" r="1.75" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
-          <circle cx="20" cy="16" r="1.75" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
-          <path d="M16 21v5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round"/>
-          <path d="M16 5v6" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round"/>
-          <circle cx="16" cy="4" r="1.5" stroke="var(--ez-amber,#FED300)" stroke-width="1.5"/>
-        </svg>
-        <span class="pdp-highlight-num" aria-hidden="true">01</span>
-        <p class="pdp-highlight-copy">{{ pdp_hl_one }}</p>
-      </div>
-      <div class="pdp-highlight-card">
-        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <path d="M18 4L9 17h9l-4 11 10-14h-9L18 4z" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="pdp-highlight-num" aria-hidden="true">02</span>
-        <p class="pdp-highlight-copy">{{ pdp_hl_two }}</p>
-      </div>
-      <div class="pdp-highlight-card">
-        <svg class="pdp-highlight-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-          <circle cx="16" cy="16" r="11" stroke="var(--ez-amber,#FED300)" stroke-width="1.75"/>
-          <path d="M10.5 16.5l4 4 7-8.5" stroke="var(--ez-amber,#FED300)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="pdp-highlight-num" aria-hidden="true">03</span>
-        <p class="pdp-highlight-copy">{{ pdp_hl_three }}</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-{% comment %}──────────────────────────────────────────────────────────────
-  ZONE 6 — COMPATIBILITY
-  No guard — OS chips always render.
-  Compat table renders only if compatibility_entries metafield exists.
-  Driver callout always renders.
-──────────────────────────────────────────────────────────────{% endcomment %}
-<section class="section-shell pdp-section pdp-section--compat" id="pdp-compat">
-  <div class="container-shell container-wild">
-    <div class="container-shell">
-      <div class="max-w-7xl">
-        <p class="section-kicker">Compatibility</p>
-        <h2 class="section-heading mt-4">Works with your setup</h2>
-        <p class="mt-4">{% if compatibility_summary_text != blank %}{{ compatibility_summary_text }}{% else %}Compatible with Mac, Windows, iPad, and most USB-C host devices.{% endif %}</p>
-      </div>
+    <div class="pdp-tabs__list" role="tablist" aria-label="Product information">
+      {%- if has_features -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'features' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'features' %}true{% else %}false{% endif %}"
+                data-tab="features">Features</button>
+      {%- endif -%}
+      {%- if has_specs -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'specs' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'specs' %}true{% else %}false{% endif %}"
+                data-tab="specs">Specifications</button>
+      {%- endif -%}
+      {%- if has_highlight -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'highlight' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'highlight' %}true{% else %}false{% endif %}"
+                data-tab="highlight">Highlight</button>
+      {%- endif -%}
+      {%- if has_compat -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'compat' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'compat' %}true{% else %}false{% endif %}"
+                data-tab="compat">Compatibility</button>
+      {%- endif -%}
+      <button class="pdp-tabs__trigger{% if first_tab == 'downloads' %} is-active{% endif %}"
+              role="tab" aria-selected="{% if first_tab == 'downloads' %}true{% else %}false{% endif %}"
+              data-tab="downloads">Downloads</button>
     </div>
 
-    <div class="container-shell pdp-os-chips mt-10" role="list" aria-label="Compatible platforms">
-      <span class="pdp-os-chip" role="listitem">macOS</span>
-      <span class="pdp-os-chip" role="listitem">Windows</span>
-      <span class="pdp-os-chip" role="listitem">iPadOS</span>
-      <span class="pdp-os-chip" role="listitem">ChromeOS</span>
-    </div>
-
-    {% if product != blank and product.metafields.ezquest.compatibility_entries != blank %}
-      {%- assign compat_entries = product.metafields.ezquest.compatibility_entries.value -%}
-      {% if compat_entries.size > 0 %}
-        <div class="pdp-compat-table mt-8 container-shell">
-          {% for entry in compat_entries limit: 10 %}
-            {%- assign entry_status = entry.status.value | default: 'Compatible' -%}
-            <div class="pdp-compat-row">
-              <span class="pdp-compat-device">{{ entry.device.value | default: entry.label.value }}</span>
-              <span class="pdp-compat-status pdp-compat-status--{{ entry_status | handleize }}">{{ entry_status }}</span>
-            </div>
-          {% endfor %}
+    <div class="pdp-tabs__panels">
+      {%- if has_features -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'features' %} is-active{% endif %}"
+             role="tabpanel" data-panel="features">
+          <div class="pdp-content-prose">{{ features_html }}</div>
         </div>
-      {% endif %}
-    {% endif %}
+      {%- endif -%}
 
-    <div class="container-shell pdp-driver-callout mt-6">
-      <span class="pdp-driver-icon" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
-      <span>No drivers required — plug in and use immediately on supported hosts.</span>
+      {%- if has_specs -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'specs' %} is-active{% endif %}"
+             role="tabpanel" data-panel="specs">
+          <div class="pdp-content-prose">{{ specs_html }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if has_highlight -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'highlight' %} is-active{% endif %}"
+             role="tabpanel" data-panel="highlight">
+          <div class="pdp-content-prose">{{ highlight_html }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if has_compat -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'compat' %} is-active{% endif %}"
+             role="tabpanel" data-panel="compat">
+          <div class="pdp-content-prose">{{ compat_html }}</div>
+        </div>
+      {%- endif -%}
+
+      <div class="pdp-tabs__panel{% if first_tab == 'downloads' %} is-active{% endif %}"
+           role="tabpanel" data-panel="downloads">
+        {%- render 'product-downloads-list', product: product -%}
+      </div>
     </div>
-  </div>
-</section>
 
-{% comment %}──────────────────────────────────────────────────────────────
-  ZONE 7 — DOWNLOADS
-  No guard — always renders.
-  Shows file count + support link when files exist.
-  Shows fallback link to downloads page when no files are set.
-──────────────────────────────────────────────────────────────{% endcomment %}
-<section class="section-shell pdp-section pdp-section--downloads" id="pdp-downloads">
-  <div class="container-shell">
-    <p class="section-kicker">Downloads &amp; manuals</p>
-    <h2 class="section-heading mt-4">Support files</h2>
-
-    {% if manual_count > 0 or download_count > 0 %}
-      <div class="pdp-download-list mt-8">
-        {% if manual_count > 0 %}
-          <a href="{{ manuals_support_url }}" class="pdp-download-row">
-            <span class="pdp-download-icon" aria-hidden="true">{% render 'icon', name: 'file' %}</span>
-            <span class="pdp-download-name">Product manual{% if manual_count > 1 %}s{% endif %}</span>
-            <span class="pdp-download-badge">{{ manual_count }} PDF{% if manual_count > 1 %}s{% endif %}</span>
-            <span class="pdp-download-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
-          </a>
-        {% endif %}
-        {% if download_count > 0 %}
-          <a href="{{ downloads_support_url }}" class="pdp-download-row">
-            <span class="pdp-download-icon" aria-hidden="true">{% render 'icon', name: 'file' %}</span>
-            <span class="pdp-download-name">Software &amp; driver download{% if download_count > 1 %}s{% endif %}</span>
-            <span class="pdp-download-badge">{{ download_count }} file{% if download_count > 1 %}s{% endif %}</span>
-            <span class="pdp-download-arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right' %}</span>
-          </a>
-        {% endif %}
-      </div>
-      <p class="pdp-download-note mt-4">
-        <a href="{{ support_center_url }}" class="site-meta-link">Open full support hub</a>
-      </p>
-    {% else %}
-      <div class="pdp-download-fallback mt-8">
-        <p class="pdp-download-fallback-copy">Find product documentation, drivers, and support files on the EZQuest support hub.</p>
-        <a href="{{ downloads_support_url }}" class="pdp-download-fallback-link mt-4">View downloads &amp; manuals {% render 'icon', name: 'arrow-right' %}</a>
-      </div>
-    {% endif %}
   </div>
 </section>
 
@@ -1255,51 +1156,32 @@
 
 <script>
 (function () {
-  var strip = document.querySelector('[data-pdp-tab-strip]');
-  if (!strip) return;
-  strip.setAttribute('data-ready', '');
-
-  var tabs = Array.prototype.slice.call(strip.querySelectorAll('[data-pdp-tab]'));
-  var targets = tabs.map(function (t) {
-    var id = (t.getAttribute('href') || '').replace(/^#/, '');
-    return id ? document.getElementById(id) : null;
-  });
-
-  function setActive(idx) {
-    tabs.forEach(function (t, i) { t.classList.toggle('is-active', i === idx); });
-    var activeTab = tabs[idx];
-    if (activeTab) {
-      var stripRect = strip.getBoundingClientRect();
-      var tabRect = activeTab.getBoundingClientRect();
-      if (tabRect.left < stripRect.left || tabRect.right > stripRect.right) {
-        activeTab.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-      }
-    }
-  }
-
-  tabs.forEach(function (tab, idx) {
-    tab.addEventListener('click', function (e) {
-      e.preventDefault();
-      var target = targets[idx];
-      if (!target) return;
-      var stripH = strip.offsetHeight;
-      var y = target.getBoundingClientRect().top + window.scrollY - stripH - 8;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+  document.querySelectorAll('[data-pdp-tabs]').forEach(function (tabs) {
+    var triggers = Array.prototype.slice.call(tabs.querySelectorAll('[data-tab]'));
+    var panels   = Array.prototype.slice.call(tabs.querySelectorAll('[data-panel]'));
+    triggers.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var target = t.dataset.tab;
+        triggers.forEach(function (x) {
+          var active = x.dataset.tab === target;
+          x.classList.toggle('is-active', active);
+          x.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          p.classList.toggle('is-active', p.dataset.panel === target);
+        });
+        // Scroll active trigger into view when tab strip overflows on mobile
+        var list = t.closest('.pdp-tabs__list');
+        if (list) {
+          var listRect = list.getBoundingClientRect();
+          var tRect    = t.getBoundingClientRect();
+          if (tRect.left < listRect.left || tRect.right > listRect.right) {
+            t.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+          }
+        }
+      });
     });
   });
-
-  if (!window.IntersectionObserver) { setActive(0); return; }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var idx = targets.indexOf(entry.target);
-      if (idx >= 0) setActive(idx);
-    });
-  }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
-
-  targets.forEach(function (t) { if (t) io.observe(t); });
-  setActive(0);
 })();
 </script>
 

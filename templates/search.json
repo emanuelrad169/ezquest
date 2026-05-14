@@ -1,6 +1,9 @@
 {
   "sections": {
-    "main": { "type": "main-search", "settings": {} },
+    "main": {
+      "type": "main-search",
+      "settings": {}
+    },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
@@ -12,7 +15,22 @@
         "cta2_label": "Contact support",
         "cta2_url": "/pages/contact"
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 280,
+        "heading": "Search results",
+        "subheading": "Use the search box to explore products, guides, and support articles.",
+        "kicker": "Search"
+      }
     }
   },
-  "order": ["main", "cta"]
+  "order": [
+    "page_hero",
+    "main",
+    "cta"
+  ]
 }

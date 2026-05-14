@@ -43,8 +43,26 @@
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3"
+      ]
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "Since 1994, EZQuest has made it simpler to connect the devices that matter most.",
+        "kicker": "About"
+      }
     }
   },
-  "order": ["about"]
+  "order": [
+    "page_hero",
+    "about"
+  ]
 }

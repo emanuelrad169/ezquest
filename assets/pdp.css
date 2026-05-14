@@ -421,7 +421,7 @@
 
 /* Price: 28px / 500 */
 .main-product-section .price-amount {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.1;
@@ -705,7 +705,7 @@
   color: rgb(15 23 42);
   border-bottom: 1px solid rgba(226, 232, 240, 0.6);
   transition: background 0.15s ease;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -740,7 +740,7 @@
 }
 
 .pdp-download-fallback-copy {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: rgb(100 116 139);
   max-width: 32rem;
   margin: 0 auto;
@@ -750,7 +750,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 600;
   color: rgb(15 23 42);
   text-decoration: none;
@@ -931,59 +931,38 @@
   color: #27500a;
 }
 
-/* ── Hover zoom — desktop side-panel ── */
+/* ── Hover zoom — circular lens overlay ── */
 
-.pdp-col-left {
-  position: relative;
-  overflow: visible;
-}
-
-.pdp-zoom-pane {
+.pdp-zoom-lens {
+  --lens-size: 280px;
   position: absolute;
   top: 0;
-  left: calc(100% + 2.5rem); /* matches lg:gap-10 */
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #fafafa;
-  border-radius: 16px;
-  border: 1px solid var(--ez-border, #e5e5e5);
-  overflow: hidden;
-  opacity: 0;
+  left: 0;
+  width: var(--lens-size);
+  height: var(--lens-size);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
   pointer-events: none;
-  transition: opacity 0.2s ease;
-  z-index: 20;
-  display: none; /* desktop-only; enabled below */
-}
-
-.pdp-zoom-pane.is-active {
-  opacity: 1;
-}
-
-.pdp-zoom-pane__crop {
-  width: 100%;
-  height: 100%;
-  background-size: 250%;
   background-repeat: no-repeat;
-  background-position: 50% 50%;
-  transition: background-position 0.05s linear;
+  background-color: #fff;
+  display: none;
+  z-index: 5;
 }
 
-/* Buy-box fades while zoom panel is visible */
+.pdp-zoom-lens.is-active {
+  display: block;
+}
+
+/* Keep buy-box fully visible — no fade */
 .pdp-buy-box {
   position: relative;
-  top: auto; /* neutralize top offset inherited from .buybox-sticky */
+  top: auto;
   z-index: 10;
-  transition: opacity 0.2s ease;
 }
 
-.pdp-buy-box.is-zoom-active {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Main image gets a zoom-in cursor on desktop hover */
+/* Crosshair cursor on desktop hover */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-  .pdp-zoom-pane { display: block; }
   .pdp-gallery-main { cursor: crosshair; }
   .pdp-gallery-main img { cursor: crosshair; }
 }
@@ -1609,3 +1588,90 @@
   opacity: 0.45;
   flex-shrink: 0;
 }
+
+/* ── Content tabs (§4 replacement — legacy HTML from metafields) ─────────── */
+.pdp-content-tabs-section {
+  padding-top: 0;
+  padding-bottom: 48px;
+}
+
+.pdp-tabs__list {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--ez-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pdp-tabs__list::-webkit-scrollbar { display: none; }
+
+.pdp-tabs__trigger {
+  background: transparent;
+  border: none;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-grey);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  font-family: inherit;
+  line-height: 1;
+}
+.pdp-tabs__trigger:hover { color: #111; }
+.pdp-tabs__trigger.is-active {
+  color: #111;
+  border-bottom-color: var(--ez-amber);
+  font-weight: 600;
+}
+
+.pdp-tabs__panel {
+  display: none;
+  padding: 32px 0;
+}
+.pdp-tabs__panel.is-active { display: block; }
+
+/* Prose for legacy HTML content */
+.pdp-content-prose ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 0 0 16px;
+}
+.pdp-content-prose li { padding: 4px 0; line-height: 1.6; }
+.pdp-content-prose li b,
+.pdp-content-prose li strong { color: #111; font-weight: 600; }
+.pdp-content-prose h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  margin: 24px 0 8px;
+}
+.pdp-content-prose h3:first-child { margin-top: 0; }
+.pdp-content-prose p { line-height: 1.6; margin: 0 0 16px; color: var(--ez-grey); }
+.pdp-content-prose p:last-child { margin-bottom: 0; }
+
+/* Per-product download list inside Downloads tab */
+.pdp-dl-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pdp-dl-item a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+.pdp-dl-item a:hover { background: rgb(248 250 252); }
+.pdp-dl-item__name { flex: 1; }
+.pdp-dl-empty { color: var(--ez-grey); font-size: 14px; padding: 16px 0; }

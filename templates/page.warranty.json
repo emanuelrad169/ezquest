@@ -4,14 +4,13 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Warranty",
-        "heading": "Warranty guidance that keeps the next step clear",
-        "subheading": "Review coverage, claim expectations, and the steps customers should take before service begins.",
-        "light_mode": true
+        "heading": "",
+        "subheading": "",
+        "light_mode": true,
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "details": {
       "type": "info-card-grid",
@@ -82,7 +81,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "details",
     "main",
     "cta"

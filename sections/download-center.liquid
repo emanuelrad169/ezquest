@@ -8,45 +8,21 @@
     when 'downloads'
       assign mo_type     = 'ezquest_download'
       assign type_field  = 'download_type'
-      assign hero_kicker = 'Downloads'
-      assign hero_head   = 'Drivers, utilities &<br>setup files'
-      assign hero_sub    = 'All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.'
     when 'manuals'
       assign mo_type     = 'ezquest_manual'
       assign type_field  = 'manual_type'
-      assign hero_kicker = 'Manuals'
-      assign hero_head   = 'Setup guides &<br>documentation'
-      assign hero_sub    = 'Product manuals and quick-start guides, organized by product family.'
     when 'firmware'
       assign mo_type     = 'ezquest_firmware'
       assign type_field  = 'firmware_type'
-      assign hero_kicker = 'Firmware'
-      assign hero_head   = 'Firmware updates<br>by product'
-      assign hero_sub    = 'Confirm the product and version before installing. Update only the firmware that matches your exact setup.'
     when 'guides'
       assign mo_type     = 'ezquest_user_guide'
       assign type_field  = 'guide_type'
-      assign hero_kicker = 'User guides'
-      assign hero_head   = 'Setup guides &<br>best practices'
-      assign hero_sub    = 'Step-by-step guides for getting the most from your EZQuest products.'
   endcase
 
   if structured_source == 'global'
     assign mo_entries = shop.metaobjects[mo_type].values
   endif
 -%}
-
-<section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
-  <div class="support-hero__wrap w-full">
-    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">{{ hero_kicker }}</p>
-    <h2 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
-      {{ hero_head }}
-    </h2>
-    <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
-      {{ hero_sub }}
-    </p>
-  </div>
-</section>
 
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
 
@@ -198,7 +174,7 @@
 
 {%- render 'page-cta',
   variant: 'dark',
-  kicker: hero_kicker,
+  kicker: 'Support',
   heading: 'Can't find what you need?',
   subhead: 'Tell us the product and file type — we'll send it directly.',
   primary_label: 'Request a file',

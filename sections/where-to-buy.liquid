@@ -2,20 +2,6 @@
 
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
-{% comment %} ── Hero ─────────────────────────────── {% endcomment %}
-<section class="wtb-hero">
-  <div class="wtb-hero__inner page-width">
-    <p class="wtb-hero__kicker">EZQuest products</p>
-    <h1 class="wtb-hero__heading">
-      {{ section.settings.heading | default: 'Where to buy' }}
-    </h1>
-    <p class="wtb-hero__body">
-      {{ section.settings.subheading
-         | default: 'EZQuest products are sold through these authorised retailers and distributors worldwide.' }}
-    </p>
-  </div>
-</section>
-
 {% comment %} ── Group blocks by category ─────────── {% endcomment %}
 {% assign categories = 'us_retailer,intl_reseller,intl_distributor' | split: ',' %}
 {% assign cat_labels = 'U.S. Retailers,International Resellers,International Distributors' | split: ',' %}

@@ -4,15 +4,18 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Compare",
-        "heading": "Find the right setup, side by side",
-        "subheading": "Compare ports, power, portability, and display support across the full EZQuest lineup."
+        "heading": "Find the right setup",
+        "subheading": "Side-by-side comparison of EZQuest products.",
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
     },
     "compare": {
       "type": "product-compare-table",
       "settings": {
-        "heading": "Choose the right UltimatePower charger",
-        "body": "Compare wattage, port count, and travel weight before you buy."
+        "heading": "",
+        "body": ""
       },
       "blocks": {
         "p1": {
@@ -104,7 +107,18 @@
           }
         }
       },
-      "block_order": ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "s5", "s6"]
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6"
+      ]
     },
     "cta": {
       "type": "support-cta-rail",
@@ -119,5 +133,9 @@
       }
     }
   },
-  "order": ["hero", "compare", "cta"]
+  "order": [
+    "hero",
+    "compare",
+    "cta"
+  ]
 }

@@ -1,6 +1,23 @@
 {
   "sections": {
-    "main": { "type": "cart-page", "settings": {} }
+    "main": {
+      "type": "cart-page",
+      "settings": {}
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 280,
+        "heading": "Your cart",
+        "subheading": "Review your items before checkout.",
+        "kicker": "Cart"
+      }
+    }
   },
-  "order": ["main"]
+  "order": [
+    "page_hero",
+    "main"
+  ]
 }

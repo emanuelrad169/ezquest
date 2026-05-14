@@ -1,30 +1,7 @@
 <section class="section-shell" {% if search.performed %}data-site-search-results="{{ search.results_count }}"{% endif %}>
   <div class="container-shell">
-    <div class="editorial-shell">
-      <div class="grid gap-8 lg:grid-cols-editorial lg:items-end">
-        <div class="max-w-3xl">
-          <p class="section-kicker">Search</p>
-          <h1 class="section-heading mt-5">
-            {% if search.performed %}
-              {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for “{{ search.terms | escape }}”
-            {% else %}
-              Find products, resources, and support faster
-            {% endif %}
-          </h1>
-          {% if search.performed %}
-            <p class="section-copy mt-5">Search across products, manuals, downloads, support pages, and resources from one focused grid.</p>
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <span class="product-meta-pill">{{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }}</span>
-              <span class="product-meta-pill">Unified discovery</span>
-            </div>
-          {% else %}
-            <p class="section-copy mt-5">Search by product name, port type, compatibility keyword, or support topic from one clear starting point.</p>
-          {% endif %}
-        </div>
-        <div class="hero-side-panel">
-          {% render 'support-search-form' %}
-        </div>
-      </div>
+    <div class="mb-8 lg:mb-10 max-w-xl ml-auto">
+      {% render 'support-search-form' %}
     </div>
 
     {% if search.performed and search.results_count > 0 %}

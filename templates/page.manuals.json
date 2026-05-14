@@ -4,9 +4,12 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Manuals",
-        "heading": "Find the right manual fast",
-        "subheading": "Setup guides, quick-start instructions, and product documentation by family.",
-        "light_mode": true
+        "heading": "",
+        "subheading": "Product manuals and quick-start guides, organized by product family.",
+        "light_mode": true,
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
     },
     "downloads": {

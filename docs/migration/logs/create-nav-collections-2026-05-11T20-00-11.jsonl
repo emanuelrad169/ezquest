@@ -1,0 +1,11 @@
+{"action":"dry_run","handle":"usb-c-hubs","tag":"nav-usb-c-hubs","ts":"2026-05-11T20:00:12.362Z"}
+{"action":"dry_run","handle":"usb-c-cables-collection","tag":"nav-usb-c-cables","ts":"2026-05-11T20:00:12.362Z"}
+{"action":"dry_run","handle":"usb-c-adapters","tag":"nav-usb-c-adapters","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"usb-c-card-readers","tag":"nav-usb-c-card-readers","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"usb-c-enclosures","tag":"nav-usb-c-enclosures","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"hdmi-cables-adapters","tag":"nav-cables-hdmi","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"displayport-cables-adapters","tag":"nav-cables-displayport","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"mini-displayport-cables","tag":"nav-cables-mini-displayport","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"audio-cables","tag":"nav-cables-audio","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"wall-chargers","tag":"nav-power-wall-chargers","ts":"2026-05-11T20:00:12.363Z"}
+{"action":"dry_run","handle":"car-chargers","tag":"nav-power-car-chargers","ts":"2026-05-11T20:00:12.363Z"}

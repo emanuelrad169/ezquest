@@ -62,7 +62,26 @@
         "heading": "Recently viewed",
         "max_products": 8
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": ""
+      }
     }
   },
-  "order": ["main", "faq", "compare", "bundle", "cta", "recently_viewed"]
+  "order": [
+    "page_hero",
+    "main",
+    "faq",
+    "compare",
+    "bundle",
+    "cta",
+    "recently_viewed"
+  ]
 }

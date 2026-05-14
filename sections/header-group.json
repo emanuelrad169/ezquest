@@ -38,7 +38,143 @@
       "settings": {
         "support_phone_label": "Support",
         "support_phone": "1-800-881-9305"
-      }
+      },
+      "blocks": {
+        "col_usbc": {
+          "type": "menu_column",
+          "settings": {
+            "title": "USB-C",
+            "tagline": "Hubs · Cables · Adapters",
+            "hero_product_handle": "usb-c-multimedia-10-in-1-gen-2-hub",
+            "footer_link_text": "All USB-C →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        "sub_usbc_hubs": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Hubs",
+            "url": "/collections/usb-c-hubs"
+          }
+        },
+        "sub_usbc_cables": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Cables",
+            "url": "/collections/usb-c-cables-collection"
+          }
+        },
+        "sub_usbc_adapters": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Adapters",
+            "url": "/collections/usb-c-adapters"
+          }
+        },
+        "sub_usbc_readers": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "Card Readers",
+            "url": "/collections/usb-c-card-readers"
+          }
+        },
+        "sub_usbc_enclos": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "Enclosures",
+            "url": "/collections/usb-c-enclosures"
+          }
+        },
+        "col_cables": {
+          "type": "menu_column",
+          "settings": {
+            "title": "Cables/Adapters",
+            "tagline": "HDMI · DisplayPort · Audio",
+            "hero_product_handle": "duraguard-usb-c-to-hdmi-4k-60hz-cable-with-hdr",
+            "footer_link_text": "All cables →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        "sub_cab_hdmi": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "HDMI",
+            "url": "/collections/hdmi-cables-adapters"
+          }
+        },
+        "sub_cab_dp": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "DisplayPort",
+            "url": "/collections/displayport-cables-adapters"
+          }
+        },
+        "sub_cab_mdp": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "Mini DisplayPort",
+            "url": "/collections/mini-displayport-cables"
+          }
+        },
+        "sub_cab_audio": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "Audio",
+            "url": "/collections/audio-cables"
+          }
+        },
+        "col_power": {
+          "type": "menu_column",
+          "settings": {
+            "title": "Power",
+            "tagline": "Wall · Car · GaN",
+            "hero_product_handle": "ultimatepower-120w-gan-usb-c-pd-wall-charger",
+            "footer_link_text": "All chargers →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        "sub_pow_wall": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Power",
+            "label": "Wall Chargers",
+            "url": "/collections/wall-chargers"
+          }
+        },
+        "sub_pow_car": {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Power",
+            "label": "Car Chargers",
+            "url": "/collections/car-chargers"
+          }
+        }
+      },
+      "block_order": [
+        "col_usbc",
+        "sub_usbc_hubs",
+        "sub_usbc_cables",
+        "sub_usbc_adapters",
+        "sub_usbc_readers",
+        "sub_usbc_enclos",
+        "col_cables",
+        "sub_cab_hdmi",
+        "sub_cab_dp",
+        "sub_cab_mdp",
+        "sub_cab_audio",
+        "col_power",
+        "sub_pow_wall",
+        "sub_pow_car"
+      ]
     }
   },
   "order": ["announcement_bar", "header"]

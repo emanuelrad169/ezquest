@@ -10,8 +10,6 @@
 {% paginate collection.products by 100 %}
   {%- liquid
         assign intro_copy = section.settings.intro_copy | default: collection.description
-        assign category_label = section.settings.eyebrow | default: 'Product family'
-        assign category_statement = 'Find the EZQuest family with the right ports, power, and footprint.'
         assign collection_visual = blank
         assign lead_product = collection.products.first
         assign fallback_product_handles = blank
@@ -25,10 +23,7 @@
         assign promo_image = blank
         assign promo_insert_index = 4
         assign family_handle_list = 'hubs-adapters|docking-stations|chargers-power|accessories' | split: '|'
-        assign use_owned_collection_scene = false
-        assign setup_guide_url = '/pages/help-me-choose'
         assign family_compare_url = '/pages/compare'
-        assign lead_product_url = blank
 
         if intro_copy == blank
           case collection.handle
@@ -47,9 +42,6 @@
 
         case collection.handle
           when 'hubs-adapters'
-            assign use_owned_collection_scene = true
-            assign category_label = 'Hybrid + travel'
-            assign category_statement = 'Everyday expansion for travel, hybrid desks, and lighter display setups.'
             assign fallback_product_handles = 'usb-c-multimedia-hub,usb-c-travel-hub'
             assign promo_handle = 'docking-stations'
             assign promo_title = 'Ready for a full desk?'
@@ -57,9 +49,6 @@
             assign promo_link_label = 'View docking stations'
             assign promo_image = section.settings.promo_ready_for_desk_image
           when 'docking-stations'
-            assign use_owned_collection_scene = true
-            assign category_label = 'Desk command'
-            assign category_statement = 'Docking stations for permanent desks that need displays, Ethernet, charging, and control.'
             assign fallback_product_handles = 'usb-c-pro-dock'
             assign promo_handle = 'chargers-power'
             assign promo_title = 'Power, refined'
@@ -67,18 +56,12 @@
             assign promo_link_label = 'View chargers and power'
             assign promo_image = section.settings.promo_power_up_image
           when 'chargers-power'
-            assign use_owned_collection_scene = true
-            assign category_label = 'Power layer'
-            assign category_statement = 'Charging products for cleaner travel kits, desks, and multi-device routines.'
             assign promo_handle = 'accessories'
             assign promo_title = 'Finish the setup'
             assign promo_copy = 'Add the cables and accessories that keep power clean and dependable.'
             assign promo_link_label = 'View accessories'
             assign promo_image = section.settings.promo_duraguard_cables_image
           when 'accessories'
-            assign use_owned_collection_scene = true
-            assign category_label = 'Finish the setup'
-            assign category_statement = 'Cables and finishing pieces that make the setup feel complete and dependable.'
             assign promo_handle = 'hubs-adapters'
             assign promo_title = 'Expand the setup'
             assign promo_copy = 'Add hubs and adapters when the setup needs more ports and more reach.'
@@ -101,10 +84,6 @@
 
         if total_visible_products == 0
           assign total_visible_products = fallback_visible_count
-        endif
-
-        if lead_product != blank
-          assign lead_product_url = lead_product.url | within: collection
         endif
 
         if collection.handle != blank
@@ -233,108 +212,21 @@
     "url": {{ shop.url | append: collection.url | json }}
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": {{ collection.title | append: ' products' | json }},
-    "itemListElement": [
-      {%- for product in collection.products limit: 12 -%}
-        {
-          "@type": "ListItem",
-          "position": {{ forloop.index }},
-          "item": {
-            "@type": "Product",
-            "name": {{ product.title | json }},
-            "url": {{ shop.url | append: product.url | json }}
-            {%- if product.featured_image != blank -%},
-              "image": {{ product.featured_image | image_url: width: 800 | prepend: 'https:' | json }}
-            {%- endif -%}
-          }
-        }{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-    ]
-  }
-  </script>
 
-  <section class="section-shell pt-0">
-    <div class="collection-showcase-shell relative">
-      <header class="collection-showcase relative min-h-96 overflow-hidden bg-slate-950">
-        <div class="collection-showcase-media absolute inset-0">
-          {% if collection_visual != blank %}
-            {%- liquid
-              assign collection_visual_height = 1200
-              if collection_visual.aspect_ratio > 0
-                assign collection_visual_height = 1800 | divided_by: collection_visual.aspect_ratio | round
-              endif
-            -%}
-            {{ collection_visual | image_url: width: 1800, format: 'pjpg' | image_tag: loading: 'eager', fetchpriority: 'high', width: 1800, height: collection_visual_height, class: 'collection-showcase-image' }}
-          {% elsif use_owned_collection_scene %}
-            {% render 'owned-collection-visual',
-              collection_handle: collection.handle,
-              collection_title: collection.title,
-              width: 1800,
-              height: 1200,
-              class: 'collection-showcase-image',
-              loading: 'eager',
-              fetchpriority: 'high'
-            %}
-          {% else %}
-            {% render 'owned-collection-visual',
-              collection_handle: collection.handle,
-              collection_title: collection.title,
-              width: 1800,
-              height: 1200,
-              class: 'collection-showcase-image',
-              loading: 'eager',
-              fetchpriority: 'high'
-            %}
-          {% endif %}
-        </div>
-        <div class="collection-showcase-scrim absolute inset-0" aria-hidden="true"></div>
-        <div class="container-shell collection-showcase-inner relative z-10 flex h-full min-h-full flex-col justify-between pt-6 pb-16 lg:pt-8 lg:pb-24">
-
-          <nav class="collection-showcase-breadcrumb flex items-center gap-2 text-xs font-medium text-white/45" aria-label="Breadcrumb">
-            <a href="{{ routes.root_url }}" aria-label="Home">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6L6 1.5 11 6M2 5.5V10.5H4.5V7.5H7.5V10.5H10V5.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <span>/</span>
-            <a href="{{ routes.collections_url }}">Collections</a>
-            <span>/</span>
-            <span>{{ collection.title }}</span>
-          </nav>
-
-          <div class="collection-showcase-copy flex max-w-2xl flex-col gap-4" data-animate>
-            <p class="collection-showcase-label">{{ category_label }}</p>
-            <h1 class="collection-showcase-heading">{{ section.settings.intro_heading | default: collection.title }}</h1>
-            <p class="collection-showcase-statement">{{ category_statement }}</p>
-            <div class="collection-showcase-actions flex flex-wrap items-center gap-3 pt-1.5">
-              {% render 'button', label: 'Shop ' | append: collection.title, url: collection.url | append: '#collection-grid', style: 'primary', class: 'button-context-collection-hero collection-showcase-action' %}
-              {% if lead_product != blank %}
-                <a href="{{ lead_product_url }}" class="site-meta-link">Start with {{ lead_product.title }}</a>
-              {% endif %}
-              <a href="{{ setup_guide_url }}" class="site-meta-link">Need setup guidance?</a>
-            </div>
-          </div>
-
-        </div>
-      </header>
-    </div>
-
-    {%- liquid
-      assign active_count = 0
-      for filter in collection.filters
-        assign active_count = active_count | plus: filter.active_values.size
-        if filter.type == 'price_range'
-          if filter.min_value.value != blank or filter.max_value.value != blank
-            assign active_count = active_count | plus: 1
-          endif
+  {%- liquid
+    assign active_count = 0
+    for filter in collection.filters
+      assign active_count = active_count | plus: filter.active_values.size
+      if filter.type == 'price_range'
+        if filter.min_value.value != blank or filter.max_value.value != blank
+          assign active_count = active_count | plus: 1
         endif
-      endfor
-    -%}
+      endif
+    endfor
+  -%}
 
-    <div class="collection-subnav">
-      <div class="container-shell collection-subnav__inner">
+  <div class="collection-subnav">
+    <div class="container-shell collection-subnav__inner">
 
         <nav class="collection-subnav__tabs" aria-label="Collection families">
           {% for family_handle in family_handle_list %}
@@ -804,7 +696,6 @@
       </div>
     </div>
 
-  </section>
 {% endpaginate %}
 
 {% schema %}

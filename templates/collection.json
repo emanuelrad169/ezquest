@@ -29,9 +29,21 @@
         "cta2_label": "Help me choose",
         "cta2_url": "/pages/help-me-choose"
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 360,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Collection"
+      }
     }
   },
   "order": [
+    "page_hero",
     "main",
     "cta"
   ]

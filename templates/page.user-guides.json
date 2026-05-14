@@ -3,10 +3,13 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "User guides",
-        "heading": "Guides for setup, workflows, and best practices",
-        "subheading": "Step-by-step guides for getting the most from your EZQuest products.",
-        "light_mode": true
+        "kicker": "User Guides",
+        "heading": "",
+        "subheading": "",
+        "light_mode": true,
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320
       }
     },
     "downloads": {

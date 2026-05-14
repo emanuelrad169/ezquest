@@ -1,17 +1,3 @@
-{%- assign nav_contained = contained | default: false -%}
-<nav class="support-nav bg-white border-b border-black/[7%]{% if nav_contained %} support-nav--contained w-full mb-0{% endif %}" aria-label="Support navigation">
-  {% unless nav_contained %}<div class="container-shell">{% endunless %}
-    <ul class="support-nav__list">
-      <li><a href="/pages/support" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'support' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Support home</a></li>
-      <li><a href="/pages/downloads" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'downloads' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Downloads</a></li>
-      <li><a href="/pages/manuals" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'manuals' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Manuals</a></li>
-      <li><a href="/pages/firmware" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'firmware' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Firmware</a></li>
-      <li><a href="/pages/user-guides" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'user-guides' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">User guides</a></li>
-      <li><a href="/pages/compatibility" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'compatibility' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Compatibility</a></li>
-      <li><a href="/pages/troubleshooting" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'troubleshooting' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Troubleshooting</a></li>
-      <li><a href="/pages/warranty" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'warranty' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Warranty</a></li>
-      <li><a href="/pages/faq" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'faq' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">FAQ</a></li>
-      <li><a href="/pages/contact" class="support-nav__link hover:text-[var(--ez-black)]{% if current == 'contact' %} is-active text-[var(--ez-black)] font-medium border-b-[var(--ez-amber)]{% endif %}">Contact</a></li>
-    </ul>
-  {% unless nav_contained %}</div>{% endunless %}
-</nav>
+{%- comment -%}
+  Support navigation intentionally disabled.
+{%- endcomment -%}

@@ -1,0 +1,10 @@
+Gift Card Reconciliation — 2026-05-06T06:30:03.841Z
+
+Legacy outstanding balance: $1420.66
+Shopify reissued balance:   $1420.66
+Difference:                 $0.00
+
+✓ RECONCILED — balances match within $0.01
+
+Cards reissued: 23
+Cards failed:   0

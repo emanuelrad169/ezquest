@@ -45,14 +45,13 @@ function animateMediaReveal(element, options) {
 (function () {
   const header = document.querySelector('.site-header');
   if (!header) return;
-  const announcementBar = document.querySelector('.site-announcement-bar');
   let ticking = false;
   let scrollThreshold = Number(header.dataset.headerScrollThreshold || 8);
 
   function updateScrollThreshold() {
     const configuredThreshold = Number(header.dataset.headerScrollThreshold || 8);
-    if (header.classList.contains('site-header--hero-overlay') && announcementBar) {
-      scrollThreshold = Math.max(configuredThreshold, Math.round(announcementBar.getBoundingClientRect().height));
+    if (header.classList.contains('site-header--hero-overlay')) {
+      scrollThreshold = 40; // announcement bar height — white header once bar scrolls away
       return;
     }
     scrollThreshold = configuredThreshold;
@@ -1438,11 +1437,17 @@ document.addEventListener('keydown', function(event) {
     const OPEN_CLASS = 'is-open';
     const HIDE_DELAY = 180;
 
+    const overlayHeader = document.querySelector('.site-header--hero-overlay');
+    function setSearchOpen(open) {
+      if (overlayHeader) overlayHeader.classList.toggle('is-menu-open', open);
+    }
+
     function openPanel() {
       if (window.closeMegaMenus) window.closeMegaMenus();
       window.clearTimeout(panel._hideTimer);
       panel.hidden = false;
       trigger.setAttribute('aria-expanded', 'true');
+      setSearchOpen(true);
       window.requestAnimationFrame(function () {
         panel.classList.add(OPEN_CLASS);
       });
@@ -1457,6 +1462,7 @@ document.addEventListener('keydown', function(event) {
       window.clearTimeout(panel._hideTimer);
       panel.classList.remove(OPEN_CLASS);
       trigger.setAttribute('aria-expanded', 'false');
+      setSearchOpen(false);
       panel._hideTimer = window.setTimeout(function () {
         if (!panel.classList.contains(OPEN_CLASS)) {
           panel.hidden = true;

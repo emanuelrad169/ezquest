@@ -1,0 +1,9 @@
+company,contact_name,email,phone,tier,discount_pct,payment_terms,address1,city,state,zip,country,notes
+"Pacific Rim Electronics","Alex Chen","alex.chen@pacificrim.com","+1-415-555-0101","Tier 1","20","net-30","500 Market St","San Francisco","CA","94105","US","Annual volume $80k+"
+"Mountain View AV","Sara Lopez","sara.lopez@mvav.com","+1-720-555-0102","Tier 1","20","net-30","1400 Pearl St","Boulder","CO","80302","US","Retail chain — 12 locations"
+"Maple Tech Distribution","Ryan Park","ryan.park@mapletech.ca","+1-416-555-0103","Tier 2","30","net-30","145 King St W","Toronto","ON","M5H1J8","CA","Canada distributor"
+"TechSource Chicago","Dana Williams","d.williams@techsource.com","+1-312-555-0104","Tier 2","30","net-30","222 W Adams St","Chicago","IL","60606","US",""
+"Coast IT Solutions","Mike Torres","mtorres@coastit.com","+1-858-555-0105","Tier 2","30","net-45","3900 Harney St","San Diego","CA","92110","US","Net-45 approved by owner"
+"Nexus Enterprise Supply","Fiona Grant","fgrant@nexusent.com","+1-212-555-0106","Tier 3","40","net-30","1271 Avenue Americas","New York","NY","10020","US","Volume $200k/yr. Annual contract."
+"Brit AV Wholesale Ltd","James Barker","j.barker@britav.co.uk","+44-20-5555-0107","Tier 3","40","net-30","10 Downing Street","London","ENG","SW1A2AA","GB","UK distributor. VAT registered."
+"SouthEast Tech Partners","Priya Nair","pnair@setechpartners.com","+1-404-555-0108","Tier 1","20","net-30","1 Peachtree Center","Atlanta","GA","30303","US","New account — trial period 90 days"

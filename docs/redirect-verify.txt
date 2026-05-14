@@ -1,0 +1,7 @@
+Redirect verification — 2026-05-05T23:10:31.199Z
+Store: ezquest-4.myshopify.com
+Total: 110 | Pass: 109 | Fail: 1
+
+Failures:
+  /index.html → /
+    HTTP 200 (expected 301/302)

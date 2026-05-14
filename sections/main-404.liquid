@@ -1,16 +1,6 @@
 <section class="not-found section--dark" aria-label="Page not found">
   <div class="page-width not-found__inner">
 
-    <p class="not-found__kicker">404</p>
-
-    <h1 class="not-found__heading">
-      {{ section.settings.heading | default: "This page isn't plugged in." | escape }}
-    </h1>
-
-    <p class="not-found__body">
-      {{ section.settings.copy | default: 'The link may have moved or the URL may be wrong.' | escape }}
-    </p>
-
     <div class="not-found__actions">
       <a href="{{ routes.root_url }}" class="btn btn--primary not-found__btn-primary">
         Go home

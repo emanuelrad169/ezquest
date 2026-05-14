@@ -20,3 +20,6 @@ prompts/archive/
 
 # Live Shopify theme exports are large local safety backups
 backups/
+
+# Gift card codes — treat as cash, never commit
+docs/migration/gift-cards-reissued.csv
