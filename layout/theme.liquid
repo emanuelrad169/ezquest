@@ -164,6 +164,9 @@
       @media (min-width:640px){.container-shell{padding-inline:1.5rem}}@media (min-width:1024px){.container-shell{padding-inline:2rem}.section-shell{padding-block:4rem}}
     </style>
     <style id="tidio-cls-fix">#tidio-chat-root,#tidio-chat-code{display:none!important}</style>
+    {%- if settings.hide_chat_widget -%}
+      <style>#tidio-chat-root,#tidio-chat-code,#tidio-chat,iframe[id*="tidio"]{display:none!important;visibility:hidden!important}</style>
+    {%- endif -%}
     {%- comment -%}v2026-04-29-newsletter-popup{%- endcomment -%}
     {{ content_for_header }}
     <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" media="print" onload="this.media='all'">

@@ -72,7 +72,6 @@ const menus = [
       { title: 'Firmware',         url: '/pages/firmware' },
       { title: 'User Guides',      url: '/pages/user-guides' },
       { title: 'Compatibility',    url: '/pages/compatibility' },
-      { title: 'Troubleshooting',  url: '/pages/troubleshooting' },
       { title: 'Warranty',         url: '/pages/warranty' },
       { title: 'Contact',          url: '/pages/contact' },
       { title: 'Submit a ticket',  url: '/pages/ticket-submission' }

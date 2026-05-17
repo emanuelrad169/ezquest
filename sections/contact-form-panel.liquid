@@ -1,27 +1,27 @@
 {{ 'support-cluster.css' | asset_url | stylesheet_tag }}
 
-<section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
-  <div class="support-hero__wrap w-full">
-    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">Contact</p>
-    <h2 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
-      We respond within<br>1 business day
-    </h2>
-    <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
-      Every message is read by a real person.
-      No ticket queues, no bots.
-    </p>
-  </div>
-</section>
+<div class="support-body container-shell pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
+  <div class="contact-panel rounded-3xl border border-black/[6%] bg-white p-6 lg:p-8">
+    <div class="max-w-2xl">
+      {% if section.settings.eyebrow != blank %}
+        <p class="text-[11px] font-semibold tracking-[.08em] uppercase text-[var(--ez-grey)] m-0">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="section-heading mt-4">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.copy != blank %}
+        <p class="section-copy mt-4">{{ section.settings.copy }}</p>
+      {% endif %}
+    </div>
 
-<div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
-  <div class="contact-layout grid [grid-template-columns:minmax(320px,440px)_minmax(0,1fr)] gap-[clamp(3rem,6vw,6rem)] items-start max-[900px]:grid-cols-1">
+    <div class="contact-layout mt-8 space-y-6 lg:mt-10">
 
-    <div class="contact-info">
+      <div class="contact-info">
 
-      <div class="contact-channels flex flex-col gap-6 mb-10">
+        <div class="contact-channels grid grid-cols-3 gap-5 max-[900px]:grid-cols-1">
 
         <div class="contact-channel flex items-start gap-3.5">
-          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-[var(--ez-amber-08)] border border-[rgba(254,211,0,.18)] text-[var(--ez-amber)] flex items-center justify-center shrink-0" aria-hidden="true">
+          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-black/[4%] border border-black/[8%] text-[var(--ez-grey)] flex items-center justify-center shrink-0" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M2 5A1.5 1.5 0 013.5 3.5h11A1.5 1.5 0 0116 5v8A1.5 1.5 0 0114.5 14.5h-11A1.5 1.5 0 012 13V5z" stroke="currentColor" stroke-width="1.25"/>
               <path d="M2 5.5l7 4.5 7-4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
@@ -34,19 +34,19 @@
         </div>
 
         <div class="contact-channel flex items-start gap-3.5">
-          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-[var(--ez-amber-08)] border border-[rgba(254,211,0,.18)] text-[var(--ez-amber)] flex items-center justify-center shrink-0" aria-hidden="true">
+          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-black/[4%] border border-black/[8%] text-[var(--ez-grey)] flex items-center justify-center shrink-0" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M3 4.5A1.5 1.5 0 014.5 3h1.26a1 1 0 01.95.68l.74 2.22a1 1 0 01-.23 1.02L6 8.14A9 9 0 009.86 12l1.22-1.22a1 1 0 011.02-.23l2.22.74A1 1 0 0115 12.24V13.5a1.5 1.5 0 01-1.5 1.5A10.5 10.5 0 013 4.5z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
             </svg>
           </div>
           <div>
             <p class="contact-channel__label text-[11px] font-semibold tracking-[.08em] uppercase text-[var(--ez-grey)] m-0 mb-[.2rem]">Phone</p>
-            <a href="tel:18008819305" class="contact-channel__value contact-channel__link text-sm text-[var(--ez-black)] font-medium leading-[1.45] m-0 underline decoration-[var(--ez-amber)] decoration-[1.5px] underline-offset-[3px] transition-[text-decoration-color] duration-200 hover:text-[var(--ez-black)] hover:decoration-[var(--ez-black)]">1-800-881-9305</a>
+            <a href="tel:18008819305" class="contact-channel__value contact-channel__link text-sm text-[var(--ez-black)] font-medium leading-[1.45] m-0 underline decoration-black/30 decoration-[1.5px] underline-offset-[3px] transition-[text-decoration-color] duration-200 hover:text-[var(--ez-black)] hover:decoration-black/70">1-800-881-9305</a>
           </div>
         </div>
 
         <div class="contact-channel flex items-start gap-3.5">
-          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-[var(--ez-amber-08)] border border-[rgba(254,211,0,.18)] text-[var(--ez-amber)] flex items-center justify-center shrink-0" aria-hidden="true">
+          <div class="contact-channel__icon w-9 h-9 rounded-[10px] bg-black/[4%] border border-black/[8%] text-[var(--ez-grey)] flex items-center justify-center shrink-0" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.25"/>
               <path d="M9 5.5v3.75L11.25 11" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,25 +58,13 @@
           </div>
         </div>
 
-      </div>
-
-      <div class="contact-support-links">
-        <p class="contact-support-links__label text-[11px] font-semibold tracking-[.08em] uppercase text-[var(--ez-grey)] m-0 mb-[.875rem]">Looking for something specific?</p>
-        <div class="contact-support-links__grid flex flex-wrap gap-2">
-          <a href="/pages/faq" class="contact-link-pill py-[.375rem] px-[.875rem] rounded-full border-[1.5px] border-black/10 text-[13px] text-[var(--ez-grey)] no-underline transition-all duration-200 hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]">FAQ</a>
-          <a href="/pages/compatibility" class="contact-link-pill py-[.375rem] px-[.875rem] rounded-full border-[1.5px] border-black/10 text-[13px] text-[var(--ez-grey)] no-underline transition-all duration-200 hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]">Compatibility</a>
-          <a href="/pages/troubleshooting" class="contact-link-pill py-[.375rem] px-[.875rem] rounded-full border-[1.5px] border-black/10 text-[13px] text-[var(--ez-grey)] no-underline transition-all duration-200 hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]">Troubleshooting</a>
-          <a href="/pages/warranty" class="contact-link-pill py-[.375rem] px-[.875rem] rounded-full border-[1.5px] border-black/10 text-[13px] text-[var(--ez-grey)] no-underline transition-all duration-200 hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]">Warranty</a>
-          <a href="/pages/downloads" class="contact-link-pill py-[.375rem] px-[.875rem] rounded-full border-[1.5px] border-black/10 text-[13px] text-[var(--ez-grey)] no-underline transition-all duration-200 hover:border-[var(--ez-amber)] hover:text-[var(--ez-black)] hover:bg-[var(--ez-amber-05)]">Downloads</a>
         </div>
+
       </div>
 
-    </div>
+      <div class="contact-form-card rounded-[20px] border border-black/[7%] p-[clamp(1.5rem,2.4vw,2.125rem)] bg-white" id="contact-card-{{ section.id }}">
 
-    <div class="contact-form-card relative rounded-[20px] border-[1.5px] border-black/[8%] p-[clamp(1.75rem,3vw,2.5rem)] bg-white overflow-hidden transition-[border-color,box-shadow] duration-[250ms] hover:border-[var(--ez-amber-25)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]" id="contact-card-{{ section.id }}">
-      <div class="contact-form-card__spotlight absolute inset-0 pointer-events-none z-0 rounded-[inherit]" aria-hidden="true"></div>
-
-      {% form 'contact', id: 'contact-form-{{ section.id }}', class: 'contact-form relative z-[1]' %}
+      {% form 'contact', id: 'contact-form-{{ section.id }}', class: 'contact-form' %}
 
         {% if form.posted_successfully? %}
           <div class="contact-success text-center py-12 px-6" role="alert">
@@ -100,17 +88,17 @@
 
             <div class="contact-form__field flex flex-col gap-1.5">
               <label class="contact-form__label text-[13px] font-medium text-[var(--ez-black)]" for="contact-name-{{ section.id }}">{{ 'contact.name' | t }}</label>
-              <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="contact-form__input py-3 px-4 border-[1.5px] border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]" required autocomplete="name" placeholder="Alex Johnson" value="{% if customer %}{{ customer.name }}{% endif %}">
+              <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="contact-form__input py-3 px-4 border border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-black/30 focus:shadow-[0_0_0_3px_rgba(15,23,42,.08)]" required autocomplete="name" placeholder="Alex Johnson" value="{% if customer %}{{ customer.name }}{% endif %}">
             </div>
 
             <div class="contact-form__field flex flex-col gap-1.5">
               <label class="contact-form__label text-[13px] font-medium text-[var(--ez-black)]" for="contact-email-{{ section.id }}">{{ 'contact.email' | t }}</label>
-              <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input py-3 px-4 border-[1.5px] border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
+              <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="contact-form__input py-3 px-4 border border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-black/30 focus:shadow-[0_0_0_3px_rgba(15,23,42,.08)]" required autocomplete="email" placeholder="alex@company.com" value="{% if customer %}{{ customer.email }}{% endif %}">
             </div>
 
             <div class="contact-form__field contact-form__field--full flex flex-col gap-1.5 col-span-full">
               <label class="contact-form__label text-[13px] font-medium text-[var(--ez-black)]" for="contact-subject-{{ section.id }}">What is this about?</label>
-              <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="contact-form__input py-3 px-4 border-[1.5px] border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)]">
+              <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="contact-form__input py-3 px-4 border border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-black/30 focus:shadow-[0_0_0_3px_rgba(15,23,42,.08)]">
                 <option value="" disabled selected>Select a topic</option>
                 <option>Product question</option>
                 <option>Order support</option>
@@ -124,7 +112,7 @@
 
             <div class="contact-form__field contact-form__field--full flex flex-col gap-1.5 col-span-full">
               <label class="contact-form__label text-[13px] font-medium text-[var(--ez-black)]" for="contact-message-{{ section.id }}">{{ 'contact.message' | t }}</label>
-              <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea py-3 px-4 border-[1.5px] border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-[var(--ez-amber)] focus:shadow-[0_0_0_3px_var(--ez-amber-10)] resize-y min-h-[120px]" rows="5" required placeholder="Tell us what you need…"></textarea>
+              <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="contact-form__input contact-form__textarea py-3 px-4 border border-black/[12%] rounded-[10px] text-[15px] text-[var(--ez-black)] bg-white w-full transition-[border-color,box-shadow] duration-200 outline-none appearance-none font-[inherit] focus:border-black/30 focus:shadow-[0_0_0_3px_rgba(15,23,42,.08)] resize-y min-h-[120px]" rows="5" required placeholder="Tell us what you need…"></textarea>
             </div>
 
           </div>
@@ -137,27 +125,9 @@
       {% endform %}
     </div>
 
+    </div>
   </div>
 </div>
-
-
-<script>
-(function(){
-  var card = document.getElementById('contact-card-{{ section.id }}');
-  if (!card) return;
-  var spot = card.querySelector('.contact-form-card__spotlight');
-  if (!spot) return;
-  card.addEventListener('mousemove', function(e){
-    var r = card.getBoundingClientRect();
-    var x = ((e.clientX - r.left) / r.width)  * 100;
-    var y = ((e.clientY - r.top)  / r.height) * 100;
-    spot.style.background = 'radial-gradient(circle at '+x+'% '+y+'%,rgba(254, 211, 0, .08) 0%,transparent 55%)';
-  });
-  card.addEventListener('mouseleave', function(){
-    spot.style.background = 'none';
-  });
-})();
-</script>
 
 {% schema %}
 {

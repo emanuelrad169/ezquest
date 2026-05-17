@@ -24,7 +24,7 @@
   endif
 -%}
 
-<div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
+<div class="support-body container-shell pt-20 pb-20">
 
   {%- if structured_source == 'global' -%}
 
@@ -45,7 +45,7 @@
       {%- endfor -%}
     </div>
 
-    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-x-auto">
       <table class="data-table w-full border-collapse text-sm" id="dl-table">
         <thead>
           <tr>
@@ -67,7 +67,7 @@
               {%- if platforms == blank -%}{%- assign platforms = 'Mac · Windows' -%}{%- endif -%}
               <tr data-category="{{ type_val | handleize }}">
                 <td data-label="Product">
-                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ product_ref | default: '—' }}</span>
+                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium">{{ product_ref | default: '—' }}</span>
                 </td>
                 <td data-label="File" style="font-weight:500">{{ entry.title.value }}</td>
                 <td data-label="Type">
@@ -111,7 +111,7 @@
       <button class="filter-pill" data-filter="utility" type="button">Utilities</button>
     </div>
 
-    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-hidden">
+    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-x-auto">
       <table class="data-table w-full border-collapse text-sm" id="dl-table">
         <thead>
           <tr>
@@ -129,7 +129,7 @@
             {% if block.type == 'file' %}
               <tr data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
                 <td data-label="Product">
-                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium whitespace-nowrap">{{ block.settings.product_name }}</span>
+                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium">{{ block.settings.product_name }}</span>
                 </td>
                 <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
                 <td data-label="Type">
@@ -171,15 +171,6 @@
   {%- endif -%}
 
 </div>
-
-{%- render 'page-cta',
-  variant: 'dark',
-  kicker: 'Support',
-  heading: 'Can't find what you need?',
-  subhead: 'Tell us the product and file type — we'll send it directly.',
-  primary_label: 'Request a file',
-  primary_url: '/pages/contact'
--%}
 
 <script>
 (function(){

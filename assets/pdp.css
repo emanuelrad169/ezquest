@@ -278,22 +278,52 @@
   font-weight: 500;
 }
 
-/* ── Purchase row: qty above, ATC full-width below ── */
-.product-purchase-row {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: stretch;
+/* ── Purchase row: wishlist pinned top-right, qty + ATC on one row ── */
+.main-product-section .product-buybox {
+  position: relative;
 }
 
-/* Stepper and wishlist stay at natural width — don't stretch */
-.product-buybox-quantity-shell,
-.product-wishlist-wrap {
-  align-self: flex-start;
+.main-product-section .product-form-panel {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
-.product-primary-action-wrap {
-  flex: none; /* not needed in column layout; prevent height-stretching */
+.main-product-section .product-buybox .product-wishlist-wrap {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
+  align-self: auto;
+}
+
+.main-product-section .product-purchase-row {
+  display: grid;
+  grid-template-columns: minmax(6.75rem, 7rem) minmax(0, 1fr);
+  align-items: end;
+  gap: 0.75rem;
+}
+
+.main-product-section .product-buybox-quantity-shell {
+  align-self: auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.main-product-section .product-buybox-quantity-input {
+  width: 100%;
+}
+
+.main-product-section .product-primary-action-wrap {
+  flex: none;
+}
+
+@media (max-width: 520px) {
+  .main-product-section .product-purchase-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
 }
 
 /* ── Action row (Amazon + Share) ──────────────────────────── */
@@ -1675,3 +1705,40 @@
 .pdp-dl-item a:hover { background: rgb(248 250 252); }
 .pdp-dl-item__name { flex: 1; }
 .pdp-dl-empty { color: var(--ez-grey); font-size: 14px; padding: 16px 0; }
+
+/* Key Features list — buybox, above ATC */
+.pdp-key-features {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pdp-key-feature-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #374151;
+}
+.pdp-key-feature-item::before {
+  content: '';
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ez-amber);
+  margin-top: 4px;
+}
+
+/* Recommended tab placeholder */
+.pdp-recommended-placeholder {
+  padding: 48px 0;
+  text-align: center;
+}
+.pdp-recommended-placeholder-text {
+  font-size: 14px;
+  color: var(--ez-grey);
+}

@@ -1,4 +1,11 @@
-<section class="section-shell">
+{%- liquid
+  assign is_contact_page = false
+  if template.suffix == 'contact'
+    assign is_contact_page = true
+  endif
+-%}
+
+<section class="section-shell{% if is_contact_page %} info-card-grid--contact{% endif %}">
   <div class="container-shell">
     <div class="section-intro">
       <div class="max-w-3xl">
@@ -26,9 +33,9 @@
       endif
     -%}
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2 {{ columns_class }} reveal-stagger">
+    <div class="mt-10 grid gap-6 md:grid-cols-2 {{ columns_class }} reveal-stagger{% if is_contact_page %} info-card-grid__items--contact{% endif %}">
       {% for block in section.blocks %}
-        <article class="info-card" {{ block.shopify_attributes }}>
+        <article class="info-card{% if is_contact_page %} info-card--contact{% endif %}" {{ block.shopify_attributes }}>
           <div class="flex items-center justify-between gap-4">
             <p class="section-kicker">{{ block.settings.eyebrow | default: 'Detail' }}</p>
             <span class="text-xs uppercase tracking-wide text-slate-300">{{ forloop.index | prepend: '0' }}</span>

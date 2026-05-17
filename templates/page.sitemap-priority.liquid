@@ -42,7 +42,7 @@
       </url>
     {% endfor %}
   {% endif %}
-  {% assign support_paths = '/pages/support,/pages/faq,/pages/downloads,/pages/manuals,/pages/firmware,/pages/user-guides,/pages/compatibility,/pages/troubleshooting,/pages/warranty,/pages/contact,/pages/ticket-submission,/pages/help-me-choose,/pages/compare,/pages/where-to-buy' | split: ',' %}
+  {% assign support_paths = '/pages/support,/pages/faq,/pages/downloads,/pages/manuals,/pages/firmware,/pages/user-guides,/pages/compatibility,/pages/warranty,/pages/contact,/pages/ticket-submission,/pages/help-me-choose,/pages/compare,/pages/where-to-buy' | split: ',' %}
   {% for support_path in support_paths %}
     <url>
       <loc>{{ shop.url }}{{ support_path }}</loc>

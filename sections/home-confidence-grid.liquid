@@ -1,18 +1,6 @@
 <section class="section-shell pt-10 lg:pt-16 home-confidence-section">
   <div class="container-shell">
 
-    <div class="home-confidence-header grid gap-8 lg:grid-cols-2 lg:items-center reveal-on-scroll">
-      <div class="home-confidence-header-copy max-w-3xl">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <h2 class="section-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ section.settings.heading }}</h2>
-      </div>
-      <div class="home-confidence-header-note max-w-sm text-sm leading-6 text-slate-500 lg:justify-self-end">
-        <p>Every purchase backed by fast shipping, a 2-year warranty, easy returns, and real support when you need it.</p>
-      </div>
-    </div>
-
     <div class="home-confidence-grid mt-8 reveal-stagger">
 
       {%- comment -%} Row 1 · Col 1 — Fast shipping {%- endcomment -%}
@@ -90,10 +78,7 @@
 {% schema %}
 {
   "name": "Home confidence grid",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support and service" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Clear help before and after checkout." }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Home confidence grid"

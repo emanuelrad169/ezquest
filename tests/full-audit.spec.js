@@ -27,7 +27,6 @@ const ALL_PAGES = [
   { name: 'FAQ', path: '/pages/faq' },
   { name: 'Downloads', path: '/pages/downloads' },
   { name: 'Compatibility', path: '/pages/compatibility' },
-  { name: 'Troubleshooting', path: '/pages/troubleshooting' },
   { name: 'Warranty', path: '/pages/warranty' },
   { name: 'Contact', path: '/pages/contact' },
   { name: 'Help me choose', path: '/pages/help-me-choose' },

@@ -4,67 +4,18 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Warranty",
-        "heading": "",
-        "subheading": "",
+        "heading": "Our promise to you",
+        "subheading": "Every EZQuest product is covered by a limited manufacturer's warranty. Find your coverage period, what's covered, and how to file a claim.",
         "light_mode": true,
+        "image": "shopify://shop_images/ezquest-faq-hero.png",
         "background_color": "#020617",
         "overlay_opacity": 35,
         "height": 320
       }
     },
-    "details": {
-      "type": "info-card-grid",
-      "settings": {
-        "eyebrow": "Warranty flow",
-        "heading": "Coverage, process, and next steps",
-        "copy": "These highlights explain coverage, claim details, and where to go when you need warranty help.",
-        "columns_desktop": 3
-      },
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Coverage",
-            "title": "What the warranty is intended to cover",
-            "copy": "Highlight what coverage is intended to include, along with key exclusions customers should know."
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Claims",
-            "title": "What customers should prepare before filing",
-            "copy": "Explain what customers should prepare, including proof of purchase and issue details."
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "eyebrow": "Support",
-            "title": "When support should be contacted first",
-            "copy": "Clarify when troubleshooting or compatibility review should happen before a claim moves forward.",
-            "link_label": "Open support center",
-            "link_url": "/pages/support"
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3"
-      ]
-    },
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "show_title": false,
-        "intro_copy": "The full warranty policy, regional notes, and formal coverage language continue below.",
-        "side_eyebrow": "Claim support",
-        "side_heading": "Keep the claim path practical",
-        "side_copy": "Use contact or troubleshooting depending on what the claim needs next.",
-        "side_link_label": "Contact support",
-        "side_link_url": "/pages/contact"
-      }
+    "warranty_content": {
+      "type": "warranty-page",
+      "settings": {}
     },
     "cta": {
       "type": "support-cta-rail",
@@ -72,8 +23,8 @@
         "kicker": "Support",
         "heading": "Have a warranty question?",
         "body": "Some warranty questions are resolved faster through troubleshooting or direct support.",
-        "cta_label": "Open troubleshooting",
-        "cta_url": "/pages/troubleshooting",
+        "cta_label": "Open support",
+        "cta_url": "/pages/support",
         "cta2_label": "Contact support",
         "cta2_url": "/pages/contact"
       }
@@ -81,8 +32,7 @@
   },
   "order": [
     "hero",
-    "details",
-    "main",
+    "warranty_content",
     "cta"
   ]
 }

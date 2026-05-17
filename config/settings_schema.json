@@ -101,6 +101,17 @@
           }
         ],
         "default": "native"
+      },
+      {
+        "type": "header",
+        "content": "Chat widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_chat_widget",
+        "label": "Hide chat bubble",
+        "info": "Hides the Tidio chat button sitewide. Support is still reachable via the Contact page.",
+        "default": false
       }
     ]
   },

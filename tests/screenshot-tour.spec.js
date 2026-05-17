@@ -18,7 +18,6 @@ const PAGES = [
   { name: '09-faq',            path: '/pages/faq',               scroll: true },
   { name: '10-downloads',      path: '/pages/downloads',         scroll: true },
   { name: '11-compatibility',  path: '/pages/compatibility',     scroll: false },
-  { name: '12-troubleshoot',   path: '/pages/troubleshooting',   scroll: false },
   { name: '13-warranty',       path: '/pages/warranty',          scroll: true },
   { name: '14-contact',        path: '/pages/contact',           scroll: true },
   { name: '15-help-choose',    path: '/pages/help-me-choose',    scroll: true },

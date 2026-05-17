@@ -23,7 +23,7 @@
   endif
 -%}
 
-<section class="faq-section section-shell" id="pdp-faq">
+<section class="faq-section section-shell{% if request.page_type == 'page' and page and page.handle == 'faq' %} faq-section--compact{% endif %}" id="pdp-faq">
   <div class="container-shell">
     {%- liquid
       assign hide_faq_intro = false
@@ -31,7 +31,7 @@
         assign hide_faq_intro = true
       endif
     -%}
-    <div class="faq-layout">
+    <div class="faq-layout{% if hide_faq_intro %} faq-layout--full-width{% endif %}">
 
       <!-- Sticky heading column -->
       <div class="faq-header">
@@ -41,13 +41,28 @@
         {% if section.settings.subhead != blank and hide_faq_intro == false %}
           <p class="faq-subhead">{{ section.settings.subhead }}</p>
         {% endif %}
-        <div class="faq-cta-stack">
-          <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="btn">{{ section.settings.cta_label | default: 'Contact support' }}</a>
-        </div>
+        {% unless hide_faq_intro %}
+          <div class="faq-cta-stack">
+            <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="btn">{{ section.settings.cta_label | default: 'Contact support' }}</a>
+          </div>
+        {% endunless %}
       </div>
 
+      <!-- Tab Navigation (only on dedicated FAQ page) -->
+      {% if hide_faq_intro and section.blocks.size > 0 %}
+        <div class="faq-tabs-nav">
+          {% for block in section.blocks %}
+            {% if block.type == 'group' %}
+              <button class="faq-tab-trigger{% if forloop.first %} is-active{% endif %}" data-tab="faq-tab-{{ forloop.index }}" type="button">
+                {{ block.settings.title }}
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <!-- Accordion groups -->
-      <div class="faq-main">
+      <div class="faq-main{% if hide_faq_intro %} faq-main--tabbed{% endif %}">
         {% if section.blocks.size > 0 %}
           {%- assign item_idx = 0 -%}
           {% for block in section.blocks %}
@@ -55,13 +70,15 @@
               {%- assign group_filter = block.settings.group_handle | downcase -%}
               {%- assign group_faq_count = 0 -%}
 
-              <div class="faq-group" {{ block.shopify_attributes }}>
-                {% if block.settings.title != blank %}
-                  <div class="faq-category-heading">{{ block.settings.title }}</div>
-                {% endif %}
-                {% if block.settings.subtitle != blank %}
-                  <p class="faq-category-desc">{{ block.settings.subtitle }}</p>
-                {% endif %}
+              <div class="faq-group{% if hide_faq_intro %} faq-tab-panel{% if forloop.first %} is-active{% endif %}{% endif %}" id="faq-tab-{{ forloop.index }}" {{ block.shopify_attributes }}>
+                {% unless hide_faq_intro %}
+                  {% if block.settings.title != blank %}
+                    <div class="faq-category-heading">{{ block.settings.title }}</div>
+                  {% endif %}
+                  {% if block.settings.subtitle != blank %}
+                    <p class="faq-category-desc">{{ block.settings.subtitle }}</p>
+                  {% endif %}
+                {% endunless %}
 
                 <div class="faq-list">
                   {% if use_global_faqs and group_filter != blank %}
@@ -156,6 +173,24 @@
 
 <script>
 (function () {
+  // Tab switching
+  var tabTriggers = document.querySelectorAll('.faq-tab-trigger');
+  tabTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all triggers and panels
+      tabTriggers.forEach(function (t) { t.classList.remove('is-active'); });
+      document.querySelectorAll('.faq-tab-panel').forEach(function (p) { p.classList.remove('is-active'); });
+      
+      // Add active class to clicked trigger and corresponding panel
+      trigger.classList.add('is-active');
+      var panel = document.getElementById(tabId);
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+
+  // Accordion toggle
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('.faq-trigger');
     if (!trigger) return;

@@ -363,6 +363,27 @@
     });
   });
 
+  // Touch swipe support
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var SWIPE_THRESHOLD = 40;
+
+  section.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  section.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    var next = dx < 0
+      ? (currentIndex + 1) % totalSlides
+      : (currentIndex - 1 + totalSlides) % totalSlides;
+    goToSlide(next);
+    startAutoplay();
+  }, { passive: true });
+
   startAutoplay();
 })();
 </script>

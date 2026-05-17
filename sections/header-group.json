@@ -11,25 +11,18 @@
         "free_shipping": {
           "type": "message",
           "settings": {
-            "text": "Free shipping over $100"
-          }
-        },
-        "warranty": {
-          "type": "message",
-          "settings": {
-            "text": "2-year warranty"
+            "text": "Free Shipping Over $100"
           }
         },
         "returns": {
           "type": "message",
           "settings": {
-            "text": "30-day returns"
+            "text": "30-Day Returns"
           }
         }
       },
       "block_order": [
         "free_shipping",
-        "warranty",
         "returns"
       ]
     },

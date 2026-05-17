@@ -223,13 +223,6 @@
             {% endfor %}
           </div>
         {% endif %}
-        {% if rating_value != blank %}
-          <span class="product-card-featured-rating-badge" aria-label="Rated {{ rating_value }} out of 5{% if rating_count != blank %} from {{ rating_count }} reviews{% endif %}">
-            <span class="rating-star" aria-hidden="true">★</span>
-            {{ rating_value }}
-            {% if rating_count != blank %}<span class="rating-count">({{ rating_count }})</span>{% endif %}
-          </span>
-        {% endif %}
       </a>
 
       {% if product != blank %}

@@ -22,7 +22,6 @@ const pages = [
   { url: '/pages/manuals',                   name: 'Manuals' },
   { url: '/pages/firmware',                  name: 'Firmware' },
   { url: '/pages/user-guides',               name: 'User guides' },
-  { url: '/pages/troubleshooting',           name: 'Troubleshooting' },
   { url: '/pages/warranty',                  name: 'Warranty' },
   { url: '/pages/contact',                   name: 'Contact' },
   { url: '/pages/ticket-submission',         name: 'Ticket submission' },

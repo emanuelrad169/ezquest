@@ -12,23 +12,28 @@
 <section class="blog-hero">
   <div class="blog-hero__inner container-shell">
     <div class="blog-hero__content" data-animate>
-      <h1 class="blog-hero__heading">
-        {{ section.settings.heading
-           | default: 'Guides, tips & setup help.' }}
-      </h1>
-      <p class="blog-hero__body">
-        {{ section.settings.body
-           | default: 'Setup guides, compatibility advice, and buying guidance — everything you need to choose the right EZQuest product.' }}
-      </p>
-      <div class="blog-hero__meta">
-        <span class="blog-hero__count">
-          {{ blog.articles_count }}
-          {% if blog.articles_count == 1 %}article{% else %}articles{% endif %}
-        </span>
-        <span class="blog-hero__dot">·</span>
-        <a href="/pages/support" class="blog-hero__link hover:opacity-75">
-          Support center →
-        </a>
+      <div class="blog-hero__copy-panel">
+        {% if section.settings.kicker != blank %}
+          <p class="blog-hero__kicker">{{ section.settings.kicker }}</p>
+        {% endif %}
+        <h1 class="blog-hero__heading">
+          {{ section.settings.heading
+             | default: 'Guides, tips & setup help.' }}
+        </h1>
+        <p class="blog-hero__body">
+          {{ section.settings.body
+             | default: 'Setup guides, compatibility advice, and buying guidance — everything you need to choose the right EZQuest product.' }}
+        </p>
+        <div class="blog-hero__meta">
+          <span class="blog-hero__count">
+            {{ blog.articles_count }}
+            {% if blog.articles_count == 1 %}article{% else %}articles{% endif %}
+          </span>
+          <a href="/pages/support" class="blog-hero__link">
+            Support center →
+          </a>
+        </div>
+        <p class="blog-hero__subnote">Updated weekly with setup workflows, compatibility answers, and product guidance.</p>
       </div>
     </div>
     {% if section.settings.hero_image %}

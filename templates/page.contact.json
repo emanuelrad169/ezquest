@@ -4,9 +4,10 @@
       "type": "page-hero",
       "settings": {
         "kicker": "Contact",
-        "heading": "",
-        "subheading": "Pick the reason that matches your need, then send one support request with the right context.",
+        "heading": "Contact Support",
+        "subheading": "Tell us what you need and we will route your message to the right specialist within one business day.",
         "light_mode": true,
+        "image": "shopify://shop_images/ezquest-support-hero.png",
         "background_color": "#020617",
         "overlay_opacity": 35,
         "height": 320
@@ -67,7 +68,7 @@
   },
   "order": [
     "hero",
-    "details",
-    "form"
+    "form",
+    "details"
   ]
 }

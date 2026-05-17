@@ -1,96 +1,122 @@
 {{ 'support-cluster.css' | asset_url | stylesheet_tag }}
 
-<section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
-  <div class="support-hero__wrap w-full">
-    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">Warranty</p>
-    <h1 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
-      2-year limited<br>warranty
-    </h1>
-    <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
-      Every EZQuest product is covered from the day you buy it.
-      No registration required. No hoops to jump through.
-    </p>
-  </div>
-</section>
-
 <div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
-  <div class="warranty-layout grid [grid-template-columns:1fr_360px] gap-[clamp(2rem,5vw,5rem)] items-start max-[900px]:grid-cols-1">
+  <div class="container-shell">
+    <div class="warranty-layout grid [grid-template-columns:minmax(0,1fr)_340px] gap-[clamp(2rem,5vw,4rem)] items-start max-[900px]:grid-cols-1">
 
-    <div class="warranty-policy">
+    <div class="warranty-policy space-y-6">
 
-      <div class="warranty-stat-row flex gap-8 mb-12 pb-8 border-b border-black/[7%] flex-wrap">
-        <div class="warranty-stat flex flex-col gap-[.125rem]">
-          <span class="warranty-stat__number text-[clamp(40px,6vw,64px)] font-medium tracking-[-0.04em] text-[var(--ez-black)] leading-none">2</span>
-          <span class="warranty-stat__unit text-sm text-[var(--ez-grey)] font-medium mb-0.5">years</span>
-          <span class="warranty-stat__label text-xs text-[var(--ez-grey)]">Coverage period</span>
-        </div>
-        <div class="warranty-stat flex flex-col gap-[.125rem]">
-          <span class="warranty-stat__number text-[clamp(40px,6vw,64px)] font-medium tracking-[-0.04em] text-[var(--ez-black)] leading-none">30</span>
-          <span class="warranty-stat__unit text-sm text-[var(--ez-grey)] font-medium mb-0.5">days</span>
-          <span class="warranty-stat__label text-xs text-[var(--ez-grey)]">Return window</span>
-        </div>
-        <div class="warranty-stat flex flex-col gap-[.125rem]">
-          <span class="warranty-stat__number text-[clamp(40px,6vw,64px)] font-medium tracking-[-0.04em] text-[var(--ez-black)] leading-none">1</span>
-          <span class="warranty-stat__unit text-sm text-[var(--ez-grey)] font-medium mb-0.5">day</span>
-          <span class="warranty-stat__label text-xs text-[var(--ez-grey)]">Typical response</span>
+      <div class="warranty-panel warranty-panel--intro rounded-[24px] border border-black/[7%] bg-white p-6 md:p-8 shadow-[0_18px_50px_rgba(15,23,42,.04)]">
+        <p class="text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-3">Warranty coverage</p>
+        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-medium tracking-[-.03em] leading-[1.05] text-[var(--ez-black)] mb-3">Clear coverage, simple claim steps, no guesswork.</h2>
+        <p class="text-sm md:text-[15px] leading-[1.75] text-[var(--ez-grey)] max-w-3xl m-0">
+          Review what is covered, what is excluded, and exactly how to submit a claim. If a product issue is actually a setup or compatibility problem, we’ll point you to support before you waste time filing the wrong request.
+        </p>
+      </div>
+
+      <div class="warranty-panel warranty-panel--stats rounded-[24px] border border-black/[7%] bg-[linear-gradient(180deg,#fff,rgba(255,255,255,.92))] p-6 md:p-7 shadow-[0_12px_40px_rgba(15,23,42,.03)]">
+        <p class="text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">Coverage at a glance</p>
+        <div class="warranty-stat-row">
+          <div class="warranty-stat">
+            <span class="warranty-stat__label">Coverage</span>
+            <span class="warranty-stat__number">1–2 yr</span>
+            <span class="warranty-stat__copy">Varies by product family</span>
+          </div>
+          <div class="warranty-stat">
+            <span class="warranty-stat__label">Returns</span>
+            <span class="warranty-stat__number">30 days</span>
+            <span class="warranty-stat__copy">From delivery</span>
+          </div>
+          <div class="warranty-stat">
+            <span class="warranty-stat__label">Claim shipping</span>
+            <span class="warranty-stat__number">Free</span>
+            <span class="warranty-stat__copy">On valid claims</span>
+          </div>
         </div>
       </div>
 
-      <div class="warranty-section mb-10">
-        <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">What is covered</h2>
-        <ul class="warranty-list warranty-list--covered p-0 m-0 list-none flex flex-col gap-[.625rem]">
-          <li>Manufacturing defects in materials and workmanship</li>
-          <li>Electrical failures under normal operating conditions</li>
-          <li>Port and connector defects not caused by physical damage</li>
-          <li>Firmware issues attributable to the hardware itself</li>
-        </ul>
+      <div class="warranty-proof-grid grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="warranty-panel rounded-[24px] border border-black/[7%] bg-white p-6 md:p-7 shadow-[0_12px_40px_rgba(15,23,42,.03)]">
+          <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">What is covered</h2>
+          <ul class="warranty-list warranty-list--covered p-0 m-0 list-none flex flex-col gap-[.625rem]">
+            <li>Manufacturing defects in materials and workmanship</li>
+            <li>Material failures under normal use</li>
+            <li>Premature wear under normal operating conditions</li>
+            <li>Functional issues not caused by user error or physical damage</li>
+          </ul>
+        </div>
+
+        <div class="warranty-panel rounded-[24px] border border-black/[7%] bg-white p-6 md:p-7 shadow-[0_12px_40px_rgba(15,23,42,.03)]">
+          <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">What is not covered</h2>
+          <ul class="warranty-list warranty-list--excluded p-0 m-0 list-none flex flex-col gap-[.625rem]">
+            <li>Physical damage from drops or impact</li>
+            <li>Liquid damage</li>
+            <li>Damage from non-standard use or modifications</li>
+            <li>Normal wear after the warranty period expires</li>
+            <li>Loss or theft</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="warranty-section mb-10">
-        <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">What is not covered</h2>
-        <ul class="warranty-list warranty-list--excluded p-0 m-0 list-none flex flex-col gap-[.625rem]">
-          <li>Physical damage from drops, liquid exposure, or misuse</li>
-          <li>Normal wear and cosmetic changes over time</li>
-          <li>Use outside the product's rated specifications</li>
-          <li>Third-party modifications or unauthorized repairs</li>
-          <li>Lost or stolen products</li>
-        </ul>
-      </div>
-
-      <div class="warranty-section mb-10">
-        <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">How to claim</h2>
+      <div class="warranty-panel rounded-[24px] border border-black/[7%] bg-white p-6 md:p-7 shadow-[0_12px_40px_rgba(15,23,42,.03)]">
+        <h2 class="warranty-section__heading text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-4">How to file a claim</h2>
         <ol class="warranty-steps">
-          <li>Contact us via the form or call 1-800-881-9305</li>
-          <li>Provide your order number and describe the issue</li>
-          <li>We may request photos or a short video of the defect</li>
-          <li>If approved, a replacement ships within 3–5 business days at no cost</li>
+          <li>
+            <span class="warranty-step__number">1</span>
+            <div class="warranty-step__content">
+              <strong>Check your coverage</strong>
+              <p>Find your product's warranty period on the product page or in your order confirmation. Have your order number ready.</p>
+            </div>
+          </li>
+          <li>
+            <span class="warranty-step__number">2</span>
+            <div class="warranty-step__content">
+              <strong>Gather what you need</strong>
+              <p>Order number or proof of purchase, photos of the issue, and a clear description of what's wrong.</p>
+            </div>
+          </li>
+          <li>
+            <span class="warranty-step__number">3</span>
+            <div class="warranty-step__content">
+              <strong>Contact us</strong>
+              <p>Submit a warranty claim through our support form. We respond within 1 business day on weekdays.</p>
+            </div>
+          </li>
+          <li>
+            <span class="warranty-step__number">4</span>
+            <div class="warranty-step__content">
+              <strong>Replacement or refund</strong>
+              <p>Approved claims receive a free replacement shipped at no cost, or a refund if a replacement isn't available.</p>
+            </div>
+          </li>
         </ol>
       </div>
 
     </div>
 
-    <div class="warranty-claim-col">
+      <div class="warranty-claim-col lg:sticky lg:top-24">
 
-      <div class="warranty-claim-card border-[1.5px] border-[var(--ez-amber-20)] rounded-[18px] p-8 bg-[rgba(254,211,0,.03)]">
-        <div class="warranty-claim-card__icon w-12 h-12 rounded-[14px] bg-[var(--ez-amber-08)] flex items-center justify-center mb-5" aria-hidden="true">
+      <div class="warranty-claim-card border-[1.5px] border-black/[7%] rounded-[24px] p-8 bg-white shadow-[0_18px_55px_rgba(15,23,42,.06)]">
+        <div class="warranty-claim-card__icon w-12 h-12 rounded-[14px] bg-black/[4%] text-[var(--ez-grey)] flex items-center justify-center mb-5" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 4l9 3.5V14c0 5.25-3.75 8.25-9 10.5C9.75 22.25 5 20.25 5 14V7.5L14 4z" stroke="var(--ez-amber)" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M10 14l2.5 2.5 5.5-5.5" stroke="var(--ez-amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 4l9 3.5V14c0 5.25-3.75 8.25-9 10.5C9.75 22.25 5 20.25 5 14V7.5L14 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10 14l2.5 2.5 5.5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
+        <p class="warranty-claim-card__eyebrow text-[11px] font-semibold tracking-[.1em] uppercase text-[var(--ez-grey)] mb-2">Claim support</p>
         <h3 class="warranty-claim-card__heading text-[20px] font-medium tracking-[-0.02em] text-[var(--ez-black)] m-0 mb-[.625rem]">Start a warranty claim</h3>
         <p class="warranty-claim-card__body text-sm text-[var(--ez-grey)] leading-[1.65] m-0 mb-6">
-          If your product has a defect covered under the 2-year limited warranty,
-          contact us here. We respond within 1 business day.
+          If your product has a defect covered under the limited warranty,
+          contact us here. We respond within 1 business day on weekdays.
         </p>
-        <a href="/pages/contact" class="btn btn--primary" style="display:block;text-align:center;width:100%">
-          Submit a claim
-        </a>
-        <p class="warranty-claim-card__note text-xs text-[var(--ez-grey)] text-center mt-[.875rem] mb-0">Have your order number ready — we'll ask for it.</p>
+        <div class="warranty-claim-card__actions flex flex-col gap-3">
+          {% render 'button', label: 'Submit a claim', url: '/pages/contact', style: 'secondary', size: 'sm', class: 'warranty-claim-card__button' %}
+          <p class="warranty-claim-card__note text-xs text-[var(--ez-grey)] text-left m-0">Have your order number ready — we'll ask for it.</p>
+        </div>
       </div>
 
-      <div class="info-card info-card--amber rounded-[14px] p-6 flex gap-5 items-start border-[1.5px] bg-[var(--ez-amber-04)] border-[var(--ez-amber-25)]" style="margin-top:1rem">
-        <div class="info-card__icon info-card__icon--amber w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 bg-[var(--ez-amber-10)] text-[var(--ez-amber)]">
+      <div class="info-card rounded-[18px] p-6 flex gap-5 items-start bg-white shadow-[0_12px_28px_rgba(15,23,42,.05)]" style="margin-top:1rem">
+        <div class="info-card__icon w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 bg-black/[4%] text-[var(--ez-grey)]">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M9 2l1.5 4.5H15l-3.75 2.75 1.5 4.5L9 11l-3.75 2.75 1.5-4.5L3 6.5h4.5L9 2z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
           </svg>
@@ -103,8 +129,8 @@
         </div>
       </div>
 
-      <div class="info-card rounded-[14px] p-6 flex gap-5 items-start border-[1.5px] border-black/[7%] bg-white" style="margin-top:1rem">
-        <div class="info-card__icon info-card__icon--amber w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 bg-[var(--ez-amber-10)] text-[var(--ez-amber)]">
+      <div class="info-card rounded-[18px] p-6 flex gap-5 items-start bg-white shadow-[0_12px_28px_rgba(15,23,42,.05)]" style="margin-top:1rem">
+        <div class="info-card__icon w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 bg-black/[4%] text-[var(--ez-grey)]">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M2 5.5A1.5 1.5 0 013.5 4h11A1.5 1.5 0 0116 5.5v7A1.5 1.5 0 0114.5 14h-11A1.5 1.5 0 012 12.5v-7z" stroke="currentColor" stroke-width="1.25"/>
             <path d="M2 6.5l7 4.5 7-4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
@@ -118,6 +144,7 @@
         </div>
       </div>
 
+      </div>
     </div>
   </div>
 </div>

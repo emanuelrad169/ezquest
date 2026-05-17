@@ -256,7 +256,7 @@
         "kicker": "Support",
         "heading": "Still have questions?",
         "body": "Send a support request and we'll help you find the right answer.",
-        "cta_label": "Contact support",
+        "cta_label": "",
         "cta_url": "/pages/contact",
         "cta2_label": "Open support hub",
         "cta2_url": "/pages/support"
