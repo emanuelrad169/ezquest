@@ -3,9 +3,9 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Help Me Choose",
-        "heading": "",
-        "subheading": "",
+        "kicker": "Choose a setup",
+        "heading": "Pick the setup role that matches the way you work",
+        "subheading": "Choose the role first, then move into the family and the product built for that setup.",
         "image": "shopify://shop_images/ezquest-support-multi-device-charging.png",
         "background_color": "#020617",
         "overlay_opacity": 35,
@@ -15,9 +15,9 @@
     "guide": {
       "type": "support-decision-guide",
       "settings": {
-        "eyebrow": "Choose a setup",
-        "heading": "Pick the setup role that matches the way you work",
-        "copy": "Choose the role first, then move into the family and the product built for that setup.",
+        "eyebrow": "",
+        "heading": "",
+        "copy": "",
         "structured_source": "blocks",
         "entry_limit": 6,
         "link_label": "Open support center",

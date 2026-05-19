@@ -11,6 +11,8 @@ module.exports = {
     'is-revealed',
     'is-active',
     'is-hidden',
+    'pb-20',
+    'pt-20',
     { pattern: /^faq-/ },
     { pattern: /^reveal-/ },
     { pattern: /^decision-/ },

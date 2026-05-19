@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 40,
+        "height": 280,
+        "kicker": "Legal",
+        "heading": "Return & Refund Policy",
+        "subheading": "Our terms for returns, refunds, and warranty claims. 30-day money back, 1–2 year warranty depending on product."
+      }
+    },
+    "main": {
+      "type": "refund-policy",
+      "settings": {}
+    }
+  },
+  "order": [
+    "page_hero",
+    "main"
+  ]
+}

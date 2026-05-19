@@ -7,20 +7,19 @@
 {%- assign asin    = product.metafields.custom.amazon_asin -%}
 {%- assign rating  = product.metafields.custom.amazon_rating | times: 1 -%}
 {%- assign count   = product.metafields.custom.amazon_review_count | default: 0 -%}
-{%- assign seller  = product.metafields.custom.amazon_seller_id | default: 'A34WE8HAFZHTZW' -%}
 
-{%- if asin != blank -%}
+{%- if asin != blank and rating > 0 and count > 0 -%}
   {%- assign reviews_url = 'https://www.amazon.com/product-reviews/' | append: asin -%}
+  {%- assign widget_href = link_href | default: reviews_url -%}
 
   {%- assign full_stars      = rating | floor -%}
   {%- assign remainder       = rating | minus: full_stars -%}
   {%- assign half_star_index = full_stars | plus: 1 -%}
 
-  <a href="{{ reviews_url }}"
-     target="_blank"
-     rel="noopener noreferrer"
+  <a href="{{ widget_href }}"
+     {% unless link_href %}target="_blank" rel="noopener noreferrer"{% endunless %}
      class="amazon-reviews-widget"
-     aria-label="{{ count }} reviews on Amazon — rated {{ rating }} out of 5">
+     aria-label="{{ count }} reviews — rated {{ rating }} out of 5">
 
     <span class="amazon-reviews-widget__stars" aria-hidden="true">
       {%- for i in (1..5) -%}

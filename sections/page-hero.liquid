@@ -1,5 +1,6 @@
 {%- liquid
   assign hero_image = section.settings.background_image | default: section.settings.image
+  assign hero_background_url = blank
   assign hero_kicker = section.settings.kicker
   assign hero_heading = section.settings.heading
   assign hero_subheading = section.settings.subheading
@@ -19,6 +20,11 @@
     assign hero_heading = section.settings.heading | default: collection.title
     assign hero_subheading = section.settings.subheading | default: collection.description | strip_html | truncate: 120
     assign hero_image = section.settings.background_image | default: section.settings.image | default: collection.featured_image
+  elsif request.page_type == 'article' and article
+    assign hero_kicker = section.settings.kicker | default: article.tags.first | upcase
+    assign hero_heading = section.settings.heading | default: article.title
+    assign hero_subheading = section.settings.subheading | default: article.excerpt | strip_html | truncate: 160
+    assign hero_image = section.settings.background_image | default: section.settings.image | default: article.image
   elsif hero_heading == blank
     if request.page_type == 'search'
       assign hero_heading = 'Search results'
@@ -49,17 +55,27 @@
     For templates without a dynamic or configured image, fall back
     to a gradient instead of a flat solid color.
   endcomment
+  if hero_image != blank
+    assign hero_background_url = hero_image | image_url: width: 2000
+  elsif request.page_type == 'page' and page and page.handle == 'compatibility'
+    assign hero_background_url = 'support-compatibility.svg' | asset_url
+  endif
+
   if hero_image == blank
     assign use_gradient = true
+  endif
+
+  if hero_background_url != blank
+    assign use_gradient = false
   endif
 -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} .page-hero {
     background-color: {{ section.settings.background_color | default: '#020617' }};
-    min-height: {{ section.settings.height | default: 360 }}px;
-    {%- if hero_image != blank -%}
-      background-image: url('{{ hero_image | image_url: width: 2000 }}');
+    min-height: {% if request.page_type == 'product' %}240px{% else %}{{ section.settings.height | default: 360 }}px{% endif %};
+    {%- if hero_background_url != blank -%}
+      background-image: url('{{ hero_background_url }}');
       background-size: cover;
       background-position: center;
     {%- endif -%}
@@ -73,19 +89,21 @@
 <section class="page-hero {% if use_gradient %}page-hero--gradient{% endif %}" aria-label="{{ hero_heading | escape }}">
   <div class="page-hero__overlay"></div>
 
-  <div class="page-hero__inner container-shell">
-    {% if hero_kicker != blank %}
-      <p class="page-hero__kicker">{{ hero_kicker | escape }}</p>
-    {% endif %}
+  {%- unless request.page_type == 'product' -%}
+    <div class="page-hero__inner container-shell">
+      {% if hero_kicker != blank %}
+        <p class="page-hero__kicker">{{ hero_kicker | escape }}</p>
+      {% endif %}
 
-    {% if hero_heading != blank %}
-      <h1 class="page-hero__heading">{{ hero_heading | escape }}</h1>
-    {% endif %}
+      {% if hero_heading != blank %}
+        <h1 class="page-hero__heading">{{ hero_heading | escape }}</h1>
+      {% endif %}
 
-    {% if hero_subheading != blank %}
-      <p class="page-hero__subheading">{{ hero_subheading | escape }}</p>
-    {% endif %}
-  </div>
+      {% if hero_subheading != blank %}
+        <p class="page-hero__subheading">{{ hero_subheading | escape }}</p>
+      {% endif %}
+    </div>
+  {%- endunless -%}
 </section>
 
 {% schema %}

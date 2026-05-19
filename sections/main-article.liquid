@@ -25,10 +25,6 @@
   </nav>
 
   <div class="article-intro__text">
-    {% if article.tags.size > 0 %}
-      <p class="article-intro__kicker">{{ article.tags.first | upcase }}</p>
-    {% endif %}
-    <h1 class="article-intro__title">{{ article.title }}</h1>
     <div class="article-intro__meta">
       <span class="article-intro__author">{{ article.author }}</span>
       <span aria-hidden="true">·</span>
@@ -41,15 +37,43 @@
   </div>
 
   {% if article.image %}
-    <div class="article-intro__img">
+    <div class="article-intro__img-wrap">
       <img
         src="{{ article.image | image_url: width: 960, format: 'pjpg' }}"
         alt="{{ article.image.alt | default: article.title | escape }}"
         width="960"
         height="540"
         loading="eager"
+        fetchpriority="high"
         decoding="async">
+      {% if blog.all_tags.size > 0 %}
+        <div class="blog-filter-bar blog-filter-bar--overlay">
+          <div class="blog-filter-bar__inner">
+            <a href="{{ blog.url }}" class="blog-filter-chip">All</a>
+            {% for tag in blog.all_tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+                 class="blog-filter-chip{% if article.tags contains tag %} is-active{% endif %}">
+                {{ tag }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
     </div>
+  {% else %}
+    {% if blog.all_tags.size > 0 %}
+      <div class="blog-filter-bar">
+        <div class="blog-filter-bar__inner">
+          <a href="{{ blog.url }}" class="blog-filter-chip">All</a>
+          {% for tag in blog.all_tags %}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+               class="blog-filter-chip{% if article.tags contains tag %} is-active{% endif %}">
+              {{ tag }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
   {% endif %}
 
 </div>

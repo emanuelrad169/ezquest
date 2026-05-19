@@ -8,7 +8,7 @@
         "show_product_type": false,
         "show_description": false,
         "show_quantity_selector": true,
-        "show_dynamic_checkout": false,
+        "show_dynamic_checkout": true,
         "show_support_panel": false,
         "support_heading": "Support for this product",
         "support_copy": "Compatibility, manuals, downloads, and help"
@@ -20,31 +20,6 @@
         "heading": "FAQ",
         "copy": "Answer the questions most likely to slow the decision.",
         "structured_source": "product"
-      }
-    },
-    "compare": {
-      "type": "product-compare-table",
-      "settings": {
-        "eyebrow": "Compare",
-        "heading": "Compare nearby options",
-        "copy": "See nearby EZQuest models side by side so the right role, port mix, power, and display support are easier to spot.",
-        "columns_desktop": 3,
-        "structured_source": "auto",
-        "source_note": "Compare nearby models by ports, power, and display support before you go deeper into one product page."
-      }
-    },
-    "cta": {
-      "type": "cta-banner",
-      "settings": {
-        "eyebrow": "More detail",
-        "heading": "Compatibility, manuals, and support",
-        "copy": "Check compatibility, open manuals, or contact support without leaving the product context.",
-        "link_label": "Compatibility",
-        "link_url": "/pages/compatibility",
-        "secondary_label": "Expert help",
-        "secondary_url": "/pages/support",
-        "style": "light",
-        "button_style": "secondary"
       }
     },
     "bundle": {
@@ -60,7 +35,7 @@
       "settings": {
         "kicker": "Continue browsing",
         "heading": "Recently viewed",
-        "max_products": 8
+        "max_products": 4
       }
     },
     "page_hero": {
@@ -79,9 +54,7 @@
     "page_hero",
     "main",
     "faq",
-    "compare",
     "bundle",
-    "cta",
     "recently_viewed"
   ]
 }

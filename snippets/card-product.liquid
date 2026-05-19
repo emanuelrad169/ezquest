@@ -110,11 +110,6 @@
       assign product_badge_codes = product_badge_codes | append: 'highwatt,'
     endif
 
-    if product.metafields.custom.amazon_rating != blank and product.metafields.custom.amazon_review_count > 0
-      assign rating_value = product.metafields.custom.amazon_rating
-      assign rating_count = product.metafields.custom.amazon_review_count
-    endif
-
     for option in product.options_with_values
       assign option_name = option.name | downcase
       if option_name contains 'color' or option_name contains 'finish'

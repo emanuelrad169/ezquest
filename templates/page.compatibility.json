@@ -14,9 +14,9 @@
         "background_color": "#020617",
         "overlay_opacity": 35,
         "height": 320,
-        "heading": "",
-        "subheading": "",
-        "kicker": "Compatibility"
+        "heading": "Will it work with your setup?",
+        "subheading": "Tell us what you're using. We'll show you exactly what fits — and what to skip.",
+        "kicker": "Compatibility checker"
       }
     }
   },

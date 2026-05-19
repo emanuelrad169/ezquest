@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 40,
+        "height": 280,
+        "kicker": "Support",
+        "heading": "Product Resources",
+        "subheading": "Setup guides, downloads, manuals, firmware, and warranty information for your EZQuest product."
+      }
+    },
+    "main": {
+      "type": "product-resource",
+      "settings": {}
+    }
+  },
+  "order": [
+    "page_hero",
+    "main"
+  ]
+}

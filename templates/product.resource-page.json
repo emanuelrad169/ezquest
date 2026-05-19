@@ -3,13 +3,16 @@
     "page_hero": {
       "type": "page-hero",
       "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 45,
+        "height": 280,
         "heading": "",
         "subheading": "",
-        "background_image": ""
+        "kicker": ""
       }
     },
     "main": {
-      "type": "main-article",
+      "type": "product-resource",
       "settings": {}
     }
   },

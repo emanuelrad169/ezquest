@@ -16,7 +16,7 @@
     <h1 class="page-hero__heading">Fast shipping.<br>Easy returns.</h1>
     <p class="page-hero__subheading">
       Free shipping on all US orders over $100.
-      30-day hassle-free returns. 2-year warranty on everything.
+      30-day hassle-free returns. 1–2 year limited warranty depending on product.
     </p>
     <div class="sr-hero-stats">
       <div>
@@ -28,8 +28,8 @@
         <p class="sr-hero-stat__label">day return window</p>
       </div>
       <div>
-        <p class="sr-hero-stat__value">2yr</p>
-        <p class="sr-hero-stat__label">warranty on all products</p>
+        <p class="sr-hero-stat__value">1–2 yr</p>
+        <p class="sr-hero-stat__label">limited warranty varies by product</p>
       </div>
     </div>
   </div>
@@ -140,7 +140,7 @@
           <svg class="page-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
         <div class="page-faq-body">
-          <div class="page-faq-content">Yes — if the product is in like-new condition within 30 days. If the product has a defect, it's covered by the 2-year warranty regardless of whether it's been opened.</div>
+          <div class="page-faq-content">Yes — if the product is in like-new condition within 30 days. If the product has a defect, it's covered by the 1–2 year limited warranty (depending on product) regardless of whether it's been opened.</div>
         </div>
       </div>
       <div class="page-faq-item">
@@ -155,6 +155,56 @@
     </div>
   </div>
 </section>
+
+{% comment %} 5. RETURN POLICY HIGHLIGHTS {% endcomment %}
+<section class="page-section page-section--white bg-white" style="border-top:0.5px solid rgba(0,0,0,0.07);">
+  <div class="container-shell">
+    <div style="margin-bottom:1.5rem;">
+      <p class="section-intro__kicker">Return policy highlights</p>
+      <h2 class="section-intro__heading section-intro__heading--left text-left" style="font-size:clamp(1.25rem,2.5vw,1.75rem);">What to know before you return</h2>
+    </div>
+    <ul class="sr-policy-list">
+      <li>Undamaged products qualify for a <strong>full refund within 30 days</strong> of purchase</li>
+      <li>Must include all original accessories, cables, and retail packaging</li>
+      <li>Bulk orders of 10 or more units of the same product are not eligible for refund</li>
+      <li>Free prepaid return shipping label provided for all approved US returns</li>
+    </ul>
+    <a href="/pages/refund-policy" class="sr-policy-link">Read the full return &amp; refund policy &rarr;</a>
+  </div>
+</section>
+
+<style>
+.sr-policy-list {
+  padding: 0;
+  margin: 0 0 1.5rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+.sr-policy-list li {
+  font-size: 14px;
+  color: #3d3d3f;
+  line-height: 1.65;
+  padding-left: 1.375rem;
+  position: relative;
+}
+.sr-policy-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--ez-amber);
+  font-weight: 700;
+}
+.sr-policy-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+</style>
 
 {%- render 'page-cta',
   variant: 'light',

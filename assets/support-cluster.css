@@ -36,6 +36,18 @@
 
 /* File/data table */
 
+.data-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
 .data-table thead th {
   padding: .875rem 1.25rem;
   text-align: left;
@@ -60,12 +72,83 @@
   color: var(--ez-black);
 }
 
+.data-table__file {
+  font-weight: 500;
+}
+
+.data-table__muted {
+  color: var(--ez-grey);
+}
+
+.data-table__meta {
+  color: var(--ez-grey);
+  font-size: 13px;
+}
+
 /* File type badge */
+
+.file-badge {
+  display: inline-block;
+  padding: .2rem .625rem;
+  border-radius: 6px;
+  background: rgba(0,0,0,.04);
+  color: var(--ez-grey);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.file-badge--zip {
+  background: rgba(37,99,235,.07);
+  color: var(--ez-info-text);
+}
+
+.file-badge--exe {
+  background: rgba(124,58,237,.07);
+  color: #6d28d9;
+}
+
+.file-badge--other {
+  background: rgba(220,38,38,.07);
+  color: var(--ez-error-text);
+}
 
 /* Download button */
 
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .45rem 1rem;
+  border-radius: 9999px;
+  background: var(--ez-amber);
+  color: var(--ez-black);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, opacity .2s;
+}
+
+.btn-download:hover,
+.btn-download:focus-visible {
+  background: var(--ez-amber);
+  opacity: .86;
+}
+
 
 /* Product name pill */
+
+.product-pill {
+  display: inline-block;
+  padding: .2rem .75rem;
+  border-radius: 9999px;
+  background: rgba(0,0,0,.04);
+  color: var(--ez-grey);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
 
 /* Status indicators */
 
@@ -76,6 +159,30 @@
 
 
 /* Empty state */
+
+.empty-state {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-state--panel {
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 1rem;
+  background: var(--ez-light);
+}
+
+.empty-state__heading {
+  margin: 0 0 .5rem;
+  color: var(--ez-black);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.empty-state__body {
+  margin: 0 0 1.5rem;
+  color: var(--ez-grey);
+  font-size: 0.875rem;
+}
 
 
 
@@ -175,5 +282,4 @@
 
 
 .contact-form__input::placeholder{color:var(--ez-grey);opacity:.6}
-
 

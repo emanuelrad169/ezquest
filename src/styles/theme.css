@@ -1126,6 +1126,177 @@
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.042);
   }
 
+  /* ── Search results bar ─────────────────── */
+  .search-results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .search-results-bar__count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgb(100 116 139);
+  }
+
+  .search-results-bar__reset {
+    font-size: 0.8rem;
+    color: rgb(100 116 139);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ── Search tabs ────────────────────────── */
+  .search-tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .search-tabs::-webkit-scrollbar { display: none; }
+
+  .search-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.625rem 1rem;
+    border: none;
+    background: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(100 116 139);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .search-tab:hover { color: var(--ez-black); }
+
+  .search-tab.is-active {
+    color: var(--ez-black);
+    border-bottom-color: var(--ez-black);
+  }
+
+  .search-tab__count {
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0.1rem 0.4rem;
+    color: inherit;
+    min-width: 1.25rem;
+    text-align: center;
+  }
+
+  .search-tab.is-active .search-tab__count {
+    background: var(--ez-black);
+    color: #fff;
+  }
+
+  .search-tab-panel { display: block; }
+  .search-tab-panel[hidden] { display: none; }
+
+  /* ── No-results ─────────────────────────── */
+  .search-empty {
+    max-width: 640px;
+    padding: 2rem 0;
+  }
+
+  .search-empty__heading {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: rgb(2 6 23);
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .search-empty__body {
+    font-size: 0.9rem;
+    color: rgb(100 116 139);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  .search-empty__sub {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(100 116 139);
+    margin: 0 0 0.875rem;
+  }
+
+  .search-empty__suggestions { margin-bottom: 2rem; }
+
+  .search-empty__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .search-empty__chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ez-black);
+    text-decoration: none;
+    background: #fff;
+    transition: background 0.12s, border-color 0.12s;
+  }
+
+  .search-empty__chip:hover {
+    background: var(--ez-light);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .search-empty__categories { margin-bottom: 2rem; }
+
+  .search-empty__cat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .search-empty__cat {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ez-black);
+    text-decoration: none;
+    background: #fff;
+    transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+  }
+
+  .search-empty__cat:hover {
+    background: var(--ez-light);
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .search-empty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .support-crosslink-list {
     @apply mt-5 space-y-2.5 border-t border-slate-200/80 pt-4;
   }
@@ -2070,6 +2241,59 @@
   }
 
 
+  /* ── Buybox title block (kicker + H1 + subtitle) ─── */
+  .product-buybox__header {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(2, 6, 23, 0.08);
+  }
+
+  .product-buybox__kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ez-brand-yellow, #FED300);
+    margin: 0 0 8px;
+  }
+
+  .product-buybox__title {
+    font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: rgb(2, 6, 23);
+    margin: 0 0 12px;
+  }
+
+  .product-buybox__subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: rgba(2, 6, 23, 0.65);
+    margin: 0;
+  }
+
+  .product-buybox__full-detail {
+    color: rgb(2, 6, 23);
+    text-decoration: underline;
+    text-decoration-color: rgba(2, 6, 23, 0.3);
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .product-buybox__full-detail:hover {
+    text-decoration-color: rgb(2, 6, 23);
+  }
+
+  /* "Buy it now" dynamic checkout button */
+  .shopify-payment-button__button--unbranded {
+    border-radius: 100px !important;
+    background: #000 !important;
+    color: #fff !important;
+    border-radius: 2rem;
+  }
+
   .product-buybox-proof-line {
     @apply max-w-md text-sm font-medium leading-5 text-slate-700;
     text-wrap: pretty;
@@ -2647,6 +2871,15 @@
     .main-product-section .product-buybox-title {
       font-size: 1.25rem;
       line-height: 1.18;
+    }
+
+    .product-buybox__header {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+    }
+
+    .product-buybox__title {
+      font-size: clamp(1.25rem, 5vw, 1.625rem);
     }
 
     .main-product-section .product-buybox-lead {
@@ -7590,6 +7823,64 @@
     text-decoration-color: var(--ez-black);
   }
 
+  .search-results__empty-link {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    color: var(--ez-black);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ── Multi-type predictive groups ─────────── */
+  .predictive-group { border-bottom: 1px solid rgba(226,232,240,0.72); }
+  .predictive-group:last-of-type { border-bottom: none; }
+
+  .predictive-group__label {
+    padding: 0.5rem 0.875rem 0.25rem;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(100 116 139);
+  }
+
+  .predictive-group__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .predictive-group__list--text .predictive-text-result {
+    display: block;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--ez-black);
+    text-decoration: none;
+    transition: background 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .predictive-group__list--text .predictive-text-result:hover {
+    background: rgb(248 250 252);
+  }
+
+  .predictive-group__list--text .predictive-text-result mark {
+    background: transparent;
+    color: var(--ez-black);
+    font-weight: 700;
+  }
+
+  /* ── Mobile search results container ─────── */
+  .mobile-search-results {
+    overflow-y: auto;
+    max-height: calc(100dvh - 64px);
+    background: #fff;
+    border-top: 1px solid rgba(226, 232, 240, 0.72);
+  }
+
   /* ── Scroll entrance animations ──────────── */
   @media (prefers-reduced-motion: no-preference) {
     [data-animate] {
@@ -8635,8 +8926,15 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    overflow: hidden;
+    overflow: visible; /* fill uses transform:scaleX — no clip needed; visible required for ::before tap-area */
     transition: width 0.3s ease, background 0.3s ease;
+  }
+
+  /* Invisible hit-area pad — keeps visual size at 3px, tap area ≥44px */
+  .home-hero-slider-dot::before {
+    content: '';
+    position: absolute;
+    inset: -21px -20px;
   }
 
   .home-hero-slider-dot::after {
@@ -17599,3 +17897,242 @@ body.cookie-visible {
 .icon--md { width: 16px; height: 16px; }
 .icon--lg { width: 24px; height: 24px; }
 .icon--xl { width: 36px; height: 36px; }
+
+/* ── Accessibility: visually hide but keep in accessibility tree ── */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE USABILITY FIXES
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Tier 3: Root overflow defense (applied unconditionally) ── */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── Tier 1: Touch target floors (44×44px minimum) ─────────── */
+@media (max-width: 768px) {
+  .announcement-bar__social-link,
+  .announcement-bar__btn,
+  .site-header-icon-button,
+  .lang-picker__trigger,
+  .mega-menu-trigger,
+  .home-hero-slider-dot {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .site-header-icon-button,
+  .announcement-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── Tier 2: iOS Safari font-size zoom fix ──────────────────── */
+/* iOS zooms viewport when input font-size < 16px */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── Tier 3: Overflow containment — hero slider controls ─────── */
+.home-hero-slider-controls {
+  max-width: calc(100% - 32px);
+  margin-inline: auto;
+}
+
+.home-hero-slider-dots {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+/* ── Tier 3: Mega-menu panels constrained on tablet/mobile ─────── */
+@media (max-width: 1024px) {
+  .mega-menu-panels {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* ── Tier 5A: Collection page — sticky mobile filter/sort bar ─── */
+.collection-mobile-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .collection-mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
+    z-index: 40;
+  }
+
+  .collection-mobile-bar__btn {
+    flex: 1;
+    min-height: 48px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ez-black);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Pad grid bottom row so it doesn't hide behind bar */
+  #collection-grid {
+    padding-bottom: 80px;
+  }
+}
+
+/* ── Tier 5B: Mobile search overlay ─────────────────────────────── */
+.mobile-search-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 24px;
+}
+
+.mobile-search-overlay.is-open {
+  transform: translateY(0);
+}
+
+.mobile-search-overlay__form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mobile-search-overlay__input {
+  flex: 1;
+  font-size: 16px;
+  padding: 14px 20px;
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  outline: none;
+  background: var(--ez-light);
+}
+
+.mobile-search-overlay__input:focus {
+  border-color: var(--ez-black);
+  background: #fff;
+}
+
+.mobile-search-overlay__close {
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--ez-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Tier 5D: Mobile typography floors ──────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  p, li {
+    font-size: 16px;
+  }
+
+  h1 { font-size: clamp(1.75rem, 7vw, 2.5rem); line-height: 1.15; }
+  h2 { font-size: clamp(1.5rem, 5vw, 2rem);    line-height: 1.2; }
+  h3 { font-size: clamp(1.125rem, 4vw, 1.5rem); line-height: 1.3; }
+  h4 { font-size: 1.125rem; line-height: 1.35; }
+
+  .meta, .small, time, .post-date { font-size: 0.875rem; }
+}
+
+/* ── Tier 6: Body scroll lock CSS safety net ────────────────────── */
+/* JS handles inline style; this class is a belt-and-suspenders guard */
+body.drawer-open {
+  overflow: hidden;
+}
+
+/* ── Announcement bar: hide when any drawer is open ─────────────── */
+.announcement-bar {
+  transition: opacity 0.2s, transform 0.2s;
+}
+body.drawer-open .announcement-bar,
+body.collection-filter-drawer-open .announcement-bar {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* ── Page-hero mobile: increase padding-top to clear header/logo ─── */
+@media (max-width: 768px) {
+  .page-hero__inner {
+    padding-top: 172px;
+  }
+  .page-hero__heading {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+    line-height: 1.15;
+  }
+  .page-hero__kicker {
+    font-size: 0.6875rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* ── Gallery zoom: ensure it covers Tidio + announcement bar ─────── */
+body.has-pdp-zoom-open .announcement-bar,
+body.has-pdp-zoom-open #tidio-chat,
+body.has-pdp-zoom-open [id*="tidio"] {
+  display: none !important;
+}
+
+/* ── Tidio chat: float above sticky ATC bar on mobile ────────────── */
+@media (max-width: 768px) {
+  #tidio-chat,
+  [id*="tidio-chat-button"] {
+    bottom: 80px !important;
+  }
+}

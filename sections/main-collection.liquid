@@ -696,6 +696,43 @@
       </div>
     </div>
 
+  {%- if collection.filters.size > 0 or section.settings.show_sort -%}
+    <div class="collection-mobile-bar" aria-label="Filter and sort" role="toolbar">
+      {%- if collection.filters.size > 0 -%}
+        <button type="button"
+                class="collection-mobile-bar__btn collection-filter-toggle"
+                aria-label="Open filters"
+                aria-controls="collection-filters">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Filter
+        </button>
+      {%- endif -%}
+      {%- if section.settings.show_sort -%}
+        <button type="button"
+                class="collection-mobile-bar__btn"
+                id="collection-mobile-sort-btn"
+                aria-label="Sort products">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 5h8M2 8h5M2 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M11 3v10M9 11l2 2 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Sort
+        </button>
+        <script>
+        (function() {
+          var sortBtn = document.getElementById('collection-mobile-sort-btn');
+          var sortSelect = document.getElementById('CollectionSort');
+          if (sortBtn && sortSelect) {
+            sortBtn.addEventListener('click', function() { sortSelect.focus(); sortSelect.click(); });
+          }
+        })();
+        </script>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
 {% endpaginate %}
 
 {% schema %}

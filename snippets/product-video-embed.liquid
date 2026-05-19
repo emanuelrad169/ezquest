@@ -8,54 +8,54 @@
   {%- assign video_title = title | default: product.title | default: 'Product video' -%}
 
   {%- comment -%} Detect type and extract ID {%- endcomment -%}
-  {%- assign _is_yt    = false -%}
-  {%- assign _is_vimeo = false -%}
-  {%- assign _is_mp4   = false -%}
-  {%- assign _embed_id  = '' -%}
+  {%- assign is_youtube = false -%}
+  {%- assign is_vimeo = false -%}
+  {%- assign is_mp4 = false -%}
+  {%- assign embed_id = '' -%}
 
   {%- if url contains 'youtube.com' or url contains 'youtu.be' -%}
-    {%- assign _is_yt = true -%}
+    {%- assign is_youtube = true -%}
     {%- if url contains 'youtu.be/' -%}
-      {%- assign _embed_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
+      {%- assign embed_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
     {%- elsif url contains '/embed/' -%}
-      {%- assign _embed_id = url | split: '/embed/' | last | split: '?' | first -%}
+      {%- assign embed_id = url | split: '/embed/' | last | split: '?' | first -%}
     {%- elsif url contains 'watch?v=' -%}
-      {%- assign _embed_id = url | split: 'watch?v=' | last | split: '&' | first -%}
+      {%- assign embed_id = url | split: 'watch?v=' | last | split: '&' | first -%}
     {%- elsif url contains '/shorts/' -%}
-      {%- assign _embed_id = url | split: '/shorts/' | last | split: '?' | first -%}
+      {%- assign embed_id = url | split: '/shorts/' | last | split: '?' | first -%}
     {%- else -%}
-      {%- assign _embed_id = url | split: 'v=' | last | split: '&' | first -%}
+      {%- assign embed_id = url | split: 'v=' | last | split: '&' | first -%}
     {%- endif -%}
   {%- elsif url contains 'vimeo.com' -%}
-    {%- assign _is_vimeo = true -%}
+    {%- assign is_vimeo = true -%}
     {%- if url contains '/video/' -%}
-      {%- assign _embed_id = url | split: '/video/' | last | split: '?' | first | split: '/' | first -%}
+      {%- assign embed_id = url | split: '/video/' | last | split: '?' | first | split: '/' | first -%}
     {%- else -%}
-      {%- assign _embed_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | first -%}
+      {%- assign embed_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | first -%}
     {%- endif -%}
   {%- elsif url contains '.mp4' or url contains '.webm' -%}
-    {%- assign _is_mp4 = true -%}
+    {%- assign is_mp4 = true -%}
   {%- endif -%}
 
   <div class="pdp-video-wrap mt-8 w-full">
     <div class="pdp-video-frame">
-      {%- if _is_yt and _embed_id != blank -%}
+      {%- if is_youtube and embed_id != blank -%}
         <iframe
-          src="https://www.youtube-nocookie.com/embed/{{ _embed_id | escape }}?rel=0&modestbranding=1"
+          src="https://www.youtube-nocookie.com/embed/{{ embed_id | escape }}?rel=0&modestbranding=1"
           title="{{ video_title | escape }}"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           loading="lazy"
         ></iframe>
-      {%- elsif _is_vimeo and _embed_id != blank -%}
+      {%- elsif is_vimeo and embed_id != blank -%}
         <iframe
-          src="https://player.vimeo.com/video/{{ _embed_id | escape }}?byline=0&portrait=0"
+          src="https://player.vimeo.com/video/{{ embed_id | escape }}?byline=0&portrait=0"
           title="{{ video_title | escape }}"
           allow="autoplay; fullscreen; picture-in-picture"
           allowfullscreen
           loading="lazy"
         ></iframe>
-      {%- elsif _is_mp4 -%}
+      {%- elsif is_mp4 -%}
         <video
           src="{{ url | escape }}"
           controls

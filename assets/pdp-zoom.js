@@ -77,6 +77,7 @@
     resetTransform();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('has-pdp-zoom-open');
 
     var closeButton = modal.querySelector('.pdp-zoom-modal__close');
     if (closeButton) closeButton.focus();
@@ -87,6 +88,7 @@
     if (!modal || modal.hidden) return;
     modal.hidden = true;
     document.body.style.overflow = '';
+    document.body.classList.remove('has-pdp-zoom-open');
     resetTransform();
 
     if (previousFocus && typeof previousFocus.focus === 'function') {

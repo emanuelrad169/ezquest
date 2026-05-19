@@ -949,8 +949,40 @@ function openDrawer(target, controller) {
   window.requestAnimationFrame(function() {
     target.classList.add(DRAWER_OPEN_CLASS);
     const panel = target.querySelector('[data-drawer-panel]');
-    if (panel) panel.focus();
+    if (panel) {
+      panel.focus();
+      trapFocusInDrawer(panel);
+    }
   });
+}
+
+function trapFocusInDrawer(panel) {
+  const SELECTORS = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  function handleTab(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(panel.querySelectorAll(SELECTORS)).filter(function(el) {
+      return !el.closest('[hidden]') && el.offsetParent !== null;
+    });
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first || document.activeElement === panel) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  panel.removeEventListener('keydown', panel._trapHandler);
+  panel._trapHandler = handleTab;
+  panel.addEventListener('keydown', handleTab);
 }
 
 function closeDrawer(target, controller) {

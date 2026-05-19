@@ -24,15 +24,19 @@
 
 <section class="decision-guide" aria-label="Find your setup">
   <div class="page-width">
-    <div class="decision-guide__header">
-      {% if section.settings.eyebrow != blank %}
-        <p class="decision-guide__kicker"><span class="shiny-text">{{ section.settings.eyebrow }}</span></p>
-      {% endif %}
-      <h2 class="decision-guide__heading">{{ section.settings.heading | default: 'Pick the role that matches the way you work' }}</h2>
-      {% if section.settings.copy != blank %}
-        <p class="decision-guide__subhead">{{ section.settings.copy }}</p>
-      {% endif %}
-    </div>
+    {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.copy != blank %}
+      <div class="decision-guide__header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="decision-guide__kicker"><span class="shiny-text">{{ section.settings.eyebrow }}</span></p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2 class="decision-guide__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.copy != blank %}
+          <p class="decision-guide__subhead">{{ section.settings.copy }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
 
     <div class="decision-bento" id="decision-bento-{{ section.id }}">
       {%- if use_global_entries and metaobjects.ezquest_decision_guide_entry != blank -%}

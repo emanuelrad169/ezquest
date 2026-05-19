@@ -165,6 +165,9 @@
             </div>
           </div>
         {% endif %}
+        {% unless hide_faq_intro %}
+          <a href="/pages/faq" class="faq-more-link">More questions? See our full FAQ →</a>
+        {% endunless %}
       </div>
 
     </div>
@@ -264,6 +267,20 @@
   ]
 }
 </script>
+
+{% style %}
+.faq-more-link {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-dark);
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+}
+.faq-more-link:hover { opacity: 1; }
+{% endstyle %}
 
 {% schema %}
 {

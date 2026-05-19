@@ -28,47 +28,87 @@
       <link rel="preconnect" href="https://www.googletagmanager.com">
       <link rel="dns-prefetch" href="https://www.google-analytics.com">
     {% endif %}
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% elsif template.name == 'index' %}
-      <meta name="description" content="EZQuest makes premium USB-C hubs, GaN wall chargers, and DuraGuard cables — compatible with Mac, iPad, iPhone, and Windows. Free US shipping over $35.">
-    {% endif %}
+    {%- liquid
+      if page_description != blank
+        assign meta_desc = page_description
+      elsif template.name == 'index'
+        assign meta_desc = 'Premium USB-C hubs, GaN chargers, and DuraGuard cables — compatible with Mac, iPad, iPhone, and Windows. Trusted since 1994. Free US shipping over $100.'
+      elsif request.page_type == 'product'
+        assign meta_desc = product.description | strip_html | truncate: 160
+      elsif request.page_type == 'collection'
+        assign meta_desc = collection.description | strip_html | truncate: 160
+        if meta_desc == blank
+          assign meta_desc = 'Shop ' | append: collection.title | append: ' from EZQuest. Premium USB-C accessories for Mac, iPad, and Windows.'
+        endif
+      elsif request.page_type == 'article'
+        assign meta_desc = article.excerpt | strip_html | truncate: 160
+        if meta_desc == blank
+          assign meta_desc = article.content | strip_html | truncate: 160
+        endif
+      elsif request.page_type == 'blog'
+        assign meta_desc = blog.description | default: 'Product guides, tips, and setup help from EZQuest.'
+      else
+        assign meta_desc = 'Premium USB-C hubs, GaN chargers, and DuraGuard cables. Compatible with Mac, iPad, and Windows. Trusted since 1994.'
+      endif
+    -%}
+    <meta name="description" content="{{ meta_desc | escape }}">
     {% if request.page_type == 'blog' and current_tags %}
       <link rel="canonical" href="{{ shop.url }}{{ request.path }}">
     {% else %}
       <link rel="canonical" href="{{ canonical_url }}">
     {% endif %}
+    {%- if shop.published_locales.size > 1 -%}
+      {%- for locale in shop.published_locales -%}
+        <link rel="alternate" hreflang="{{ locale.iso_code }}" href="{{ request.origin }}{{ locale.root_url }}{{ request.path }}">
+      {%- endfor -%}
+      <link rel="alternate" hreflang="x-default" href="{{ request.origin }}{{ request.path }}">
+    {%- endif -%}
     {% if settings.favicon %}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
     {% else %}
       <link rel="icon" type="image/svg+xml" href="{{ 'ezquest-logo.svg' | asset_url }}">
     {% endif %}
-    <title>{% if page_title %}{{ page_title }}{% endif %}{% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} - Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
+    <title>
+      {%- if template.name == 'index' -%}
+        EZQuest — USB-C Hubs, Docks, Chargers &amp; Cables
+      {%- elsif page_title -%}
+        {{ page_title }}{% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} – Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}
+      {%- else -%}
+        {{ shop.name }} — Premium USB-C Accessories
+      {%- endif -%}
+    </title>
 
     <!-- Open Graph -->
+    {%- liquid
+      if request.page_type == 'product' and product.featured_image
+        assign og_image = product.featured_image | image_url: width: 1200
+      elsif request.page_type == 'article' and article.image
+        assign og_image = article.image | image_url: width: 1200
+      elsif page_image
+        assign og_image = page_image | image_url: width: 1200
+      elsif settings.share_image
+        assign og_image = settings.share_image | image_url: width: 1200
+      endif
+    -%}
     <meta property="og:site_name" content="{{ shop.name }}">
     <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
     <meta property="og:type" content="{% if template == 'product' %}product{% elsif template == 'article' %}article{% else %}website{% endif %}">
     <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
-    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
-    {% if page_image %}
-      <meta property="og:image" content="{{ page_image | image_url: width: 1200 }}">
-      <meta property="og:image:width" content="1200">
-      <meta property="og:image:height" content="630">
-    {% elsif settings.share_image %}
-      <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+    <meta property="og:description" content="{{ meta_desc | escape }}">
+    {% if og_image %}
+      <meta property="og:image" content="{{ og_image }}">
       <meta property="og:image:width" content="1200">
       <meta property="og:image:height" content="630">
     {% endif %}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ezquest">
     <meta name="twitter:title" content="{{ page_title | default: shop.name | escape }}">
-    <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
-    {% if page_image %}
-      <meta name="twitter:image" content="{{ page_image | image_url: width: 1200 }}">
-    {% elsif settings.share_image %}
-      <meta name="twitter:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+    <meta name="twitter:description" content="{{ meta_desc | escape }}">
+    {% if og_image %}
+      <meta name="twitter:image" content="{{ og_image }}">
     {% endif %}
 
     <!-- Structured data: Organization + WebSite -->
@@ -78,7 +118,22 @@
       "@type": "Organization",
       "name": {{ shop.name | json }},
       "url": {{ shop.url | json }},
-      "logo": "{{ settings.share_image | image_url: width: 400 }}"
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ 'ezquest-logo.svg' | asset_url }}"
+      },
+      "sameAs": [
+        "https://www.facebook.com/ezquest",
+        "https://www.instagram.com/ezquest",
+        "https://www.youtube.com/@ezquest",
+        "https://www.amazon.com/stores/EZQuest"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@ezq.com",
+        "contactType": "customer support",
+        "areaServed": "US"
+      }
     }
     </script>
     <script type="application/ld+json">
@@ -103,6 +158,10 @@
       {
         "@context": "https://schema.org",
         "@type": "Article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ shop.url }}{{ article.url }}"
+        },
         "headline": {{ article.title | json }},
         "description": {{ article.excerpt | default: article.title | strip_html | truncate: 160 | json }},
         "author": {
@@ -112,12 +171,21 @@
         "publisher": {
           "@type": "Organization",
           "name": "EZQuest",
-          "url": {{ shop.url | json }}
+          "url": {{ shop.url | json }},
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ 'ezquest-logo.svg' | asset_url }}"
+          }
         },
         "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
-        "dateModified": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+        "dateModified": "{{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
         {% if article.image %}
-        "image": "{{ article.image | image_url: width: 1200 }}",
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ article.image | image_url: width: 1200 }}",
+          "width": 1200,
+          "height": 630
+        },
         {% endif %}
         "url": "{{ shop.url }}{{ article.url }}"
       }
@@ -129,6 +197,33 @@
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+
+        /* Consent Mode v2 — default denied until user accepts */
+        gtag('consent', 'default', {
+          analytics_storage:    'denied',
+          ad_storage:           'denied',
+          ad_user_data:         'denied',
+          ad_personalization:   'denied',
+          functionality_storage:'granted',
+          security_storage:     'granted',
+          wait_for_update:      500
+        });
+
+        /* Restore consent immediately if already given this session */
+        (function() {
+          try {
+            var saved = localStorage.getItem('ez_cookie_consent');
+            if (saved === 'accepted') {
+              gtag('consent', 'update', {
+                analytics_storage:  'granted',
+                ad_storage:         'granted',
+                ad_user_data:       'granted',
+                ad_personalization: 'granted'
+              });
+            }
+          } catch (_) {}
+        })();
+
         gtag('js', new Date());
         gtag('config', {{ settings.ga4_measurement_id | json }}, {
           page_path: window.location.pathname,
@@ -160,7 +255,7 @@
     {% endif %}
     <style id="ez-critical-css">
       :root{--page-max-width:100rem;--header-height:4.5rem;--ez-amber:#FED300;--ez-black:#1d1d1f;--ez-dark:#0a0a0a;--ez-grey:#6e6e73;--ez-light:#f5f5f7;--radius-pill:9999px;--radius-lg:1.75rem;--shadow-soft:0 12px 32px rgba(15,23,42,.04);--font-base:"Inter",-apple-system,BlinkMacSystemFont,sans-serif}
-      *,:before,:after{box-sizing:border-box}html{background:#fff;color:#020617;font-family:var(--font-base);-webkit-text-size-adjust:100%}body{margin:0;min-height:100vh;-webkit-font-smoothing:antialiased}img,svg,video{display:block;max-width:100%;height:auto}[hidden]{display:none!important}.page-shell{min-height:100vh;background:#fff;color:#020617}.site-main{position:relative}.container-shell{width:100%;max-width:var(--page-max-width);margin-inline:auto;padding-inline:1.25rem}.section-shell{padding-block:2.5rem;scroll-margin-top:calc(var(--header-height) + 1.25rem)}.display-heading,.section-heading{font-weight:500;color:#020617;letter-spacing:-.04em;line-height:1.02}.section-heading{font-size:clamp(1.875rem,4vw,3rem)}.section-kicker{display:inline-flex;align-items:center;gap:.75rem;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#64748b}.button-primary,.button-secondary{display:inline-flex;min-height:3.2rem;align-items:center;justify-content:center;border-radius:var(--radius-pill);padding:.75rem 1.25rem;font-weight:500;text-decoration:none}.button-primary{background:#0f172a;color:#fff}.skip-link{position:absolute;left:1rem;top:1rem;z-index:9999;transform:translateY(-6rem);border-radius:999px;background:#020617;color:#fff;padding:.6rem 1rem}.skip-link:focus{transform:translateY(0)}.home-hero,.collection-showcase,.product-hero-grid{contain:layout paint}.home-hero-media-image,.collection-showcase-image{width:100%;height:100%;object-fit:cover}.product-buybox{background:#fff;border:1px solid rgba(226,232,240,.9);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft)}
+      *,:before,:after{box-sizing:border-box}html{background:#fff;color:#020617;font-family:var(--font-base);-webkit-text-size-adjust:100%}body{margin:0;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}img,svg,video{display:block;max-width:100%;height:auto}[hidden]{display:none!important}.page-shell{min-height:100vh;background:#fff;color:#020617}.site-main{position:relative}.container-shell{width:100%;max-width:var(--page-max-width);margin-inline:auto;padding-inline:1.25rem}.section-shell{padding-block:2.5rem;scroll-margin-top:calc(var(--header-height) + 1.25rem)}.display-heading,.section-heading{font-weight:500;color:#020617;letter-spacing:-.04em;line-height:1.02}.section-heading{font-size:clamp(1.875rem,4vw,3rem)}.section-kicker{display:inline-flex;align-items:center;gap:.75rem;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#64748b}.button-primary,.button-secondary{display:inline-flex;min-height:3.2rem;align-items:center;justify-content:center;border-radius:var(--radius-pill);padding:.75rem 1.25rem;font-weight:500;text-decoration:none}.button-primary{background:#0f172a;color:#fff}.skip-link{position:absolute;left:1rem;top:1rem;z-index:9999;transform:translateY(-6rem);border-radius:999px;background:#020617;color:#fff;padding:.6rem 1rem}.skip-link:focus{transform:translateY(0)}.home-hero,.collection-showcase,.product-hero-grid{contain:layout paint}.home-hero-media-image,.collection-showcase-image{width:100%;height:100%;object-fit:cover}.product-buybox{background:#fff;border:1px solid rgba(226,232,240,.9);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft)}
       @media (min-width:640px){.container-shell{padding-inline:1.5rem}}@media (min-width:1024px){.container-shell{padding-inline:2rem}.section-shell{padding-block:4rem}}
     </style>
     <style id="tidio-cls-fix">#tidio-chat-root,#tidio-chat-code{display:none!important}</style>
@@ -222,6 +317,7 @@
       ['scroll','click','touchstart','keydown'].forEach(function(e){
         window.addEventListener(e, show, { passive: true, once: true });
       });
+      setTimeout(show, 5000);
     })();
     </script>
     {% render 'newsletter-popup' %}

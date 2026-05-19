@@ -351,20 +351,33 @@
       </div>
 
       <div class="space-y-4 lg:space-y-5 min-w-0 buybox-sticky motion-fade-up reveal-tier-2 pdp-buy-box">
+
         <div class="product-buybox card-elevated p-5 lg:p-6">
+
+          {%- comment -%} ── Title block — direct child of card, above rating ── {%- endcomment -%}
+          <header class="product-buybox__header">
+            {%- assign pdp_kicker = product.metafields.custom.kicker | default: product.type | default: product.collections.first.title -%}
+            {%- if pdp_kicker != blank -%}
+              <p class="product-buybox__kicker">{{ pdp_kicker | upcase }}</p>
+            {%- endif -%}
+            <h1 class="product-buybox__title">{{ product.title }}</h1>
+            {%- assign pdp_short_desc = product.metafields.custom.short_description | default: product.description | strip_html | strip -%}
+            {%- if pdp_short_desc != blank -%}
+              {%- assign pdp_truncated = pdp_short_desc | truncate: 120, '' -%}
+              <p class="product-buybox__subtitle">
+                {{- pdp_truncated -}}
+                {%- if pdp_short_desc.size > 120 -%}
+                  &hellip; <a href="#product-overview" class="product-buybox__full-detail">(full detail)</a>
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+          </header>
+
           <div class="product-buybox-header space-y-4">
-            <div class="product-buybox-topline flex flex-wrap items-center justify-between gap-3">
-              {% if section.settings.show_vendor and product.vendor != blank %}
-                <p class="product-buybox-brand text-sm font-medium text-slate-600">{{ product.vendor }}</p>
-              {% endif %}
-              {% if section.settings.show_product_type and product.type != blank %}
-                <span class="product-meta-pill product-meta-pill--desktop">{{ product.type }}</span>
-              {% endif %}
-            </div>
 
             <div class="product-buybox-headline-row flex flex-col gap-3">
               <div class="product-buybox-lead space-y-2.5">
-                {% render 'amazon-reviews-widget', product: product %}
+                {% render 'amazon-reviews-widget', product: product, link_href: '#pdp-reviews' %}
               </div>
 
               <div class="product-buybox-price" data-product-price-block>
@@ -374,7 +387,9 @@
               {% comment %} ── Stock counter ─────────────────── {% endcomment %}
               {%- assign stock_counter_hidden = true -%}
               {%- assign stock_counter_class = 'stock-counter--ok' -%}
-              {%- assign stock_counter_text = 'In stock · ships within 1-2 days' -%}
+              {%- assign delivery_ts = 'now' | date: '%s' | plus: 432000 -%}
+              {%- assign delivery_date_str = delivery_ts | date: '%A, %B %-d' -%}
+              {%- assign stock_counter_text = 'In stock · Get it by ' | append: delivery_date_str -%}
               {%- if selected_variant.inventory_management == 'shopify' and selected_variant.inventory_policy == 'deny' -%}
                 {%- assign stock = selected_variant.inventory_quantity -%}
                 {%- if stock > 0 -%}
@@ -524,6 +539,46 @@
             </div>
           {% endform %}
 
+          <div class="pdp-trust-grid" role="list" aria-label="Purchase confidence">
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <p class="pdp-trust-label">{{ product.metafields.custom.warranty_years | default: '1' }}-yr warranty</p>
+                <p class="pdp-trust-sub">Covered against defects</p>
+              </div>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <p class="pdp-trust-label">{{ 'trust.no_drivers' | t }}</p>
+                <p class="pdp-trust-sub">Plug in and go</p>
+              </div>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="9" cy="9" r="6.5" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
+                <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>
+              <div>
+                <p class="pdp-trust-label">{{ 'trust.mac_windows' | t }}</p>
+                <p class="pdp-trust-sub">macOS &amp; Windows ready</p>
+              </div>
+            </div>
+            <div class="pdp-trust-item" role="listitem">
+              <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M2 8h9M2 8l3-3M2 8l3 3M16 10H7M16 10l-3-3M16 10l-3 3" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <p class="pdp-trust-label">30-day returns</p>
+                <p class="pdp-trust-sub">Free, no-hassle returns</p>
+              </div>
+            </div>
+          </div>
+
           {% comment %} ── Action row: Social share ── {% endcomment %}
           <div class="pdp-action-row">
 
@@ -602,35 +657,6 @@
             </div>
           {% endif %}
 
-          <div class="pdp-trust-strip" role="list" aria-label="Purchase confidence">
-            <div class="pdp-trust-item last:border-r-0" role="listitem">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M9 2l6 2.5V9c0 3.5-2.5 5.5-6 7C3.5 14.5 3 12.5 3 9V4.5L9 2z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linejoin="round"/>
-              </svg>
-              <span class="pdp-trust-label">{{ 'trust.warranty' | t }}</span>
-            </div>
-            <div class="pdp-trust-item last:border-r-0" role="listitem">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M9 13v3M6 3v4M12 3v4M5 7h8l-1 4H6L5 7z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span class="pdp-trust-label">{{ 'trust.no_drivers' | t }}</span>
-            </div>
-            <div class="pdp-trust-item last:border-r-0" role="listitem">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <circle cx="9" cy="9" r="6.5" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
-                <path d="M9 2.5C9 2.5 7 6 7 9s2 6.5 2 6.5M9 2.5C9 2.5 11 6 11 9s-2 6.5-2 6.5M2.5 9h13" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round"/>
-              </svg>
-              <span class="pdp-trust-label">{{ 'trust.mac_windows' | t }}</span>
-            </div>
-            <div class="pdp-trust-item last:border-r-0" role="listitem">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-                <path d="M1.5 4.5h10v7.5H1.5V4.5zM11.5 7.5H15l1.5 3v1.5h-5V7.5z" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="4.5" cy="13" r="1.25" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
-                <circle cx="13" cy="13" r="1.25" stroke="rgba(254, 211, 0, 0.96)" stroke-width="1.25"/>
-              </svg>
-              <span class="pdp-trust-label">{{ 'trust.free_shipping' | t }}</span>
-            </div>
-          </div>
 
 
 
@@ -778,6 +804,7 @@
             </p>
             <p class="product-sticky-atc-price" data-sticky-atc-price>{{ product.selected_or_first_available_variant.price | money }}</p>
           </div>
+          <p class="product-sticky-atc-trust">{{ sticky_trust_line }}</p>
         </div>
         <button class="btn btn--primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
           <span data-sticky-atc-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
@@ -818,9 +845,9 @@
       </div>
     </div>
 
-    {%- assign _feature_video_url = section.settings.youtube_url | strip | default: metafield_video_url -%}
-    {%- if _feature_video_url != blank -%}
-      {%- render 'product-video-embed', url: _feature_video_url, title: product.title -%}
+    {%- assign feature_video_url = section.settings.youtube_url | strip | default: metafield_video_url -%}
+    {%- if feature_video_url != blank -%}
+      {%- render 'product-video-embed', url: feature_video_url, title: product.title -%}
     {%- endif -%}
 
     {%- assign feature_block_count = 0 -%}
@@ -849,19 +876,20 @@
 
 {% comment %}──────────────────────────────────────────────────────────────
   ZONE 4 — CONTENT TABS
-  Driven by custom metafields seeded from legacy ezq.com extract.
-  Tabs render only when the metafield has content — products without
-  legacy content (placeholder products) show 0 tabs (correct).
+  Default (tab_set = "default"): Overview / Specifications / Recommended
+  Flagship (tab_set = "flagship"): Overview / Specifications / Comparisons / Reviews
+  Legacy tabs (Highlight / Compatibility / Downloads) are OFF by default;
+  merchant enables per-product via section settings.
 ──────────────────────────────────────────────────────────────{% endcomment %}
 {%- liquid
-  assign features_html      = product.metafields.custom.product_features.value
-  assign specs_html         = product.metafields.custom.product_specifications.value
-  assign highlight_html     = product.metafields.custom.product_highlight.value
-  assign compat_html        = product.metafields.custom.product_compatibility_html.value
-  assign has_features       = false
-  assign has_specs          = false
-  assign has_highlight      = false
-  assign has_compat         = false
+  assign features_html  = product.metafields.custom.product_features.value
+  assign specs_html     = product.metafields.custom.product_specifications.value
+  assign highlight_html = product.metafields.custom.product_highlight.value
+  assign compat_html    = product.metafields.custom.product_compatibility_html.value
+  assign has_features   = false
+  assign has_specs      = false
+  assign has_highlight  = false
+  assign has_compat     = false
   if features_html and features_html != ''
     assign has_features = true
   endif
@@ -874,98 +902,176 @@
   if compat_html and compat_html != ''
     assign has_compat = true
   endif
+
+  assign tab_set = section.settings.tab_set | default: 'default'
+
+  assign show_overview_tab    = false
+  assign show_specs_tab       = false
+  assign show_highlight_tab   = false
+  assign show_compat_tab      = false
+  assign show_downloads_tab   = false
+  assign show_recommended_tab = false
+  assign show_comparisons_tab = false
+  assign show_reviews_tab     = false
+
+  if has_features and section.settings.show_overview != false
+    assign show_overview_tab = true
+  endif
+  if has_specs and section.settings.show_specifications != false
+    assign show_specs_tab = true
+  endif
+  if section.settings.show_recommended != false
+    assign show_recommended_tab = true
+  endif
+  if section.settings.show_comparisons or tab_set == 'flagship'
+    assign show_comparisons_tab = true
+  endif
+  if section.settings.show_reviews or tab_set == 'flagship'
+    assign show_reviews_tab = true
+  endif
+  if has_highlight and section.settings.show_highlight
+    assign show_highlight_tab = true
+  endif
+  if has_compat and section.settings.show_compatibility
+    assign show_compat_tab = true
+  endif
+  if section.settings.show_downloads
+    assign show_downloads_tab = true
+  endif
+
   assign first_tab = ''
-  if has_features
+  if show_overview_tab
     assign first_tab = 'features'
-  elsif has_specs
+  elsif show_specs_tab
     assign first_tab = 'specs'
-  elsif has_highlight
+  elsif show_comparisons_tab
+    assign first_tab = 'comparisons'
+  elsif show_reviews_tab
+    assign first_tab = 'reviews'
+  elsif show_recommended_tab
+    assign first_tab = 'recommended'
+  elsif show_highlight_tab
     assign first_tab = 'highlight'
-  elsif has_compat
+  elsif show_compat_tab
     assign first_tab = 'compat'
-  else
+  elsif show_downloads_tab
     assign first_tab = 'downloads'
   endif
 -%}
-
-{%- assign tab_count = 0 -%}
-{%- if has_features -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
-{%- if has_specs -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
-{%- if has_highlight -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
-{%- if has_compat -%}{%- assign tab_count = tab_count | plus: 1 -%}{%- endif -%}
-{%- assign tab_count = tab_count | plus: 2 -%}
 
 <section class="section-shell pdp-section pdp-content-tabs-section" id="pdp-content-tabs" data-pdp-tabs>
   <div class="container-shell">
 
     <div class="pdp-tabs__list" role="tablist" aria-label="Product information">
-      {%- if has_features -%}
+      {%- if show_overview_tab -%}
         <button class="pdp-tabs__trigger{% if first_tab == 'features' %} is-active{% endif %}"
                 role="tab" aria-selected="{% if first_tab == 'features' %}true{% else %}false{% endif %}"
                 data-tab="features">Overview</button>
       {%- endif -%}
-      {%- if has_specs -%}
+      {%- if show_specs_tab -%}
         <button class="pdp-tabs__trigger{% if first_tab == 'specs' %} is-active{% endif %}"
                 role="tab" aria-selected="{% if first_tab == 'specs' %}true{% else %}false{% endif %}"
                 data-tab="specs">Specifications</button>
       {%- endif -%}
-      {%- if has_highlight -%}
+      {%- if show_comparisons_tab -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'comparisons' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'comparisons' %}true{% else %}false{% endif %}"
+                data-tab="comparisons">Comparisons</button>
+      {%- endif -%}
+      {%- if show_reviews_tab -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'reviews' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'reviews' %}true{% else %}false{% endif %}"
+                data-tab="reviews">Reviews</button>
+      {%- endif -%}
+      {%- if show_recommended_tab -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'recommended' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'recommended' %}true{% else %}false{% endif %}"
+                data-tab="recommended">Recommended</button>
+      {%- endif -%}
+      {%- if show_highlight_tab -%}
         <button class="pdp-tabs__trigger{% if first_tab == 'highlight' %} is-active{% endif %}"
                 role="tab" aria-selected="{% if first_tab == 'highlight' %}true{% else %}false{% endif %}"
                 data-tab="highlight">Highlight</button>
       {%- endif -%}
-      {%- if has_compat -%}
+      {%- if show_compat_tab -%}
         <button class="pdp-tabs__trigger{% if first_tab == 'compat' %} is-active{% endif %}"
                 role="tab" aria-selected="{% if first_tab == 'compat' %}true{% else %}false{% endif %}"
                 data-tab="compat">Compatibility</button>
       {%- endif -%}
-      <button class="pdp-tabs__trigger{% if first_tab == 'downloads' %} is-active{% endif %}"
-              role="tab" aria-selected="{% if first_tab == 'downloads' %}true{% else %}false{% endif %}"
-              data-tab="downloads">Downloads</button>
-      <button class="pdp-tabs__trigger"
-              role="tab" aria-selected="false"
-              data-tab="recommended">Recommended</button>
+      {%- if show_downloads_tab -%}
+        <button class="pdp-tabs__trigger{% if first_tab == 'downloads' %} is-active{% endif %}"
+                role="tab" aria-selected="{% if first_tab == 'downloads' %}true{% else %}false{% endif %}"
+                data-tab="downloads">Downloads</button>
+      {%- endif -%}
     </div>
 
     <div class="pdp-tabs__panels">
-      {%- if has_features -%}
+      {%- if show_overview_tab -%}
         <div class="pdp-tabs__panel{% if first_tab == 'features' %} is-active{% endif %}"
              role="tabpanel" data-panel="features">
           <div class="pdp-content-prose">{{ features_html }}</div>
         </div>
       {%- endif -%}
 
-      {%- if has_specs -%}
+      {%- if show_specs_tab -%}
         <div class="pdp-tabs__panel{% if first_tab == 'specs' %} is-active{% endif %}"
              role="tabpanel" data-panel="specs">
           <div class="pdp-content-prose">{{ specs_html }}</div>
         </div>
       {%- endif -%}
 
-      {%- if has_highlight -%}
+      {%- if show_comparisons_tab -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'comparisons' %} is-active{% endif %}"
+             role="tabpanel" data-panel="comparisons">
+          <div class="pdp-recommended-placeholder">
+            <p class="pdp-recommended-placeholder-text">Product comparisons — coming soon.</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_reviews_tab -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'reviews' %} is-active{% endif %}"
+             role="tabpanel" data-panel="reviews">
+          <div class="pdp-reviews-body">
+            <div class="pdp-amazon-reviews-callout flex flex-col gap-4 max-w-[480px]">
+              {%- render 'amazon-reviews-widget', product: product -%}
+              <p class="text-sm text-slate-500 m-0">
+                Reviews are hosted on Amazon. Click to read verified customer feedback.
+              </p>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_recommended_tab -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'recommended' %} is-active{% endif %}"
+             role="tabpanel" data-panel="recommended">
+          <div class="pdp-recommended-placeholder">
+            <p class="pdp-recommended-placeholder-text">Frequently bought together — coming soon.</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_highlight_tab -%}
         <div class="pdp-tabs__panel{% if first_tab == 'highlight' %} is-active{% endif %}"
              role="tabpanel" data-panel="highlight">
           <div class="pdp-content-prose">{{ highlight_html }}</div>
         </div>
       {%- endif -%}
 
-      {%- if has_compat -%}
+      {%- if show_compat_tab -%}
         <div class="pdp-tabs__panel{% if first_tab == 'compat' %} is-active{% endif %}"
              role="tabpanel" data-panel="compat">
           <div class="pdp-content-prose">{{ compat_html }}</div>
         </div>
       {%- endif -%}
 
-      <div class="pdp-tabs__panel{% if first_tab == 'downloads' %} is-active{% endif %}"
-           role="tabpanel" data-panel="downloads">
-        {%- render 'product-downloads-list', product: product -%}
-      </div>
-
-      <div class="pdp-tabs__panel" role="tabpanel" data-panel="recommended">
-        <div class="pdp-recommended-placeholder">
-          <p class="pdp-recommended-placeholder-text">Frequently bought together — coming soon.</p>
+      {%- if show_downloads_tab -%}
+        <div class="pdp-tabs__panel{% if first_tab == 'downloads' %} is-active{% endif %}"
+             role="tabpanel" data-panel="downloads">
+          {%- render 'product-downloads-list', product: product -%}
         </div>
-      </div>
+      {%- endif -%}
     </div>
 
   </div>
@@ -989,21 +1095,30 @@
 </section>
 {%- endif -%}
 
-{%- assign _jsonld_nl = '
+{%- assign jsonld_newline = '
 ' -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "Product",
   "name": {{ product.title | json }},
-  "description": {{ product.description | strip_html | split: _jsonld_nl | join: ' ' | strip | truncate: 200 | json }},
+  "description": {{ product.description | strip_html | split: jsonld_newline | join: ' ' | strip | truncate: 200 | json }},
   "url": {{ shop.url | append: product.url | json }},
   "brand": {
     "@type": "Brand",
-    "name": {{ product.vendor | default: shop.name | json }}
+    "name": "EZQuest"
   },
-  "image": {{ product.featured_image | image_url: width: 1200 | json }},
+  "image": [
+    {%- for img in product.images limit: 5 -%}
+      {{ img | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
   "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  {%- assign mpn_value = product.metafields.custom.mpn.value -%}
+  {%- if mpn_value != blank -%}
+  "mpn": {{ mpn_value | json }},
+  {%- endif -%}
+  "itemCondition": "https://schema.org/NewCondition",
   "offers": {
     "@type": "Offer",
     "url": {{ shop.url | append: product.url | json }},
@@ -1365,6 +1480,68 @@
       "type": "checkbox",
       "id": "show_3d_badge",
       "label": "Show 3D badge on gallery image",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Tab visibility"
+    },
+    {
+      "type": "select",
+      "id": "tab_set",
+      "label": "Tab set",
+      "options": [
+        { "value": "default", "label": "Default — Overview / Specifications / Recommended" },
+        { "value": "flagship", "label": "Flagship — Overview / Specifications / Comparisons / Reviews" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overview",
+      "label": "Show Overview tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_specifications",
+      "label": "Show Specifications tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recommended",
+      "label": "Show Recommended tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparisons",
+      "label": "Show Comparisons tab (flagship only)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Reviews tab (flagship only)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_highlight",
+      "label": "Show Highlight tab (legacy — off by default)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compatibility",
+      "label": "Show Compatibility tab (legacy — off by default)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_downloads",
+      "label": "Show Downloads tab (legacy — off by default)",
       "default": false
     }
   ],

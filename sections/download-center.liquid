@@ -45,8 +45,8 @@
       {%- endfor -%}
     </div>
 
-    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-x-auto">
-      <table class="data-table w-full border-collapse text-sm" id="dl-table">
+    <div class="data-table-wrap">
+      <table class="data-table" id="dl-table">
         <thead>
           <tr>
             <th>Product</th>
@@ -67,22 +67,22 @@
               {%- if platforms == blank -%}{%- assign platforms = 'Mac · Windows' -%}{%- endif -%}
               <tr data-category="{{ type_val | handleize }}">
                 <td data-label="Product">
-                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium">{{ product_ref | default: '—' }}</span>
+                  <span class="product-pill">{{ product_ref | default: '—' }}</span>
                 </td>
-                <td data-label="File" style="font-weight:500">{{ entry.title.value }}</td>
+                <td class="data-table__file" data-label="File">{{ entry.title.value }}</td>
                 <td data-label="Type">
-                  <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase bg-black/[4%] text-[var(--ez-grey)]">{{ type_val | default: '—' }}</span>
+                  <span class="file-badge">{{ type_val | default: '—' }}</span>
                 </td>
-                <td data-label="Version" style="color:var(--ez-grey)">{{ entry.version.value | default: '—' }}</td>
-                <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ platforms }}</td>
+                <td class="data-table__muted" data-label="Version">{{ entry.version.value | default: '—' }}</td>
+                <td class="data-table__meta" data-label="Compatible">{{ platforms }}</td>
                 <td>
                   {%- if file_url != blank -%}
-                    <a href="{{ file_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download aria-label="Download {{ entry.title.value }}">
+                    <a href="{{ file_url }}" class="btn-download" download aria-label="Download {{ entry.title.value }}">
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       Download
                     </a>
                   {%- else -%}
-                    <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
+                    <span class="data-table__meta">Available on request</span>
                   {%- endif -%}
                 </td>
               </tr>
@@ -90,9 +90,9 @@
           {%- else -%}
             <tr>
               <td colspan="6">
-                <div class="empty-state text-center py-16 px-8">
-                  <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Files are being uploaded</p>
-                  <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct file access.</p>
+                <div class="empty-state">
+                  <p class="empty-state__heading">Files are being uploaded</p>
+                  <p class="empty-state__body">Check back shortly or contact us for direct file access.</p>
                   <a href="/pages/contact" class="btn btn--primary">Request a file</a>
                 </div>
               </td>
@@ -111,8 +111,8 @@
       <button class="filter-pill" data-filter="utility" type="button">Utilities</button>
     </div>
 
-    <div class="data-table-wrap border border-black/[7%] rounded-2xl overflow-x-auto">
-      <table class="data-table w-full border-collapse text-sm" id="dl-table">
+    <div class="data-table-wrap">
+      <table class="data-table" id="dl-table">
         <thead>
           <tr>
             <th>Product</th>
@@ -129,24 +129,33 @@
             {% if block.type == 'file' %}
               <tr data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
                 <td data-label="Product">
-                  <span class="product-pill inline-block py-[.2rem] px-3 rounded-full bg-black/[4%] text-[var(--ez-grey)] text-xs font-medium">{{ block.settings.product_name }}</span>
+                  <span class="product-pill">{{ block.settings.product_name }}</span>
                 </td>
-                <td data-label="File" style="font-weight:500">{{ block.settings.file_title }}</td>
+                <td class="data-table__file" data-label="File">{{ block.settings.file_title }}</td>
                 <td data-label="Type">
                   {% assign ext = block.settings.file_url | split: '.' | last | upcase %}
-                  <span class="file-badge inline-block py-[.2rem] px-[.625rem] rounded-[6px] text-[11px] font-semibold tracking-[.05em] uppercase {%- case ext | downcase -%}{%- when 'zip' -%} bg-[rgba(37,99,235,.07)] text-[var(--ez-info-text)]{%- when 'exe' -%} bg-[rgba(124,58,237,.07)] text-[#6d28d9]{%- else -%} bg-[rgba(220,38,38,.07)] text-[var(--ez-error-text)]{%- endcase -%}">{{ ext }}</span>
+                  {%- liquid
+                    assign ext_class = 'file-badge--other'
+                    case ext | downcase
+                      when 'zip'
+                        assign ext_class = 'file-badge--zip'
+                      when 'exe'
+                        assign ext_class = 'file-badge--exe'
+                    endcase
+                  -%}
+                  <span class="file-badge {{ ext_class }}">{{ ext }}</span>
                 </td>
-                <td data-label="Size" style="color:var(--ez-grey)">{{ block.settings.file_size }}</td>
-                <td data-label="Version" style="color:var(--ez-grey)">{{ block.settings.version | default: '—' }}</td>
-                <td data-label="Compatible" style="color:var(--ez-grey);font-size:13px">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
+                <td class="data-table__muted" data-label="Size">{{ block.settings.file_size }}</td>
+                <td class="data-table__muted" data-label="Version">{{ block.settings.version | default: '—' }}</td>
+                <td class="data-table__meta" data-label="Compatible">{{ block.settings.compatibility | default: 'Mac · Windows' }}</td>
                 <td>
                   {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
-                    <a href="{{ block.settings.file_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download aria-label="Download {{ block.settings.file_title }}">
+                    <a href="{{ block.settings.file_url }}" class="btn-download" download aria-label="Download {{ block.settings.file_title }}">
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       Download
                     </a>
                   {% else %}
-                    <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
+                    <span class="data-table__meta">Available on request</span>
                   {% endif %}
                 </td>
               </tr>
@@ -156,9 +165,9 @@
           {% if section.blocks.size == 0 %}
             <tr>
               <td colspan="7">
-                <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]">
-                  <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Files are being uploaded</p>
-                  <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct file access.</p>
+                <div class="empty-state empty-state--panel">
+                  <p class="empty-state__heading">Files are being uploaded</p>
+                  <p class="empty-state__body">Check back shortly or contact us for direct file access.</p>
                   <a href="/pages/contact" class="btn btn--primary">Request a file</a>
                 </div>
               </td>

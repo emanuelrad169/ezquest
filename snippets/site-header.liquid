@@ -7,7 +7,7 @@
     <div class="site-header-shell grid w-full grid-cols-1 py-0">
       <div class="site-header-main-row flex w-full items-center gap-3 lg:gap-6">
         <a href="{{ routes.root_url }}" class="site-brandmark inline-flex shrink-0 items-center">
-          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-32 lg:w-60" width="240" height="56">
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-32 lg:w-60" width="240" height="56" loading="eager" fetchpriority="high">
         </a>
 
         <nav aria-label="Primary" class="site-header-nav hidden min-w-0 flex-1 justify-center lg:flex">
@@ -26,9 +26,12 @@
             >
               {% render 'icon', name: 'search' %}
             </button>
-            <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
+            <button type="button"
+                    class="site-header-icon-button lg:hidden"
+                    aria-label="{{ 'header.search' | t }}"
+                    data-mobile-search-open>
               {% render 'icon', name: 'search' %}
-            </a>
+            </button>
             {% if customer %}
               <div class="site-header-account-wrap">
                 <a href="{{ account_url }}"
@@ -263,6 +266,65 @@
     support_phone: section.settings.support_phone,
     support_phone_label: section.settings.support_phone_label
   %}
+
+<div class="mobile-search-overlay lg:hidden" id="mobile-search-overlay" aria-hidden="true" role="search" data-search-panel>
+  <form action="{{ routes.search_url }}" method="get" class="mobile-search-overlay__form">
+    <input type="hidden" name="type" value="product,article,page">
+    <input type="search"
+           name="q"
+           id="mobile-search-input"
+           class="mobile-search-overlay__input"
+           placeholder="{{ 'general.search.placeholder' | t | default: 'Search products, support, articles…' }}"
+           aria-label="{{ 'general.search.search' | t | default: 'Search' }}"
+           aria-autocomplete="list"
+           aria-expanded="false"
+           aria-controls="mobile-search-results"
+           autocomplete="off"
+           data-search-input>
+    <button type="button" class="mobile-search-overlay__close" data-mobile-search-close aria-label="Close search">
+      {% render 'icon', name: 'close' %}
+    </button>
+  </form>
+  <div
+    class="mobile-search-results"
+    id="mobile-search-results"
+    data-search-results
+    role="listbox"
+    aria-label="Search suggestions"
+    hidden
+  ></div>
+</div>
+
+<script>
+(function() {
+  var overlay = document.getElementById('mobile-search-overlay');
+  if (!overlay) return;
+
+  function openSearch() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var input = overlay.querySelector('input[type="search"]');
+    if (input) setTimeout(function() { input.focus(); }, 50);
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-mobile-search-open]')) { openSearch(); return; }
+    if (e.target.closest('[data-mobile-search-close]')) { closeSearch(); return; }
+    if (overlay.classList.contains('is-open') && !overlay.contains(e.target)) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeSearch();
+  });
+})();
+</script>
 
 {% if localization.available_languages.size > 1 %}
 <script>
