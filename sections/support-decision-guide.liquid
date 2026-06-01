@@ -134,20 +134,20 @@
 
   // BlurFade reveal via IntersectionObserver
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced) {
+  if (!prefersReduced && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           var el = e.target;
           var delay = parseInt(el.dataset.revealDelay || '0', 10) || 0;
-          setTimeout(function () { el.classList.add('is-revealed'); }, delay);
+          setTimeout(function () { el.classList.add('decision-card--is-revealed'); }, delay);
           io.unobserve(el);
         }
       });
     }, { threshold: 0.08 });
     cards.forEach(function (c) { io.observe(c); });
   } else {
-    cards.forEach(function (c) { c.classList.add('is-revealed'); });
+    cards.forEach(function (c) { c.classList.add('decision-card--is-revealed'); });
   }
 })();
 </script>
