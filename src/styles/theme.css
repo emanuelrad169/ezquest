@@ -94,7 +94,9 @@
   ───────────────────────────────────────────────────────────── */
   :root {
     /* Typography scale */
-    --font-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-base: var(--font-body);
     --text-xs:   0.75rem;    /* 12px  — text-xs  */
     --text-sm:   0.875rem;   /* 14px  — text-sm  */
     --text-base: 1rem;       /* 16px  — text-base */
@@ -201,6 +203,13 @@
 
   body {
     @apply min-h-screen antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .display-heading, .section-heading, .type-heading,
+  .page-hero-heading, .home-hero-copy-heading {
+    font-family: var(--font-heading);
   }
 
   [hidden] {
