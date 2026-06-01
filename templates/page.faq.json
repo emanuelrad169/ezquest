@@ -1,25 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "page-hero",
       "settings": {
+        "image": "shopify://shop_images/ezquest-faq-hero.png",
+        "background_color": "#020617",
         "kicker": "FAQ",
         "heading": "Frequently asked questions",
         "subheading": "Quick answers to common product questions.",
-        "light_mode": true,
-        "image": "shopify://shop_images/ezquest-faq-hero.png",
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 320
+        "height": 320,
+        "overlay_opacity": 35
       }
     },
     "faq": {
       "type": "faq-accordion",
-      "settings": {
-        "heading": "Frequently asked questions",
-        "contact_heading": "Still need help?",
-        "contact_sub": "Send us your question and our team will help you find the right answer."
-      },
       "blocks": {
         "group_shipping": {
           "type": "group",
@@ -248,7 +251,10 @@
         "prod_6",
         "prod_7",
         "prod_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Frequently asked questions"
+      }
     },
     "cta": {
       "type": "support-cta-rail",

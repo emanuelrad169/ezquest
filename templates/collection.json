@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,7 +17,6 @@
         "intro_copy": "",
         "support_label": "Support",
         "support_url": "/pages/support",
-        "products_per_page": 16,
         "show_collection_image": true,
         "show_sort": true,
         "show_support_panel": false,
@@ -34,11 +42,11 @@
       "type": "page-hero",
       "settings": {
         "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 360,
+        "kicker": "Collection",
         "heading": "",
         "subheading": "",
-        "kicker": "Collection"
+        "height": 360,
+        "overlay_opacity": 35
       }
     }
   },

@@ -1,39 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "page-hero",
       "settings": {
+        "image": "shopify://shop_images/ezquest-downloads-hero.png",
+        "background_color": "#020617",
         "kicker": "Downloads",
         "heading": "",
         "subheading": "All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.",
-        "light_mode": true,
-        "image": "shopify://shop_images/ezquest-downloads-hero.png",
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 320
+        "height": 320,
+        "overlay_opacity": 35
       }
     },
     "downloads": {
       "type": "download-center",
-      "settings": {
-        "resource_kind": "downloads",
-        "structured_source": "global",
-        "kicker": "Downloads",
-        "heading": "Downloads by product and platform",
-        "body": "Review downloads by product and platform. Use the filter to narrow by product family."
-      },
       "blocks": {
         "file_d1": {
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "2.1 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d2": {
@@ -41,12 +39,9 @@
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 8 Ports",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.8 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d3": {
@@ -54,12 +49,9 @@
           "settings": {
             "product_name": "USB-C Dual HDMI Hub Adapter",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.9 MB",
-            "version": "",
-            "updated": "January 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d4": {
@@ -67,12 +59,9 @@
           "settings": {
             "product_name": "UltimatePower 120W GaN USB-C PD Wall Charger",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.2 MB",
-            "version": "",
-            "updated": "February 2024",
-            "family": "chargers-power",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d5": {
@@ -80,12 +69,9 @@
           "settings": {
             "product_name": "UltimatePower 65W GaN USB-C PD Wall Charger",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.1 MB",
-            "version": "",
-            "updated": "February 2024",
-            "family": "chargers-power",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d6": {
@@ -93,12 +79,9 @@
           "settings": {
             "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.6 MB",
-            "version": "",
-            "updated": "October 2023",
-            "family": "accessories",
-            "file_url": "#"
+            "version": ""
           }
         }
       },
@@ -109,7 +92,11 @@
         "file_d4",
         "file_d5",
         "file_d6"
-      ]
+      ],
+      "settings": {
+        "resource_kind": "downloads",
+        "structured_source": "global"
+      }
     },
     "cta": {
       "type": "support-cta-rail",
@@ -126,6 +113,7 @@
   },
   "order": [
     "hero",
-    "downloads"
+    "downloads",
+    "cta"
   ]
 }

@@ -355,16 +355,16 @@
         <div class="product-buybox card-elevated p-5 lg:p-6">
 
           {%- comment -%} ── Title block — direct child of card, above rating ── {%- endcomment -%}
-          <header class="product-buybox__header">
+            <header class="product-buybox__header mb-5 border-b border-slate-950/10 pb-5">
             {%- assign pdp_kicker = product.metafields.custom.kicker | default: product.type | default: product.collections.first.title -%}
             {%- if pdp_kicker != blank -%}
-              <p class="product-buybox__kicker">{{ pdp_kicker | upcase }}</p>
+                <p class="product-buybox__kicker mb-3 text-caption-sm font-semibold uppercase text-slate-500">{{ pdp_kicker | upcase }}</p>
             {%- endif -%}
-            <h1 class="product-buybox__title">{{ product.title }}</h1>
+              <h1 class="product-buybox__title mb-3 text-heading font-bold leading-tight text-slate-950 md:text-heading-lg">{{ product.title }}</h1>
             {%- assign pdp_short_desc = product.metafields.custom.short_description | default: product.description | strip_html | strip -%}
             {%- if pdp_short_desc != blank -%}
               {%- assign pdp_truncated = pdp_short_desc | truncate: 120, '' -%}
-              <p class="product-buybox__subtitle">
+                <p class="product-buybox__subtitle max-w-prose text-body-sm-plus text-slate-600 md:text-body-sm">
                 {{- pdp_truncated -}}
                 {%- if pdp_short_desc.size > 120 -%}
                   &hellip; <a href="#product-overview" class="product-buybox__full-detail">(full detail)</a>

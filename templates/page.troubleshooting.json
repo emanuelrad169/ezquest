@@ -9,12 +9,8 @@
  */
 {
   "sections": {
-    "search": {
-      "type": "compatibility-search",
-      "settings": {}
-    },
-    "results": {
-      "type": "compatibility-results",
+    "main": {
+      "type": "troubleshooting-guide",
       "settings": {}
     },
     "page_hero": {
@@ -23,15 +19,14 @@
         "background_color": "#020617",
         "overlay_opacity": 35,
         "height": 320,
-        "heading": "Will it work with your setup?",
-        "subheading": "Tell us what you're using. We'll show you exactly what fits — and what to skip.",
-        "kicker": "Compatibility checker"
+        "heading": "",
+        "subheading": "",
+        "kicker": "Troubleshooting"
       }
     }
   },
   "order": [
     "page_hero",
-    "search",
-    "results"
+    "main"
   ]
 }

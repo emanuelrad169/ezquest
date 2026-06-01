@@ -1,26 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "page-hero",
       "settings": {
+        "background_color": "#020617",
         "kicker": "User Guides",
         "heading": "",
         "subheading": "",
-        "light_mode": true,
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 320
+        "height": 320,
+        "overlay_opacity": 35
       }
     },
     "downloads": {
       "type": "download-center",
-      "settings": {
-        "resource_kind": "guides",
-        "structured_source": "global",
-        "kicker": "User guides",
-        "heading": "User guides by product family",
-        "body": "Find the guide that matches your product, setup role, and workflow."
-      },
       "blocks": {
         "fam_1": {
           "type": "family",
@@ -55,12 +56,9 @@
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
             "file_title": "Mac Setup Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "3.1 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_u2": {
@@ -68,12 +66,9 @@
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
             "file_title": "Windows Setup Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "2.9 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_u3": {
@@ -81,12 +76,9 @@
           "settings": {
             "product_name": "USB-C to 2.5 Gigabit Ethernet Adapter",
             "file_title": "Driver Installation Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "2.2 MB",
-            "version": "",
-            "updated": "November 2023",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_u4": {
@@ -94,12 +86,9 @@
           "settings": {
             "product_name": "UltimatePower 120W GaN USB-C PD Wall Charger",
             "file_title": "Charging Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.4 MB",
-            "version": "",
-            "updated": "January 2024",
-            "family": "chargers-power",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_u5": {
@@ -107,12 +96,9 @@
           "settings": {
             "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
             "file_title": "Setup & Compatibility Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "3.6 MB",
-            "version": "",
-            "updated": "October 2023",
-            "family": "accessories",
-            "file_url": "#"
+            "version": ""
           }
         }
       },
@@ -126,7 +112,11 @@
         "file_u3",
         "file_u4",
         "file_u5"
-      ]
+      ],
+      "settings": {
+        "resource_kind": "guides",
+        "structured_source": "global"
+      }
     },
     "cta": {
       "type": "support-cta-rail",

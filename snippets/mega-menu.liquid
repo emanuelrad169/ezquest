@@ -153,11 +153,8 @@
                   {% endif %}
                 </div>
                 <div class="nav-dd__article-body">
-                  {% if featured_article.tags.size > 0 %}
-                    <span class="nav-dd__article-tag">{{ featured_article.tags.first }}</span>
-                  {% endif %}
-                  <span class="nav-dd__article-title">{{ featured_article.title | truncate: 56 }}</span>
-                  <span class="nav-dd__article-cta">Read article →</span>
+                  <span class="nav-dd__article-title">{{ featured_article.title | truncate: 42 }}</span>
+                  <span class="nav-dd__article-cta">Read →</span>
                 </div>
               </a>
             {% endif %}

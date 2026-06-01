@@ -1,16 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "page-hero",
       "settings": {
+        "image": "shopify://shop_images/ezquest-faq-hero.png",
+        "background_color": "#020617",
         "kicker": "Warranty",
         "heading": "Our promise to you",
         "subheading": "Every EZQuest product is covered by a limited manufacturer's warranty. Find your coverage period, what's covered, and how to file a claim.",
-        "light_mode": true,
-        "image": "shopify://shop_images/ezquest-faq-hero.png",
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 320
+        "height": 320,
+        "overlay_opacity": 35
       }
     },
     "warranty_content": {
