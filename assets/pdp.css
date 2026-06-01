@@ -363,24 +363,46 @@
 }
 
 /* Amazon button */
+/* Secondary link, not a competing primary CTA (keep the direct sale primary). */
 .pdp-amazon-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0 1.125rem;
-  height: 40px;
-  border-radius: 100px;
-  background: var(--ez-amber);
-  color: var(--ez-black);
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ez-grey, #6e6e73);
   font-size: 13px;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   white-space: nowrap;
-  transition: background 0.2s;
+  transition: color 0.2s;
   flex-shrink: 0;
 }
 
-.pdp-amazon-btn:hover { background: #1a2330; }
+.pdp-amazon-btn:hover { background: transparent; color: var(--ez-black); }
+
+/* Separator between the breadcrumb context links (back / shop by setup) */
+.product-context-row > a:not(:last-child)::after {
+  content: "·";
+  margin-left: 1.25rem;
+  color: #cbd5e1;
+  pointer-events: none;
+}
+/* Flat buy box (card removed): no border/shadow/radius/bg/padding */
+.main-product-section .product-buybox {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+}
+@media (max-width: 1023px) {
+  .main-product-section .product-buybox { margin-top: 1.25rem; }
+}
 
 /* Share strip */
 .pdp-share-strip {

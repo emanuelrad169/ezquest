@@ -18257,11 +18257,11 @@ body.has-pdp-zoom-open [id*="tidio"] {
   display: none !important;
 }
 
-/* ── Tidio chat: float above sticky ATC bar on mobile ────────────── */
+/* ── Tidio chat: float clear above the sticky ATC bar on mobile ────────────── */
 @media (max-width: 768px) {
   #tidio-chat,
   [id*="tidio-chat-button"] {
-    bottom: 80px !important;
+    bottom: 104px !important;
   }
 }
 
