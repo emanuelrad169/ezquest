@@ -17783,6 +17783,17 @@ body.cookie-visible {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
+/* Icon-led layout: move the icon above the copy and center the group so it
+   isn't orphaned in the bottom-right corner (applies to non-hero cards only). */
+.home-confidence-card:not(.home-confidence-card--hero) {
+  justify-content: center;
+  gap: 16px;
+}
+.home-confidence-card:not(.home-confidence-card--hero) .home-confidence-card-icon {
+  order: -1;
+  align-self: flex-start;
+}
+
 /* ── Hero tile ────────────────────────────────────────── */
 .home-confidence-card--hero {
   grid-column: span 2;
