@@ -308,8 +308,27 @@
   .page-cta { padding: 48px 0; }
   .page-cta__inner { flex-direction: column; align-items: flex-start; gap: 24px; }
   .page-cta__heading { font-size: 28px; }
-  .page-cta__actions { width: 100%; flex-direction: column; }
-  .page-cta__actions .btn { width: 100%; }
+  .page-cta__actions { width: 100%; flex-direction: column; align-items: flex-start; }
+  .page-cta__actions .btn--primary { width: 100%; }
+}
+
+/* One clear primary CTA: demote the secondary to a subordinate text link on the
+   light variant so it doesn't read as an equal-weight button (ui-ux-pro-max). */
+.page-cta--light .page-cta__actions .btn--secondary {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: #334155;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  width: auto;
+  padding-inline: 4px;
+}
+.page-cta--light .page-cta__actions .btn--secondary:hover,
+.page-cta--light .page-cta__actions .btn--secondary:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  color: #020617;
 }
 
 /* Free shipping highlight strip */
