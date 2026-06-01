@@ -18093,6 +18093,43 @@ body {
   }
 }
 
+/* Hero: demote the secondary CTA to a subordinate text link so there is one
+   clear primary button (ui-ux-pro-max: one primary CTA per section). */
+.home-hero-actions .btn--secondary-on-dark {
+  height: auto;
+  min-height: 44px;
+  padding-inline: 4px;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.82);
+  text-underline-offset: 4px;
+}
+.home-hero-actions .btn--secondary-on-dark::after {
+  content: "\2192"; /* → */
+  margin-left: 6px;
+  transition: transform 200ms var(--motion-ease-standard);
+}
+.home-hero-actions .btn--secondary-on-dark:focus-visible {
+  text-decoration: underline;
+}
+@media (hover: hover) {
+  .home-hero-actions .btn--secondary-on-dark:hover {
+    background: transparent;
+    border-color: transparent;
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  .home-hero-actions .btn--secondary-on-dark:hover::after {
+    transform: translateX(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-actions .btn--secondary-on-dark::after {
+    transition: none;
+  }
+}
+
 .mobile-search-overlay__form {
   display: flex;
   gap: 8px;
