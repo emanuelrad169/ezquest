@@ -15445,7 +15445,9 @@ select {
 
 /* ── Decision Guide — BentoGrid ───────────────────────────────────────────── */
 .decision-guide {
-  padding: 5rem var(--page-gutter, 1.5rem);
+  /* Horizontal gutter is owned by the inner .page-width; keep only vertical
+     padding here to avoid doubled side margins squeezing the card grid. */
+  padding: 5rem 0;
   background: var(--color-bg-secondary, var(--ez-light));
 }
 
