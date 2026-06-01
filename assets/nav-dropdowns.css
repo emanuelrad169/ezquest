@@ -19,7 +19,7 @@
   padding: 0;
 }
 
-/* ── Icon link list ─────────────────────────────── */
+/* ── Dropdown link list ─────────────────────────── */
 .nav-dd__links {
   list-style: none;
   padding: 6px 8px 8px;
@@ -46,26 +46,6 @@
   outline: 2px solid var(--ez-amber, #FED300);
   outline-offset: 1px;
 }
-
-/* Icon badge */
-.nav-dd__icon {
-  width: 30px; height: 30px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.15s ease;
-}
-.nav-dd__link:hover .nav-dd__icon {
-  transform: scale(1.08);
-}
-.nav-dd__icon--blue   { background: #E6F1FB; color: #185FA5; }
-.nav-dd__icon--green  { background: #EAF3DE; color: #27500A; }
-.nav-dd__icon--amber  { background: #FAEEDA; color: #633806; }
-.nav-dd__icon--purple { background: #EEEDFE; color: #3C3489; }
-.nav-dd__icon--teal   { background: #E1F5EE; color: #085041; }
-.nav-dd__icon--gray   { background: #f5f5f7; color: #6e6e73; }
 
 /* Link text block */
 .nav-dd__link-text {

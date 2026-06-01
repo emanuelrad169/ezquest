@@ -18298,3 +18298,19 @@ body.has-pdp-zoom-open [id*="tidio"] {
   .u-hover-lift:hover,
   .u-press:active { transform: none; }
 }
+
+/* Brand the Shopify "Buy it now" dynamic-checkout button (default is an
+   off-brand blue). Unlayered + higher specificity so it beats Shopify's
+   late-injected unlayered !important. */
+.main-product-section .shopify-payment-button__button--unbranded,
+.product-buybox .shopify-payment-button__button--unbranded {
+  background: #1d1d1f !important;
+  color: #ffffff !important;
+  border-radius: 980px !important;
+  min-height: 52px !important;
+  transition: background 200ms var(--motion-ease-standard) !important;
+}
+.main-product-section .shopify-payment-button__button--unbranded:hover,
+.product-buybox .shopify-payment-button__button--unbranded:hover {
+  background: #000 !important;
+}

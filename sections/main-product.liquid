@@ -1333,6 +1333,24 @@
 
 <script src="{{ 'pdp-zoom.js' | asset_url }}" defer></script>
 
+<script>
+  /* Brand the Shopify "Buy it now" dynamic-checkout button: Shopify sets its
+     colour via an inline !important style (store Brand colour), which external
+     CSS can't override, so re-apply our brand colour once it renders. */
+  (function () {
+    function brand() {
+      document.querySelectorAll('.shopify-payment-button__button--unbranded').forEach(function (b) {
+        b.style.setProperty('background', '#1d1d1f', 'important');
+        b.style.setProperty('color', '#ffffff', 'important');
+      });
+    }
+    brand();
+    var mo = new MutationObserver(brand);
+    mo.observe(document.body, { childList: true, subtree: true });
+    window.setTimeout(function () { mo.disconnect(); }, 6000);
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Main product",
