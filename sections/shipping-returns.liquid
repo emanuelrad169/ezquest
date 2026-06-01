@@ -1,10 +1,16 @@
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
 <style>
-.sr-hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2.5rem; margin-top: 2rem; }
-@media (max-width: 480px) { .sr-hero-stats { grid-template-columns: 1fr; gap: 1.25rem; } }
-.sr-hero-stat__value { font-size: 28px; font-weight: 500; letter-spacing: -.02em; color: var(--ez-light); }
-.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.6); }
+.sr-hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2rem; margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.14); }
+@media (max-width: 560px) {
+  .sr-hero-stats { grid-template-columns: 1fr; gap: 0; }
+  .sr-hero-stats > div { padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+  .sr-hero-stats > div:first-child { padding-top: 0; border-top: 0; }
+}
+.sr-hero-stat__value { font-size: 30px; font-weight: 500; letter-spacing: -.02em; color: var(--ez-light); line-height: 1.1; }
+.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.62); margin-top: 0.3rem; }
+
+.free-shipping-strip__icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(254,211,0,0.18); flex-shrink: 0; }
 </style>
 
 {% comment %} 1. HERO {% endcomment %}
@@ -38,9 +44,11 @@
 
 {% comment %} 2. FREE SHIPPING STRIP {% endcomment %}
 <div class="free-shipping-strip container-shell">
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" class="shrink-0">
-    <path d="M8.5 3.5L3 10h5.5L7 16.5l9.5-9H11L12.5 3.5z" stroke="var(--ez-amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
+  <span class="free-shipping-strip__icon" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+      <path d="M8.5 3.5L3 10h5.5L7 16.5l9.5-9H11L12.5 3.5z" fill="var(--ez-amber)"/>
+    </svg>
+  </span>
   <p>Free shipping automatically applied on all US orders over $100 — no code needed.</p>
 </div>
 
