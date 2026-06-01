@@ -9966,7 +9966,7 @@
 
   .product-card-tile:hover {
     transform: translateY(-3px);
-    box-shadow: none;
+    box-shadow: var(--shadow-soft-hover);
   }
 
   .support-crosslink:hover,
@@ -18260,5 +18260,19 @@ body.has-pdp-zoom-open [id*="tidio"] {
   #tidio-chat,
   [id*="tidio-chat-button"] {
     bottom: 80px !important;
+  }
+}
+
+/* ── Global reduced-motion safety net (Phase A foundation) ──────────────
+   Honours prefers-reduced-motion across the whole theme so every hover-lift,
+   reveal, and transition is effectively disabled for users who opt out. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
