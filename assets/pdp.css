@@ -384,6 +384,21 @@
 
 .pdp-amazon-btn:hover { background: transparent; color: var(--ez-black); }
 
+/* Subtle, modern gallery frames (less boxy) */
+.main-product-section .hero-media-frame {
+  border-color: rgba(226, 232, 240, 0.45);
+  box-shadow: none;
+}
+.main-product-section .product-thumb-card {
+  border-width: 1px;
+  border-color: rgba(226, 232, 240, 0.65);
+  box-shadow: none;
+}
+.main-product-section .product-thumb-card[aria-current="true"] {
+  border-width: 1.5px;
+  border-color: var(--ez-amber, #FED300);
+}
+
 /* Separator between the breadcrumb context links (back / shop by setup) */
 .product-context-row > a:not(:last-child)::after {
   content: "·";
