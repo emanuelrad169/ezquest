@@ -126,16 +126,30 @@
         if (event.key === 'Escape' && !popup.hidden) close();
       });
 
-      timer = window.setTimeout(open, DELAY_MS);
+      function startTriggers() {
+        timer = window.setTimeout(open, DELAY_MS);
 
-      if (EXIT_ENABLED && !('ontouchstart' in window)) {
-        document.addEventListener('mouseleave', function onLeave(event) {
-          if (event.clientY <= 0 && popup.hidden) {
-            window.clearTimeout(timer);
-            open();
-            document.removeEventListener('mouseleave', onLeave);
+        if (EXIT_ENABLED && !('ontouchstart' in window)) {
+          document.addEventListener('mouseleave', function onLeave(event) {
+            if (event.clientY <= 0 && popup.hidden) {
+              window.clearTimeout(timer);
+              open();
+              document.removeEventListener('mouseleave', onLeave);
+            }
+          });
+        }
+      }
+
+      // Don't stack on top of the cookie banner — wait for a consent choice first.
+      if (localStorage.getItem('ez_cookie_consent')) {
+        startTriggers();
+      } else {
+        var consentPoll = window.setInterval(function () {
+          if (localStorage.getItem('ez_cookie_consent')) {
+            window.clearInterval(consentPoll);
+            startTriggers();
           }
-        });
+        }, 600);
       }
 
       var form = document.getElementById('nl-popup-form');
