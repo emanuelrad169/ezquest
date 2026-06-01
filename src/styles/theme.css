@@ -15574,6 +15574,16 @@ select {
   padding: 1.25rem 1.5rem;
 }
 
+/* Mobile: stack the "Talk to support" banner (placed AFTER the row rule so it
+   wins on source order — media queries add no specificity). */
+@media (max-width: 540px) {
+  .decision-card--5 .decision-card__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
 .decision-card__top {
   display: flex;
   align-items: center;
