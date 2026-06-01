@@ -9309,6 +9309,7 @@
 
   .home-feature-bento-card:hover {
     transform: scale(1.015);
+    box-shadow: var(--shadow-soft-hover);
   }
 
   /* colour styles */
