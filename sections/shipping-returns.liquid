@@ -1,9 +1,10 @@
 {{ 'pages.css' | asset_url | stylesheet_tag }}
 
 <style>
-.sr-hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem; }
+.sr-hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2.5rem; margin-top: 2rem; }
+@media (max-width: 480px) { .sr-hero-stats { grid-template-columns: 1fr; gap: 1.25rem; } }
 .sr-hero-stat__value { font-size: 28px; font-weight: 500; letter-spacing: -.02em; color: var(--ez-light); }
-.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.45); }
+.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.6); }
 </style>
 
 {% comment %} 1. HERO {% endcomment %}

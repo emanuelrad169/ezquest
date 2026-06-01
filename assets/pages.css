@@ -336,7 +336,10 @@
   border-top: 1px solid rgba(254, 211, 0,.2);
   border-bottom: 1px solid rgba(254, 211, 0,.2);
   display: flex; align-items: center; gap: 1rem;
-  padding: 0.75rem clamp(1.25rem,3vw,2rem);
+  /* horizontal gutter comes from .container-shell; set only vertical padding
+     (padding-block) so the container's gutter survives and this strip stays
+     left-aligned with the hero content above it. */
+  padding-block: 0.75rem;
   margin-top: 1rem;
 }
 
