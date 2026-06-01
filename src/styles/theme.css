@@ -14771,7 +14771,8 @@ select {
   min-height: 80vh;
   display: flex;
   align-items: center;
-  padding: clamp(80px, 10vw, 140px) var(--page-gutter);
+  /* horizontal gutter comes from the inner .page-width — keep vertical only */
+  padding: clamp(80px, 10vw, 140px) 0;
 }
 
 .not-found__inner {
@@ -18275,4 +18276,24 @@ body.has-pdp-zoom-open [id*="tidio"] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Reusable interaction utilities (Phase A motion foundation) ─────────────
+   .u-hover-lift → gentle soft-shadow lift on hover (cards, tiles, panels)
+   .u-press      → subtle scale on press (tappable elements)
+   Both use the shared motion + soft-shadow tokens for one consistent feel. */
+.u-hover-lift {
+  transition: transform var(--motion-duration-base) var(--motion-ease-standard),
+              box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}
+@media (hover: hover) {
+  .u-hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft-hover);
+  }
+}
+.u-press:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .u-hover-lift:hover,
+  .u-press:active { transform: none; }
 }

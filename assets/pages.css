@@ -1945,7 +1945,8 @@
 /* Extracted from email-signup.liquid           */
 /* ============================================ */
 .email-signup {
-  padding: clamp(64px, 8vw, 96px) clamp(1.25rem, 5vw, 5rem);
+  /* horizontal gutter comes from the inner .page-width — keep vertical only */
+  padding: clamp(64px, 8vw, 96px) 0;
   background: var(--ez-dark);
 }
 
