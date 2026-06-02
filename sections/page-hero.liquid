@@ -90,13 +90,23 @@
   }
 {%- endstyle -%}
 
+{{ 'page-hero.css' | asset_url | stylesheet_tag }}
+
 <section class="page-hero {% if use_gradient %}page-hero--gradient{% endif %}" aria-label="{{ hero_heading | escape }}">
   <div class="page-hero__overlay"></div>
 
   {%- unless request.page_type == 'product' -%}
     <div class="page-hero__inner container-shell">
+      {%- if section.settings.show_breadcrumb -%}
+        <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
+          <span aria-current="page">{{ hero_heading | escape }}</span>
+        </nav>
+      {%- endif -%}
+
       {% if hero_kicker != blank %}
-        <p class="page-hero__kicker">{{ hero_kicker | escape }}</p>
+        <p class="page-hero__kicker">{%- if section.settings.eyebrow_pulse -%}<span class="page-hero__pulse" aria-hidden="true"></span>{%- endif -%}{{ hero_kicker | escape }}</p>
       {% endif %}
 
       {% if hero_heading != blank %}
@@ -106,6 +116,35 @@
       {% if hero_subheading != blank %}
         <p class="page-hero__subheading">{{ hero_subheading | escape }}</p>
       {% endif %}
+
+      {%- if section.settings.cta_label != blank -%}
+        <div class="page-hero__actions">
+          <a href="{{ section.settings.cta_link | default: '#' }}" class="page-hero__cta">{{ section.settings.cta_label | escape }}</a>
+          {%- if section.settings.cta_secondary_label != blank -%}
+            <a href="{{ section.settings.cta_secondary_link | default: '#' }}" class="page-hero__cta-secondary">{{ section.settings.cta_secondary_label | escape }} <span aria-hidden="true">&rarr;</span></a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_trust -%}
+        {%- capture trust_raw -%}{{ section.settings.trust_1 }}|{{ section.settings.trust_2 }}|{{ section.settings.trust_3 }}|{{ section.settings.trust_4 }}{%- endcapture -%}
+        {%- assign trust_list = trust_raw | split: '|' -%}
+        {%- assign trust_has = false -%}
+        {%- for t in trust_list -%}{%- assign t = t | strip -%}{%- if t != blank -%}{%- assign trust_has = true -%}{%- endif -%}{%- endfor -%}
+        {%- if trust_has -%}
+          <ul class="page-hero__trust">
+            {%- for t in trust_list -%}
+              {%- assign t = t | strip -%}
+              {%- if t != blank -%}
+                <li class="page-hero__trust-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {{ t }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- endif -%}
     </div>
   {%- endunless -%}
 </section>
@@ -163,7 +202,20 @@
       "max": 90,
       "step": 5,
       "default": 35
-    }
+    },
+    { "type": "header", "content": "Conversion" },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true },
+    { "type": "checkbox", "id": "eyebrow_pulse", "label": "Eyebrow pulse dot", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Primary button label" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary link label" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Secondary link URL" },
+    { "type": "header", "content": "Trust strip" },
+    { "type": "checkbox", "id": "show_trust", "label": "Show trust strip", "default": true },
+    { "type": "text", "id": "trust_1", "label": "Trust item 1", "default": "1-year warranty" },
+    { "type": "text", "id": "trust_2", "label": "Trust item 2", "default": "30-day returns" },
+    { "type": "text", "id": "trust_3", "label": "Trust item 3", "default": "Free shipping over $100" },
+    { "type": "text", "id": "trust_4", "label": "Trust item 4" }
   ],
   "presets": [
     {

@@ -195,9 +195,13 @@
         "background_color": "#020617",
         "overlay_opacity": 35,
         "height": 320,
-        "heading": "",
-        "subheading": "",
-        "kicker": "Where To Buy"
+        "heading": "Where to buy EZQuest",
+        "subheading": "Shop online or find an authorised retailer or distributor near you — worldwide.",
+        "kicker": "Where To Buy",
+        "cta_label": "Shop online",
+        "cta_link": "/collections",
+        "cta_secondary_label": "Become a reseller",
+        "cta_secondary_link": "/pages/contact"
       }
     }
   },
