@@ -18861,6 +18861,19 @@ body.template-index .home-hero-slider-shell {
   margin-top: -108px;
 }
 
+/* Mobile: fit the visible viewport (svh) and cap min-height so the hero
+   never exceeds a phone screen (800px > most phones). Higher specificity so
+   it overrides the base rules above. */
+@media (max-width: 640px) {
+  body.template-index .home-hero,
+  body.template-index .home-hero-slider-shell {
+    height: 100vh;
+    height: 100svh;
+    min-height: 32rem;
+    max-height: 56rem;
+  }
+}
+
 /* Non-home templates: pull first content block behind announcement + header stack. */
 
 @media (max-width: 767px) {
