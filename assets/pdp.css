@@ -230,6 +230,32 @@
   background: linear-gradient(180deg, rgba(148, 163, 184, 0.92), rgba(100, 116, 139, 0.8));
 }
 
+/* Price lives on the CTA button only; this element is a JS data holder. */
+.product-sticky-atc-price,
+.product-sticky-atc-price[hidden] {
+  display: none;
+}
+
+.product-sticky-atc-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(100 116 139);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-sticky-atc-trust::before {
+  content: '·';
+  flex: 0 0 auto;
+  color: rgb(203 213 225);
+  font-weight: 700;
+}
+
 .product-sticky-atc-button {
   flex: 0 0 auto;
   min-height: 2.9rem;
@@ -260,7 +286,9 @@
   .product-sticky-atc-main { gap: 1rem; }
   .product-sticky-atc-copy { gap: 0.22rem; }
   .product-sticky-atc-title { font-size: 1rem; }
-  .product-sticky-atc-meta { gap: 0.65rem; }
+  .product-sticky-atc-meta { gap: 0.6rem; }
+  .product-sticky-atc-availability,
+  .product-sticky-atc-trust { font-size: 0.8125rem; }
 
   .product-sticky-atc-button {
     min-width: 14rem;

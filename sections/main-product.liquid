@@ -811,9 +811,11 @@
             <p class="product-sticky-atc-availability" data-sticky-atc-availability>
               {% if product.available %}{{ 'product.in_stock' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}
             </p>
-            <p class="product-sticky-atc-price" data-sticky-atc-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+            {%- if sticky_trust_line != blank -%}
+              <span class="product-sticky-atc-trust">{{ sticky_trust_line }}</span>
+            {%- endif -%}
+            <p class="product-sticky-atc-price" data-sticky-atc-price hidden>{{ product.selected_or_first_available_variant.price | money }}</p>
           </div>
-          <p class="product-sticky-atc-trust">{{ sticky_trust_line }}</p>
         </div>
         <button class="btn btn--primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
           <span data-sticky-atc-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
