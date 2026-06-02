@@ -79,7 +79,7 @@
           <div class="resources-article-card resources-article-card--placeholder block cursor-default overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-soft">
             <div class="resources-article-media overflow-hidden bg-slate-100">
               {%- if ph_img != blank -%}
-                {{ ph_img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'resources-article-img h-full w-full object-cover' }}
+                {{ ph_img | image_url: width: 900 | image_tag: loading: 'lazy', alt: '', class: 'resources-article-img h-full w-full object-cover' }}
               {%- else -%}
                 {% render 'owned-product-visual', product_handle: 'usb-c-multimedia-hub', variant: 'hero', width: 900, height: 600, class: 'resources-article-img h-full w-full object-cover', loading: 'lazy' %}
               {%- endif -%}

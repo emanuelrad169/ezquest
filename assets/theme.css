@@ -25995,6 +25995,15 @@ select {
   contain: layout style;
 }
 
+/* Hide the chat launcher while a drawer (nav / cart) is open so it can't
+   float over the panel. */
+body.drawer-open #tidio-chat,
+body.drawer-open #tidio-chat-root,
+body.drawer-open #tidio-chat-code,
+body.drawer-open [id*="tidio-chat-button"] {
+  display: none !important;
+}
+
 /* ── 375px header fix: shrink logo + hide lang-picker at xs ──────────────── */
 
 @media (max-width: 639px) {

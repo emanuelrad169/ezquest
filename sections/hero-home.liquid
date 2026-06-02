@@ -120,7 +120,7 @@
                                 sizes="100vw">
                       {% endif %}
                       {% if slide_desktop_image != blank %}
-                        {{ slide_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, decoding: slide_image_decoding, width: 2400, height: slide_desktop_height, class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                        {{ slide_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: slide_image_loading, fetchpriority: slide_image_fetchpriority, decoding: slide_image_decoding, width: 2400, height: slide_desktop_height, alt: '', class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                       {% else %}
                         <img
                           src="{{ owned_hero_desktop_asset | asset_url }}"
@@ -218,7 +218,7 @@
                               sizes="100vw">
                     {% endif %}
                     {% if fallback_desktop_image != blank %}
-                      {{ fallback_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, decoding: 'sync', width: 2400, height: fallback_desktop_height, class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
+                      {{ fallback_desktop_image | image_url: width: 2400, format: 'pjpg' | image_tag: loading: fallback_image_loading, fetchpriority: fallback_image_fetchpriority, decoding: 'sync', width: 2400, height: fallback_desktop_height, alt: '', class: 'home-hero-media-image h-full w-full origin-center object-cover', widths: '1200, 1600, 2000, 2400', sizes: '100vw' }}
                     {% else %}
                       <img
                         src="{{ owned_hero_desktop_asset | asset_url }}"

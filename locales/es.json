@@ -16,6 +16,7 @@
     "view_all": "Ver todo",
     "close": "Cerrar",
     "search": "Buscar",
+    "search_placeholder": "Buscar productos, soporte, artículos…",
     "loading": "Cargando"
   },
   "accessibility": {

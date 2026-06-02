@@ -137,9 +137,9 @@
   if (forgotBtn) forgotBtn.addEventListener('click', showRecover);
   if (cancelBtn) cancelBtn.addEventListener('click', showLogin);
 
-  // Auto-show recover panel if recover form was submitted
-  {%- if form.posted_successfully? -%}
-  showRecover();
-  {%- endif -%}
+  // Auto-show recover panel when redirected back from a recover submit
+  if (/[?&]recover=/.test(window.location.search) || window.location.hash === '#recover') {
+    showRecover();
+  }
 }());
 </script>

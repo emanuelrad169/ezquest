@@ -30,14 +30,10 @@
       assign compat_html = rp.metafields.custom.product_compatibility_html.value
     endif
 
-    assign has_setup     = false
     assign has_manuals   = false
     assign has_firmware  = false
     assign has_compat    = false
 
-    if setup_guide_html != blank or in_the_box != blank
-      assign has_setup = true
-    endif
     if manual_pdf_url != blank or quickstart_pdf_url != blank
       assign has_manuals = true
     endif

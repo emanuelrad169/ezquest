@@ -16,6 +16,7 @@
     "view_all": "View all",
     "close": "Close",
     "search": "Search",
+    "search_placeholder": "Search products, support, articles…",
     "loading": "Loading"
   },
   "accessibility": {

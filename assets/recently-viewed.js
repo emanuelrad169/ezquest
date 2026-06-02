@@ -66,6 +66,7 @@
     var price = priceNode && priceNode.dataset ? priceNode.dataset.productPrice : '';
     var id = idNode && idNode.dataset ? idNode.dataset.productId : '';
     var type = idNode && idNode.dataset ? (idNode.dataset.productType || '') : '';
+    var created = idNode && idNode.dataset ? (idNode.dataset.productCreated || '') : '';
 
     if (!id) {
       id = normalizeUrl(url) || window.location.pathname;
@@ -79,7 +80,8 @@
       url: url,
       image: image,
       price: price,
-      type: type
+      type: type,
+      created: created
     };
 
     var products = getStoredProducts().filter(function (item) {
@@ -112,8 +114,12 @@
       ? '<img class="card-img product-card-image product-card-featured-image" src="' + image + '" alt="' + title + '" loading="lazy" width="400" height="400">'
       : '';
 
+    var isNew = item.created && (Date.now() / 1000 - parseInt(item.created, 10)) < 60 * 86400;
+    var badge = isNew ? '<div class="product-badges" aria-label="Product features"><span class="product-badge product-badge--new">New</span></div>' : '';
+
     article.innerHTML =
       '<div class="product-card-featured-media-shell relative">' +
+        badge +
         '<a href="' + url + '" class="product-card-featured-media product-card-featured-media-link relative flex min-h-56 items-center justify-center overflow-hidden border-b border-slate-200/70 bg-white no-underline" aria-label="View ' + title + '">' +
           '<div class="card-img-wrap aspect-card w-full">' + mediaImg + '</div>' +
         '</a>' +
