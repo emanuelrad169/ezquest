@@ -981,71 +981,63 @@
 {%- endif -%}
 
 {%- if has_editorial_content -%}
-<section class="section-shell pdp-content-sections" id="pdp-content-tabs" data-pdp-scrollspy>
-  <div class="pdp-anchor-nav" data-pdp-anchor-nav>
-    <div class="container-shell">
-      <nav class="pdp-anchor-nav__list" aria-label="Product information">
-        {%- if show_overview_tab -%}<a class="pdp-anchor-nav__link is-active" href="#pdp-overview" data-anchor="pdp-overview">Overview</a>{%- endif -%}
-        {%- if has_in_box -%}<a class="pdp-anchor-nav__link" href="#pdp-in-box" data-anchor="pdp-in-box">In the box</a>{%- endif -%}
-        {%- if show_specs_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-specs" data-anchor="pdp-specs">Specifications</a>{%- endif -%}
-        {%- if show_highlight_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-highlight-section" data-anchor="pdp-highlight-section">Highlights</a>{%- endif -%}
-        {%- if show_compat_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-compat" data-anchor="pdp-compat">Compatibility</a>{%- endif -%}
-        {%- if show_downloads_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-downloads" data-anchor="pdp-downloads">Downloads</a>{%- endif -%}
-      </nav>
+<section class="section-shell pdp-tabs-section" id="pdp-content-tabs" data-pdp-tabs>
+  <div class="container-shell">
+    <div class="pdp-tabs2" role="tablist" aria-label="Product information">
+      {%- if show_overview_tab -%}<button class="pdp-tabs2__tab is-active" type="button" role="tab" aria-selected="true" data-tab="overview">Overview</button>{%- endif -%}
+      {%- if has_in_box -%}<button class="pdp-tabs2__tab" type="button" role="tab" aria-selected="false" data-tab="in-box">In the box</button>{%- endif -%}
+      {%- if show_specs_tab -%}<button class="pdp-tabs2__tab" type="button" role="tab" aria-selected="false" data-tab="specs">Specifications</button>{%- endif -%}
+      {%- if show_highlight_tab -%}<button class="pdp-tabs2__tab" type="button" role="tab" aria-selected="false" data-tab="highlight">Highlights</button>{%- endif -%}
+      {%- if show_compat_tab -%}<button class="pdp-tabs2__tab" type="button" role="tab" aria-selected="false" data-tab="compat">Compatibility</button>{%- endif -%}
+      {%- if show_downloads_tab -%}<button class="pdp-tabs2__tab" type="button" role="tab" aria-selected="false" data-tab="downloads">Downloads</button>{%- endif -%}
     </div>
-  </div>
 
-  <div class="container-shell pdp-content-sections__body">
+    <div class="pdp-tabs2__panels">
+      {%- if show_overview_tab -%}
+        <div class="pdp-tabs2__panel is-active" role="tabpanel" data-panel="overview" id="pdp-overview" tabindex="0">
+          <div class="pdp-content-prose">{{ features_html }}</div>
+        </div>
+      {%- endif -%}
 
-    {%- if show_overview_tab -%}
-      <section class="pdp-content-block" id="pdp-overview" data-anchor-section tabindex="-1" aria-label="Overview">
-        <div class="pdp-content-prose">{{ features_html }}</div>
-      </section>
-    {%- endif -%}
+      {%- if has_in_box -%}
+        <div class="pdp-tabs2__panel" role="tabpanel" data-panel="in-box" id="pdp-in-box" tabindex="0">
+          <ul class="pdp-in-box__grid">
+            {%- for item in in_the_box -%}
+              <li class="pdp-in-box__item">
+                <span class="pdp-in-box__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="pdp-in-box__label">{{ item }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
 
-    {%- if has_in_box -%}
-      <section class="pdp-content-block pdp-content-block--in-box" id="pdp-in-box" data-anchor-section tabindex="-1" aria-label="In the box">
-        <h2 class="pdp-content-block__title">In the box</h2>
-        <ul class="pdp-in-box__grid">
-          {%- for item in in_the_box -%}
-            <li class="pdp-in-box__item">
-              <span class="pdp-in-box__check" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <span class="pdp-in-box__label">{{ item }}</span>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </section>
-    {%- endif -%}
+      {%- if show_specs_tab -%}
+        <div class="pdp-tabs2__panel" role="tabpanel" data-panel="specs" id="pdp-specs" tabindex="0">
+          <div class="pdp-content-prose">{{ specs_html }}</div>
+        </div>
+      {%- endif -%}
 
-    {%- if show_specs_tab -%}
-      <section class="pdp-content-block" id="pdp-specs" data-anchor-section tabindex="-1" aria-label="Specifications">
-        <h2 class="pdp-content-block__title">Specifications</h2>
-        <div class="pdp-content-prose">{{ specs_html }}</div>
-      </section>
-    {%- endif -%}
+      {%- if show_highlight_tab -%}
+        <div class="pdp-tabs2__panel" role="tabpanel" data-panel="highlight" id="pdp-highlight-section" tabindex="0">
+          <div class="pdp-content-prose">{{ highlight_html }}</div>
+        </div>
+      {%- endif -%}
 
-    {%- if show_highlight_tab -%}
-      <section class="pdp-content-block" id="pdp-highlight-section" data-anchor-section tabindex="-1" aria-label="Highlights">
-        <div class="pdp-content-prose">{{ highlight_html }}</div>
-      </section>
-    {%- endif -%}
+      {%- if show_compat_tab -%}
+        <div class="pdp-tabs2__panel" role="tabpanel" data-panel="compat" id="pdp-compat" tabindex="0">
+          <div class="pdp-content-prose">{{ compat_html }}</div>
+        </div>
+      {%- endif -%}
 
-    {%- if show_compat_tab -%}
-      <section class="pdp-content-block" id="pdp-compat" data-anchor-section tabindex="-1" aria-label="Compatibility">
-        <h2 class="pdp-content-block__title">Compatibility</h2>
-        <div class="pdp-content-prose">{{ compat_html }}</div>
-      </section>
-    {%- endif -%}
-
-    {%- if show_downloads_tab -%}
-      <section class="pdp-content-block" id="pdp-downloads" data-anchor-section tabindex="-1" aria-label="Downloads">
-        <h2 class="pdp-content-block__title">Downloads</h2>
-        {%- render 'product-downloads-list', product: product -%}
-      </section>
-    {%- endif -%}
-
+      {%- if show_downloads_tab -%}
+        <div class="pdp-tabs2__panel" role="tabpanel" data-panel="downloads" id="pdp-downloads" tabindex="0">
+          {%- render 'product-downloads-list', product: product -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 {%- endif -%}
@@ -1275,53 +1267,45 @@
 
 <script>
 (function () {
-  /* Anker-style scrolling editorial: sticky anchor nav smooth-scrolls to
-     stacked content sections, with scroll-spy highlighting the active link. */
-  document.querySelectorAll('[data-pdp-scrollspy]').forEach(function (root) {
-    var links = Array.prototype.slice.call(root.querySelectorAll('.pdp-anchor-nav__link'));
-    if (!links.length) return;
-    var sections = links
-      .map(function (l) { return document.getElementById(l.dataset.anchor); })
-      .filter(Boolean);
-    if (!sections.length) return;
+  /* PDP content tabs: Overview / Specifications / Compatibility / Downloads. */
+  document.querySelectorAll('[data-pdp-tabs]').forEach(function (root) {
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('.pdp-tabs2__tab'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('.pdp-tabs2__panel'));
+    if (!tabs.length || !panels.length) return;
 
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function setActive(id) {
-      links.forEach(function (l) {
-        var active = l.dataset.anchor === id;
-        l.classList.toggle('is-active', active);
-        if (active) {
-          var nav = l.closest('.pdp-anchor-nav__list');
-          if (nav) {
-            var nr = nav.getBoundingClientRect();
-            var lr = l.getBoundingClientRect();
-            if (lr.left < nr.left || lr.right > nr.right) {
-              l.scrollIntoView({ inline: 'center', block: 'nearest' });
-            }
+    function activate(key, focusTab) {
+      tabs.forEach(function (t) {
+        var on = t.dataset.tab === key;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (on && focusTab) t.focus();
+        if (on) {
+          // keep the active tab visible when the bar scrolls on mobile
+          var bar = t.parentNode;
+          var br = bar.getBoundingClientRect();
+          var tr = t.getBoundingClientRect();
+          if (tr.left < br.left || tr.right > br.right) {
+            t.scrollIntoView({ inline: 'center', block: 'nearest' });
           }
         }
       });
+      panels.forEach(function (p) {
+        p.classList.toggle('is-active', p.dataset.panel === key);
+      });
     }
 
-    links.forEach(function (l) {
-      l.addEventListener('click', function (e) {
-        var target = document.getElementById(l.dataset.anchor);
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-        setActive(l.dataset.anchor);
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { activate(t.dataset.tab, false); });
+      t.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = tabs[(i + 1) % tabs.length];
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === 'Home') next = tabs[0];
+        else if (e.key === 'End') next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); activate(next.dataset.tab, true); }
       });
     });
-
-    if ('IntersectionObserver' in window) {
-      var spy = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
-      sections.forEach(function (s) { spy.observe(s); });
-    }
   });
 })();
 </script>
