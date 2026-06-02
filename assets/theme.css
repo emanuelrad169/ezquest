@@ -21555,12 +21555,11 @@ body.template-index .home-hero-slide {
 }
 
 .page-hero--gradient {
-  background: linear-gradient(
-    135deg,
-    rgb(2, 6, 23) 0%,
-    rgb(30, 41, 59) 50%,
-    rgb(2, 6, 23) 100%
-  ) !important;
+  background-color: #060a16 !important;
+  background-image:
+    radial-gradient(115% 120% at 88% 12%, rgba(254, 211, 0, 0.22) 0%, rgba(254, 211, 0, 0) 46%),
+    radial-gradient(100% 110% at 10% 92%, rgba(56, 132, 255, 0.20) 0%, rgba(56, 132, 255, 0) 52%),
+    linear-gradient(135deg, #020617 0%, #111c33 55%, #020617 100%) !important;
 }
 
 .page-hero__overlay {
