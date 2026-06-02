@@ -10,6 +10,9 @@
         <p class="section-kicker">{{ section.settings.eyebrow | default: 'Bundle' }}</p>
         <h2 class="product-bundle-upsell__heading">{{ section.settings.heading | default: 'Buy together and save 10%' }}</h2>
         <p class="product-bundle-upsell__body">{{ section.settings.copy | default: 'Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings.' }}</p>
+        <a href="{{ product.url }}" class="product-bundle-upsell__cta">
+          Configure bundle
+        </a>
       </div>
 
       <div class="product-bundle-upsell-grid grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" role="list">
@@ -24,10 +27,6 @@
           {% endfor %}
         {% endif %}
       </div>
-
-      <a href="{{ product.url }}" class="product-bundle-upsell__cta">
-        Configure bundle
-      </a>
     </div>
   </div>
 </section>

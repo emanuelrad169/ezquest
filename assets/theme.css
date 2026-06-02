@@ -21746,7 +21746,7 @@ body.template-index .home-hero-slide {
 
 @media (min-width: 1024px) {
   .product-bundle-upsell__panel {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) auto;
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
   }
 }
 
@@ -21826,10 +21826,12 @@ body.template-index .home-hero-slide {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  justify-self: start;
+  margin-top: 0.5rem;
   min-height: 3rem;
   border-radius: var(--radius-pill);
   background: rgb(15 23 42);
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
   color: #fff;
   font-size: 0.875rem;
   font-weight: 600;
