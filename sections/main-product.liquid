@@ -1,5 +1,5 @@
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
-<section class="section-shell main-product-section" id="pdp-overview" data-product-root data-product-id="{{ product.id }}" data-product-price="{{ product.selected_or_first_available_variant.price | money }}">
+<section class="section-shell main-product-section" id="pdp-overview" data-product-root data-product-id="{{ product.id }}" data-product-type="{{ product.type | escape }}" data-product-price="{{ product.selected_or_first_available_variant.price | money }}">
   <div class="container-shell">
     <div class="hidden lg:block">
       {% render 'breadcrumbs' %}

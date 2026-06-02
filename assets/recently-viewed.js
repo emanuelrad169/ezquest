@@ -65,6 +65,7 @@
     var url = getMetaContent('meta[property="og:url"]') || window.location.href;
     var price = priceNode && priceNode.dataset ? priceNode.dataset.productPrice : '';
     var id = idNode && idNode.dataset ? idNode.dataset.productId : '';
+    var type = idNode && idNode.dataset ? (idNode.dataset.productType || '') : '';
 
     if (!id) {
       id = normalizeUrl(url) || window.location.pathname;
@@ -77,7 +78,8 @@
       title: title,
       url: url,
       image: image,
-      price: price
+      price: price,
+      type: type
     };
 
     var products = getStoredProducts().filter(function (item) {
@@ -88,43 +90,51 @@
     setStoredProducts(products);
   }
 
-  function createProductCard(item) {
-    var card = document.createElement('a');
-    card.className = 'rv-card';
-    card.href = item.url || '#';
-
-    var imageWrap = document.createElement('div');
-    imageWrap.className = 'rv-card__img-wrap';
-
-    if (item.image) {
-      var image = document.createElement('img');
-      image.className = 'rv-card__img';
-      image.src = item.image;
-      image.alt = item.title || '';
-      image.loading = 'lazy';
-      image.width = 200;
-      image.height = 200;
-      imageWrap.appendChild(image);
-    }
-
-    var title = document.createElement('p');
-    title.className = 'rv-card__title';
-    title.textContent = item.title || '';
-
-    var price = document.createElement('p');
-    price.className = 'rv-card__price';
-    price.textContent = item.price || '';
-
-    card.appendChild(imageWrap);
-    card.appendChild(title);
-    card.appendChild(price);
-
-    return card;
+  function esc(value) {
+    var div = document.createElement('div');
+    div.textContent = value == null ? '' : String(value);
+    return div.innerHTML;
   }
 
-  function cardEndpoint(url) {
-    var path = normalizeUrl(url);
-    return path + (path.indexOf('?') > -1 ? '&' : '?') + 'section_id=recently-viewed-card';
+  // Build a card that reuses the standard product-card class names so the
+  // shared theme CSS styles it identically to collection/search cards.
+  function createProductCard(item) {
+    var article = document.createElement('article');
+    article.className = 'product-card product-card-tile product-card-tile--featured-strip product-card-tile--collection card-elevated card-interactive relative flex h-full flex-col overflow-hidden text-slate-950 no-underline';
+
+    var url = esc(item.url || '#');
+    var title = esc(item.title || '');
+    var image = item.image ? esc(item.image) : '';
+    var price = item.price ? esc(item.price) : '';
+    var type = item.type ? esc(item.type) : '';
+
+    var mediaImg = image
+      ? '<img class="card-img product-card-image product-card-featured-image" src="' + image + '" alt="' + title + '" loading="lazy" width="400" height="400">'
+      : '';
+
+    article.innerHTML =
+      '<div class="product-card-featured-media-shell relative">' +
+        '<a href="' + url + '" class="product-card-featured-media product-card-featured-media-link relative flex min-h-56 items-center justify-center overflow-hidden border-b border-slate-200/70 bg-white no-underline" aria-label="View ' + title + '">' +
+          '<div class="card-img-wrap aspect-card w-full">' + mediaImg + '</div>' +
+        '</a>' +
+        '<div class="product-card__wishlist">' +
+          '<button class="wishlist-btn" type="button" aria-pressed="false" aria-label="Add ' + title + ' to wishlist"' +
+            ' data-wishlist-id="' + esc(item.id) + '" data-wishlist-title="' + title + '" data-wishlist-url="' + url + '" data-wishlist-image="' + image + '" data-wishlist-price="' + price + '">' +
+            '<svg class="wishlist-btn__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M10 16.5S2.5 12 2.5 6.5a4 4 0 017.5-2A4 4 0 0117.5 6.5c0 5.5-7.5 10-7.5 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="product-card-featured-body flex flex-1 flex-col gap-3 px-4 pb-4 pt-3 lg:px-5">' +
+        '<div class="product-card-featured-copy grid gap-1.5">' +
+          (type ? '<p class="product-card-featured-vendor">' + type + '</p>' : '') +
+          '<div class="product-card-featured-title-price-row flex items-start justify-between gap-3">' +
+            '<h3 class="card-title product-card-featured-title"><a href="' + url + '" class="product-card-featured-title-link">' + title + '</a></h3>' +
+            '<div class="product-card-featured-price"><span class="price-amount">' + price + '</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    return article;
   }
 
   function renderRecentlyViewed(maxProducts) {
@@ -144,35 +154,12 @@
       return;
     }
 
-    // Fetch the standard product card for each item via the Section Rendering API
-    // so Recently viewed matches the rest of the site. Falls back to a simple card.
-    var canFetch = typeof window.fetch === 'function';
-    if (!canFetch) {
-      grid.innerHTML = '';
-      products.forEach(function (item) { grid.appendChild(createProductCard(item)); });
-      section.hidden = false;
-      return;
-    }
-
-    Promise.all(products.map(function (item) {
-      return window.fetch(cardEndpoint(item.url), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
-        .then(function (res) { return res.ok ? res.text() : ''; })
-        .then(function (html) { return { html: html, item: item }; })
-        .catch(function () { return { html: '', item: item }; });
-    })).then(function (results) {
-      grid.innerHTML = '';
-      results.forEach(function (res) {
-        if (res.html && res.html.trim()) {
-          var cell = document.createElement('div');
-          cell.className = 'rv-card-cell';
-          cell.innerHTML = res.html.trim();
-          grid.appendChild(cell);
-        } else {
-          grid.appendChild(createProductCard(res.item));
-        }
-      });
-      section.hidden = false;
+    grid.innerHTML = '';
+    products.forEach(function (item) {
+      grid.appendChild(createProductCard(item));
     });
+
+    section.hidden = false;
   }
 
   document.addEventListener('DOMContentLoaded', function () {
