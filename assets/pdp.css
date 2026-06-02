@@ -1575,7 +1575,7 @@
   overflow: hidden;
   aspect-ratio: 1;
   border-radius: 10px;
-  background: var(--ez-light);
+  background: transparent;
 }
 
 .rv-card__img {
