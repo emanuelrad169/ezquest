@@ -122,6 +122,11 @@
     return card;
   }
 
+  function cardEndpoint(url) {
+    var path = normalizeUrl(url);
+    return path + (path.indexOf('?') > -1 ? '&' : '?') + 'section_id=recently-viewed-card';
+  }
+
   function renderRecentlyViewed(maxProducts) {
     var section = document.getElementById('recently-viewed');
     var grid = document.getElementById('rv-grid');
@@ -139,12 +144,35 @@
       return;
     }
 
-    grid.innerHTML = '';
-    products.forEach(function (item) {
-      grid.appendChild(createProductCard(item));
-    });
+    // Fetch the standard product card for each item via the Section Rendering API
+    // so Recently viewed matches the rest of the site. Falls back to a simple card.
+    var canFetch = typeof window.fetch === 'function';
+    if (!canFetch) {
+      grid.innerHTML = '';
+      products.forEach(function (item) { grid.appendChild(createProductCard(item)); });
+      section.hidden = false;
+      return;
+    }
 
-    section.hidden = false;
+    Promise.all(products.map(function (item) {
+      return window.fetch(cardEndpoint(item.url), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(function (res) { return res.ok ? res.text() : ''; })
+        .then(function (html) { return { html: html, item: item }; })
+        .catch(function () { return { html: '', item: item }; });
+    })).then(function (results) {
+      grid.innerHTML = '';
+      results.forEach(function (res) {
+        if (res.html && res.html.trim()) {
+          var cell = document.createElement('div');
+          cell.className = 'rv-card-cell';
+          cell.innerHTML = res.html.trim();
+          grid.appendChild(cell);
+        } else {
+          grid.appendChild(createProductCard(res.item));
+        }
+      });
+      section.hidden = false;
+    });
   }
 
   document.addEventListener('DOMContentLoaded', function () {

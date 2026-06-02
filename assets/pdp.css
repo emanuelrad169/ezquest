@@ -1574,18 +1574,18 @@
 }
 
 .recently-viewed__grid {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  padding: 0.25rem 0 1rem;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1.25rem;
 }
-.recently-viewed__grid::-webkit-scrollbar {
-  display: none;
+@media (min-width: 768px) {
+  .recently-viewed__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+@media (min-width: 1024px) {
+  .recently-viewed__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.rv-card-cell { display: flex; }
+.rv-card-cell > * { width: 100%; }
 
 .rv-card {
   flex: 0 0 clamp(200px, 22vw, 244px);
