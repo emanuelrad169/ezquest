@@ -27264,7 +27264,7 @@ body.has-pdp-zoom-open [id*="tidio"] {
 @media (max-width: 768px) {
   #tidio-chat,
   [id*="tidio-chat-button"] {
-    bottom: 104px !important;
+    bottom: 80px !important;
   }
 }
 
