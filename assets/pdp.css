@@ -1909,6 +1909,68 @@
 .pdp-content-prose p { line-height: 1.6; margin: 0 0 16px; color: var(--ez-grey); }
 .pdp-content-prose p:last-child { margin-bottom: 0; }
 
+/* ── Specifications: designed key/value table ───────────────── */
+#pdp-specs .pdp-spec-table {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow-soft, 0 12px 32px rgba(15, 23, 42, 0.04));
+}
+#pdp-specs .pdp-spec-table li {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  border-right: 1px solid rgba(15, 23, 42, 0.07);
+}
+#pdp-specs .pdp-spec-table li:nth-child(2n) { border-right: 0; }
+#pdp-specs .pdp-spec__k {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ez-dark, #0a0a0a);
+  line-height: 1.35;
+}
+#pdp-specs .pdp-spec__v {
+  font-size: 0.9rem;
+  color: var(--ez-grey, #6e6e73);
+  line-height: 1.5;
+}
+@media (max-width: 640px) {
+  #pdp-specs .pdp-spec-table { grid-template-columns: 1fr; }
+  #pdp-specs .pdp-spec-table li { border-right: 0; }
+}
+
+/* Native <table> specs (for products that author specs as a table) */
+#pdp-specs .pdp-content-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+#pdp-specs .pdp-content-prose th,
+#pdp-specs .pdp-content-prose td {
+  padding: 0.85rem 1.15rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+#pdp-specs .pdp-content-prose tr:last-child td { border-bottom: 0; }
+#pdp-specs .pdp-content-prose td:first-child,
+#pdp-specs .pdp-content-prose th:first-child {
+  font-weight: 600;
+  color: var(--ez-dark, #0a0a0a);
+  width: 40%;
+}
+#pdp-specs .pdp-content-prose tbody tr:nth-child(odd) { background: rgba(15, 23, 42, 0.02); }
+
 /* Per-product download list inside Downloads tab */
 .pdp-dl-list {
   list-style: none;

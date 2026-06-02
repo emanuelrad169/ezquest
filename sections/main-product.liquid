@@ -1361,6 +1361,38 @@
   })();
 </script>
 
+<script>
+  /* Specifications: turn "Label: Value" list items into a designed
+     two-column key/value spec table. Native <table> specs are styled via CSS. */
+  (function () {
+    document.querySelectorAll('#pdp-specs .pdp-content-prose ul').forEach(function (ul) {
+      var rows = 0;
+      Array.prototype.forEach.call(ul.children, function (li) {
+        if (li.tagName !== 'LI') return;
+        var txt = (li.textContent || '').trim();
+        var idx = txt.indexOf(':');
+        if (idx > 0 && idx < 70) {
+          var k = txt.slice(0, idx).trim();
+          var v = txt.slice(idx + 1).trim();
+          if (k && v) {
+            li.textContent = '';
+            var ks = document.createElement('span');
+            ks.className = 'pdp-spec__k';
+            ks.textContent = k;
+            var vs = document.createElement('span');
+            vs.className = 'pdp-spec__v';
+            vs.textContent = v;
+            li.appendChild(ks);
+            li.appendChild(vs);
+            rows++;
+          }
+        }
+      });
+      if (rows) ul.classList.add('pdp-spec-table');
+    });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Main product",
