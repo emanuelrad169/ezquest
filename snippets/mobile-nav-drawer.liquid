@@ -26,30 +26,7 @@
       </button>
     </div>
 
-    <div class="mega-mobile-service mt-5 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-soft">
-      <a href="{{ support_href | default: '/pages/support' }}" class="mega-mobile-service-link block no-underline">
-        <span class="mega-mobile-service-kicker block text-xs font-medium uppercase tracking-widest text-slate-400">
-          {% if support_has_phone %}
-            {{ support_phone_label | default: 'Support' }}
-          {% else %}
-            Support center
-          {% endif %}
-        </span>
-        <strong class="mega-mobile-service-value mt-1 block text-base font-medium tracking-tight text-slate-950">
-          {% if support_has_phone %}
-            {{ support_phone }}
-          {% else %}
-            Contact support
-          {% endif %}
-        </strong>
-      </a>
-      <div class="mega-mobile-service-meta mt-4 flex flex-wrap gap-2">
-        <a href="/pages/shipping-returns" class="inline-flex min-h-9 items-center rounded-full border border-slate-200/80 bg-white px-3 py-2 text-xs font-medium uppercase tracking-widest text-slate-600 no-underline">Shipping &amp; returns</a>
-        <a href="/pages/compatibility" class="inline-flex min-h-9 items-center rounded-full border border-slate-200/80 bg-white px-3 py-2 text-xs font-medium uppercase tracking-widest text-slate-600 no-underline">Compatibility</a>
-      </div>
-    </div>
-
-    <div class="mega-mobile-primary-actions mt-4">
+    <div class="mega-mobile-primary-actions mt-5">
       <a href="/pages/help-me-choose" class="mega-mobile-primary-link flex min-h-12 w-full items-center justify-center rounded-2xl bg-slate-950 px-4 py-3 text-sm font-medium text-white no-underline transition hover:bg-slate-800" data-drawer-close>Shop by setup</a>
     </div>
 
@@ -123,6 +100,29 @@
         </div>
       </div>
     </nav>
+
+    <div class="mega-mobile-service mt-4 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-soft">
+      <a href="{{ support_href | default: '/pages/support' }}" class="mega-mobile-service-link block no-underline">
+        <span class="mega-mobile-service-kicker block text-xs font-medium uppercase tracking-widest text-slate-400">
+          {% if support_has_phone %}
+            {{ support_phone_label | default: 'Support' }}
+          {% else %}
+            Support center
+          {% endif %}
+        </span>
+        <strong class="mega-mobile-service-value mt-1 block text-base font-medium tracking-tight text-slate-950">
+          {% if support_has_phone %}
+            {{ support_phone }}
+          {% else %}
+            Contact support
+          {% endif %}
+        </strong>
+      </a>
+      <div class="mega-mobile-service-meta mt-4 flex flex-wrap gap-2">
+        <a href="/pages/shipping-returns" class="inline-flex min-h-9 items-center rounded-full border border-slate-200/80 bg-white px-3 py-2 text-xs font-medium uppercase tracking-widest text-slate-600 no-underline">Shipping &amp; returns</a>
+        <a href="/pages/compatibility" class="inline-flex min-h-9 items-center rounded-full border border-slate-200/80 bg-white px-3 py-2 text-xs font-medium uppercase tracking-widest text-slate-600 no-underline">Compatibility</a>
+      </div>
+    </div>
 
     <div class="support-crosslink-list">
       <a href="{{ routes.search_url }}" class="support-crosslink" data-drawer-close>
