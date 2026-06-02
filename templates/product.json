@@ -44,21 +44,9 @@
         "heading": "Recently viewed",
         "max_products": 4
       }
-    },
-    "page_hero": {
-      "type": "page-hero",
-      "settings": {
-        "background_color": "#020617",
-        "kicker": "",
-        "heading": "",
-        "subheading": "",
-        "height": 320,
-        "overlay_opacity": 35
-      }
     }
   },
   "order": [
-    "page_hero",
     "main",
     "faq",
     "bundle",

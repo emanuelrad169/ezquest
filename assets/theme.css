@@ -27319,6 +27319,27 @@ body.has-pdp-zoom-open [id*="tidio"] {
   background: #000 !important;
 }
 
+/* Product pages are gallery-first (no dark page-hero), so the header must be
+   solid from the top instead of a transparent overlay — otherwise the white
+   logo/icons would be invisible on the white page. */
+
+body.template-product .site-header--hero-overlay {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(226, 232, 240, 0.75);
+}
+
+body.template-product .site-header--hero-overlay .site-brandmark img {
+  filter: none;
+}
+
+body.template-product .site-header--hero-overlay .mega-menu-trigger,
+body.template-product .site-header--hero-overlay .mega-menu-trigger--plain,
+body.template-product .site-header--hero-overlay .site-header-icon-button {
+  color: rgba(15, 23, 42, 0.88);
+}
+
 .placeholder\:text-slate-500::-moz-placeholder {
   --tw-text-opacity:       1;
   color:       rgb(100 116 139 / var(--tw-text-opacity, 1));
