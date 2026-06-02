@@ -1490,12 +1490,16 @@
   gap: 0.75rem;
   padding: 1.25rem;
   background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
   text-decoration: none;
-  transition: background 0.15s ease;
+  transition: transform var(--motion-duration-base, 220ms) var(--motion-ease-standard, ease),
+              box-shadow var(--motion-duration-base, 220ms) var(--motion-ease-standard, ease);
 }
 
 .rv-card:hover {
-  background: #fafafa;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft-hover);
 }
 
 .rv-card__img-wrap {

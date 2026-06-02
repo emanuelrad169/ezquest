@@ -789,7 +789,7 @@
             {%- assign product_features_content_stripped = product_features_content | strip -%}
             {%- assign product_support_content_stripped = product_support_content | strip -%}
 
-	          <div class="product-mobile-accordions">
+	          <div class="product-mobile-accordions hidden lg:block">
 	            {% render 'accordion-item', title: 'Why it fits', content: product_fit_content, expanded: false %}
 	            {% if product_features_content_stripped != blank %}
 	              {% render 'accordion-item', title: 'Features', content: product_features_content %}
