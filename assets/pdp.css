@@ -468,6 +468,40 @@
 .product-form-terms { margin-top: 0.5rem; }
 .product-form-terms:empty { display: none; }
 
+/* Key-stat strip above the tabs (dark band, big values) */
+.pdp-stat-strip {
+  background: var(--ez-dark, #0a0a0a);
+  color: #f5f5f7;
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+}
+.pdp-stat-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+.pdp-stat-strip__item {
+  position: relative;
+  text-align: center;
+  font-size: clamp(1.05rem, 2.1vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.pdp-stat-strip__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2rem;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+@media (max-width: 640px) {
+  .pdp-stat-strip__grid { grid-template-columns: 1fr 1fr; }
+  .pdp-stat-strip__item:nth-child(2n)::after { display: none; }
+}
+
 /* Separator between the breadcrumb context links (back / shop by setup) */
 .product-context-row > a:not(:last-child)::after {
   content: "·";

@@ -968,6 +968,19 @@
   endif
 -%}
 
+{%- comment -%} Key-stat strip above the tabs — fills from the same key_features metafield as the buy-box bullets {%- endcomment -%}
+{%- if key_features != blank and key_features.size > 0 -%}
+  <section class="pdp-stat-strip" aria-label="Product highlights">
+    <div class="container-shell">
+      <div class="pdp-stat-strip__grid">
+        {%- for feature in key_features limit: 4 -%}
+          <div class="pdp-stat-strip__item">{{ feature }}</div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
 <section class="section-shell pdp-section pdp-content-tabs-section" id="pdp-content-tabs" data-pdp-tabs>
   <div class="container-shell">
 
