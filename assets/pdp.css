@@ -2090,6 +2090,20 @@
 }
 .pdp-dl-empty { color: var(--ez-grey); font-size: 14px; padding: 16px 0; }
 
+/* Reassurance microcopy directly under the ATC / Buy-it-now buttons */
+.product-form-secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ez-grey, #6e6e73);
+  text-align: center;
+}
+.product-form-secure svg { color: #16a34a; flex: 0 0 auto; }
+
 /* Key Features list — buybox, above ATC */
 .pdp-key-features {
   list-style: none;
