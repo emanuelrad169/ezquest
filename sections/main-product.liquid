@@ -954,10 +954,10 @@
   if has_highlight and section.settings.show_highlight
     assign show_highlight_tab = true
   endif
-  if has_compat and section.settings.show_compatibility
+  if has_compat
     assign show_compat_tab = true
   endif
-  if section.settings.show_downloads
+  if manual_count > 0 or download_count > 0
     assign show_downloads_tab = true
   endif
 
