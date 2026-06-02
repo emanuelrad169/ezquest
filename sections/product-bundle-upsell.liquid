@@ -10,8 +10,8 @@
         <p class="section-kicker">{{ section.settings.eyebrow | default: 'Bundle' }}</p>
         <h2 class="product-bundle-upsell__heading">{{ section.settings.heading | default: 'Buy together and save 10%' }}</h2>
         <p class="product-bundle-upsell__body">{{ section.settings.copy | default: 'Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings.' }}</p>
-        <a href="{{ product.url }}" class="product-bundle-upsell__cta">
-          Configure bundle
+        <a href="{{ related_collection.url | default: routes.all_products_collection_url }}" class="product-bundle-upsell__cta">
+          Shop the collection
         </a>
       </div>
 
