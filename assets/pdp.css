@@ -2006,11 +2006,11 @@
 @media (max-width: 1023px) { .pdp-feature-icons { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 @media (max-width: 540px) {
   .pdp-feature-icons {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.6rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.4rem;
     justify-items: center;
   }
-  .pdp-feature-icons img { max-width: 82px; }
+  .pdp-feature-icons img { max-width: 100%; }
 }
 
 /* Per-product download list inside Downloads tab */
