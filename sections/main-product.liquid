@@ -914,31 +914,23 @@
     assign has_compat = true
   endif
 
-  assign tab_set = section.settings.tab_set | default: 'default'
+  assign in_the_box = product.metafields.custom.in_the_box.value
+  assign has_in_box = false
+  if in_the_box != blank and in_the_box.size > 0
+    assign has_in_box = true
+  endif
 
   assign show_overview_tab    = false
   assign show_specs_tab       = false
   assign show_highlight_tab   = false
   assign show_compat_tab      = false
   assign show_downloads_tab   = false
-  assign show_recommended_tab = false
-  assign show_comparisons_tab = false
-  assign show_reviews_tab     = false
 
   if has_features and section.settings.show_overview != false
     assign show_overview_tab = true
   endif
   if has_specs and section.settings.show_specifications != false
     assign show_specs_tab = true
-  endif
-  if section.settings.show_recommended != false
-    assign show_recommended_tab = true
-  endif
-  if section.settings.show_comparisons or tab_set == 'flagship'
-    assign show_comparisons_tab = true
-  endif
-  if section.settings.show_reviews or tab_set == 'flagship'
-    assign show_reviews_tab = true
   endif
   if has_highlight and section.settings.show_highlight
     assign show_highlight_tab = true
@@ -950,23 +942,9 @@
     assign show_downloads_tab = true
   endif
 
-  assign first_tab = ''
-  if show_overview_tab
-    assign first_tab = 'features'
-  elsif show_specs_tab
-    assign first_tab = 'specs'
-  elsif show_comparisons_tab
-    assign first_tab = 'comparisons'
-  elsif show_reviews_tab
-    assign first_tab = 'reviews'
-  elsif show_recommended_tab
-    assign first_tab = 'recommended'
-  elsif show_highlight_tab
-    assign first_tab = 'highlight'
-  elsif show_compat_tab
-    assign first_tab = 'compat'
-  elsif show_downloads_tab
-    assign first_tab = 'downloads'
+  assign has_editorial_content = false
+  if show_overview_tab or show_specs_tab or show_highlight_tab or show_compat_tab or show_downloads_tab or has_in_box
+    assign has_editorial_content = true
   endif
 -%}
 
@@ -983,123 +961,75 @@
   </section>
 {%- endif -%}
 
-<section class="section-shell pdp-section pdp-content-tabs-section" id="pdp-content-tabs" data-pdp-tabs>
-  <div class="container-shell">
-
-    <div class="pdp-tabs__list" role="tablist" aria-label="Product information">
-      {%- if show_overview_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'features' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'features' %}true{% else %}false{% endif %}"
-                data-tab="features">Overview</button>
-      {%- endif -%}
-      {%- if show_specs_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'specs' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'specs' %}true{% else %}false{% endif %}"
-                data-tab="specs">Specifications</button>
-      {%- endif -%}
-      {%- if show_comparisons_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'comparisons' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'comparisons' %}true{% else %}false{% endif %}"
-                data-tab="comparisons">Comparisons</button>
-      {%- endif -%}
-      {%- if show_reviews_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'reviews' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'reviews' %}true{% else %}false{% endif %}"
-                data-tab="reviews">Reviews</button>
-      {%- endif -%}
-      {%- if show_recommended_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'recommended' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'recommended' %}true{% else %}false{% endif %}"
-                data-tab="recommended">Recommended</button>
-      {%- endif -%}
-      {%- if show_highlight_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'highlight' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'highlight' %}true{% else %}false{% endif %}"
-                data-tab="highlight">Highlight</button>
-      {%- endif -%}
-      {%- if show_compat_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'compat' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'compat' %}true{% else %}false{% endif %}"
-                data-tab="compat">Compatibility</button>
-      {%- endif -%}
-      {%- if show_downloads_tab -%}
-        <button class="pdp-tabs__trigger{% if first_tab == 'downloads' %} is-active{% endif %}"
-                role="tab" aria-selected="{% if first_tab == 'downloads' %}true{% else %}false{% endif %}"
-                data-tab="downloads">Downloads</button>
-      {%- endif -%}
+{%- if has_editorial_content -%}
+<section class="section-shell pdp-content-sections" id="pdp-content-tabs" data-pdp-scrollspy>
+  <div class="pdp-anchor-nav" data-pdp-anchor-nav>
+    <div class="container-shell">
+      <nav class="pdp-anchor-nav__list" aria-label="Product information">
+        {%- if show_overview_tab -%}<a class="pdp-anchor-nav__link is-active" href="#pdp-overview" data-anchor="pdp-overview">Overview</a>{%- endif -%}
+        {%- if has_in_box -%}<a class="pdp-anchor-nav__link" href="#pdp-in-box" data-anchor="pdp-in-box">In the box</a>{%- endif -%}
+        {%- if show_specs_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-specs" data-anchor="pdp-specs">Specifications</a>{%- endif -%}
+        {%- if show_highlight_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-highlight-section" data-anchor="pdp-highlight-section">Highlights</a>{%- endif -%}
+        {%- if show_compat_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-compat" data-anchor="pdp-compat">Compatibility</a>{%- endif -%}
+        {%- if show_downloads_tab -%}<a class="pdp-anchor-nav__link" href="#pdp-downloads" data-anchor="pdp-downloads">Downloads</a>{%- endif -%}
+      </nav>
     </div>
+  </div>
 
-    <div class="pdp-tabs__panels">
-      {%- if show_overview_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'features' %} is-active{% endif %}"
-             role="tabpanel" data-panel="features">
-          <div class="pdp-content-prose">{{ features_html }}</div>
-        </div>
-      {%- endif -%}
+  <div class="container-shell pdp-content-sections__body">
 
-      {%- if show_specs_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'specs' %} is-active{% endif %}"
-             role="tabpanel" data-panel="specs">
-          <div class="pdp-content-prose">{{ specs_html }}</div>
-        </div>
-      {%- endif -%}
+    {%- if show_overview_tab -%}
+      <section class="pdp-content-block" id="pdp-overview" data-anchor-section tabindex="-1" aria-label="Overview">
+        <div class="pdp-content-prose">{{ features_html }}</div>
+      </section>
+    {%- endif -%}
 
-      {%- if show_comparisons_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'comparisons' %} is-active{% endif %}"
-             role="tabpanel" data-panel="comparisons">
-          <div class="pdp-recommended-placeholder">
-            <p class="pdp-recommended-placeholder-text">Product comparisons — coming soon.</p>
-          </div>
-        </div>
-      {%- endif -%}
+    {%- if has_in_box -%}
+      <section class="pdp-content-block pdp-content-block--in-box" id="pdp-in-box" data-anchor-section tabindex="-1" aria-label="In the box">
+        <h2 class="pdp-content-block__title">In the box</h2>
+        <ul class="pdp-in-box__grid">
+          {%- for item in in_the_box -%}
+            <li class="pdp-in-box__item">
+              <span class="pdp-in-box__check" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="pdp-in-box__label">{{ item }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </section>
+    {%- endif -%}
 
-      {%- if show_reviews_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'reviews' %} is-active{% endif %}"
-             role="tabpanel" data-panel="reviews">
-          <div class="pdp-reviews-body">
-            <div class="pdp-amazon-reviews-callout flex flex-col gap-4 max-w-[480px]">
-              {%- render 'amazon-reviews-widget', product: product -%}
-              <p class="text-sm text-slate-500 m-0">
-                Reviews are hosted on Amazon. Click to read verified customer feedback.
-              </p>
-            </div>
-          </div>
-        </div>
-      {%- endif -%}
+    {%- if show_specs_tab -%}
+      <section class="pdp-content-block" id="pdp-specs" data-anchor-section tabindex="-1" aria-label="Specifications">
+        <h2 class="pdp-content-block__title">Specifications</h2>
+        <div class="pdp-content-prose">{{ specs_html }}</div>
+      </section>
+    {%- endif -%}
 
-      {%- if show_recommended_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'recommended' %} is-active{% endif %}"
-             role="tabpanel" data-panel="recommended">
-          <div class="pdp-recommended-placeholder">
-            <p class="pdp-recommended-placeholder-text">Frequently bought together — coming soon.</p>
-          </div>
-        </div>
-      {%- endif -%}
+    {%- if show_highlight_tab -%}
+      <section class="pdp-content-block" id="pdp-highlight-section" data-anchor-section tabindex="-1" aria-label="Highlights">
+        <div class="pdp-content-prose">{{ highlight_html }}</div>
+      </section>
+    {%- endif -%}
 
-      {%- if show_highlight_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'highlight' %} is-active{% endif %}"
-             role="tabpanel" data-panel="highlight">
-          <div class="pdp-content-prose">{{ highlight_html }}</div>
-        </div>
-      {%- endif -%}
+    {%- if show_compat_tab -%}
+      <section class="pdp-content-block" id="pdp-compat" data-anchor-section tabindex="-1" aria-label="Compatibility">
+        <h2 class="pdp-content-block__title">Compatibility</h2>
+        <div class="pdp-content-prose">{{ compat_html }}</div>
+      </section>
+    {%- endif -%}
 
-      {%- if show_compat_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'compat' %} is-active{% endif %}"
-             role="tabpanel" data-panel="compat">
-          <div class="pdp-content-prose">{{ compat_html }}</div>
-        </div>
-      {%- endif -%}
-
-      {%- if show_downloads_tab -%}
-        <div class="pdp-tabs__panel{% if first_tab == 'downloads' %} is-active{% endif %}"
-             role="tabpanel" data-panel="downloads">
-          {%- render 'product-downloads-list', product: product -%}
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if show_downloads_tab -%}
+      <section class="pdp-content-block" id="pdp-downloads" data-anchor-section tabindex="-1" aria-label="Downloads">
+        <h2 class="pdp-content-block__title">Downloads</h2>
+        {%- render 'product-downloads-list', product: product -%}
+      </section>
+    {%- endif -%}
 
   </div>
 </section>
+{%- endif -%}
 
 {%- assign amazon_asin = product.metafields.custom.amazon_asin -%}
 {%- if amazon_asin != blank and display_rating_value != blank -%}
@@ -1326,31 +1256,53 @@
 
 <script>
 (function () {
-  document.querySelectorAll('[data-pdp-tabs]').forEach(function (tabs) {
-    var triggers = Array.prototype.slice.call(tabs.querySelectorAll('[data-tab]'));
-    var panels   = Array.prototype.slice.call(tabs.querySelectorAll('[data-panel]'));
-    triggers.forEach(function (t) {
-      t.addEventListener('click', function () {
-        var target = t.dataset.tab;
-        triggers.forEach(function (x) {
-          var active = x.dataset.tab === target;
-          x.classList.toggle('is-active', active);
-          x.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach(function (p) {
-          p.classList.toggle('is-active', p.dataset.panel === target);
-        });
-        // Scroll active trigger into view when tab strip overflows on mobile
-        var list = t.closest('.pdp-tabs__list');
-        if (list) {
-          var listRect = list.getBoundingClientRect();
-          var tRect    = t.getBoundingClientRect();
-          if (tRect.left < listRect.left || tRect.right > listRect.right) {
-            t.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  /* Anker-style scrolling editorial: sticky anchor nav smooth-scrolls to
+     stacked content sections, with scroll-spy highlighting the active link. */
+  document.querySelectorAll('[data-pdp-scrollspy]').forEach(function (root) {
+    var links = Array.prototype.slice.call(root.querySelectorAll('.pdp-anchor-nav__link'));
+    if (!links.length) return;
+    var sections = links
+      .map(function (l) { return document.getElementById(l.dataset.anchor); })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setActive(id) {
+      links.forEach(function (l) {
+        var active = l.dataset.anchor === id;
+        l.classList.toggle('is-active', active);
+        if (active) {
+          var nav = l.closest('.pdp-anchor-nav__list');
+          if (nav) {
+            var nr = nav.getBoundingClientRect();
+            var lr = l.getBoundingClientRect();
+            if (lr.left < nr.left || lr.right > nr.right) {
+              l.scrollIntoView({ inline: 'center', block: 'nearest' });
+            }
           }
         }
       });
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener('click', function (e) {
+        var target = document.getElementById(l.dataset.anchor);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        setActive(l.dataset.anchor);
+      });
     });
+
+    if ('IntersectionObserver' in window) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function (s) { spy.observe(s); });
+    }
   });
 })();
 </script>
