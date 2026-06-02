@@ -92,12 +92,25 @@
       elsif settings.share_image
         assign og_image = settings.share_image | image_url: width: 1200
       endif
+
+      if template.name == 'index'
+        assign social_title = 'EZQuest — USB-C Hubs, Docks, Chargers & Cables'
+      else
+        assign social_title = page_title | default: shop.name
+      endif
+
+      assign og_type = 'website'
+      if request.page_type == 'product'
+        assign og_type = 'product'
+      elsif request.page_type == 'article'
+        assign og_type = 'article'
+      endif
     -%}
     <meta property="og:site_name" content="{{ shop.name }}">
     <meta property="og:url" content="{{ canonical_url }}">
     <meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
-    <meta property="og:type" content="{% if template == 'product' %}product{% elsif template == 'article' %}article{% else %}website{% endif %}">
-    <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:title" content="{{ social_title | escape }}">
     <meta property="og:description" content="{{ meta_desc | escape }}">
     {% if og_image %}
       <meta property="og:image" content="{{ og_image }}">
@@ -108,7 +121,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ezquest">
-    <meta name="twitter:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta name="twitter:title" content="{{ social_title | escape }}">
     <meta name="twitter:description" content="{{ meta_desc | escape }}">
     {% if og_image %}
       <meta name="twitter:image" content="{{ og_image }}">
@@ -191,6 +204,38 @@
         },
         {% endif %}
         "url": "{{ shop.url }}{{ article.url }}"
+      }
+      </script>
+    {% endif %}
+
+    {% if request.page_type == 'product' and product %}
+      {%- assign p_variant = product.selected_or_first_available_variant -%}
+      {%- assign p_rating = product.metafields.reviews.rating.value -%}
+      {%- assign p_rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | truncate: 320 | json }},
+        "sku": {{ p_variant.sku | default: product.id | json }},
+        {% if product.metafields.custom.mpn.value != blank %}"mpn": {{ product.metafields.custom.mpn.value | json }},{% endif %}
+        "brand": { "@type": "Brand", "name": "EZQuest" },
+        "url": "{{ shop.url }}{{ product.url }}",
+        {% if product.images.size > 0 %}"image": [{% for img in product.images limit: 5 %}{{ img | image_url: width: 1500 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],{% endif %}
+        "offers": {
+          "@type": "Offer",
+          "url": "{{ shop.url }}{{ product.url }}",
+          "priceCurrency": {{ shop.currency | json }},
+          "price": {{ p_variant.price | money_without_currency | replace: ',', '' | json }},
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition"
+        }{% if p_rating and p_rating_count > 0 %},
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{ p_rating.rating }}",
+          "reviewCount": "{{ p_rating_count }}"
+        }{% endif %}
       }
       </script>
     {% endif %}
