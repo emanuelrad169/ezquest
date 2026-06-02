@@ -399,6 +399,15 @@
   border-color: var(--ez-amber, #FED300);
 }
 
+/* Sticky buy box on desktop while the gallery scrolls (UGREEN/Anker pattern) */
+@media (min-width: 1024px) {
+  .main-product-section .product-buybox {
+    position: sticky;
+    top: calc(var(--header-height, 4.5rem) + 1.5rem);
+    align-self: start;
+  }
+}
+
 /* Separator between the breadcrumb context links (back / shop by setup) */
 .product-context-row > a:not(:last-child)::after {
   content: "·";
