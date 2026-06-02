@@ -422,6 +422,16 @@
             <div class="product-buybox-price-row flex flex-col gap-2">
               <p class="product-buybox-setup-statement text-sm leading-relaxed text-slate-700">{{ setup_statement }}</p>
             </div>
+
+            {%- if product.description != blank -%}
+              <div class="pdp-highlight" data-pdp-highlight>
+                <div class="pdp-highlight__body richtext-content">{{ product.description }}</div>
+                <button type="button" class="pdp-highlight__toggle" data-pdp-highlight-toggle aria-expanded="false">
+                  <span data-pdp-highlight-label>Learn more</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 5.5 7 9l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            {%- endif -%}
           </div>
 
           {% form 'product', product, id: product_form_id, class: 'mt-5 space-y-4 lg:mt-6 lg:space-y-5' %}
@@ -535,6 +545,9 @@
                   {{ form | payment_button }}
                 </div>
               {% endif %}
+
+              {%- comment -%} Installment messaging (Shop Pay / Klarna) — renders only when enabled in the store {%- endcomment -%}
+              <div class="product-form-terms">{{ form | payment_terms }}</div>
 
             </div>
           {% endform %}
@@ -1348,6 +1361,29 @@
     var mo = new MutationObserver(brand);
     mo.observe(document.body, { childList: true, subtree: true });
     window.setTimeout(function () { mo.disconnect(); }, 6000);
+  })();
+</script>
+
+<script>
+  /* UGREEN-style highlight box: clamp the description, toggle on "Learn more". */
+  (function () {
+    document.querySelectorAll('[data-pdp-highlight]').forEach(function (box) {
+      var btn = box.querySelector('[data-pdp-highlight-toggle]');
+      var body = box.querySelector('.pdp-highlight__body');
+      var label = box.querySelector('[data-pdp-highlight-label]');
+      if (!btn || !body) return;
+      // If the content already fits, drop the clamp + hide the toggle.
+      if (body.scrollHeight <= body.clientHeight + 4) {
+        box.classList.add('is-open');
+        btn.style.display = 'none';
+        return;
+      }
+      btn.addEventListener('click', function () {
+        var open = box.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (label) label.textContent = open ? 'Show less' : 'Learn more';
+      });
+    });
   })();
 </script>
 
