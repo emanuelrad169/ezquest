@@ -1971,6 +1971,24 @@
 }
 #pdp-specs .pdp-content-prose tbody tr:nth-child(odd) { background: rgba(15, 23, 42, 0.02); }
 
+/* ── Feature icon strip below the gallery ───────────────────── */
+.pdp-feature-icons {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+.pdp-feature-icons img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+@media (max-width: 1023px) { .pdp-feature-icons { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (max-width: 540px)  { .pdp-feature-icons { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
 /* Per-product download list inside Downloads tab */
 .pdp-dl-list {
   list-style: none;

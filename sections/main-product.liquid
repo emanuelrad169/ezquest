@@ -319,6 +319,14 @@
         </div>
 
 
+        {%- comment -%} Feature icon strip (assets/pcon-001..009.png) {%- endcomment -%}
+        <div class="pdp-feature-icons" aria-label="Product features">
+          {%- for i in (1..9) -%}
+            {%- assign pcon_n = i | prepend: '00' -%}
+            <img src="{{ 'pcon-' | append: pcon_n | append: '.png' | asset_url }}" alt="" width="80" height="80" loading="lazy">
+          {%- endfor -%}
+        </div>
+
         <div
           id="pdp-zoom-modal"
           class="pdp-zoom-modal"
