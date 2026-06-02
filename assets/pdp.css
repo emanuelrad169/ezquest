@@ -170,7 +170,6 @@
 .product-sticky-atc-main {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.75rem;
 }
 
@@ -199,9 +198,9 @@
 }
 
 .product-sticky-atc-price {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: rgb(15 23 42);
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(2 6 23);
 }
 
 .product-sticky-atc-variant,
@@ -230,10 +229,51 @@
   background: linear-gradient(180deg, rgba(148, 163, 184, 0.92), rgba(100, 116, 139, 0.8));
 }
 
-/* Price lives on the CTA button only; this element is a JS data holder. */
-.product-sticky-atc-price,
-.product-sticky-atc-price[hidden] {
-  display: none;
+/* Product thumbnail */
+.product-sticky-atc-thumb {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+.product-sticky-atc-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 3px;
+}
+
+/* Price block: price + compare-at + savings badge */
+.product-sticky-atc-pricing {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+.product-sticky-atc-compare {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgb(148 163 184);
+  text-decoration: line-through;
+}
+.product-sticky-atc-save {
+  align-self: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.4);
+  border-radius: 6px;
+  padding: 0.12rem 0.42rem;
+}
+
+@media (max-width: 600px) {
+  .product-sticky-atc-thumb { display: none; }
+  .product-sticky-atc-compare { display: none; }
+  .product-sticky-atc-pricing { gap: 0.35rem; }
 }
 
 .product-sticky-atc-trust {

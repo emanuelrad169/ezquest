@@ -802,9 +802,16 @@
 
   </div>
 
+  {%- assign sticky_variant = product.selected_or_first_available_variant -%}
+  {%- assign sticky_image = sticky_variant.image | default: product.featured_image -%}
   <div class="product-sticky-atc" aria-hidden="true" data-sticky-atc>
     <div class="product-sticky-atc-shell">
       <div class="product-sticky-atc-main">
+        {%- if sticky_image != blank -%}
+          <div class="product-sticky-atc-thumb">
+            <img src="{{ sticky_image | image_url: width: 120 }}" alt="" width="48" height="48" loading="lazy">
+          </div>
+        {%- endif -%}
         <div class="product-sticky-atc-copy">
           <p class="product-sticky-atc-title">{{ product.title | truncate: 28 }}</p>
           <div class="product-sticky-atc-meta">
@@ -814,13 +821,17 @@
             {%- if sticky_trust_line != blank -%}
               <span class="product-sticky-atc-trust">{{ sticky_trust_line }}</span>
             {%- endif -%}
-            <p class="product-sticky-atc-price" data-sticky-atc-price hidden>{{ product.selected_or_first_available_variant.price | money }}</p>
           </div>
+        </div>
+        <div class="product-sticky-atc-pricing">
+          <span class="product-sticky-atc-price" data-sticky-atc-price>{{ sticky_variant.price | money }}</span>
+          {%- if sticky_variant.compare_at_price > sticky_variant.price -%}
+            <s class="product-sticky-atc-compare">{{ sticky_variant.compare_at_price | money }}</s>
+            <span class="product-sticky-atc-save">-{{ sticky_variant.compare_at_price | minus: sticky_variant.price | money }}</span>
+          {%- endif -%}
         </div>
         <button class="btn btn--primary product-sticky-atc-button" type="submit" name="add" form="{{ product_form_id }}" data-sticky-atc-button{% unless product.available %} disabled="disabled"{% endunless %}>
           <span data-sticky-atc-button-label>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
-          <span class="product-primary-action-divider" aria-hidden="true" data-sticky-atc-button-divider>·</span>
-          <span data-sticky-atc-button-price>{{ product.selected_or_first_available_variant.price | money }}</span>
         </button>
       </div>
     </div>
