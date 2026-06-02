@@ -21,6 +21,12 @@
     assign sorted_use_case_keys = sorted_use_cases_raw | split: '||' | sort_natural
   endif
 -%}
+{% style %}
+  /* Sit above the sticky site header (z-index 51) and sticky ATC bar (80),
+     consistent with the cart drawer (z-index 200). Fixes header bleeding
+     over the open mobile menu. */
+  #mobile-nav-drawer { z-index: 200; }
+{% endstyle %}
 <div id="mobile-nav-drawer" class="fixed inset-0 z-50" hidden data-drawer>
   <div class="drawer-backdrop" data-drawer-close></div>
   <div class="drawer-panel mega-mobile-drawer absolute top-0 right-0 h-full w-full max-w-96 overflow-y-auto bg-white px-5 py-5 shadow-2xl outline-none" data-drawer-panel tabindex="-1">
