@@ -500,6 +500,20 @@
 .pdp-highlight__body ul { margin: 0; padding-left: 1.15rem; }
 .pdp-highlight__body li { margin-bottom: 0.4rem; }
 .pdp-highlight__body strong { color: #0f172a; font-weight: 600; }
+.pdp-highlight__body h2 {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  line-height: 1.25;
+  margin: 1.1rem 0 0.4rem;
+}
+.pdp-highlight__body h3 {
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.3;
+  margin: 0.9rem 0 0.35rem;
+}
+.pdp-highlight__body h2:first-child,
+.pdp-highlight__body h3:first-child { margin-top: 0; }
+.pdp-highlight__body p { margin-bottom: 0.7rem; }
+.pdp-highlight__body p + p { margin-top: 0; }
 .pdp-highlight__toggle {
   display: inline-flex;
   align-items: center;
@@ -1899,14 +1913,22 @@
 .pdp-content-prose li { padding: 4px 0; line-height: 1.6; }
 .pdp-content-prose li b,
 .pdp-content-prose li strong { color: #111; font-weight: 600; }
-.pdp-content-prose h3 {
-  font-size: 18px;
+.pdp-content-prose h2 {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
   font-weight: 600;
   color: #111;
-  margin: 24px 0 8px;
+  margin: 18px 0 6px;
+  line-height: 1.25;
+}
+.pdp-content-prose h2:first-child { margin-top: 0; }
+.pdp-content-prose h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111;
+  margin: 16px 0 6px;
 }
 .pdp-content-prose h3:first-child { margin-top: 0; }
-.pdp-content-prose p { line-height: 1.6; margin: 0 0 16px; color: var(--ez-grey); }
+.pdp-content-prose p { line-height: 1.55; margin: 0 0 12px; color: var(--ez-grey); }
 .pdp-content-prose p:last-child { margin-bottom: 0; }
 
 /* ── Specifications: designed key/value table ───────────────── */
@@ -2093,7 +2115,7 @@
 }
 
 .pdp-content-block {
-  padding-block: clamp(2.5rem, 5vw, 4rem);
+  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
   scroll-margin-top: calc(var(--header-height, 4.5rem) + 4.25rem);
   border-top: 1px solid rgba(226, 232, 240, 0.7);
   outline: none;
@@ -2102,9 +2124,9 @@
 
 .pdp-content-block__title {
   font-family: var(--font-heading, inherit);
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-size: clamp(1.2rem, 1.9vw, 1.55rem);
   line-height: 1.2;
-  margin: 0 0 1.4rem;
+  margin: 0 0 1rem;
   color: var(--ez-dark, #0a0a0a);
 }
 
