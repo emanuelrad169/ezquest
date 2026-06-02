@@ -408,6 +408,17 @@
   }
 }
 
+/* Wishlist heart sits absolute top-right — reserve space so it never overlaps the title */
+.main-product-section .product-buybox__title,
+.main-product-section .product-buybox-title {
+  padding-right: 3.75rem;
+}
+/* Consistent pill radius across buy-box controls (qty input + both buttons) */
+.main-product-section .product-buybox-quantity-input,
+.main-product-section .product-buybox .btn--primary {
+  border-radius: 980px;
+}
+
 /* Separator between the breadcrumb context links (back / shop by setup) */
 .product-context-row > a:not(:last-child)::after {
   content: "·";
