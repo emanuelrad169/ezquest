@@ -13,18 +13,29 @@
 .free-shipping-strip__icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(254,211,0,0.18); flex-shrink: 0; }
 </style>
 
+{{ 'page-hero.css' | asset_url | stylesheet_tag }}
+
 {% comment %} 1. HERO {% endcomment %}
 {%- assign hero_image = section.settings.hero_image -%}
 <section
-  class="page-hero{% if hero_image != blank %} page-hero--has-image{% endif %}"
+  class="page-hero{% if hero_image != blank %} page-hero--has-image{% else %} page-hero--gradient{% endif %}"
   {% if hero_image != blank %}style="--hero-bg: url('{{ hero_image | image_url: width: 1800 }}')"{% endif %}>
   <div class="page-hero__inner container-shell">
-    <p class="page-hero__kicker">Shipping &amp; returns</p>
+    <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
+      <span aria-current="page">Shipping &amp; returns</span>
+    </nav>
+    <p class="page-hero__kicker"><span class="page-hero__pulse" aria-hidden="true"></span>Shipping &amp; returns</p>
     <h1 class="page-hero__heading">Fast shipping.<br>Easy returns.</h1>
     <p class="page-hero__subheading">
       Free shipping on all US orders over $100.
       30-day hassle-free returns. 1–2 year limited warranty depending on product.
     </p>
+    <div class="page-hero__actions">
+      <a href="/pages/contact" class="page-hero__cta">Start a return</a>
+      <a href="/pages/faq" class="page-hero__cta-secondary">Browse FAQ <span aria-hidden="true">&rarr;</span></a>
+    </div>
     <div class="sr-hero-stats">
       <div>
         <p class="sr-hero-stat__value">Free</p>

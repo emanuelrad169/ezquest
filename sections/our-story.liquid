@@ -1,8 +1,9 @@
 {{ 'pages.css' | asset_url | stylesheet_tag }}
+{{ 'page-hero.css' | asset_url | stylesheet_tag }}
 
 {% comment %} 1. HERO {% endcomment %}
 {% assign story_hero_image = section.settings.hero_image %}
-<section class="page-hero-dark{% if story_hero_image != blank %} page-hero-dark--has-image{% endif %}">
+<section class="page-hero-dark{% if story_hero_image != blank %} page-hero-dark--has-image{% else %} page-hero--gradient{% endif %}">
   {% if story_hero_image != blank %}
     <div class="page-hero-dark__media" aria-hidden="true">
       {{ story_hero_image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'page-hero-dark__image' }}
@@ -10,7 +11,12 @@
   {% endif %}
   <div class="container-shell">
     <div class="story-hero-copy" data-animate>
-    <p class="page-hero-dark__kicker">Est. 1994 · Lake Forest, California</p>
+    <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
+      <span aria-current="page">Our story</span>
+    </nav>
+    <p class="page-hero-dark__kicker"><span class="page-hero__pulse" aria-hidden="true"></span>Est. 1994 · Lake Forest, California</p>
     <h1 class="page-hero-dark__heading">
       Built for people who connect everything.
     </h1>
@@ -18,6 +24,10 @@
       Since 1994, EZQuest has made it simpler to connect the devices that matter most —
       with products built to last and a team that stands behind every one.
     </p>
+    <div class="page-hero__actions">
+      <a href="/collections" class="page-hero__cta">Shop products</a>
+      <a href="/pages/contact" class="page-hero__cta-secondary">Contact us <span aria-hidden="true">&rarr;</span></a>
+    </div>
     <div class="story-stat-grid">
       <div>
         <p style="font-size:36px;font-weight:500;letter-spacing:-.03em;color:var(--ez-light);margin:0 0 .25rem;">30+</p>
