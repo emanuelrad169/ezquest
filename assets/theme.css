@@ -18874,6 +18874,14 @@ body.template-index .home-hero-slider-shell {
   }
 }
 
+/* Large screens: cap the hero so it doesn't get excessively tall on big monitors. */
+@media (min-width: 1440px) {
+  body.template-index .home-hero-slider-shell,
+  body.template-index .home-hero {
+    max-height: 1000px;
+  }
+}
+
 /* Non-home templates: pull first content block behind announcement + header stack. */
 
 @media (max-width: 767px) {
