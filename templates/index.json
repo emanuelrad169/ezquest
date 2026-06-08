@@ -36,8 +36,8 @@
             "primary_url": "/collections/docking-stations",
             "secondary_label": "Compare desk options",
             "secondary_url": "/pages/compare",
-            "image": "shopify://shop_images/ezquest-hero-slide-2-desktop.png",
-            "image_mobile": "shopify://shop_images/ezquest-hero-slide-2-mobile.png"
+            "image": "shopify://shop_images/01_Desktop.png",
+            "image_mobile": "shopify://shop_images/001_Mobile.png"
           }
         },
         "slide_3": {
@@ -92,36 +92,36 @@
           "type": "collection_card",
           "settings": {
             "collection": "hubs-adapters",
+            "image": "shopify://shop_images/ezquest-collection-hubs.png",
             "title": "",
-            "link": "",
-            "image": "shopify://shop_images/ezquest-collection-hubs.png"
+            "link": ""
           }
         },
         "category_2": {
           "type": "collection_card",
           "settings": {
             "collection": "docking-stations",
+            "image": "shopify://shop_images/ezquest-collection-docking-stations.png",
             "title": "",
-            "link": "",
-            "image": "shopify://shop_images/ezquest-collection-docking-stations.png"
+            "link": ""
           }
         },
         "category_3": {
           "type": "collection_card",
           "settings": {
             "collection": "chargers-power",
+            "image": "shopify://shop_images/ezquest-collection-chargers-power.png",
             "title": "",
-            "link": "",
-            "image": "shopify://shop_images/ezquest-collection-chargers-power.png"
+            "link": ""
           }
         },
         "category_4": {
           "type": "collection_card",
           "settings": {
             "collection": "accessories",
+            "image": "shopify://shop_images/ezquest-collection-cables-accessories.png",
             "title": "",
-            "link": "",
-            "image": "shopify://shop_images/ezquest-collection-cables-accessories.png"
+            "link": ""
           }
         }
       },
@@ -270,14 +270,13 @@
     "feature_banner": {
       "type": "home-feature-banner",
       "settings": {
+        "image": "shopify://shop_images/ezquest-feature-banner-background.png",
         "text_position": "right",
         "eyebrow": "Desk and travel coverage",
         "heading": "Choose the right mix of ports, power, and displays.",
-        "subheading": "Desk-ready docks, travel hubs, and chargers built for modern devices.",
         "copy": "From compact travel hubs to desk-ready docks and multi-device chargers, EZQuest keeps modern-device setups cleaner and easier to manage.",
-        "link_label": "",
-        "link_url": "",
-        "image": "shopify://shop_images/ezquest-feature-banner-background.png"
+        "cta_label": "Shop the lineup",
+        "cta_link": ""
       }
     },
     "story": {
@@ -300,12 +299,7 @@
     },
     "confidence": {
       "type": "home-confidence-grid",
-      "settings": {
-        "eyebrow": "Support and service",
-        "heading": "Clear help before and after checkout",
-        "copy": "Shipping, warranty, manuals, downloads, and direct support stay easy to find across the full EZQuest lineup.",
-        "support_image": "shopify://shop_images/ezquest-confidence-support-visual.png"
-      }
+      "settings": {}
     },
     "cinematic_reveal": {
       "type": "homepage-cinematic-reveal",
@@ -315,8 +309,7 @@
         "body_text": "EZQuest accessories are engineered for people who need the right connection, every time.",
         "cta_label": "Shop the range",
         "cta_url": "/collections/all",
-        "aria_label": "Brand statement",
-        "background_image": "shopify://shop_images/ezquest-cinematic-reveal-background.png"
+        "aria_label": "Brand statement"
       }
     },
     "testimonials": {
