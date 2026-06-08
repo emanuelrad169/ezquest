@@ -1,0 +1,269 @@
+{% comment %} sections/product-resource.liquid
+  Used by two templates:
+    templates/product.resource-page.json  → URL: /products/{handle}?view=resource-page
+    templates/page.product-resource.json  → URL: /pages/product-resource?product={handle}
+
+  On the product template, `product` is available and the full resource page renders.
+  On the page template, JavaScript reads ?product= and redirects to the product template.
+  If no param is present, a product picker is shown.
+{% endcomment %}
+
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if request.page_type == 'product'
+    assign rp = product
+  else
+    assign rp = nil
+  endif
+
+  if rp != nil
+    assign setup_guide_html   = rp.metafields.custom.setup_guide.value
+    assign in_the_box         = rp.metafields.custom.in_the_box.value
+    assign compat_html        = rp.metafields.custom.compatibility_notes.value
+    assign firmware_url       = rp.metafields.custom.firmware_url.value
+    assign manual_pdf_url     = rp.metafields.custom.manual_pdf.value
+    assign quickstart_pdf_url = rp.metafields.custom.quickstart_pdf.value
+    assign warranty_years     = rp.metafields.custom.warranty_years | default: '1'
+
+    if compat_html == blank
+      assign compat_html = rp.metafields.custom.product_compatibility_html.value
+    endif
+
+    assign has_manuals   = false
+    assign has_firmware  = false
+    assign has_compat    = false
+
+    if manual_pdf_url != blank or quickstart_pdf_url != blank
+      assign has_manuals = true
+    endif
+    if firmware_url != blank
+      assign has_firmware = true
+    endif
+    if compat_html != blank
+      assign has_compat = true
+    endif
+  endif
+-%}
+
+{% if rp == nil %}
+
+  {% comment %} ── PAGE TEMPLATE: JS router + picker fallback ── {% endcomment %}
+  <div class="pr-picker container-shell" id="pr-picker-root">
+    <div class="pr-picker__content">
+      <p class="section-kicker">Resources</p>
+      <h1 class="pr-picker__title">Find your product resources</h1>
+      <p class="pr-picker__copy">
+        Enter the product handle from your packaging, or scan the QR code to go directly to setup, downloads, and support for your device.
+      </p>
+      <form class="pr-picker__form" id="pr-picker-form">
+        <input
+          type="text"
+          id="pr-picker-input"
+          class="pr-picker__input"
+          placeholder="e.g. usb-c-hub-7-in-1"
+          aria-label="Product handle">
+        <button type="submit" class="btn btn--primary">Go</button>
+      </form>
+      <p class="pr-picker__hint" id="pr-picker-hint" hidden>
+        Product not found. Check the handle and try again, or visit
+        <a href="/pages/support">support</a> for help.
+      </p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var handle = new URLSearchParams(window.location.search).get('product');
+    if (handle) {
+      window.location.replace('/products/' + encodeURIComponent(handle) + '?view=resource-page');
+      return;
+    }
+
+    var form = document.getElementById('pr-picker-form');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var val = document.getElementById('pr-picker-input').value.trim().toLowerCase().replace(/\s+/g, '-');
+        if (!val) return;
+        fetch('/products/' + encodeURIComponent(val) + '.json')
+          .then(function (r) {
+            if (r.ok) {
+              window.location.href = '/products/' + encodeURIComponent(val) + '?view=resource-page';
+            } else {
+              document.getElementById('pr-picker-hint').hidden = false;
+            }
+          })
+          .catch(function () {
+            document.getElementById('pr-picker-hint').hidden = false;
+          });
+      });
+    }
+  })();
+  </script>
+
+{% else %}
+
+  {% comment %} ── QUICK NAV ─────────────────── {% endcomment %}
+  <nav class="pr-quick-nav" aria-label="Jump to section">
+    <div class="pr-quick-nav__inner container-shell">
+      <a href="#pr-setup" class="pr-quick-nav__link">Setup</a>
+      <a href="#pr-downloads" class="pr-quick-nav__link">Downloads</a>
+      {% if has_manuals %}
+        <a href="#pr-manuals" class="pr-quick-nav__link">Manuals</a>
+      {% endif %}
+      {% if has_firmware %}
+        <a href="#pr-firmware" class="pr-quick-nav__link">Firmware</a>
+      {% endif %}
+      {% if has_compat %}
+        <a href="#pr-compatibility" class="pr-quick-nav__link">Compatibility</a>
+      {% endif %}
+      <a href="#pr-warranty" class="pr-quick-nav__link">Warranty</a>
+      <a href="#pr-contact" class="pr-quick-nav__link">Support</a>
+    </div>
+  </nav>
+
+  {% comment %} ── SECTION 1: SETUP ─────────────────────────── {% endcomment %}
+  <section class="pr-section" id="pr-setup">
+    <div class="container-shell">
+      <p class="section-kicker">Getting started</p>
+      <h2 class="section-heading mt-4">Setup guide</h2>
+
+      {% if in_the_box != blank %}
+        <div class="pr-subsection">
+          <h3 class="pr-section__subheading">What's in the box</h3>
+          <ul class="pr-checklist">
+            {%- for item in in_the_box -%}
+              <li class="pr-checklist__item">{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if setup_guide_html != blank %}
+        <div class="pr-prose mt-8">{{ setup_guide_html }}</div>
+      {% elsif in_the_box == blank %}
+        <p class="pr-empty">Setup guide coming soon — visit <a href="/pages/support">support</a> for help.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {% comment %} ── SECTION 2: DOWNLOADS ─────────────────────── {% endcomment %}
+  <section class="pr-section pr-section--alt" id="pr-downloads">
+    <div class="container-shell">
+      <p class="section-kicker">Downloads</p>
+      <h2 class="section-heading mt-4">Drivers &amp; software</h2>
+      <div class="pr-downloads-wrap mt-8">
+        {%- render 'product-downloads-list', product: rp -%}
+      </div>
+    </div>
+  </section>
+
+  {% comment %} ── SECTION 3: MANUALS ───────────────────────── {% endcomment %}
+  {% if has_manuals %}
+    <section class="pr-section" id="pr-manuals">
+      <div class="container-shell">
+        <p class="section-kicker">Documentation</p>
+        <h2 class="section-heading mt-4">Manuals &amp; guides</h2>
+        <div class="pr-doc-links">
+          {% if manual_pdf_url != blank %}
+            <a href="{{ manual_pdf_url }}" class="pr-doc-card" target="_blank" rel="noopener">
+              <div class="pr-doc-card__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="4" y="2" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pr-doc-card__body">
+                <p class="pr-doc-card__title">User Manual</p>
+                <p class="pr-doc-card__meta">PDF · Full product guide</p>
+              </div>
+              <span class="pr-doc-card__action" aria-hidden="true">Download →</span>
+            </a>
+          {% endif %}
+          {% if quickstart_pdf_url != blank %}
+            <a href="{{ quickstart_pdf_url }}" class="pr-doc-card" target="_blank" rel="noopener">
+              <div class="pr-doc-card__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="4" y="2" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 6v5M10 13v.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pr-doc-card__body">
+                <p class="pr-doc-card__title">Quick Start Guide</p>
+                <p class="pr-doc-card__meta">PDF · Fast setup reference</p>
+              </div>
+              <span class="pr-doc-card__action" aria-hidden="true">Download →</span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ── SECTION 4: FIRMWARE ──────────────────────── {% endcomment %}
+  {% if has_firmware %}
+    <section class="pr-section pr-section--alt" id="pr-firmware">
+      <div class="container-shell">
+        <p class="section-kicker">Software</p>
+        <h2 class="section-heading mt-4">Firmware &amp; updates</h2>
+        <p class="pr-firmware-copy">Download the latest firmware to ensure peak performance and compatibility.</p>
+        <a href="{{ firmware_url }}" class="btn btn--primary mt-6" target="_blank" rel="noopener">
+          Download firmware
+        </a>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ── SECTION 5: COMPATIBILITY ─────────────────── {% endcomment %}
+  {% if has_compat %}
+    <section class="pr-section" id="pr-compatibility">
+      <div class="container-shell">
+        <p class="section-kicker">Compatibility</p>
+        <h2 class="section-heading mt-4">Supported devices &amp; systems</h2>
+        <div class="pr-prose mt-6">{{ compat_html }}</div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ── SECTION 6: WARRANTY ──────────────────────── {% endcomment %}
+  <section class="pr-section pr-section--alt" id="pr-warranty">
+    <div class="container-shell">
+      <p class="section-kicker">Coverage</p>
+      <h2 class="section-heading mt-4">{{ warranty_years }}-year limited warranty</h2>
+      <div class="pr-warranty-body">
+        <p class="pr-warranty-copy">
+          Your {{ rp.title }} is covered by EZQuest's {{ warranty_years }}-year limited warranty against defects in materials and workmanship under normal use.
+        </p>
+        <div class="pr-warranty-actions">
+          <a href="/pages/warranty" class="btn btn--secondary">View warranty terms</a>
+          <a href="/pages/contact?subject=warranty&product={{ rp.handle | url_encode }}" class="btn btn--primary">File a claim</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} ── SECTION 7: CONTACT ───────────────────────── {% endcomment %}
+  <section class="pr-section" id="pr-contact">
+    <div class="container-shell">
+      <p class="section-kicker">Help &amp; support</p>
+      <h2 class="section-heading mt-4">Get in touch</h2>
+      <p class="pr-contact-copy">
+        Can't find what you need? Our support team is available to help with setup, compatibility, or anything else.
+      </p>
+      <div class="pr-contact-actions">
+        <a href="/pages/support" class="btn btn--primary">Open support center</a>
+        <a href="/pages/contact?product={{ rp.handle | url_encode }}" class="btn btn--secondary">Contact support</a>
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product resource page",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

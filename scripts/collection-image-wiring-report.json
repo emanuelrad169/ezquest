@@ -1,0 +1,28 @@
+[
+  {
+    "collection": "hubs-adapters",
+    "image": "collection-hubs-hero.png",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-hubs-hero.png?v=1776761387",
+    "resultUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/collections/a2bfcabb90094bc9447c912427d8ed4e.png?v=1776762568",
+    "status": "wired"
+  },
+  {
+    "collection": "chargers-power",
+    "image": "collection-chargers-hero.png",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-chargers-hero.png?v=1776761384",
+    "resultUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/collections/04c7df1ac6bff8a6813757f5c5473e55.png?v=1776762570",
+    "status": "wired"
+  },
+  {
+    "collection": "cables",
+    "image": "collection-cables-hero.png",
+    "status": "not found"
+  },
+  {
+    "collection": "accessories",
+    "image": "collection-accessories-hero.png",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-collection-accessories-hero.png?v=1776761378",
+    "resultUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/collections/06e4abd16a49c93530de19b4699b7b7e.png?v=1776762573",
+    "status": "wired"
+  }
+]

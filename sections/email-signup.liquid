@@ -1,0 +1,137 @@
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+<section class="email-signup section--dark" aria-labelledby="email-signup-heading">
+  <div class="email-signup__inner page-width">
+    <div class="email-signup__content">
+      {% if section.settings.kicker != blank %}
+        <p class="section-kicker email-signup__kicker">
+          {{ section.settings.kicker | escape }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="email-signup__heading" id="email-signup-heading">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <p class="email-signup__body">
+          {{ section.settings.body | escape }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="email-signup__form-wrap">
+      {% form 'customer', id: 'email-signup-form', class: 'email-signup__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        {% if form.posted_successfully? %}
+          <div class="email-signup__success" role="status">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="15" stroke="var(--ez-amber)" stroke-width="1.5"/>
+              <path d="M10 16l4 4 8-8" stroke="var(--ez-amber)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="email-signup__success-msg">
+              {{ section.settings.success_message | escape }}
+            </p>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <p class="email-signup__error" role="alert">
+              {{ form.errors.translated_fields.email | escape }}
+              {{ form.errors.messages.email | escape }}
+            </p>
+          {% endif %}
+
+          <div class="email-signup__input-row">
+            <label for="email-signup-input" class="visually-hidden">
+              {{ section.settings.input_label | escape }}
+            </label>
+            <input
+              type="email"
+              id="email-signup-input"
+              name="contact[email]"
+              class="email-signup__input"
+              placeholder="{{ section.settings.placeholder | escape }}"
+              autocomplete="email"
+              required
+              aria-required="true"
+            >
+            <button type="submit" class="email-signup__submit btn btn--primary">
+              {{ section.settings.button_label | escape }}
+            </button>
+          </div>
+
+          {% if section.settings.disclaimer != blank %}
+            <p class="email-signup__disclaimer">
+              {{ section.settings.disclaimer | escape }}
+            </p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Email signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get new product news and exclusive deals"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "First access to launches, limited offers, and setup guides. No spam."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "input_label",
+      "label": "Input label",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "You're in. We'll be in touch."
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "We never share your email. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email signup"
+    }
+  ]
+}
+{% endschema %}

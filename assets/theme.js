@@ -45,14 +45,13 @@ function animateMediaReveal(element, options) {
 (function () {
   const header = document.querySelector('.site-header');
   if (!header) return;
-  const announcementBar = document.querySelector('.site-announcement-bar');
   let ticking = false;
   let scrollThreshold = Number(header.dataset.headerScrollThreshold || 8);
 
   function updateScrollThreshold() {
     const configuredThreshold = Number(header.dataset.headerScrollThreshold || 8);
-    if (header.classList.contains('site-header--hero-overlay') && announcementBar) {
-      scrollThreshold = Math.max(configuredThreshold, Math.round(announcementBar.getBoundingClientRect().height));
+    if (header.classList.contains('site-header--hero-overlay')) {
+      scrollThreshold = 40; // announcement bar height — white header once bar scrolls away
       return;
     }
     scrollThreshold = configuredThreshold;
@@ -950,8 +949,40 @@ function openDrawer(target, controller) {
   window.requestAnimationFrame(function() {
     target.classList.add(DRAWER_OPEN_CLASS);
     const panel = target.querySelector('[data-drawer-panel]');
-    if (panel) panel.focus();
+    if (panel) {
+      panel.focus();
+      trapFocusInDrawer(panel);
+    }
   });
+}
+
+function trapFocusInDrawer(panel) {
+  const SELECTORS = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  function handleTab(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(panel.querySelectorAll(SELECTORS)).filter(function(el) {
+      return !el.closest('[hidden]') && el.offsetParent !== null;
+    });
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first || document.activeElement === panel) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  panel.removeEventListener('keydown', panel._trapHandler);
+  panel._trapHandler = handleTab;
+  panel.addEventListener('keydown', handleTab);
 }
 
 function closeDrawer(target, controller) {
@@ -1010,9 +1041,9 @@ document.addEventListener('keydown', function(event) {
 
 // ─── Mega menu controller ────────────────────────────────────────────────────
 (function () {
-  const OPEN_DELAY = 120;
-  const CLOSE_DELAY = 240;
-  const PANEL_HIDE_DELAY = 220;
+  const OPEN_DELAY = 500;
+  const CLOSE_DELAY = 500;
+  const PANEL_HIDE_DELAY = 80;
 
   function MegaMenu(root) {
     this.root = root;
@@ -1158,7 +1189,7 @@ document.addEventListener('keydown', function(event) {
     window.clearTimeout(this.openTimer);
     this.openTimer = window.setTimeout(function () {
       self.open(key, false);
-    }, this.activeKey ? 60 : OPEN_DELAY);
+    }, this.activeKey ? 0 : OPEN_DELAY);
   };
 
   MegaMenu.prototype.clearCloseTimer = function () {
@@ -1438,11 +1469,17 @@ document.addEventListener('keydown', function(event) {
     const OPEN_CLASS = 'is-open';
     const HIDE_DELAY = 180;
 
+    const overlayHeader = document.querySelector('.site-header--hero-overlay');
+    function setSearchOpen(open) {
+      if (overlayHeader) overlayHeader.classList.toggle('is-menu-open', open);
+    }
+
     function openPanel() {
       if (window.closeMegaMenus) window.closeMegaMenus();
       window.clearTimeout(panel._hideTimer);
       panel.hidden = false;
       trigger.setAttribute('aria-expanded', 'true');
+      setSearchOpen(true);
       window.requestAnimationFrame(function () {
         panel.classList.add(OPEN_CLASS);
       });
@@ -1457,6 +1494,7 @@ document.addEventListener('keydown', function(event) {
       window.clearTimeout(panel._hideTimer);
       panel.classList.remove(OPEN_CLASS);
       trigger.setAttribute('aria-expanded', 'false');
+      setSearchOpen(false);
       panel._hideTimer = window.setTimeout(function () {
         if (!panel.classList.contains(OPEN_CLASS)) {
           panel.hidden = true;

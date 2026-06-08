@@ -1,0 +1,269 @@
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+
+<style>
+.sr-hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2rem; margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.14); }
+@media (max-width: 560px) {
+  .sr-hero-stats { grid-template-columns: 1fr; gap: 0; }
+  .sr-hero-stats > div { padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+  .sr-hero-stats > div:first-child { padding-top: 0; border-top: 0; }
+}
+.sr-hero-stat__value { font-size: 30px; font-weight: 500; letter-spacing: -.02em; color: var(--ez-light); line-height: 1.1; }
+.sr-hero-stat__label { font-size: 13px; color: rgba(255,255,255,0.62); margin-top: 0.3rem; }
+
+.free-shipping-strip__icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(254,211,0,0.18); flex-shrink: 0; }
+</style>
+
+{{ 'page-hero.css' | asset_url | stylesheet_tag }}
+
+{% comment %} 1. HERO {% endcomment %}
+{%- assign hero_image = section.settings.hero_image -%}
+<section
+  class="page-hero{% if hero_image != blank %} page-hero--has-image{% else %} page-hero--gradient{% endif %}"
+  {% if hero_image != blank %}style="--hero-bg: url('{{ hero_image | image_url: width: 1800 }}')"{% endif %}>
+  <div class="page-hero__inner container-shell">
+    <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
+      <span aria-current="page">Shipping &amp; returns</span>
+    </nav>
+    <p class="page-hero__kicker"><span class="page-hero__pulse" aria-hidden="true"></span>Shipping &amp; returns</p>
+    <h1 class="page-hero__heading">Fast shipping.<br>Easy returns.</h1>
+    <p class="page-hero__subheading">
+      Free shipping on all US orders over $100.
+      30-day hassle-free returns. 1–2 year limited warranty depending on product.
+    </p>
+    <div class="page-hero__actions">
+      <a href="/pages/contact" class="page-hero__cta">Start a return</a>
+      <a href="/pages/faq" class="page-hero__cta-secondary">Browse FAQ <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="sr-hero-stats">
+      <div>
+        <p class="sr-hero-stat__value">Free</p>
+        <p class="sr-hero-stat__label">shipping over $100 in the US</p>
+      </div>
+      <div>
+        <p class="sr-hero-stat__value">30</p>
+        <p class="sr-hero-stat__label">day return window</p>
+      </div>
+      <div>
+        <p class="sr-hero-stat__value">1–2 yr</p>
+        <p class="sr-hero-stat__label">limited warranty varies by product</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 2. FREE SHIPPING STRIP {% endcomment %}
+<div class="free-shipping-strip container-shell">
+  <span class="free-shipping-strip__icon" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+      <path d="M8.5 3.5L3 10h5.5L7 16.5l9.5-9H11L12.5 3.5z" fill="var(--ez-amber)"/>
+    </svg>
+  </span>
+  <p>Free shipping automatically applied on all US orders over $100 — no code needed.</p>
+</div>
+
+{% comment %} 3. 2-COL CONTENT {% endcomment %}
+<section class="page-section page-section--white bg-white">
+  <div class="two-col">
+
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin-bottom:1.25rem;">US shipping rates</p>
+      <div class="shipping-table-wrap">
+        <table class="shipping-table">
+          <thead><tr><th>Order total</th><th>Rate</th><th>Delivery</th></tr></thead>
+          <tbody>
+            <tr><td>Under $25</td><td>$4.97</td><td>2–7 business days</td></tr>
+            <tr><td>$25 – $50</td><td>$6.54</td><td>2–7 business days</td></tr>
+            <tr><td>$50 – $100</td><td>$7.97</td><td>2–7 business days</td></tr>
+            <tr><td>Over $100</td><td class="shipping-free">Free</td><td>2–7 business days</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin:2rem 0 1.25rem;">International shipping</p>
+      <div class="shipping-table-wrap">
+        <table class="shipping-table">
+          <thead><tr><th>Order total</th><th>Rate</th><th>Delivery</th></tr></thead>
+          <tbody>
+            <tr><td>Under $25</td><td>$14.99</td><td>5–15 days</td></tr>
+            <tr><td>$25 – $50</td><td>$19.99</td><td>5–15 days</td></tr>
+            <tr><td>$50 – $100</td><td>$23.99</td><td>5–15 days</td></tr>
+            <tr><td>Over $250</td><td>$35.99</td><td>5–15 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--ez-grey);margin-top:.75rem;line-height:1.5;">International orders may be subject to customs duties and taxes — these are the responsibility of the recipient.</p>
+    </div>
+
+    <div>
+      <p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ez-grey);margin-bottom:1.25rem;">How returns work</p>
+      <div class="return-steps">
+        <div class="return-step">
+          <div class="return-step__num">1</div>
+          <div>
+            <p class="return-step__title">Contact us</p>
+            <p class="return-step__body">Email support@ezq.com with your order number and reason for return. We respond within 1 business day.</p>
+          </div>
+        </div>
+        <div class="return-step">
+          <div class="return-step__num">2</div>
+          <div>
+            <p class="return-step__title">Get your RMA</p>
+            <p class="return-step__body">We'll email you a Return Materials Authorization number and step-by-step return instructions.</p>
+          </div>
+        </div>
+        <div class="return-step">
+          <div class="return-step__num">3</div>
+          <div>
+            <p class="return-step__title">Ship it back</p>
+            <p class="return-step__body">Write your RMA number on the outside of the package. Use a trackable shipping method — we can't accept responsibility for lost returns.</p>
+          </div>
+        </div>
+        <div class="return-step">
+          <div class="return-step__num">4</div>
+          <div>
+            <p class="return-step__title">Get your refund</p>
+            <p class="return-step__body">Once received and inspected, refunds process within 5–7 business days back to your original payment method.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:2rem;padding:1.25rem;background:var(--ez-light);border-radius:14px;">
+        <p style="font-size:13px;font-weight:500;color:var(--ez-black);margin-bottom:.375rem;">30-day return window</p>
+        <p style="font-size:13px;color:var(--ez-grey);line-height:1.6;">Items must be returned within 30 days of delivery, unused, and in original packaging. Items showing signs of use may not be eligible for a full refund.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% comment %} 4. QUICK FAQ {% endcomment %}
+<section class="page-section page-section--white bg-white" style="border-top:0.5px solid rgba(0,0,0,0.07);">
+  <div class="container-shell">
+    <div style="margin-bottom:2rem;">
+      <p class="section-intro__kicker">Common questions</p>
+      <h2 class="section-intro__heading section-intro__heading--left text-left">Shipping &amp; returns FAQ</h2>
+    </div>
+    <div class="page-faq">
+      <div class="page-faq-item">
+        <button class="page-faq-trigger" aria-expanded="false">
+          When will my order ship?
+          <svg class="page-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="page-faq-body">
+          <div class="page-faq-content">Orders placed before 2pm PST on business days typically ship same day. Orders placed Friday after 2pm, Saturday, or Sunday ship the following Monday.</div>
+        </div>
+      </div>
+      <div class="page-faq-item">
+        <button class="page-faq-trigger" aria-expanded="false">
+          Can I return a product I've already opened?
+          <svg class="page-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="page-faq-body">
+          <div class="page-faq-content">Yes — if the product is in like-new condition within 30 days. If the product has a defect, it's covered by the 1–2 year limited warranty (depending on product) regardless of whether it's been opened.</div>
+        </div>
+      </div>
+      <div class="page-faq-item">
+        <button class="page-faq-trigger" aria-expanded="false">
+          Does free shipping apply to international orders?
+          <svg class="page-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="page-faq-body">
+          <div class="page-faq-content">Free shipping applies to US orders only. International shipping rates are calculated at checkout based on order weight and destination.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} 5. RETURN POLICY HIGHLIGHTS {% endcomment %}
+<section class="page-section page-section--white bg-white" style="border-top:0.5px solid rgba(0,0,0,0.07);">
+  <div class="container-shell">
+    <div style="margin-bottom:1.5rem;">
+      <p class="section-intro__kicker">Return policy highlights</p>
+      <h2 class="section-intro__heading section-intro__heading--left text-left" style="font-size:clamp(1.25rem,2.5vw,1.75rem);">What to know before you return</h2>
+    </div>
+    <ul class="sr-policy-list">
+      <li>Undamaged products qualify for a <strong>full refund within 30 days</strong> of purchase</li>
+      <li>Must include all original accessories, cables, and retail packaging</li>
+      <li>Bulk orders of 10 or more units of the same product are not eligible for refund</li>
+      <li>Free prepaid return shipping label provided for all approved US returns</li>
+    </ul>
+    <a href="/pages/refund-policy" class="sr-policy-link">Read the full return &amp; refund policy &rarr;</a>
+  </div>
+</section>
+
+<style>
+.sr-policy-list {
+  padding: 0;
+  margin: 0 0 1.5rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+.sr-policy-list li {
+  font-size: 14px;
+  color: #3d3d3f;
+  line-height: 1.65;
+  padding-left: 1.375rem;
+  position: relative;
+}
+.sr-policy-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--ez-amber);
+  font-weight: 700;
+}
+.sr-policy-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+</style>
+
+{%- render 'page-cta',
+  variant: 'light',
+  kicker: 'Support',
+  heading: 'Questions? We’re here.',
+  subhead: 'Our team responds within 1 business day.',
+  primary_label: 'Contact support',
+  primary_url: '/pages/contact'
+-%}
+
+<script>
+(function(){
+  document.querySelectorAll('.page-faq-trigger').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = this.closest('.page-faq-item');
+      var isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.page-faq-item.is-open').forEach(function(el){
+        el.classList.remove('is-open');
+        el.querySelector('.page-faq-trigger').setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){
+        item.classList.add('is-open');
+        this.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Shipping & returns",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    }
+  ]
+}
+{% endschema %}

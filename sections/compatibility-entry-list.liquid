@@ -1,4 +1,15 @@
-<section class="section-shell section--grey">
+{% liquid
+  assign compat_has_content = false
+  if product != blank and product.metafields.ezquest.compatibility_entries != blank and product.metafields.ezquest.compatibility_entries.value.count > 0
+    assign compat_has_content = true
+  elsif request.page_type == 'page' and page != blank and page.handle == 'compatibility' and section.settings.structured_source == 'global'
+    assign compat_has_content = true
+  elsif section.blocks.size > 0
+    assign compat_has_content = true
+  endif
+%}
+{% if compat_has_content %}
+<section class="section-shell section--grey" id="pdp-compat">
   <div class="container-shell">
     {%- liquid
       assign current_product = blank
@@ -634,6 +645,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% schema %}
 {

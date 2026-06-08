@@ -1,4 +1,13 @@
-<section class="section-shell product-specs-section">
+{% liquid
+  assign spec_has_content = false
+  if product != blank and product.metafields.ezquest.spec_rows != blank and product.metafields.ezquest.spec_rows.value.count > 0
+    assign spec_has_content = true
+  elsif section.blocks.size > 0
+    assign spec_has_content = true
+  endif
+%}
+{% if spec_has_content %}
+<section class="section-shell product-specs-section" id="pdp-specs">
   <div class="container-shell max-w-6xl">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Technical sheet'
@@ -62,6 +71,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% schema %}
 {

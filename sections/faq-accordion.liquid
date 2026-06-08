@@ -1,3 +1,5 @@
+{{ 'faq-accordion.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign use_global_faqs = false
   assign sorted_global_faq_keys = '' | split: ''
@@ -21,27 +23,64 @@
   endif
 -%}
 
-<section class="faq-page-section section-shell">
+<section class="faq-section section-shell{% if request.page_type == 'page' and page and page.handle == 'faq' %} faq-section--compact{% endif %}" id="pdp-faq">
   <div class="container-shell">
-    <div class="faq-page-shell">
+    {%- liquid
+      assign hide_faq_intro = false
+      if request.page_type == 'page' and page and page.handle == 'faq'
+        assign hide_faq_intro = true
+      endif
+    -%}
+    <div class="faq-layout{% if hide_faq_intro %} faq-layout--full-width{% endif %}">
 
-      <!-- FAQ groups -->
-      <div class="faq-page-main">
+      <!-- Sticky heading column -->
+      <div class="faq-header">
+        {% unless hide_faq_intro %}
+          <h2 class="faq-heading">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
+        {% endunless %}
+        {% if section.settings.subhead != blank and hide_faq_intro == false %}
+          <p class="faq-subhead">{{ section.settings.subhead }}</p>
+        {% endif %}
+        {% unless hide_faq_intro %}
+          <div class="faq-cta-stack">
+            <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="btn">{{ section.settings.cta_label | default: 'Contact support' }}</a>
+          </div>
+        {% endunless %}
+      </div>
+
+      <!-- Tab Navigation (only on dedicated FAQ page) -->
+      {% if hide_faq_intro and section.blocks.size > 0 %}
+        <div class="faq-tabs-nav">
+          {% for block in section.blocks %}
+            {% if block.type == 'group' %}
+              <button class="faq-tab-trigger{% if forloop.first %} is-active{% endif %}" data-tab="faq-tab-{{ forloop.index }}" type="button">
+                {{ block.settings.title }}
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Accordion groups -->
+      <div class="faq-main{% if hide_faq_intro %} faq-main--tabbed{% endif %}">
         {% if section.blocks.size > 0 %}
+          {%- assign item_idx = 0 -%}
           {% for block in section.blocks %}
             {% if block.type == 'group' %}
               {%- assign group_filter = block.settings.group_handle | downcase -%}
               {%- assign group_faq_count = 0 -%}
 
-              <div class="faq-group-card" {{ block.shopify_attributes }}>
-                <div class="faq-group-header">
-                  <h2 class="faq-group-title">{{ block.settings.title }}</h2>
-                  {% if block.settings.subtitle != blank %}
-                    <p class="faq-group-subtitle">{{ block.settings.subtitle }}</p>
+              <div class="faq-group{% if hide_faq_intro %} faq-tab-panel{% if forloop.first %} is-active{% endif %}{% endif %}" id="faq-tab-{{ forloop.index }}" {{ block.shopify_attributes }}>
+                {% unless hide_faq_intro %}
+                  {% if block.settings.title != blank %}
+                    <div class="faq-category-heading">{{ block.settings.title }}</div>
                   {% endif %}
-                </div>
+                  {% if block.settings.subtitle != blank %}
+                    <p class="faq-category-desc">{{ block.settings.subtitle }}</p>
+                  {% endif %}
+                {% endunless %}
 
-                <div class="faq-list faq-group-list">
+                <div class="faq-list">
                   {% if use_global_faqs and group_filter != blank %}
                     {% for faq_key in sorted_global_faq_keys %}
                       {% if faq_key == blank %}{% continue %}{% endif %}
@@ -49,9 +88,19 @@
                       {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
                       {%- assign item_group = faq_item.faq_group.value | downcase | default: '' -%}
                       {% if item_group == group_filter %}
-                        {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
-                        {% render 'accordion-item', title: faq_item.question.value, content: answer %}
+                        <div class="faq-item" style="--i:{{ item_idx }}">
+                          <button class="faq-trigger" type="button" aria-expanded="false">
+                            <span class="faq-trigger-text">
+                              <span class="faq-question">{{ faq_item.question.value }}</span>
+                            </span>
+                            <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></span>
+                          </button>
+                          <div class="faq-body" aria-hidden="true">
+                            <div class="faq-answer">{{ faq_item.answer.value | newline_to_br }}</div>
+                          </div>
+                        </div>
                         {%- assign group_faq_count = group_faq_count | plus: 1 -%}
+                        {%- assign item_idx = item_idx | plus: 1 -%}
                       {% endif %}
                     {% endfor %}
                   {% endif %}
@@ -60,12 +109,23 @@
                   {% if group_faq_count == 0 %}
                     {% for item_block in section.blocks %}
                       {% if item_block.type == 'faq' and item_block.settings.group == block.settings.group_handle %}
-                        {% capture answer %}<p>{{ item_block.settings.answer }}</p>{% endcapture %}
-                        {% render 'accordion-item', title: item_block.settings.question, content: answer %}
+                        <div class="faq-item" style="--i:{{ item_idx }}">
+                          <button class="faq-trigger" type="button" aria-expanded="false">
+                            <span class="faq-trigger-text">
+                              <span class="faq-question">{{ item_block.settings.question }}</span>
+                            </span>
+                            <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></span>
+                          </button>
+                          <div class="faq-body" aria-hidden="true">
+                            <div class="faq-answer">{{ item_block.settings.answer }}</div>
+                          </div>
+                        </div>
                         {%- assign block_faq_count = block_faq_count | plus: 1 -%}
+                        {%- assign item_idx = item_idx | plus: 1 -%}
                       {% endif %}
                     {% endfor %}
                   {% endif %}
+
                   {% if group_faq_count == 0 and block_faq_count == 0 %}
                     <div class="section-empty-state">
                       <p class="section-empty-state__message">No FAQs added to this group yet.</p>
@@ -76,19 +136,25 @@
             {% endif %}
           {% endfor %}
         {% else %}
-          <!-- Flat list fallback (no groups defined) -->
-          <div class="faq-group-card">
-            <div class="faq-group-header">
-              <h2 class="faq-group-title">{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
-            </div>
-            <div class="faq-list faq-group-list">
+          <!-- Flat list fallback -->
+          <div class="faq-group">
+            <div class="faq-list">
               {% if use_global_faqs %}
                 {% for faq_key in sorted_global_faq_keys %}
                   {% if faq_key == blank %}{% continue %}{% endif %}
                   {% assign faq_handle = faq_key | split: '::' | last %}
                   {% assign faq_item = metaobjects.ezquest_faq_item[faq_handle] %}
-                  {% capture answer %}<p>{{ faq_item.answer.value | newline_to_br }}</p>{% endcapture %}
-                  {% render 'accordion-item', title: faq_item.question.value, content: answer %}
+                  <div class="faq-item" style="--i:{{ forloop.index0 }}">
+                    <button class="faq-trigger" type="button" aria-expanded="false">
+                      <span class="faq-trigger-text">
+                        <span class="faq-question">{{ faq_item.question.value }}</span>
+                      </span>
+                      <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></span>
+                    </button>
+                    <div class="faq-body" aria-hidden="true">
+                      <div class="faq-answer">{{ faq_item.answer.value | newline_to_br }}</div>
+                    </div>
+                  </div>
                 {% endfor %}
               {% else %}
                 <div class="section-empty-state">
@@ -99,40 +165,131 @@
             </div>
           </div>
         {% endif %}
+        {% unless hide_faq_intro %}
+          <a href="/pages/faq" class="faq-more-link">More questions? See our full FAQ →</a>
+        {% endunless %}
       </div>
-
-      <!-- Contact form sidebar -->
-      <aside class="faq-page-aside">
-        <div class="faq-contact-card">
-          <h3 class="faq-contact-heading">{{ section.settings.contact_heading | default: "Still need help?" }}</h3>
-          <p class="faq-contact-sub">{{ section.settings.contact_sub | default: "Send us your question and our team will help you find the right answer." }}</p>
-
-          {%- form 'contact', id: 'faq-contact-form' -%}
-            {% if form.posted_successfully? %}
-              <p class="faq-contact-success">Thanks! We'll get back to you soon.</p>
-            {% else %}
-              <div class="faq-contact-fields">
-                <input class="faq-contact-input" type="text" name="contact[name]" placeholder="Name" autocomplete="name" required>
-                <input class="faq-contact-input" type="email" name="contact[email]" placeholder="Email" autocomplete="email" required>
-                <textarea class="faq-contact-input faq-contact-textarea" name="contact[body]" placeholder="Message" rows="4"></textarea>
-                <button class="faq-contact-btn" type="submit">Send message</button>
-              </div>
-            {% endif %}
-          {%- endform -%}
-        </div>
-      </aside>
 
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  // Tab switching
+  var tabTriggers = document.querySelectorAll('.faq-tab-trigger');
+  tabTriggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var tabId = this.getAttribute('data-tab');
+      
+      // Remove active class from all triggers and panels
+      tabTriggers.forEach(function (t) { t.classList.remove('is-active'); });
+      document.querySelectorAll('.faq-tab-panel').forEach(function (p) { p.classList.remove('is-active'); });
+      
+      // Add active class to clicked trigger and corresponding panel
+      trigger.classList.add('is-active');
+      var panel = document.getElementById(tabId);
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+
+  // Accordion toggle
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('.faq-trigger');
+    if (!trigger) return;
+    var item = trigger.closest('.faq-item');
+    if (!item) return;
+    var body = item.querySelector('.faq-body');
+    var isOpen = item.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (body) body.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  });
+
+  // BlurFade reveal via IntersectionObserver
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var items = document.querySelectorAll('.faq-item');
+  if (!items.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var idx = parseInt(el.style.getPropertyValue('--i') || '0', 10) || 0;
+      setTimeout(function () { el.classList.add('is-revealed'); }, idx * 50);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.08 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+{% comment %} FAQPage structured data for AI Overviews {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign schema_item_count = 0 -%}
+    {%- if use_global_faqs -%}
+      {%- for faq_key in sorted_global_faq_keys -%}
+        {%- if faq_key == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign faq_handle = faq_key | split: '::' | last -%}
+        {%- assign faq_item = metaobjects.ezquest_faq_item[faq_handle] -%}
+        {%- if faq_item.question.value != blank and faq_item.answer.value != blank -%}
+          {%- if schema_item_count > 0 -%},{%- endif -%}
+          {
+            "@type": "Question",
+            "name": {{ faq_item.question.value | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ faq_item.answer.value | strip_html | json }}
+            }
+          }
+          {%- assign schema_item_count = schema_item_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+      {%- for block in faq_blocks -%}
+        {%- if block.settings.question != blank and block.settings.answer != blank -%}
+          {%- if schema_item_count > 0 -%},{%- endif -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.answer | strip_html | json }}
+            }
+          }
+          {%- assign schema_item_count = schema_item_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  ]
+}
+</script>
+
+{% style %}
+.faq-more-link {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ez-dark);
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+}
+.faq-more-link:hover { opacity: 1; }
+{% endstyle %}
 
 {% schema %}
 {
   "name": "FAQ accordion",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
-    { "type": "text", "id": "contact_heading", "label": "Contact card heading", "default": "Still need help?" },
-    { "type": "textarea", "id": "contact_sub", "label": "Contact card subtext", "default": "Send us your question and our team will help you find the right answer." }
+    { "type": "textarea", "id": "subhead", "label": "Subhead", "default": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Contact support" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" }
   ],
   "blocks": [
     {
@@ -155,9 +312,7 @@
     }
   ],
   "presets": [
-    {
-      "name": "FAQ accordion"
-    }
+    { "name": "FAQ accordion" }
   ]
 }
 {% endschema %}

@@ -12,63 +12,26 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "image": "shopify://shop_images/ezquest-downloads-hero.png",
+        "background_color": "#020617",
         "kicker": "Downloads",
-        "heading": "Find the right download fast",
-        "subheading": "Drivers, utilities, and firmware files organized by product family.",
-        "light_mode": true
+        "heading": "",
+        "subheading": "All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.",
+        "height": 320,
+        "overlay_opacity": 35
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "downloads": {
       "type": "download-center",
-      "settings": {
-        "kicker": "Downloads",
-        "heading": "Downloads by product and platform",
-        "body": "Review downloads by product and platform. Use the filter to narrow by product family."
-      },
       "blocks": {
-        "fam_1": {
-          "type": "family",
-          "settings": {
-            "label": "Hubs & Adapters",
-            "handle": "hubs-adapters"
-          }
-        },
-        "fam_2": {
-          "type": "family",
-          "settings": {
-            "label": "Docking Stations",
-            "handle": "docking-stations"
-          }
-        },
-        "fam_3": {
-          "type": "family",
-          "settings": {
-            "label": "Chargers & Power",
-            "handle": "chargers-power"
-          }
-        },
-        "fam_4": {
-          "type": "family",
-          "settings": {
-            "label": "Accessories",
-            "handle": "accessories"
-          }
-        },
         "file_d1": {
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "2.1 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d2": {
@@ -76,12 +39,9 @@
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 8 Ports",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.8 MB",
-            "version": "",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d3": {
@@ -89,12 +49,9 @@
           "settings": {
             "product_name": "USB-C Dual HDMI Hub Adapter",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.9 MB",
-            "version": "",
-            "updated": "January 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d4": {
@@ -102,12 +59,9 @@
           "settings": {
             "product_name": "UltimatePower 120W GaN USB-C PD Wall Charger",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.2 MB",
-            "version": "",
-            "updated": "February 2024",
-            "family": "chargers-power",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d5": {
@@ -115,12 +69,9 @@
           "settings": {
             "product_name": "UltimatePower 65W GaN USB-C PD Wall Charger",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.1 MB",
-            "version": "",
-            "updated": "February 2024",
-            "family": "chargers-power",
-            "file_url": "#"
+            "version": ""
           }
         },
         "file_d6": {
@@ -128,27 +79,24 @@
           "settings": {
             "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
             "file_title": "Quick Start Guide",
-            "file_type": "PDF",
+            "file_url": "#",
             "file_size": "1.6 MB",
-            "version": "",
-            "updated": "October 2023",
-            "family": "accessories",
-            "file_url": "#"
+            "version": ""
           }
         }
       },
       "block_order": [
-        "fam_1",
-        "fam_2",
-        "fam_3",
-        "fam_4",
         "file_d1",
         "file_d2",
         "file_d3",
         "file_d4",
         "file_d5",
         "file_d6"
-      ]
+      ],
+      "settings": {
+        "resource_kind": "downloads",
+        "structured_source": "global"
+      }
     },
     "cta": {
       "type": "support-cta-rail",
@@ -165,7 +113,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]

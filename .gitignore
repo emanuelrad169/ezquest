@@ -4,3 +4,22 @@ shopify.theme.toml
 .shopify/
 dist/
 .DS_Store
+.claude/
+scripts/image-upload-report.json
+scripts/missing-images.json
+scripts/qa-results.json
+
+# Generated images (in Shopify CDN — no need to track locally)
+public/images/
+
+# Archived one-time scripts (reference only)
+scripts/archive/
+
+# Archived prompt manifests
+prompts/archive/
+
+# Live Shopify theme exports are large local safety backups
+backups/
+
+# Gift card codes — treat as cash, never commit
+docs/migration/gift-cards-reissued.csv

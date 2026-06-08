@@ -1,0 +1,7 @@
+interface:
+  display_name: "Shopify Image System"
+  short_description: "Create consistent EZQuest storefront images"
+  default_prompt: "Use $shopify-image-system to create a consistent EZQuest storefront image prompt and output plan."
+
+policy:
+  allow_implicit_invocation: true

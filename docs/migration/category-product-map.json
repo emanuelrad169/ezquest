@@ -1,0 +1,148 @@
+{
+  "usb-c-hubs": {
+    "group": "USB-C",
+    "label": "USB-C Hubs",
+    "tag": "nav-usb-c-hubs",
+    "handle": "usb-c-hubs",
+    "productIds": [
+      "8842165223622",
+      "8842165256390",
+      "8842165190854",
+      "8842165125318",
+      "8842165092550",
+      "8842164764870",
+      "8832352288966",
+      "8842164863174",
+      "8842164961478",
+      "8842164928710",
+      "8842161422534",
+      "8842161488070",
+      "8842165027014",
+      "8842161356998",
+      "8842165158086"
+    ]
+  },
+  "usb-c-cables": {
+    "group": "USB-C",
+    "label": "USB-C Cables",
+    "tag": "nav-usb-c-cables",
+    "handle": "usb-c-cables",
+    "productIds": [
+      "8842165354694",
+      "8842165452998",
+      "8842165485766",
+      "8842165584070",
+      "8842165616838",
+      "8842165682374",
+      "8842165715142",
+      "8832352649414",
+      "8832352714950"
+    ]
+  },
+  "usb-c-adapters": {
+    "group": "USB-C",
+    "label": "USB-C Adapters",
+    "tag": "nav-usb-c-adapters",
+    "handle": "usb-c-adapters",
+    "productIds": [
+      "8842165747910",
+      "8842165813446",
+      "8842165878982",
+      "8842165911750",
+      "8842165977286",
+      "8842166010054",
+      "8842166042822",
+      "8842166075590",
+      "8842166108358",
+      "8832352846022",
+      "8842166141126"
+    ]
+  },
+  "usb-c-card-readers": {
+    "group": "USB-C",
+    "label": "USB-C Card Readers",
+    "tag": "nav-usb-c-card-readers",
+    "handle": "usb-c-card-readers",
+    "productIds": [
+      "8842165321926",
+      "8842165289158"
+    ]
+  },
+  "usb-c-enclosures": {
+    "group": "USB-C",
+    "label": "USB-C Enclosures",
+    "tag": "nav-usb-c-enclosures",
+    "handle": "usb-c-enclosures",
+    "productIds": [
+      "8842166173894"
+    ]
+  },
+  "hdmi-cables-adapters": {
+    "group": "Cables/Adapters",
+    "label": "HDMI",
+    "tag": "nav-cables-hdmi",
+    "handle": "hdmi-cables-adapters",
+    "productIds": [
+      "8842165747910",
+      "8842166206662",
+      "8842166239430",
+      "8842166272198",
+      "8842166304966"
+    ]
+  },
+  "displayport-cables-adapters": {
+    "group": "Cables/Adapters",
+    "label": "DisplayPort",
+    "tag": "nav-cables-displayport",
+    "handle": "displayport-cables-adapters",
+    "productIds": [
+      "8842166370502",
+      "8842165813446"
+    ]
+  },
+  "mini-displayport-cables": {
+    "group": "Cables/Adapters",
+    "label": "Mini DisplayPort",
+    "tag": "nav-cables-mini-displayport",
+    "handle": "mini-displayport-cables",
+    "productIds": [
+      "8842166206662"
+    ]
+  },
+  "audio-cables": {
+    "group": "Cables/Adapters",
+    "label": "Audio",
+    "tag": "nav-cables-audio",
+    "handle": "audio-cables",
+    "productIds": [
+      "8832352780486"
+    ]
+  },
+  "wall-chargers": {
+    "group": "Power",
+    "label": "Wall Chargers",
+    "tag": "nav-power-wall-chargers",
+    "handle": "wall-chargers",
+    "productIds": [
+      "8832352387270",
+      "8832352485574",
+      "8832352551110",
+      "8842026025158",
+      "8842025992390",
+      "8842166436038",
+      "8842025959622",
+      "8842025926854",
+      "8842166501574"
+    ]
+  },
+  "car-chargers": {
+    "group": "Power",
+    "label": "Car Chargers",
+    "tag": "nav-power-car-chargers",
+    "handle": "car-chargers",
+    "productIds": [
+      "8842166534342",
+      "8842166567110"
+    ]
+  }
+}

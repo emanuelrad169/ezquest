@@ -1,0 +1,51 @@
+{%- comment -%}
+  Amazon reviews widget — aggregate rating + review count + link to Amazon listing.
+  Shows nothing when amazon_asin metafield is blank (graceful degradation).
+  Usage: {% render 'amazon-reviews-widget', product: product %}
+{%- endcomment -%}
+
+{%- assign asin    = product.metafields.custom.amazon_asin -%}
+{%- assign rating  = product.metafields.custom.amazon_rating | times: 1 -%}
+{%- assign count   = product.metafields.custom.amazon_review_count | default: 0 -%}
+
+{%- if asin != blank and rating > 0 and count > 0 -%}
+  {%- assign reviews_url = 'https://www.amazon.com/product-reviews/' | append: asin -%}
+  {%- assign widget_href = link_href | default: reviews_url -%}
+
+  {%- assign full_stars      = rating | floor -%}
+  {%- assign remainder       = rating | minus: full_stars -%}
+  {%- assign half_star_index = full_stars | plus: 1 -%}
+
+  <a href="{{ widget_href }}"
+     {% unless link_href %}target="_blank" rel="noopener noreferrer"{% endunless %}
+     class="amazon-reviews-widget"
+     aria-label="{{ count }} reviews — rated {{ rating }} out of 5">
+
+    <span class="amazon-reviews-widget__stars" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        {%- if i <= full_stars -%}
+          <svg class="amazon-reviews-widget__star star--filled" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+            <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="currentColor"/>
+          </svg>
+        {%- elsif remainder >= 0.5 and i == half_star_index -%}
+          <svg class="amazon-reviews-widget__star star--filled" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="half-{{ product.id }}-{{ i }}"><rect x="0" y="0" width="7" height="14"/></clipPath>
+            </defs>
+            <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="#d5d5d5"/>
+            <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="currentColor" clip-path="url(#half-{{ product.id }}-{{ i }})"/>
+          </svg>
+        {%- else -%}
+          <svg class="amazon-reviews-widget__star star--empty" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+            <path d="M7 1l1.5 4h4l-3.5 2.5 1.5 4L7 9 3.5 11.5l1.5-4L1 5h4z" fill="currentColor"/>
+          </svg>
+        {%- endif -%}
+      {%- endfor -%}
+    </span>
+
+    <span class="amazon-reviews-widget__rating">{{ rating }}</span>
+    <span class="amazon-reviews-widget__separator" aria-hidden="true">·</span>
+    <span class="amazon-reviews-widget__count">{{ count }} {{ count | pluralize: 'review', 'reviews' }} on Amazon</span>
+    {%- render 'icon', name: 'external-link', size: 13, class: 'amazon-reviews-widget__icon' -%}
+  </a>
+{%- endif -%}

@@ -1,0 +1,203 @@
+/* ============================================ */
+/* Shoppable Video section                      */
+/* Component: sections/shoppable-video.liquid   */
+/* ============================================ */
+/* Per-block tag positions are emitted inline via a {% for block %} Liquid
+   loop in the section file (< 15 lines, must stay inline). */
+
+.shoppable-video {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+  background: var(--ez-dark);
+}
+
+.shoppable-video__media {
+  position: absolute;
+  inset: 0;
+}
+
+.shoppable-video__media video,
+.shoppable-video__media iframe,
+.shoppable-video__video,
+.shoppable-video__iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  display: block;
+}
+
+.shoppable-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.2) 55%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shoppable-video__content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(64px, 8vw, 112px) clamp(1.25rem, 5vw, 5rem);
+  max-width: 520px;
+}
+
+.shoppable-video__kicker {
+  margin: 0 0 0.9rem;
+  color: rgba(254, 211, 0, 0.96);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.shoppable-video__heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.shoppable-video__body {
+  max-width: 44ch;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.6;
+}
+
+.shoppable-video__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1.6rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ez-dark);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.shoppable-video__cta:hover {
+  background: rgba(255, 255, 255, 0.88);
+  transform: translateY(-2px);
+}
+
+.shoppable-video__tag-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.shoppable-product-tag {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  transform: translate(-50%, -50%);
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 200px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.95);
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shoppable-product-tag:hover {
+  transform: translate(-50%, -54%);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.shoppable-product-tag::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.95);
+  border-bottom: none;
+}
+
+.shoppable-product-tag__img {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--ez-light);
+}
+
+.shoppable-product-tag__info {
+  display: grid;
+  min-width: 0;
+}
+
+.shoppable-product-tag__title {
+  overflow: hidden;
+  color: var(--ez-black);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.shoppable-product-tag__price {
+  color: var(--ez-grey);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.shoppable-video__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #2f3338;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .shoppable-video {
+    min-height: 56vh;
+  }
+
+  .shoppable-video__content {
+    max-width: none;
+    width: 100%;
+  }
+
+  .shoppable-video__tag-layer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shoppable-product-tag,
+  .shoppable-video__cta {
+    transition: none;
+  }
+}

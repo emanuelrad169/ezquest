@@ -1,0 +1,238 @@
+/* ── Custom policy-page section (pages/cookie-policy etc.) ── */
+
+
+/* ── Native Shopify policy pages (/policies/*) ── */
+.shopify-policy__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.shopify-policy__title {
+  background: var(--ez-light);
+  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,2rem) clamp(32px,4vw,48px);
+}
+
+.shopify-policy__title::before {
+  content: 'Legal';
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ez-amber);
+  margin-bottom: .625rem;
+}
+
+.shopify-policy__title h1 {
+  font-size: clamp(28px,4.5vw,48px);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--ez-black);
+  margin: 0;
+}
+
+/* Layout wrapper injected by policy-page.js */
+.policy-native-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(3rem,6vw,6rem);
+  align-items: start;
+  padding: clamp(48px,6vw,80px) clamp(1.25rem,5vw,2rem);
+}
+
+@media (max-width: 900px) {
+  .policy-native-layout { grid-template-columns: 1fr; }
+  .policy-native-layout .policy-sidebar { order: -1; }
+}
+
+/* Style the body/rte inside the native container */
+.shopify-policy__body {
+  max-width: 720px;
+}
+
+.policy-hero {
+  background: var(--ez-light);
+  padding: clamp(48px,6vw,72px) clamp(1.25rem,5vw,2rem)
+           clamp(32px,4vw,48px);
+}
+
+.policy-hero__kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ez-amber);
+  margin: 0 0 .625rem;
+}
+
+.policy-hero__heading {
+  font-size: clamp(28px,4.5vw,48px);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--ez-black);
+  margin: 0 0 .75rem;
+}
+
+.policy-hero__meta {
+  font-size: 13px;
+  color: var(--ez-grey);
+  margin: 0;
+}
+
+.policy-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(48px,6vw,80px) clamp(1.25rem,5vw,2rem);
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(2rem,2vw,6rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .policy-layout { grid-template-columns: 1fr; }
+  .policy-sidebar { order: -1; }
+}
+
+
+.shopify-policy__body h2,
+.shopify-policy__body .rte h2,
+.policy-prose h2 {
+  font-size: clamp(18px,2.5vw,24px);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  color: var(--ez-black);
+  margin: 2.5rem 0 .875rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+
+.shopify-policy__body h2:first-child,
+.shopify-policy__body .rte h2:first-child,
+.policy-prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.shopify-policy__body h3,
+.shopify-policy__body .rte h3,
+.policy-prose h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ez-black);
+  margin: 1.75rem 0 .5rem;
+}
+
+.shopify-policy__body p,
+.shopify-policy__body .rte p,
+.policy-prose p {
+  font-size: 15px;
+  color: #3d3d3f;
+  line-height: 1.75;
+  margin: 0 0 1.125rem;
+}
+
+.shopify-policy__body a,
+.shopify-policy__body .rte a,
+.policy-prose a {
+  color: var(--ez-amber);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.shopify-policy__body ul,
+.shopify-policy__body ol,
+.shopify-policy__body .rte ul,
+.shopify-policy__body .rte ol,
+.policy-prose ul,
+.policy-prose ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1.125rem;
+}
+
+.shopify-policy__body li,
+.shopify-policy__body .rte li,
+.policy-prose li {
+  font-size: 15px;
+  color: #3d3d3f;
+  line-height: 1.75;
+  margin-bottom: .375rem;
+}
+
+.shopify-policy__body strong,
+.shopify-policy__body .rte strong,
+.policy-prose strong {
+  font-weight: 600;
+  color: var(--ez-black);
+}
+
+/* Sidebar */
+.policy-sidebar {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.policy-sidebar__card {
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 16px;
+  padding: 1.5rem;
+  background: #fff;
+}
+
+.policy-sidebar__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ez-grey);
+  margin: 0 0 1rem;
+}
+
+.policy-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.policy-sidebar__link {
+  display: block;
+  font-size: 14px;
+  color: var(--ez-grey);
+  text-decoration: none;
+  padding: .625rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  transition: color .15s;
+}
+
+.policy-sidebar__link:last-child { border-bottom: none; }
+.policy-sidebar__link:hover { color: var(--ez-black); }
+.policy-sidebar__link.is-active {
+  color: var(--ez-amber);
+  font-weight: 500;
+}
+
+.policy-sidebar__card--help {
+  background: rgba(254, 211, 0,.03);
+  border-color: rgba(254, 211, 0,.2);
+}
+
+.policy-sidebar__help-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ez-black);
+  margin: 0 0 .375rem;
+}
+
+.policy-sidebar__help-body {
+  font-size: 13px;
+  color: var(--ez-grey);
+  line-height: 1.55;
+  margin: 0;
+}

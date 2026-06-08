@@ -1,76 +1,241 @@
-{%- liquid
-  assign shop_url = '/pages/help-me-choose'
-  assign collections_url = routes.collections_url
-  assign about_url = '/pages/about'
--%}
+{%- comment -%} mega-menu nav {%- endcomment -%}
 {%- comment -%}
   Static snippet references for Theme Check.
-  These helpers are retained for alternate mega-menu compositions and JS data wiring.
 {%- endcomment -%}
 {%- capture mega_menu_helper_references -%}
   {%- render 'mega-menu-data' -%}
   {%- render 'mega-menu-group', href: routes.all_products_collection_url, title: 'Shop' -%}
+  {%- render 'mega-menu-panel', group_handle: 'shop' -%}
   {%- render 'mega-menu-preview', group_handle: 'shop', title: 'Shop' -%}
   {%- render 'mega-menu-featured', href: '/pages/compare', title: 'Compare' -%}
 {%- endcapture -%}
 {% if mega_menu_helper_references == blank %}{% endif %}
+{{- 'nav-dropdowns.css' | asset_url | stylesheet_tag -}}
 <div class="mega-menu" data-mega-menu>
   <ul class="mega-menu-nav-list" role="list">
-    <li class="mega-menu-nav-item" data-mega-item="shop">
-      <a href="{{ shop_url }}" class="mega-menu-trigger" data-mega-trigger="shop" aria-expanded="false" aria-controls="mega-menu-panel-shop">
-        <span>Shop by setup</span>
+
+    <li class="mega-menu-nav-item">
+      <a
+        href="{{ routes.collections_url }}"
+        class="mega-menu-trigger"
+        data-nav-trigger="nav-panel-shop"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="nav-panel-shop">
+        <span>Shop</span>
       </a>
     </li>
-    <li class="mega-menu-nav-item" data-mega-item="collections">
-      <a href="{{ collections_url }}" class="mega-menu-trigger" data-mega-trigger="collections" aria-expanded="false" aria-controls="mega-menu-panel-collections">
-        <span>Browse product families</span>
-      </a>
-    </li>
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-compare" data-nav-submenu-trigger>
-        <span>Compare</span>
-      </button>
-      <div id="nav-flyout-compare" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/compare" class="nav-submenu-link">Compare lineup</a>
-        <a href="/pages/help-me-choose" class="nav-submenu-link">Help me choose</a>
-        <a href="/pages/compatibility" class="nav-submenu-link">Compatibility</a>
-      </div>
-    </li>
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-support" data-nav-submenu-trigger>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-support" data-nav-trigger="nav-panel-support">
         <span>Support</span>
       </button>
-      <div id="nav-flyout-support" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/pages/support" class="nav-submenu-link">Support hub</a>
-        <a href="/pages/downloads" class="nav-submenu-link">Downloads</a>
-        <a href="/pages/manuals" class="nav-submenu-link">Manuals</a>
-        <a href="/pages/troubleshooting" class="nav-submenu-link">Troubleshooting</a>
-        <a href="/pages/faq" class="nav-submenu-link">FAQ</a>
-        <a href="/pages/contact" class="nav-submenu-link">Contact</a>
+      <div id="nav-panel-support" class="nav-submenu-panel nav-panel" role="region" aria-label="Support menu" hidden>
+        <ul class="nav-dd__links" role="list">
+          <li>
+            <a href="/pages/support" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Support center</span>
+                <span class="nav-dd__link-sub">All help in one place</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/faq" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">FAQ</span>
+                <span class="nav-dd__link-sub">Common questions answered</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/downloads" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Downloads</span>
+                <span class="nav-dd__link-sub">Drivers &amp; software</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/manuals" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Manuals</span>
+                <span class="nav-dd__link-sub">PDF user guides</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/warranty" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Warranty</span>
+                <span class="nav-dd__link-sub">2-year coverage on all products</span>
+              </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </li>
-    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative" data-nav-submenu>
-      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-controls="nav-flyout-resources" data-nav-submenu-trigger>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-resources" data-nav-trigger="nav-panel-resources">
         <span>Resources</span>
       </button>
-      <div id="nav-flyout-resources" class="nav-submenu-panel" hidden data-nav-submenu-panel>
-        <a href="/blogs/resources" class="nav-submenu-link">Guides</a>
-        <a href="/pages/about" class="nav-submenu-link">About EZQuest</a>
-        <a href="/pages/our-story" class="nav-submenu-link">Our story</a>
-        <a href="/pages/warranty" class="nav-submenu-link">Warranty</a>
-        <a href="/pages/shipping-returns" class="nav-submenu-link">Shipping & returns</a>
+      <div id="nav-panel-resources" class="nav-submenu-panel nav-panel" role="region" aria-label="Resources menu" hidden>
+        {%- assign res_blog = blogs['resources'] -%}
+        {%- assign featured_article = res_blog.articles.first -%}
+        <div class="nav-dd__two-col">
+          <div class="nav-dd__col nav-dd__col--border">
+            <p class="nav-dd__col-head">Resources</p>
+            <ul class="nav-dd__links" role="list">
+              <li>
+                <a href="/blogs/resources" class="nav-dd__link">
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">All articles</span>
+                    <span class="nav-dd__link-sub">Guides, tips &amp; news</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/compatibility" class="nav-dd__link">
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">Compatibility</span>
+                    <span class="nav-dd__link-sub">Device compatibility checker</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/pages/help-me-choose" class="nav-dd__link">
+                  <span class="nav-dd__link-text">
+                    <span class="nav-dd__link-title">Help me choose</span>
+                    <span class="nav-dd__link-sub">Find the right product</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-dd__col">
+            <p class="nav-dd__col-head">Featured</p>
+            {% if featured_article %}
+              <a href="{{ featured_article.url }}" class="nav-dd__article">
+                <div class="nav-dd__article-img">
+                  {% if featured_article.image %}
+                    <img src="{{ featured_article.image | image_url: width: 400 }}"
+                         alt="{{ featured_article.image.alt | default: featured_article.title | escape }}"
+                         width="400" height="200" loading="lazy" decoding="async">
+                  {% else %}
+                    <div class="nav-dd__article-img-fallback" aria-hidden="true">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" opacity="0.2"><rect x="4" y="6" width="24" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 20l7-7 5 5 4-4 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="nav-dd__article-body">
+                  <span class="nav-dd__article-title">{{ featured_article.title | truncate: 42 }}</span>
+                  <span class="nav-dd__article-cta">Read →</span>
+                </div>
+              </a>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </li>
-    <li class="mega-menu-nav-item">
-      <a href="{{ about_url }}" class="mega-menu-trigger mega-menu-trigger--plain">
-        <span>About</span>
-      </a>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-compare" data-nav-trigger="nav-panel-compare">
+        <span>Compare</span>
+      </button>
+      <div id="nav-panel-compare" class="nav-submenu-panel nav-panel" role="region" aria-label="Compare menu" hidden>
+        {%- assign compare_products = collections['hubs-adapters'].products -%}
+        <div class="nav-dd__compare-head">
+          <p class="nav-dd__col-head">Compare products</p>
+        </div>
+        <div class="nav-dd__compare-preview" aria-hidden="true">
+          {%- for p in compare_products limit: 3 -%}
+            <div class="nav-dd__compare-card">
+              <div class="nav-dd__compare-img">
+                {%- if p.featured_image -%}
+                  <img src="{{ p.featured_image | image_url: width: 120 }}"
+                       alt="{{ p.featured_image.alt | default: p.title | escape }}"
+                       width="60" height="60" loading="lazy" decoding="async">
+                {%- endif -%}
+              </div>
+              <span class="nav-dd__compare-name">{{ p.title | truncate: 22 }}</span>
+            </div>
+            {%- unless forloop.last -%}
+              <span class="nav-dd__compare-vs" aria-hidden="true">VS</span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+        <ul class="nav-dd__links" role="list" style="padding-top:2px">
+          <li>
+            <a href="/pages/compare" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Open compare tool</span>
+                <span class="nav-dd__link-sub">Compare up to 3 products</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-dd__compare-footer">
+          <span class="nav-dd__compare-badge">Free tool</span>
+          <a href="/pages/help-me-choose" class="nav-dd__compare-help">Not sure? Help me choose →</a>
+        </div>
+      </div>
     </li>
+
+    <li class="mega-menu-nav-item mega-menu-nav-item--submenu relative">
+      <button type="button" class="mega-menu-trigger mega-menu-trigger--plain" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-about" data-nav-trigger="nav-panel-about">
+        <span>About</span>
+      </button>
+      <div id="nav-panel-about" class="nav-submenu-panel nav-panel" role="region" aria-label="About menu" hidden>
+        <ul class="nav-dd__links" role="list">
+          <li>
+            <a href="/pages/our-story" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Our story</span>
+                <span class="nav-dd__link-sub">30 years of innovation</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/about" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">About EZQuest</span>
+                <span class="nav-dd__link-sub">Company &amp; mission</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/where-to-buy" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Where to buy</span>
+                <span class="nav-dd__link-sub">Retailers &amp; resellers</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/shipping-returns" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Shipping &amp; returns</span>
+                <span class="nav-dd__link-sub">Policies &amp; timelines</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/contact" class="nav-dd__link">
+              <span class="nav-dd__link-text">
+                <span class="nav-dd__link-title">Contact us</span>
+                <span class="nav-dd__link-sub">Phone · Email · Live chat</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
   </ul>
 
   <div class="mega-menu-backdrop" data-mega-backdrop hidden></div>
   <div class="mega-menu-panels" data-mega-panels>
-    {% render 'mega-menu-panel', group_handle: 'shop', section: section %}
-    {% render 'mega-menu-panel', group_handle: 'collections', section: section %}
+    {% render 'ez-mega-shop', section: section %}
   </div>
 </div>

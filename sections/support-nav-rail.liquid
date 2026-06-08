@@ -1,24 +1,6 @@
-<nav class="support-nav" aria-label="Support navigation">
-  <div class="page-width">
-    {%- liquid
-      assign support_links = 'Support|/pages/support,FAQ|/pages/faq,Downloads|/pages/downloads,Manuals|/pages/manuals,Firmware|/pages/firmware,User guides|/pages/user-guides,Compatibility|/pages/compatibility,Troubleshooting|/pages/troubleshooting,Warranty|/pages/warranty,Contact|/pages/contact' | split: ','
-    -%}
-    <ul class="support-nav__list" role="list">
-      {% for item in support_links %}
-        {%- assign parts = item | split: '|' -%}
-        <li>
-          <a
-            href="{{ parts[1] }}"
-            class="support-nav__link{% if request.path == parts[1] %} is-active{% endif %}"
-            {% if request.path == parts[1] %}aria-current="page"{% endif %}
-          >
-            {{ parts[0] }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</nav>
+{%- comment -%}
+  Support navigation rail intentionally disabled.
+{%- endcomment -%}
 
 {% schema %}
 {

@@ -1,0 +1,45 @@
+<section class="not-found section--dark" aria-label="Server error">
+  <div class="page-width not-found__inner">
+
+    <p class="not-found__kicker">500</p>
+
+    <h1 class="not-found__heading">
+      Something went wrong on our end.
+    </h1>
+
+    <p class="not-found__body">
+      Our server hit an unexpected error. The team has been notified. Please try again in a moment — or reach out to support if it keeps happening.
+    </p>
+
+    <div class="not-found__actions">
+      <a href="{{ routes.root_url }}" class="btn btn--primary not-found__btn-primary">
+        Go home
+      </a>
+      <a href="/pages/support" class="btn btn--secondary not-found__btn-secondary">
+        Contact support
+      </a>
+    </div>
+
+    <div class="not-found__families">
+      <p class="not-found__families-label">While you wait, browse:</p>
+      <div class="not-found__family-links">
+        <a href="{{ routes.collections_url }}/hubs-adapters" class="not-found__family-pill">Hubs &amp; Adapters</a>
+        <a href="{{ routes.collections_url }}/chargers-power" class="not-found__family-pill">Chargers &amp; Power</a>
+        <a href="{{ routes.collections_url }}/accessories" class="not-found__family-pill">Accessories</a>
+        <a href="/pages/faq" class="not-found__family-pill">FAQ</a>
+        <a href="/pages/support" class="not-found__family-pill">Support</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "500 page",
+  "settings": [],
+  "presets": [
+    { "name": "500 page" }
+  ]
+}
+{% endschema %}

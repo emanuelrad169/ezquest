@@ -12,24 +12,17 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Support request",
-        "heading": "Get help now",
-        "subheading": "Choose the reason for your request, share the key details once, and we will take the next step with you.",
-        "light_mode": true
+        "image": "shopify://shop_images/ezquest-support-hero.png",
+        "background_color": "#020617",
+        "kicker": "Contact",
+        "heading": "Contact Support",
+        "subheading": "Tell us what you need and we will route your message to the right specialist within one business day.",
+        "height": 320,
+        "overlay_opacity": 35
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "details": {
       "type": "info-card-grid",
-      "settings": {
-        "eyebrow": "Choose one",
-        "heading": "Three clear request types",
-        "copy": "Pick the reason that matches your need, then send one support request with the right context.",
-        "columns_desktop": 3
-      },
       "blocks": {
         "card_1": {
           "type": "card",
@@ -60,7 +53,13 @@
         "card_1",
         "card_2",
         "card_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Choose one",
+        "heading": "Three clear request types",
+        "copy": "Pick the reason that matches your need, then send one support request with the right context.",
+        "columns_desktop": 3
+      }
     },
     "form": {
       "type": "contact-form-panel",
@@ -68,17 +67,13 @@
         "eyebrow": "Support form",
         "heading": "Tell us what you need",
         "copy": "Choose the request type, add the key details, and keep the message focused on the next step you need.",
-        "side_eyebrow": "What to include",
-        "side_heading": "Help us respond clearly",
-        "side_copy": "Include the product name, order reference when relevant, and a short summary of what you expected versus what happened.",
         "success_message": "Thanks for reaching out. Your message has been sent."
       }
     }
   },
   "order": [
     "hero",
-    "nav_rail",
-    "details",
-    "form"
+    "form",
+    "details"
   ]
 }

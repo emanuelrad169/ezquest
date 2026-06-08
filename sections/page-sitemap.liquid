@@ -1,0 +1,85 @@
+{% comment %} sections/page-sitemap.liquid — HTML sitemap for SEO + AI crawlers {% endcomment %}
+<section class="section-shell">
+  <div class="container-shell">
+    <div class="editorial-shell">
+      <div class="max-w-3xl">
+        <p class="section-kicker">Site map</p>
+        <h1 class="section-heading mt-5">Everything on EZQuest</h1>
+        <p class="section-copy mt-5">A complete listing of all product families, support resources, and content on this site.</p>
+      </div>
+    </div>
+
+    <div class="sitemap-grid mt-12">
+
+      <div class="sitemap-group">
+        <h2 class="sitemap-group__heading">Shop</h2>
+        <ul class="sitemap-group__list">
+          <li><a href="{{ routes.collections_url }}">All products</a></li>
+          <li><a href="{{ routes.collections_url }}/hubs-adapters">Hubs &amp; Adapters</a></li>
+          <li><a href="{{ routes.collections_url }}/chargers-power">Chargers &amp; Power</a></li>
+          <li><a href="{{ routes.collections_url }}/accessories">Accessories &amp; Cables</a></li>
+          {%- for product in collections.all.products limit: 30 -%}
+            <li><a href="{{ product.url }}">{{ product.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="sitemap-group">
+        <h2 class="sitemap-group__heading">Support</h2>
+        <ul class="sitemap-group__list">
+          <li><a href="/pages/support">Support center</a></li>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/compatibility">Compatibility checker</a></li>
+          <li><a href="/pages/help-me-choose">Help me choose</a></li>
+          <li><a href="/pages/compare">Compare products</a></li>
+          <li><a href="/pages/downloads">Downloads &amp; drivers</a></li>
+          <li><a href="/pages/manuals">Manuals</a></li>
+          <li><a href="/pages/user-guides">User guides</a></li>
+          <li><a href="/pages/firmware">Firmware</a></li>
+          <li><a href="/pages/contact">Contact us</a></li>
+          <li><a href="/pages/ticket-submission">Submit a ticket</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-group">
+        <h2 class="sitemap-group__heading">Company</h2>
+        <ul class="sitemap-group__list">
+          <li><a href="/pages/about">About EZQuest</a></li>
+          <li><a href="/pages/our-story">Our story</a></li>
+          <li><a href="/pages/where-to-buy">Where to buy</a></li>
+          <li><a href="/pages/warranty">Warranty</a></li>
+          <li><a href="/pages/shipping-returns">Shipping &amp; returns</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-group">
+        <h2 class="sitemap-group__heading">Resources</h2>
+        <ul class="sitemap-group__list">
+          <li><a href="/blogs/resources">Blog</a></li>
+          {%- for article in blogs.resources.articles limit: 20 -%}
+            <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="sitemap-group">
+        <h2 class="sitemap-group__heading">Legal &amp; policies</h2>
+        <ul class="sitemap-group__list">
+          <li><a href="{{ shop.privacy_policy.url }}">Privacy policy</a></li>
+          <li><a href="{{ shop.refund_policy.url }}">Refund policy</a></li>
+          <li><a href="{{ shop.terms_of_service.url }}">Terms of service</a></li>
+          <li><a href="/pages/cookie-policy">Cookie policy</a></li>
+          <li><a href="/pages/llms">llms.txt</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sitemap",
+  "settings": []
+}
+{% endschema %}

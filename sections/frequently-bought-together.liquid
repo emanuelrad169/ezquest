@@ -1,0 +1,133 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign valid_product_count = 0
+
+  for block in section.blocks
+    if block.type == 'product' and block.settings.product != blank
+      assign valid_product_count = valid_product_count | plus: 1
+    endif
+  endfor
+%}
+
+{% if valid_product_count > 0 %}
+  <section class="fbt-section section--grey" aria-label="Frequently bought together">
+    <div class="page-width">
+      <div class="fbt-header">
+        <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
+        <h2 class="fbt-header__heading">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="fbt-layout">
+        <div class="fbt-products">
+          {% liquid
+            assign rendered_product_count = 0
+          %}
+
+          {% for block in section.blocks %}
+            {% liquid
+              assign fbt_product = block.settings.product
+              assign fbt_variant = fbt_product.selected_or_first_available_variant
+            %}
+
+            {% if block.type == 'product' and fbt_product != blank and fbt_variant != blank %}
+              {% liquid
+                assign rendered_product_count = rendered_product_count | plus: 1
+              %}
+
+              <div
+                class="fbt-item"
+                data-variant-id="{{ fbt_variant.id }}"
+                data-price="{{ fbt_product.price }}"
+                {{ block.shopify_attributes }}
+              >
+                {% if fbt_product.featured_image != blank %}
+                  <img
+                    class="fbt-item__img"
+                    src="{{ fbt_product.featured_image | image_url: width: 160, format: 'pjpg' }}"
+                    alt="{{ fbt_product.title | escape }}"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                {% endif %}
+
+                <div class="fbt-item__body">
+                  <p class="fbt-item__title">{{ fbt_product.title | escape }}</p>
+                  <p class="fbt-item__price">{{ fbt_product.price | money }}</p>
+                </div>
+              </div>
+
+              {% if rendered_product_count < valid_product_count %}
+                <span class="fbt-plus" aria-hidden="true">+</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="fbt-summary">
+          <p class="fbt-summary__label">Total price</p>
+          <p class="fbt-summary__price" id="fbt-total"></p>
+          <div class="fbt-checkboxes" id="fbt-checkboxes"></div>
+          <button
+            type="button"
+            class="btn btn--primary fbt-add-btn"
+            id="fbt-add-all"
+            aria-label="Add selected items to cart"
+          >
+            Add all to cart
+          </button>
+          {% if section.settings.note != blank %}
+            <p class="fbt-summary__note">{{ section.settings.note | escape }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Bought together",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Complete the setup"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently bought together"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Ships together · Free over $100"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Frequently bought together"
+    }
+  ]
+}
+{% endschema %}

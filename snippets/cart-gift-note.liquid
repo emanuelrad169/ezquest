@@ -1,0 +1,34 @@
+{% comment %} Optional cart note field used by cart page and drawer. {% endcomment %}
+{%- assign gift_note_id = id | default: 'cart-gift-note' -%}
+{%- assign note_form_id = form_id | default: '' -%}
+{%- assign is_open = false -%}
+{%- if cart.note != blank -%}
+  {%- assign is_open = true -%}
+{%- endif -%}
+
+<div class="cart-gift-note" data-cart-gift-note>
+  <label class="cart-gift-note__toggle">
+    <input
+      type="checkbox"
+      class="cart-gift-note__checkbox"
+      data-cart-gift-toggle
+      {% if is_open %}checked{% endif %}
+    >
+    <span>Add a gift message</span>
+  </label>
+
+  <div class="cart-gift-note__panel" data-cart-gift-panel {% unless is_open %}hidden{% endunless %}>
+    <label class="cart-gift-note__label" for="{{ gift_note_id }}">Gift message</label>
+    <textarea
+      id="{{ gift_note_id }}"
+      class="cart-gift-note__textarea"
+      name="note"
+      rows="3"
+      maxlength="500"
+      placeholder="Add a short message for the recipient"
+      data-cart-gift-textarea
+      {% if note_form_id != blank %}form="{{ note_form_id }}"{% endif %}
+    >{{ cart.note | escape }}</textarea>
+    <p class="cart-gift-note__status" data-cart-gift-status aria-live="polite"></p>
+  </div>
+</div>

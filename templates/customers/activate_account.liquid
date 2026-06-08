@@ -1,0 +1,60 @@
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+
+<div class="account-page">
+
+  <div class="account-hero">
+    <p class="account-hero__kicker">My Account</p>
+    <h1 class="account-hero__heading">Activate your account</h1>
+    <p class="account-hero__subhead">Create a password to complete your account setup.</p>
+  </div>
+
+  <div class="account-wrap account-wrap--narrow">
+    <div class="account-card">
+
+      {%- form 'activate_customer_password' -%}
+        {%- if form.errors -%}
+          <div class="account-errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="account-form">
+
+          <div class="account-field">
+            <label for="ActivatePassword">Password <span style="color:#6e6e73;font-weight:400">(min. 5 characters)</span></label>
+            <input
+              type="password"
+              name="customer[password]"
+              id="ActivatePassword"
+              autocomplete="new-password"
+              minlength="5"
+              required
+              {% if form.errors contains 'password' %}aria-invalid="true"{% endif %}
+            >
+          </div>
+
+          <div class="account-field">
+            <label for="ActivatePasswordConfirm">Confirm password</label>
+            <input
+              type="password"
+              name="customer[password_confirmation]"
+              id="ActivatePasswordConfirm"
+              autocomplete="new-password"
+              minlength="5"
+              required
+            >
+          </div>
+
+          <div class="account-form__actions">
+            <button type="submit" class="btn btn--primary btn--block">Activate account</button>
+            <a href="{{ routes.account_login_url }}" class="btn btn--secondary btn--block">
+              Already have a password? Sign in
+            </a>
+          </div>
+
+        </div>
+      {%- endform -%}
+
+    </div>
+  </div>
+</div>

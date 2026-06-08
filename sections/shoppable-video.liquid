@@ -1,0 +1,271 @@
+{{ 'shoppable-video.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign youtube_url = section.settings.youtube_url | strip
+  assign youtube_id = ''
+
+  if youtube_url != blank
+    if youtube_url contains 'youtu.be/'
+      assign youtube_id = youtube_url | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first | split: '/' | first
+    elsif youtube_url contains 'watch?v='
+      assign youtube_id = youtube_url | split: 'watch?v=' | last | split: '&' | first
+    elsif youtube_url contains '/embed/'
+      assign youtube_id = youtube_url | split: '/embed/' | last | split: '?' | first | split: '&' | first
+    elsif youtube_url contains '/shorts/'
+      assign youtube_id = youtube_url | split: '/shorts/' | last | split: '?' | first | split: '&' | first
+    elsif youtube_url contains 'v='
+      assign youtube_id = youtube_url | split: 'v=' | last | split: '&' | first
+    endif
+  endif
+
+  assign has_native_video = false
+  if section.settings.video != blank
+    assign has_native_video = true
+  endif
+
+  assign has_youtube_video = false
+  if youtube_id != blank
+    assign has_youtube_video = true
+  endif
+%}
+
+<section class="shoppable-video section--dark" aria-label="{{ section.settings.heading | escape }}">
+  <div class="shoppable-video__media">
+    {% if has_native_video %}
+      {{
+        section.settings.video
+        | video_tag:
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          class: 'shoppable-video__video'
+      }}
+    {% elsif has_youtube_video %}
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}?autoplay=1&mute=1&loop=1&playlist={{ youtube_id | escape }}&playsinline=1&controls=0&modestbranding=1&rel=0"
+        class="shoppable-video__iframe"
+        title="{{ section.settings.heading | escape }}"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    {% else %}
+      <div class="shoppable-video__placeholder">
+        <p>Upload a video in theme customizer</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="shoppable-video__overlay" aria-hidden="true"></div>
+
+  <div class="shoppable-video__content">
+    {% if section.settings.kicker != blank %}
+      <p class="shoppable-video__kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
+
+    <h2 class="shoppable-video__heading">{{ section.settings.heading | escape }}</h2>
+
+    {% if section.settings.body != blank %}
+      <p class="shoppable-video__body">{{ section.settings.body | escape }}</p>
+    {% endif %}
+
+    {% if section.settings.cta_label != blank %}
+      <a href="{{ section.settings.cta_url | default: '#' | escape }}" class="shoppable-video__cta">
+        {{ section.settings.cta_label | escape }}
+      </a>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div class="shoppable-video__tag-layer" aria-label="Tagged products">
+      {% for block in section.blocks %}
+        {% liquid
+          assign tagged_product = block.settings.product
+        %}
+
+        {% if block.type == 'product' and tagged_product != blank %}
+          <a
+            href="{{ tagged_product.url | escape }}"
+            class="shoppable-product-tag shoppable-product-tag--{{ block.id }}"
+            aria-label="{{ tagged_product.title | escape }}"
+            {{ block.shopify_attributes }}
+          >
+            {% if tagged_product.featured_image != blank %}
+              <img
+                src="{{ tagged_product.featured_image | image_url: width: 80, format: 'pjpg' }}"
+                alt="{{ tagged_product.title | escape }}"
+                class="shoppable-product-tag__img"
+                width="40"
+                height="40"
+                loading="lazy"
+              >
+            {% endif %}
+
+            <span class="shoppable-product-tag__info">
+              <span class="shoppable-product-tag__title">{{ tagged_product.title | truncate: 30 | escape }}</span>
+              <span class="shoppable-product-tag__price">{{ tagged_product.price | money }}</span>
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  {% for block in section.blocks %}
+    {% if block.type == 'product' %}
+      #shopify-section-{{ section.id }} .shoppable-product-tag--{{ block.id }} {
+        --x: {{ block.settings.x_position }}%;
+        --y: {{ block.settings.y_position }}%;
+      }
+    {% endif %}
+  {% endfor %}
+</style>
+
+<script>
+  (function () {
+    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!section) return;
+
+    section.querySelectorAll('video').forEach(function (video) {
+      video.pause();
+      video.removeAttribute('autoplay');
+    });
+  })();
+</script>
+
+{% comment %} VideoObject structured data {% endcomment %}
+{%- liquid
+  assign schema_video_url = youtube_url
+  assign schema_video_thumb = blank
+  assign schema_video_title = section.settings.heading | default: product.title | default: shop.name
+  assign schema_video_desc = section.settings.body | default: product.description | default: schema_video_title | strip_html | truncate: 300
+
+  if youtube_id != blank
+    assign schema_video_thumb = 'https://img.youtube.com/vi/' | append: youtube_id | append: '/maxresdefault.jpg'
+  elsif section.settings.video != blank and section.settings.video.preview_image != blank
+    assign schema_video_thumb = section.settings.video.preview_image | image_url: width: 1280
+  elsif product.featured_image != blank
+    assign schema_video_thumb = product.featured_image | image_url: width: 1280
+  endif
+
+  if schema_video_url == blank and section.settings.video != blank
+    assign schema_video_source = section.settings.video.sources | where: 'format', 'mp4' | first
+    if schema_video_source == blank
+      assign schema_video_source = section.settings.video.sources | first
+    endif
+    assign schema_video_url = schema_video_source.url
+  endif
+-%}
+
+{%- if schema_video_url != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": {{ schema_video_title | json }},
+    "description": {{ schema_video_desc | json }},
+    {%- if schema_video_thumb != blank %}
+    "thumbnailUrl": {{ schema_video_thumb | json }},
+    {%- endif %}
+    "uploadDate": "{{ 'now' | date: '%Y-%m-%d' }}",
+    "contentUrl": {{ schema_video_url | json }},
+    "publisher": {
+      "@type": "Organization",
+      "name": "EZQuest",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ 'ezquest-logo.svg' | asset_url }}"
+      }
+    }{%- if youtube_id != blank -%},
+    "embedUrl": "https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}"
+    {%- endif %}
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Shoppable video",
+  "tag": "section",
+  "class": "section-shoppable-video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See it in action"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product tag",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "x_position",
+          "label": "Horizontal position %",
+          "min": 5,
+          "max": 90,
+          "step": 5,
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y_position",
+          "label": "Vertical position %",
+          "min": 5,
+          "max": 85,
+          "step": 5,
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Shoppable video"
+    }
+  ]
+}
+{% endschema %}

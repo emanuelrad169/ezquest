@@ -1,11 +1,10 @@
+{%- comment -%}v2026-04-15b{%- endcomment -%}
 {%- liquid
   assign resolved_handle = product_handle | default: product.handle
   assign resolved_title = product_title | default: product.title | default: 'EZQuest product'
   assign resolved_variant = variant | default: 'hero'
   assign resolved_width = width | default: 1600
-  assign resolved_height = height | default: 1200
   assign resolved_class = class | default: ''
-  assign resolved_kind = kind | default: 'product'
   assign resolved_loading = loading | default: 'lazy'
   assign resolved_fetchpriority = fetchpriority | default: 'auto'
   assign resolved_alt = alt | default: resolved_title
@@ -47,7 +46,9 @@
       assign preferred_keyword = 'scale'
   endcase
 
-  if resolved_handle != blank
+  if product != blank and product.handle != blank
+    assign resolved_product = product
+  elsif resolved_handle != blank
     assign resolved_product = all_products[resolved_handle]
   endif
 
@@ -192,15 +193,25 @@
       endcase
     endif
   endif
+
+  assign resolved_height = resolved_width
+  if resolved_image != blank and resolved_image.aspect_ratio > 0
+    assign resolved_height = resolved_width | divided_by: resolved_image.aspect_ratio | round
+  endif
 -%}
 {% if resolved_image != blank %}
-  {{ resolved_image | image_url: width: resolved_width | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
+  {{ resolved_image | image_url: width: resolved_width, format: 'pjpg' | image_tag: alt: resolved_alt, class: resolved_class, loading: resolved_loading, fetchpriority: resolved_fetchpriority, width: resolved_width, height: resolved_height, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 100vw' }}
 {% else %}
-  {% render 'placeholder-visual',
-    kind: resolved_kind,
-    text: resolved_title,
-    width: resolved_width,
-    height: resolved_height,
-    class: resolved_class
-  %}
+  <div class="product-visual-placeholder {{ resolved_class }}"
+       role="img"
+       aria-label="{{ resolved_title | escape }} — image coming soon">
+    <img
+      src="{{ 'ezquest-logo.svg' | asset_url }}"
+      alt="EZQuest"
+      class="product-visual-placeholder__logo"
+      width="80"
+      height="24"
+      loading="lazy"
+    >
+  </div>
 {% endif %}

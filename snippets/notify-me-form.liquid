@@ -1,0 +1,40 @@
+{% comment %} snippets/notify-me-form.liquid {% endcomment %}
+<form
+  class="notify-form"
+  id="notify-form-{{ section.id }}"
+  action="{{ routes.root_url }}contact"
+  method="post"
+  data-notify-form
+  data-product-title="{{ product.title | escape }}"
+  data-product-handle="{{ product.handle | escape }}"
+  data-product-url="{{ shop.url }}{{ product.url }}"
+>
+  <input type="hidden" name="form_type" value="customer">
+  <input type="hidden" name="utf8" value="✓">
+
+  <p class="notify-form__message">{{ 'notify.out_of_stock' | t }}</p>
+
+  <div class="notify-form__input-row" data-notify-fields data-notify-input-row>
+    <input
+      type="email"
+      class="notify-form__input"
+      data-notify-email
+      name="contact[email]"
+      placeholder="{{ 'notify.email_placeholder' | t }}"
+      aria-label="{{ 'notify.label' | t }}"
+      autocomplete="email"
+      required
+    >
+    <button class="btn btn--primary notify-form__submit" data-notify-submit type="submit">
+      {{ 'notify.submit' | t }}
+    </button>
+  </div>
+
+  <input type="hidden" data-notify-product value="{{ product.title | escape }}">
+  <input type="hidden" data-notify-variant value="{{ product.selected_or_first_available_variant.title | escape }}">
+
+  <p class="notify-form__success" data-notify-success hidden role="status" aria-live="polite">
+    {{ 'notify.success' | t }}
+  </p>
+  <p class="notify-form__error" data-notify-error hidden role="alert" aria-live="polite"></p>
+</form>

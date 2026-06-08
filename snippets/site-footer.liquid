@@ -1,131 +1,108 @@
-{%- liquid
-  assign support_menu = section.settings.support_menu | default: settings.footer_menu_support
-  assign company_menu = section.settings.company_menu | default: settings.footer_menu_company
-  assign legal_menu = section.settings.legal_menu | default: settings.footer_menu_legal
--%}
 <footer class="site-footer" role="contentinfo">
   <div class="container-shell">
-    <div class="site-footer-shell">
-      <div class="site-footer-brand-column">
-        <a href="{{ routes.root_url }}" class="site-footer-brandmark">
-          {% if settings.brand_logo != blank %}
-            {{ settings.brand_logo | image_url: width: 220 | image_tag: alt: shop.name, class: 'h-10 w-auto' }}
-          {% else %}
-            <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="h-10 w-auto" width="152" height="36">
-          {% endif %}
-        </a>
 
-        <div class="site-footer-contact-block">
-          <h3 class="site-footer-column-heading">Support</h3>
-          <ul class="site-footer-contact-list">
-            <li>
-              <span class="site-footer-contact-icon">{% render 'icon', name: 'map' %}</span>
-              <span>Support, manuals, downloads, compatibility, and where to buy stay in one place.</span>
-            </li>
-            <li>
-              <span class="site-footer-contact-icon">{% render 'icon', name: 'support' %}</span>
-              <span><a href="/pages/contact">Need direct help? Contact EZQuest support.</a></span>
-            </li>
-          </ul>
-        </div>
-      </div>
+    {% comment %} TOP: 4-col link grid {% endcomment %}
+    <div class="site-footer__grid">
 
-      <div class="site-footer-column">
-        <h3 class="site-footer-column-heading">{{ section.settings.company_heading }}</h3>
-        {% if company_menu != blank and company_menu.links.size > 0 %}
-          <ul class="site-footer-link-list">
-            {% for link in company_menu.links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
+    <div class="footer-col">
+      <p class="footer-col__heading">Products</p>
+      <ul class="footer-col__links">
+        <li><a href="{{ routes.collections_url }}/hubs-adapters">Hubs &amp; adapters</a></li>
+        <li><a href="{{ routes.collections_url }}/chargers-power">Chargers &amp; power</a></li>
+        <li><a href="{{ routes.collections_url }}/accessories">Cables &amp; accessories</a></li>
+        <li><a href="{{ routes.collections_url }}">View all products</a></li>
+        <li><a href="/pages/help-me-choose">Setup guide</a></li>
+        <li><a href="/pages/compare">Compare products</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col__heading">Support</p>
+      <ul class="footer-col__links">
+        <li><a href="/pages/support">Support center</a></li>
+        <li><a href="/pages/faq">FAQ</a></li>
+        <li><a href="/pages/downloads">Downloads</a></li>
+        <li><a href="/pages/warranty">Warranty</a></li>
+        <li><a href="/pages/contact">Contact us</a></li>
+        <li><a href="/pages/ticket-submission">Submit a ticket</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col__heading">Company</p>
+      <ul class="footer-col__links">
+        <li><a href="/pages/about">About EZQuest</a></li>
+        <li><a href="/pages/our-story">Our story</a></li>
+        <li><a href="/pages/where-to-buy">Where to buy</a></li>
+        <li><a href="/blogs/resources">Guides &amp; resources</a></li>
+        <li><a href="/pages/compatibility">Compatibility</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col__heading">Legal</p>
+      <ul class="footer-col__links">
+        <li><a href="/policies/privacy-policy">Privacy policy</a></li>
+        <li><a href="/policies/terms-of-service">Terms of service</a></li>
+        <li><a href="/policies/refund-policy">Refund policy</a></li>
+        <li><a href="/pages/shipping-returns">Shipping &amp; returns</a></li>
+        <li><a href="/pages/cookie-policy">Cookie policy</a></li>
+      </ul>
+    </div>
+
+    </div>
+
+    <div class="site-footer__divider"></div>
+
+    {% comment %} BOTTOM: logo + social + copyright {% endcomment %}
+    <div class="site-footer__bottom">
+
+    <div class="site-footer__brand">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+        {% if settings.brand_logo != blank %}
+          {{ settings.brand_logo | image_url: width: 200 | image_tag: alt: shop.name, width: 100, height: 28, loading: 'lazy' }}
         {% else %}
-          <ul class="site-footer-link-list">
-            <li><a href="/pages/about">About EZQuest</a></li>
-            <li><a href="/pages/our-story">Our Story</a></li>
-            <li><a href="/pages/where-to-buy">Where to Buy</a></li>
-            <li><a href="/blogs/resources">Resources</a></li>
-          </ul>
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="100" height="28" loading="lazy">
         {% endif %}
-      </div>
+      </a>
+      <p class="site-footer__tagline">Premium Digital Life Accessories</p>
+    </div>
 
-      <div class="site-footer-column">
-        <h3 class="site-footer-column-heading">Product families</h3>
-        {% if support_menu != blank and support_menu.links.size > 0 %}
-          <ul class="site-footer-link-list">
-            {% for link in support_menu.links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <ul class="site-footer-link-list">
-            <li><a href="{{ routes.collections_url }}/hubs-adapters">Hubs & Adapters</a></li>
-            <li><a href="{{ routes.collections_url }}/docking-stations">Docking Stations</a></li>
-            <li><a href="{{ routes.collections_url }}/chargers-power">Chargers & Power</a></li>
-            <li><a href="{{ routes.collections_url }}/accessories">Accessories</a></li>
-          </ul>
-        {% endif %}
-      </div>
+    <div class="site-footer__social">
+      <a href="https://www.facebook.com/EZQuestInc/" aria-label="EZQuest on Facebook" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/ezquestinc/" aria-label="EZQuest on Instagram" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://x.com/EZQuestInc" aria-label="EZQuest on X/Twitter" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/@ezquest2146" aria-label="EZQuest on YouTube" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+        </svg>
+      </a>
+      <a href="http://pinterest.com/EZQuestInc/" aria-label="EZQuest on Pinterest" class="footer-social-link" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+        </svg>
+      </a>
+    </div>
 
-      <div class="site-footer-column">
-        <h3 class="site-footer-column-heading">{{ section.settings.legal_heading }}</h3>
-        {% if legal_menu != blank and legal_menu.links.size > 0 %}
-          <ul class="site-footer-link-list">
-            {% for link in legal_menu.links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <ul class="site-footer-link-list">
-            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
-            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
-            <li><a href="/policies/refund-policy">Refund Policy</a></li>
-            <li><a href="/pages/shipping-returns">Shipping &amp; returns</a></li>
-            <li><a href="/pages/cookie-policy">Cookie Policy</a></li>
-          </ul>
-        {% endif %}
-      </div>
+    <p class="site-footer__copy">
+      &copy; {{ 'now' | date: '%Y' }} EZQuest Corporation. All rights reserved.
+    </p>
+
     </div>
   </div>
 
-  <div class="site-footer-meta-bar">
-    <div class="container-shell site-footer-meta-shell">
-      <div class="site-footer-meta-links">
-        {% if legal_menu != blank and legal_menu.links.size > 0 %}
-          {% for link in legal_menu.links limit: 4 %}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {% endfor %}
-        {% else %}
-          <a href="/policies/privacy-policy">Privacy Policy</a>
-          <a href="/policies/terms-of-service">Terms of Service</a>
-          <a href="/policies/refund-policy">Refund Policy</a>
-          <a href="/pages/cookie-policy">Cookie Policy</a>
-        {% endif %}
-      </div>
-
-        <div class="site-footer-socials">
-        <a href="/pages/support" aria-label="Support">Support</a>
-        <a href="/pages/compare" aria-label="Compare">Compare</a>
-        <a href="/blogs/resources" aria-label="Resources">Resources</a>
-        <a href="/pages/where-to-buy" aria-label="Where to buy">Where to buy</a>
-        <a href="/pages/about" aria-label="About EZQuest">About</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="site-footer-bottom">
-    <div class="container-shell site-footer-bottom-shell">
-      <div class="site-footer-payments" aria-label="Accepted payment methods">
-        <span>Visa</span>
-        <span>Mastercard</span>
-        <span>Amex</span>
-        <span>PayPal</span>
-        <span>Discover</span>
-      </div>
-
-      <div class="site-footer-copyright">
-        <span>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name }}</span>
-        <span>{{ section.settings.bottom_text }}</span>
-      </div>
-    </div>
-  </div>
 </footer>

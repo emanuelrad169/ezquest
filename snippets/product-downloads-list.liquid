@@ -1,0 +1,51 @@
+{% comment %}
+  Renders the per-product download list from ezquest_download metaobjects.
+  Usage: {% render 'product-downloads-list', product: product %}
+  Filters by iterating dl.products.value (array of Product drops) and comparing
+  .id to the current product.id — GID string comparison does not work here
+  because .value returns objects, not strings.
+{% endcomment %}
+
+{%- assign all_downloads = shop.metaobjects.ezquest_download.values -%}
+
+{%- capture dl_list_html -%}
+  {%- for dl in all_downloads -%}
+    {%- assign dl_has_product = false -%}
+    {%- for ref in dl.products.value -%}
+      {%- if ref.id == product.id -%}
+        {%- assign dl_has_product = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if dl_has_product -%}
+      {%- assign file_url = dl.file.value.url | default: dl.external_url.value -%}
+      {%- if file_url != blank -%}
+        {%- assign ext = file_url | split: '?' | first | split: '.' | last | upcase -%}
+        {%- assign ext_class = 'file' -%}
+        {%- if ext == 'PDF' or ext == 'ZIP' or ext == 'EXE' or ext == 'DMG' -%}
+          {%- assign ext_class = ext | downcase -%}
+        {%- else -%}
+          {%- assign ext = '' -%}
+        {%- endif -%}
+        <li class="pdp-dl-item">
+          <span class="pdp-dl-item__icon pdp-dl-item__icon--{{ ext_class }}" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="pdp-dl-item__text">
+            <span class="pdp-dl-item__name">{{ dl.title.value }}</span>
+            {%- if ext != blank -%}<span class="pdp-dl-item__meta">{{ ext }} file</span>{%- endif -%}
+          </span>
+          <a class="pdp-dl-item__btn" href="{{ file_url }}" target="_blank" rel="noopener" download aria-label="Download {{ dl.title.value | escape }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Download</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if dl_list_html != blank -%}
+  <ul class="pdp-dl-list">{{ dl_list_html }}</ul>
+{%- else -%}
+  <p class="pdp-dl-empty">No downloads available for this product yet. Visit the <a href="/pages/downloads" class="site-meta-link">downloads page</a> for all support files.</p>
+{%- endif -%}

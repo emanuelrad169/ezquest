@@ -6,11 +6,57 @@ module.exports = {
     "./snippets/**/*.liquid",
     "./src/**/*.css"
   ],
+  safelist: [
+    'is-open',
+    'is-revealed',
+    'is-active',
+    'is-hidden',
+    'pb-20',
+    'pt-20',
+    { pattern: /^faq-/ },
+    { pattern: /^reveal-/ },
+    { pattern: /^decision-/ },
+    { pattern: /^compare-/ },
+    { pattern: /^contact-/ },
+    { pattern: /^download-/ },
+    { pattern: /^support-/ },
+    { pattern: /^product-/ },
+    { pattern: /^pdp-/ },
+    { pattern: /^hero-/ },
+    { pattern: /^cart-/ },
+    { pattern: /^mega-/ },
+    { pattern: /^trust-/ },
+    { pattern: /^collection-/ },
+  ],
   theme: {
     extend: {
       colors: {
+        amber: {
+          50: "rgba(254, 211, 0, 0.12)",
+          100: "rgba(254, 211, 0, 0.18)",
+          200: "rgba(254, 211, 0, 0.32)",
+          300: "rgba(254, 211, 0, 0.56)",
+          400: "#FED300",
+          500: "#FED300",
+          600: "#FED300",
+          700: "#FED300",
+          800: "#FED300",
+          900: "#FED300"
+        },
+        yellow: {
+          50: "rgba(254, 211, 0, 0.12)",
+          100: "rgba(254, 211, 0, 0.18)",
+          200: "rgba(254, 211, 0, 0.32)",
+          300: "rgba(254, 211, 0, 0.56)",
+          400: "#FED300",
+          500: "#FED300",
+          600: "#FED300",
+          700: "#FED300",
+          800: "#FED300",
+          900: "#FED300"
+        },
         brand: {
-          DEFAULT: "#facc15",
+          DEFAULT: "#FED300",
           soft: "#fef3c7"
         },
         ink: {
@@ -26,7 +72,26 @@ module.exports = {
         border: {
           DEFAULT: "#e2e8f0",
           strong: "#cbd5e1"
-        }
+        },
+        /* Token-aliased utilities — generated from src/styles/tokens.css */
+        'ez-brand':   { yellow: 'var(--ez-brand-yellow)', dark: 'var(--ez-brand-dark)' },
+        'ez-text':    {
+          primary:   'var(--ez-text-primary)',
+          secondary: 'var(--ez-text-secondary)',
+          tertiary:  'var(--ez-text-tertiary)',
+          link:      'var(--ez-text-link)',
+        },
+        'ez-surface': {
+          DEFAULT: 'var(--ez-surface-default)',
+          soft:    'var(--ez-surface-soft)',
+          subtle:  'var(--ez-surface-subtle)',
+          dark:    'var(--ez-surface-dark)',
+        },
+        'ez-border': {
+          DEFAULT: 'var(--ez-border-default)',
+          strong:  'var(--ez-border-strong)',
+          subtle:  'var(--ez-border-subtle)',
+        },
       },
       fontSize: {
         "caption-xs": ["0.65rem", { lineHeight: "1rem", letterSpacing: "0.18em" }],
@@ -213,11 +278,14 @@ module.exports = {
       boxShadow: {
         soft: "0 12px 36px rgba(15, 23, 42, 0.04)",
         medium: "0 18px 50px rgba(15, 23, 42, 0.05)",
-        lift: "0 24px 70px rgba(15, 23, 42, 0.12)"
+        lift: "0 24px 70px rgba(15, 23, 42, 0.12)",
+        xs:    'var(--shadow-xs)',
+        xl:    'var(--shadow-xl)',
+        focus: 'var(--shadow-focus)',
       },
       backgroundImage: {
         surface: "linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%)",
-        "surface-glow": "radial-gradient(circle at top left, rgba(250, 204, 21, 0.16), transparent 28%), linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+        "surface-glow": "radial-gradient(circle at top left, rgba(254, 211, 0, 0.16), transparent 28%), linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         "surface-brand": "linear-gradient(180deg, #fffcf1 0%, #f8fafc 100%)"
       },
       gridTemplateColumns: {
@@ -257,6 +325,12 @@ module.exports = {
       },
       backdropBlur: {
         hairline: "1px"
+      },
+      transitionTimingFunction: {
+        overshoot: "cubic-bezier(.34,1.56,.64,1)"
+      },
+      screens: {
+        "lg-mid": "900px"
       }
     }
   },

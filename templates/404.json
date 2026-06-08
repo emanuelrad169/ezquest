@@ -15,7 +15,21 @@
         "heading": "This page isn't connected.",
         "copy": "The link might have moved or the URL might be wrong. Here is where to go instead."
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 280,
+        "heading": "We couldn't find that page",
+        "subheading": "Try searching or browse our products from the menu.",
+        "kicker": "Not found"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "page_hero",
+    "main"
+  ]
 }

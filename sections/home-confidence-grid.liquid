@@ -1,85 +1,76 @@
 <section class="section-shell pt-10 lg:pt-16 home-confidence-section">
   <div class="container-shell">
-    <div class="home-confidence-header grid gap-8 lg:grid-cols-2 lg:items-end reveal-on-scroll">
-      <div class="home-confidence-header-copy max-w-3xl">
-        {% if section.settings.eyebrow != blank %}
-          <p class="section-kicker">{{ section.settings.eyebrow }}</p>
-        {% endif %}
-        <h2 class="section-heading{% if section.settings.eyebrow != blank %} mt-4{% endif %}">{{ section.settings.heading }}</h2>
-        {% if section.settings.copy != blank %}
-          <p class="section-copy mt-4">{{ section.settings.copy }}</p>
-        {% endif %}
-      </div>
-      <div class="home-confidence-header-note max-w-sm text-sm leading-6 text-slate-500 lg:justify-self-end">
-        <p>Keep shipping, warranty, manuals, and support visible so confidence comes from the product and the help behind it.</p>
-      </div>
-    </div>
 
-    <div class="home-confidence-grid mt-8 grid gap-4 lg:grid-cols-3 reveal-stagger">
-      <article class="home-confidence-card home-confidence-card--shipping card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
+    <div class="home-confidence-grid mt-8 reveal-stagger">
+
+      {%- comment -%} Row 1 · Col 1 — Fast shipping {%- endcomment -%}
+      <article class="home-confidence-card home-confidence-card--shipping">
         <div class="home-confidence-card-copy">
-          <h3 class="card-title">Fast shipping</h3>
-          <p class="type-body mt-3">Shipping and delivery details stay clear before checkout, so expectations feel as reliable as the product.</p>
+          <h3 class="home-confidence-card-title">Fast shipping</h3>
+          <p class="home-confidence-card-sub">Orders ship within 1–2 business days with full tracking provided.</p>
         </div>
-        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
-          {% render 'icon', name: 'truck' %}
+        <div class="home-confidence-card-icon" style="--icon-bg:#FEF3C7;--icon-color:#92400E">
+          {% render 'icon', name: 'truck', size: 28 %}
         </div>
       </article>
 
-      <article class="home-confidence-card home-confidence-card--featured card-base flex h-full flex-col justify-between gap-6 bg-gradient-to-b from-white to-slate-50 p-6 shadow-md lg:col-span-1 lg:row-span-2 lg:p-7">
-        <div class="home-confidence-card-copy">
-          <p class="type-caption home-confidence-card-eyebrow">Direct support</p>
-          <h3 class="card-title">Support stays tied to what you bought.</h3>
-          <p class="type-body mt-3">Move from manuals and downloads into compatibility guidance and direct help without losing product context.</p>
-          <div class="home-confidence-card-links mt-5 flex flex-wrap items-center gap-3">
-            {% render 'button', label: 'Open support center', url: '/pages/support', style: 'secondary', size: 'sm', class: 'home-confidence-link no-underline' %}
-            {% render 'button', label: 'Check compatibility', url: '/pages/compatibility', style: 'secondary', size: 'sm', class: 'home-confidence-link home-confidence-link--subtle bg-slate-50 text-slate-600 no-underline' %}
+      {%- comment -%} Row 1 · Cols 2–3 — 2-Year Warranty HERO {%- endcomment -%}
+      <article class="home-confidence-card home-confidence-card--hero">
+        <div class="home-confidence-hero-watermark" aria-hidden="true">
+          <svg width="240" height="240" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2.9 13.9 4.6v3.6c0 3-2 5.65-4.9 6.9-2.9-1.25-4.9-3.9-4.9-6.9V4.6L9 2.9Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="home-confidence-hero-copy">
+          <p class="home-confidence-hero-eyebrow">EZQuest Promise</p>
+          <p class="home-confidence-hero-title">1–2yr warranty</p>
+          <p class="home-confidence-hero-sub">Varies by product. No fine print.</p>
+        </div>
+        <div class="home-confidence-hero-bottom">
+          <svg class="home-confidence-hero-badge" width="72" height="72" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 2.9 13.9 4.6v3.6c0 3-2 5.65-4.9 6.9-2.9-1.25-4.9-3.9-4.9-6.9V4.6L9 2.9Z" fill="var(--ez-amber,#FED300)"/>
+            <path d="M6.5 9.2L8.3 11l3.2-3.2" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <p class="home-confidence-hero-badge-label">1–2yr coverage</p>
+            <a href="/pages/warranty" class="btn btn--link-on-dark">View warranty</a>
           </div>
         </div>
-        <div class="home-confidence-feature-visual mt-auto overflow-hidden rounded-2xl border border-white/70 bg-white/75 p-3">
-          {% render 'owned-support-visual', context: 'support', alt: 'EZQuest ownership support', class: 'home-confidence-feature-image' %}
-        </div>
       </article>
 
-      <article class="home-confidence-card home-confidence-card--returns card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
+      {%- comment -%} Row 2 · Col 1 — Easy returns {%- endcomment -%}
+      <article class="home-confidence-card home-confidence-card--returns">
         <div class="home-confidence-card-copy">
-          <h3 class="card-title">Returns and warranty</h3>
-          <p class="type-body mt-3">Warranty and shipping-return policies stay easy to find, so support feels built in rather than hidden.</p>
+          <h3 class="home-confidence-card-title">Easy returns</h3>
+          <p class="home-confidence-card-sub">Hassle-free returns within 30 days. No questions asked.</p>
         </div>
-        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
-          {% render 'icon', name: 'shield' %}
+        <div class="home-confidence-card-icon" style="--icon-bg:#DBEAFE;--icon-color:#1E40AF">
+          {% render 'icon', name: 'refresh-cw', size: 28 %}
         </div>
       </article>
 
-      <article class="home-confidence-card card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
+      {%- comment -%} Row 2 · Col 2 — Manuals & downloads {%- endcomment -%}
+      <article class="home-confidence-card home-confidence-card--manuals">
         <div class="home-confidence-card-copy">
-          <h3 class="card-title">Secure payment</h3>
-          <p class="type-body mt-3">Clean checkout paths and clear pricing keep the buying decision calm, direct, and easy to trust.</p>
+          <h3 class="home-confidence-card-title">Manuals &amp; downloads</h3>
+          <p class="home-confidence-card-sub">Setup guides, firmware, and docs ready when you need them.</p>
         </div>
-        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
-          {% render 'icon', name: 'shield' %}
+        <div class="home-confidence-card-icon" style="--icon-bg:#E0E7FF;--icon-color:#3730A3">
+          {% render 'icon', name: 'file-text', size: 28 %}
         </div>
       </article>
 
-      <article class="home-confidence-card card-base flex h-full flex-col justify-between gap-6 p-6 lg:p-7">
+      {%- comment -%} Row 2 · Col 3 — Customer support {%- endcomment -%}
+      <article class="home-confidence-card home-confidence-card--support">
         <div class="home-confidence-card-copy">
-          <h3 class="card-title">Manuals and downloads</h3>
-          <p class="type-body mt-3">Setup guides, firmware, and downloads stay ready when you need product details or the latest file.</p>
+          <h3 class="home-confidence-card-title">Live support</h3>
+          <p class="home-confidence-card-sub">Real humans, fast replies. Help by email, chat, or phone.</p>
         </div>
-        <div class="home-confidence-card-visual inline-flex h-12 w-12 items-center justify-center rounded-full border border-amber-200/80 bg-amber-50 text-slate-700">
-          {% render 'icon', name: 'download' %}
+        <div class="home-confidence-card-icon" style="--icon-bg:#D1FAE5;--icon-color:#065F46">
+          {% render 'icon', name: 'support', size: 28 %}
         </div>
       </article>
 
-    </div>
-
-    <div class="home-confidence-links-row mt-8 flex flex-wrap items-center gap-3 border-t border-slate-200/80 pt-6">
-      <span class="type-caption home-confidence-links-label">Quick access</span>
-      {% render 'button', label: 'Shipping & returns', url: '/pages/shipping-returns', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
-      {% render 'button', label: 'Warranty', url: '/pages/warranty', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
-      {% render 'button', label: 'Manuals', url: '/pages/manuals', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
-      {% render 'button', label: 'Downloads', url: '/pages/downloads', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
-      {% render 'button', label: 'Contact support', url: '/pages/contact', style: 'secondary', size: 'sm', class: 'home-confidence-pill-link no-underline' %}
     </div>
   </div>
 </section>
@@ -87,11 +78,7 @@
 {% schema %}
 {
   "name": "Home confidence grid",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Support and service" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence should stay visible before and after checkout." },
-    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Keep shipping, warranty, payment, manuals, downloads, and direct support easy to find so the EZQuest experience stays clear from first click onward." }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Home confidence grid"

@@ -1,0 +1,112 @@
+{{ 'support-cluster.css' | asset_url | stylesheet_tag }}
+
+<section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
+  <div class="support-hero__wrap w-full">
+    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">User Guides</p>
+    <h1 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
+      Setup guides for<br>every scenario
+    </h1>
+    <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
+      Step-by-step instructions for first setup,
+      display configuration, and advanced use cases.
+    </p>
+  </div>
+</section>
+
+<div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
+
+  <div class="guide-grid grid grid-cols-3 gap-4 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
+    {% for block in section.blocks %}
+      {% if block.type == 'guide' %}
+        {% assign p = block.settings.product %}
+        <a href="{{ block.settings.file_url | default: '#' }}"
+           class="guide-card group border border-black/[7%] rounded-2xl overflow-hidden bg-white no-underline flex flex-col transition-[border-color,transform] duration-200 hover:border-[var(--ez-amber-30)] hover:-translate-y-0.5"
+           {{ block.shopify_attributes }}
+           {% unless block.settings.file_url != blank and block.settings.file_url != '#' %}
+             aria-disabled="true"
+           {% endunless %}
+        >
+          <div class="guide-card__image-wrap relative bg-[var(--ez-light)] aspect-[16/9] overflow-hidden">
+            {% if p != blank and p.featured_image %}
+              <img src="{{ p.featured_image | image_url: width: 320, format: 'pjpg' }}" alt="{{ p.title | escape }}" class="guide-card__image w-full h-full object-contain p-4" loading="lazy" width="320" height="200">
+            {% else %}
+              <div class="guide-card__image-placeholder w-full h-full bg-[linear-gradient(135deg,var(--ez-light)_0%,#e5e5e7_100%)]"></div>
+            {% endif %}
+            <span class="guide-card__type-pill absolute top-3 left-3 text-[11px] font-semibold tracking-[.05em] uppercase bg-[var(--ez-amber-10)] text-[var(--ez-grey)] border border-[var(--ez-amber-25)] py-[.2rem] px-[.625rem] rounded-full">{{ block.settings.guide_type | default: 'Setup guide' }}</span>
+          </div>
+
+          <div class="guide-card__body p-5 flex-1">
+            <div class="guide-card__meta flex items-center gap-[.625rem] mb-3">
+              <span class="guide-card__steps text-xs text-[var(--ez-grey)] font-medium">{{ block.settings.step_count | default: '5' }} steps</span>
+              <span class="guide-card__difficulty text-[11px] font-semibold py-[.15rem] px-2 rounded-full uppercase tracking-[.05em] {%- case block.settings.difficulty | default: 'Easy' -%}{%- when 'Medium' -%} bg-[rgba(254,211,0,.07)] text-[var(--ez-black)]{%- when 'Advanced' -%} bg-[rgba(239,68,68,.07)] text-[var(--ez-error-text)]{%- else -%} bg-[rgba(21,128,61,.07)] text-[var(--ez-success-text)]{%- endcase -%}">
+                {{ block.settings.difficulty | default: 'Easy' }}
+              </span>
+            </div>
+            <h3 class="guide-card__title text-[15px] font-medium text-[var(--ez-black)] tracking-[-0.01em] leading-[1.35] mb-[.375rem]">{{ block.settings.title }}</h3>
+            <p class="guide-card__desc text-[13px] text-[var(--ez-grey)] leading-[1.55] m-0">{{ block.settings.description }}</p>
+          </div>
+
+          <div class="guide-card__footer py-[.875rem] px-5 border-t border-black/[6%]">
+            {% if block.settings.file_url != blank and block.settings.file_url != '#' %}
+              <span class="guide-card__cta inline-flex items-center gap-[.375rem] text-[13px] font-medium text-[var(--ez-black)] underline decoration-[var(--ez-amber)] decoration-[1.5px] underline-offset-[3px] transition-[gap,text-decoration-color] duration-150 group-hover:gap-2.5">
+                View guide
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            {% else %}
+              <span style="font-size:13px;color:var(--ez-grey)">Available on request</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+
+    {% if section.blocks.size == 0 %}
+      <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]" style="grid-column:1/-1">
+        <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Guides are being written</p>
+        <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">We're preparing step-by-step guides for every product.</p>
+        <a href="/pages/contact" class="btn btn--primary">Ask a question</a>
+      </div>
+    {% endif %}
+  </div>
+
+
+</div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'User guides',
+  heading: 'Need a walkthrough?',
+  subhead: 'Our support team can guide you through setup in real time.',
+  primary_label: 'Contact support',
+  primary_url: '/pages/contact'
+-%}
+
+{% schema %}
+{
+  "name": "User guides",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "guide",
+      "name": "Guide",
+      "settings": [
+        {"type":"product","id":"product","label":"Product"},
+        {"type":"text","id":"title","label":"Guide title"},
+        {"type":"text","id":"description","label":"Short description"},
+        {"type":"url","id":"file_url","label":"PDF or page URL"},
+        {"type":"text","id":"guide_type","label":"Guide type","default":"Setup guide"},
+        {"type":"text","id":"step_count","label":"Number of steps","default":"5"},
+        {
+          "type":"select","id":"difficulty","label":"Difficulty",
+          "options":[
+            {"value":"Easy","label":"Easy"},
+            {"value":"Medium","label":"Medium"},
+            {"value":"Advanced","label":"Advanced"}
+          ],"default":"Easy"
+        }
+      ]
+    }
+  ],
+  "presets":[{"name":"User guides"}]
+}
+{% endschema %}

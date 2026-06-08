@@ -1,0 +1,14 @@
+Path,Target
+/product/,/products/
+/product-category/hubs/,/collections/hubs-adapters
+/product-category/chargers/,/collections/chargers-power
+/product-category/cables/,/collections/accessories
+/product-category/adapters/,/collections/accessories
+/shop/,/collections
+/support/,/pages/support
+/faq/,/pages/faq
+/warranty/,/pages/warranty
+/contact/,/pages/contact
+/blog/,/blogs/resources
+/about/,/pages/about
+/where-to-buy/,/pages/where-to-buy

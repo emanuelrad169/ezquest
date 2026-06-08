@@ -9,13 +9,24 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "policy": {
+      "type": "policy-page",
+      "settings": {}
+    },
+    "page_hero": {
+      "type": "page-hero",
       "settings": {
-        "show_title": true,
-        "intro_copy": "Review how cookies and similar technologies are used across the EZQuest storefront."
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Cookie Policy"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "page_hero",
+    "policy"
+  ]
 }

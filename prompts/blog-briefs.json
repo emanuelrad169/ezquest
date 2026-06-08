@@ -1,0 +1,257 @@
+[
+  {
+    "id": "B001",
+    "title": "USB-C Hub Buying Guide: How to Choose the Right Ports for Your Setup",
+    "slug": "usb-c-hub-buying-guide",
+    "target_keyword": "USB-C hub buying guide",
+    "secondary_keywords": ["best USB-C hub", "USB-C hub ports explained", "USB-C hub for MacBook"],
+    "intent": "informational / top-of-funnel",
+    "audience": "MacBook and Windows laptop users overwhelmed by hub options",
+    "format": "long-form guide with comparison table",
+    "word_count": 1400,
+    "outline": [
+      "Why laptop ports matter more now than ever",
+      "Bus-powered vs. self-powered: which do you need?",
+      "Port types explained: USB-A, USB-C, HDMI, Ethernet, SD",
+      "Power delivery: how to pick the right wattage",
+      "EZQuest lineup mapped to setup type",
+      "Quick decision table: Travel / Desk / Everyday"
+    ],
+    "cta": "Shop hubs by setup type",
+    "internal_links": ["/pages/compare", "/collections/hubs-adapters"],
+    "tags": ["USB-C", "Buying guide", "Hubs"]
+  },
+  {
+    "id": "B002",
+    "title": "GaN Charger vs. Standard Wall Charger: Is the Upgrade Worth It?",
+    "slug": "gan-charger-vs-standard",
+    "target_keyword": "GaN charger vs standard charger",
+    "secondary_keywords": ["GaN charger worth it", "GaN charging technology", "compact wall charger"],
+    "intent": "informational / comparison",
+    "audience": "Frequent travelers and desk workers who want fewer adapters",
+    "format": "head-to-head comparison article",
+    "word_count": 1100,
+    "outline": [
+      "What GaN technology actually is (plain-language explanation)",
+      "Size and heat: the two biggest differences",
+      "Charging speeds compared: standard 20W vs. GaN 65W",
+      "Multi-port charging without a power strip",
+      "Who should upgrade now vs. who can wait"
+    ],
+    "cta": "See EZQuest GaN chargers",
+    "internal_links": ["/collections/chargers-power"],
+    "tags": ["GaN", "Chargers", "Comparison"]
+  },
+  {
+    "id": "B003",
+    "title": "How to Add a Second Monitor to a MacBook Air (No Tech Degree Required)",
+    "slug": "macbook-air-second-monitor-setup",
+    "target_keyword": "MacBook Air second monitor setup",
+    "secondary_keywords": ["MacBook Air dual monitor", "USB-C to HDMI MacBook", "extend display MacBook Air"],
+    "intent": "informational / how-to",
+    "audience": "MacBook Air M1/M2/M3 owners frustrated by single-display limitation",
+    "format": "step-by-step how-to with product callouts",
+    "word_count": 1000,
+    "outline": [
+      "Why MacBook Air only supports one external display natively",
+      "The DisplayLink workaround explained",
+      "Step-by-step: USB-C hub + HDMI cable setup",
+      "Resolution settings: what to configure in macOS",
+      "Recommended EZQuest hubs for this use case"
+    ],
+    "cta": "Shop hubs with HDMI",
+    "internal_links": ["/collections/hubs-adapters", "/pages/compatibility"],
+    "tags": ["MacBook", "Dual monitor", "How-to"]
+  },
+  {
+    "id": "B004",
+    "title": "USB-C Cable Quality: Why Cheap Cables Break and What to Look For",
+    "slug": "usb-c-cable-quality-guide",
+    "target_keyword": "USB-C cable quality",
+    "secondary_keywords": ["best USB-C cable", "USB-C cable durability", "why USB-C cables break"],
+    "intent": "informational / education",
+    "audience": "Anyone who has had a USB-C cable fail within a year",
+    "format": "educational article with product highlight",
+    "word_count": 900,
+    "outline": [
+      "The real reason cables fail: stress points and cheap braiding",
+      "What '480Mbps' vs '10Gbps' means for you",
+      "USB 2.0 vs. USB 3.2 cables: can you tell by looking?",
+      "DuraGuard construction explained",
+      "Warranty as a quality signal"
+    ],
+    "cta": "Browse DuraGuard cables",
+    "internal_links": ["/collections/accessories", "/pages/warranty"],
+    "tags": ["Cables", "Quality", "Education"]
+  },
+  {
+    "id": "B005",
+    "title": "Work From Home Setup Guide: The Accessories Worth Having at Your Desk",
+    "slug": "work-from-home-desk-setup-guide",
+    "target_keyword": "work from home desk setup accessories",
+    "secondary_keywords": ["home office accessories", "WFH desk setup essentials", "USB-C hub for home office"],
+    "intent": "informational / listicle",
+    "audience": "Remote workers building or upgrading their home office",
+    "format": "curated listicle with setup tiers (budget / mid / full)",
+    "word_count": 1200,
+    "outline": [
+      "The three-tier home office: minimal, mid-range, full desk",
+      "Tier 1 (under $80): hub + cable",
+      "Tier 2 ($80-$150): hub + GaN charger + cable kit",
+      "Tier 3 (full desk): Pro Dock + dual monitors + everything",
+      "Common WFH mistakes and how to avoid them"
+    ],
+    "cta": "Build your desk kit",
+    "internal_links": ["/pages/compare", "/collections/hubs-adapters", "/collections/chargers-power"],
+    "tags": ["WFH", "Desk setup", "Listicle"]
+  },
+  {
+    "id": "B006",
+    "title": "iPad Pro Connectivity Guide: What You Can and Can't Do with USB-C",
+    "slug": "ipad-pro-usb-c-connectivity-guide",
+    "target_keyword": "iPad Pro USB-C connectivity",
+    "secondary_keywords": ["iPad Pro hub", "iPad Pro HDMI", "iPad Pro external display"],
+    "intent": "informational / how-to",
+    "audience": "iPad Pro owners wanting to extend its capabilities",
+    "format": "capability guide with limitation callouts",
+    "word_count": 1000,
+    "outline": [
+      "What iPad Pro USB-C actually supports in 2024",
+      "Display out: which apps respect it, which don't",
+      "File transfer and SD card workflows",
+      "Charging through the hub",
+      "Limitations: no Ethernet on older iPads, Stage Manager requirements",
+      "Best hubs for iPad Pro"
+    ],
+    "cta": "See iPad-compatible hubs",
+    "internal_links": ["/collections/hubs-adapters", "/pages/compatibility"],
+    "tags": ["iPad", "USB-C", "How-to"]
+  },
+  {
+    "id": "B007",
+    "title": "Understanding USB-C Standards: USB 3.2, Thunderbolt 4, and USB4 Explained",
+    "slug": "usb-c-standards-explained",
+    "target_keyword": "USB-C standards explained",
+    "secondary_keywords": ["Thunderbolt 4 vs USB4", "USB 3.2 speeds", "USB-C version differences"],
+    "intent": "informational / deep-dive",
+    "audience": "Power users and IT professionals managing mixed device fleets",
+    "format": "technical explainer with comparison table",
+    "word_count": 1300,
+    "outline": [
+      "Why USB-C is a connector, not a standard",
+      "USB 2.0, 3.2 Gen 1, 3.2 Gen 2: speed differences in real terms",
+      "USB4 vs. Thunderbolt 4: are they the same?",
+      "How to identify the capability of a port you own",
+      "Practical advice: when specs matter vs. when they don't"
+    ],
+    "cta": "Check compatibility for your device",
+    "internal_links": ["/pages/compatibility"],
+    "tags": ["USB-C", "Technical", "Education"]
+  },
+  {
+    "id": "B008",
+    "title": "Traveling Light: The Minimal Tech Kit for Remote Workers and Frequent Flyers",
+    "slug": "minimal-travel-tech-kit",
+    "target_keyword": "minimal travel tech kit remote worker",
+    "secondary_keywords": ["travel hub", "compact GaN charger travel", "carry-on tech essentials"],
+    "intent": "inspirational / lifestyle",
+    "audience": "Consultants, digital nomads, and frequent business travelers",
+    "format": "essentials-list article with personal framing",
+    "word_count": 900,
+    "outline": [
+      "The weight penalty of bad cable choices",
+      "One hub to replace five adapters",
+      "A single GaN brick vs. three chargers",
+      "What to leave at home",
+      "The complete carry-on tech list"
+    ],
+    "cta": "Shop the Travel Hub",
+    "internal_links": ["/collections/hubs-adapters", "/collections/chargers-power"],
+    "tags": ["Travel", "Minimalism", "Lifestyle"]
+  },
+  {
+    "id": "B009",
+    "title": "How to Check If Your USB-C Hub Is Causing Slow Charging",
+    "slug": "usb-c-hub-slow-charging-fix",
+    "target_keyword": "USB-C hub slow charging",
+    "secondary_keywords": ["hub power delivery problem", "USB-C charging issues", "why is my MacBook charging slow"],
+    "intent": "support / troubleshooting",
+    "audience": "Users experiencing charging problems through their hub",
+    "format": "troubleshooting guide with diagnostic steps",
+    "word_count": 850,
+    "outline": [
+      "Hub-passthrough charging: how it works",
+      "Why 100W in doesn't mean 100W to your laptop",
+      "Step 1: check the hub's PD wattage spec",
+      "Step 2: check your charger output",
+      "Step 3: check for 'reverse charging' symptoms",
+      "When to replace vs. upgrade your hub"
+    ],
+    "cta": "See hub PD specs",
+    "internal_links": ["/collections/hubs-adapters", "/pages/support"],
+    "tags": ["Troubleshooting", "Charging", "Support"]
+  },
+  {
+    "id": "B010",
+    "title": "EZQuest vs. Generic Amazon Hubs: What You Actually Get for the Price Difference",
+    "slug": "ezquest-vs-generic-hubs-comparison",
+    "target_keyword": "EZQuest vs generic USB-C hub",
+    "secondary_keywords": ["is EZQuest worth it", "best USB-C hub brand", "USB-C hub quality comparison"],
+    "intent": "comparison / brand",
+    "audience": "Value-conscious buyers researching before purchasing",
+    "format": "honest head-to-head comparison",
+    "word_count": 1000,
+    "outline": [
+      "What you pay for in a $15 hub vs. a $60 hub",
+      "Chipset quality and thermal management",
+      "FCC/CE certification: why it matters for data safety",
+      "Warranty and support access",
+      "Long-term cost: one good hub vs. three replacements"
+    ],
+    "cta": "See EZQuest hubs",
+    "internal_links": ["/pages/compare", "/collections/hubs-adapters", "/pages/warranty"],
+    "tags": ["Comparison", "Brand", "Value"]
+  },
+  {
+    "id": "B011",
+    "title": "macOS Sequoia and USB-C: What Changed and What It Means for Your Hub",
+    "slug": "macos-sequoia-usb-c-changes",
+    "target_keyword": "macOS Sequoia USB-C hub compatibility",
+    "secondary_keywords": ["macOS 15 hub issues", "Sequoia display output", "Mac USB-C 2024"],
+    "intent": "informational / timely",
+    "audience": "Mac users who upgraded to Sequoia and noticed issues",
+    "format": "concise update article",
+    "word_count": 750,
+    "outline": [
+      "What changed in Sequoia's USB-C stack",
+      "Known issues with DisplayLink and workarounds",
+      "Which EZQuest hubs are verified compatible",
+      "Where to report new issues"
+    ],
+    "cta": "Check compatibility",
+    "internal_links": ["/pages/compatibility", "/pages/support"],
+    "tags": ["macOS", "Compatibility", "News"]
+  },
+  {
+    "id": "B012",
+    "title": "The Right Cable for Every Job: USB-C Data, Video, and Charging Cables Compared",
+    "slug": "usb-c-cable-types-comparison",
+    "target_keyword": "USB-C cable types comparison",
+    "secondary_keywords": ["data cable vs charging cable", "USB-C video cable", "best cable for each task"],
+    "intent": "informational / education",
+    "audience": "Anyone confused about why some USB-C cables don't do everything",
+    "format": "visual-friendly table + explainer",
+    "word_count": 950,
+    "outline": [
+      "Why USB-C cables are not interchangeable",
+      "Charging-only cables: safe but limited",
+      "Data cables: speed tiers and what they're for",
+      "Video cables: Alt Mode requirements",
+      "The one cable that does everything (and its trade-offs)",
+      "EZQuest cable lineup mapped to use case"
+    ],
+    "cta": "Browse cables",
+    "internal_links": ["/collections/accessories"],
+    "tags": ["Cables", "Education", "Comparison"]
+  }
+]

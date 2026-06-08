@@ -1,0 +1,89 @@
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+
+<div class="account-page">
+
+  <div class="account-hero">
+    <p class="account-hero__kicker">My Account</p>
+    <h1 class="account-hero__heading">Create an account</h1>
+    <p class="account-hero__subhead">Track orders, save addresses, and manage your EZQuest profile.</p>
+  </div>
+
+  <div class="account-wrap account-wrap--narrow">
+    <div class="account-card">
+
+      {%- form 'create_customer' -%}
+        {%- if form.errors -%}
+          <div class="account-errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="account-form">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.875rem">
+            <div class="account-field">
+              <label for="RegisterFirstName">First name</label>
+              <input
+                type="text"
+                name="customer[first_name]"
+                id="RegisterFirstName"
+                value="{{ form.first_name }}"
+                autocomplete="given-name"
+                autocapitalize="words"
+              >
+            </div>
+            <div class="account-field">
+              <label for="RegisterLastName">Last name</label>
+              <input
+                type="text"
+                name="customer[last_name]"
+                id="RegisterLastName"
+                value="{{ form.last_name }}"
+                autocomplete="family-name"
+                autocapitalize="words"
+              >
+            </div>
+          </div>
+
+          <div class="account-field">
+            <label for="RegisterEmail">Email address</label>
+            <input
+              type="email"
+              name="customer[email]"
+              id="RegisterEmail"
+              value="{{ form.email }}"
+              autocomplete="email"
+              autocapitalize="off"
+              autocorrect="off"
+              required
+              {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}
+            >
+          </div>
+
+          <div class="account-field">
+            <label for="RegisterPassword">Password <span style="color:#6e6e73;font-weight:400">(min. 5 characters)</span></label>
+            <input
+              type="password"
+              name="customer[password]"
+              id="RegisterPassword"
+              autocomplete="new-password"
+              minlength="5"
+              required
+              {% if form.errors contains 'password' %}aria-invalid="true"{% endif %}
+            >
+          </div>
+
+          <div class="account-form__actions">
+            <button type="submit" class="btn btn--primary btn--block">Create account</button>
+          </div>
+
+        </div>
+      {%- endform -%}
+
+      <p class="account-form__link" style="margin-top:1.25rem">
+        Already have an account? <a href="{{ routes.account_login_url }}">Sign in</a>
+      </p>
+
+    </div>
+  </div>
+</div>

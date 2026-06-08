@@ -1,0 +1,44 @@
+{% comment %}
+  Render before </body> in layout/theme.liquid:
+    {% render 'cookie-consent' %}
+
+  Load cookie-consent.js before </body>:
+    {{ 'cookie-consent.js' | asset_url | script_tag }}
+{% endcomment %}
+
+<div
+  class="cookie-banner"
+  id="cookie-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-describedby="cookie-banner-body"
+  data-cookie-consent
+  hidden
+>
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__body" id="cookie-banner-body">
+      We use cookies to improve your experience, analyse traffic, and personalise content.
+      <a href="/policies/privacy-policy" class="cookie-banner__link">Privacy policy</a>
+      &nbsp;·&nbsp;
+      <a href="/pages/cookie-policy" class="cookie-banner__link">Cookie policy</a>
+    </p>
+    <div class="cookie-banner__actions">
+      <button
+        type="button"
+        class="cookie-banner__btn cookie-banner__btn--decline"
+        id="cookie-decline"
+        aria-label="Use essential cookies only"
+      >
+        Essential only
+      </button>
+      <button
+        type="button"
+        class="cookie-banner__btn cookie-banner__btn--accept"
+        id="cookie-accept"
+        aria-label="Accept all cookies"
+      >
+        Accept all
+      </button>
+    </div>
+  </div>
+</div>

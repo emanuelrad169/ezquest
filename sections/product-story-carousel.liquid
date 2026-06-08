@@ -1,4 +1,19 @@
-<section class="section-shell section--grey product-story-section">
+{% liquid
+  assign story_has_content = false
+  if product != blank and product.metafields.ezquest.feature_highlights != blank
+    for h in product.metafields.ezquest.feature_highlights.value
+      if h != blank and h != ''
+        assign story_has_content = true
+        break
+      endif
+    endfor
+  endif
+  if story_has_content == false and section.blocks.size > 0
+    assign story_has_content = true
+  endif
+%}
+{% if story_has_content %}
+<section class="section-shell section--grey product-story-section" id="pdp-features">
   <div class="container-shell">
     {%- liquid
       assign section_heading = section.settings.heading | default: 'Product details that matter in real setups'
@@ -200,6 +215,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% schema %}
 {

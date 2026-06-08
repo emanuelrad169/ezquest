@@ -1,0 +1,252 @@
+{% comment %} snippets/newsletter-popup.liquid {% endcomment %}
+{% unless customer %}
+  <div
+    id="newsletter-popup"
+    class="nl-popup"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="nl-popup-heading"
+    hidden
+  >
+    <div class="nl-popup__backdrop" data-nl-close></div>
+
+    <div class="nl-popup__modal">
+      <button type="button" class="nl-popup__close" data-nl-close aria-label="Close offer">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="nl-popup__visual" aria-hidden="true">
+        <div class="nl-popup__visual-inner">
+          <p class="nl-popup__visual-kicker">EZQuest exclusive</p>
+          <div class="nl-popup__visual-discount">
+            10<span class="nl-popup__visual-pct">%</span>
+          </div>
+          <p class="nl-popup__visual-off">off your first order</p>
+          <div class="nl-popup__visual-product">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.25">
+              <rect x="16" y="28" width="48" height="30" rx="5" stroke="#f5f5f7" stroke-width="2"/>
+              <path d="M26 28v-6M40 28v-6M54 28v-6" stroke="#f5f5f7" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="26" cy="43" r="4" fill="#FED300"/>
+              <circle cx="40" cy="43" r="4" fill="#FED300"/>
+              <circle cx="54" cy="43" r="4" fill="#FED300"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="nl-popup__form-panel">
+        <p class="nl-popup__badge">Limited time offer</p>
+        <h2 class="nl-popup__heading" id="nl-popup-heading">Get 10% off your first order</h2>
+        <p class="nl-popup__sub">
+          Subscribe for your discount code plus early access to new products, setup guides, and exclusive deals.
+        </p>
+
+        <form class="nl-popup__form" id="nl-popup-form" novalidate>
+          <div class="nl-popup__field-wrap">
+            <label class="sr-only" for="nl-popup-email">Email address</label>
+            <input
+              type="email"
+              id="nl-popup-email"
+              name="email"
+              class="nl-popup__input"
+              placeholder="Your email address"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="nl-popup-error"
+            >
+            <p class="nl-popup__error" id="nl-popup-error" role="alert" hidden>
+              Please enter a valid email address.
+            </p>
+          </div>
+          <button type="submit" class="nl-popup__submit">Claim my 10% off</button>
+        </form>
+
+        <div class="nl-popup__success" id="nl-popup-success" hidden>
+          <div class="nl-popup__code-box">
+            <p class="nl-popup__code-label">Your discount code</p>
+            <button type="button" class="nl-popup__code" id="nl-popup-code" aria-label="Copy code WELCOME10">
+              WELCOME10
+            </button>
+            <p class="nl-popup__code-hint" id="nl-code-hint">Click to copy</p>
+          </div>
+          <p class="nl-popup__success-msg">Code saved to clipboard. Use it at checkout.</p>
+        </div>
+
+        <p class="nl-popup__terms">
+          By subscribing you agree to receive marketing emails.<br>
+          Unsubscribe anytime. One use per customer.
+        </p>
+        <button type="button" class="nl-popup__skip" data-nl-close>No thanks, I'll pay full price</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var POPUP_KEY = 'ez_nl_dismissed';
+      var SUCCESS_KEY = 'ez_nl_subscribed';
+      var DELAY_MS = 8000;
+      var EXIT_ENABLED = true;
+      var popup = document.getElementById('newsletter-popup');
+      var timer;
+      var previousFocus = null;
+
+      if (!popup) return;
+
+      if (sessionStorage.getItem(POPUP_KEY) || localStorage.getItem(SUCCESS_KEY)) return;
+
+      function open() {
+        if (!popup.hidden) return;
+        previousFocus = document.activeElement;
+        popup.hidden = false;
+        document.body.style.overflow = 'hidden';
+        var input = popup.querySelector('.nl-popup__input');
+        if (input) input.focus();
+      }
+
+      function close() {
+        popup.hidden = true;
+        document.body.style.overflow = '';
+        sessionStorage.setItem(POPUP_KEY, '1');
+        if (previousFocus && typeof previousFocus.focus === 'function') {
+          previousFocus.focus();
+        }
+      }
+
+      popup.querySelectorAll('[data-nl-close]').forEach(function (element) {
+        element.addEventListener('click', close);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !popup.hidden) close();
+      });
+
+      function startTriggers() {
+        timer = window.setTimeout(open, DELAY_MS);
+
+        if (EXIT_ENABLED && !('ontouchstart' in window)) {
+          document.addEventListener('mouseleave', function onLeave(event) {
+            if (event.clientY <= 0 && popup.hidden) {
+              window.clearTimeout(timer);
+              open();
+              document.removeEventListener('mouseleave', onLeave);
+            }
+          });
+        }
+      }
+
+      // Don't stack on top of the cookie banner — wait for a consent choice first.
+      if (localStorage.getItem('ez_cookie_consent')) {
+        startTriggers();
+      } else {
+        var consentPoll = window.setInterval(function () {
+          if (localStorage.getItem('ez_cookie_consent')) {
+            window.clearInterval(consentPoll);
+            startTriggers();
+          }
+        }, 600);
+      }
+
+      var form = document.getElementById('nl-popup-form');
+      var success = document.getElementById('nl-popup-success');
+      var error = document.getElementById('nl-popup-error');
+      var code = document.getElementById('nl-popup-code');
+      var hint = document.getElementById('nl-code-hint');
+
+      if (form) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var emailInput = document.getElementById('nl-popup-email');
+          var email = emailInput ? emailInput.value.trim() : '';
+          var button = form.querySelector('.nl-popup__submit');
+
+          if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+            if (error) {
+              error.textContent = 'Please enter a valid email address.';
+              error.hidden = false;
+            }
+            if (emailInput) emailInput.focus();
+            return;
+          }
+
+          if (error) error.hidden = true;
+          if (button) {
+            button.disabled = true;
+            button.textContent = 'Saving...';
+          }
+
+          var formData = new FormData();
+          formData.append('form_type', 'customer');
+          formData.append('utf8', '✓');
+          formData.append('contact[email]', email);
+          formData.append('contact[tags]', 'newsletter,welcome10');
+          formData.append('contact[body]', 'Newsletter signup — discount code: WELCOME10');
+
+          var root = window.EZRoutes && window.EZRoutes.root ? window.EZRoutes.root : '/';
+          var endpoint = root.replace(/\/?$/, '/') + 'contact';
+
+          fetch(endpoint, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: formData
+          })
+            .then(function () {
+              form.hidden = true;
+              if (success) success.hidden = false;
+              sessionStorage.setItem(POPUP_KEY, '1');
+              localStorage.setItem(SUCCESS_KEY, '1');
+              window.setTimeout(close, 6000);
+            })
+            .catch(function () {
+              if (button) {
+                button.disabled = false;
+                button.textContent = 'Claim my 10% off';
+              }
+              if (error) {
+                error.textContent = 'Something went wrong. Please try again.';
+                error.hidden = false;
+              }
+            });
+        });
+      }
+
+      if (code) {
+        code.addEventListener('click', function () {
+          function markCopied() {
+            if (hint) hint.textContent = 'Copied!';
+            code.classList.add('is-copied');
+          }
+
+          function fallbackCopy() {
+            var textarea = document.createElement('textarea');
+            textarea.value = 'WELCOME10';
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+            } catch (error) {
+              // Visual feedback still helps the customer use the code manually.
+            }
+            document.body.removeChild(textarea);
+          }
+
+          markCopied();
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('WELCOME10').catch(fallbackCopy);
+          } else {
+            fallbackCopy();
+          }
+        });
+      }
+    })();
+  </script>
+{% endunless %}

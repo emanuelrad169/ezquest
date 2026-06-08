@@ -9,95 +9,45 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "page-hero",
+    "hub": {
+      "type": "support-hub",
       "settings": {
-        "kicker": "Support center",
-        "heading": "Support for products, downloads, and orders",
-        "subheading": "Choose downloads, manuals, compatibility, or direct support based on what you need.",
-        "light_mode": true
+        "image": "shopify://shop_images/ezquest-support-hero.png"
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
-    },
-    "nav": {
-      "type": "support-nav-grid",
-      "settings": {
-        "eyebrow": "Support hub",
-        "heading": "Choose the support path",
-        "copy": "Most questions start with a file, a manual, compatibility guidance, or direct support.",
-        "show_search": false,
-        "link_label": "Get help now",
-        "link_url": "/pages/contact"
-      },
-      "blocks": {
-        "nav_1": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "01",
-            "title": "Find a download",
-            "copy": "Use downloads when you need a driver, utility, or firmware file for a product you already own.",
-            "link_label": "Find downloads",
-            "link_url": "/pages/downloads"
-          }
-        },
-        "nav_2": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "02",
-            "title": "Find a manual",
-            "copy": "Use manuals when you need setup steps, a quick-start guide, or product instructions.",
-            "link_label": "Find manuals",
-            "link_url": "/pages/manuals"
-          }
-        },
-        "nav_3": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "03",
-            "title": "Check compatibility",
-            "copy": "Check device, platform, and workflow compatibility before you buy or install.",
-            "link_label": "Check compatibility",
-            "link_url": "/pages/compatibility"
-          }
-        },
-        "nav_4": {
-          "type": "nav_item",
-          "settings": {
-            "eyebrow": "04",
-            "title": "Get help now",
-            "copy": "Contact support when the answer depends on your product, order, or warranty details.",
-            "link_label": "Start support request",
-            "link_url": "/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "nav_1",
-        "nav_2",
-        "nav_3",
-        "nav_4"
-      ]
     },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
-        "kicker": "Direct support",
-        "heading": "Need help with a specific product or order?",
-        "body": "Send one support request and we will route product, order, or warranty help from the same place.",
-        "cta_label": "Get help now",
+        "variant": "light",
+        "kicker": "Still need help?",
+        "heading": "Our team responds within 1 business day.",
+        "body": "Every message is read by a real person. No bots, no ticket queues.",
+        "cta_label": "Contact support",
         "cta_url": "/pages/contact",
-        "cta2_label": "Check compatibility",
-        "cta2_url": "/pages/compatibility"
+        "cta2_label": "Browse resources",
+        "cta2_url": "/blogs/resources"
+      }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 360,
+        "heading": "How can we help?",
+        "subheading": "Find answers, download files, and get in touch.",
+        "kicker": "Support Center",
+        "background_image": "shopify://shop_images/ezquest-support-hero.png",
+        "cta_label": "Browse FAQ",
+        "cta_link": "/pages/faq",
+        "cta_secondary_label": "Contact support",
+        "cta_secondary_link": "/pages/contact"
       }
     }
   },
   "order": [
-    "hero",
-    "nav_rail",
-    "nav",
+    "page_hero",
+    "hub",
     "cta"
   ]
 }

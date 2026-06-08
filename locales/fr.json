@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "continue_reading": "Continuer à lire",
+    "learn_more": "En savoir plus",
+    "shop_now": "Acheter maintenant",
+    "contact_support": "Contacter le support",
+    "view_all": "Voir tout",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "search_placeholder": "Rechercher produits, support, articles…",
+    "loading": "Chargement"
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu"
+  },
+  "header": {
+    "open_menu": "Ouvrir le menu",
+    "search": "Rechercher",
+    "cart": "Panier",
+    "my_account": "Mon compte",
+    "sign_in": "Se connecter",
+    "wishlist": "Liste de souhaits",
+    "select_language": "Choisir la langue"
+  },
+  "footer": {
+    "newsletter_placeholder": "Entrez votre e-mail",
+    "newsletter_button": "S'abonner",
+    "company": "Entreprise",
+    "product_families": "Familles de produits",
+    "legal": "Mentions légales",
+    "support": "Assistance"
+  },
+  "support": {
+    "search_label": "Rechercher des ressources d'assistance",
+    "downloads_title": "Téléchargements",
+    "manuals_title": "Manuels",
+    "compatibility_title": "Compatibilité",
+    "faq_title": "FAQ",
+    "troubleshooting_title": "Dépannage"
+  },
+  "product": {
+    "specifications": "Caractéristiques",
+    "compare": "Comparer",
+    "related": "Produits associés",
+    "add_to_cart": "Ajouter au panier",
+    "adding": "Ajout\u2026",
+    "sold_out": "\u00c9puis\u00e9",
+    "in_stock": "En stock",
+    "out_of_stock": "Rupture de stock",
+    "buy_on_amazon": "Acheter sur Amazon",
+    "share": "Partager",
+    "copy_link": "Copier le lien",
+    "quantity": "Quantité",
+    "back_to_products": "Retour aux produits",
+    "back_to": "Retour à {{ collection }}",
+    "save": "Économiser {{ amount }}"
+  },
+  "social": {
+    "share_on_facebook": "Partager sur Facebook",
+    "share_on_twitter": "Partager sur X / Twitter",
+    "save_to_pinterest": "Enregistrer sur Pinterest",
+    "copy_link": "Copier le lien"
+  },
+  "trust": {
+    "warranty": "Garantie 2 ans",
+    "no_drivers": "Sans pilotes",
+    "mac_windows": "Mac + Windows",
+    "free_shipping": "Livraison gratuite"
+  },
+  "notify": {
+    "out_of_stock": "Cet article est actuellement en rupture de stock.",
+    "label": "Email pour notification de réapprovisionnement",
+    "email_placeholder": "Entrez votre e-mail",
+    "submit": "M'avertir",
+    "success": "Vous serez averti(e) dès que cet article sera disponible."
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide",
+    "empty_body": "Ajoutez des produits pour les voir ici.",
+    "empty_cta": "Voir les produits",
+    "checkout": "Passer à la caisse",
+    "continue_shopping": "Continuer les achats",
+    "close": "Fermer le panier",
+    "remove": "Supprimer",
+    "remove_item": "Supprimer {{ product }} du panier",
+    "subtotal": "Sous-total",
+    "tax_note": "Taxes et livraison calculées lors du paiement",
+    "free_shipping_threshold": "Ajoutez {{ amount }} de plus pour la livraison gratuite",
+    "free_shipping_unlocked": "Livraison gratuite débloquée",
+    "qty_decrease": "Diminuer la quantité de {{ product }}",
+    "qty_increase": "Augmenter la quantité de {{ product }}"
+  },
+  "wishlist": {
+    "title": "Votre liste de souhaits",
+    "saved_items": "Articles sauvegardés",
+    "empty": "Aucun article sauvegardé",
+    "empty_body": "Ajoutez un cœur à n'importe quel produit pour le sauvegarder ici."
+  },
+  "contact": {
+    "send_message": "Envoyer le message",
+    "name": "Nom complet",
+    "email": "Adresse e-mail",
+    "message": "Message",
+    "success": "Message envoyé",
+    "success_body": "Nous répondrons à {{ email }} dans un délai d'un jour ouvrable.",
+    "note": "Nous lisons chaque message. Délai de réponse : 1 jour ouvrable."
+  }
+}

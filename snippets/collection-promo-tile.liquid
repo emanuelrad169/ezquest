@@ -4,6 +4,7 @@
   assign resolved_title = promo_title | default: 'Explore the next part of the lineup'
   assign resolved_copy = promo_copy | default: 'See the adjacent EZQuest category that keeps the setup moving cleanly.'
   assign resolved_link_label = promo_link_label | default: 'Explore now'
+  assign resolved_image = promo_image | default: blank
   assign target_collection = collections[resolved_handle]
   assign target_url = routes.collections_url
   assign target_product_count = 0
@@ -13,16 +14,20 @@
     assign target_product_count = target_collection.products_count
   endif
 -%}
-<a href="{{ target_url }}" class="collection-promo-tile collection-promo-tile--{{ resolved_handle | handleize }} md:col-span-2 xl:col-span-2" aria-label="{{ resolved_eyebrow }}: {{ resolved_title }}">
+<a href="{{ target_url }}" class="collection-promo-tile collection-promo-tile--{{ resolved_handle | handleize }} col-span-full" aria-label="{{ resolved_eyebrow }}: {{ resolved_title }}">
   <div class="collection-promo-tile-media">
-    {% render 'owned-collection-visual',
-      collection_handle: resolved_handle,
-      collection_title: resolved_title,
-      width: 1200,
-      height: 900,
-      class: 'collection-promo-tile-image',
-      loading: 'lazy'
-    %}
+    {% if resolved_image != blank %}
+      {{ resolved_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 1280px) 50vw, (min-width: 768px) 66vw, 100vw', class: 'collection-promo-tile-image', alt: resolved_title }}
+    {% else %}
+      {% render 'owned-collection-visual',
+        collection_handle: resolved_handle,
+        collection_title: resolved_title,
+        width: 1200,
+        height: 900,
+        class: 'collection-promo-tile-image',
+        loading: 'lazy'
+      %}
+    {% endif %}
   </div>
   <div class="collection-promo-tile-scrim" aria-hidden="true"></div>
   <div class="collection-promo-tile-copy">

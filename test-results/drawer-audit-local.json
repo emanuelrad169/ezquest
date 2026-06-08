@@ -1,0 +1,12 @@
+{
+  "btnFound": true,
+  "drawerInDom": true,
+  "drawerVisible": true,
+  "hasNewDrawer": false,
+  "supportCenterCount": 2,
+  "hasRemovedPromoContent": false,
+  "rowCount": 0,
+  "minRowHeight": null,
+  "sampleRowColor": null,
+  "drawerParent": "HEADER"
+}

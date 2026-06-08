@@ -14,13 +14,13 @@
 
     <div class="cart-drawer__header">
       <h2 class="cart-drawer__title">
-        Your cart
+        {{ 'cart.title' | t }}
         <span class="cart-drawer__count" id="cart-drawer-count">({{ cart.item_count }})</span>
       </h2>
       <button
         class="cart-drawer__close"
         data-drawer-close
-        aria-label="Close cart"
+        aria-label="{{ 'cart.close' | t }}"
         type="button"
       >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -31,6 +31,7 @@
 
     <div class="cart-drawer__body" id="cart-drawer-body">
       {% if cart.item_count > 0 %}
+        {% render 'free-shipping-bar' %}
         {% render 'cart-drawer-items' %}
       {% else %}
         {% render 'cart-drawer-empty' %}

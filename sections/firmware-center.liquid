@@ -1,0 +1,118 @@
+{{ 'support-cluster.css' | asset_url | stylesheet_tag }}
+
+<section class="support-hero relative overflow-hidden bg-[var(--ez-light)] pt-[clamp(48px,6vw,80px)] pb-[clamp(32px,4vw,48px)]">
+  <div class="support-hero__wrap w-full">
+    <p class="support-hero__kicker text-[11px] font-semibold tracking-[.12em] uppercase text-[var(--ez-grey)] mb-3">Firmware</p>
+    <h1 class="support-hero__heading text-[clamp(28px,4.5vw,52px)] font-medium tracking-[-0.035em] leading-[1.08] text-[var(--ez-black)] mb-3.5 max-w-[18ch]">
+      Firmware updates
+    </h1>
+    <p class="support-hero__sub text-[clamp(15px,1.5vw,17px)] text-[var(--ez-grey)] leading-[1.6] max-w-[52ch] m-0">
+      Keep your EZQuest device running the latest verified firmware.
+      Always download the version matched to your OS.
+    </p>
+  </div>
+</section>
+
+<div class="support-body pt-[clamp(48px,6vw,80px)] pb-[clamp(48px,6vw,80px)]">
+
+  <div class="info-card info-card--amber rounded-[14px] p-6 flex gap-5 items-start border-[1.5px] bg-[var(--ez-amber-04)] border-[var(--ez-amber-25)]" style="margin-bottom:2rem">
+    <div class="info-card__icon info-card__icon--amber w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 bg-[var(--ez-amber-10)] text-[var(--ez-amber)]">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 13H2L9 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 7v4M9 13v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div>
+      <p class="info-card__title text-[15px] font-medium text-[var(--ez-black)] mb-1 tracking-[-0.01em]">Before updating</p>
+      <p class="info-card__body text-sm text-[var(--ez-grey)] leading-[1.6] m-0">
+        Connect your device to a power source and ensure a stable connection.
+        Do not disconnect during the update. Firmware updates are not reversible.
+      </p>
+    </div>
+  </div>
+
+  {% for block in section.blocks %}
+    {% if block.type == 'firmware_entry' %}
+      <div class="fw-card border border-black/[7%] rounded-2xl p-7 mb-4 bg-white transition-[border-color] duration-200 hover:border-[var(--ez-amber-30)]" {{ block.shopify_attributes }}>
+        <div class="fw-card__header mb-5">
+          <div class="fw-card__meta flex items-center gap-3 mb-2">
+            <span class="fw-card__version text-[clamp(20px,3vw,28px)] font-medium tracking-[-0.03em] text-[var(--ez-black)] [font-variant-numeric:tabular-nums]">{{ block.settings.version }}</span>
+            {% if block.settings.is_latest %}
+              <span class="fw-card__latest-badge text-[11px] font-semibold tracking-[.06em] uppercase bg-[rgba(21,128,61,.08)] text-[var(--ez-success-text)] border border-[rgba(21,128,61,.2)] py-[.2rem] px-[.625rem] rounded-full">Latest</span>
+            {% endif %}
+          </div>
+          <p class="fw-card__product text-[16px] font-medium text-[var(--ez-black)] m-0 mb-[.25rem] tracking-[-0.01em]">{{ block.settings.product_name }}</p>
+          <p class="fw-card__date text-[13px] text-[var(--ez-grey)] m-0">Released {{ block.settings.release_date }} · Compatible with {{ block.settings.os_compat }}</p>
+        </div>
+
+        {% if block.settings.changelog != blank %}
+          <details class="fw-changelog border-t border-black/[6%] pt-3.5 mt-3.5">
+            <summary class="fw-changelog__trigger flex items-center justify-between text-[13px] font-medium text-[var(--ez-grey)] cursor-pointer list-none pb-2 transition-[color] duration-150 hover:text-[var(--ez-black)]">
+              What's changed in this version
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="fw-changelog__icon transition-transform duration-200 shrink-0" aria-hidden="true"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="fw-changelog__body text-sm text-[var(--ez-grey)] leading-[1.7] pt-3 pb-2">{{ block.settings.changelog }}</div>
+          </details>
+        {% endif %}
+
+        <div class="fw-card__actions flex gap-3 flex-wrap pt-5 border-t border-black/[6%]">
+          {% if block.settings.mac_url != blank and block.settings.mac_url != '#' %}
+            <a href="{{ block.settings.mac_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-amber)] text-[var(--ez-black)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)]" download>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              macOS
+            </a>
+          {% endif %}
+          {% if block.settings.win_url != blank and block.settings.win_url != '#' %}
+            <a href="{{ block.settings.win_url }}" class="btn-download inline-flex items-center gap-[.375rem] py-[.45rem] px-4 rounded-full bg-[var(--ez-black)] text-[var(--ez-light)] text-[13px] font-medium no-underline transition-[background,opacity] duration-200 whitespace-nowrap hover:bg-[var(--ez-amber)] hover:text-[var(--ez-black)]" download>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7m0 0L4.5 6.5M7 9l2.5-2.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Windows
+            </a>
+          {% endif %}
+          {% if block.settings.mac_url == blank and block.settings.win_url == blank %}
+            <span style="font-size:13px;color:var(--ez-grey)">Files uploading</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  {% if section.blocks.size == 0 %}
+    <div class="empty-state text-center py-16 px-8 border border-black/[7%] rounded-2xl bg-[var(--ez-light)]">
+      <p class="empty-state__heading text-[18px] font-medium text-[var(--ez-black)] mb-2">Firmware files are being prepared</p>
+      <p class="empty-state__body text-sm text-[var(--ez-grey)] mb-6">Check back shortly or contact us for direct access.</p>
+      <a href="/pages/contact" class="btn btn--primary">Contact support</a>
+    </div>
+  {% endif %}
+
+
+</div>
+
+{%- render 'page-cta',
+  variant: 'dark',
+  kicker: 'Firmware',
+  heading: 'Need help with an update?',
+  subhead: 'Our team can walk you through the process.',
+  primary_label: 'Get help',
+  primary_url: '/pages/contact'
+-%}
+
+{% schema %}
+{
+  "name": "Firmware",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "firmware_entry",
+      "name": "Firmware version",
+      "settings": [
+        {"type":"text","id":"product_name","label":"Product name"},
+        {"type":"text","id":"version","label":"Version number","placeholder":"v2.1.0"},
+        {"type":"checkbox","id":"is_latest","label":"Mark as latest","default":true},
+        {"type":"text","id":"release_date","label":"Release date","placeholder":"April 2025"},
+        {"type":"text","id":"os_compat","label":"Compatible with","default":"macOS 12+ · Windows 10/11"},
+        {"type":"richtext","id":"changelog","label":"Changelog (optional)"},
+        {"type":"url","id":"mac_url","label":"macOS download URL"},
+        {"type":"url","id":"win_url","label":"Windows download URL"}
+      ]
+    }
+  ],
+  "presets":[{"name":"Firmware"}]
+}
+{% endschema %}

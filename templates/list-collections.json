@@ -22,9 +22,16 @@
       "settings": {
         "heading": "Choose the EZQuest product family for your setup.",
         "copy": "Choose hubs, docks, power, or finishing pieces by the way the workflow actually needs to work.",
-        "note": "Use collections to narrow the right family first, then compare models or open support when you need more detail."
+        "note": "Use collections to narrow the right family first, then compare models or open support when you need more detail.",
+        "accessories_image": "shopify://shop_images/ezquest-card-accessories-collections.png",
+        "cables_image": "shopify://shop_images/ezquest-card-cables-collections.png",
+        "chargers_image": "shopify://shop_images/ezquest-card-chargers-collections.png",
+        "hubs_image": "shopify://shop_images/ezquest-card-hubs-collections.png"
       }
     }
   },
-  "order": ["hero", "main"]
+  "order": [
+    "hero",
+    "main"
+  ]
 }

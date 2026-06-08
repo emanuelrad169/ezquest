@@ -1,0 +1,56 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section
+  class="recently-viewed section--grey"
+  id="recently-viewed"
+  aria-label="Recently viewed products"
+  data-max="{{ section.settings.max_products }}"
+  hidden
+>
+  <div class="recently-viewed__inner page-width">
+    <div class="recently-viewed__header">
+      <p class="section-kicker">
+        {{ section.settings.kicker | default: 'Continue browsing' | escape }}
+      </p>
+      <h2 class="recently-viewed__heading">
+        {{ section.settings.heading | default: 'Recently viewed' | escape }}
+      </h2>
+    </div>
+    <div class="recently-viewed__grid" id="rv-grid"></div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Recently viewed",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Continue browsing"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recently viewed"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products to show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently viewed"
+    }
+  ]
+}
+{% endschema %}

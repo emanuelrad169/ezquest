@@ -1,0 +1,136 @@
+{% comment %} sections/maintenance-mode.liquid {% endcomment %}
+{% comment %}
+  MAINTENANCE MODE - enable via theme editor.
+  Use during domain cutover windows, then disable immediately after testing.
+{% endcomment %}
+
+{% if section.settings.enabled %}
+  {% style %}
+    .site-header,
+    .site-footer,
+    .announcement-bar,
+    #cart-drawer,
+    .site-main > .shopify-section:not(#shopify-section-{{ section.id }}) {
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} {
+      position: relative;
+      z-index: 99999;
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay__logo {
+      width: 120px;
+      height: auto;
+      opacity: 0.6;
+      margin: 0 auto 2.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay__heading {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: #f5f5f7;
+      margin-bottom: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay__message {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 44ch;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay__contact {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    #shopify-section-{{ section.id }} .maintenance-overlay__contact a {
+      color: rgba(254, 211, 0, 0.8);
+      text-decoration: none;
+    }
+  {% endstyle %}
+
+  <div id="maintenance-overlay" class="maintenance-overlay" role="status" aria-live="polite">
+    <div class="maintenance-overlay__inner">
+      <img
+        src="{{ 'ezquest-logo.svg' | asset_url }}"
+        alt="EZQuest"
+        width="120"
+        height="32"
+        class="maintenance-overlay__logo"
+      >
+      <h1 class="maintenance-overlay__heading">
+        {{ section.settings.heading | default: "We'll be back shortly." | escape }}
+      </h1>
+      <p class="maintenance-overlay__message">
+        {{ section.settings.message | default: "EZQuest is currently undergoing scheduled maintenance. We'll be back in a few minutes." | escape }}
+      </p>
+      {% if section.settings.show_contact %}
+        <p class="maintenance-overlay__contact">
+          Questions? Email us at
+          <a href="mailto:support@ezq.com">support@ezq.com</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Maintenance mode",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable maintenance mode",
+      "default": false,
+      "info": "When enabled, replaces visible page content. Use only during domain cutover."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We'll be back shortly."
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "EZQuest is currently undergoing scheduled maintenance. We'll be back in a few minutes."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show contact email",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maintenance mode",
+      "settings": {
+        "enabled": false,
+        "heading": "We'll be back shortly.",
+        "message": "EZQuest is currently undergoing scheduled maintenance. We'll be back in a few minutes.",
+        "show_contact": true
+      }
+    }
+  ]
+}
+{% endschema %}

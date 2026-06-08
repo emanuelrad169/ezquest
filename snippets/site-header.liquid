@@ -1,26 +1,20 @@
 {%- liquid
   assign account_url = routes.account_url | default: '/account'
   assign account_login_url = routes.account_login_url | default: '/account/login'
-  assign account_register_url = routes.account_register_url | default: '/account/register'
-  assign account_logout_url = routes.account_logout_url | default: '/account/logout'
-  assign is_home_template = false
-  if request.page_type == 'index'
-    assign is_home_template = true
-  endif
 -%}
-<header class="site-header{% if is_home_template %} site-header--hero-overlay{% endif %}" role="banner"{% if is_home_template %} data-header-scroll-threshold="28"{% else %} data-header-scroll-threshold="8"{% endif %}>
+<header class="site-header site-header--hero-overlay" role="banner" data-header-scroll-threshold="28">
   <div class="site-header-inner container-shell">
     <div class="site-header-shell grid w-full grid-cols-1 py-0">
       <div class="site-header-main-row flex w-full items-center gap-3 lg:gap-6">
         <a href="{{ routes.root_url }}" class="site-brandmark inline-flex shrink-0 items-center">
-          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-48 max-w-full lg:w-60" width="240" height="56">
+          <img src="{{ 'ezquest-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="block h-auto w-32 lg:w-60" width="240" height="56" loading="eager" fetchpriority="high">
         </a>
 
         <nav aria-label="Primary" class="site-header-nav hidden min-w-0 flex-1 justify-center lg:flex">
           {% render 'mega-menu', section: section %}
         </nav>
 
-        <div class="site-header-utility-cluster ml-auto flex shrink-0 items-center gap-1 lg:gap-1.5">
+        <div class="site-header-utility-cluster ml-auto flex items-center gap-1 lg:gap-1.5">
           <div class="site-header-actions flex items-center gap-1">
             <button
               type="button"
@@ -32,82 +26,78 @@
             >
               {% render 'icon', name: 'search' %}
             </button>
-            <a href="{{ routes.search_url }}" class="site-header-icon-button lg:hidden" aria-label="{{ 'header.search' | t }}">
+            <button type="button"
+                    class="site-header-icon-button lg:hidden"
+                    aria-label="{{ 'header.search' | t }}"
+                    data-mobile-search-open>
               {% render 'icon', name: 'search' %}
-            </a>
-            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
-              <button
-                type="button"
-                class="site-header-icon-button"
-                aria-label="Account"
-                aria-expanded="false"
-                aria-controls="header-account-menu"
-                data-nav-submenu-trigger
-              >
-                {% render 'icon', name: 'user' %}
-              </button>
-              <div id="header-account-menu" class="nav-submenu-panel nav-submenu-panel--icon" hidden data-nav-submenu-panel>
-                {% if customer %}
-                  <a href="{{ account_url }}" class="nav-submenu-link">My account</a>
-                  <a href="{{ account_url }}#orders" class="nav-submenu-link">Orders</a>
-                  <a href="{{ account_logout_url }}" class="nav-submenu-link">Log out</a>
-                {% else %}
-                  <a href="{{ account_login_url }}" class="nav-submenu-link">Sign in</a>
-                  <a href="{{ account_register_url }}" class="nav-submenu-link">Create account</a>
-                {% endif %}
-              </div>
-            </div>
-            <a href="{{ account_url }}" class="site-header-icon-button lg:hidden" aria-label="Account">
-              {% render 'icon', name: 'user' %}
-            </a>
-            <div class="site-header-action-menu mega-menu-nav-item--submenu relative hidden lg:block" data-nav-submenu>
-              <button
-                type="button"
-                class="site-header-icon-button site-header-cart-button"
-                aria-label="{{ 'header.cart' | t }}"
-                aria-expanded="false"
-                aria-controls="header-cart-menu"
-                data-nav-submenu-trigger
-              >
-                {% render 'icon', name: 'cart' %}
-                {% if cart.item_count > 0 %}
-                  <span class="site-header-cart-count">{{ cart.item_count }}</span>
-                {% endif %}
-              </button>
-              <div id="header-cart-menu" class="nav-submenu-panel nav-submenu-panel--icon nav-submenu-panel--cart" hidden data-nav-submenu-panel>
-                <div class="nav-submenu-summary">
-                  <strong>
-                    {% if cart.item_count > 0 %}
-                      {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}
-                    {% else %}
-                      Your cart is empty
-                    {% endif %}
-                  </strong>
-                  <span>
-                    {% if cart.item_count > 0 %}
-                      {{ cart.total_price | money }}
-                    {% else %}
-                      Add a product to get started.
-                    {% endif %}
-                  </span>
+            </button>
+            {% if customer %}
+              <div class="site-header-account-wrap">
+                <a href="{{ account_url }}"
+                   class="site-header-icon-button"
+                   aria-label="{{ 'header.my_account' | t }}"
+                   aria-haspopup="true">
+                  <svg width="20" height="20" viewBox="0 0 20 20"
+                       fill="none" aria-hidden="true">
+                    <circle cx="10" cy="7" r="3"
+                            stroke="currentColor" stroke-width="1.25"/>
+                    <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                          stroke="currentColor" stroke-width="1.25"
+                          stroke-linecap="round"/>
+                  </svg>
+                </a>
+                <div class="site-header-account-menu" role="menu">
+                  <a href="{{ account_url }}" class="site-header-account-menu__item" role="menuitem">My account</a>
+                  <a href="{{ account_url }}/orders" class="site-header-account-menu__item" role="menuitem">My orders</a>
+                  <a href="{{ routes.account_logout_url }}" class="site-header-account-menu__item site-header-account-menu__item--signout" role="menuitem">Sign out</a>
                 </div>
-                <a href="{{ routes.cart_url }}" class="nav-submenu-link">View cart</a>
-                {% if cart.item_count > 0 %}
-                  <a href="/checkout" class="nav-submenu-link">Checkout</a>
-                {% else %}
-                  <a href="{{ routes.all_products_collection_url }}" class="nav-submenu-link">Browse products</a>
-                {% endif %}
               </div>
-            </div>
-            <a href="{{ routes.cart_url }}" class="site-header-icon-button site-header-cart-button lg:hidden" aria-label="{{ 'header.cart' | t }}">
-              {% render 'icon', name: 'cart' %}
-              {% if cart.item_count > 0 %}
-                <span class="site-header-cart-count">{{ cart.item_count }}</span>
-              {% endif %}
+            {% else %}
+              <a href="{{ account_login_url }}"
+                 class="site-header-icon-button"
+                 aria-label="{{ 'header.sign_in' | t }}">
+                <svg width="20" height="20" viewBox="0 0 20 20"
+                     fill="none" aria-hidden="true">
+                  <circle cx="10" cy="7" r="3"
+                          stroke="currentColor" stroke-width="1.25"/>
+                  <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                        stroke="currentColor" stroke-width="1.25"
+                        stroke-linecap="round"/>
+                </svg>
+              </a>
+            {% endif %}
+            <a href="/pages/wishlist" class="site-header-icon-button" aria-label="{{ 'header.wishlist' | t }}">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+                <path d="M10 16.5S2.5 12 2.5 6.5a4 4 0 017.5-2A4 4 0 0117.5 6.5c0 5.5-7.5 10-7.5 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+              <span class="site-header-wishlist-count" data-wishlist-count hidden>0</span>
             </a>
+
+            <button
+              class="site-header-icon-button site-header-cart-button header-icon-btn"
+              type="button"
+              aria-label="Open cart"
+              aria-expanded="false"
+              aria-controls="cart-drawer"
+              id="header-cart-btn"
+              data-cart-drawer-trigger
+              data-cart-count="{{ cart.item_count }}"
+            >
+              {% render 'icon', name: 'cart' %}
+              <span
+                class="site-header-cart-count header-icon-btn__count"
+                data-cart-count-badge
+                aria-label="{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in cart"
+                {% if cart.item_count == 0 %}hidden{% endif %}
+              >
+                {{ cart.item_count }}
+              </span>
+            </button>
             <button
               class="site-header-icon-button lg:hidden"
               type="button"
+              aria-label="{{ 'header.open_menu' | t }}"
               aria-controls="mobile-nav-drawer"
               aria-expanded="false"
               data-drawer-open="mobile-nav-drawer"
@@ -123,10 +113,63 @@
     {% render 'search-mega-panel' %}
   </div>
 
-  {% render 'mobile-nav-drawer',
-    support_href: '/pages/support',
-    support_has_phone: false,
-    support_phone: section.settings.support_phone,
-    support_phone_label: section.settings.support_phone_label
-  %}
+<div class="mobile-search-overlay lg:hidden" id="mobile-search-overlay" aria-hidden="true" role="search" data-search-panel>
+  <form action="{{ routes.search_url }}" method="get" class="mobile-search-overlay__form">
+    <input type="hidden" name="type" value="product,article,page">
+    <input type="search"
+           name="q"
+           id="mobile-search-input"
+           class="mobile-search-overlay__input"
+           placeholder="{{ 'general.search_placeholder' | t }}"
+           aria-label="{{ 'general.search' | t }}"
+           aria-autocomplete="list"
+           aria-expanded="false"
+           aria-controls="mobile-search-results"
+           autocomplete="off"
+           data-search-input>
+    <button type="button" class="mobile-search-overlay__close" data-mobile-search-close aria-label="Close search">
+      {% render 'icon', name: 'close' %}
+    </button>
+  </form>
+  <div
+    class="mobile-search-results"
+    id="mobile-search-results"
+    data-search-results
+    role="listbox"
+    aria-label="Search suggestions"
+    hidden
+  ></div>
+</div>
+
+<script>
+(function() {
+  var overlay = document.getElementById('mobile-search-overlay');
+  if (!overlay) return;
+
+  function openSearch() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var input = overlay.querySelector('input[type="search"]');
+    if (input) setTimeout(function() { input.focus(); }, 50);
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-mobile-search-open]')) { openSearch(); return; }
+    if (e.target.closest('[data-mobile-search-close]')) { closeSearch(); return; }
+    if (overlay.classList.contains('is-open') && !overlay.contains(e.target)) closeSearch();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeSearch();
+  });
+})();
+</script>
+
 </header>

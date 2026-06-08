@@ -16,7 +16,7 @@
   </div>
   {% if image != blank %}
     <div class="mega-menu-preview-media">
-      {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-preview-image', data-mega-preview-image: '' }}
+      {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '', class: 'mega-menu-preview-image', data-mega-preview-image: '' }}
     </div>
   {% endif %}
 </div>

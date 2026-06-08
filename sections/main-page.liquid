@@ -37,7 +37,7 @@
 
       <div class="content-page-body">
         {% unless section.settings.show_title %}
-          <h1 class="section-heading">{{ page.title }}</h1>
+          <h2 class="section-heading">{{ page.title }}</h2>
         {% endunless %}
         <div class="richtext-content{% unless section.settings.show_title %} mt-8{% endunless %} max-w-none">
           {{ page.content }}

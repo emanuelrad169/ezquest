@@ -10,29 +10,11 @@
 {
   "sections": {
     "main": {
-      "type": "main-page",
-      "settings": {
-        "show_title": true,
-        "intro_copy": "Review shipping timelines, return windows, and the right next step for order-related help.",
-        "side_eyebrow": "Order support",
-        "side_heading": "Need order help?",
-        "side_copy": "Contact support for shipping questions, returns, or order references.",
-        "side_link_label": "Contact support",
-        "side_link_url": "/pages/contact"
-      }
-    },
-    "cta": {
-      "type": "support-cta-rail",
-      "settings": {
-        "kicker": "Need direct help",
-        "heading": "Still need support with a shipment or return?",
-        "body": "Move into direct order help when the policy answers are no longer enough.",
-        "cta_label": "Contact support",
-        "cta_url": "/pages/contact",
-        "cta2_label": "Open FAQ",
-        "cta2_url": "/pages/faq"
-      }
+      "type": "shipping-returns",
+      "settings": {}
     }
   },
-  "order": ["main", "cta"]
+  "order": [
+    "main"
+  ]
 }

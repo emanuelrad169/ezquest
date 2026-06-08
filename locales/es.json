@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "continue_reading": "Seguir leyendo",
+    "learn_more": "Más información",
+    "shop_now": "Comprar ahora",
+    "contact_support": "Contactar soporte",
+    "view_all": "Ver todo",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "search_placeholder": "Buscar productos, soporte, artículos…",
+    "loading": "Cargando"
+  },
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido"
+  },
+  "header": {
+    "open_menu": "Abrir menú",
+    "search": "Buscar",
+    "cart": "Carrito",
+    "my_account": "Mi cuenta",
+    "sign_in": "Iniciar sesión",
+    "wishlist": "Lista de deseos",
+    "select_language": "Seleccionar idioma"
+  },
+  "footer": {
+    "newsletter_placeholder": "Ingresa tu correo",
+    "newsletter_button": "Suscribirse",
+    "company": "Empresa",
+    "product_families": "Familias de productos",
+    "legal": "Legal",
+    "support": "Soporte"
+  },
+  "support": {
+    "search_label": "Buscar recursos de soporte",
+    "downloads_title": "Descargas",
+    "manuals_title": "Manuales",
+    "compatibility_title": "Compatibilidad",
+    "faq_title": "Preguntas frecuentes",
+    "troubleshooting_title": "Solución de problemas"
+  },
+  "product": {
+    "specifications": "Especificaciones",
+    "compare": "Comparar",
+    "related": "Productos relacionados",
+    "add_to_cart": "Agregar al carrito",
+    "adding": "Agregando\u2026",
+    "sold_out": "Agotado",
+    "in_stock": "En existencia",
+    "out_of_stock": "Sin existencias",
+    "buy_on_amazon": "Comprar en Amazon",
+    "share": "Compartir",
+    "copy_link": "Copiar enlace",
+    "quantity": "Cantidad",
+    "back_to_products": "Volver a productos",
+    "back_to": "Volver a {{ collection }}",
+    "save": "Ahorrar {{ amount }}"
+  },
+  "social": {
+    "share_on_facebook": "Compartir en Facebook",
+    "share_on_twitter": "Compartir en X / Twitter",
+    "save_to_pinterest": "Guardar en Pinterest",
+    "copy_link": "Copiar enlace"
+  },
+  "trust": {
+    "warranty": "Garantía 2 años",
+    "no_drivers": "Sin drivers",
+    "mac_windows": "Mac + Windows",
+    "free_shipping": "Envío gratis"
+  },
+  "notify": {
+    "out_of_stock": "Este artículo está actualmente agotado.",
+    "label": "Correo para notificación de reposición",
+    "email_placeholder": "Ingresa tu correo",
+    "submit": "Notifícame",
+    "success": "Te notificaremos cuando este artículo esté disponible."
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío",
+    "empty_body": "Agrega productos para verlos aquí.",
+    "empty_cta": "Ver productos",
+    "checkout": "Proceder al pago",
+    "continue_shopping": "Seguir comprando",
+    "close": "Cerrar carrito",
+    "remove": "Eliminar",
+    "remove_item": "Eliminar {{ product }} del carrito",
+    "subtotal": "Subtotal",
+    "tax_note": "Impuestos y envío calculados al pagar",
+    "free_shipping_threshold": "Agrega {{ amount }} más para envío gratis",
+    "free_shipping_unlocked": "Envío gratis desbloqueado",
+    "qty_decrease": "Reducir cantidad de {{ product }}",
+    "qty_increase": "Aumentar cantidad de {{ product }}"
+  },
+  "wishlist": {
+    "title": "Tu lista de deseos",
+    "saved_items": "Artículos guardados",
+    "empty": "Aún no hay artículos guardados",
+    "empty_body": "Marca cualquier producto para guardarlo aquí."
+  },
+  "contact": {
+    "send_message": "Enviar mensaje",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "success": "Mensaje enviado",
+    "success_body": "Responderemos a {{ email }} en 1 día hábil.",
+    "note": "Leemos cada mensaje. Tiempo de respuesta: 1 día hábil."
+  }
+}

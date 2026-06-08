@@ -1,76 +1,420 @@
-<section class="site-announcement-bar relative z-50 border-0 bg-amber-400 text-black" aria-label="Store announcement">
-  <div class="site-announcement-inner container-shell">
-    <div class="flex min-h-announcement items-center gap-4 lg:gap-6">
-      <div class="hidden flex-1 items-center lg:flex">
-        {% if section.settings.support_phone != blank %}
-          <a
-            href="tel:{{ section.settings.support_phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' | replace: '.', '' }}"
-            class="site-announcement-meta-item inline-flex items-center gap-1.5 text-body-micro font-medium text-black/90 no-underline transition-opacity hover:opacity-70"
-          >
-            <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-              {% render 'icon', name: 'support' %}
-            </span>
-            <span>{{ section.settings.support_phone_label | default: 'Support' }} {{ section.settings.support_phone }}</span>
-          </a>
-        {% endif %}
-      </div>
+{% liquid
+  assign msg_blocks = section.blocks | where: 'type', 'message'
+  assign announcement_count = msg_blocks.size | default: 0
+  if announcement_count == 0
+    assign announcement_count = 3
+  endif
+%}
 
-      <p class="flex flex-1 items-center justify-start gap-2 whitespace-nowrap text-body-2xs font-medium tracking-subtle text-black/90 lg:justify-center lg:text-body-xs">
-        <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-          {% render 'icon', name: 'book-open' %}
-        </span>
-        <span>{{ section.settings.message }}</span>
-      </p>
-
-      <div class="ml-auto flex items-center justify-end gap-2 lg:flex-1">
-        {% if localization.available_languages.size > 1 %}
-          {% form 'localization', id: 'announcement-language-form', class: 'm-0 hidden lg:block' %}
-            <label class="sr-only" for="announcement-language-select">Language</label>
-            <div class="site-announcement-language-wrap inline-flex min-h-7 items-center gap-1.5 rounded-full bg-white/15 px-2">
-              <span class="inline-flex h-4 w-4 items-center justify-center rounded-full text-black/90">
-                {% render 'icon', name: 'layers' %}
-              </span>
-              <select id="announcement-language-select" name="locale_code" class="site-announcement-language-select border-0 bg-transparent pr-1 text-body-micro font-medium text-black/90 outline-none" onchange="this.form.submit()">
-                {% for language in localization.available_languages %}
-                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
-                    {{ language.endonym_name | capitalize }}
-                  </option>
-                {% endfor %}
-              </select>
-            </div>
-          {% endform %}
-        {% endif %}
-      </div>
-    </div>
+<div
+  class="announcement-bar announcement-bar--utility"
+  role="region"
+  aria-label="Announcements"
+  id="announcement-bar"
+  data-count="{{ announcement_count }}"
+  data-interval="{{ section.settings.interval }}"
+>
+  <div class="container-shell announcement-bar__inner">
+  <div class="announcement-bar__social" aria-label="EZQuest social links">
+    <a href="https://www.facebook.com/EZQuestInc/" aria-label="EZQuest on Facebook" class="announcement-bar__social-link" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+      </svg>
+    </a>
+    <a href="https://x.com/EZQuestInc" aria-label="EZQuest on X/Twitter" class="announcement-bar__social-link" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+    <a href="https://www.instagram.com/ezquestinc/" aria-label="EZQuest on Instagram" class="announcement-bar__social-link" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </a>
+    <a href="https://www.youtube.com/@ezquest2146" aria-label="EZQuest on YouTube" class="announcement-bar__social-link" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+      </svg>
+    </a>
   </div>
-</section>
+
+  <div
+    class="announcement-bar__track"
+    id="announcement-track"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    {% if msg_blocks.size > 0 %}
+      {% for block in msg_blocks %}
+        <div
+          class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
+          id="announcement-{{ forloop.index0 }}"
+          role="text"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.icon != blank %}
+            <span class="announcement-bar__icon" aria-hidden="true">
+              {{ block.settings.icon | escape }}
+            </span>
+          {% endif %}
+
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link | escape }}" class="announcement-bar__link">
+              {{ block.settings.text | escape }}
+            </a>
+          {% else %}
+            <span class="announcement-bar__text">
+              {{ block.settings.text | escape }}
+            </span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      {% assign fallback_messages = 'Free Shipping Over $100|30-Day Returns' | split: '|' %}
+      {% for fallback_message in fallback_messages %}
+      <div
+        class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
+        id="announcement-{{ forloop.index0 }}"
+        role="text"
+      >
+        <span class="announcement-bar__text">{{ fallback_message | escape }}</span>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% if announcement_count > 1 %}
+    <div class="announcement-bar__controls" aria-label="Announcement navigation">
+      <button
+        type="button"
+        class="announcement-bar__btn"
+        id="announcement-prev"
+        aria-label="Previous announcement"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="announcement-bar__counter" aria-label="Announcement 1 of {{ announcement_count }}">
+        <span id="announcement-current">1</span>
+        <span aria-hidden="true">/</span>
+        <span>{{ announcement_count }}</span>
+      </span>
+      <button
+        type="button"
+        class="announcement-bar__btn"
+        id="announcement-next"
+        aria-label="Next announcement"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="announcement-bar__locale">
+    {% if localization.available_countries and localization.available_countries.size > 1 %}
+      {% form 'localization', class: 'announcement-bar__locale-form' %}
+        <label class="visually-hidden" for="ab-country">Country/region</label>
+        <span class="announcement-bar__locale-icon" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        </span>
+        <select id="ab-country" name="country_code" class="announcement-bar__locale-select" onchange="this.form.submit()">
+          {% for country in localization.available_countries %}
+            <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+              {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+            </option>
+          {% endfor %}
+        </select>
+        <span class="announcement-bar__locale-caret" aria-hidden="true">
+          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5l3 3 3-3"/></svg>
+        </span>
+      {% endform %}
+    {% endif %}
+
+    {% if localization.available_languages and localization.available_languages.size > 1 %}
+      {% form 'localization', class: 'announcement-bar__locale-form' %}
+        <label class="visually-hidden" for="ab-language">Language</label>
+        <span class="announcement-bar__locale-icon" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2M5 5c0 5 4 9 8 9M13 9c0 4-4 8-9 8M14 21l5-12 5 12M16.5 17h5"/></svg>
+        </span>
+        <select id="ab-language" name="locale_code" class="announcement-bar__locale-select" onchange="this.form.submit()">
+          {% for lang in localization.available_languages %}
+            <option value="{{ lang.iso_code }}" lang="{{ lang.iso_code }}" {% if lang.iso_code == localization.language.iso_code %}selected{% endif %}>
+              {{ lang.endonym_name | capitalize }}
+            </option>
+          {% endfor %}
+        </select>
+        <span class="announcement-bar__locale-caret" aria-hidden="true">
+          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5l3 3 3-3"/></svg>
+        </span>
+      {% endform %}
+    {% endif %}
+  </div>
+  </div>
+</div>
+
+<style>
+  /* Merchant-configurable colors emitted as custom properties.
+     Static layout rules live in pages.css (loaded globally via footer). */
+  #shopify-section-{{ section.id }} {
+    --ab-bg: {{ section.settings.background_color }};
+    --ab-text: {{ section.settings.text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .announcement-bar--utility {
+    display: block;
+    padding: 0;
+    height: auto;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 40px;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: var(--ab-text, #0f172a);
+    border-radius: 50%;
+    transition: opacity 0.15s ease, background 0.15s ease;
+    opacity: 0.85;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__social-link:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.08);
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale-form {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale-icon {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    color: var(--ab-text, #0f172a);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale-caret {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    color: var(--ab-text, #0f172a);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--ab-text, #0f172a);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 4px 18px 4px 24px;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.15s ease;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__locale-select:hover,
+  #shopify-section-{{ section.id }} .announcement-bar__locale-select:focus {
+    background: rgba(0, 0, 0, 0.08);
+    outline: none;
+  }
+  #shopify-section-{{ section.id }} .announcement-bar__controls {
+    padding-right: 0;
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .announcement-bar__social,
+    #shopify-section-{{ section.id }} .announcement-bar__locale {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var bar = document.getElementById('announcement-bar');
+    if (!bar) return;
+    var count = parseInt(bar.dataset.count, 10);
+    if (count <= 1) return;
+
+    var interval = parseInt(bar.dataset.interval, 10) || 4000;
+    var current = 0;
+    var timer = null;
+
+    function getSlide(i) {
+      return document.getElementById('announcement-' + i);
+    }
+
+    function getCounter() {
+      return document.getElementById('announcement-current');
+    }
+
+    function goTo(next) {
+      var prev = current;
+      if (next === prev) return;
+
+      var prevSlide = getSlide(prev);
+      var nextSlide = getSlide(next);
+      if (!prevSlide || !nextSlide) return;
+
+      prevSlide.classList.add('is-exiting');
+      prevSlide.classList.remove('is-active');
+
+      setTimeout(function() {
+        prevSlide.classList.remove('is-exiting');
+      }, 400);
+
+      nextSlide.classList.add('is-active');
+
+      current = next;
+      var counter = getCounter();
+      if (counter) counter.textContent = next + 1;
+
+      var ariaLabel = bar.querySelector('.announcement-bar__counter');
+      if (ariaLabel) {
+        ariaLabel.setAttribute('aria-label', 'Announcement ' + (next + 1) + ' of ' + count);
+      }
+    }
+
+    function next() {
+      goTo((current + 1) % count);
+    }
+
+    function prev() {
+      goTo((current - 1 + count) % count);
+    }
+
+    function startTimer() {
+      timer = setInterval(next, interval);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    var prevBtn = document.getElementById('announcement-prev');
+    var nextBtn = document.getElementById('announcement-next');
+
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      stopTimer(); prev(); startTimer();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      stopTimer(); next(); startTimer();
+    });
+
+    bar.addEventListener('mouseenter', stopTimer);
+    bar.addEventListener('mouseleave', startTimer);
+
+    bar.addEventListener('focusin', stopTimer);
+    bar.addEventListener('focusout', startTimer);
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startTimer();
+    }
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Announcement bar",
+  "tag": "section",
   "settings": [
     {
-      "type": "text",
-      "id": "message",
-      "label": "Message",
-      "default": "Free shipping over $100"
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FED300"
     },
     {
-      "type": "text",
-      "id": "support_phone_label",
-      "label": "Support phone label",
-      "default": "Support"
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0f172a"
     },
     {
-      "type": "text",
-      "id": "support_phone",
-      "label": "Support phone number",
-      "default": "1-800-881-9305"
+      "type": "range",
+      "id": "interval",
+      "label": "Rotation interval (ms)",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "default": 4000
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping Over $100",
+          "placeholder": "Free Shipping Over $100"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or leave blank)"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Announcement bar"
+      "name": "Announcement bar",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "text": "Free Shipping Over $100"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "30-Day Returns"
+          }
+        }
+      ]
     }
   ]
 }

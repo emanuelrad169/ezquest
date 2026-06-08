@@ -1,0 +1,37 @@
+{% comment %} templates/robots.txt.liquid {% endcomment %}
+{% for group in robots.groups %}
+  {% for agent in group.user_agents %}
+User-agent: {{ agent.value }}
+  {% endfor %}
+  {% for rule in group.rules %}
+{{ rule.directive }}: {{ rule.value }}
+  {% endfor %}
+
+{% endfor %}
+
+{% comment %} AI search engine crawlers {% endcomment %}
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: {{ request.origin }}/sitemap.xml

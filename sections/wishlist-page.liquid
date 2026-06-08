@@ -1,0 +1,41 @@
+<section class="wishlist-section section-shell" aria-label="{{ 'wishlist.title' | t }}">
+  <div class="page-width">
+    <div class="wishlist-header">
+      <p class="section-kicker">{{ 'wishlist.saved_items' | t }}</p>
+      <h1 class="wishlist-heading">{{ 'wishlist.title' | t }}</h1>
+      <p class="wishlist-subhead" id="wishlist-count" aria-live="polite"></p>
+    </div>
+
+    <div class="wishlist-grid" id="wishlist-grid">
+      <div class="wishlist-empty" id="wishlist-empty" hidden>
+        <div class="wishlist-empty__icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 42S6 32 6 18a10 10 0 0118-6 10 10 0 0118 6c0 14-18 24-18 24z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="wishlist-empty__heading">{{ 'wishlist.empty' | t }}</h2>
+        <p class="wishlist-empty__body">
+          {{ 'wishlist.empty_body' | t }}
+        </p>
+        <a href="{{ routes.collections_url }}" class="btn btn--primary">
+          {{ 'cart.empty_cta' | t }}
+        </a>
+      </div>
+
+      <div class="wishlist-items collection-product-grid" id="wishlist-items"></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Wishlist"
+    }
+  ]
+}
+{% endschema %}

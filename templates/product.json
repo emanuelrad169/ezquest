@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,76 +17,39 @@
         "show_product_type": false,
         "show_description": false,
         "show_quantity_selector": true,
-        "show_dynamic_checkout": false,
+        "show_dynamic_checkout": true,
         "show_support_panel": false,
         "support_heading": "Support for this product",
         "support_copy": "Compatibility, manuals, downloads, and help"
       }
     },
-    "story": {
-      "type": "product-story-carousel",
-      "settings": {
-        "eyebrow": "Product story",
-        "heading": "Product highlights",
-        "copy": "See the product details that matter most for ports, power, displays, and everyday use.",
-        "structured_source": "product"
-      }
-    },
-    "specs": {
-      "type": "product-spec-table",
-      "settings": {
-        "heading": "Specifications",
-        "copy": "Review the ports, charging support, display capability, and compatibility details before you order.",
-        "source_note": "Check the key specs here, then open compatibility or manuals if you need one last detail."
-      }
-    },
-    "compare": {
-      "type": "product-compare-table",
-      "settings": {
-        "eyebrow": "Compare",
-        "heading": "Compare nearby options",
-        "copy": "See nearby EZQuest models side by side so the right role, port mix, power, and display support are easier to spot.",
-        "columns_desktop": 3,
-        "structured_source": "auto",
-        "source_note": "Compare nearby models by ports, power, and display support before you go deeper into one product page."
-      }
-    },
-    "compatibility": {
-      "type": "compatibility-entry-list",
-      "settings": {
-        "eyebrow": "Compatibility",
-        "heading": "Buy with confidence",
-        "copy": "Check device, platform, and workflow compatibility before you order.",
-        "source_note": "",
-        "structured_source": "auto",
-        "entry_limit": 4,
-        "product_link_label": "View product",
-        "download_link_label": "Downloads",
-        "manual_link_label": "Manuals"
-      }
-    },
     "faq": {
       "type": "faq-accordion",
       "settings": {
-        "heading": "FAQ",
-        "copy": "Answer the questions most likely to slow the decision.",
-        "structured_source": "product"
+        "heading": "FAQ"
       }
     },
-    "cta": {
-      "type": "cta-banner",
+    "bundle": {
+      "type": "product-bundle-upsell",
       "settings": {
-        "eyebrow": "More detail",
-        "heading": "Compatibility, manuals, and support",
-        "copy": "Check compatibility, open manuals, or contact support without leaving the product context.",
-        "link_label": "Compatibility",
-        "link_url": "/pages/compatibility",
-        "secondary_label": "Expert help",
-        "secondary_url": "/pages/support",
-        "style": "light",
-        "button_style": "secondary"
+        "eyebrow": "Bundle",
+        "heading": "Buy together and save 10%",
+        "copy": "Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings."
+      }
+    },
+    "recently_viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "kicker": "Continue browsing",
+        "heading": "Recently viewed",
+        "max_products": 4
       }
     }
   },
-  "order": ["main", "story", "specs", "compatibility", "faq", "compare", "cta"]
+  "order": [
+    "main",
+    "faq",
+    "bundle",
+    "recently_viewed"
+  ]
 }

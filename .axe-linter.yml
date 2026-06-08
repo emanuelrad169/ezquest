@@ -1,0 +1,8 @@
+rules:
+  color-contrast: warn
+  image-alt: error
+  label: error
+  button-name: error
+  link-name: error
+  aria-required-attr: error
+  landmark-one-main: warn

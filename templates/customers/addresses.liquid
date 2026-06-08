@@ -1,0 +1,241 @@
+{{ 'accounts.css' | asset_url | stylesheet_tag }}
+
+<div class="account-page">
+
+  <div class="account-hero">
+    <p class="account-hero__kicker">My Account</p>
+    <h1 class="account-hero__heading">Saved addresses</h1>
+  </div>
+
+  <div class="account-wrap account-wrap--wide">
+
+    <a href="{{ routes.account_url }}" class="account-back">← Back to account</a>
+
+    {%- comment -%} ── Saved addresses ── {%- endcomment -%}
+    {%- if customer.addresses_count > 0 -%}
+      <div class="addresses-grid">
+        {%- for address in customer.addresses -%}
+          <div class="address-card{% if address == customer.default_address %} address-card--default{% endif %}">
+
+            {%- if address == customer.default_address -%}
+              <div class="address-card__default-badge">Default</div>
+            {%- endif -%}
+
+            <div class="address-card__body" id="address-view-{{ address.id }}">
+              {{ address.first_name }} {{ address.last_name }}<br>
+              {{ address.company }}{%- if address.company != blank -%}<br>{%- endif -%}
+              {{ address.address1 }}<br>
+              {%- if address.address2 != blank -%}{{ address.address2 }}<br>{%- endif -%}
+              {{ address.city }}, {{ address.province_code }} {{ address.zip }}<br>
+              {{ address.country }}<br>
+              {%- if address.phone != blank -%}{{ address.phone }}{%- endif -%}
+            </div>
+
+            <div class="address-card__actions">
+
+              <button
+                type="button"
+                class="btn btn--secondary btn--sm"
+                data-address-edit-toggle="{{ address.id }}"
+              >Edit</button>
+
+              {%- unless address == customer.default_address -%}
+                {%- form 'customer_address', address -%}
+                  <input type="hidden" name="_method" value="put">
+                  <input type="hidden" name="address[default]" value="true">
+                  <button type="submit" class="btn btn--secondary btn--sm">Set default</button>
+                {%- endform -%}
+                {%- form 'customer_address', address -%}
+                  <input type="hidden" name="_method" value="delete">
+                  <button
+                    type="submit"
+                    class="btn btn--secondary btn--sm"
+                    onclick="return confirm('Delete this address?')"
+                    style="color:#dc2626"
+                  >Delete</button>
+                {%- endform -%}
+              {%- endunless -%}
+
+            </div>
+
+            {%- comment -%} Inline edit form ── {%- endcomment -%}
+            <div class="address-form-panel" id="address-edit-{{ address.id }}" aria-hidden="true">
+              {%- form 'customer_address', address -%}
+                {%- if form.errors -%}
+                  <div class="account-errors" role="alert">{{ form.errors | default_errors }}</div>
+                {%- endif -%}
+                <div class="address-form-grid" style="margin-top:1rem">
+                  <div class="account-field">
+                    <label for="edit_first_name_{{ address.id }}">First name</label>
+                    <input type="text" id="edit_first_name_{{ address.id }}" name="address[first_name]" value="{{ address.first_name }}" autocomplete="given-name">
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_last_name_{{ address.id }}">Last name</label>
+                    <input type="text" id="edit_last_name_{{ address.id }}" name="address[last_name]" value="{{ address.last_name }}" autocomplete="family-name">
+                  </div>
+                  <div class="account-field account-field--full">
+                    <label for="edit_company_{{ address.id }}">Company (optional)</label>
+                    <input type="text" id="edit_company_{{ address.id }}" name="address[company]" value="{{ address.company }}" autocomplete="organization">
+                  </div>
+                  <div class="account-field account-field--full">
+                    <label for="edit_address1_{{ address.id }}">Address</label>
+                    <input type="text" id="edit_address1_{{ address.id }}" name="address[address1]" value="{{ address.address1 }}" autocomplete="address-line1" required>
+                  </div>
+                  <div class="account-field account-field--full">
+                    <label for="edit_address2_{{ address.id }}">Apartment, suite, etc. (optional)</label>
+                    <input type="text" id="edit_address2_{{ address.id }}" name="address[address2]" value="{{ address.address2 }}" autocomplete="address-line2">
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_city_{{ address.id }}">City</label>
+                    <input type="text" id="edit_city_{{ address.id }}" name="address[city]" value="{{ address.city }}" autocomplete="address-level2" required>
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_zip_{{ address.id }}">ZIP / Postal code</label>
+                    <input type="text" id="edit_zip_{{ address.id }}" name="address[zip]" value="{{ address.zip }}" autocomplete="postal-code">
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_country_{{ address.id }}">Country</label>
+                    <input type="text" id="edit_country_{{ address.id }}" name="address[country]" value="{{ address.country }}" autocomplete="country-name" required>
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_province_{{ address.id }}">State / Province</label>
+                    <input type="text" id="edit_province_{{ address.id }}" name="address[province]" value="{{ address.province }}" autocomplete="address-level1">
+                  </div>
+                  <div class="account-field">
+                    <label for="edit_phone_{{ address.id }}">Phone (optional)</label>
+                    <input type="tel" id="edit_phone_{{ address.id }}" name="address[phone]" value="{{ address.phone }}" autocomplete="tel">
+                  </div>
+                </div>
+                <div style="display:flex;gap:0.75rem;margin-top:1rem">
+                  <button type="submit" class="btn btn--primary btn--sm">Save address</button>
+                  <button type="button" class="btn btn--secondary btn--sm" data-address-cancel="{{ address.id }}">Cancel</button>
+                </div>
+              {%- endform -%}
+            </div>
+
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="font-size:14px;color:#6e6e73;margin-bottom:1.5rem">No saved addresses yet.</p>
+    {%- endif -%}
+
+    {%- comment -%} ── Add new address ── {%- endcomment -%}
+    <button
+      type="button"
+      class="btn btn--secondary"
+      style="margin-top:1.5rem"
+      id="add-address-btn"
+      data-address-add-toggle
+    >+ Add new address</button>
+
+    <div class="address-form-panel" id="add-address-form" aria-hidden="true">
+      <h3 style="font-size:16px;font-weight:600;margin:0 0 1.25rem">New address</h3>
+      {%- form 'new_customer_address', customer -%}
+        {%- if form.errors -%}
+          <div class="account-errors" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="address-form-grid">
+          <div class="account-field">
+            <label for="new_first_name">First name</label>
+            <input type="text" id="new_first_name" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+          </div>
+          <div class="account-field">
+            <label for="new_last_name">Last name</label>
+            <input type="text" id="new_last_name" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+          </div>
+          <div class="account-field account-field--full">
+            <label for="new_company">Company (optional)</label>
+            <input type="text" id="new_company" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+          </div>
+          <div class="account-field account-field--full">
+            <label for="new_address1">Address</label>
+            <input type="text" id="new_address1" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
+          </div>
+          <div class="account-field account-field--full">
+            <label for="new_address2">Apartment, suite, etc. (optional)</label>
+            <input type="text" id="new_address2" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+          </div>
+          <div class="account-field">
+            <label for="new_city">City</label>
+            <input type="text" id="new_city" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+          </div>
+          <div class="account-field">
+            <label for="new_zip">ZIP / Postal code</label>
+            <input type="text" id="new_zip" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code">
+          </div>
+          <div class="account-field">
+            <label for="new_country">Country</label>
+            <input type="text" id="new_country" name="address[country]" value="{{ form.country | default: 'United States' }}" autocomplete="country-name" required>
+          </div>
+          <div class="account-field">
+            <label for="new_province">State / Province</label>
+            <input type="text" id="new_province" name="address[province]" value="{{ form.province }}" autocomplete="address-level1">
+          </div>
+          <div class="account-field">
+            <label for="new_phone">Phone (optional)</label>
+            <input type="tel" id="new_phone" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem">
+          <button type="submit" class="btn btn--primary btn--sm">Save address</button>
+          <button type="button" class="btn btn--secondary btn--sm" data-address-add-cancel>Cancel</button>
+        </div>
+      {%- endform -%}
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  // Edit toggle
+  document.querySelectorAll('[data-address-edit-toggle]').forEach(function (btn) {
+    var id = btn.dataset.addressEditToggle;
+    var panel = document.getElementById('address-edit-' + id);
+    if (!panel) return;
+    btn.addEventListener('click', function () {
+      var open = panel.classList.toggle('is-active');
+      panel.setAttribute('aria-hidden', String(!open));
+      if (open) { var input = panel.querySelector('input'); if (input) input.focus(); }
+    });
+  });
+
+  // Cancel edit
+  document.querySelectorAll('[data-address-cancel]').forEach(function (btn) {
+    var id = btn.dataset.addressCancel;
+    var panel = document.getElementById('address-edit-' + id);
+    if (panel) {
+      btn.addEventListener('click', function () {
+        panel.classList.remove('is-active');
+        panel.setAttribute('aria-hidden', 'true');
+      });
+    }
+  });
+
+  // Add new toggle
+  var addBtn = document.querySelector('[data-address-add-toggle]');
+  var addPanel = document.getElementById('add-address-form');
+  if (addBtn && addPanel) {
+    addBtn.addEventListener('click', function () {
+      var open = addPanel.classList.toggle('is-active');
+      addPanel.setAttribute('aria-hidden', String(!open));
+      if (open) { var input = addPanel.querySelector('input'); if (input) input.focus(); }
+    });
+  }
+  var addCancel = document.querySelector('[data-address-add-cancel]');
+  if (addCancel && addPanel) {
+    addCancel.addEventListener('click', function () {
+      addPanel.classList.remove('is-active');
+      addPanel.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  // Auto-open add form if it had errors
+  {%- form 'new_customer_address', customer -%}
+    {%- if form.errors -%}
+    if (addPanel) { addPanel.classList.add('is-active'); addPanel.setAttribute('aria-hidden', 'false'); }
+    {%- endif -%}
+  {%- endform -%}
+}());
+</script>

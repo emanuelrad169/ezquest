@@ -19,7 +19,7 @@
     </div>
 
     <div class="home-testimonials-carousel" data-scroll-carousel aria-label="{{ section.settings.heading }}">
-      <div class="home-testimonials-track" data-carousel-track>
+      <div class="home-testimonials-track" data-carousel-track tabindex="0" aria-label="Customer testimonials">
         {% for block in section.blocks %}
           {%- liquid
             assign reviewer = block.settings.reviewer_name | default: 'Customer'
@@ -40,7 +40,7 @@
                 </div>
                 <div>
                   <p class="home-testimonials-name">{{ reviewer }}</p>
-                  <div class="home-testimonials-stars" aria-label="{{ rating }} out of 5 stars">
+                  <div class="home-testimonials-stars" role="img" aria-label="{{ rating }} out of 5 stars">
                     {%- for i in (1..5) -%}
                       <svg class="home-testimonials-star{% if i <= rating %} is-filled{% endif %}" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                         <path d="M7 1.5l1.55 3.14 3.47.5-2.51 2.45.59 3.45L7 9.27l-3.1 1.77.59-3.45L2 5.14l3.47-.5L7 1.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
@@ -56,7 +56,7 @@
             {% if product_obj != blank %}
               <div class="home-testimonials-product">
                 {% if product_obj.featured_image != blank %}
-                  {{ product_obj.featured_image | image_url: width: 80 | image_tag: loading: 'lazy', class: 'home-testimonials-product-img', alt: product_obj.title }}
+                  {{ product_obj.featured_image | image_url: width: 80, format: 'pjpg' | image_tag: loading: 'lazy', width: 80, height: 80, class: 'home-testimonials-product-img', alt: product_obj.title }}
                 {% endif %}
                 <span class="home-testimonials-product-name">{{ product_obj.title | truncate: 40 }}</span>
               </div>

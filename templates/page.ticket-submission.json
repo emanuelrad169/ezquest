@@ -12,15 +12,13 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Support",
-        "heading": "Submit a support ticket",
-        "subheading": "Describe your issue and our team will respond within 1 business day.",
-        "light_mode": true
+        "background_color": "#020617",
+        "kicker": "Ticket Submission",
+        "heading": "",
+        "subheading": "",
+        "height": 320,
+        "overlay_opacity": 35
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "ticket_form": {
       "type": "ticket-form",
@@ -45,7 +43,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "ticket_form",
     "cta"
   ]

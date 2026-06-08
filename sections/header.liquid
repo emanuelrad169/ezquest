@@ -43,6 +43,23 @@
       "id": "show_mega_panel",
       "label": "Show mega panel on desktop",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mega menu featured product"
+    },
+    {
+      "type": "product",
+      "id": "mega_menu_featured_product",
+      "label": "Featured product",
+      "info": "Shown in the bottom strip of the Shop dropdown. Leave blank to hide the strip."
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_featured_label",
+      "label": "Label",
+      "default": "NEW",
+      "info": "Pill label above the product name. Keep under 8 characters."
     }
   ],
   "blocks": [
@@ -73,6 +90,193 @@
           "type": "url",
           "id": "link",
           "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "menu_column",
+      "name": "Shop column",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column title",
+          "default": "USB-C"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "default": "Hubs · Cables · Adapters",
+          "info": "Short descriptor shown under the title."
+        },
+        {
+          "type": "text",
+          "id": "hero_product_handle",
+          "label": "Hero product handle",
+          "info": "Product handle (e.g. usb-c-multimedia-10-in-1-gen-2-hub). Its featured image becomes the tile hero. Overridden by a custom image below."
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Hero image (override)",
+          "info": "Upload a custom image to override the collection product image."
+        },
+        {
+          "type": "text",
+          "id": "footer_link_text",
+          "label": "Footer link text",
+          "default": "View all →"
+        },
+        {
+          "type": "url",
+          "id": "footer_link_url",
+          "label": "Footer link URL"
+        }
+      ]
+    },
+    {
+      "type": "menu_sub_link",
+      "name": "Shop sub-link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "column_title",
+          "label": "Parent column title",
+          "info": "Must match the Column title of the parent Shop column block exactly."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        {
+          "type": "menu_column",
+          "settings": {
+            "title": "USB-C",
+            "tagline": "Hubs · Cables · Adapters",
+            "footer_link_text": "All USB-C →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Hubs",
+            "url": "/collections/usb-c-hubs"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Cables",
+            "url": "/collections/usb-c-cables-collection"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "USB-C Adapters",
+            "url": "/collections/usb-c-adapters"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "Card Readers",
+            "url": "/collections/usb-c-card-readers"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "USB-C",
+            "label": "Enclosures",
+            "url": "/collections/usb-c-enclosures"
+          }
+        },
+        {
+          "type": "menu_column",
+          "settings": {
+            "title": "Cables/Adapters",
+            "tagline": "HDMI · DisplayPort · Audio",
+            "footer_link_text": "All cables →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "HDMI",
+            "url": "/collections/hdmi-cables-adapters"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "DisplayPort",
+            "url": "/collections/displayport-cables-adapters"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "Mini DisplayPort",
+            "url": "/collections/mini-displayport-cables"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Cables/Adapters",
+            "label": "Audio",
+            "url": "/collections/audio-cables"
+          }
+        },
+        {
+          "type": "menu_column",
+          "settings": {
+            "title": "Power",
+            "tagline": "Wall · Car · GaN",
+            "footer_link_text": "All chargers →",
+            "footer_link_url": "/collections/all"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Power",
+            "label": "Wall Chargers",
+            "url": "/collections/wall-chargers"
+          }
+        },
+        {
+          "type": "menu_sub_link",
+          "settings": {
+            "column_title": "Power",
+            "label": "Car Chargers",
+            "url": "/collections/car-chargers"
+          }
         }
       ]
     }

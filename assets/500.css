@@ -1,0 +1,87 @@
+/* 500 error page - matches 404 design */
+.error-page {
+  background: var(--ez-dark, #0a0a0a);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  padding: clamp(64px, 8vw, 96px) 0;
+}
+
+.error-page__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2rem);
+  text-align: center;
+}
+
+.error-page__code {
+  font-size: clamp(80px, 15vw, 180px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.06);
+  line-height: 1;
+  margin-bottom: -0.2em;
+  user-select: none;
+}
+
+.error-page__heading {
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #f5f5f7;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.error-page__body {
+  font-size: clamp(15px, 1.5vw, 17px);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.65;
+  max-width: 50ch;
+  margin: 0 auto 2.5rem;
+}
+
+.error-page__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.error-page__btn-primary {
+  background: var(--ez-amber);
+  color: var(--ez-black);
+}
+
+.error-page__links {
+  margin-top: 1rem;
+}
+
+.error-page__links-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.75rem;
+}
+
+.error-page__pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-page__pill {
+  font-size: 13px;
+  padding: 6px 14px;
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.error-page__pill:hover {
+  border-color: var(--ez-amber, #FED300);
+  color: #f5f5f7;
+}

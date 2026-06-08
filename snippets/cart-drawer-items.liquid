@@ -6,7 +6,7 @@
       <a href="{{ item.url }}" class="cart-drawer-item__image-link" tabindex="-1" aria-hidden="true">
         {% if item.image %}
           <img
-            src="{{ item.image | image_url: width: 120 }}"
+            src="{{ item.image | image_url: width: 120, format: 'pjpg' }}"
             alt="{{ item.image.alt | escape }}"
             width="80"
             height="80"
@@ -31,7 +31,7 @@
               class="cart-drawer-item__qty-btn"
               data-cart-action="decrease"
               data-key="{{ item.key }}"
-              aria-label="Decrease quantity of {{ item.product.title | escape }}"
+              aria-label="{{ 'cart.qty_decrease' | t: product: item.product.title }}"
               type="button"
               {% if item.quantity <= 1 %}disabled{% endif %}
             >
@@ -48,7 +48,7 @@
               class="cart-drawer-item__qty-btn"
               data-cart-action="increase"
               data-key="{{ item.key }}"
-              aria-label="Increase quantity of {{ item.product.title | escape }}"
+              aria-label="{{ 'cart.qty_increase' | t: product: item.product.title }}"
               type="button"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -64,10 +64,10 @@
           class="cart-drawer-item__remove"
           data-cart-action="remove"
           data-key="{{ item.key }}"
-          aria-label="Remove {{ item.product.title | escape }} from cart"
+          aria-label="{{ 'cart.remove_item' | t: product: item.product.title }}"
           type="button"
         >
-          Remove
+          {{ 'cart.remove' | t }}
         </button>
       </div>
 

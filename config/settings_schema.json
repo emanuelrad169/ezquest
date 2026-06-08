@@ -25,7 +25,7 @@
         "type": "image_picker",
         "id": "share_image",
         "label": "Default social sharing image",
-        "info": "Used when a page has no featured image. Recommended: 1200×630px."
+        "info": "Used when a page has no featured image. Recommended: 1200\u00d7630px."
       }
     ]
   },
@@ -68,6 +68,50 @@
         "id": "footer_newsletter_heading",
         "label": "Newsletter heading",
         "default": "Stay connected"
+      }
+    ]
+  },
+  {
+    "name": "Integrations",
+    "settings": [
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "GA4 Measurement ID",
+        "info": "Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX). Leave blank to disable.",
+        "placeholder": "G-XXXXXXXXXX"
+      },
+      {
+        "type": "select",
+        "id": "reviews_app",
+        "label": "Reviews app",
+        "info": "Controls how review stars render on product cards. Set to Judge.me after installing the app.",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "native",
+            "label": "Shopify native metafields"
+          },
+          {
+            "value": "judgeme",
+            "label": "Judge.me"
+          }
+        ],
+        "default": "native"
+      },
+      {
+        "type": "header",
+        "content": "Chat widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_chat_widget",
+        "label": "Hide chat bubble",
+        "info": "Hides the Tidio chat button sitewide. Support is still reachable via the Contact page.",
+        "default": false
       }
     ]
   },

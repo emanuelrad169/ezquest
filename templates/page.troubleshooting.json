@@ -9,93 +9,24 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "page-hero",
-      "settings": {
-        "kicker": "Troubleshooting",
-        "heading": "Troubleshoot by symptom",
-        "subheading": "Start with the symptom you see, take the shortest recovery step, and escalate only if the issue remains.",
-        "light_mode": true
-      }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
+    "main": {
+      "type": "troubleshooting-guide",
       "settings": {}
     },
-    "issues": {
-      "type": "troubleshooting-list",
+    "page_hero": {
+      "type": "page-hero",
       "settings": {
-        "eyebrow": "Common issues",
-        "heading": "Troubleshooting by symptom and product behavior",
-        "copy": "Review the likely cause, try the most useful action, and move forward only if the symptom remains.",
-        "link_label": "Get help now",
-        "link_url": "/pages/contact"
-      }
-    },
-    "support": {
-      "type": "support-link-grid",
-      "settings": {
-        "eyebrow": "Next useful step",
-        "heading": "Move to the next clear path",
-        "copy": "If the symptom points to a file, a guide, or direct help, take the next step without restarting the journey.",
-        "columns_desktop": 3
-      },
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "title": "Downloads",
-            "copy": "Open drivers and utilities when the issue points to software or tools.",
-            "meta": "Files",
-            "link_label": "Find downloads",
-            "link_url": "/pages/downloads"
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "title": "Manuals",
-            "copy": "Open the setup guide when the symptom points to the install path or a missed step.",
-            "meta": "Guides",
-            "link_label": "Find manuals",
-            "link_url": "/pages/manuals"
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "title": "Get help now",
-            "copy": "Start a support request when guided troubleshooting still leaves one clear question open.",
-            "meta": "Direct help",
-            "link_label": "Start support request",
-            "link_url": "/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3"
-      ]
-    },
-    "cta": {
-      "type": "support-cta-rail",
-      "settings": {
-        "kicker": "Support",
-        "heading": "Still stuck after the guided step?",
-        "body": "Start one support request and include the product, symptom, and what you already tried.",
-        "cta_label": "Get help now",
-        "cta_url": "/pages/contact",
-        "cta2_label": "Find manuals",
-        "cta2_url": "/pages/manuals"
+        "background_color": "#020617",
+        "overlay_opacity": 35,
+        "height": 320,
+        "heading": "",
+        "subheading": "",
+        "kicker": "Troubleshooting"
       }
     }
   },
   "order": [
-    "hero",
-    "nav_rail",
-    "issues",
-    "support",
-    "cta"
+    "page_hero",
+    "main"
   ]
 }

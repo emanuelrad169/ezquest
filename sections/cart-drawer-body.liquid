@@ -1,5 +1,6 @@
 <div class="cart-drawer__body" id="cart-drawer-body">
   {% if cart.item_count > 0 %}
+    {% render 'free-shipping-bar' %}
     {% render 'cart-drawer-items' %}
   {% else %}
     {% render 'cart-drawer-empty' %}

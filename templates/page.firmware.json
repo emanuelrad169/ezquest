@@ -12,23 +12,16 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "background_color": "#020617",
         "kicker": "Firmware",
-        "heading": "Firmware updates by product and version",
-        "subheading": "Confirm the product and version first, then update only the firmware that matches your exact setup.",
-        "light_mode": true
+        "heading": "",
+        "subheading": "",
+        "height": 320,
+        "overlay_opacity": 35
       }
-    },
-    "nav_rail": {
-      "type": "support-nav-rail",
-      "settings": {}
     },
     "downloads": {
       "type": "download-center",
-      "settings": {
-        "kicker": "Firmware",
-        "heading": "Firmware releases by product and platform",
-        "body": "Review firmware updates by product, platform, and release guidance before you install."
-      },
       "blocks": {
         "fam_1": {
           "type": "family",
@@ -62,26 +55,20 @@
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
-            "file_title": "Firmware Update \u2014 Windows",
-            "file_type": "ZIP",
+            "file_title": "Firmware Update — Windows",
+            "file_url": "#",
             "file_size": "8.4 MB",
-            "version": "1.2.1",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": "1.2.1"
           }
         },
         "file_f2": {
           "type": "file",
           "settings": {
             "product_name": "USB-C Multimedia Hub Adapter 13 Ports",
-            "file_title": "Firmware Update \u2014 macOS",
-            "file_type": "ZIP",
+            "file_title": "Firmware Update — macOS",
+            "file_url": "#",
             "file_size": "8.1 MB",
-            "version": "1.2.1",
-            "updated": "March 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": "1.2.1"
           }
         },
         "file_f3": {
@@ -89,12 +76,9 @@
           "settings": {
             "product_name": "USB-C Dual HDMI Hub Adapter",
             "file_title": "Firmware Update",
-            "file_type": "ZIP",
+            "file_url": "#",
             "file_size": "6.7 MB",
-            "version": "1.0.3",
-            "updated": "January 2024",
-            "family": "hubs-adapters",
-            "file_url": "#"
+            "version": "1.0.3"
           }
         },
         "file_f4": {
@@ -102,12 +86,9 @@
           "settings": {
             "product_name": "Magnetic USB-C M.2 NVMe SSD Enclosure",
             "file_title": "Firmware Update",
-            "file_type": "ZIP",
+            "file_url": "#",
             "file_size": "12.1 MB",
-            "version": "2.0.0",
-            "updated": "December 2023",
-            "family": "accessories",
-            "file_url": "#"
+            "version": "2.0.0"
           }
         }
       },
@@ -120,7 +101,11 @@
         "file_f2",
         "file_f3",
         "file_f4"
-      ]
+      ],
+      "settings": {
+        "resource_kind": "firmware",
+        "structured_source": "global"
+      }
     },
     "cta": {
       "type": "support-cta-rail",
@@ -137,7 +122,6 @@
   },
   "order": [
     "hero",
-    "nav_rail",
     "downloads",
     "cta"
   ]

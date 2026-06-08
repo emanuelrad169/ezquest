@@ -1,26 +1,31 @@
-{%- liquid
-  assign hubs_collection = collections['hubs-adapters']
-  assign docks_collection = collections['docking-stations']
-  assign power_collection = collections['chargers-power']
-  assign sorted_use_case_keys = '' | split: ''
+{% style %}
+  /* Sit above the sticky site header (z-index 51) and sticky ATC bar (80),
+     consistent with the cart drawer (z-index 200). Fixes header bleeding
+     over the open mobile menu. */
+  #mobile-nav-drawer { z-index: 200; }
 
-  if metaobjects.ezquest_use_case != blank
-    capture sorted_use_cases_raw
-      for use_case in metaobjects.ezquest_use_case.values
-        capture order_token_raw
-          echo '000000'
-          echo use_case.sort_order.value | default: 999999 | plus: 0
-        endcapture
-        assign order_token = order_token_raw | strip | slice: -6, 6
-        echo order_token
-        echo '::'
-        echo use_case.system.handle
-        echo '||'
-      endfor
-    endcapture
-    assign sorted_use_case_keys = sorted_use_cases_raw | split: '||' | sort_natural
-  endif
--%}
+  /* Brand-yellow support block */
+  #mobile-nav-drawer .mega-mobile-service {
+    background: var(--ez-amber, #FED300);
+    border-color: rgba(10, 10, 10, 0.08);
+  }
+  #mobile-nav-drawer .mega-mobile-service-kicker {
+    color: rgba(10, 10, 10, 0.62);
+  }
+  #mobile-nav-drawer .mega-mobile-service-value {
+    color: #0a0a0a;
+  }
+  /* Black pill chips on the yellow support block */
+  #mobile-nav-drawer .mega-mobile-service-meta a {
+    background: #0a0a0a;
+    color: #ffffff;
+    border-color: #0a0a0a;
+    transition: background-color 0.2s ease;
+  }
+  #mobile-nav-drawer .mega-mobile-service-meta a:hover {
+    background: #1d1d1f;
+  }
+{% endstyle %}
 <div id="mobile-nav-drawer" class="fixed inset-0 z-50" hidden data-drawer>
   <div class="drawer-backdrop" data-drawer-close></div>
   <div class="drawer-panel mega-mobile-drawer absolute top-0 right-0 h-full w-full max-w-96 overflow-y-auto bg-white px-5 py-5 shadow-2xl outline-none" data-drawer-panel tabindex="-1">
@@ -31,7 +36,82 @@
       </button>
     </div>
 
-    <div class="mega-mobile-service mt-5 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-soft">
+    <div class="mega-mobile-primary-actions mt-5">
+      <a href="/pages/help-me-choose" class="mega-mobile-primary-link flex min-h-12 w-full items-center justify-center rounded-2xl bg-slate-950 px-4 py-3 text-sm font-medium text-white no-underline transition hover:bg-slate-800" data-drawer-close>Shop by setup</a>
+    </div>
+
+    {% comment %} Mirrors the desktop mega-menu: Shop / Support / Resources / Compare / About (same items + order). {% endcomment %}
+    <nav aria-label="Mobile" class="mega-mobile-nav mt-4 grid gap-2">
+      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
+        <button class="mega-mobile-trigger flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" type="button" aria-expanded="false" data-mega-mobile-trigger="shop" aria-controls="mega-mobile-panel-shop">
+          <span>Shop</span>
+          <span aria-hidden="true" class="text-slate-400">{% render 'icon', name: 'chevron-down' %}</span>
+        </button>
+        <div class="mega-mobile-panel overflow-hidden px-4" id="mega-mobile-panel-shop" data-mega-mobile-panel="shop" hidden>
+          <div class="mega-mobile-stack-links space-y-0.5 pb-1">
+            <a href="{{ routes.collections_url }}/hubs-adapters" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Hubs &amp; adapters</a>
+            <a href="{{ routes.collections_url }}/docking-stations" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Docking stations</a>
+            <a href="{{ routes.collections_url }}/chargers-power" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Chargers &amp; power</a>
+            <a href="{{ routes.collections_url }}/accessories" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Cables &amp; accessories</a>
+            <a href="{{ routes.collections_url }}" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-900 no-underline" data-drawer-close>Shop all products</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
+        <button class="mega-mobile-trigger flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" type="button" aria-expanded="false" data-mega-mobile-trigger="support" aria-controls="mega-mobile-panel-support">
+          <span>Support</span>
+          <span aria-hidden="true" class="text-slate-400">{% render 'icon', name: 'chevron-down' %}</span>
+        </button>
+        <div class="mega-mobile-panel overflow-hidden px-4" id="mega-mobile-panel-support" data-mega-mobile-panel="support" hidden>
+          <div class="mega-mobile-stack-links space-y-0.5 pb-1">
+            <a href="/pages/support" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Support center</a>
+            <a href="/pages/faq" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>FAQ</a>
+            <a href="/pages/downloads" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Downloads</a>
+            <a href="/pages/manuals" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Manuals</a>
+            <a href="/pages/warranty" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Warranty</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
+        <button class="mega-mobile-trigger flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" type="button" aria-expanded="false" data-mega-mobile-trigger="resources" aria-controls="mega-mobile-panel-resources">
+          <span>Resources</span>
+          <span aria-hidden="true" class="text-slate-400">{% render 'icon', name: 'chevron-down' %}</span>
+        </button>
+        <div class="mega-mobile-panel overflow-hidden px-4" id="mega-mobile-panel-resources" data-mega-mobile-panel="resources" hidden>
+          <div class="mega-mobile-stack-links space-y-0.5 pb-1">
+            <a href="/blogs/resources" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>All articles</a>
+            <a href="/pages/compatibility" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Compatibility</a>
+            <a href="/pages/help-me-choose" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Help me choose</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
+        <a href="/pages/compare" class="mega-mobile-trigger mega-mobile-trigger--link flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" data-drawer-close>
+          <span>Compare</span>
+        </a>
+      </div>
+
+      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
+        <button class="mega-mobile-trigger flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" type="button" aria-expanded="false" data-mega-mobile-trigger="about" aria-controls="mega-mobile-panel-about">
+          <span>About</span>
+          <span aria-hidden="true" class="text-slate-400">{% render 'icon', name: 'chevron-down' %}</span>
+        </button>
+        <div class="mega-mobile-panel overflow-hidden px-4" id="mega-mobile-panel-about" data-mega-mobile-panel="about" hidden>
+          <div class="mega-mobile-stack-links space-y-0.5 pb-1">
+            <a href="/pages/our-story" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Our story</a>
+            <a href="/pages/about" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>About EZQuest</a>
+            <a href="/pages/where-to-buy" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Where to buy</a>
+            <a href="/pages/shipping-returns" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Shipping &amp; returns</a>
+            <a href="/pages/contact" class="block border-t border-slate-200/80 px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>Contact us</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mega-mobile-service mt-4 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-soft">
       <a href="{{ support_href | default: '/pages/support' }}" class="mega-mobile-service-link block no-underline">
         <span class="mega-mobile-service-kicker block text-xs font-medium uppercase tracking-widest text-slate-400">
           {% if support_has_phone %}
@@ -53,114 +133,6 @@
         <a href="/pages/compatibility" class="inline-flex min-h-9 items-center rounded-full border border-slate-200/80 bg-white px-3 py-2 text-xs font-medium uppercase tracking-widest text-slate-600 no-underline">Compatibility</a>
       </div>
     </div>
-
-    <div class="mega-mobile-primary-actions mt-4 grid grid-cols-2 gap-2">
-      <a href="/pages/help-me-choose" class="mega-mobile-primary-link inline-flex min-h-12 items-center justify-center rounded-2xl bg-slate-950 px-4 py-3 text-sm font-medium text-white no-underline transition hover:bg-slate-800" data-drawer-close>Shop by setup</a>
-      <a href="{{ routes.collections_url }}" class="mega-mobile-primary-link mega-mobile-primary-link--secondary inline-flex min-h-12 items-center justify-center rounded-2xl border border-slate-200/80 bg-white px-4 py-3 text-sm font-medium text-slate-900 no-underline transition hover:bg-slate-50" data-drawer-close>Browse products</a>
-    </div>
-
-    <nav aria-label="Mobile" class="mega-mobile-nav mt-4 grid gap-2">
-      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
-        <a href="/pages/compare" class="mega-mobile-trigger mega-mobile-trigger--link flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" data-drawer-close>
-          <span>Compare</span>
-        </a>
-      </div>
-
-      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
-        <a href="/pages/support" class="mega-mobile-trigger mega-mobile-trigger--link flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" data-drawer-close>
-          <span>Support</span>
-        </a>
-      </div>
-
-      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
-        <a href="/blogs/resources" class="mega-mobile-trigger mega-mobile-trigger--link flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" data-drawer-close>
-          <span>Resources</span>
-        </a>
-      </div>
-
-      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
-        <a href="/pages/about" class="mega-mobile-trigger mega-mobile-trigger--link flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" data-drawer-close>
-          <span>About</span>
-        </a>
-      </div>
-
-      <div class="mega-mobile-section rounded-2xl border border-slate-200/80 bg-slate-50/60 px-4 py-0.5">
-        <button class="mega-mobile-trigger flex min-h-11 w-full items-center justify-between gap-4 py-2 text-left text-base font-medium text-slate-900 no-underline" type="button" aria-expanded="false" data-mega-mobile-trigger="more" aria-controls="mega-mobile-panel-more">
-          <span>More destinations</span>
-          <span aria-hidden="true" class="text-slate-400">{% render 'icon', name: 'chevron-down' %}</span>
-        </button>
-        <div class="mega-mobile-panel overflow-hidden px-4" id="mega-mobile-panel-more" data-mega-mobile-panel="more" hidden>
-          <div class="mega-mobile-stack-links mega-mobile-stack-links--detailed space-y-0.5 pb-1">
-            {% if sorted_use_case_keys.size > 0 %}
-              {% for use_case_key in sorted_use_case_keys %}
-                {% if use_case_key == blank %}
-                  {% continue %}
-                {% endif %}
-                {%- liquid
-                  assign use_case_handle = use_case_key | split: '::' | last
-                  assign use_case = metaobjects.ezquest_use_case[use_case_handle]
-                  if use_case == blank or use_case.title == blank or use_case.products == blank or use_case.products.value.count == 0
-                    continue
-                  endif
-                  assign use_case_slug = use_case.slug.value | default: use_case.system.handle
-                  assign use_case_description = use_case.description.value | default: blank
-                  assign use_case_destination_url = use_case.products.value.first.url
-                  case use_case_slug
-                    when 'balanced-everyday'
-                      assign use_case_destination_url = hubs_collection.url
-                    when 'portable'
-                      assign use_case_destination_url = hubs_collection.url
-                    when 'desk-ready'
-                      assign use_case_destination_url = docks_collection.url
-                    when 'chargers-power'
-                      assign use_case_destination_url = power_collection.url
-                  endcase
-                  if use_case_description == blank
-                    assign use_case_description = 'Products for ' | append: use_case.title.value | downcase | append: '.'
-                  endif
-                -%}
-                <a href="{{ use_case_destination_url | default: '/pages/help-me-choose' }}" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-                  <span>{{ use_case.title.value }}</span>
-                  <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">{{ use_case_description }}</span>
-                </a>
-              {% endfor %}
-            {% endif %}
-            <a href="{{ routes.collections_url }}/hubs-adapters" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Hubs & adapters</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">USB-C expansion for desks, travel, and everyday carry.</span>
-            </a>
-            <a href="{{ routes.collections_url }}/docking-stations" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Docking stations</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Display, Ethernet, charging, and desk-ready connectivity.</span>
-            </a>
-            <a href="{{ routes.collections_url }}/chargers-power" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Chargers & power</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Wall chargers, car chargers, and power for daily devices.</span>
-            </a>
-            <a href="{{ routes.collections_url }}/accessories" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Cables & accessories</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Cables, adapters, and finishing pieces for the setup.</span>
-            </a>
-            <a href="/pages/downloads" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Downloads</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Drivers, utilities, and supporting files.</span>
-            </a>
-            <a href="/pages/manuals" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Manuals</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Product guides and setup instructions.</span>
-            </a>
-            <a href="/pages/compatibility" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>Compatibility</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Check displays, systems, and connection support.</span>
-            </a>
-            <a href="/pages/faq" class="grid gap-0.5 border-t border-slate-200/80 bg-transparent px-0 py-3 text-sm font-medium text-slate-700 no-underline" data-drawer-close>
-              <span>FAQ</span>
-              <span class="mega-mobile-link-detail text-xs font-medium leading-5 text-slate-500">Common answers without leaving the flow.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
 
     <div class="support-crosslink-list">
       <a href="{{ routes.search_url }}" class="support-crosslink" data-drawer-close>

@@ -1,59 +1,255 @@
-<article class="section-shell main-article-section">
-  {%- liquid
-    assign words = article.content | strip_html | split: ' '
-    assign read_time = words.size | divided_by: 200 | plus: 1
-  -%}
-  <div class="container-shell">
-    {% render 'breadcrumbs' %}
+{% comment %} sections/main-article.liquid {% endcomment %}
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":{{ shop.url | json }}},
+  {"@type":"ListItem","position":2,"name":{{ blog.title | json }},"item":{{ shop.url | append: blog.url | json }}},
+  {"@type":"ListItem","position":3,"name":{{ article.title | json }},"item":{{ shop.url | append: article.url | json }}}
+]}
+</script>
+<div id="reading-progress" aria-hidden="true"></div>
+{%- assign words = article.content | strip_html | split: ' ' -%}
+{%- assign read_time = words.size | divided_by: 200 | at_least: 1 -%}
 
-    <div class="article-header">
-      <p class="article-header__category">{{ article.blog.title | default: 'Article' }}</p>
-      <h1 class="article-header__title">{{ article.title }}</h1>
-      <div class="article-header__meta">
-        <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
-        <span class="article-header__meta-divider" aria-hidden="true"></span>
-        <span>{{ read_time }} min read</span>
-        {% if article.tags.size > 0 %}
-          <span class="article-header__meta-divider" aria-hidden="true"></span>
-          {% for tag in article.tags limit: 2 %}
-            <span>{{ tag }}</span>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
+{% comment %} ── ARTICLE INTRO ─────────────────── {% endcomment %}
+<div class="article-intro container-shell">
 
-    <div class="article-featured-image-wrap">
-      {% if article.image != blank %}
-        {{ article.image | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'article-featured-image' }}
-      {% else %}
-        {% render 'owned-editorial-visual', visual: 'guide', title: article.title, class: 'article-featured-image' %}
-      {% endif %}
-    </div>
+  <nav class="article-intro__bc" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li aria-hidden="true">›</li>
+      <li><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+      <li aria-hidden="true">›</li>
+      <li aria-current="page">{{ article.title | truncate: 48 }}</li>
+    </ol>
+  </nav>
 
-    <div class="article-body richtext-content">
-      {{ article.content }}
-    </div>
-
-    <div class="article-footer">
-      <div class="article-tags">
-        {% for tag in article.tags %}
-          <a href="{{ article.blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
-        {% endfor %}
-      </div>
-      <div class="article-continuation-links">
-        <span class="article-continuation-label">Continue:</span>
-        <a href="/pages/support" class="support-inline-link">Support center</a>
-        <a href="/pages/manuals" class="support-inline-link">Manuals</a>
-        <a href="/pages/downloads" class="support-inline-link">Downloads</a>
-        <a href="/pages/compatibility" class="support-inline-link">Compatibility</a>
-      </div>
+  <div class="article-intro__text">
+    <div class="article-intro__meta">
+      <span class="article-intro__author">{{ article.author }}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+        {{ article.published_at | date: '%B %d, %Y' }}
+      </time>
+      <span aria-hidden="true">·</span>
+      <span>{{ read_time }} min read</span>
     </div>
   </div>
-</article>
+
+  {% if article.image %}
+    <div class="article-intro__img-wrap">
+      <img
+        src="{{ article.image | image_url: width: 960, format: 'pjpg' }}"
+        alt="{{ article.image.alt | default: article.title | escape }}"
+        width="960"
+        height="540"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async">
+      {% if blog.all_tags.size > 0 %}
+        <div class="blog-filter-bar blog-filter-bar--overlay">
+          <div class="blog-filter-bar__inner">
+            <a href="{{ blog.url }}" class="blog-filter-chip">All</a>
+            {% for tag in blog.all_tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+                 class="blog-filter-chip{% if article.tags contains tag %} is-active{% endif %}">
+                {{ tag }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    {% if blog.all_tags.size > 0 %}
+      <div class="blog-filter-bar">
+        <div class="blog-filter-bar__inner">
+          <a href="{{ blog.url }}" class="blog-filter-chip">All</a>
+          {% for tag in blog.all_tags %}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+               class="blog-filter-chip{% if article.tags contains tag %} is-active{% endif %}">
+              {{ tag }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+
+</div>
+
+{% comment %} ── ARTICLE BODY ───────────────────── {% endcomment %}
+<div class="article-body container-shell">
+  {%- assign quick_answer = article.metafields.ezquest.quick_answer -%}
+  {% render 'article-quick-answer', answer: quick_answer %}
+  <div class="article-body__content rte">
+    {{ article.content }}
+  </div>
+
+  {% comment %} Article tags {% endcomment %}
+  {% if article.tags.size > 0 %}
+    <div class="article-tags">
+      <span class="article-tags__label">Topics:</span>
+      {% for tag in article.tags %}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+           class="article-tag-pill">
+          {{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% comment %} Author card {% endcomment %}
+  <div class="article-author-card">
+    <div class="article-author-card__avatar"
+         aria-hidden="true">
+      {{ article.author | slice: 0 | upcase }}
+    </div>
+    <div class="article-author-card__info flex-1">
+      <p class="article-author-card__name">
+        {{ article.author }}
+      </p>
+      <p class="article-author-card__role">
+        EZQuest Team · Lake Forest, California
+      </p>
+    </div>
+    <time class="article-author-card__date">
+      {{ article.published_at | date: '%B %Y' }}
+    </time>
+  </div>
+</div>
+
+{% comment %} ── RELATED ARTICLES ───────────────── {% endcomment %}
+{% if blog.articles.size > 1 %}
+  <section class="article-related">
+    <div class="article-related__inner container-shell">
+      <div class="article-related__header">
+        <h2 class="article-related__heading">
+          Keep reading
+        </h2>
+        <a href="{{ blog.url }}"
+           class="article-related__view-all">
+          View all articles →
+        </a>
+      </div>
+      <div class="article-related__grid">
+        {%- assign related_count = 0 -%}
+        {% for related in blog.articles %}
+          {% if related.id != article.id and related_count < 3 %}
+            {%- assign related_count = related_count | plus: 1 -%}
+            {% assign rwords = related.content
+               | strip_html | split: ' ' %}
+            {% assign rread = rwords.size
+               | divided_by: 200 | at_least: 1 %}
+            <a href="{{ related.url }}"
+               class="blog-card">
+              <div class="blog-card__img-wrap">
+                {% if related.image %}
+                  <img
+                    src="{{ related.image | image_url: width: 600, format: 'pjpg' }}"
+                    alt="{{ related.image.alt
+                            | default: related.title | escape }}"
+                    class="blog-card__img"
+                    width="600"
+                    height="338"
+                    loading="lazy"
+                    decoding="async">
+                {% else %}
+                  <div class="blog-card__img-fallback"
+                       aria-hidden="true">
+                    <svg width="32" height="32"
+                         viewBox="0 0 32 32" fill="none">
+                      <rect x="4" y="6" width="24" height="20"
+                            rx="3" stroke="currentColor"
+                            stroke-width="1.5"/>
+                      <path d="M4 21l6-6 5 5 4-4 8 5"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="blog-card__body">
+                {% if related.tags.size > 0 %}
+                  <span class="blog-card__tag">
+                    {{ related.tags.first | upcase }}
+                  </span>
+                {% endif %}
+                <h3 class="blog-card__title">
+                  {{ related.title | escape }}
+                </h3>
+                {% if related.excerpt != blank %}
+                  <p class="blog-card__excerpt">
+                    {{ related.excerpt | strip_html
+                       | truncate: 90 }}
+                  </p>
+                {% endif %}
+                <div class="blog-card__meta">
+                  <time datetime="{{ related.published_at
+                                     | date: '%Y-%m-%d' }}">
+                    {{ related.published_at | date: '%b %d, %Y' }}
+                  </time>
+                  <span>·</span>
+                  <span>{{ rread }} min</span>
+                </div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{%- render 'page-cta',
+  variant: 'light',
+  kicker: 'Questions about a product?',
+  heading: 'We’re here to help you find the right fit.',
+  subhead: 'Move from reading into support, compatibility help, or product discovery without losing the thread.',
+  primary_label: 'Open support center',
+  primary_url: '/pages/support',
+  secondary_label: 'Browse products',
+  secondary_url: routes.collections_url
+-%}
+
+<script>
+(function(){
+  var bar = document.getElementById('reading-progress');
+  if (!bar) return;
+  var sent = {};
+  var ticking = false;
+
+  function sendMilestones(pct) {
+    [25, 50, 75, 100].forEach(function(mark) {
+      if (pct < mark || sent[mark]) return;
+      sent[mark] = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'article_reading_progress',
+        article_title: {{ article.title | json }},
+        progress_percent: mark
+      });
+    });
+  }
+
+  function update() {
+    ticking = false;
+    var html = document.documentElement;
+    var maxScroll = Math.max(html.scrollHeight - html.clientHeight, 1);
+    var pct = Math.min(html.scrollTop / maxScroll * 100, 100);
+    bar.style.width = pct + '%';
+    sendMilestones(pct);
+  }
+  function requestUpdate() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+  document.addEventListener('scroll', requestUpdate, { passive: true });
+  update();
+})();
+</script>
 
 {% schema %}
-{
-  "name": "Main article",
-  "settings": []
-}
+{ "name": "Article", "tag": "section" }
 {% endschema %}

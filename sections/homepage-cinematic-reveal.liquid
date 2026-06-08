@@ -6,38 +6,65 @@
   data-cinematic-reveal
   aria-label="{{ section.settings.aria_label | default: 'Brand statement' | escape }}"
 >
+  {% if section.settings.background_image != blank %}
+    <div class="cinematic-reveal-media" aria-hidden="true">
+      {{ section.settings.background_image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'cinematic-reveal-image', alt: '' }}
+    </div>
+  {% endif %}
+
   <div class="cinematic-reveal-inner container-shell">
 
-    {% if section.settings.kicker != blank %}
-      <p class="cinematic-reveal-kicker section-kicker">{{ section.settings.kicker | escape }}</p>
-    {% endif %}
+    <div class="cinematic-reveal-copy">
+      {% if section.settings.kicker != blank %}
+        <p class="cinematic-reveal-kicker section-kicker">{{ section.settings.kicker | escape }}</p>
+      {% endif %}
 
-    <div class="cinematic-reveal-lines" aria-label="{{ headline_lines | join: ' ' | escape }}">
-      {% for line in headline_lines %}
-        <div
-          class="cinematic-reveal-line"
-          data-reveal-line
-          style="--line-index: {{ forloop.index0 }}; --line-last: {{ forloop.last | json }}"
-        >
-          <span class="cinematic-reveal-line-inner">{{ line | strip | escape }}</span>
+      <div class="cinematic-reveal-lines" aria-label="{{ headline_lines | join: ' ' | escape }}">
+        {% for line in headline_lines %}
+          <div
+            class="cinematic-reveal-line"
+            data-reveal-line
+            style="--line-index: {{ forloop.index0 }}; --line-last: {{ forloop.last | json }}"
+          >
+            <span class="cinematic-reveal-line-inner">{{ line | strip | escape }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.body_text != blank %}
+        <p class="cinematic-reveal-body" data-reveal-body>{{ section.settings.body_text | escape }}</p>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank %}
+        <div class="cinematic-reveal-cta" data-reveal-cta>
+          {% render 'button',
+            label: section.settings.cta_label,
+            url: section.settings.cta_url,
+            style: 'primary',
+            size: 'lg'
+          %}
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
 
-    {% if section.settings.body_text != blank %}
-      <p class="cinematic-reveal-body" data-reveal-body>{{ section.settings.body_text | escape }}</p>
-    {% endif %}
-
-    {% if section.settings.cta_label != blank %}
-      <div class="cinematic-reveal-cta" data-reveal-cta>
-        {% render 'button',
-          label: section.settings.cta_label,
-          url: section.settings.cta_url,
-          style: 'primary',
-          size: 'lg'
-        %}
+    <div class="cinematic-reveal-stats" aria-label="Brand highlights">
+      <div class="cinematic-reveal-stat">
+        <span class="cinematic-reveal-stat__num">30+</span>
+        <span class="cinematic-reveal-stat__lbl">Years in business</span>
       </div>
-    {% endif %}
+      <div class="cinematic-reveal-stat">
+        <span class="cinematic-reveal-stat__num">100+</span>
+        <span class="cinematic-reveal-stat__lbl">Products made</span>
+      </div>
+      <div class="cinematic-reveal-stat">
+        <span class="cinematic-reveal-stat__num">1–2yr</span>
+        <span class="cinematic-reveal-stat__lbl">Warranty (varies)</span>
+      </div>
+      <div class="cinematic-reveal-stat">
+        <span class="cinematic-reveal-stat__num">24hr</span>
+        <span class="cinematic-reveal-stat__lbl">Ships in 24 hours</span>
+      </div>
+    </div>
 
   </div>
 
@@ -73,6 +100,11 @@
 {
   "name": "Cinematic reveal",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
     {
       "type": "text",
       "id": "kicker",

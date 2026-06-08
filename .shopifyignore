@@ -1,6 +1,9 @@
 node_modules/
 src/
 docs/
+design-system/
+.audit/
+.claude/
 package.json
 package-lock.json
 postcss.config.cjs

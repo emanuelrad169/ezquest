@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "overlay_opacity": 40,
+        "height": 280,
+        "kicker": "Support",
+        "heading": "Product Resources",
+        "subheading": "Setup guides, downloads, manuals, firmware, and warranty information for your EZQuest product."
+      }
+    },
+    "main": {
+      "type": "product-resource",
+      "settings": {}
+    }
+  },
+  "order": [
+    "page_hero",
+    "main"
+  ]
+}

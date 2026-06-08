@@ -61,7 +61,7 @@
     </div>
     {% if image != blank %}
       <div class="mega-menu-featured-media">
-        {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'mega-menu-featured-image' }}
+        {{ image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '', class: 'mega-menu-featured-image' }}
       </div>
     {% endif %}
   </a>

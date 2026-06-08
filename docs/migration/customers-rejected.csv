@@ -1,0 +1,4 @@
+"first_name","last_name","email","phone","company","address1","address2","city","state","zip","country","accepts_marketing","taxExempt","wholesale","tier","notes","_errors"
+"Susan","Evans","bad-email-no-at-sign","(697) 660-9017","","8575 Oak Ave","","Seattle","WA","93744","US","no","no","no","","","invalid email: bad-email-no-at-sign"
+"Matthew","Evans","joseph.jones@aol.com","(834) 748-3041","","5956 Park Ave","Apt 42","San Jose","CA","22502","US","yes","no","no","","Returning customer. Handle with care.","duplicate email: joseph.jones@aol.com"
+"Kevin","Sanchez","","(558) 674-4280","","1235 Maple Dr","","Dallas","TX","33237","US","no","no","no","","","missing email"

@@ -1,0 +1,70 @@
+{%- comment -%}
+  Product video embed — YouTube, Vimeo, or MP4.
+  Usage: {% render 'product-video-embed', url: url, title: title %}
+  Renders nothing if url is blank.
+{%- endcomment -%}
+
+{%- if url != blank -%}
+  {%- assign video_title = title | default: product.title | default: 'Product video' -%}
+
+  {%- comment -%} Detect type and extract ID {%- endcomment -%}
+  {%- assign is_youtube = false -%}
+  {%- assign is_vimeo = false -%}
+  {%- assign is_mp4 = false -%}
+  {%- assign embed_id = '' -%}
+
+  {%- if url contains 'youtube.com' or url contains 'youtu.be' -%}
+    {%- assign is_youtube = true -%}
+    {%- if url contains 'youtu.be/' -%}
+      {%- assign embed_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
+    {%- elsif url contains '/embed/' -%}
+      {%- assign embed_id = url | split: '/embed/' | last | split: '?' | first -%}
+    {%- elsif url contains 'watch?v=' -%}
+      {%- assign embed_id = url | split: 'watch?v=' | last | split: '&' | first -%}
+    {%- elsif url contains '/shorts/' -%}
+      {%- assign embed_id = url | split: '/shorts/' | last | split: '?' | first -%}
+    {%- else -%}
+      {%- assign embed_id = url | split: 'v=' | last | split: '&' | first -%}
+    {%- endif -%}
+  {%- elsif url contains 'vimeo.com' -%}
+    {%- assign is_vimeo = true -%}
+    {%- if url contains '/video/' -%}
+      {%- assign embed_id = url | split: '/video/' | last | split: '?' | first | split: '/' | first -%}
+    {%- else -%}
+      {%- assign embed_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | first -%}
+    {%- endif -%}
+  {%- elsif url contains '.mp4' or url contains '.webm' -%}
+    {%- assign is_mp4 = true -%}
+  {%- endif -%}
+
+  <div class="pdp-video-wrap mt-8 w-full">
+    <div class="pdp-video-frame">
+      {%- if is_youtube and embed_id != blank -%}
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/{{ embed_id | escape }}?rel=0&modestbranding=1"
+          title="{{ video_title | escape }}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      {%- elsif is_vimeo and embed_id != blank -%}
+        <iframe
+          src="https://player.vimeo.com/video/{{ embed_id | escape }}?byline=0&portrait=0"
+          title="{{ video_title | escape }}"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      {%- elsif is_mp4 -%}
+        <video
+          src="{{ url | escape }}"
+          controls
+          playsinline
+          preload="metadata"
+          class="shoppable-video__video"
+          aria-label="{{ video_title | escape }}"
+        ></video>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

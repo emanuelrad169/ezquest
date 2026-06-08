@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════
+   EZQuest Support Cluster — Shared Design System
+   ═══════════════════════════════════════════════ */
+
+/* Page hero — light variant (all support pages) */
+
+
+.support-hero--has-image .support-hero__wrap { position: relative; z-index: 1; }
+.support-hero--has-image::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(90deg, rgba(248,250,252,.96), rgba(248,250,252,.72) 45%, rgba(248,250,252,.18));
+}
+
+/* Filter pill row */
+.filter-pill {
+  padding: .4rem 1rem;
+  border-radius: 100px;
+  border: 1.5px solid rgba(0,0,0,.1);
+  background: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ez-grey);
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+
+.filter-pill.is-active,
+.filter-pill:focus {
+  border-color: var(--ez-black);
+  color: var(--ez-light);
+  background: var(--ez-black);
+  font-weight: 500;
+}
+
+/* File/data table */
+
+.data-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.data-table thead th {
+  padding: .875rem 1.25rem;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ez-grey);
+  background: var(--ez-light);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  transition: background .12s;
+}
+
+
+.data-table td {
+  padding: 1rem 1.25rem;
+  vertical-align: middle;
+  color: var(--ez-black);
+}
+
+.data-table__file {
+  font-weight: 500;
+}
+
+.data-table__muted {
+  color: var(--ez-grey);
+}
+
+.data-table__meta {
+  color: var(--ez-grey);
+  font-size: 13px;
+}
+
+/* File type badge */
+
+.file-badge {
+  display: inline-block;
+  padding: .2rem .625rem;
+  border-radius: 6px;
+  background: rgba(0,0,0,.04);
+  color: var(--ez-grey);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.file-badge--zip {
+  background: rgba(37,99,235,.07);
+  color: var(--ez-info-text);
+}
+
+.file-badge--exe {
+  background: rgba(124,58,237,.07);
+  color: #6d28d9;
+}
+
+.file-badge--other {
+  background: rgba(220,38,38,.07);
+  color: var(--ez-error-text);
+}
+
+/* Download button */
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .45rem 1rem;
+  border-radius: 9999px;
+  background: var(--ez-amber);
+  color: var(--ez-black);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, opacity .2s;
+}
+
+.btn-download:hover,
+.btn-download:focus-visible {
+  background: var(--ez-amber);
+  opacity: .86;
+}
+
+
+/* Product name pill */
+
+.product-pill {
+  display: inline-block;
+  padding: .2rem .75rem;
+  border-radius: 9999px;
+  background: rgba(0,0,0,.04);
+  color: var(--ez-grey);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Status indicators */
+
+/* Section label */
+
+/* Info card */
+
+
+
+/* Empty state */
+
+.empty-state {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-state--panel {
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 1rem;
+  background: var(--ez-light);
+}
+
+.empty-state__heading {
+  margin: 0 0 .5rem;
+  color: var(--ez-black);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.empty-state__body {
+  margin: 0 0 1.5rem;
+  color: var(--ez-grey);
+  font-size: 0.875rem;
+}
+
+
+
+@media (max-width: 640px) {
+  .data-table thead { display: none; }
+  .data-table tbody tr { display: block; padding: 1rem; }
+  .data-table td { display: block; padding: .25rem 0; border: none; }
+  .data-table td:before {
+    content: attr(data-label) ': ';
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ez-grey);
+    margin-right: .375rem;
+  }
+}
+
+/* ── Support Hub ───────────────────────────────── */
+
+
+
+
+/* ── Warranty Page ─────────────────────────────── */
+
+
+.support-body .container-shell.max-w-6xl { max-width: 76rem; }
+.warranty-layout { grid-template-columns: minmax(0, 1fr) 340px; }
+.warranty-policy { display: flex; flex-direction: column; gap: 1.25rem; }
+.warranty-panel { backdrop-filter: blur(8px); }
+.warranty-panel--intro { background: linear-gradient(180deg, #fff, rgba(255,255,255,.95)); }
+.warranty-panel--stats { padding-bottom: 1.5rem; }
+.warranty-stat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .875rem; }
+.warranty-stat { padding: 1rem 1rem .95rem; border-radius: 18px; background: rgba(15,23,42,.02); border: 1px solid rgba(0,0,0,.06); display: flex; flex-direction: column; gap: .35rem; min-height: 112px; }
+.warranty-stat__label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ez-grey); }
+.warranty-stat__number { font-size: clamp(1.25rem, 2.6vw, 1.95rem); line-height: 1; font-weight: 600; letter-spacing: -.04em; color: var(--ez-black); }
+.warranty-stat__copy { font-size: 13px; line-height: 1.55; color: var(--ez-grey); }
+.warranty-proof-grid { align-items: stretch; }
+.warranty-claim-col { display: flex; flex-direction: column; gap: 1rem; }
+.warranty-claim-col > * { margin-top: 0 !important; }
+.warranty-claim-col .info-card { border: 0 !important; background-image: none !important; }
+.warranty-claim-col .info-card::before { display: none !important; content: none !important; }
+.warranty-claim-card__button { width: fit-content; }
+.warranty-claim-card__actions { align-items: flex-start; }
+.warranty-steps { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+.warranty-steps li { display: grid; grid-template-columns: auto 1fr; gap: .875rem; align-items: start; font-size: 15px; line-height: 1.5; color: var(--ez-black); }
+.warranty-steps li::before { content: none; }
+.warranty-step__number { width: 30px; height: 30px; border-radius: 9999px; background: rgba(15,23,42,.08); color: var(--ez-black); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+.warranty-step__content { min-width: 0; }
+.warranty-step__content strong { display: block; font-size: 15px; font-weight: 600; color: var(--ez-black); line-height: 1.35; margin-bottom: .3rem; }
+.warranty-step__content p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ez-grey); }
+
+.warranty-list li { font-size: 15px; line-height: 1.5; padding-left: 1.75rem; position: relative; color: var(--ez-black); }
+.warranty-list--covered li::before { content: '✓'; position: absolute; left: 0; color: var(--ez-success-dot); font-weight: 700; font-size: 13px; top: .1rem; }
+.warranty-list--excluded li::before { content: '×'; position: absolute; left: 0; color: var(--ez-error-dot); font-weight: 500; font-size: 16px; top: -.05rem; }
+.warranty-section__heading { letter-spacing: .12em; }
+
+@media (max-width: 900px) {
+  .warranty-proof-grid { grid-template-columns: 1fr; }
+  .warranty-stat-row { grid-template-columns: 1fr; }
+  .warranty-claim-card__button { width: 100%; }
+}
+
+/* ── User Guides Center ────────────────────────── */
+
+
+/* ── Firmware Center ───────────────────────────── */
+
+
+.fw-changelog__trigger::-webkit-details-marker { display: none; }
+.fw-changelog[open] .fw-changelog__icon { transform: rotate(180deg); }
+.fw-changelog__body ul { padding-left: 1.25rem; margin: 0; }
+.fw-changelog__body li { margin-bottom: .375rem; }
+
+/* ── Troubleshooting Guide ─────────────────────── */
+
+.ts-steps { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .625rem; counter-reset: step; }
+.ts-step { display: flex; gap: .875rem; align-items: flex-start; font-size: 14px; color: #3d3d3f; line-height: 1.55; counter-increment: step; }
+.ts-step::before { content: counter(step); width: 22px; height: 22px; border-radius: 50%; background: rgba(254, 211, 0,.1); color: var(--ez-black); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .15rem; }
+
+/* ── Troubleshooting Guide v2 (redesigned) ──── */
+
+/* Hero */
+/* Page body */
+
+/* Category group */
+
+/* Card — step number top-right variant */
+
+/* "Where to go from here" section */
+
+
+
+/* ============================================ */
+/* Extracted from contact-form-panel.liquid     */
+/* ============================================ */
+
+
+.contact-form__input::placeholder{color:var(--ez-grey);opacity:.6}
+

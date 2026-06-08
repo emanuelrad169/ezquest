@@ -1,0 +1,39 @@
+{% comment %} templates/500.liquid — Server error page {% endcomment %}
+{{ '500.css' | asset_url | stylesheet_tag }}
+
+<section class="error-page section--dark" aria-label="Server error">
+  <div class="error-page__inner page-width">
+
+    <div class="error-page__code" aria-hidden="true">500</div>
+
+    <h1 class="error-page__heading">
+      Something went wrong on our end.
+    </h1>
+
+    <p class="error-page__body">
+      We're sorry. Something unexpected happened. Our team has been notified and is working on a fix.
+      Please try again in a few minutes.
+    </p>
+
+    <div class="error-page__actions">
+      <a href="{{ routes.root_url }}" class="btn btn--primary error-page__btn-primary">
+        Go to homepage
+      </a>
+      <a href="/pages/contact" class="btn btn--secondary error-page__btn-secondary">
+        Contact support
+      </a>
+    </div>
+
+    <div class="error-page__links">
+      <p class="error-page__links-label">Or browse by category:</p>
+      <div class="error-page__pills">
+        <a href="{{ routes.collections_url }}/hubs-adapters" class="error-page__pill">Hubs &amp; adapters</a>
+        <a href="{{ routes.collections_url }}/chargers-power" class="error-page__pill">Chargers</a>
+        <a href="{{ routes.collections_url }}/accessories" class="error-page__pill">Cables</a>
+        <a href="/pages/support" class="error-page__pill">Support</a>
+        <a href="/pages/contact" class="error-page__pill">Contact</a>
+      </div>
+    </div>
+
+  </div>
+</section>

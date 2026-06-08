@@ -54,7 +54,7 @@
         <article class="{{ story_class }}" {{ block.shopify_attributes }}>
           {% if story_image != blank %}
             <div class="home-story-media">
-              {{ story_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-story-image aspect-card w-full object-cover' }}
+              {{ story_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '', class: 'home-story-image aspect-card w-full object-cover' }}
             </div>
           {% else %}
             <div class="home-story-media">
@@ -107,7 +107,7 @@
           <article class="home-story-card home-story-card--support">
             <div class="home-story-media">
               {% if fallback_story_image != blank %}
-                {{ fallback_story_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'home-story-image aspect-card w-full object-cover' }}
+                {{ fallback_story_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '', class: 'home-story-image aspect-card w-full object-cover' }}
               {% else %}
                 {% render 'placeholder-visual',
                   kind: 'story',

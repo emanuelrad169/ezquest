@@ -1,0 +1,155 @@
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign blog_handle = section.settings.blog.handle | default: 'resources'
+  assign source_blog = blogs[blog_handle]
+  assign articles = source_blog.articles
+  assign article_limit = section.settings.article_count | plus: 0
+%}
+
+{% if articles.size > 0 %}
+  <section class="blog-grid section--white" aria-labelledby="blog-grid-heading">
+    <div class="page-width">
+      <div class="blog-grid__header">
+        <div class="blog-grid__header-copy">
+          {% if section.settings.kicker != blank %}
+            <p class="section-kicker">
+              {{ section.settings.kicker | escape }}
+            </p>
+          {% endif %}
+          <h2 class="blog-grid__heading" id="blog-grid-heading">
+            {{ section.settings.heading | escape }}
+          </h2>
+        </div>
+
+        {% if section.settings.show_view_all and source_blog.url != blank %}
+          <a href="{{ source_blog.url | escape }}" class="blog-grid__view-all">
+            {{ section.settings.view_all_label | escape }} &rarr;
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="blog-grid__grid">
+        {% for article in articles limit: article_limit %}
+          <a href="{{ article.url | escape }}" class="article-card" aria-label="{{ article.title | escape }}">
+            <div class="article-card__img-wrap">
+              {% if article.image %}
+                <img
+                  src="{{ article.image | image_url: width: 600 }}"
+                  srcset="{{ article.image | image_url: width: 400 }} 400w,
+                          {{ article.image | image_url: width: 600 }} 600w,
+                          {{ article.image | image_url: width: 900 }} 900w"
+                  sizes="(max-width: 639px) 100vw,
+                         (max-width: 1023px) 50vw,
+                         33vw"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  class="article-card__img"
+                  width="{{ article.image.width | at_most: 600 }}"
+                  height="{{ article.image.height | times: 600 | divided_by: article.image.width | floor }}"
+                  loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+                >
+              {% else %}
+                <div class="article-card__img-placeholder" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="6" width="24" height="20" rx="3" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+                    <path d="M4 20l7-7 5 5 3-3 9 9" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="article-card__body">
+              {% if article.tags.size > 0 %}
+                <p class="article-card__tag">
+                  {{ article.tags.first | escape }}
+                </p>
+              {% endif %}
+
+              <h3 class="article-card__title">
+                {{ article.title | escape }}
+              </h3>
+
+              {% if article.excerpt != blank %}
+                <p class="article-card__excerpt">
+                  {{ article.excerpt | strip_html | truncate: 100 | escape }}
+                </p>
+              {% endif %}
+
+              <div class="article-card__meta">
+                <time class="article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                  {{ article.published_at | date: '%B %d, %Y' }}
+                </time>
+                {% liquid
+                  assign words = article.content | strip_html | split: ' '
+                  assign read_time = words.size | divided_by: 200 | plus: 1
+                %}
+                <span class="article-card__read-time" aria-label="{{ read_time }} minute read">
+                  {{ read_time }} min read
+                </span>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Blog article grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "From the blog"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Resources & guides"
+    },
+    {
+      "type": "select",
+      "id": "article_count",
+      "label": "Number of articles",
+      "default": "3",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all articles"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog article grid"
+    }
+  ]
+}
+{% endschema %}

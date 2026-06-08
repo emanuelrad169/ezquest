@@ -1,0 +1,585 @@
+/* ─── EZQuest Customer Account Pages ────────────────────────────────────────
+   Shared styles for login, register, account, order, addresses,
+   reset_password, activate_account templates.
+   Loaded per-template via: {{ 'accounts.css' | asset_url | stylesheet_tag }}
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Page shell ─────────────────────────────────────────────────────────── */
+
+.account-page {
+  background: #f5f5f7;
+  min-height: 100vh;
+}
+
+/* ── Hero banner ─────────────────────────────────────────────────────────── */
+
+.account-hero {
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 3rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.account-hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.account-hero__heading {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+.account-hero__subhead {
+  margin: 0.75rem auto 0;
+  max-width: 36rem;
+  font-size: 15px;
+  color: #6e6e73;
+  line-height: 1.5;
+}
+
+/* ── Layout containers ───────────────────────────────────────────────────── */
+
+.account-wrap {
+  max-width: 100rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.account-wrap--narrow {
+  max-width: 480px;
+}
+
+.account-wrap--wide {
+  max-width: 860px;
+}
+
+@media (min-width: 640px) {
+  .account-wrap { padding-inline: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .account-wrap { padding-inline: 2rem; padding-block: 3.5rem 5rem; }
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+
+.account-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 1.25rem;
+  padding: 2rem 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .account-card { padding: 2.5rem 2.25rem; }
+}
+
+.account-card + .account-card {
+  margin-top: 1.5rem;
+}
+
+.account-card__heading {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  margin: 0 0 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+
+.account-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.account-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d1d1f;
+  letter-spacing: 0.01em;
+}
+
+.account-field input,
+.account-field select,
+.account-field textarea {
+  width: 100%;
+  height: 48px;
+  padding: 0 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.75rem;
+  font-size: 16px; /* 16px prevents iOS zoom */
+  color: #1d1d1f;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.account-field textarea {
+  height: auto;
+  padding: 0.75rem 1rem;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.account-field input:focus,
+.account-field select:focus,
+.account-field textarea:focus {
+  outline: none;
+  border-color: #1d1d1f;
+  box-shadow: 0 0 0 3px rgba(29, 29, 31, 0.08);
+}
+
+.account-field input[aria-invalid="true"],
+.account-field input.is-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+/* ── Error display ───────────────────────────────────────────────────────── */
+
+.account-errors {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 14px;
+  color: #dc2626;
+  line-height: 1.5;
+}
+
+.account-errors ul {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+}
+
+.account-errors li { margin: 0.2rem 0; }
+
+/* ── Form actions ────────────────────────────────────────────────────────── */
+
+.account-form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.account-form__link {
+  font-size: 13px;
+  color: #6e6e73;
+  text-align: center;
+  text-decoration: none;
+}
+
+.account-form__link a {
+  color: #1d1d1f;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Forgot password toggle ──────────────────────────────────────────────── */
+
+.account-recover { display: none; }
+.account-recover.is-active { display: block; }
+.account-login-panel.is-hidden { display: none; }
+
+/* ── Stats row ───────────────────────────────────────────────────────────── */
+
+.account-stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.account-stat {
+  background: #f5f5f7;
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+.account-stat__value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: #1d1d1f;
+  line-height: 1;
+}
+
+.account-stat__label {
+  font-size: 12px;
+  color: #6e6e73;
+  margin-top: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* ── Orders table ────────────────────────────────────────────────────────── */
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.orders-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6e6e73;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.orders-table td {
+  padding: 1rem 0.5rem 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  vertical-align: middle;
+  color: #1d1d1f;
+}
+
+.orders-table tr:last-child td { border-bottom: none; }
+
+.orders-table a {
+  color: #1d1d1f;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .orders-table thead { display: none; }
+  .orders-table tr {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+  .orders-table td {
+    padding: 0.15rem 0;
+    border: none;
+  }
+  .orders-table td[data-label]::before {
+    content: attr(data-label) ": ";
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6e6e73;
+  }
+}
+
+/* ── Status badge ────────────────────────────────────────────────────────── */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-badge--fulfilled,
+.status-badge--paid,
+.status-badge--delivered {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge--unfulfilled,
+.status-badge--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge--partial {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge--cancelled,
+.status-badge--refunded,
+.status-badge--voided {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* ── Order detail ────────────────────────────────────────────────────────── */
+
+.order-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 14px;
+  color: #6e6e73;
+  margin-bottom: 1.5rem;
+}
+
+.order-meta strong { color: #1d1d1f; }
+
+.order-tracking {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.875rem;
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.order-tracking__label {
+  font-weight: 600;
+  color: #166534;
+  margin-bottom: 0.25rem;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.order-tracking a {
+  color: #166534;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Order line items ────────────────────────────────────────────────────── */
+
+.order-items { list-style: none; margin: 0; padding: 0; }
+
+.order-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  align-items: flex-start;
+}
+
+.order-item:last-child { border-bottom: none; }
+
+.order-item__image {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: #f5f5f7;
+  object-fit: contain;
+}
+
+.order-item__details { flex: 1; min-width: 0; }
+
+.order-item__title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+  margin: 0 0 0.2rem;
+}
+
+.order-item__variant {
+  font-size: 12px;
+  color: #6e6e73;
+  margin: 0 0 0.3rem;
+}
+
+.order-item__qty {
+  font-size: 12px;
+  color: #6e6e73;
+}
+
+.order-item__price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1d1f;
+  white-space: nowrap;
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+/* ── Totals block ────────────────────────────────────────────────────────── */
+
+.order-totals {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-totals__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+.order-totals__row--total {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d1d1f;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: 0.25rem;
+}
+
+/* ── Two-column address grid ─────────────────────────────────────────────── */
+
+.order-addresses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 560px) {
+  .order-addresses { grid-template-columns: 1fr; }
+}
+
+.order-address__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6e6e73;
+  margin-bottom: 0.5rem;
+}
+
+.order-address__body {
+  font-size: 14px;
+  color: #1d1d1f;
+  line-height: 1.6;
+}
+
+/* ── Address cards ───────────────────────────────────────────────────────── */
+
+.addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.address-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+
+.address-card--default {
+  border-color: #1d1d1f;
+}
+
+.address-card__default-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1d1d1f;
+  background: #FED300;
+  padding: 0.2rem 0.625rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.address-card__body {
+  font-size: 14px;
+  color: #1d1d1f;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.address-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Address add/edit form ───────────────────────────────────────────────── */
+
+.address-form-panel {
+  display: none;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  margin-top: 1.25rem;
+}
+
+.address-form-panel.is-active { display: block; }
+
+.address-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem 1rem;
+}
+
+@media (max-width: 520px) {
+  .address-form-grid { grid-template-columns: 1fr; }
+}
+
+.address-form-grid .account-field--full { grid-column: 1 / -1; }
+
+/* ── Account nav / actions bar ───────────────────────────────────────────── */
+
+.account-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  margin-top: 1.25rem;
+}
+
+.account-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6e6e73;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.account-back:hover { color: #1d1d1f; }
+
+/* ── Section divider ─────────────────────────────────────────────────────── */
+
+.account-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6e6e73;
+  margin: 2rem 0 1rem;
+}

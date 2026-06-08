@@ -1,0 +1,46 @@
+{
+  "promo-duraguard-cables.jpg": {
+    "filename": "promo-duraguard-cables.jpg",
+    "shopifyFilename": "ezquest-promo-duraguard-cables.jpg",
+    "filePath": "public/images/promo-banners/promo-duraguard-cables.jpg",
+    "fileId": "gid://shopify/MediaImage/33908939686086",
+    "fileStatus": "READY",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-duraguard-cables.jpg?v=1776771584",
+    "width": 1200,
+    "height": 628,
+    "fileReference": "shopify://shop_images/ezquest-promo-duraguard-cables.jpg"
+  },
+  "promo-power-up.jpg": {
+    "filename": "promo-power-up.jpg",
+    "shopifyFilename": "ezquest-promo-power-up.jpg",
+    "filePath": "public/images/promo-banners/promo-power-up.jpg",
+    "fileId": "gid://shopify/MediaImage/33908940177606",
+    "fileStatus": "READY",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-power-up.jpg?v=1776771587",
+    "width": 1200,
+    "height": 628,
+    "fileReference": "shopify://shop_images/ezquest-promo-power-up.jpg"
+  },
+  "promo-ready-for-desk.jpg": {
+    "filename": "promo-ready-for-desk.jpg",
+    "shopifyFilename": "ezquest-promo-ready-for-desk.jpg",
+    "filePath": "public/images/promo-banners/promo-ready-for-desk.jpg",
+    "fileId": "gid://shopify/MediaImage/33908940701894",
+    "fileStatus": "READY",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-ready-for-desk.jpg?v=1776771590",
+    "width": 1200,
+    "height": 628,
+    "fileReference": "shopify://shop_images/ezquest-promo-ready-for-desk.jpg"
+  },
+  "promo-travel-kit.jpg": {
+    "filename": "promo-travel-kit.jpg",
+    "shopifyFilename": "ezquest-promo-travel-kit.jpg",
+    "filePath": "public/images/promo-banners/promo-travel-kit.jpg",
+    "fileId": "gid://shopify/MediaImage/33908941062342",
+    "fileStatus": "READY",
+    "cdnUrl": "https://cdn.shopify.com/s/files/1/0735/0265/4662/files/ezquest-promo-travel-kit.jpg?v=1776771593",
+    "width": 1200,
+    "height": 628,
+    "fileReference": "shopify://shop_images/ezquest-promo-travel-kit.jpg"
+  }
+}

@@ -16,25 +16,14 @@
     endcase
   endif
 
-  assign value_line = blank
-  assign product_badge = blank
-  assign product_badge_modifier = blank
-  assign rating_value = blank
-  assign rating_count = blank
+  assign product_badge_codes = ''
   assign swatch_values = blank
   assign swatch_limit = 4
   assign swatch_overflow = 0
-  assign structured_spec_rows = blank
-  assign has_structured_spec_rows = false
-  assign show_spec_strip = true
-  assign spec_limit = 3
   assign show_media_dots = false
   assign media_dot_count = 0
-  assign fallback_weight_value = blank
-  assign highlight_spec_value = blank
   assign show_swatches = true
   assign show_quick_add = false
-  assign show_media_quick_add = true
   assign show_footer_quick_add = true
   assign selected_variant = blank
   assign quick_add_label = 'Add to cart'
@@ -42,74 +31,81 @@
   assign product_eyebrow = blank
   assign show_product_eyebrow = true
   assign product_card_url = product.url | default: '#'
+  assign card_image_loading = 'lazy'
+  assign card_image_fetchpriority = 'auto'
 
   if product != blank and collection != blank and card_context == 'collection'
     assign product_card_url = product.url | within: collection
   endif
 
+  if card_index != blank and card_index < 4
+    assign card_image_loading = 'eager'
+    assign card_image_fetchpriority = 'high'
+  endif
+
   case card_context
     when 'homepage'
-      assign show_spec_strip = false
       assign show_swatches = false
-      assign spec_limit = 0
-      assign show_media_quick_add = false
     when 'collection'
-      assign show_spec_strip = true
       assign show_swatches = true
-      assign spec_limit = 3
-      assign show_media_quick_add = false
     when 'search'
-      assign show_spec_strip = false
       assign show_swatches = false
-      assign spec_limit = 0
-      assign show_media_quick_add = false
     when 'compare'
       assign show_swatches = false
-      assign show_spec_strip = false
       assign show_product_eyebrow = false
-      assign show_media_quick_add = false
       assign show_footer_quick_add = false
     when 'featured'
-      assign show_spec_strip = true
       assign show_swatches = true
-      assign spec_limit = 3
       assign show_footer_quick_add = false
-      assign show_media_quick_add = true
   endcase
-
-  if product != blank and product.metafields.ezquest.feature_highlights != blank and product.metafields.ezquest.feature_highlights.value.count > 0
-    assign value_line = product.metafields.ezquest.feature_highlights.value.first
-    assign highlight_spec_value = product.metafields.ezquest.feature_highlights.value.first
-  elsif product != blank and product.type != blank
-    assign normalized_type = product.type | downcase
-    if normalized_type contains 'dock'
-      assign value_line = 'Desk-ready connectivity'
-    elsif normalized_type contains 'hub'
-      assign value_line = 'Compact everyday connectivity'
-    elsif normalized_type contains 'charg' or normalized_type contains 'power'
-      assign value_line = 'Fast, reliable charging'
-    elsif normalized_type contains 'cable' or normalized_type contains 'accessor'
-      assign value_line = 'Refined everyday accessories'
-    else
-      assign value_line = 'Premium connectivity'
-    endif
-  else
-    assign value_line = 'Premium connectivity'
-  endif
 
   if product != blank
     assign product_tags_downcase = product.tags | join: ',' | downcase
+    assign product_tags_normalized = product_tags_downcase | replace: ' ', '-' | replace: '_', '-'
+    assign product_title_downcase = product.title | downcase
+    assign now_seconds = 'now' | date: '%s' | plus: 0
+    assign published_seconds = product.published_at | date: '%s' | plus: 0
+    assign product_age_seconds = now_seconds | minus: published_seconds
+    assign product_days_old = product_age_seconds | divided_by: 86400
+
+    unless product.available
+      assign product_badge_codes = product_badge_codes | append: 'soldout,'
+    endunless
+
     if product.compare_at_price_max > product.price
-      assign product_badge = 'Sale'
-      assign product_badge_modifier = 'sale'
-    elsif product_tags_downcase contains 'new'
-      assign product_badge = 'New'
-      assign product_badge_modifier = 'new'
+      assign product_badge_codes = product_badge_codes | append: 'sale,'
     endif
 
-    if product.metafields.reviews.rating != blank and product.metafields.reviews.rating.value != blank
-      assign rating_value = product.metafields.reviews.rating.value.rating
-      assign rating_count = product.metafields.reviews.rating_count.value | default: blank
+    if product_tags_normalized contains 'best-seller' or product_tags_normalized contains 'bestseller'
+      assign product_badge_codes = product_badge_codes | append: 'bestseller,'
+    endif
+
+    if product_days_old < 60 or product_tags_normalized contains 'new'
+      assign product_badge_codes = product_badge_codes | append: 'new,'
+    endif
+
+    if product_tags_normalized contains 'usb4' or product_tags_normalized contains 'usb-4' or product_title_downcase contains 'usb4' or product_title_downcase contains 'usb 4'
+      assign product_badge_codes = product_badge_codes | append: 'usb4,'
+    endif
+
+    if product_tags_normalized contains 'thunderbolt' or product_title_downcase contains 'thunderbolt'
+      assign product_badge_codes = product_badge_codes | append: 'thunderbolt,'
+    endif
+
+    if product_tags_normalized contains 'gan' or product_title_downcase contains 'gan'
+      assign product_badge_codes = product_badge_codes | append: 'gan,'
+    endif
+
+    if product_tags_normalized contains 'duraguard' or product_title_downcase contains 'duraguard'
+      assign product_badge_codes = product_badge_codes | append: 'duraguard,'
+    endif
+
+    if product_tags_normalized contains 'dual-display' or product_title_downcase contains 'dual display' or product_title_downcase contains 'dual-display'
+      assign product_badge_codes = product_badge_codes | append: 'dual-display,'
+    endif
+
+    if product_tags_normalized contains '100w' or product_tags_normalized contains '120w' or product_title_downcase contains '100w' or product_title_downcase contains '120w'
+      assign product_badge_codes = product_badge_codes | append: 'highwatt,'
     endif
 
     for option in product.options_with_values
@@ -124,19 +120,9 @@
       assign swatch_overflow = swatch_values.size | minus: swatch_limit
     endif
 
-    if product.metafields.ezquest.spec_rows != blank
-      assign structured_spec_rows = product.metafields.ezquest.spec_rows.value
-      if structured_spec_rows.count > 0
-        assign has_structured_spec_rows = true
-      endif
-    endif
-
     assign selected_variant = product.selected_or_first_available_variant
     if selected_variant != blank and card_context != 'compare'
       assign show_quick_add = true
-      if selected_variant.weight > 0
-        assign fallback_weight_value = selected_variant.weight | weight_with_unit
-      endif
     endif
 
     if product.type != blank
@@ -162,37 +148,110 @@
 
 {% if featured_card %}
   <article
-    class="product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up relative flex h-full flex-col overflow-hidden text-slate-950 no-underline{% if featured %} is-featured{% endif %}"
+    class="product-card product-card-tile product-card-tile--featured-strip product-card-tile--{{ card_context | handleize }} card-elevated card-interactive motion-fade-up relative flex h-full flex-col overflow-hidden text-slate-950 no-underline{% if featured %} is-featured{% endif %}"
     {% if card_index != blank %}data-card-index="{{ card_index }}"{% endif %}
   >
     <div class="product-card-featured-media-shell relative">
       <a href="{{ product_card_url }}" class="product-card-featured-media product-card-featured-media-link relative flex min-h-56 items-center justify-center overflow-hidden border-b border-slate-200/70 bg-white no-underline" aria-label="View {{ product.title | default: 'product' }}">
-        {% render 'product-browse-media',
-          product: product,
-          context: card_context,
-          variant: image_variant,
-          width: 1200,
-          height: 900,
-          class: 'product-card-image product-card-featured-image aspect-card w-full object-contain'
-        %}
-        {% if product_badge != blank %}
-          <span class="product-card-featured-badge{% if product_badge_modifier != blank %} product-card-featured-badge--{{ product_badge_modifier }}{% endif %}">{{ product_badge }}</span>
-        {% endif %}
-        {% if rating_value != blank %}
-          <span class="product-card-featured-rating-badge" aria-label="Rated {{ rating_value }} out of 5{% if rating_count != blank %} from {{ rating_count }} reviews{% endif %}">
-            <span class="rating-star" aria-hidden="true">★</span>
-            {{ rating_value }}
-            {% if rating_count != blank %}<span class="rating-count">({{ rating_count }})</span>{% endif %}
-          </span>
+        {% assign second_image = product.images[1] %}
+        <div class="card-img-wrap aspect-card w-full{% if second_image != blank %} has-rollover{% endif %}">
+          {% render 'product-browse-media',
+            product: product,
+            context: card_context,
+            variant: image_variant,
+            width: 1200,
+            height: 900,
+            loading: card_image_loading,
+            fetchpriority: card_image_fetchpriority,
+            class: 'card-img card-img--primary product-card-image product-card-featured-image aspect-card w-full object-contain'
+          %}
+          {% if second_image != blank %}
+            <img
+              class="card-img card-img--secondary product-card-image product-card-featured-image"
+              src="{{ second_image | image_url: width: 600, format: 'pjpg' }}"
+              srcset="
+                {{ second_image | image_url: width: 400, format: 'pjpg' }} 400w,
+                {{ second_image | image_url: width: 600, format: 'pjpg' }} 600w,
+                {{ second_image | image_url: width: 800, format: 'pjpg' }} 800w
+              "
+              sizes="(max-width: 639px) calc(50vw - 1.5rem), (max-width: 1023px) calc(33vw - 1.5rem), calc(25vw - 1.5rem)"
+              alt="{{ second_image.alt | default: product.title | escape }} — alternate view"
+              width="{{ second_image.width }}"
+              height="{{ second_image.height }}"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            >
+          {% endif %}
+        </div>
+        {% if product_badge_codes != blank %}
+          {% assign product_badge_list = product_badge_codes | split: ',' %}
+          <div class="product-badges" aria-label="Product features">
+            {% for badge in product_badge_list limit: 3 %}
+              {% unless badge == blank %}
+                {% case badge %}
+                  {% when 'soldout' %}
+                    <span class="product-badge product-badge--soldout">Sold out</span>
+                  {% when 'sale' %}
+                    {% assign discount_pct = product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max %}
+                    <span class="product-badge product-badge--sale">-{{ discount_pct }}%</span>
+                  {% when 'bestseller' %}
+                    <span class="product-badge product-badge--best">Best seller</span>
+                  {% when 'new' %}
+                    <span class="product-badge product-badge--new">New</span>
+                  {% when 'usb4' %}
+                    <span class="product-badge product-badge--tech">USB4</span>
+                  {% when 'thunderbolt' %}
+                    <span class="product-badge product-badge--tech">Thunderbolt</span>
+                  {% when 'gan' %}
+                    <span class="product-badge product-badge--tech">GaN</span>
+                  {% when 'duraguard' %}
+                    <span class="product-badge product-badge--tech">DuraGuard</span>
+                  {% when 'dual-display' %}
+                    <span class="product-badge product-badge--tech">Dual 4K</span>
+                  {% when 'highwatt' %}
+                    <span class="product-badge product-badge--tech">100W+</span>
+                {% endcase %}
+              {% endunless %}
+            {% endfor %}
+          </div>
         {% endif %}
       </a>
 
-      {% if show_media_quick_add and show_quick_add %}
-        {% form 'product', product, class: 'product-card-featured-add-form product-card-featured-add-form--media' %}
-          <input type="hidden" name="id" value="{{ selected_variant.id }}">
-          {% render 'button', label: quick_add_label, tag: 'button', type: 'submit', style: 'primary', size: 'sm', class: 'product-card-featured-media-cta', attributes: quick_add_attributes %}
-        {% endform %}
+      {% if product != blank %}
+        {% unless product.has_only_default_variant %}
+          <a href="{{ product_card_url }}"
+             class="quick-add-btn quick-add-btn--options"
+             aria-label="View options for {{ product.title | escape }}">
+            View options
+          </a>
+        {% else %}
+          <button
+            type="button"
+            class="quick-add-btn quick-add-btn--atc"
+            data-quick-add-id="{{ product.selected_or_first_available_variant.id }}"
+            data-quick-add-title="{{ product.title | escape }}"
+            aria-label="Add {{ product.title | escape }} to cart">
+            <svg width="16" height="16" viewBox="0 0 16 16"
+                 fill="none" aria-hidden="true">
+              <path d="M8 2v12M2 8h12"
+                    stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round"/>
+            </svg>
+            <span>Add to cart</span>
+          </button>
+        {% endunless %}
       {% endif %}
+
+      <div class="product-card__wishlist">
+        {% render 'wishlist-button',
+          product_id: product.id,
+          product_title: product.title,
+          product_url: product.url,
+          product_image: product.featured_image,
+          product_price: product.price
+        %}
+      </div>
 
       {% if show_media_dots %}
         <div class="product-card-featured-indicators" aria-hidden="true">
@@ -218,8 +277,14 @@
           </div>
         </div>
 
+        {%- comment -%} Key stat pill — first highlight only {%- endcomment -%}
+        {%- assign first_highlight = product.metafields.ezquest.highlights.value | first -%}
+        {% if first_highlight != blank %}
+          <span class="product-card__stat-pill">{{ first_highlight }}</span>
+        {% endif %}
+
         {% if show_swatches and swatch_values != blank and swatch_values.size > 0 %}
-          <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" aria-label="Available finishes">
+          <div class="product-card-featured-swatches flex flex-wrap items-center gap-1.5" role="img" aria-label="Available finishes">
             {% for swatch_value in swatch_values limit: swatch_limit %}
               <span
                 class="product-card-featured-swatch product-card-featured-swatch--{{ swatch_value | handleize }}"
@@ -243,99 +308,116 @@
         </div>
       {% endif %}
     </div>
-
-    {% if show_spec_strip %}
-      {%- assign rendered_spec_cells = 0 -%}
-      {%- capture spec_cells_html -%}
-        {% if has_structured_spec_rows %}
-          {% for spec_row in structured_spec_rows %}
-            {% if rendered_spec_cells >= spec_limit %}{% break %}{% endif %}
-            {%- assign spec_label = spec_row.label.value | strip -%}
-            {%- assign spec_value = spec_row.spec_value.value | strip_html | strip -%}
-            {% if spec_label != blank and spec_value != blank %}
-              {%- assign spec_lower = spec_label | downcase -%}
-              {%- if spec_lower contains 'sku' or spec_lower contains 'barcode' or spec_lower contains 'upc' or spec_lower contains 'ean' or spec_lower contains 'part number' or spec_lower contains 'item number' or spec_lower contains 'asin' or spec_lower contains 'model number' -%}{%- continue -%}{%- endif -%}
-              {%- assign spec_icon_name = 'spark' -%}
-              {%- if spec_lower contains 'speed' or spec_lower contains 'transfer' -%}{%- assign spec_icon_name = 'bolt' -%}{%- endif -%}
-              {%- if spec_lower contains 'port' or spec_lower contains 'hub' -%}{%- assign spec_icon_name = 'layers' -%}{%- endif -%}
-              {%- if spec_lower contains 'type' or spec_lower contains 'connector' -%}{%- assign spec_icon_name = 'tag' -%}{%- endif -%}
-              {%- if spec_lower contains 'power' or spec_lower contains 'watt' or spec_lower contains 'charg' or spec_lower contains 'battery' -%}{%- assign spec_icon_name = 'bolt' -%}{%- endif -%}
-              {%- if spec_lower contains 'display' or spec_lower contains 'resolution' or spec_lower contains 'video' -%}{%- assign spec_icon_name = 'monitor' -%}{%- endif -%}
-              {%- if spec_lower contains 'weight' -%}{%- assign spec_icon_name = 'layers' -%}{%- endif -%}
-              {%- if spec_lower contains 'length' -%}{%- assign spec_icon_name = 'map' -%}{%- endif -%}
-              {%- if spec_lower contains 'driver' -%}{%- assign spec_icon_name = 'headphones' -%}{%- endif -%}
-              <div class="product-card-featured-spec">
-                <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: spec_icon_name %}</span>
-                <span class="product-card-featured-spec-content">
-                  <span class="product-card-featured-spec-value">{{ spec_value | truncatewords: 5 }}</span>
-                  <span class="product-card-featured-spec-label">{{ spec_label }}</span>
-                </span>
-              </div>
-              {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-
-
-        {% if rendered_spec_cells < spec_limit and fallback_weight_value != blank %}
-          <div class="product-card-featured-spec">
-            <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: 'layers' %}</span>
-            <span class="product-card-featured-spec-content">
-              <span class="product-card-featured-spec-value">{{ fallback_weight_value }}</span>
-              <span class="product-card-featured-spec-label">Weight</span>
-            </span>
-          </div>
-          {%- assign rendered_spec_cells = rendered_spec_cells | plus: 1 -%}
-        {% endif %}
-
-        {% if rendered_spec_cells < spec_limit and highlight_spec_value != blank and has_structured_spec_rows == false %}
-          <div class="product-card-featured-spec">
-            <span class="product-card-featured-spec-icon" aria-hidden="true">{% render 'icon', name: 'spark' %}</span>
-            <span class="product-card-featured-spec-content">
-              <span class="product-card-featured-spec-value">{{ highlight_spec_value | truncatewords: 5 }}</span>
-              <span class="product-card-featured-spec-label">Highlight</span>
-            </span>
-          </div>
-        {% endif %}
-      {%- endcapture -%}
-      {%- assign spec_cells_html = spec_cells_html | strip -%}
-      {% if spec_cells_html != blank %}
-        <div class="product-card-featured-spec-strip grid grid-cols-1" aria-label="Key details">
-          {{ spec_cells_html }}
-        </div>
-      {% endif %}
-    {% endif %}
   </article>
 {% else %}
-<article class="product-card-tile product-card-tile--{{ card_context | handleize }} flex h-full flex-col">
+<article class="product-card product-card-tile product-card-tile--{{ card_context | handleize }} flex h-full flex-col">
 
   {%- comment -%} ── Image wrapper ── {%- endcomment -%}
   {% if product != blank %}
     <div class="product-thumb-card product-card-image-wrapper relative overflow-hidden">
       <a href="{{ product_card_url }}" class="product-card-image-link" aria-label="{{ product.title }}">
-        {% render 'product-browse-media',
-          product: product,
-          context: card_context,
-          variant: image_variant,
-          width: 900,
-          height: 675,
-          class: 'product-card-image aspect-card w-full object-contain'
-        %}
+        {% assign second_image = product.images[1] %}
+        <div class="card-img-wrap aspect-card w-full{% if second_image != blank %} has-rollover{% endif %}">
+          {% render 'product-browse-media',
+            product: product,
+            context: card_context,
+            variant: image_variant,
+            width: 900,
+            height: 675,
+            loading: card_image_loading,
+            fetchpriority: card_image_fetchpriority,
+            class: 'card-img card-img--primary product-card-image aspect-card w-full object-contain'
+          %}
+          {% if second_image != blank %}
+            <img
+              class="card-img card-img--secondary product-card-image"
+              src="{{ second_image | image_url: width: 600, format: 'pjpg' }}"
+              srcset="
+                {{ second_image | image_url: width: 400, format: 'pjpg' }} 400w,
+                {{ second_image | image_url: width: 600, format: 'pjpg' }} 600w,
+                {{ second_image | image_url: width: 800, format: 'pjpg' }} 800w
+              "
+              sizes="(max-width: 639px) calc(50vw - 1.5rem), (max-width: 1023px) calc(33vw - 1.5rem), calc(25vw - 1.5rem)"
+              alt="{{ second_image.alt | default: product.title | escape }} — alternate view"
+              width="{{ second_image.width }}"
+              height="{{ second_image.height }}"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            >
+          {% endif %}
+        </div>
       </a>
-      {% if product.available == false %}
-        <span class="product-card-badge">Sold out</span>
-      {% elsif product.compare_at_price_max > product.price %}
-        <span class="product-card-badge product-card-badge--sale">Sale</span>
+      {% if product_badge_codes != blank %}
+        {% assign product_badge_list = product_badge_codes | split: ',' %}
+        <div class="product-badges" aria-label="Product features">
+          {% for badge in product_badge_list limit: 3 %}
+            {% unless badge == blank %}
+              {% case badge %}
+                {% when 'soldout' %}
+                  <span class="product-badge product-badge--soldout">Sold out</span>
+                {% when 'sale' %}
+                  {% assign discount_pct = product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max %}
+                  <span class="product-badge product-badge--sale">-{{ discount_pct }}%</span>
+                {% when 'bestseller' %}
+                  <span class="product-badge product-badge--best">Best seller</span>
+                {% when 'new' %}
+                  <span class="product-badge product-badge--new">New</span>
+                {% when 'usb4' %}
+                  <span class="product-badge product-badge--tech">USB4</span>
+                {% when 'thunderbolt' %}
+                  <span class="product-badge product-badge--tech">Thunderbolt</span>
+                {% when 'gan' %}
+                  <span class="product-badge product-badge--tech">GaN</span>
+                {% when 'duraguard' %}
+                  <span class="product-badge product-badge--tech">DuraGuard</span>
+                {% when 'dual-display' %}
+                  <span class="product-badge product-badge--tech">Dual 4K</span>
+                {% when 'highwatt' %}
+                  <span class="product-badge product-badge--tech">100W+</span>
+              {% endcase %}
+            {% endunless %}
+          {% endfor %}
+        </div>
       {% endif %}
-      <div class="product-card-quick-action" aria-hidden="true">
-        <span class="product-card-quick-action-cta">View product</span>
-      </div>
+      <button type="button"
+              class="qv-trigger"
+              data-quick-view="{{ product.handle }}"
+              aria-label="Quick view {{ product.title | escape }}">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <circle cx="6" cy="6" r="2.5" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M1 6s2-4 5-4 5 4 5 4-2 4-5 4-5-4-5-4z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+        </svg>
+        Quick view
+      </button>
+      {% unless product.has_only_default_variant %}
+        <a href="{{ product_card_url }}"
+           class="quick-add-btn quick-add-btn--options"
+           aria-label="View options for {{ product.title | escape }}">
+          View options
+        </a>
+      {% else %}
+        <button
+          type="button"
+          class="quick-add-btn quick-add-btn--atc"
+          data-quick-add-id="{{ product.selected_or_first_available_variant.id }}"
+          data-quick-add-title="{{ product.title | escape }}"
+          aria-label="Add {{ product.title | escape }} to cart">
+          <svg width="16" height="16" viewBox="0 0 16 16"
+               fill="none" aria-hidden="true">
+            <path d="M8 2v12M2 8h12"
+                  stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round"/>
+          </svg>
+          <span>Add to cart</span>
+        </button>
+      {% endunless %}
     </div>
   {% else %}
     <div class="product-thumb-card product-card-image-wrapper">
       {% render 'owned-product-visual',
         product_handle: product.handle,
-        product_title: product.title | default: value_line,
+        product_title: product.title | default: 'EZQuest connectivity essential',
         variant: image_variant,
         kind: 'product',
         width: 900,
@@ -359,8 +441,10 @@
     </div>
   </div>
 
-  {% if value_line != blank %}
-    <p class="product-card-proof">{{ value_line | truncatewords: 7 }}</p>
+  {%- comment -%} Key stat pill — first highlight only {%- endcomment -%}
+  {%- assign first_highlight = product.metafields.ezquest.highlights.value | first -%}
+  {% if first_highlight != blank %}
+    <span class="product-card__stat-pill">{{ first_highlight }}</span>
   {% endif %}
 
   {% if product != blank %}

@@ -17,10 +17,13 @@
         "intro_copy": "",
         "support_label": "Support",
         "support_url": "/pages/support",
-        "products_per_page": 16,
         "show_collection_image": true,
         "show_sort": true,
-        "show_support_panel": false
+        "show_support_panel": false,
+        "promo_ready_for_desk_image": "shopify://shop_images/ezquest-promo-ready-for-desk.jpg",
+        "promo_power_up_image": "shopify://shop_images/ezquest-promo-power-up.jpg",
+        "promo_duraguard_cables_image": "shopify://shop_images/ezquest-promo-duraguard-cables.jpg",
+        "promo_travel_kit_image": "shopify://shop_images/ezquest-promo-travel-kit.jpg"
       }
     },
     "cta": {
@@ -34,7 +37,22 @@
         "cta2_label": "Help me choose",
         "cta2_url": "/pages/help-me-choose"
       }
+    },
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "kicker": "Collection",
+        "heading": "",
+        "subheading": "",
+        "height": 360,
+        "overlay_opacity": 35
+      }
     }
   },
-  "order": ["main", "cta"]
+  "order": [
+    "page_hero",
+    "main",
+    "cta"
+  ]
 }
