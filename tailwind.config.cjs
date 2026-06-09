@@ -3,8 +3,7 @@ module.exports = {
     "./layout/**/*.liquid",
     "./templates/**/*.{json,liquid}",
     "./sections/**/*.liquid",
-    "./snippets/**/*.liquid",
-    "./src/**/*.css"
+    "./snippets/**/*.liquid"
   ],
   safelist: [
     'is-open',
@@ -27,6 +26,7 @@ module.exports = {
     { pattern: /^mega-/ },
     { pattern: /^trust-/ },
     { pattern: /^collection-/ },
+    { pattern: /^home-feature-bento-card--/ },
   ],
   theme: {
     extend: {
