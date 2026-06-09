@@ -35,7 +35,7 @@
       if page_description != blank
         assign meta_desc = page_description
       elsif template.name == 'index'
-        assign meta_desc = 'Premium USB-C hubs, GaN chargers, and DuraGuard cables — compatible with Mac, iPad, iPhone, and Windows. Trusted since 1994. Free US shipping over $100.'
+        assign meta_desc = 'Premium USB-C hubs, GaN chargers, and DuraGuard cables — compatible with Mac, iPad, iPhone, and Windows. Trusted since 1994. Free US shipping over $90.'
       elsif request.page_type == 'product'
         assign meta_desc = product.description | strip_html | truncate: 160
       elsif request.page_type == 'collection'

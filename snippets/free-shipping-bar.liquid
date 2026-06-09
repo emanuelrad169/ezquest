@@ -3,13 +3,13 @@
     {% render 'free-shipping-bar' %}
 
   The snippet reads cart.total_price directly.
-  Threshold default is 10000 cents ($100.00).
+  Threshold default is 9000 cents ($90.00).
   To customise, pass threshold parameter:
     {% render 'free-shipping-bar', threshold: 15000 %}
 {% endcomment %}
 
 {% liquid
-  assign shipping_threshold = threshold | default: 10000
+  assign shipping_threshold = threshold | default: 9000
   assign cart_total = cart.total_price
   assign remaining = shipping_threshold | minus: cart_total
 %}

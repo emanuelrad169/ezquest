@@ -72,7 +72,7 @@
         </div>
       {% endfor %}
     {% else %}
-      {% assign fallback_messages = 'Free Shipping Over $100|30-Day Returns' | split: '|' %}
+      {% assign fallback_messages = 'Free Shipping Over $90|30-Day Returns' | split: '|' %}
       {% for fallback_message in fallback_messages %}
       <div
         class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}"
@@ -382,8 +382,8 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Free Shipping Over $100",
-          "placeholder": "Free Shipping Over $100"
+          "default": "Free Shipping Over $90",
+          "placeholder": "Free Shipping Over $90"
         },
         {
           "type": "url",
@@ -405,7 +405,7 @@
         {
           "type": "message",
           "settings": {
-            "text": "Free Shipping Over $100"
+            "text": "Free Shipping Over $90"
           }
         },
         {

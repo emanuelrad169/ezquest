@@ -1,5 +1,5 @@
 {% comment %} snippets/cart-drawer-footer.liquid {% endcomment %}
-{% assign free_shipping_threshold = 100 %}
+{% assign free_shipping_threshold = 90 %}
 {% assign cart_dollars = cart.total_price | divided_by: 100.0 %}
 {% assign remaining = free_shipping_threshold | minus: cart_dollars %}
 
