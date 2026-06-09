@@ -32,9 +32,10 @@
     "bundle": {
       "type": "product-bundle-upsell",
       "settings": {
-        "eyebrow": "Bundle",
-        "heading": "Buy together and save 10%",
-        "copy": "Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings."
+        "eyebrow": "Pairs with",
+        "heading": "Complete your setup",
+        "copy": "Curated EZQuest accessories that pair perfectly with this product.",
+        "products_to_show": 3
       }
     },
     "recently_viewed": {

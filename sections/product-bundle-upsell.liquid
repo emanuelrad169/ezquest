@@ -1,34 +1,69 @@
-{% liquid
+{%- liquid
   assign related_collection = product.collections.first
-  assign shown_count = 0
-%}
+  assign rec_limit = section.settings.products_to_show | default: 3
+-%}
 
-<section class="section-shell product-bundle-upsell" aria-label="Bundle and save">
+<section
+  class="section-shell product-bundle-upsell"
+  aria-label="Pairs well with"
+  data-rec-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&intent=complementary&limit={{ rec_limit }}&product_id={{ product.id }}"
+>
   <div class="container-shell">
     <div class="product-bundle-upsell__panel">
       <div class="product-bundle-upsell__copy">
-        <p class="section-kicker">{{ section.settings.eyebrow | default: 'Bundle' }}</p>
-        <h2 class="product-bundle-upsell__heading">{{ section.settings.heading | default: 'Buy together and save 10%' }}</h2>
-        <p class="product-bundle-upsell__body">{{ section.settings.copy | default: 'Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings.' }}</p>
+        <p class="section-kicker">{{ section.settings.eyebrow | default: 'Pairs with' }}</p>
+        <h2 class="product-bundle-upsell__heading">{{ section.settings.heading | default: 'Complete your setup' }}</h2>
+        <p class="product-bundle-upsell__body">{{ section.settings.copy | default: 'Curated EZQuest accessories that pair perfectly with this product.' }}</p>
         <a href="{{ related_collection.url | default: routes.all_products_collection_url }}" class="product-bundle-upsell__cta">
           Shop the collection
         </a>
       </div>
 
-      <div class="product-bundle-upsell-grid grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'collection', image_rollover: true %}
-
-        {% if related_collection != blank %}
-          {% for bundled_product in related_collection.products limit: 5 %}
-            {% if bundled_product.id != product.id and shown_count < 2 %}
-              {% assign shown_count = shown_count | plus: 1 %}
-              {% render 'card-product', product: bundled_product, card_style: 'featured-strip', card_context: 'collection', image_rollover: true %}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
+      <div class="product-bundle-upsell-grid grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" role="list" data-rec-grid>
+        {%- if recommendations.performed -%}
+          {%- comment -%} Rendered via the Product Recommendations API (intent=complementary). {%- endcomment -%}
+          {%- for rec in recommendations.products -%}
+            {% render 'card-product', product: rec, card_style: 'featured-strip', card_context: 'collection', image_rollover: true %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Fallback shown on first paint; JS swaps in complementary recs when available. {%- endcomment -%}
+          {% render 'card-product', product: product, card_style: 'featured-strip', card_context: 'collection', image_rollover: true %}
+          {%- if related_collection != blank -%}
+            {%- assign shown_count = 0 -%}
+            {%- for bundled_product in related_collection.products limit: 5 -%}
+              {%- if bundled_product.id != product.id and shown_count < 2 -%}
+                {%- assign shown_count = shown_count | plus: 1 -%}
+                {% render 'card-product', product: bundled_product, card_style: 'featured-strip', card_context: 'collection', image_rollover: true %}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endif -%}
       </div>
     </div>
   </div>
+
+  {%- unless recommendations.performed -%}
+    <script>
+      (function () {
+        var cs = document.currentScript;
+        var sec = cs && cs.closest('.product-bundle-upsell');
+        if (!sec) return;
+        var url = sec.getAttribute('data-rec-url');
+        var grid = sec.querySelector('[data-rec-grid]');
+        if (!url || !grid) return;
+        fetch(url)
+          .then(function (r) { return r.text(); })
+          .then(function (html) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var fresh = doc.querySelector('[data-rec-grid]');
+            if (fresh && fresh.children.length > 0) {
+              grid.innerHTML = fresh.innerHTML;
+            }
+          })
+          .catch(function () { /* keep fallback on failure */ });
+      })();
+    </script>
+  {%- endunless -%}
 </section>
 
 {% schema %}
@@ -39,19 +74,28 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Bundle"
+      "default": "Pairs with"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Buy together and save 10%"
+      "default": "Complete your setup"
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Copy",
-      "default": "Pair this product with nearby EZQuest essentials. When Shopify Bundles is installed, connect this section to the bundle offer for checkout-ready savings."
+      "default": "Curated EZQuest accessories that pair perfectly with this product."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Recommended products to show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
     }
   ],
   "presets": [
