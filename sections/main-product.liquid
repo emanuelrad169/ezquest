@@ -1103,11 +1103,12 @@
       "name": {{ shop.name | json }}
     }
   }
-  {%- if display_rating_value != blank -%}
+  {%- comment -%} aggregateRating only for genuine first-party reviews (not Amazon/fallback) — Google review-snippet policy {%- endcomment -%}
+  {%- if review_rating_value != blank and review_rating_count != blank and review_rating_count > 0 -%}
   ,"aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": {{ display_rating_value }},
-    "reviewCount": {{ display_rating_count | default: 1 }},
+    "ratingValue": {{ review_rating_value }},
+    "reviewCount": {{ review_rating_count }},
     "bestRating": "5",
     "worstRating": "1"
   }
