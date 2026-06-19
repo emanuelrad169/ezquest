@@ -146,7 +146,8 @@
             "card_style": "light",
             "stat": "8-in-1",
             "label": "Hub expansion",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_E.jpg"
           }
         },
         "f2": {
@@ -156,7 +157,8 @@
             "card_style": "blue",
             "stat": "",
             "label": "USB-C charging",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_F.jpg"
           }
         },
         "f3": {
@@ -166,7 +168,8 @@
             "card_style": "light",
             "stat": "4K 60Hz",
             "label": "Display support",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_G.jpg"
           }
         },
         "f4": {
@@ -176,7 +179,8 @@
             "card_style": "light",
             "stat": "",
             "label": "Desk-ready docks",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_L.jpg"
           }
         },
         "f5": {
@@ -186,7 +190,8 @@
             "card_style": "light",
             "stat": "100W",
             "label": "Power delivery",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_I.jpg"
           }
         },
         "f6": {
@@ -196,7 +201,8 @@
             "card_style": "blue",
             "stat": "Travel-ready",
             "label": "Compact chargers and hubs",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_J.jpg"
           }
         },
         "f7": {
@@ -206,7 +212,8 @@
             "card_style": "light",
             "stat": "2.5GbE",
             "label": "Faster wired networking",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_K.jpg"
           }
         },
         "f10": {
@@ -216,7 +223,8 @@
             "card_style": "light",
             "stat": "Works with",
             "label": "Mac, iPad, and Windows setups",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_L.jpg"
           }
         },
         "f8": {
@@ -226,7 +234,8 @@
             "card_style": "light",
             "stat": "DuraGuard",
             "label": "Braided cable durability",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_N.jpg"
           }
         },
         "f9": {
@@ -236,7 +245,8 @@
             "card_style": "light",
             "stat": "2-year",
             "label": "Warranty coverage",
-            "sublabel": ""
+            "sublabel": "",
+            "image": "shopify://shop_images/DT_Family_Card_M.jpg"
           }
         }
       },
