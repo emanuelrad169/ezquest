@@ -45,9 +45,7 @@
             "primary_label": "Shop chargers & power",
             "primary_url": "/collections/chargers-power",
             "secondary_label": "Find the right charger",
-            "secondary_url": "/pages/help-me-choose",
-            "image": "shopify://shop_images/ezquest-hero-slide-3-desktop.png",
-            "image_mobile": "shopify://shop_images/ezquest-hero-slide-3-mobile.png"
+            "secondary_url": "/pages/help-me-choose"
           }
         },
         "slide_4": {
