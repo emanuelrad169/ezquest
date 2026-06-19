@@ -270,7 +270,7 @@
     "feature_banner": {
       "type": "home-feature-banner",
       "settings": {
-        "image": "shopify://shop_images/ezquest-feature-banner-background.png",
+        "image": "shopify://shop_images/Down_Page_Banner.jpg",
         "text_position": "right",
         "eyebrow": "Desk and travel coverage",
         "heading": "Choose the right mix of ports, power, and displays.",
@@ -304,6 +304,7 @@
     "cinematic_reveal": {
       "type": "homepage-cinematic-reveal",
       "settings": {
+        "background_image": "shopify://shop_images/Down_Page_Banner.jpg",
         "kicker": "Backed by the right support.",
         "headline": "Built different.|Works better.",
         "body_text": "EZQuest accessories are engineered for people who need the right connection, every time.",
