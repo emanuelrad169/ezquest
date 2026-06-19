@@ -146,8 +146,7 @@
             "card_style": "light",
             "stat": "8-in-1",
             "label": "Hub expansion",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-category-card-hubs.png"
+            "sublabel": ""
           }
         },
         "f2": {
@@ -157,8 +156,7 @@
             "card_style": "blue",
             "stat": "",
             "label": "USB-C charging",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-category-card-chargers-power.png"
+            "sublabel": ""
           }
         },
         "f3": {
@@ -168,8 +166,7 @@
             "card_style": "light",
             "stat": "4K 60Hz",
             "label": "Display support",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-category-card-cables-accessories.png"
+            "sublabel": ""
           }
         },
         "f4": {
@@ -179,8 +176,7 @@
             "card_style": "light",
             "stat": "",
             "label": "Desk-ready docks",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-category-card-docking-stations.png"
+            "sublabel": ""
           }
         },
         "f5": {
@@ -190,8 +186,7 @@
             "card_style": "light",
             "stat": "100W",
             "label": "Power delivery",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-lifestyle-charging-scene.png"
+            "sublabel": ""
           }
         },
         "f6": {
@@ -201,8 +196,7 @@
             "card_style": "blue",
             "stat": "Travel-ready",
             "label": "Compact chargers and hubs",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-lifestyle-travel-setup.png"
+            "sublabel": ""
           }
         },
         "f7": {
@@ -212,8 +206,7 @@
             "card_style": "light",
             "stat": "2.5GbE",
             "label": "Faster wired networking",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-lifestyle-clean-desk-setup.png"
+            "sublabel": ""
           }
         },
         "f10": {
@@ -223,8 +216,7 @@
             "card_style": "light",
             "stat": "Works with",
             "label": "Mac, iPad, and Windows setups",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-feature-compatibility.png"
+            "sublabel": ""
           }
         },
         "f8": {
@@ -234,8 +226,7 @@
             "card_style": "light",
             "stat": "DuraGuard",
             "label": "Braided cable durability",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-feature-duraguard.png"
+            "sublabel": ""
           }
         },
         "f9": {
@@ -245,8 +236,7 @@
             "card_style": "light",
             "stat": "2-year",
             "label": "Warranty coverage",
-            "sublabel": "",
-            "image": "shopify://shop_images/ezquest-feature-warranty.png"
+            "sublabel": ""
           }
         }
       },
