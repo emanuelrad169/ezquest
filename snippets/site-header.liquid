@@ -74,6 +74,44 @@
               <span class="site-header-wishlist-count" data-wishlist-count hidden>0</span>
             </a>
 
+            {%- if localization.available_languages and localization.available_languages.size > 1 -%}
+              {%- assign lang_code = localization.language.iso_code | downcase -%}
+              {%- case lang_code -%}
+                {%- when 'en' -%}{%- assign flag_cc = 'us' -%}
+                {%- when 'es' -%}{%- assign flag_cc = 'es' -%}
+                {%- when 'ar' -%}{%- assign flag_cc = 'iq' -%}
+                {%- when 'fr' -%}{%- assign flag_cc = 'fr' -%}
+                {%- when 'de' -%}{%- assign flag_cc = 'de' -%}
+                {%- when 'it' -%}{%- assign flag_cc = 'it' -%}
+                {%- when 'pt' -%}{%- assign flag_cc = 'pt' -%}
+                {%- when 'nl' -%}{%- assign flag_cc = 'nl' -%}
+                {%- when 'zh' -%}{%- assign flag_cc = 'cn' -%}
+                {%- when 'ja' -%}{%- assign flag_cc = 'jp' -%}
+                {%- when 'ko' -%}{%- assign flag_cc = 'kr' -%}
+                {%- when 'ru' -%}{%- assign flag_cc = 'ru' -%}
+                {%- else -%}{%- assign flag_cc = localization.country.iso_code | downcase -%}
+              {%- endcase -%}
+              <div class="site-header-locale">
+                {%- form 'localization', class: 'site-header-locale__form' -%}
+                  <label class="sr-only" for="header-locale-select">Language</label>
+                  <span class="site-header-locale__flag" aria-hidden="true">
+                    <img src="https://flagcdn.com/h20/{{ flag_cc }}.png"
+                         srcset="https://flagcdn.com/h40/{{ flag_cc }}.png 2x"
+                         width="20" height="15" alt="" loading="lazy" decoding="async">
+                  </span>
+                  <span class="site-header-locale__code" aria-hidden="true">{{ localization.language.iso_code | upcase }}</span>
+                  <span class="site-header-locale__caret" aria-hidden="true">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5l3 3 3-3"/></svg>
+                  </span>
+                  <select id="header-locale-select" name="locale_code" class="site-header-locale__select" onchange="this.form.submit()" aria-label="Language">
+                    {%- for lang in localization.available_languages -%}
+                      <option value="{{ lang.iso_code }}" lang="{{ lang.iso_code }}" {% if lang.iso_code == localization.language.iso_code %}selected{% endif %}>{{ lang.endonym_name | capitalize }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- endform -%}
+              </div>
+            {%- endif -%}
+
             <button
               class="site-header-icon-button site-header-cart-button header-icon-btn"
               type="button"
