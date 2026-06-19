@@ -49,7 +49,9 @@
             "primary_label": "Shop chargers & power",
             "primary_url": "/collections/chargers-power",
             "secondary_label": "Find the right charger",
-            "secondary_url": "/pages/help-me-choose"
+            "secondary_url": "/pages/help-me-choose",
+            "image": "shopify://shop_images/DT_Banner_03.jpg",
+            "image_mobile": "shopify://shop_images/Mob_Banner_03.jpg"
           }
         },
         "slide_4": {
@@ -62,8 +64,8 @@
             "primary_url": "/collections/chargers-power",
             "secondary_label": "Shop hubs & adapters",
             "secondary_url": "/collections/hubs-adapters",
-            "image": "shopify://shop_images/ezquest-hero-slide-4-desktop.png",
-            "image_mobile": "shopify://shop_images/ezquest-hero-slide-4-mobile.png"
+            "image": "shopify://shop_images/DT_Banner_04.png",
+            "image_mobile": "shopify://shop_images/Mob_Banner_04.jpg"
           }
         }
       },
