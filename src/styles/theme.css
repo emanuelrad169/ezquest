@@ -18379,3 +18379,4 @@ body.template-product .site-header--hero-overlay .site-header-icon-button {
 .site-header-locale__select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:transparent;color:#fff;font-size:12px;font-weight:600;line-height:1;border:0;border-radius:999px;cursor:pointer;padding:6px 24px 6px 36px;transition:background-color .15s ease}
 .site-header-locale__select:hover,.site-header-locale__select:focus{background-color:rgba(255,255,255,.12);outline:none}
 .site-header-locale__select option{color:#0f172a}
+@media (max-width:1023px){.site-header-locale{display:none}}
