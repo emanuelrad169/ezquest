@@ -92,7 +92,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "hubs-adapters",
-            "image": "shopify://shop_images/ezquest-collection-hubs.png",
+            "image": "shopify://shop_images/DT_Family_Card_A.jpg",
             "title": "",
             "link": ""
           }
@@ -101,7 +101,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "docking-stations",
-            "image": "shopify://shop_images/ezquest-collection-docking-stations.png",
+            "image": "shopify://shop_images/DT_Family_Card_B.jpg",
             "title": "",
             "link": ""
           }
@@ -110,7 +110,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "chargers-power",
-            "image": "shopify://shop_images/ezquest-collection-chargers-power.png",
+            "image": "shopify://shop_images/DT_Family_Card_C.jpg",
             "title": "",
             "link": ""
           }
@@ -119,7 +119,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "accessories",
-            "image": "shopify://shop_images/ezquest-collection-cables-accessories.png",
+            "image": "shopify://shop_images/DT_Family_Card_D.jpg",
             "title": "",
             "link": ""
           }
