@@ -35,7 +35,9 @@
             "primary_label": "See desk-ready docks",
             "primary_url": "/collections/docking-stations",
             "secondary_label": "Compare desk options",
-            "secondary_url": "/pages/compare"
+            "secondary_url": "/pages/compare",
+            "image": "shopify://shop_images/DT_Banner_02.jpg",
+            "image_mobile": "shopify://shop_images/Mob_Banner_02.jpg"
           }
         },
         "slide_3": {
