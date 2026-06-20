@@ -11632,8 +11632,6 @@ body.template-index .home-hero-slide {
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem 3rem;
   margin-top: 2rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(245, 245, 247, 0.1);
 }
 
 @media (max-width: 767px) {
