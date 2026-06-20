@@ -5560,16 +5560,9 @@
 
   .home-strip-heading,
   .featured-products-heading {
-    @apply shrink-0 font-medium text-slate-950;
-    font-size: 2.2rem;
-  }
-
-  @screen lg{
-
-    .home-strip-heading,
-  .featured-products-heading{
-      font-size: 2.8rem;
-    }
+    @apply shrink-0 text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
+    letter-spacing: var(--tracking-title);
+    line-height: var(--leading-headline);
   }
 
   .home-strip-rule {
@@ -5993,9 +5986,9 @@
   }
 
   .featured-products-title-v2 {
-    @apply text-3xl font-medium text-slate-950 sm:text-4xl lg:text-5xl;
+    @apply text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
     letter-spacing: var(--tracking-title);
-    line-height: var(--leading-display-tight);
+    line-height: var(--leading-headline);
   }
 
   /* Filter tab pills */
@@ -9428,7 +9421,7 @@
   }
 
   .home-feature-banner-heading {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1.875rem, 4vw, 3rem);
   }
 
   .home-feature-banner-cta {
