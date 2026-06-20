@@ -12,26 +12,28 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "kicker": "Choose a setup",
-        "heading": "Pick the setup role that matches the way you work",
-        "subheading": "Choose the role first, then move into the family and the product built for that setup.",
         "image": "shopify://shop_images/ezquest-support-multi-device-charging.png",
         "background_color": "#020617",
+        "kicker": "Choose a setup",
+        "heading": "Built for Your Workflow",
+        "subheading": "Choose the role first, then move into the family and the product built for that setup.",
+        "height": 360,
         "overlay_opacity": 35,
-        "height": 320
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
       }
     },
     "guide": {
       "type": "support-decision-guide",
-      "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "copy": "",
-        "structured_source": "blocks",
-        "entry_limit": 6,
-        "link_label": "Open support center",
-        "link_url": "/pages/support"
-      },
       "blocks": {
         "guide_1": {
           "type": "guide",
@@ -113,11 +115,21 @@
         "guide_4",
         "guide_5",
         "guide_6"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "copy": "",
+        "structured_source": "blocks",
+        "entry_limit": 6,
+        "link_label": "Open support center",
+        "link_url": "/pages/support"
+      }
     },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Need compatibility help",
         "heading": "Need to confirm compatibility before you decide?",
         "body": "Use compatibility or support when one device, display, or workflow detail still needs confirmation.",
