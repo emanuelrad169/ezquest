@@ -271,7 +271,7 @@
   }
 
   .section-heading {
-    @apply text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
+    @apply text-3xl font-light text-slate-950 sm:text-4xl lg:text-5xl;
     letter-spacing: var(--tracking-title);
     line-height: var(--leading-headline);
   }
@@ -5560,7 +5560,7 @@
 
   .home-strip-heading,
   .featured-products-heading {
-    @apply shrink-0 text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
+    @apply shrink-0 text-3xl font-light text-slate-950 sm:text-4xl lg:text-5xl;
     letter-spacing: var(--tracking-title);
     line-height: var(--leading-headline);
   }
@@ -5986,7 +5986,7 @@
   }
 
   .featured-products-title-v2 {
-    @apply text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
+    @apply text-3xl font-light text-slate-950 sm:text-4xl lg:text-5xl;
     letter-spacing: var(--tracking-title);
     line-height: var(--leading-headline);
   }
