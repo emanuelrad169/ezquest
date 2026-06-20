@@ -12,6 +12,7 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "background_image": "shopify://shop_images/DT_Banner_01_c6de8290-f7ef-4bc9-b38f-8a9498d83589.jpg",
         "background_color": "#020617",
         "kicker": "FAQ",
         "heading": "Frequently asked questions",
