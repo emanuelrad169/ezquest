@@ -12,6 +12,7 @@
     "page_hero": {
       "type": "page-hero",
       "settings": {
+        "background_image": "shopify://shop_images/DT_Banner_03_79f6bd2c-a4b7-48e2-a5b6-08bfe534c5d5.jpg",
         "background_color": "#020617",
         "kicker": "Support Center",
         "heading": "How can we help?",
