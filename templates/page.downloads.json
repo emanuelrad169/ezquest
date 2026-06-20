@@ -16,7 +16,7 @@
         "kicker": "Downloads",
         "heading": "",
         "subheading": "All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.",
-        "height": 360,
+        "height": 320,
         "overlay_opacity": 35,
         "show_breadcrumb": true,
         "eyebrow_pulse": true,
@@ -117,7 +117,7 @@
       ],
       "settings": {
         "resource_kind": "downloads",
-        "structured_source": "blocks"
+        "structured_source": "global"
       }
     },
     "cta": {
