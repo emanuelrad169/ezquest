@@ -1,275 +1,72 @@
+{%- comment -%}
+  Dynamic product comparison.
+  Shoppers add products via "Compare" buttons across the site (stored in
+  localStorage by compare.js). This section emits a JSON catalog of comparable
+  products (with spec metafields) plus render targets; compare.js builds the
+  table client-side from the shopper's selection. Liquid can't read the selection
+  (localStorage / ?ids), so the catalog is rendered server-side and filtered on
+  the client.
+{%- endcomment -%}
+
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
-{% liquid
-  assign product_blocks = section.blocks | where: 'type', 'product'
-  assign spec_blocks = section.blocks | where: 'type', 'spec'
-  assign col_count = product_blocks.size
-%}
 
-<section class="compare-page" aria-label="{{ section.settings.heading | escape }}">
-  <div class="compare-page__header">
-    {% if section.settings.kicker != blank %}
-      <p class="section-kicker">{{ section.settings.kicker | escape }}</p>
-    {% endif %}
+{%- liquid
+  assign source_handles = 'hubs-adapters,chargers-power,accessories,usb-c-enclosures,usb-c-card-readers,docking-stations' | split: ','
+  assign seen = '|'
+-%}
 
-    {% if section.settings.heading != blank %}
-      <h2 class="compare-page__heading">{{ section.settings.heading | escape }}</h2>
-    {% endif %}
+<section class="compare-shell section-shell" data-compare-root aria-label="{{ section.settings.heading | default: 'Compare products' | escape }}">
+  <div class="container-shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="section-heading compare-shell__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <p class="section-copy compare-shell__body">{{ section.settings.body | escape }}</p>
+    {%- endif -%}
 
-    {% if section.settings.body != blank %}
-      <p class="compare-page__body">{{ section.settings.body | escape }}</p>
-    {% endif %}
-
-    {% if col_count > 0 %}
-      <div class="compare-share">
-        <span class="compare-share__label">Share this comparison:</span>
-        <button type="button" class="compare-share__button" data-compare-share>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
-            <path d="M9 1H13V5M13 1L6 8M5 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>Copy link</span>
-        </button>
-        <p class="compare-share__status" data-compare-share-status aria-live="polite"></p>
+    <div class="compare-shell__bar" data-compare-bar hidden>
+      <p class="compare-shell__count" data-compare-page-count aria-live="polite"></p>
+      <div class="compare-shell__actions">
+        <button type="button" class="compare-shell__btn compare-shell__btn--ghost" data-compare-clear>Clear all</button>
+        <button type="button" class="compare-shell__btn" data-compare-share>Share comparison</button>
       </div>
-    {% endif %}
+    </div>
+    <p class="compare-share__status" data-compare-share-status aria-live="polite"></p>
+
+    <div class="compare-shell__empty" data-compare-empty hidden>
+      <p class="compare-shell__empty-title">No products selected yet</p>
+      <p class="compare-shell__empty-copy">Browse the catalog and tap <strong>Compare</strong> on any product to line them up side by side.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="compare-shell__btn">Shop products</a>
+    </div>
+
+    <div class="compare-dyn" data-compare-render></div>
   </div>
 
-  {% if col_count == 0 %}
-    <div class="compare-empty-state">
-      <p>Add products in the theme customizer to compare them.</p>
-    </div>
-  {% else %}
-    <div class="compare-scroll-wrap">
-      <div class="compare-table" style="--col-count: {{ col_count }}" data-compare-table>
-        <div class="compare-row compare-row--header">
-          <div class="compare-label-cell compare-label-cell--header"></div>
-
-          {% for block in product_blocks %}
-            {% liquid
-              assign p = block.settings.product
-              assign product_id = ''
-              if p != blank
-                assign product_id = p.id
-              endif
-            %}
-
-            <div
-              class="compare-product-cell{% if block.settings.is_recommended %} compare-product-cell--recommended{% endif %}"
-              {% if product_id != blank %}
-                data-compare-product-id="{{ product_id }}"
-                data-compare-product-handle="{{ p.handle | escape }}"
-              {% endif %}
-              {{ block.shopify_attributes }}
-            >
-              {% if p != blank %}
-                {% if block.settings.is_recommended %}
-                  <span class="compare-recommended-badge">Recommended</span>
-                {% endif %}
-
-                {% if p.featured_image != blank %}
-                  <img
-                    src="{{ p.featured_image | image_url: width: 200, format: 'pjpg' }}"
-                    alt="{{ p.title | escape }}"
-                    class="compare-product-cell__img"
-                    width="120"
-                    height="120"
-                    loading="lazy"
-                  >
-                {% else %}
-                  <div class="compare-product-cell__img compare-product-cell__img--empty" aria-hidden="true"></div>
-                {% endif %}
-
-                <h2 class="compare-product-cell__title">{{ p.title | escape }}</h2>
-                <p class="compare-product-cell__price">{{ p.price | money }}</p>
-                <a href="{{ p.url | escape }}" class="compare-product-cell__link">
-                  View product &rarr;
-                </a>
-                <button
-                  type="button"
-                  class="compare-product-cell__remove"
-                  data-compare-remove="{{ product_id }}"
-                  aria-label="Remove {{ p.title | escape }} from comparison"
-                >
-                  Remove
-                </button>
-              {% else %}
-                <p class="compare-empty-product">Select a product in theme customizer</p>
-              {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-
-        {% for spec in spec_blocks %}
-          <div
-            class="compare-row {% cycle 'compare-row--odd', 'compare-row--even' %}"
-            {{ spec.shopify_attributes }}
-          >
-            <div class="compare-label-cell">
-              {{ spec.settings.label | escape }}
-            </div>
-
-            {% for product_block in product_blocks %}
-              {% liquid
-                assign col_index = forloop.index
-                assign value_key = 'value_' | append: col_index
-                assign val = spec.settings[value_key]
-                assign spec_product = product_block.settings.product
-                assign spec_product_id = ''
-                if spec_product != blank
-                  assign spec_product_id = spec_product.id
-                endif
-              %}
-
-              <div
-                class="compare-spec-cell"
-                {% if spec_product_id != blank %}data-compare-spec-product-id="{{ spec_product_id }}"{% endif %}
-              >
-                {% if val != blank %}
-                  {{ val | escape }}
-                {% else %}
-                  <span class="compare-spec-empty" aria-label="Not available">&mdash;</span>
-                {% endif %}
-              </div>
-            {% endfor %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
-</section>
-
-
-{% if request.page_type == 'page' and page.handle == 'compare' %}
-  <script>
-    document.addEventListener('compare:updated', function(e) {
-      var ids = e.detail && e.detail.ids ? e.detail.ids : [];
-      var count = ids.length;
-      if (count > 0) {
-        var ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) {
-          ogTitle.content = 'Compare ' + count + ' EZQuest products - ezquest.com';
-        }
-      }
-    });
+  <script type="application/json" data-compare-catalog>
+  [
+  {%- assign first = true -%}
+  {%- for ch in source_handles -%}
+    {%- assign col = collections[ch] -%}
+    {%- for p in col.products -%}
+      {%- assign key = '|' | append: p.handle | append: '|' -%}
+      {%- unless seen contains key -%}
+        {%- assign seen = seen | append: p.handle | append: '|' -%}
+        {%- unless first %},{% endunless -%}{%- assign first = false -%}
+        {"h":{{ p.handle | json }},"t":{{ p.title | json }},"u":{{ p.url | json }},"img":{{ p.featured_image | image_url: width: 320 | json }},"price":{{ p.price | money | strip_html | json }},"type":{{ p.type | default: '' | json }},"kf":{{ p.metafields.custom.key_features.value | json }},"specs":{{ p.metafields.custom.product_specifications.value | default: '' | json }}}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  ]
   </script>
-{% endif %}
+</section>
 
 {% schema %}
 {
-  "name": "Product comparison",
+  "name": "Product compare",
   "settings": [
-    {
-      "type": "text",
-      "id": "kicker",
-      "label": "Kicker",
-      "default": "Compare models"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Find the right EZQuest for your setup"
-    },
-    {
-      "type": "textarea",
-      "id": "body",
-      "label": "Body"
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare products" },
+    { "type": "textarea", "id": "body", "label": "Sub-copy", "default": "Add products from anywhere on the site to compare them side by side." }
   ],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product column",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "checkbox",
-          "id": "is_recommended",
-          "label": "Show as recommended",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "spec",
-      "name": "Spec row",
-      "limit": 20,
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "placeholder": "e.g. USB-C Ports"
-        },
-        {
-          "type": "text",
-          "id": "value_1",
-          "label": "Value — column 1"
-        },
-        {
-          "type": "text",
-          "id": "value_2",
-          "label": "Value — column 2"
-        },
-        {
-          "type": "text",
-          "id": "value_3",
-          "label": "Value — column 3"
-        },
-        {
-          "type": "text",
-          "id": "value_4",
-          "label": "Value — column 4"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product comparison",
-      "blocks": [
-        {
-          "type": "product"
-        },
-        {
-          "type": "product"
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "label": "Ports"
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "label": "Display output"
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "label": "Power delivery"
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "label": "Compatibility"
-          }
-        },
-        {
-          "type": "spec",
-          "settings": {
-            "label": "Warranty"
-          }
-        }
-      ]
-    }
-  ]
+  "presets": [ { "name": "Product compare" } ]
 }
 {% endschema %}
