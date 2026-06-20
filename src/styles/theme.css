@@ -156,13 +156,13 @@
 
     /* Fluid typography scale — capped at text-7xl (72px) */
     --text-display:   clamp(2.25rem, 5vw, 4.5rem);    /* text-4xl → text-7xl  36–72px */
-    --text-headline:  clamp(1.875rem, 4vw, 3rem);     /* text-3xl → text-5xl  30–48px */
+    --text-headline:  clamp(2rem, 4vw, 3.25rem);     /* 32 → 52px */
     --text-subhead:   clamp(1.25rem, 2.5vw, 1.875rem);/* text-xl  → text-3xl  20–30px */
     --text-title:     clamp(1.125rem, 2vw, 1.5rem);   /* text-lg  → text-2xl  18–24px */
     --text-body-xl:   clamp(1rem, 1.5vw, 1.25rem);    /* text-base → text-xl  16–20px */
 
     /* Corrected leading — readable at display sizes */
-    --leading-display:  1.02;
+    --leading-display:  1.06;
     --leading-headline: 1.06;
     --leading-title:    1.2;
 
@@ -271,7 +271,7 @@
   }
 
   .section-heading {
-    @apply text-3xl font-medium text-slate-950 sm:text-4xl lg:text-5xl;
+    @apply text-3xl font-semibold text-slate-950 sm:text-4xl lg:text-5xl;
     letter-spacing: var(--tracking-title);
     line-height: var(--leading-headline);
   }
@@ -12218,7 +12218,7 @@ body.template-index .home-hero-slide {
 
   /* Viewport-scale type ramp — Tailwind v4 scale, 72px ceiling */
   --text-display:  clamp(2.25rem, 5vw,   4.5rem);   /* text-4xl → text-7xl */
-  --text-headline: clamp(1.875rem, 4vw,  3rem);     /* text-3xl → text-5xl */
+  --text-headline: clamp(2rem, 4vw,  3.25rem);     /* 32 → 52px */
   --text-subhead:  clamp(1.25rem,  2vw,  1.875rem); /* text-xl  → text-3xl */
   --text-body-lg:  1.125rem;                        /* text-lg  18px */
   --text-body:     1rem;                            /* text-base 16px */
@@ -12904,15 +12904,16 @@ body.template-index .home-hero-slide {
 }
 
 .page-hero__heading {
-  font-size: var(--text-4xl, 2.25rem);
-  font-weight: 600;
-  line-height: 1.1;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.08;
   color: #fff;
   margin: 0 0 16px;
 }
 
 .page-hero__subheading {
-  font-size: var(--text-base, 1rem);
+  font-size: var(--text-lg, 1.125rem);
+  max-width: 60ch;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
