@@ -8836,7 +8836,7 @@
   /* Heading */
   .home-hero-copy-heading {
     margin-top: 1rem;
-    font-weight: 500;
+    font-weight: 300;
     color: #fff;
     font-size: clamp(1.875rem, 3vw, 2.25rem);
     line-height: 1.0;
