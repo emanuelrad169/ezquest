@@ -12,6 +12,7 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "background_image": "shopify://shop_images/DT_Banner_03.jpg",
         "background_color": "#020617",
         "kicker": "Warranty",
         "heading": "Our promise to you",
