@@ -9,6 +9,28 @@
  */
 {
   "sections": {
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_color": "#020617",
+        "kicker": "Support Center",
+        "heading": "How can we help?",
+        "subheading": "Find answers, download files, and get in touch.",
+        "height": 360,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "/pages/faq",
+        "cta_secondary_label": "Contact support",
+        "cta_secondary_link": "/pages/contact",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
+      }
+    },
     "hub": {
       "type": "support-hub",
       "settings": {
@@ -26,22 +48,6 @@
         "cta_url": "/pages/contact",
         "cta2_label": "Browse resources",
         "cta2_url": "/blogs/resources"
-      }
-    },
-    "page_hero": {
-      "type": "page-hero",
-      "settings": {
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 360,
-        "heading": "How can we help?",
-        "subheading": "Find answers, download files, and get in touch.",
-        "kicker": "Support Center",
-        "background_image": "shopify://shop_images/ezquest-support-hero.png",
-        "cta_label": "",
-        "cta_link": "/pages/faq",
-        "cta_secondary_label": "Contact support",
-        "cta_secondary_link": "/pages/contact"
       }
     }
   },
