@@ -12,13 +12,23 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "image": "shopify://shop_images/ezquest-downloads-hero.png",
         "background_color": "#020617",
         "kicker": "Downloads",
         "heading": "",
         "subheading": "All files verified and maintained by EZQuest. Updated when firmware or OS compatibility changes.",
-        "height": 320,
-        "overlay_opacity": 35
+        "height": 360,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
       }
     },
     "downloads": {
@@ -31,7 +41,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "2.1 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_d2": {
@@ -41,7 +53,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "1.8 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_d3": {
@@ -51,7 +65,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "1.9 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_d4": {
@@ -61,7 +77,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "1.2 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_d5": {
@@ -71,7 +89,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "1.1 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_d6": {
@@ -81,7 +101,9 @@
             "file_title": "Quick Start Guide",
             "file_url": "#",
             "file_size": "1.6 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         }
       },
@@ -95,12 +117,13 @@
       ],
       "settings": {
         "resource_kind": "downloads",
-        "structured_source": "global"
+        "structured_source": "blocks"
       }
     },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Support",
         "heading": "Need help choosing the right file?",
         "body": "Open support if you need guidance on which download matches your product and platform.",
