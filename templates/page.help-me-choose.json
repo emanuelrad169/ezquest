@@ -12,7 +12,7 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "image": "shopify://shop_images/ezquest-support-multi-device-charging.png",
+        "background_image": "shopify://shop_images/DT_Banner_04.png",
         "background_color": "#020617",
         "kicker": "Choose a setup",
         "heading": "Built for Your Workflow",
