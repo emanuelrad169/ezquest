@@ -12,13 +12,23 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "image": "shopify://shop_images/ezquest-faq-hero.png",
         "background_color": "#020617",
         "kicker": "Warranty",
         "heading": "Our promise to you",
         "subheading": "Every EZQuest product is covered by a limited manufacturer's warranty. Find your coverage period, what's covered, and how to file a claim.",
-        "height": 320,
-        "overlay_opacity": 35
+        "height": 360,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
       }
     },
     "warranty_content": {
@@ -28,6 +38,7 @@
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Support",
         "heading": "Have a warranty question?",
         "body": "Some warranty questions are resolved faster through troubleshooting or direct support.",

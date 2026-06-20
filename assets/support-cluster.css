@@ -230,7 +230,7 @@
 .warranty-steps { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: .9rem; }
 .warranty-steps li { display: grid; grid-template-columns: auto 1fr; gap: .875rem; align-items: start; font-size: 15px; line-height: 1.5; color: var(--ez-black); }
 .warranty-steps li::before { content: none; }
-.warranty-step__number { width: 30px; height: 30px; border-radius: 9999px; background: var(--ez-brand-yellow, #FBCE2A); color: #000; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+.warranty-step__number { width: 30px; height: 30px; border-radius: 9999px; background: rgba(15,23,42,.08); color: var(--ez-black); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
 .warranty-step__content { min-width: 0; }
 .warranty-step__content strong { display: block; font-size: 15px; font-weight: 600; color: var(--ez-black); line-height: 1.35; margin-bottom: .3rem; }
 .warranty-step__content p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ez-grey); }
