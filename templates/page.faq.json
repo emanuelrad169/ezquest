@@ -12,13 +12,23 @@
     "hero": {
       "type": "page-hero",
       "settings": {
-        "image": "shopify://shop_images/ezquest-faq-hero.png",
         "background_color": "#020617",
         "kicker": "FAQ",
         "heading": "Frequently asked questions",
         "subheading": "Quick answers to common product questions.",
-        "height": 320,
-        "overlay_opacity": 35
+        "height": 360,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
       }
     },
     "faq": {
@@ -253,12 +263,16 @@
         "prod_8"
       ],
       "settings": {
-        "heading": "Frequently asked questions"
+        "heading": "Frequently asked questions",
+        "subhead": "Find answers to the questions we hear most. If something is missing, use the form to reach us directly.",
+        "cta_label": "Contact support",
+        "cta_url": ""
       }
     },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Support",
         "heading": "Still have questions?",
         "body": "Send a support request and we'll help you find the right answer.",
