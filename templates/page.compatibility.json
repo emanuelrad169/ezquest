@@ -9,6 +9,29 @@
  */
 {
   "sections": {
+    "page_hero": {
+      "type": "page-hero",
+      "settings": {
+        "background_image": "shopify://shop_images/Down_Page_Banner.jpg",
+        "background_color": "#020617",
+        "kicker": "Compatibility checker",
+        "heading": "Will it work with your setup?",
+        "subheading": "Tell us what you're using. We'll show you exactly what fits — and what to skip.",
+        "height": 320,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "/pages/help-me-choose",
+        "cta_secondary_label": "Contact support",
+        "cta_secondary_link": "/pages/contact",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
+      }
+    },
     "search": {
       "type": "compatibility-search",
       "settings": {}
@@ -16,21 +39,6 @@
     "results": {
       "type": "compatibility-results",
       "settings": {}
-    },
-    "page_hero": {
-      "type": "page-hero",
-      "settings": {
-        "background_color": "#020617",
-        "overlay_opacity": 35,
-        "height": 320,
-        "heading": "Will it work with your setup?",
-        "subheading": "Tell us what you're using. We'll show you exactly what fits — and what to skip.",
-        "kicker": "Compatibility checker",
-        "cta_label": "",
-        "cta_link": "/pages/help-me-choose",
-        "cta_secondary_label": "Contact support",
-        "cta_secondary_link": "/pages/contact"
-      }
     }
   },
   "order": [
