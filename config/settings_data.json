@@ -10,6 +10,7 @@
 {
   "current": {
     "brand_tagline": "Premium connectivity solutions",
+    "share_image": "shopify://shop_images/ezquest-og-default.png",
     "header_primary_menu": "main-menu",
     "header_show_search": true,
     "footer_menu_support": "footer-support",
@@ -29,8 +30,43 @@
         "type": "shopify://apps/tidio-live-chat-chatbots/blocks/app-embed/1002274d-fb18-4939-98f6-5f05a8deeadc",
         "disabled": false,
         "settings": {}
+      },
+      "6096544053266484610": {
+        "type": "shopify://apps/comparexpert/blocks/app-embed/c855b225-94ed-4209-962c-0fcdc53b09bf",
+        "disabled": true,
+        "settings": {
+          "widget_layout": "bottom_bar",
+          "widget_bottom_offset": 20,
+          "widget_side_offset": 20,
+          "widget_z_index": 99999999,
+          "label_item": "Item",
+          "label_items": "Items",
+          "label_selected": "selected",
+          "label_compare": "Compare",
+          "label_clear_all": "Clear All",
+          "label_view_product": "View Product",
+          "label_add_to_cart": "Add to Cart",
+          "label_buy_it_now": "Buy it now",
+          "label_vs": "vs",
+          "label_view_all": "View All",
+          "label_show_only_differences": "Show Only Differences",
+          "label_highlight_differences": "Highlight Differences",
+          "label_price": "Price",
+          "label_sku": "SKU",
+          "label_barcode": "Barcode",
+          "label_type": "Type",
+          "label_tags": "Tags",
+          "label_vendor": "Vendor",
+          "label_available": "Available",
+          "label_description": "Description",
+          "label_action": "Action",
+          "label_show_more": "Show More",
+          "label_show_less": "Show Less",
+          "msg_another_product": "please add another product for compare",
+          "msg_compare_limit": "Maximum compare limit reached",
+          "msg_same_collection_required": "Please select product with same collections"
+        }
       }
-    },
-    "share_image": "shopify://shop_images/ezquest-og-default.png"
+    }
   }
 }
