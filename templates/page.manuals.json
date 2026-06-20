@@ -12,12 +12,24 @@
     "hero": {
       "type": "page-hero",
       "settings": {
+        "background_image": "shopify://shop_images/DT_Banner_04.png",
         "background_color": "#020617",
         "kicker": "Manuals",
         "heading": "",
         "subheading": "Product manuals and quick-start guides, organized by product family.",
-        "height": 320,
-        "overlay_opacity": 35
+        "height": 360,
+        "overlay_opacity": 35,
+        "show_breadcrumb": true,
+        "eyebrow_pulse": true,
+        "cta_label": "",
+        "cta_link": "",
+        "cta_secondary_label": "",
+        "cta_secondary_link": "",
+        "show_trust": true,
+        "trust_1": "1-year warranty",
+        "trust_2": "30-day returns",
+        "trust_3": "Free shipping over $90",
+        "trust_4": ""
       }
     },
     "downloads": {
@@ -58,7 +70,9 @@
             "file_title": "User Manual",
             "file_url": "#",
             "file_size": "3.8 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_m2": {
@@ -68,7 +82,9 @@
             "file_title": "User Manual",
             "file_url": "#",
             "file_size": "3.2 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_m3": {
@@ -78,7 +94,9 @@
             "file_title": "User Manual",
             "file_url": "#",
             "file_size": "2.1 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_m4": {
@@ -88,7 +106,9 @@
             "file_title": "User Manual",
             "file_url": "#",
             "file_size": "2.8 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         },
         "file_m5": {
@@ -98,7 +118,9 @@
             "file_title": "User Manual",
             "file_url": "#",
             "file_size": "4.2 MB",
-            "version": ""
+            "version": "",
+            "compatibility": "Mac · Windows",
+            "category": "quickstart"
           }
         }
       },
@@ -114,13 +136,14 @@
         "file_m5"
       ],
       "settings": {
-        "resource_kind": "manuals",
-        "structured_source": "global"
+        "resource_kind": "downloads",
+        "structured_source": "blocks"
       }
     },
     "cta": {
       "type": "support-cta-rail",
       "settings": {
+        "variant": "light",
         "kicker": "Support",
         "heading": "Can't find the right manual?",
         "body": "Open support when the documentation still leaves a question open.",
