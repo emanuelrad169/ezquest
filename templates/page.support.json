@@ -38,7 +38,7 @@
         "subheading": "Find answers, download files, and get in touch.",
         "kicker": "Support Center",
         "background_image": "shopify://shop_images/ezquest-support-hero.png",
-        "cta_label": "Browse FAQ",
+        "cta_label": "",
         "cta_link": "/pages/faq",
         "cta_secondary_label": "Contact support",
         "cta_secondary_link": "/pages/contact"

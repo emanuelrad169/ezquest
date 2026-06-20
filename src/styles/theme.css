@@ -11707,7 +11707,7 @@ body.template-index .home-hero-slide {
 
 /* ── Body text ──────────────────────────────────────────────────────────────── */
 .cinematic-reveal-body {
-  max-width: 60ch;
+  max-width: 80ch;
   margin-top: 1.25rem;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.6;
@@ -12913,7 +12913,6 @@ body.template-index .home-hero-slide {
 
 .page-hero__subheading {
   font-size: var(--text-base, 1rem);
-  max-width: 600px;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
