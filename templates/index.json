@@ -271,7 +271,7 @@
       "type": "home-feature-banner",
       "settings": {
         "image": "shopify://shop_images/Down_Page_Banner.jpg",
-        "text_position": "right",
+        "text_position": "left",
         "eyebrow": "Desk and travel coverage",
         "heading": "Choose the right mix of ports, power, and displays.",
         "copy": "From compact travel hubs to desk-ready docks and multi-device chargers, EZQuest keeps modern-device setups cleaner and easier to manage.",
