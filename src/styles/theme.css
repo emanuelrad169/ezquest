@@ -11677,7 +11677,7 @@ body.template-index .home-hero-slide {
 .cinematic-reveal-line-inner {
   display: block;
   font-size: clamp(1.875rem, 4vw, 3rem);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.04em;
   color: var(--ez-light);
   transform: translateY(105%);
