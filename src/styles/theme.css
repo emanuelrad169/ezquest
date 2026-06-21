@@ -18377,3 +18377,7 @@ li:has(> div a[href*="helptochoose.com"]),
 li:has(a[href*="helptochoose.com"]),
 p:has(> a[href*="helptochoose.com"]),
 a[href*="helptochoose.com"]{display:none !important;}
+
+/* ComparExpert compare widget spacing on /pages/compare */
+#htc-page{padding:2rem 1.25rem 3rem}
+@media (min-width:768px){#htc-page{padding:2.5rem 2rem 4rem}}
