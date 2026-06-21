@@ -33,7 +33,7 @@
       },
       "6096544053266484610": {
         "type": "shopify://apps/comparexpert/blocks/app-embed/c855b225-94ed-4209-962c-0fcdc53b09bf",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "widget_layout": "bottom_bar",
           "widget_bottom_offset": 20,

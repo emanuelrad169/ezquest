@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -25,36 +34,32 @@
     },
     "compare": {
       "type": "product-compare-table",
-      "settings": {
-        "heading": "Choose the right UltimatePower charger",
-        "body": "Compare wattage, port count, and travel weight before you buy."
-      },
       "blocks": {
         "p1": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025926854",
+            "product": "gid://shopify/product/8842025926854",
             "is_recommended": false
           }
         },
         "p2": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025959622",
+            "product": "gid://shopify/product/8842025959622",
             "is_recommended": true
           }
         },
         "p3": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842025992390",
+            "product": "gid://shopify/product/8842025992390",
             "is_recommended": false
           }
         },
         "p4": {
           "type": "product",
           "settings": {
-            "product": "gid://shopify/Product/8842026025158",
+            "product": "gid://shopify/product/8842026025158",
             "is_recommended": false
           }
         },
@@ -130,7 +135,12 @@
         "s4",
         "s5",
         "s6"
-      ]
+      ],
+      "settings": {
+        "kicker": "Compare models",
+        "heading": "Choose the right UltimatePower charger",
+        "body": "Compare wattage, port count, and travel weight before you buy."
+      }
     },
     "cta": {
       "type": "support-cta-rail",
@@ -144,11 +154,28 @@
         "cta2_label": "Check compatibility",
         "cta2_url": "/pages/compatibility"
       }
+    },
+    "17820811407903cc7e": {
+      "type": "apps",
+      "blocks": {
+        "comparexpert_comparison_table_builder_N3tTj9": {
+          "type": "shopify://apps/comparexpert/blocks/comparison-table-builder/c855b225-94ed-4209-962c-0fcdc53b09bf",
+          "settings": {
+            "heading": "Build your Comparison",
+            "default_slots": "2"
+          }
+        }
+      },
+      "block_order": [
+        "comparexpert_comparison_table_builder_N3tTj9"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "compare",
-    "cta"
+    "cta",
+    "17820811407903cc7e"
   ]
 }
