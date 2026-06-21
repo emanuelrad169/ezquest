@@ -47,7 +47,8 @@
         "comparexpert_comparison_table_builder_N3tTj9"
       ],
       "custom_css": [
-        ".htc-static-table-container {padding: 5rem 0;}"
+        ".htc-static-table-container {padding: 5rem 0;}",
+        "h3 {display: none}"
       ],
       "settings": {}
     },
