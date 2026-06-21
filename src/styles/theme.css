@@ -18371,3 +18371,9 @@ body.template-product .site-header--hero-overlay .site-header-icon-button {
 .site-header-locale__select:hover,.site-header-locale__select:focus{background-color:rgba(255,255,255,.12);outline:none}
 .site-header-locale__select option{color:#0f172a}
 @media (max-width:1023px){.site-header-locale{display:none}}
+
+/* Hide ComparExpert free-tier "Powered by Helptochoose" branding */
+li:has(> div a[href*="helptochoose.com"]),
+li:has(a[href*="helptochoose.com"]),
+p:has(> a[href*="helptochoose.com"]),
+a[href*="helptochoose.com"]{display:none !important;}
