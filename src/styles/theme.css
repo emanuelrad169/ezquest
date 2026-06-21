@@ -18381,3 +18381,12 @@ a[href*="helptochoose.com"]{display:none !important;}
 /* ComparExpert compare widget spacing on /pages/compare */
 #htc-page{padding:2rem 1.25rem 3rem}
 @media (min-width:768px){#htc-page{padding:2.5rem 2rem 4rem}}
+
+/* Restrict ComparExpert compare UI to /pages/compare only (flagged by htc-clean.js) */
+.ezq-no-compare .htc-addToCompare,
+.ezq-no-compare .htc-overllayCmpBtn,
+.ezq-no-compare .htc-comparison-preview,
+.ezq-no-compare .htc-comparison-preview-button-cont,
+.ezq-no-compare .htc-comparison-list,
+.ezq-no-compare .htc-side-tab-count,
+.ezq-no-compare [class*="htc-addToCompare"]{display:none !important;}
