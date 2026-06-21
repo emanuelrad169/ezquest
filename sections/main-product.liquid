@@ -1,4 +1,16 @@
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Sticky gallery / scrolling buybox — inlined so it can't be defeated by a stale cached theme.css. {%- endcomment -%}
+{%- style -%}
+  @media (min-width: 1024px) {
+    .product-layout-grid { align-items: start; }
+    .pdp-col-left {
+      position: sticky !important;
+      top: calc(var(--header-height, 72px) + 1.5rem);
+      align-self: start;
+    }
+    .buybox-sticky { position: static !important; top: auto !important; }
+  }
+{%- endstyle -%}
 <section class="section-shell main-product-section" id="pdp-overview" data-product-root data-product-id="{{ product.id }}" data-product-type="{{ product.type | escape }}" data-product-created="{{ product.created_at | date: '%s' }}" data-product-price="{{ product.selected_or_first_available_variant.price | money }}">
   <div class="container-shell">
     <div class="hidden lg:block">
