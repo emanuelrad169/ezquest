@@ -1327,25 +1327,38 @@
 </script>
 
 <script>
-  /* UGREEN-style highlight box: clamp the description, toggle on "Learn more". */
+  /* UGREEN-style highlight box: clamp the description, toggle on "Learn more".
+     Uses a DELEGATED click handler on document so it survives buybox re-renders
+     (e.g. variant changes), which previously dropped a directly-bound handler. */
   (function () {
-    document.querySelectorAll('[data-pdp-highlight]').forEach(function (box) {
-      var btn = box.querySelector('[data-pdp-highlight-toggle]');
-      var body = box.querySelector('.pdp-highlight__body');
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-pdp-highlight-toggle]');
+      if (!btn) return;
+      var box = btn.closest('[data-pdp-highlight]');
+      if (!box) return;
+      var open = box.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       var label = box.querySelector('[data-pdp-highlight-label]');
-      if (!btn || !body) return;
-      // If the content already fits, drop the clamp + hide the toggle.
-      if (body.scrollHeight <= body.clientHeight + 4) {
-        box.classList.add('is-open');
-        btn.style.display = 'none';
-        return;
-      }
-      btn.addEventListener('click', function () {
-        var open = box.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (label) label.textContent = open ? 'Show less' : 'Learn more';
-      });
+      if (label) label.textContent = open ? 'Show less' : 'Learn more';
     });
+
+    /* Hide the toggle when the description already fits (no clamp needed).
+       Runs on load and once more after late renders. */
+    function refresh() {
+      document.querySelectorAll('[data-pdp-highlight]').forEach(function (box) {
+        var btn = box.querySelector('[data-pdp-highlight-toggle]');
+        var body = box.querySelector('.pdp-highlight__body');
+        if (!btn || !body) return;
+        if (!box.classList.contains('is-open') && body.scrollHeight <= body.clientHeight + 4) {
+          btn.style.display = 'none';
+        } else {
+          btn.style.display = '';
+        }
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh);
+    else refresh();
+    window.setTimeout(refresh, 1500);
   })();
 </script>
 
