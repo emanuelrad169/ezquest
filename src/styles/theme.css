@@ -9565,9 +9565,16 @@
     border-radius: 1.05rem;
   }
 
-  .buybox-sticky {
+  /* PDP: left gallery sticks while the right column (info) scrolls; page resumes
+     once the info column ends. */
+  .pdp-col-left {
     @apply lg:sticky;
     top: calc(var(--header-height) + 1.5rem);
+    align-self: start;
+  }
+
+  .buybox-sticky {
+    position: static;
   }
 
   .site-header.is-scrolled {
