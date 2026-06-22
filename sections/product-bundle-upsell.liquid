@@ -51,6 +51,16 @@
         var url = sec.getAttribute('data-rec-url');
         var grid = sec.querySelector('[data-rec-grid]');
         if (!url || !grid) return;
+        // The scroll-reveal observer won't catch cards we inject after load,
+        // and these cards ship with motion-fade-up (opacity:0). Force them visible.
+        function reveal() {
+          Array.prototype.forEach.call(grid.children, function (card) {
+            card.classList.remove('motion-fade-up');
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+          });
+        }
+        reveal();
         fetch(url)
           .then(function (r) { return r.text(); })
           .then(function (html) {
@@ -59,8 +69,9 @@
             if (fresh && fresh.children.length > 0) {
               grid.innerHTML = fresh.innerHTML;
             }
+            reveal();
           })
-          .catch(function () { /* keep fallback on failure */ });
+          .catch(function () { reveal(); });
       })();
     </script>
   {%- endunless -%}
